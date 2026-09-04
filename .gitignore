@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+
+# Secrets
+.env
+.env.local
+
+# Local SQLite databases (knowledge base is rebuilt via `pnpm build-kb`)
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
+# Scratch output
+tmp/
+*.log
+.DS_Store
