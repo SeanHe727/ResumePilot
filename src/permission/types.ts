@@ -1,0 +1,105 @@
+import type { ToolCall } from '../types.js';
+
+export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
+export type PermissionAction = 'allow' | 'confirm' | 'deny';
+export type ConfirmResult = 'approved' | 'denied' | 'timeout';
+
+export type RuleMatcher =
+  | { type: 'tool_name'; pattern: string | RegExp }
+  | { type: 'tool_arg'; tool: string; arg: string; pattern: string | RegExp }
+  | { type: 'operation'; category: string };
+
+export interface PermissionRule {
+  id: string;
+  name: string;
+  match: RuleMatcher;
+  level: RiskLevel;
+  action: PermissionAction;
+  /** Shown to the user verbatim when asking for confirmation. */
+  reason: string;
+  /** Whether an approval carries over to later calls in the same session. */
+  rememberApproval?: boolean;
+}
+
+export interface PermissionDecision {
+  allowed: boolean;
+  rule: PermissionRule;
+  confirmedBy?: 'rule' | 'user' | 'remembered';
+  timestamp: string;
+}
+
+export interface PermissionGate {
+  /** No matching rule means deny — the default is closed, not open. */
+  checkTool(toolCall: ToolCall, sessionId: string): Promise<PermissionDecision>;
+  addRule(rule: PermissionRule): void;
+  getRules(): readonly PermissionRule[];
+  clearApprovalCache(): void;
+}
+
+export interface ConfirmRequest {
+  toolName: string;
+  reason: string;
+  level: RiskLevel;
+  details: string;
+}
+
+export interface PermissionConfirm {
+  ask(request: ConfirmRequest): Promise<ConfirmResult>;
+}
+
+// ---------------------------------------------------------------------------
+// Reversible redaction
+// ---------------------------------------------------------------------------
+
+/**
+ * A resume is dense with real personal data. Replacing it with `***` the way
+ * the reference project did would make rewrite suggestions unusable — the
+ * model would hand back bullets full of asterisks.
+ *
+ * So redaction is reversible: identifiers are swapped for stable placeholders
+ * on the way out to the provider, and restored on the way back. The map never
+ * leaves the process, and only the placeholder ever reaches the network.
+ */
+export type PiiKind = 'person' | 'email' | 'phone' | 'url' | 'address' | 'company' | 'school';
+
+export interface RedactionEntry {
+  /** e.g. `[PERSON_1]`. Stable for the lifetime of the session. */
+  placeholder: string;
+  kind: PiiKind;
+  original: string;
+}
+
+export interface RedactionMap {
+  entries: readonly RedactionEntry[];
+  redact(text: string): string;
+  restore(text: string): string;
+}
+
+export interface Redactor {
+  /** Builds or extends the session's map, returning text safe to transmit. */
+  redact(text: string, map: RedactionMap): { text: string; map: RedactionMap };
+  restore(text: string, map: RedactionMap): string;
+}
+
+// ---------------------------------------------------------------------------
+// Audit
+// ---------------------------------------------------------------------------
+
+export interface AuditEntry {
+  id: number;
+  sessionId: string;
+  toolName: string;
+  /** Redacted before storage — the audit log is not an exfiltration path. */
+  toolArgs: string;
+  ruleId: string;
+  riskLevel: RiskLevel;
+  decision: 'allowed' | 'denied';
+  confirmedBy?: string;
+  timestamp: string;
+}
+
+export interface AuditLogger {
+  log(sessionId: string, toolCall: ToolCall, decision: PermissionDecision): void;
+  getSessionLog(sessionId: string): AuditEntry[];
+  getStats(): { total: number; allowed: number; denied: number; confirmed: number };
+}

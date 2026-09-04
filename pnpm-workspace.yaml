@@ -1,0 +1,9 @@
+# Native bindings that must compile at install time.
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true
+
+# pnpm's minimum-release-age gate; these were published recently but are the
+# versions this project pins deliberately.
+minimumReleaseAgeExclude:
+  - openai@7.10.0

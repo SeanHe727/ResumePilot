@@ -55,6 +55,16 @@
 - **Node.js >= 22.12**（`better-sqlite3` / `commander` / `chalk` 均要求 >= 22）
 - pnpm
 
+若用 Homebrew 安装 `node@24`，它是 keg-only 的，不会链接到 `bin/`，需要手动加进 PATH：
+
+```bash
+export PATH="$(brew --prefix)/opt/node@24/bin:$PATH"
+```
+
+另外 Homebrew 从源码编译 Node 时会链接到 brew 自己的 `openssl@3`，
+若其 post-install 步骤失败，`pnpm install` 会报 `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`——
+执行 `brew postinstall openssl@3` 补上 `cert.pem` 软链即可。
+
 ## 快速开始
 
 ```bash
