@@ -1,0 +1,11 @@
+export { QueryEngine, type QueryEngineOptions } from './engine.js';
+export { QueryCache, type CacheStats } from './cache.js';
+export { ModelRouter, type Route } from './router.js';
+export { TokenCounter, type BudgetCheck } from './token-counter.js';
+export { TokenBucketLimiter, type RateLimiter } from './rate-limiter.js';
+export { withRetry, backoffMs, DEFAULT_RETRY_CONFIG, type RetryHooks } from './retry.js';
+export { parseStream } from './stream.js';
+export { classifyError, isPlainRetryable, needsCompaction } from './errors.js';
+export { ClaudeProvider } from './providers/claude.js';
+export { OpenAIProvider, DeepSeekProvider } from './providers/openai.js';
+export * from './types.js';

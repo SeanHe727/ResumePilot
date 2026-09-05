@@ -13,6 +13,12 @@ export interface StreamParams {
   tools?: ToolSchema[];
   maxTokens?: number;
   effort?: Effort;
+  /**
+   * Mark the system prompt as a prompt-cache breakpoint (Anthropic only).
+   * Defaults to on: the system prompt is the one part of a request that repeats
+   * verbatim across a fan-out, so it is exactly what should be cached.
+   */
+  cacheSystemPrompt?: boolean;
   abortSignal?: AbortSignal;
 }
 
@@ -61,6 +67,8 @@ export type ErrorCategory =
   | 'context_length'
   /** Safety classifier declined. Not an HTTP error — arrives as stop_reason. */
   | 'refusal'
+  /** Session spending ceiling hit. Never retryable — only the user can lift it. */
+  | 'budget'
   | 'unknown';
 
 export class QueryEngineError extends Error {
@@ -129,7 +137,15 @@ export interface QueryParams {
   effort?: Effort;
   useCache?: boolean;
   cacheTtlSeconds?: number;
+  /** See `StreamParams.cacheSystemPrompt`. */
+  cacheSystemPrompt?: boolean;
   onTextDelta?: (text: string) => void;
+  /**
+   * Fires before a retried attempt. A renderer that streamed the failed
+   * attempt's partial text needs this to clear it — without the signal the user
+   * sees the answer start twice.
+   */
+  onRetry?: (attempt: number, previous: QueryEngineError) => void;
   abortSignal?: AbortSignal;
 }
 

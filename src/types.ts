@@ -53,11 +53,20 @@ export interface TokenUsage {
 }
 
 /**
- * `refusal` is a real terminal state on current Anthropic models: the request
- * returns HTTP 200 with empty content. Callers must branch on it before
- * reading `content`, never assume text is present.
+ * Why the model stopped.
+ *
+ * Two of these are easy to overlook and both arrive as a successful HTTP 200:
+ * `refusal` (a safety classifier declined — content is empty, so branch on this
+ * before reading it) and `context_exceeded` (the prompt outgrew the window,
+ * reported as a stop reason rather than an error, and the cue for the Context
+ * layer to compact before trying again).
  */
-export type StopReason = 'end_turn' | 'tool_use' | 'max_tokens' | 'refusal';
+export type StopReason =
+  | 'end_turn'
+  | 'tool_use'
+  | 'max_tokens'
+  | 'refusal'
+  | 'context_exceeded';
 
 /** Wall-clock plus token accounting attached to any unit of work. */
 export interface RunStats {
