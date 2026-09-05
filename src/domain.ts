@@ -73,11 +73,26 @@ export interface ResumeSection {
   span: SourceSpan;
 }
 
+/**
+ * How well the source could be read — and, by proxy, how well an applicant
+ * tracking system will read it.
+ *
+ * This is a diagnosis in itself. Multi-column layout alone accounts for roughly
+ * a third of real ATS parsing failures, and a resume with no text layer scores
+ * zero everywhere because the machine never sees a single word.
+ */
+export type ExtractionQuality =
+  /** Text read cleanly in an unambiguous order. */
+  | 'clean'
+  /** Read, but layout signals say a parser will mangle it — columns, tables. */
+  | 'degraded'
+  /** No text layer at all: a scanned image. Nothing downstream can run. */
+  | 'unreadable';
+
 export interface ResumeMeta {
   pageCount?: number;
   wordCount: number;
-  /** True when text had to be recovered by OCR; downstream confidence drops. */
-  ocrUsed: boolean;
+  quality: ExtractionQuality;
   /** Layout features that commonly break ATS parsers. */
   layoutWarnings: string[];
 }

@@ -1,0 +1,214 @@
+import type {
+  Bullet,
+  ResumeDocument,
+  ResumeEntry,
+  ResumeSection,
+  SectionKind,
+} from '../domain.js';
+import { isBulletLine, stripBulletMarker } from './section-detector.js';
+import type {
+  ExtractionResult,
+  SectionCandidate,
+  StructureBuilder,
+  TextBlock,
+} from './types.js';
+
+/** Sections whose bodies are lists of positions rather than free prose. */
+const ENTRY_BEARING: ReadonlySet<SectionKind> = new Set(['experience', 'project', 'education']);
+
+/**
+ * `2025.06 – 2025.09`, `Jun 2024 – Sep 2024`, `2023 – Present`, `2024年6月至今`.
+ *
+ * A date range is the single most reliable marker that a line opens a new
+ * position: bullets describe the work, headers say where and when it happened.
+ *
+ * Both ends use the same sub-pattern deliberately. Written asymmetrically — a
+ * month allowed on the start but not the end — it still matches, just short,
+ * swallowing `2025.06 – 2025` and silently dropping the closing month.
+ */
+const MONTH_NAME = '(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*';
+const DATE_POINT = `(?:${MONTH_NAME}\\.?\\s+)?(?:19|20)\\d{2}(?:\\s*[.\\-/年]\\s*\\d{1,2}\\s*月?)?`;
+const OPEN_ENDED = 'present|now|current|ongoing|至今|现在';
+/**
+ * The separator is optional so that `至` can serve both roles it has in
+ * Chinese: a range separator in `2024年6月至2025年3月`, and the first character
+ * of `至今`. Required, it would consume the `至` of `至今` and then fail on the
+ * dangling `今`; optional, the engine backtracks and matches `至今` whole.
+ */
+const DATE_RANGE = new RegExp(
+  `(${DATE_POINT})\\s*(?:[-–—~至到]+\\s*)?(${DATE_POINT}|${OPEN_ENDED})`,
+  'i',
+);
+
+/** Separators people use between company and title on one line. */
+const HEADER_SEPARATOR = /\s*[|｜·•‧—–]\s*|\s+[-–—]\s+/;
+
+export class HeuristicStructureBuilder implements StructureBuilder {
+  build(
+    result: ExtractionResult,
+    sections: SectionCandidate[],
+    sourcePath: string,
+  ): ResumeDocument {
+    const ordered = [...sections].sort((a, b) => a.span.start - b.span.start);
+    const built: ResumeSection[] = [];
+
+    for (const [index, candidate] of ordered.entries()) {
+      const from = candidate.span.start;
+      const to = ordered[index + 1]?.span.start ?? Number.MAX_SAFE_INTEGER;
+
+      // The heading line itself is not part of the section body.
+      const body = result.blocks.filter(
+        (b) => b.span.start > from && b.span.start < to && b.span.start !== candidate.span.start,
+      );
+      const headingBlock = result.blocks.find((b) => b.span.start === from);
+      const bodyBlocks = candidate.heading ? body : [...(headingBlock ? [headingBlock] : []), ...body];
+
+      const sectionId = `s${index}`;
+      built.push({
+        id: sectionId,
+        kind: candidate.kind,
+        heading: candidate.heading,
+        ...(ENTRY_BEARING.has(candidate.kind)
+          ? { entries: buildEntries(sectionId, bodyBlocks), looseLines: [] }
+          : { entries: [], looseLines: bodyBlocks.map((b) => b.text) }),
+        span: {
+          start: from,
+          end: bodyBlocks.at(-1)?.span.end ?? candidate.span.end,
+        },
+      });
+    }
+
+    const wordCount = countWords(result.rawText);
+
+    return {
+      sourcePath,
+      format: result.format,
+      rawText: result.rawText,
+      sections: built,
+      meta: {
+        ...(result.pageCount !== undefined ? { pageCount: result.pageCount } : {}),
+        wordCount,
+        quality: result.quality,
+        layoutWarnings: result.layoutWarnings,
+      },
+    };
+  }
+}
+
+/**
+ * Splits a section body into positions.
+ *
+ * The rule is a state machine over two line kinds: bullets always attach to the
+ * entry above them, and a non-bullet line either continues the current header
+ * (still collecting company/title/dates) or — once bullets have started —
+ * begins the next entry.
+ */
+function buildEntries(sectionId: string, blocks: TextBlock[]): ResumeEntry[] {
+  const entries: ResumeEntry[] = [];
+  let current: { headerLines: string[]; bullets: string[]; start: number; end: number } | null =
+    null;
+
+  const flush = (): void => {
+    if (!current) return;
+    if (current.headerLines.length === 0 && current.bullets.length === 0) {
+      current = null;
+      return;
+    }
+    const id = `${sectionId}:e${entries.length}`;
+    entries.push({
+      id,
+      sectionId,
+      index: entries.length,
+      ...parseHeader(current.headerLines),
+      headerLines: current.headerLines,
+      bullets: current.bullets.map<Bullet>((text, i) => ({
+        id: `${id}:b${i}`,
+        entryId: id,
+        index: i,
+        text,
+        // Bullet-level spans are filled by the caller when the source carries
+        // them; text-derived formats resolve them below.
+        span: { start: 0, end: 0 },
+      })),
+      span: { start: current.start, end: current.end },
+    });
+    current = null;
+  };
+
+  for (const block of blocks) {
+    if (isBulletLine(block.text)) {
+      if (!current) current = { headerLines: [], bullets: [], start: block.span.start, end: 0 };
+      current.bullets.push(stripBulletMarker(block.text));
+      current.end = block.span.end;
+      continue;
+    }
+
+    // A non-bullet line after bullets means the previous position is finished.
+    if (current && current.bullets.length > 0) flush();
+    if (!current) current = { headerLines: [], bullets: [], start: block.span.start, end: 0 };
+    current.headerLines.push(block.text);
+    current.end = block.span.end;
+  }
+
+  flush();
+  return attachBulletSpans(entries, blocks);
+}
+
+/** Re-links each bullet to its source offsets so diagnoses can cite the original. */
+function attachBulletSpans(entries: ResumeEntry[], blocks: TextBlock[]): ResumeEntry[] {
+  const bulletBlocks = blocks.filter((b) => isBulletLine(b.text));
+  let cursor = 0;
+
+  for (const entry of entries) {
+    for (const bullet of entry.bullets) {
+      const block = bulletBlocks[cursor++];
+      if (block) bullet.span = block.span;
+    }
+  }
+  return entries;
+}
+
+/**
+ * Pulls company, title, dates and location out of the header lines.
+ *
+ * Everything here is optional on purpose: header layouts vary wildly, and a
+ * missed field is recoverable — `headerLines` always keeps the text verbatim,
+ * so nothing is lost, and a later model-assisted pass can fill the gaps.
+ */
+function parseHeader(lines: string[]): Pick<
+  ResumeEntry,
+  'organization' | 'title' | 'dateRange' | 'location'
+> {
+  const out: Pick<ResumeEntry, 'organization' | 'title' | 'dateRange' | 'location'> = {};
+
+  for (const line of lines) {
+    const dates = DATE_RANGE.exec(line);
+    if (dates && !out.dateRange) out.dateRange = dates[0].trim();
+
+    // Strip the date range before splitting, so it does not land in a field.
+    const withoutDates = dates ? line.replace(dates[0], '') : line;
+    const parts = withoutDates
+      .split(HEADER_SEPARATOR)
+      .map((p) => p.trim())
+      .filter(Boolean);
+
+    // `noUncheckedIndexedAccess` makes every index access possibly undefined,
+    // so each field is guarded rather than assumed present.
+    const [org, title, location] = parts;
+    if (org && !out.organization) out.organization = org;
+    if (title && !out.title) out.title = title;
+    if (location && !out.location) out.location = location;
+  }
+
+  return out;
+}
+
+/** CJK has no spaces, so words and characters are counted separately. */
+export function countWords(text: string): number {
+  const cjk = text.match(/[一-鿿぀-ヿ가-힯]/g)?.length ?? 0;
+  const latin = text
+    .replace(/[一-鿿぀-ヿ가-힯]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return cjk + latin;
+}

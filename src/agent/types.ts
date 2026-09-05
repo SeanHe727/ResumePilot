@@ -1,6 +1,7 @@
 import type { TokenUsage } from '../types.js';
 import type {
   EntryDiagnosis,
+  ExtractionQuality,
   FormatDiagnosis,
   JdMatch,
   JobDescription,
@@ -96,8 +97,8 @@ export type RoleId = 'entry-substance' | 'entry-wording' | 'jd-match' | 'narrati
 export interface RoleSelectionInput {
   entryCount: number;
   hasJd: boolean;
-  /** OCR'd text is too noisy for wording judgements to mean anything. */
-  ocrUsed: boolean;
+  /** Wording judgements are meaningless on text a parser could barely read. */
+  quality: ExtractionQuality;
 }
 
 export interface RoleSelection {
