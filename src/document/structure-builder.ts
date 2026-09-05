@@ -17,6 +17,22 @@ import type {
 const ENTRY_BEARING: ReadonlySet<SectionKind> = new Set(['experience', 'project', 'education']);
 
 /**
+ * Whether a section's body should be split into entries.
+ *
+ * Kind alone is not enough. A heading our vocabulary cannot place ("My
+ * Journey", "Publications") becomes `other`, and treating `other` as prose
+ * would drop its bullets into `looseLines` where every downstream check ignores
+ * them — a resume with one unrecognised heading would silently receive almost
+ * no content diagnosis. The shape of the body is the reliable signal: if it
+ * contains bullets, it holds entries whatever the heading says.
+ */
+function isEntryBearing(kind: SectionKind, blocks: TextBlock[]): boolean {
+  if (ENTRY_BEARING.has(kind)) return true;
+  if (kind === 'contact' || kind === 'skills' || kind === 'summary') return false;
+  return blocks.some((b) => isBulletLine(b.text));
+}
+
+/**
  * `2025.06 – 2025.09`, `Jun 2024 – Sep 2024`, `2023 – Present`, `2024年6月至今`.
  *
  * A date range is the single most reliable marker that a line opens a new
@@ -68,7 +84,7 @@ export class HeuristicStructureBuilder implements StructureBuilder {
         id: sectionId,
         kind: candidate.kind,
         heading: candidate.heading,
-        ...(ENTRY_BEARING.has(candidate.kind)
+        ...(isEntryBearing(candidate.kind, bodyBlocks)
           ? { entries: buildEntries(sectionId, bodyBlocks), looseLines: [] }
           : { entries: [], looseLines: bodyBlocks.map((b) => b.text) }),
         span: {
