@@ -25,7 +25,18 @@ export interface KnowledgeEntry {
 export interface SearchOptions {
   dimension?: DiagnosisDimension;
   limit?: number;
-  /** Minimum cosine similarity for the embedding channel. */
+  /**
+   * Minimum cosine similarity for the embedding channel. Default 0.25.
+   *
+   * Measured against `text-embedding-3-small` on this corpus with a labelled
+   * query set: deliberately unrelated queries ("what is for dinner tonight")
+   * topped out at 0.181, while dimension-scoped correct hits landed between
+   * 0.415 and 0.765. The cut-off sits in the gap.
+   *
+   * Re-measure whenever the embedding model **or the corpus** changes — both
+   * move this number. Switching the corpus from Chinese to English shifted the
+   * unrelated ceiling from 0.203 to 0.181 on its own.
+   */
   threshold?: number;
 }
 
@@ -37,6 +48,7 @@ export interface SearchResult extends KnowledgeEntry {
 
 export interface KnowledgeStore {
   insertBatch(entries: KnowledgeEntry[]): void;
+  allEntries(dimension?: DiagnosisDimension): KnowledgeEntry[];
   getEntry(id: string): KnowledgeEntry | null;
   getDimensions(): Array<{ id: string; label: string; count: number }>;
   getStats(): { totalEntries: number; dimensions: number; withEmbedding: number };
