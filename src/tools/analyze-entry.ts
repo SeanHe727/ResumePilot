@@ -9,7 +9,7 @@ import { ENTRY_SUBSTANCE_PROMPT } from './prompts.js';
 import type { Tool, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
 
-interface AnalyzeEntryInput {
+export interface AnalyzeEntryInput {
   entry: ResumeEntry;
   /** Corpus entries already retrieved for the dimensions being checked. */
   references?: Array<{ question: string; weakExample: string; strongExample: string; gap: string }>;
@@ -56,7 +56,7 @@ export const analyzeEntryTool: Tool<AnalyzeEntryInput, EntryDiagnosis> = {
     const response = await ctx.queryEngine.query({
       task: 'diagnose_bullet',
       systemPrompt: ENTRY_SUBSTANCE_PROMPT,
-      messages: [{ role: 'user', content: buildUserMessage(input) }],
+      messages: [{ role: 'user', content: buildEntryMessage(input) }],
       ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
     });
 
@@ -68,11 +68,12 @@ export const analyzeEntryTool: Tool<AnalyzeEntryInput, EntryDiagnosis> = {
       };
     }
 
-    return normalise(parsed, entry);
+    return normaliseEntryDiagnosis(parsed, entry);
   },
 };
 
-function buildUserMessage(input: AnalyzeEntryInput): string {
+/** Exported so a sub-agent asks for the same shape this tool does. */
+export function buildEntryMessage(input: AnalyzeEntryInput): string {
   const { entry, references } = input;
   const header = entry.headerLines.join(' | ');
   const bullets = entry.bullets.map((b) => `  ${b.id}: ${b.text}`).join('\n');
@@ -129,7 +130,10 @@ Return JSON of exactly this shape:
  * The reference project calls `JSON.parse` and returns. This is that, plus
  * defaults for fields the model left out.
  */
-function normalise(parsed: Record<string, unknown>, entry: ResumeEntry): ToolResult<EntryDiagnosis> {
+export function normaliseEntryDiagnosis(
+  parsed: Record<string, unknown>,
+  entry: ResumeEntry,
+): ToolResult<EntryDiagnosis> {
   const rawBullets = Array.isArray(parsed.bullets) ? parsed.bullets : [];
 
   const bullets: BulletDiagnosis[] = (rawBullets as Array<Record<string, unknown>>).map((raw) => {

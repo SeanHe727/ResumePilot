@@ -45,7 +45,7 @@ export const analyzeWordingTool: Tool<AnalyzeWordingInput, WordingDiagnosis> = {
       // substance one.
       task: 'judge_wording',
       systemPrompt: ENTRY_WORDING_PROMPT,
-      messages: [{ role: 'user', content: buildUserMessage(entry) }],
+      messages: [{ role: 'user', content: buildWordingMessage(entry) }],
       ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
     });
 
@@ -88,7 +88,8 @@ export const analyzeWordingTool: Tool<AnalyzeWordingInput, WordingDiagnosis> = {
   },
 };
 
-function buildUserMessage(entry: ResumeEntry): string {
+/** Exported so a sub-agent asks for the same shape this tool does. */
+export function buildWordingMessage(entry: ResumeEntry): string {
   const bullets = entry.bullets.map((b) => `  ${b.id}: ${b.text}`).join('\n');
 
   return `<resume_content>

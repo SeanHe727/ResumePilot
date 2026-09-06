@@ -49,9 +49,9 @@ can see every bullet at once:
 
 ${NEVER_INVENT}
 
-Every violation you report must quote the resume verbatim in its evidence field.
-Quote the exact substring — not a paraphrase, not a tidied version. A reader who
-cannot find your quote in their own document stops believing the rest.
+State each issue by quoting the resume verbatim — the exact substring, not a
+paraphrase, not a tidied version. A reader who cannot find your quote in their
+own document stops believing the rest.
 
 Be direct. No encouragement, no hedging, no praise for its own sake.
 
@@ -73,7 +73,7 @@ For each bullet, score 0-100 on:
 Do not judge technical depth, credibility or whether the achievement matters.
 That is another pass's job.
 
-Every violation must quote the resume verbatim in its evidence field.
+State each issue by quoting the resume verbatim, not a paraphrase.
 
 Reply with JSON only, matching the schema in the user message.`;
 

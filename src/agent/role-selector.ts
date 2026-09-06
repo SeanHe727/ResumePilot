@@ -1,0 +1,42 @@
+import type { RoleSelection, RoleSelectionInput, RoleSelector } from './types.js';
+
+/**
+ * Which roles run, chosen from a fixed catalogue.
+ *
+ * The reference project did this with one line — `if (params.timestamps)` add
+ * the speech agent — and that is the right shape: the roles themselves are
+ * declared ahead of time, and only their inclusion varies. Letting a model
+ * invent the topology would buy unpredictable cost and unreproducible runs for
+ * variation the knowledge base already absorbs.
+ */
+export class DefaultRoleSelector implements RoleSelector {
+  select(input: RoleSelectionInput): RoleSelection {
+    const roles: RoleSelection['roles'] = [];
+    const reasons: Record<string, string> = {};
+
+    if (input.entryCount > 0) {
+      roles.push('entry-substance');
+      reasons['entry-substance'] = `${input.entryCount} entries to score`;
+    } else {
+      reasons['entry-substance'] = 'no entries found';
+    }
+
+    // Verb strength and concision are judgements about wording, and on text a
+    // parser could barely read the wording on the page is not the wording that
+    // reached us. Scoring it would report the extractor's mistakes as the
+    // candidate's.
+    if (input.entryCount > 0 && input.quality === 'clean') {
+      roles.push('entry-wording');
+      reasons['entry-wording'] = 'text extracted cleanly';
+    } else if (input.entryCount > 0) {
+      reasons['entry-wording'] = `skipped: extraction was ${input.quality}`;
+    }
+
+    reasons['jd-match'] = input.hasJd
+      ? 'skipped: no agent implemented yet'
+      : 'skipped: no job description attached';
+    reasons['narrative'] = 'skipped: no agent implemented yet';
+
+    return { roles, reasons };
+  }
+}
