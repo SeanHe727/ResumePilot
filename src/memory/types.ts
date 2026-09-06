@@ -21,6 +21,36 @@ export interface MemoryEntry<T = unknown> {
   accessCount: number;
 }
 
+/**
+ * The `value` of a `weak_point` memory.
+ *
+ * Keyed by dimension so recall can be scoped the same way knowledge retrieval
+ * is. `description` holds the finding verbatim, which is what makes a repeat
+ * sighting recognisable.
+ *
+ * No label for the entry it came from: that was stored for a while and read by
+ * nothing, which is the only reason it is gone.
+ */
+export interface WeakPointRecord {
+  dimension: string;
+  score: number;
+  description: string;
+}
+
+/**
+ * The `value` of a `diagnosis_summary` memory: the data points worth carrying
+ * to the next session, never the report itself.
+ */
+export interface DiagnosisSummaryRecord {
+  date: string;
+  totalEntries: number;
+  overallScore: number;
+  formatScore: number;
+  substanceAvg: number;
+  wordingAvg: number;
+  topWeaknesses: string[];
+}
+
 export interface MemoryStore<TProfile = Record<string, unknown>> {
   create<T>(type: MemoryType, key: string, value: T): string;
   retrieve(opts?: {
