@@ -255,3 +255,46 @@ describe('generate_report aggregation', () => {
     expect(report.summary.topWeaknesses.length).toBeGreaterThan(0);
   });
 });
+
+
+describe('what leaves the machine', () => {
+  /** Everything in the fixtures that identifies a person rather than a job. */
+  const CONTACT_DETAILS = ['Sean Chen', 'sean@example.com', '138 0000 0000', 'github.com/seanchen'];
+
+  it('sends no contact detail to the model', async () => {
+    // Not because anything strips them: the diagnosis loop walks `entries`,
+    // and `isEntryBearing` keeps contact, skills and summary out of entries
+    // whatever their body looks like. That line was written for a different
+    // reason, so this pins the consequence rather than the cause.
+    const { seen } = await runOn('sample-resume.md');
+    const sent = JSON.stringify(seen);
+
+    expect(seen.length).toBeGreaterThan(0);
+    for (const detail of CONTACT_DETAILS) {
+      expect(sent, `sent to the model: ${detail}`).not.toContain(detail);
+    }
+  });
+
+  it('keeps them out even when the contact block is written as bullets', async () => {
+    // The shape-based fallback in `isEntryBearing` treats a bulleted body as
+    // entries — which is right for an unrecognised heading and wrong here.
+    const { out, seen } = await runOn('bulleted-contact.md');
+    const everything = JSON.stringify(seen) + render(out.result as DiagnosisReport);
+
+    for (const detail of CONTACT_DETAILS) {
+      expect(everything, `leaked: ${detail}`).not.toContain(detail);
+    }
+  });
+
+  it('shows no contact detail in the report, but does name the employer', async () => {
+    // The employer stays: `20  ByteDance — Backend Engineer Intern` is how the
+    // reader knows which entry a score belongs to.
+    const { out } = await runOn('sample-resume.md');
+    const text = render(out.result as DiagnosisReport);
+
+    for (const detail of CONTACT_DETAILS) {
+      expect(text, `printed: ${detail}`).not.toContain(detail);
+    }
+    expect(text).toContain('ByteDance');
+  });
+});

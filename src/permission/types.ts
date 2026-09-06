@@ -31,6 +31,12 @@ export interface PermissionDecision {
 export interface PermissionGate {
   /** No matching rule means deny — the default is closed, not open. */
   checkTool(toolCall: ToolCall, sessionId: string): Promise<PermissionDecision>;
+  /**
+   * For the rules that gate something other than a tool call — a memory write,
+   * an outbound request. Without an entry point of its own, an `operation`
+   * matcher can never fire.
+   */
+  checkOperation(category: string, sessionId: string): Promise<PermissionDecision>;
   addRule(rule: PermissionRule): void;
   getRules(): readonly PermissionRule[];
   clearApprovalCache(): void;
@@ -45,40 +51,6 @@ export interface ConfirmRequest {
 
 export interface PermissionConfirm {
   ask(request: ConfirmRequest): Promise<ConfirmResult>;
-}
-
-// ---------------------------------------------------------------------------
-// Reversible redaction
-// ---------------------------------------------------------------------------
-
-/**
- * A resume is dense with real personal data. Replacing it with `***` the way
- * the reference project did would make rewrite suggestions unusable — the
- * model would hand back bullets full of asterisks.
- *
- * So redaction is reversible: identifiers are swapped for stable placeholders
- * on the way out to the provider, and restored on the way back. The map never
- * leaves the process, and only the placeholder ever reaches the network.
- */
-export type PiiKind = 'person' | 'email' | 'phone' | 'url' | 'address' | 'company' | 'school';
-
-export interface RedactionEntry {
-  /** e.g. `[PERSON_1]`. Stable for the lifetime of the session. */
-  placeholder: string;
-  kind: PiiKind;
-  original: string;
-}
-
-export interface RedactionMap {
-  entries: readonly RedactionEntry[];
-  redact(text: string): string;
-  restore(text: string): string;
-}
-
-export interface Redactor {
-  /** Builds or extends the session's map, returning text safe to transmit. */
-  redact(text: string, map: RedactionMap): { text: string; map: RedactionMap };
-  restore(text: string, map: RedactionMap): string;
 }
 
 // ---------------------------------------------------------------------------
