@@ -13,8 +13,21 @@ export interface ContextConfig {
   taskBudget: number;
   historyBudget: number;
   recentBudget: number;
+  /** Ceiling for one tool result before it is compressed on the way in. */
+  toolResultBudget: number;
   /** Reserved headroom for the model's own output. */
   outputReserve: number;
+  /**
+   * How many times `autoCompact` may escalate over a session's lifetime.
+   *
+   * A one-shot diagnosis does not need to compact more than a couple of times,
+   * and past that the ladder stops paying: level 3 would summarise its own
+   * summary, losing detail about the entry under diagnosis on every pass while
+   * still costing a model call. Stopping is safe because each layer is capped
+   * independently of compaction, so the window cannot grow past the sum of the
+   * layer budgets either way.
+   */
+  maxCompactions: number;
 }
 
 export const DEFAULT_CONTEXT_CONFIG: ContextConfig = {
@@ -24,7 +37,9 @@ export const DEFAULT_CONTEXT_CONFIG: ContextConfig = {
   taskBudget: 4_000,
   historyBudget: 2_000,
   recentBudget: 3_000,
+  toolResultBudget: 1_000,
   outputReserve: 4_000,
+  maxCompactions: 3,
 };
 
 export interface ContextWindow {
@@ -57,6 +72,7 @@ export interface ContextManager {
   addToolResult(toolCallId: string, result: string): void;
   build(): ContextWindow;
   needsCompaction(): boolean;
+  /** Returns the level reached, or null if nothing ran — not needed, or out of rounds. */
   autoCompact(queryEngine: QueryEngine): Promise<CompactionLevel | null>;
   getRecentMessages(): Message[];
   getStats(): string;
