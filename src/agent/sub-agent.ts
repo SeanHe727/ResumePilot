@@ -2,6 +2,7 @@ import { LayeredContextManager } from '../context/manager.js';
 import type { QueryEngine } from '../query-engine/types.js';
 import type { Session } from '../session/types.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
+import { readJson } from '../tools/verify.js';
 import type { ToolRegistry } from '../tools/types.js';
 import type { SubAgentConfig, SubAgentResult, SubAgentTask } from './types.js';
 
@@ -147,11 +148,27 @@ export class SubAgentRuntime {
         };
       }
 
+      const { value, error } = readJson(answer);
+      if (value === null && error) {
+        // Said out loud rather than falling back to "it replied in prose": the
+        // answer was JSON, and one bad character is a different problem from a
+        // model that ignored the schema.
+        return {
+          agentId: config.id,
+          agentName: config.name,
+          success: false,
+          usage,
+          turns,
+          durationMs: Date.now() - started,
+          error: `the answer would not parse as JSON — ${error}`,
+        };
+      }
+
       return {
         agentId: config.id,
         agentName: config.name,
         success: true,
-        output: parseOutput(answer),
+        output: value ?? answer,
         usage,
         turns,
         durationMs: Date.now() - started,
@@ -221,53 +238,3 @@ function stringify(value: unknown): string {
 const FINAL_TURN_NUDGE = `No more lookups. Answer now, with the JSON described above and nothing else —
 no preamble, no explanation around it. Work from what you already have; an
 answer built on partial reference material is worth more than none.`;
-
-/**
- * Sub-agents are asked for JSON and mostly send it wrapped in something.
- *
- * A fenced block is the common case. Failing that the object is found by
- * scanning braces rather than by regex: `/\{[\s\S]*\}/` is greedy, so an
- * answer like "here is the diagnosis: {...} — let me know" matches from the
- * first brace to the last one in the whole reply, and a stray `}` in the
- * closing sentence turns a good answer into an unparseable one.
- */
-function parseOutput(content: string): unknown {
-  const fenced = /```(?:json)?\s*([\s\S]+?)\s*```/.exec(content)?.[1];
-  for (const candidate of [fenced, firstJsonObject(content)]) {
-    if (!candidate) continue;
-    try {
-      return JSON.parse(candidate);
-    } catch {
-      // Try the next candidate; a fenced block can be a fragment.
-    }
-  }
-
-  return content;
-}
-
-/** The first balanced `{...}`, ignoring braces inside strings. */
-function firstJsonObject(text: string): string | null {
-  const start = text.indexOf('{');
-  if (start === -1) return null;
-
-  let depth = 0;
-  let inString = false;
-  let escaped = false;
-
-  for (let i = start; i < text.length; i++) {
-    const char = text[i]!;
-
-    if (inString) {
-      if (escaped) escaped = false;
-      else if (char === '\\') escaped = true;
-      else if (char === '"') inString = false;
-      continue;
-    }
-
-    if (char === '"') inString = true;
-    else if (char === '{') depth += 1;
-    else if (char === '}' && --depth === 0) return text.slice(start, i + 1);
-  }
-
-  return null;
-}
