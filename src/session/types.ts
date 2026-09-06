@@ -58,7 +58,10 @@ export interface SessionListEntry {
 }
 
 export interface SessionManager {
-  create(input: { sourcePath: string }, config?: Partial<SessionConfig>): Session;
+  create(
+    input: { sourcePath: string; parentSessionId?: string },
+    config?: Partial<SessionConfig>,
+  ): Session;
   get(id: string): Session | null;
   list(opts?: { status?: SessionStatus; limit?: number }): SessionListEntry[];
   updateStatus(id: string, status: SessionStatus): void;

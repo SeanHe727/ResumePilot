@@ -1,0 +1,344 @@
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+import { afterEach, describe, expect, it } from 'vitest';
+
+import type { DiagnosisReport, ResumeSessionState } from '../../src/domain.js';
+import { DefaultResumeParser } from '../../src/document/index.js';
+import { createCommandParser, DefaultCommandParser } from '../../src/command/index.js';
+import { DefaultHookPipeline, createProgressUpdateHook } from '../../src/hooks/index.js';
+import type { QueryEngine } from '../../src/query-engine/types.js';
+import {
+  DefaultSessionRestorer,
+  SqliteCheckpointManager,
+  SqliteSessionManager,
+} from '../../src/session/index.js';
+import type { Session } from '../../src/session/types.js';
+
+const temps: string[] = [];
+afterEach(() => {
+  for (const dir of temps.splice(0)) rmSync(dir, { recursive: true, force: true });
+});
+function temp(): string {
+  const dir = mkdtempSync(join(tmpdir(), 'rp-cmd-'));
+  temps.push(dir);
+  return dir;
+}
+
+const engine = {
+  getUsageSummary: () => '3 calls · 12.4k tokens · $0.08',
+  checkBudget: () => ({ ok: true }),
+  query: async () => ({ type: 'text' as const, content: '', usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' as const }),
+} as unknown as QueryEngine;
+
+function setup() {
+  const sessions = new SqliteSessionManager();
+  const checkpoints = new SqliteCheckpointManager(sessions.db);
+  const hooks = new DefaultHookPipeline();
+  hooks.register(createProgressUpdateHook());
+
+  const parser = createCommandParser({
+    sessions,
+    restorer: new DefaultSessionRestorer(sessions, checkpoints),
+    hooks,
+    engine,
+  });
+
+  return { parser, sessions, checkpoints, hooks, session: sessions.create({ sourcePath: 'resume.md' }) };
+}
+
+const REPORT: DiagnosisReport = {
+  summary: {
+    totalEntries: 1, totalBullets: 1, overallScore: 41, substanceAvg: 20,
+    wordingAvg: 40, formatScore: 80, topStrengths: [], topWeaknesses: ['no measurable outcome'],
+  },
+  perEntry: [
+    {
+      entryId: 'experience:0', label: 'ByteDance — Backend Engineer Intern', score: 20,
+      topIssue: 'no measurable outcome',
+      bullets: [{ bulletId: 'b0', text: 'Responsible for the order query service', score: 20, topIssue: 'no measurable outcome' }],
+    },
+  ],
+  format: {} as DiagnosisReport['format'],
+  improvementPlan: { immediate: ['delete the pronoun'], shortTerm: [], longTerm: [] },
+};
+
+function withReport(session: Session): void {
+  const state: Partial<ResumeSessionState> = {
+    latestReport: REPORT,
+    entryDiagnoses: [
+      {
+        entryId: 'experience:0', overallScore: 20,
+        bullets: [{
+          bulletId: 'b0', overallScore: 20,
+          dimensions: { impact: { score: 20, detail: '' }, measurement: { score: 0, detail: '' }, method: { score: 10, detail: '' } },
+          issues: ['no measurable outcome'], strengths: ['names the system'],
+        }],
+        narrative: { redundantPairs: [], weakLead: true, coherence: { score: 40, detail: '' } },
+      },
+    ],
+  };
+  Object.assign(session.state, state);
+}
+
+describe('DefaultCommandParser', () => {
+  it('takes a leading slash as a command', () => {
+    const { parser } = setup();
+
+    expect(parser.isCommand('/status')).toBe(true);
+    expect(parser.isCommand('  /status')).toBe(true);
+    expect(parser.isCommand('diagnose my resume')).toBe(false);
+  });
+
+  it('does not mistake a file path for a command', () => {
+    // The reference treated anything starting with `/` as a command, and its
+    // inputs were transcripts. Ours are paths, so a pasted absolute path is
+    // the first thing a user would hit.
+    const { parser } = setup();
+
+    expect(parser.isCommand('/Users/sean/Documents/resume.pdf')).toBe(false);
+    expect(parser.isCommand('/')).toBe(false);
+    expect(parser.isCommand('/home/sean/cv.docx and please review it')).toBe(false);
+  });
+
+  it('resolves aliases', () => {
+    const { parser } = setup();
+
+    expect(parser.parse('/s')?.command.name).toBe('status');
+    expect(parser.parse('/resume')?.command.name).toBe('continue');
+    expect(parser.parse('/STATUS')?.command.name).toBe('status');
+  });
+
+  it('splits positional arguments from flags', () => {
+    const { parser } = setup();
+    const args = parser.parse('/export md ~/out.md --overwrite --title diagnosis')?.args;
+
+    expect(args?.positional).toEqual(['md', '~/out.md']);
+    expect(args?.flags).toEqual({ overwrite: true, title: 'diagnosis' });
+  });
+
+  it('gives a flag only the next token, not the rest of the line', () => {
+    // A limitation worth knowing rather than a bug: `--title My CV` sets the
+    // title to "My" and leaves "CV" as a positional. Quoting is not handled,
+    // and no command currently takes a multi-word flag.
+    const { parser } = setup();
+    const args = parser.parse('/export md --title My CV')?.args;
+
+    expect(args?.flags).toEqual({ title: 'My' });
+    expect(args?.positional).toEqual(['md', 'CV']);
+  });
+
+  it('says so when a command does not exist', async () => {
+    const { parser, session } = setup();
+
+    expect((await parser.execute('/nope', session)).output).toMatch(/Unknown command \/nope/);
+  });
+
+  it('names the missing argument instead of failing', async () => {
+    const { parser, session } = setup();
+    const result = await parser.execute('/detail', session);
+
+    expect(result.output).toMatch(/needs n/);
+    expect(result.output).toMatch(/\/detail 2/);
+  });
+
+  it('reports a handler that throws rather than taking the session down', async () => {
+    // A user reaches for a command when something has already gone wrong.
+    const parser = new DefaultCommandParser();
+    parser.register({
+      name: 'boom', aliases: [], description: '', args: [], examples: [],
+      async execute() { throw new Error('disk full'); },
+    });
+    const { session } = setup();
+
+    expect((await parser.execute('/boom', session)).output).toBe('/boom failed: disk full');
+  });
+
+  it('refuses a duplicate name or a shadowing alias', () => {
+    const parser = new DefaultCommandParser();
+    const make = (name: string, aliases: string[]) => ({
+      name, aliases, description: '', args: [], examples: [],
+      execute: async () => ({ output: '' }),
+    });
+    parser.register(make('status', ['s']));
+
+    expect(() => parser.register(make('status', []))).toThrow(/already registered/);
+    expect(() => parser.register(make('other', ['s']))).toThrow(/collides/);
+    expect(() => parser.register(make('another', ['status']))).toThrow(/collides/);
+  });
+});
+
+describe('handlers', () => {
+  it('/help lists every command, and explains one', async () => {
+    const { parser, session } = setup();
+
+    const all = await parser.execute('/help', session);
+    expect(all.output).toContain('/status');
+    expect(all.output).toContain('/export');
+
+    const one = await parser.execute('/help export', session);
+    expect(one.output).toContain('aliases: /save');
+    expect(one.output).toContain('md or json');
+  });
+
+  it('/status shows progress, context and spend', async () => {
+    const { parser, sessions, session } = setup();
+    sessions.updateProgress(session.id, 2, 4, 'diagnosing entries (2/4)');
+
+    const output = (await parser.execute('/status', session)).output;
+
+    expect(output).toContain('2/4');
+    expect(output).toContain('context');
+    expect(output).toContain('$0.08');
+  });
+
+  it('/history lists newest first and honours a limit', async () => {
+    const { parser, sessions, session } = setup();
+    sessions.create({ sourcePath: 'other.md' });
+
+    expect((await parser.execute('/history', session)).data).toHaveLength(2);
+    expect((await parser.execute('/history 1', session)).data).toHaveLength(1);
+  });
+
+  it('/continue picks a paused session back up', async () => {
+    const { parser, sessions, session } = setup();
+    sessions.updateStatus(session.id, 'processing');
+    sessions.updateProgress(session.id, 2, 4);
+    sessions.updateStatus(session.id, 'paused');
+
+    const result = await parser.execute('/continue', session);
+
+    expect(result.output).toMatch(/Continuing .* from 2\/4/);
+    expect(sessions.get(session.id)?.status).toBe('processing');
+  });
+
+  it('/continue reports a finished session instead of restarting it', async () => {
+    const { parser, sessions, session } = setup();
+    sessions.updateStatus(session.id, 'processing');
+    sessions.updateStatus(session.id, 'completed');
+
+    expect((await parser.execute('/continue', session)).output).toMatch(/already completed/);
+  });
+
+  it('/reset keeps the old diagnosis reachable', async () => {
+    const { parser, sessions, session } = setup();
+    const result = await parser.execute('/reset', session);
+
+    expect(result.action).toBe('new_session');
+    expect((result.data as Session).parentSessionId).toBe(session.id);
+    expect(sessions.list()).toHaveLength(2);
+  });
+
+  it('/hooks lists them and switches one off', async () => {
+    const { parser, hooks, session } = setup();
+
+    expect((await parser.execute('/hooks', session)).output).toContain('progress-update');
+    await parser.execute('/hooks disable progress-update', session);
+    expect(hooks.list()[0]?.enabled).toBe(false);
+
+    expect((await parser.execute('/hooks disable nope', session)).output).toMatch(/No hook/);
+  });
+
+  it('/config shows settings and changes one', async () => {
+    const { parser, session } = setup();
+
+    expect((await parser.execute('/config', session)).output).toContain('maxCostUsd');
+    await parser.execute('/config maxCostUsd 5', session);
+    expect(session.config.maxCostUsd).toBe(5);
+  });
+
+  it('/config refuses a value that is not a number', async () => {
+    // `Number('cheap')` is NaN, and a NaN budget compares false against every
+    // limit — so nothing would ever stop.
+    const { parser, session } = setup();
+    const result = await parser.execute('/config maxCostUsd cheap', session);
+
+    expect(result.output).toMatch(/must be a number/);
+    expect(session.config.maxCostUsd).toBe(1);
+  });
+
+  it('/config refuses a setting that is not settable', async () => {
+    const { parser, session } = setup();
+
+    expect((await parser.execute('/config id abc', session)).output).toMatch(/Cannot set id/);
+  });
+
+  it('/upload checks the file is there and is a kind we read', async () => {
+    const { parser, session } = setup();
+    const image = join(temp(), 'x.png');
+    writeFileSync(image, 'not a resume');
+
+    expect((await parser.execute('/upload /nope/missing.pdf', session)).output).toMatch(/Cannot read/);
+    expect((await parser.execute(`/upload ${image}`, session)).output).toMatch(
+      /Unsupported file type/,
+    );
+  });
+
+  it('/upload after a diagnosis starts a new session rather than invalidating one', async () => {
+    const { parser, session } = setup();
+    withReport(session);
+
+    const result = await parser.execute('/upload tests/fixtures/sample-resume.md', session);
+
+    expect(result.action).toBe('new_session');
+    expect((result.data as Session).sourcePath).toMatch(/sample-resume\.md$/);
+  });
+
+  it('/report and /detail need a diagnosis first', async () => {
+    const { parser, session } = setup();
+
+    expect((await parser.execute('/report', session)).output).toMatch(/Nothing diagnosed yet/);
+    expect((await parser.execute('/detail 1', session)).output).toMatch(/Nothing diagnosed yet/);
+  });
+
+  it('/detail shows the dimensions the report only summarised', async () => {
+    const { parser, session } = setup();
+    withReport(session);
+
+    const output = (await parser.execute('/detail 1', session)).output;
+
+    expect(output).toContain('ByteDance');
+    expect(output).toContain('impact 20  measurement 0  method 10');
+    expect(output).toContain('- no measurable outcome');
+    expect(output).toContain('+ names the system');
+  });
+
+  it('/detail reports a number out of range', async () => {
+    const { parser, session } = setup();
+    withReport(session);
+
+    expect((await parser.execute('/detail 9', session)).output).toMatch(/Range: 1-1/);
+  });
+
+  it('/skip stores the entry id, not its position', async () => {
+    const { parser, sessions, session } = setup();
+    const doc = await new DefaultResumeParser().parse('tests/fixtures/sample-resume.md');
+    sessions.updateState(session.id, { resume: doc });
+
+    const result = await parser.execute('/skip 1', session);
+
+    expect(result.output).toMatch(/^Skipped 1: /);
+    const skipped = (session.state as ResumeSessionState).skipped;
+    expect(skipped?.[0]).toBe(doc.sections.flatMap((s) => s.entries)[0]?.id);
+
+    expect((await parser.execute('/skip 1', session)).output).toMatch(/already skipped/);
+    expect((await parser.execute('/skip 99', session)).output).toMatch(/Range: 1-/);
+  });
+
+  it('/export writes markdown by default and json on request', async () => {
+    const { parser, session } = setup();
+    withReport(session);
+    const dir = temp();
+
+    const md = await parser.execute(`/export md ${join(dir, 'out.md')}`, session);
+    expect(readFileSync((md.data as { path: string }).path, 'utf8')).toContain('# Resume diagnosis');
+
+    const json = await parser.execute(`/export json ${join(dir, 'out.json')}`, session);
+    expect(JSON.parse(readFileSync((json.data as { path: string }).path, 'utf8'))).toMatchObject({
+      summary: { overallScore: 41 },
+    });
+
+    expect((await parser.execute('/export pdf', session)).output).toMatch(/Unknown format/);
+  });
+});
