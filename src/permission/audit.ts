@@ -1,7 +1,14 @@
 import Database from 'better-sqlite3';
 
 import type { ToolCall } from '../types.js';
-import type { AuditEntry, AuditLogger, PermissionDecision, RiskLevel } from './types.js';
+import type { ToolResult } from '../tools/types.js';
+import type {
+  AuditEntry,
+  AuditLogger,
+  ExecutionRecord,
+  PermissionDecision,
+  RiskLevel,
+} from './types.js';
 
 const SCHEMA = `
   CREATE TABLE IF NOT EXISTS permission_audit (
@@ -16,9 +23,23 @@ const SCHEMA = `
     timestamp    TEXT NOT NULL
   );
 
+  CREATE TABLE IF NOT EXISTS tool_executions (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id     TEXT NOT NULL,
+    tool_name      TEXT NOT NULL,
+    input_summary  TEXT NOT NULL,
+    output_summary TEXT NOT NULL,
+    success        INTEGER NOT NULL,
+    timestamp      TEXT NOT NULL
+  );
+
   CREATE INDEX IF NOT EXISTS idx_audit_session ON permission_audit(session_id);
   CREATE INDEX IF NOT EXISTS idx_audit_time    ON permission_audit(timestamp);
+  CREATE INDEX IF NOT EXISTS idx_exec_session  ON tool_executions(session_id);
 `;
+
+/** How much of an argument or a result is kept. Enough to recognise, not to reconstruct. */
+const SUMMARY_CHARS = 200;
 
 /** Turns a tool call's arguments into the text stored in the log. */
 export type ArgumentSanitiser = (input: Record<string, unknown>) => string;
@@ -61,6 +82,48 @@ export class SqliteAuditLogger implements AuditLogger {
         decision.confirmedBy ?? null,
         decision.timestamp,
       );
+  }
+
+  logExecution(sessionId: string, toolCall: ToolCall, result: ToolResult): void {
+    this.db
+      .prepare(
+        `INSERT INTO tool_executions
+           (session_id, tool_name, input_summary, output_summary, success, timestamp)
+         VALUES (?, ?, ?, ?, ?, ?)`,
+      )
+      .run(
+        sessionId,
+        toolCall.name,
+        this.sanitise(toolCall.input).slice(0, SUMMARY_CHARS),
+        JSON.stringify(result.data ?? result.error ?? null).slice(0, SUMMARY_CHARS),
+        result.success ? 1 : 0,
+        new Date().toISOString(),
+      );
+  }
+
+  getSessionExecutions(sessionId: string): ExecutionRecord[] {
+    const rows = this.db
+      .prepare('SELECT * FROM tool_executions WHERE session_id = ? ORDER BY id')
+      .all(sessionId) as Array<{
+      id: number;
+      session_id: string;
+      tool_name: string;
+      input_summary: string;
+      output_summary: string;
+      success: number;
+      timestamp: string;
+    }>;
+
+    return rows.map((row) => ({
+      id: row.id,
+      sessionId: row.session_id,
+      toolName: row.tool_name,
+      inputSummary: row.input_summary,
+      outputSummary: row.output_summary,
+      // SQLite has no boolean type; the column holds 0 or 1.
+      success: row.success === 1,
+      timestamp: row.timestamp,
+    }));
   }
 
   getSessionLog(sessionId: string): AuditEntry[] {

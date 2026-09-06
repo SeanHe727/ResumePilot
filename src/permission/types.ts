@@ -1,4 +1,5 @@
 import type { ToolCall } from '../types.js';
+import type { ToolResult } from '../tools/types.js';
 
 export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
 export type PermissionAction = 'allow' | 'confirm' | 'deny';
@@ -70,8 +71,26 @@ export interface AuditEntry {
   timestamp: string;
 }
 
+/** What a tool did, as opposed to whether it was allowed to. */
+export interface ExecutionRecord {
+  id: number;
+  sessionId: string;
+  toolName: string;
+  inputSummary: string;
+  outputSummary: string;
+  success: boolean;
+  timestamp: string;
+}
+
 export interface AuditLogger {
   log(sessionId: string, toolCall: ToolCall, decision: PermissionDecision): void;
+  /**
+   * Separate from `log`, because a permission decision and an execution
+   * outcome answer different questions: whether the tool was allowed to run,
+   * and whether it worked.
+   */
+  logExecution(sessionId: string, toolCall: ToolCall, result: ToolResult): void;
+  getSessionExecutions(sessionId: string): ExecutionRecord[];
   getSessionLog(sessionId: string): AuditEntry[];
   getStats(): { total: number; allowed: number; denied: number; confirmed: number };
 }
