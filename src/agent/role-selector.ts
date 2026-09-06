@@ -32,10 +32,21 @@ export class DefaultRoleSelector implements RoleSelector {
       reasons['entry-wording'] = `skipped: extraction was ${input.quality}`;
     }
 
-    reasons['jd-match'] = input.hasJd
-      ? 'skipped: no agent implemented yet'
-      : 'skipped: no job description attached';
-    reasons['narrative'] = 'skipped: no agent implemented yet';
+    if (input.hasJd) {
+      roles.push('jd-match');
+      reasons['jd-match'] = 'job description attached';
+    } else {
+      reasons['jd-match'] = 'skipped: no job description attached';
+    }
+
+    // One entry has no sequence to read, and the per-entry agent already
+    // covers the narrative inside a single position.
+    if (input.entryCount > 1) {
+      roles.push('narrative');
+      reasons['narrative'] = `${input.entryCount} entries to read in sequence`;
+    } else {
+      reasons['narrative'] = 'skipped: needs more than one entry';
+    }
 
     return { roles, reasons };
   }

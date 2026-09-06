@@ -1,4 +1,12 @@
-import type { EntryDiagnosis, ResumeEntry, WordingDiagnosis } from '../domain.js';
+import type {
+  EntryDiagnosis,
+  JdMatch,
+  JobDescription,
+  NarrativeAssessment,
+  ResumeDocument,
+  ResumeEntry,
+  WordingDiagnosis,
+} from '../domain.js';
 import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
 import { buildWordingMessage } from '../tools/analyze-wording.js';
 import { SemaphorePool } from './pool.js';
@@ -93,6 +101,60 @@ export class DefaultOrchestrator {
   }
 
   /**
+   * The career arc, read once over the whole document.
+   *
+   * Returns null rather than an empty assessment when the agent fails, so the
+   * report can leave the section out instead of printing a confident zero.
+   */
+  async assessNarrative(entries: ResumeEntry[]): Promise<NarrativeAssessment | null> {
+    if (entries.length === 0) return null;
+
+    const [result] = await this.parallel([
+      {
+        agentConfig: ROLES['narrative']!,
+        input: 'Read these entries in sequence and return the JSON described above.',
+        context: { entries: renderEntries(entries) },
+      },
+    ]);
+
+    const raw = result?.success ? asObject(result.output) : null;
+    if (!raw) return null;
+
+    return {
+      overallScore: numeric(raw.overallScore),
+      arc: typeof raw.arc === 'string' ? raw.arc : '',
+      gaps: strings(raw.gaps),
+      orderingNotes: strings(raw.orderingNotes),
+    };
+  }
+
+  /** Keyword coverage against the posting the resume is being sent to. */
+  async matchJd(resume: ResumeDocument, jd: JobDescription): Promise<JdMatch | null> {
+    const entries = resume.sections.flatMap((s) => s.entries);
+
+    const [result] = await this.parallel([
+      {
+        agentConfig: ROLES['jd-match']!,
+        input: 'Compare the resume against the job description and return the JSON described above.',
+        context: {
+          resume: renderEntries(entries),
+          jobDescription: jd.rawText,
+        },
+      },
+    ]);
+
+    const raw = result?.success ? asObject(result.output) : null;
+    if (!raw) return null;
+
+    return {
+      overallScore: numeric(raw.overallScore),
+      covered: Array.isArray(raw.covered) ? (raw.covered as JdMatch['covered']) : [],
+      missing: Array.isArray(raw.missing) ? (raw.missing as JdMatch['missing']) : [],
+      gaps: strings(raw.gaps),
+    };
+  }
+
+  /**
    * Runs sub-agent tasks together, under the configured failure strategy.
    *
    * `continue` is the default and the reason the return type is a list of
@@ -141,6 +203,31 @@ export class DefaultOrchestrator {
       };
     }
   }
+}
+
+/** Whole entries, in document order, wrapped as untrusted data. */
+function renderEntries(entries: ResumeEntry[]): string {
+  const body = entries
+    .map((entry) => {
+      const header = entry.headerLines.join(' | ');
+      const bullets = entry.bullets.map((b) => `  - ${b.text}`).join('\n');
+      return `${header}\n${bullets}`;
+    })
+    .join('\n\n');
+
+  return `<resume_content>\n${body}\n</resume_content>`;
+}
+
+function asObject(output: unknown): Record<string, unknown> | null {
+  return output && typeof output === 'object' ? (output as Record<string, unknown>) : null;
+}
+
+function numeric(raw: unknown): number {
+  return typeof raw === 'number' && Number.isFinite(raw) ? Math.round(raw) : 0;
+}
+
+function strings(raw: unknown): string[] {
+  return Array.isArray(raw) ? raw.filter((s): s is string => typeof s === 'string') : [];
 }
 
 function taskFor(role: RoleId, entry: ResumeEntry): SubAgentTask {

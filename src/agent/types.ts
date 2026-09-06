@@ -3,6 +3,9 @@ import type {
   EntryDiagnosis,
   ExtractionQuality,
   FormatDiagnosis,
+  JdMatch,
+  JobDescription,
+  NarrativeAssessment,
   ResumeDocument,
   ResumeEntry,
   WordingDiagnosis,
@@ -118,10 +121,10 @@ export interface Orchestrator {
     roles: RoleSelection,
     onProgress?: (done: number, total: number) => void,
   ): Promise<EntryVerdict[]>;
+  /** Whole-document roles, run once rather than per entry. Null when the agent failed. */
+  assessNarrative(entries: ResumeEntry[]): Promise<NarrativeAssessment | null>;
+  matchJd(resume: ResumeDocument, jd: JobDescription): Promise<JdMatch | null>;
   parallel(tasks: SubAgentTask[]): Promise<SubAgentResult[]>;
-  // `matchJd` and `assessNarrative` belong here too, and are absent because
-  // neither has an agent yet. `DefaultRoleSelector` reports them as skipped
-  // rather than pretending they ran.
 }
 
 export interface ConcurrencyPool {

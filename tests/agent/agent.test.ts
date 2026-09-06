@@ -357,32 +357,114 @@ describe('DefaultOrchestrator', () => {
 });
 
 describe('DefaultRoleSelector', () => {
-  it('runs both per-entry roles on a clean resume', () => {
-    const selection = new DefaultRoleSelector().select({ entryCount: 4, hasJd: false, quality: 'clean' });
+  const selector = new DefaultRoleSelector();
 
-    expect(selection.roles).toEqual(['entry-substance', 'entry-wording']);
+  it('runs every role a clean multi-entry resume supports', () => {
+    const selection = selector.select({ entryCount: 4, hasJd: false, quality: 'clean' });
+
+    expect(selection.roles).toEqual(['entry-substance', 'entry-wording', 'narrative']);
+  });
+
+  it('adds the JD role only when there is a job description', () => {
+    expect(selector.select({ entryCount: 4, hasJd: true, quality: 'clean' }).roles).toContain('jd-match');
+    expect(selector.select({ entryCount: 4, hasJd: false, quality: 'clean' }).roles).not.toContain('jd-match');
   });
 
   it('drops wording when the text was barely readable', () => {
     // Judging verb choice on a degraded extraction reports the extractor's
     // mistakes as the candidate's.
-    const selection = new DefaultRoleSelector().select({ entryCount: 4, hasJd: false, quality: 'degraded' });
+    const selection = selector.select({ entryCount: 4, hasJd: false, quality: 'degraded' });
 
-    expect(selection.roles).toEqual(['entry-substance']);
+    expect(selection.roles).not.toContain('entry-wording');
     expect(selection.reasons['entry-wording']).toMatch(/degraded/);
   });
 
+  it('skips the narrative on a single entry, which has no sequence', () => {
+    const selection = selector.select({ entryCount: 1, hasJd: false, quality: 'clean' });
+
+    expect(selection.roles).not.toContain('narrative');
+    expect(selection.reasons['narrative']).toMatch(/more than one entry/);
+  });
+
   it('runs nothing when there are no entries, and says so', () => {
-    const selection = new DefaultRoleSelector().select({ entryCount: 0, hasJd: false, quality: 'clean' });
+    const selection = selector.select({ entryCount: 0, hasJd: false, quality: 'clean' });
 
     expect(selection.roles).toEqual([]);
     expect(selection.reasons['entry-substance']).toMatch(/no entries/);
   });
+});
 
-  it('says why the unbuilt roles did not run', () => {
-    const selection = new DefaultRoleSelector().select({ entryCount: 2, hasJd: true, quality: 'clean' });
+describe('whole-document roles', () => {
+  const NARRATIVE_JSON = JSON.stringify({
+    overallScore: 55,
+    arc: 'Backend intern to backend intern, no visible progression.',
+    gaps: ['Eight months between the two internships, unexplained'],
+    orderingNotes: ['Lead with ByteDance, the stronger of the two'],
+  });
 
-    expect(selection.reasons['jd-match']).toMatch(/no agent implemented/);
-    expect(selection.reasons['narrative']).toMatch(/no agent implemented/);
+  const JD_JSON = JSON.stringify({
+    overallScore: 40,
+    covered: [{ keyword: 'Go', locations: ['ByteDance bullet 2'] }],
+    missing: [{ keyword: 'Kubernetes', required: true, suggestedSection: 'experience' }],
+    gaps: ['Posting asks for five years; the resume shows two internships'],
+  });
+
+  function orch(engine: QueryEngine) {
+    const { runtime } = runtimeWith(engine);
+    return new DefaultOrchestrator(runtime);
+  }
+
+  it('reads the entries in sequence', async () => {
+    const { engine, seen } = scriptedEngine(text(NARRATIVE_JSON));
+    const entries = [entry, { ...entry, id: 'experience:1', organization: 'Tencent' }];
+
+    const narrative = await orch(engine).assessNarrative(entries);
+
+    expect(narrative?.arc).toMatch(/no visible progression/);
+    expect(narrative?.gaps).toHaveLength(1);
+    // Both entries reached the agent, wrapped as data rather than instructions.
+    expect(seen[0]?.messages.some((m) => m.content.includes('<resume_content>'))).toBe(true);
+  });
+
+  it('has nothing to read with no entries', async () => {
+    const { engine, seen } = scriptedEngine(text(NARRATIVE_JSON));
+
+    expect(await orch(engine).assessNarrative([])).toBeNull();
+    expect(seen).toHaveLength(0);
+  });
+
+  it('scores keyword coverage against the posting', async () => {
+    const { engine, seen } = scriptedEngine(text(JD_JSON));
+    const resume = {
+      sourcePath: 'r.md', format: 'markdown' as const, rawText: '',
+      sections: [{ id: 'experience', kind: 'experience' as const, heading: 'Experience', entries: [entry], looseLines: [], span: { start: 0, end: 1 } }],
+      meta: { wordCount: 10, quality: 'clean' as const, layoutWarnings: [] },
+    };
+
+    const match = await orch(engine).matchJd(resume, {
+      rawText: 'We need Go and Kubernetes, five years experience.',
+      requiredKeywords: [], preferredKeywords: [],
+    });
+
+    expect(match?.overallScore).toBe(40);
+    expect(match?.missing[0]?.required).toBe(true);
+    expect(JSON.stringify(seen[0])).toContain('Kubernetes');
+  });
+
+  it('returns null rather than a confident zero when the agent fails', async () => {
+    // An empty assessment would print as a real score of 0 in the report.
+    const engine: QueryEngine = {
+      async query() { throw new Error('provider down'); },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+
+    expect(await orch(engine).assessNarrative([entry, entry])).toBeNull();
+  });
+
+  it('survives an agent that answered in prose', async () => {
+    const { engine } = scriptedEngine(text('The career looks fine overall.'));
+
+    expect(await orch(engine).assessNarrative([entry, entry])).toBeNull();
   });
 });
