@@ -151,6 +151,29 @@ describe('SubAgentRuntime', () => {
     expect((result.output as { narrative: unknown }).narrative).toBeDefined();
   });
 
+  it('finds the JSON inside a reply that wraps it in prose', async () => {
+    // A greedy `/\{[\s\S]*\}/` runs from the first brace to the last one in the
+    // whole reply, so a closing sentence containing a brace turns a good
+    // answer into an unparseable one.
+    const { engine } = scriptedEngine(
+      text(`Here is the diagnosis:\n\n${SUBSTANCE_JSON}\n\nLet me know if you want {more} detail.`),
+    );
+    const { runtime } = runtimeWith(engine);
+
+    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    expect((result.output as { bullets: unknown[] }).bullets).toHaveLength(1);
+  });
+
+  it('keeps the prose when there is no JSON in it at all', async () => {
+    const { engine } = scriptedEngine(text('The bullet reads fine to me.'));
+    const { runtime } = runtimeWith(engine);
+
+    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    expect(typeof result.output).toBe('string');
+  });
+
   it('loops: calls a tool, reads the result, then answers', async () => {
     // This is the whole reason the layer exists — the agent chooses what to
     // look up after seeing the bullet, rather than the pipeline choosing first.
@@ -198,15 +221,49 @@ describe('SubAgentRuntime', () => {
     expect(sent).not.toContain('nope');
   });
 
-  it('gives up after maxTurns and says why', async () => {
-    const { engine } = scriptedEngine(toolUse('query_knowledge_base', { query: 'x' }));
+  it('takes the tools away on the last turn so an answer always comes back', async () => {
+    // An agent that spends its whole allowance looking things up used to
+    // return nothing, and the entry it was reading scored zero — which in the
+    // report reads as a verdict rather than as a gap.
+    const { engine, seen } = scriptedEngine(
+      toolUse('query_knowledge_base', { query: 'x' }),
+      text(WORDING_JSON),
+    );
     const { runtime } = runtimeWith(engine);
 
     const result = await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
 
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
     expect(result.turns).toBe(2);
-    expect(result.error).toMatch(/stopped after 2 turns/);
+    expect(seen[0]?.tools).toBeDefined();
+    expect(seen[1]?.tools).toBeUndefined();
+    // Taking the tools away is not enough: a model that was about to look
+    // something up writes about what it would have looked up instead.
+    expect(seen[1]?.messages.at(-1)?.content).toMatch(/No more lookups/);
+  });
+
+  it('does not nudge an agent that answered on its first turn', async () => {
+    const { engine, seen } = scriptedEngine(text(SUBSTANCE_JSON));
+    const { runtime } = runtimeWith(engine);
+
+    await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
+
+    expect(JSON.stringify(seen[0])).not.toContain('No more lookups');
+  });
+
+  it('ignores tool calls the model makes anyway on the last turn', async () => {
+    const { engine } = scriptedEngine(
+      toolUse('query_knowledge_base', { query: 'x' }),
+      toolUse('query_knowledge_base', { query: 'y' }),
+    );
+    const { runtime } = runtimeWith(engine);
+
+    const result = await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
+
+    // No JSON in that reply, so the output is the prose — but the run
+    // completed and the caller can see what came back.
+    expect(result.turns).toBe(2);
+    expect(result.success).toBe(true);
   });
 
   it('hands a tool failure back as a result the agent can read', async () => {

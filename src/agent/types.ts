@@ -121,6 +121,8 @@ export interface Orchestrator {
     roles: RoleSelection,
     onProgress?: (done: number, total: number) => void,
   ): Promise<EntryVerdict[]>;
+  /** Why a whole-document role returned null, keyed by role id. */
+  readonly failures: ReadonlyMap<string, string>;
   /** Whole-document roles, run once rather than per entry. Null when the agent failed. */
   assessNarrative(entries: ResumeEntry[]): Promise<NarrativeAssessment | null>;
   matchJd(resume: ResumeDocument, jd: JobDescription): Promise<JdMatch | null>;

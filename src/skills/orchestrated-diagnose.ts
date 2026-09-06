@@ -126,9 +126,14 @@ export const orchestratedDiagnoseSkill: Skill = {
     };
     Object.assign(ctx.session.state, state);
 
-    const wholeDocument: Array<[string, boolean]> = [];
-    if (roles.roles.includes('narrative')) wholeDocument.push(['Career Narrative', narrative !== null]);
-    if (roles.roles.includes('jd-match')) wholeDocument.push(['JD Match', jdMatch !== null]);
+    const failures = ctx.orchestrator.failures;
+    const wholeDocument: Array<[string, string]> = [];
+    if (roles.roles.includes('narrative')) {
+      wholeDocument.push(['Career Narrative', narrative ? '1 ok' : `failed: ${failures.get('narrative') ?? 'unknown'}`]);
+    }
+    if (roles.roles.includes('jd-match')) {
+      wholeDocument.push(['JD Match', jdMatch ? '1 ok' : `failed: ${failures.get('jd-match') ?? 'unknown'}`]);
+    }
 
     return {
       success: true,
@@ -175,7 +180,7 @@ async function buildReport(
 function renderAgents(
   roles: RoleSelection,
   verdicts: EntryVerdict[],
-  wholeDocument: Array<[string, boolean]> = [],
+  wholeDocument: Array<[string, string]> = [],
 ): string {
   const totals = new Map<string, { ok: number; failed: number; ms: number; tokens: number }>();
 
@@ -204,8 +209,8 @@ function renderAgents(
   if (unusable > 0) {
     lines.push(`  ${'unusable'.padEnd(18)}${unusable} entries scored nothing — the agent replied, the reply did not parse`);
   }
-  for (const [name, ok] of wholeDocument) {
-    lines.push(`  ${name.padEnd(18)}${ok ? '1 ok' : 'failed'}`);
+  for (const [name, status] of wholeDocument) {
+    lines.push(`  ${name.padEnd(18)}${status}`);
   }
   for (const [role, reason] of Object.entries(roles.reasons)) {
     if (!roles.roles.includes(role as never)) lines.push(`  ${role.padEnd(18)}${reason}`);

@@ -63,20 +63,36 @@ export class SubAgentRuntime {
 
     while (turns < config.maxTurns) {
       turns += 1;
+
+      // The last turn is offered no tools, so the only thing left to do is
+      // answer. Without this an agent that spends its whole allowance looking
+      // things up returns nothing at all, and the entry it was reading scores
+      // zero — which in the report reads as a verdict rather than a gap.
+      //
+      // Taking the tools away is not enough on its own: a model that was about
+      // to look something up writes about what it would have looked up. It has
+      // to be told that this turn is the answer.
+      const finalTurn = turns === config.maxTurns;
+      if (finalTurn && turns > 1) {
+        context.addMessage({ role: 'user', content: FINAL_TURN_NUDGE });
+      }
+
+      // Built after the nudge, not before: the window is a snapshot, and one
+      // taken first does not contain the instruction this turn depends on.
       const window = context.build();
 
       const response = await this.deps.queryEngine.query({
         task: 'diagnose_bullet',
         systemPrompt: window.systemPrompt,
         messages: window.messages,
-        ...(tools.length > 0 ? { tools } : {}),
+        ...(tools.length > 0 && !finalTurn ? { tools } : {}),
         abortSignal: deadline,
       });
 
       usage.inputTokens += response.usage.inputTokens;
       usage.outputTokens += response.usage.outputTokens;
 
-      if (response.type === 'tool_use' && response.toolCalls?.length) {
+      if (!finalTurn && response.type === 'tool_use' && response.toolCalls?.length) {
         // Sub-agent tool calls do not go through the hook pipeline. The hooks
         // govern what the main loop does on the user's behalf; a sub-agent is
         // already inside a call the gate approved, and re-running permission,
@@ -106,8 +122,8 @@ export class SubAgentRuntime {
       };
     }
 
-    // Out of turns with no answer. Reported as a failure rather than as an
-    // empty result, so `continue` can drop it and the caller can see why.
+    // Only reachable with `maxTurns` at zero: the last turn is offered no
+    // tools, so it always produces text.
     return {
       agentId: config.id,
       agentName: config.name,
@@ -166,15 +182,56 @@ function stringify(value: unknown): string {
   return typeof value === 'string' ? value : JSON.stringify(value, null, 2);
 }
 
-/** Sub-agents are asked for JSON; the fenced-block case is the common miss. */
-function parseOutput(content: string): unknown {
-  const fenced = /```(?:json)?\s*([\s\S]+?)\s*```/.exec(content);
-  const candidate = fenced?.[1] ?? /\{[\s\S]*\}/.exec(content)?.[0];
-  if (!candidate) return content;
+const FINAL_TURN_NUDGE = `No more lookups. Answer now, with the JSON described above and nothing else —
+no preamble, no explanation around it. Work from what you already have; an
+answer built on partial reference material is worth more than none.`;
 
-  try {
-    return JSON.parse(candidate);
-  } catch {
-    return content;
+/**
+ * Sub-agents are asked for JSON and mostly send it wrapped in something.
+ *
+ * A fenced block is the common case. Failing that the object is found by
+ * scanning braces rather than by regex: `/\{[\s\S]*\}/` is greedy, so an
+ * answer like "here is the diagnosis: {...} — let me know" matches from the
+ * first brace to the last one in the whole reply, and a stray `}` in the
+ * closing sentence turns a good answer into an unparseable one.
+ */
+function parseOutput(content: string): unknown {
+  const fenced = /```(?:json)?\s*([\s\S]+?)\s*```/.exec(content)?.[1];
+  for (const candidate of [fenced, firstJsonObject(content)]) {
+    if (!candidate) continue;
+    try {
+      return JSON.parse(candidate);
+    } catch {
+      // Try the next candidate; a fenced block can be a fragment.
+    }
   }
+
+  return content;
+}
+
+/** The first balanced `{...}`, ignoring braces inside strings. */
+function firstJsonObject(text: string): string | null {
+  const start = text.indexOf('{');
+  if (start === -1) return null;
+
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+
+  for (let i = start; i < text.length; i++) {
+    const char = text[i]!;
+
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === '"') inString = false;
+      continue;
+    }
+
+    if (char === '"') inString = true;
+    else if (char === '{') depth += 1;
+    else if (char === '}' && --depth === 0) return text.slice(start, i + 1);
+  }
+
+  return null;
 }

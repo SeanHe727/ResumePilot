@@ -101,7 +101,10 @@ Reply with JSON only:
 }`,
   tools: ['query_knowledge_base'],
   maxTurns: 2,
-  timeoutMs: 45_000,
+  // Generous, because the deadline covers queueing as well as the call. This
+  // role reads every entry at once and runs alongside the per-entry fan-out,
+  // so it waits for a slot before it starts working.
+  timeoutMs: 120_000,
   contextBoundary: ['entries'],
 };
 
@@ -144,7 +147,7 @@ Reply with JSON only:
 }`,
   tools: ['query_knowledge_base'],
   maxTurns: 2,
-  timeoutMs: 45_000,
+  timeoutMs: 120_000,
   contextBoundary: ['resume', 'jobDescription'],
 };
 

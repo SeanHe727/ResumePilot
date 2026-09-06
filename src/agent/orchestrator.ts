@@ -60,6 +60,15 @@ export class DefaultOrchestrator {
   /** Bounds how many entries are open at once. Never the same pool. */
   private readonly entryPool: ConcurrencyPool;
 
+  /**
+   * Why a whole-document role produced nothing.
+   *
+   * `assessNarrative` and `matchJd` return null on failure, which tells a
+   * caller that the section is missing but not why — and "failed" with no
+   * reason is the thing that makes a report useless to act on.
+   */
+  readonly failures = new Map<string, string>();
+
   constructor(
     private readonly runtime: SubAgentRuntime,
     config: Partial<OrchestratorConfig> & { entryConcurrency?: number } = {},
@@ -117,7 +126,7 @@ export class DefaultOrchestrator {
       },
     ]);
 
-    const raw = result?.success ? asObject(result.output) : null;
+    const raw = this.readWholeDocument('narrative', result);
     if (!raw) return null;
 
     return {
@@ -143,7 +152,7 @@ export class DefaultOrchestrator {
       },
     ]);
 
-    const raw = result?.success ? asObject(result.output) : null;
+    const raw = this.readWholeDocument('jd-match', result);
     if (!raw) return null;
 
     return {
@@ -177,6 +186,30 @@ export class DefaultOrchestrator {
     }
 
     return this.rolePool.runAll(tasks.map((task) => () => runOne(task)));
+  }
+
+  /** Records why nothing came back, so the caller can say so rather than just "failed". */
+  private readWholeDocument(
+    role: string,
+    result: SubAgentResult | undefined,
+  ): Record<string, unknown> | null {
+    if (!result) {
+      this.failures.set(role, 'the agent did not run');
+      return null;
+    }
+    if (!result.success) {
+      this.failures.set(role, result.error ?? 'unknown failure');
+      return null;
+    }
+
+    const raw = asObject(result.output);
+    if (!raw) {
+      this.failures.set(role, 'the agent replied in prose, not the JSON asked for');
+      return null;
+    }
+
+    this.failures.delete(role);
+    return raw;
   }
 
   private async runOrThrow(task: SubAgentTask): Promise<SubAgentResult> {
