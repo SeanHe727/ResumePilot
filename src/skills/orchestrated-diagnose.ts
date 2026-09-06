@@ -138,7 +138,7 @@ export const orchestratedDiagnoseSkill: Skill = {
     return {
       success: true,
       result: report,
-      report: `${render(report)}\n\n${renderAgents(roles, verdicts, wholeDocument)}`,
+      report: `${render(report)}\n\n${renderAgents(roles, verdicts, wholeDocument, failures)}`,
     };
   },
 };
@@ -181,15 +181,23 @@ function renderAgents(
   roles: RoleSelection,
   verdicts: EntryVerdict[],
   wholeDocument: Array<[string, string]> = [],
+  failures: ReadonlyMap<string, string> = new Map(),
 ): string {
-  const totals = new Map<string, { ok: number; failed: number; ms: number; tokens: number }>();
+  const totals = new Map<
+    string,
+    { ok: number; failed: number; ms: number; tokens: number; peakMs: number; peakTurns: number }
+  >();
 
   for (const stat of verdicts.flatMap((v) => v.agentStats)) {
-    const row = totals.get(stat.name) ?? { ok: 0, failed: 0, ms: 0, tokens: 0 };
+    const row = totals.get(stat.name) ?? { ok: 0, failed: 0, ms: 0, tokens: 0, peakMs: 0, peakTurns: 0 };
     if (stat.success) row.ok += 1;
     else row.failed += 1;
     row.ms += stat.durationMs;
     row.tokens += stat.tokens;
+    // The peaks are what a limit has to clear. Averages hide the one run that
+    // hit the ceiling, and that run is the whole reason the limit matters.
+    row.peakMs = Math.max(row.peakMs, stat.durationMs);
+    row.peakTurns = Math.max(row.peakTurns, stat.turns);
     totals.set(stat.name, row);
   }
 
@@ -198,7 +206,9 @@ function renderAgents(
     lines.push(
       `  ${name.padEnd(18)}${row.ok} ok` +
         (row.failed ? `, ${row.failed} failed` : '') +
-        `  ${Math.round(row.ms / 1000)}s  ${row.tokens} tokens`,
+        `  ${Math.round(row.ms / 1000)}s total` +
+        `  peak ${Math.round(row.peakMs / 1000)}s / ${row.peakTurns} turns` +
+        `  ${row.tokens} tokens`,
     );
   }
 
@@ -209,12 +219,18 @@ function renderAgents(
   // skipped upstream, and reporting it here as a failure would be a report on
   // our own routing rather than on the resume.
   const attempted = verdicts.filter((v) => v.agentStats.length > 0);
-  for (const [label, missing] of [
-    ['no substance', attempted.filter((v) => v.substance === null).length],
-    ['no wording', attempted.filter((v) => v.wording === null).length],
+  for (const [role, label] of [
+    ['entry-substance', 'no substance'],
+    ['entry-wording', 'no wording'],
   ] as const) {
-    if (missing > 0) {
-      lines.push(`  ${label.padEnd(18)}${missing} entries — the agent ran but nothing usable came back`);
+    const reasons = [...failures].filter(([key]) => key.startsWith(`${role}:`)).map(([, why]) => why);
+    if (reasons.length === 0) continue;
+
+    // The distinct reasons, not one per entry: five entries failing the same
+    // way is one problem, and listing it five times buries the others.
+    for (const reason of new Set(reasons)) {
+      const count = reasons.filter((r) => r === reason).length;
+      lines.push(`  ${label.padEnd(18)}${count} — ${reason}`);
     }
   }
 

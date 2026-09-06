@@ -71,7 +71,10 @@ export class ClaudeProvider implements LLMProvider {
     }
 
     // Totals only settle once the message closes, so usage is read from the
-    // final message rather than accumulated from deltas.
+    // final message rather than accumulated from deltas. This also covers
+    // abort: `finalMessage()` throws on a stream that was cut short, so a
+    // truncated response cannot reach the parser looking complete — the
+    // OpenAI-shaped providers need an explicit check for the same reason.
     const final = await stream.finalMessage();
     yield {
       type: 'message_end',

@@ -25,7 +25,7 @@ import type {
 
 const DEFAULTS: OrchestratorConfig = {
   maxConcurrency: 3,
-  timeoutMs: 120_000,
+  timeoutMs: 300_000,
   // `retry` rather than `continue`, and it is still `continue`'s promise that
   // holds: a role that fails twice is dropped, not allowed to fail the batch.
   // The failures worth retrying here are transient — a thinking model that
@@ -101,7 +101,7 @@ export class DefaultOrchestrator {
     const chosen = roles.roles.filter((role) => PER_ENTRY.has(role));
     const results = await this.parallel(chosen.map((role) => taskFor(role, entry)));
 
-    return aggregate(entry, results);
+    return aggregate(entry, results, this.failures);
   }
 
   /**
@@ -292,9 +292,13 @@ function taskFor(role: RoleId, entry: ResumeEntry): SubAgentTask {
   return { agentConfig, input, context: { entry: entry.headerLines.join(' | ') } };
 }
 
-function aggregate(entry: ResumeEntry, results: SubAgentResult[]): EntryVerdict {
-  const substance = readSubstance(entry, results);
-  const wording = readWording(entry, results);
+function aggregate(
+  entry: ResumeEntry,
+  results: SubAgentResult[],
+  failures: Map<string, string>,
+): EntryVerdict {
+  const substance = readSubstance(entry, results, (r) => failures.set(`entry-substance:${entry.id}`, r));
+  const wording = readWording(entry, results, (r) => failures.set(`entry-wording:${entry.id}`, r));
 
   const scores = [substance?.overallScore, wording?.overallScore].filter(
     (s): s is number => typeof s === 'number',
@@ -321,18 +325,36 @@ function aggregate(entry: ResumeEntry, results: SubAgentResult[]): EntryVerdict 
   };
 }
 
-function readSubstance(entry: ResumeEntry, results: SubAgentResult[]): EntryDiagnosis | null {
-  const raw = successOutput(results, 'entry-substance');
+function readSubstance(
+  entry: ResumeEntry,
+  results: SubAgentResult[],
+  note: (reason: string) => void,
+): EntryDiagnosis | null {
+  const raw = successOutput(results, 'entry-substance', note);
   if (!raw) return null;
 
   const normalised = normaliseEntryDiagnosis(raw, entry);
-  return normalised.success ? (normalised.data ?? null) : null;
+  if (!normalised.success) {
+    note(`replied with keys [${Object.keys(raw).join(', ')}] — ${normalised.error?.message ?? 'no bullets'}`);
+    return null;
+  }
+
+  return normalised.data ?? null;
 }
 
-function readWording(entry: ResumeEntry, results: SubAgentResult[]): WordingDiagnosis | null {
-  const raw = successOutput(results, 'entry-wording');
-  const perBullet = Array.isArray(raw?.perBullet) ? raw.perBullet : null;
-  if (!perBullet) return null;
+function readWording(
+  entry: ResumeEntry,
+  results: SubAgentResult[],
+  note: (reason: string) => void,
+): WordingDiagnosis | null {
+  const raw = successOutput(results, 'entry-wording', note);
+  if (!raw) return null;
+
+  const perBullet = Array.isArray(raw.perBullet) ? raw.perBullet : null;
+  if (!perBullet) {
+    note(`replied with keys [${Object.keys(raw).join(', ')}] — no perBullet array`);
+    return null;
+  }
 
   const rows = perBullet as WordingDiagnosis['perBullet'];
   const scores = rows.flatMap((b) => [b.verbStrength?.score ?? 0, b.concision?.score ?? 0]);
@@ -349,11 +371,22 @@ function readWording(entry: ResumeEntry, results: SubAgentResult[]): WordingDiag
 function successOutput(
   results: SubAgentResult[],
   agentId: RoleId,
+  note: (reason: string) => void,
 ): Record<string, unknown> | null {
-  const result = results.find((r) => r.agentId === agentId && r.success);
-  const output = result?.output;
+  const result = results.find((r) => r.agentId === agentId);
+  if (!result) return null;
+
+  if (!result.success) {
+    note(result.error ?? 'the agent failed');
+    return null;
+  }
 
   // A sub-agent that answered in prose rather than JSON returns a string here,
   // and reading fields off it would silently produce a diagnosis of nothing.
-  return output && typeof output === 'object' ? (output as Record<string, unknown>) : null;
+  if (!result.output || typeof result.output !== 'object') {
+    note('replied in prose, not the JSON asked for');
+    return null;
+  }
+
+  return result.output as Record<string, unknown>;
 }

@@ -184,6 +184,23 @@ describe('SubAgentRuntime', () => {
     expect(result.error).toMatch(/finished its reasoning without writing an answer/);
   });
 
+  it('says so when the answer was cut off at the output limit', async () => {
+    // Truncated JSON parses as prose, and the report then blames the model's
+    // formatting rather than the cap it ran into.
+    const { engine } = scriptedEngine({
+      type: 'text',
+      content: '{"bullets": [{"bulletId": "x", "overall',
+      usage,
+      stopReason: 'max_tokens',
+    });
+    const { runtime } = runtimeWith(engine);
+
+    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/cut off at the output limit/);
+  });
+
   it('keeps the prose when there is no JSON in it at all', async () => {
     const { engine } = scriptedEngine(text('The bullet reads fine to me.'));
     const { runtime } = runtimeWith(engine);
@@ -250,7 +267,10 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
+    const result = await runtime.run({
+      agentConfig: { ...ENTRY_WORDING_AGENT, maxTurns: 2 },
+      input: 'judge',
+    });
 
     expect(result.success).toBe(true);
     expect(result.turns).toBe(2);
@@ -279,7 +299,10 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
+    const result = await runtime.run({
+      agentConfig: { ...ENTRY_WORDING_AGENT, maxTurns: 2 },
+      input: 'judge',
+    });
 
     expect(result.turns).toBe(2);
     expect(result.success).toBe(false);

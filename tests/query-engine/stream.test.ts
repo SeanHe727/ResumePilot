@@ -113,3 +113,47 @@ describe('parseStream', () => {
     expect(onDelta).not.toHaveBeenCalled();
   });
 });
+
+describe('a stream that stops early', () => {
+  it('is an error, not an answer that happens to be empty', async () => {
+    // An abort firing mid-response leaves nothing to mark it: the events that
+    // did arrive look ordinary and `stopReason` keeps its default, so the
+    // result is a well-formed response with no content. Read as success it is
+    // written to the cache, and then served instantly to every identical
+    // request that follows — one timeout poisoning every later run.
+    async function* cutOff(): AsyncIterable<StreamEvent> {
+      yield { type: 'reasoning_delta', content: 'Working through the bullets...' };
+    }
+
+    await expect(parseStream(cutOff())).rejects.toThrow(/ended before the response completed/);
+  });
+
+  it('accepts a stream that reached message_end', async () => {
+    async function* complete(): AsyncIterable<StreamEvent> {
+      yield { type: 'text_delta', content: '{"ok":true}' };
+      yield {
+        type: 'message_end',
+        usage: { inputTokens: 1, outputTokens: 1 },
+        stopReason: 'end_turn',
+      };
+    }
+
+    expect((await parseStream(complete())).content).toBe('{"ok":true}');
+  });
+
+  it('keeps a model\'s own reasoning out of the answer', async () => {
+    async function* thinking(): AsyncIterable<StreamEvent> {
+      yield { type: 'reasoning_delta', content: 'Let me check the second bullet.' };
+      yield { type: 'text_delta', content: '{"score":40}' };
+      yield {
+        type: 'message_end',
+        usage: { inputTokens: 1, outputTokens: 1 },
+        stopReason: 'end_turn',
+      };
+    }
+
+    const parsed = await parseStream(thinking());
+    expect(parsed.content).toBe('{"score":40}');
+    expect(parsed.reasoning).toBe('Let me check the second bullet.');
+  });
+});

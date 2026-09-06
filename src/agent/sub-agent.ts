@@ -19,10 +19,10 @@ export interface SubAgentDeps {
  * conversation the provider rejects.
  */
 const SUB_AGENT_CONTEXT = {
-  maxTotalTokens: 24_000,
-  recentBudget: 16_000,
-  taskBudget: 1_000,
-  toolResultBudget: 1_500,
+  maxTotalTokens: 32_000,
+  recentBudget: 20_000,
+  taskBudget: 4_000,
+  toolResultBudget: 3_000,
 } as const;
 
 /**
@@ -116,6 +116,22 @@ export class SubAgentRuntime {
       // success it becomes an entry scoring zero, which reads as a verdict on
       // the resume; reported as a failure the orchestrator can run it again,
       // and it usually lands the second time.
+      // Truncated at the output cap: the JSON is cut mid-object, so parsing
+      // falls back to treating it as prose and the report blames the wrong
+      // thing. A thinking model spends most of the cap on reasoning, so this
+      // is reached long before the answer looks large.
+      if (response.stopReason === 'max_tokens') {
+        return {
+          agentId: config.id,
+          agentName: config.name,
+          success: false,
+          usage,
+          turns,
+          durationMs: Date.now() - started,
+          error: 'the answer was cut off at the output limit',
+        };
+      }
+
       const answer = response.content?.trim();
       if (!answer) {
         return {

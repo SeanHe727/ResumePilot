@@ -17,6 +17,7 @@ export async function parseStream(
   let current: { id: string; name: string; input: string } | null = null;
   let usage: TokenUsage = { inputTokens: 0, outputTokens: 0 };
   let stopReason: StopReason = 'end_turn';
+  let completed = false;
 
   for await (const event of events) {
     switch (event.type) {
@@ -53,6 +54,7 @@ export async function parseStream(
       case 'message_end':
         usage = event.usage;
         stopReason = event.stopReason;
+        completed = true;
         break;
     }
   }
@@ -64,6 +66,21 @@ export async function parseStream(
     throw new QueryEngineError(
       `Stream ended inside tool call "${current.name}"`,
       'network',
+      true,
+      1_000,
+    );
+  }
+
+  // A stream that ends without `message_end` was cut off — an abort signal
+  // firing mid-response is the usual cause. Nothing else marks it: the events
+  // that did arrive look ordinary, `stopReason` keeps its default, and the
+  // result is a well-formed response whose answer happens to be empty. That
+  // reads as "the model had nothing to say", gets written to the cache, and is
+  // then served instantly to every identical request that follows.
+  if (!completed) {
+    throw new QueryEngineError(
+      'Stream ended before the response completed (timed out or aborted)',
+      'timeout',
       true,
       1_000,
     );

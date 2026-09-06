@@ -41,8 +41,8 @@ export const ENTRY_SUBSTANCE_AGENT: SubAgentConfig = {
   // reproducing the entry as a tool argument, and a paraphrased bullet is a
   // diagnosis of text the candidate never wrote.
   tools: ['query_knowledge_base'],
-  maxTurns: 4,
-  timeoutMs: 60_000,
+  maxTurns: 5,
+  timeoutMs: 180_000,
   contextBoundary: ['entry', 'previousFindings'],
 };
 
@@ -52,10 +52,14 @@ export const ENTRY_WORDING_AGENT: SubAgentConfig = {
   description: 'Judges verb strength and concision, without touching content',
   systemPrompt: `${ENTRY_WORDING_PROMPT}\n\n${RETRIEVAL_ADDENDUM}`,
   tools: ['query_knowledge_base'],
-  // Two rather than four: wording has two rule families worth consulting
-  // (action-verbs, conciseness-language) and no reason to circle back.
-  maxTurns: 2,
-  timeoutMs: 30_000,
+  // Three, not two. This role has two rule families worth consulting, and at
+  // two turns it spent the first looking them up and met the forced final turn
+  // on the second — every time. A thinking model handed "answer now, nothing
+  // else" with a full window behind it reasons at length and writes nothing,
+  // so the role that always lands there always fails. The third turn is the
+  // one where it answers of its own accord.
+  maxTurns: 5,
+  timeoutMs: 180_000,
   contextBoundary: ['entry'],
 };
 
@@ -100,11 +104,14 @@ Reply with JSON only:
   "orderingNotes": ["what to move, and why"]
 }`,
   tools: ['query_knowledge_base'],
-  maxTurns: 2,
-  // Generous, because the deadline covers queueing as well as the call. This
-  // role reads every entry at once and runs alongside the per-entry fan-out,
-  // so it waits for a slot before it starts working.
-  timeoutMs: 120_000,
+  maxTurns: 5,
+  // The deadline covers queueing as well as the call, and this role reads
+  // every entry at once while the per-entry fan-out is still running.
+  //
+  // Every limit here is about 2-3x what a measured run actually used: peak 67s
+  // and 3 turns for the heaviest role, against 180s and 5. The margin is for
+  // the resumes not in the sample, not for the one that was.
+  timeoutMs: 180_000,
   contextBoundary: ['entries'],
 };
 
@@ -146,8 +153,8 @@ Reply with JSON only:
   "gaps": ["requirements the resume cannot meet"]
 }`,
   tools: ['query_knowledge_base'],
-  maxTurns: 2,
-  timeoutMs: 120_000,
+  maxTurns: 5,
+  timeoutMs: 180_000,
   contextBoundary: ['resume', 'jobDescription'],
 };
 

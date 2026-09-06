@@ -1,9 +1,16 @@
 import OpenAI from 'openai';
 
 import type { Message, StopReason, ToolSchema } from '../../types.js';
-import type { LLMProvider, StreamEvent, StreamParams } from '../types.js';
+import { QueryEngineError, type LLMProvider, type StreamEvent, type StreamParams } from '../types.js';
 
-const DEFAULT_MAX_TOKENS = 8_192;
+/**
+ * A thinking model spends most of its output budget on reasoning before it
+ * writes anything, so a cap sized for the answer alone truncates the answer.
+ * At 8k, a five-bullet entry hit the ceiling with 22k characters of working
+ * and its JSON cut mid-object — and truncated JSON parses as prose, so the
+ * report blamed the model's formatting rather than the cap.
+ */
+const DEFAULT_MAX_TOKENS = 16_000;
 
 export class OpenAIProvider implements LLMProvider {
   readonly name: string = 'openai';
@@ -71,6 +78,16 @@ export class OpenAIProvider implements LLMProvider {
       }
 
       if (choice.finish_reason) stopReason = mapFinishReason(choice.finish_reason);
+    }
+
+
+    // The SDK ends the iteration on abort rather than throwing, so without
+    // this the loop simply finishes early and everything below runs as if the
+    // response were complete: `message_end` is yielded, `stopReason` keeps its
+    // default, and a half-written answer becomes a well-formed empty one —
+    // which is then cached and served to every identical request after it.
+    if (params.abortSignal?.aborted) {
+      throw new QueryEngineError('Request timed out or was aborted', 'timeout', true, 1_000);
     }
 
     for (const index of [...partials.keys()].sort((a, b) => a - b)) {
