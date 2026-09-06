@@ -12,6 +12,15 @@ export interface StreamParams {
   systemPrompt?: string;
   tools?: ToolSchema[];
   maxTokens?: number;
+  /**
+   * Constrain generation to a valid JSON object.
+   *
+   * `JSON.parse` is a validator as much as a parser — a raw newline inside a
+   * string is rejected outright — so the robust fix is not to repair the
+   * output but to make the invalid output unreachable. Ignored by providers
+   * that have no equivalent.
+   */
+  jsonMode?: boolean;
   effort?: Effort;
   /**
    * Mark the system prompt as a prompt-cache breakpoint (Anthropic only).
@@ -140,6 +149,8 @@ export interface QueryParams {
   systemPrompt?: string;
   tools?: ToolSchema[];
   maxTokens?: number;
+  /** See `StreamParams.jsonMode`. */
+  jsonMode?: boolean;
   effort?: Effort;
   useCache?: boolean;
   cacheTtlSeconds?: number;

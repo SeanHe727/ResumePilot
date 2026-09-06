@@ -243,6 +243,24 @@ export function render(report: DiagnosisReport): string {
     lines.push('');
   }
 
+  if (report.rewrites?.length) {
+    lines.push('Suggested rewrites');
+    for (const rewrite of report.rewrites) {
+      lines.push(`  - ${truncate(rewrite.before, 74)}`);
+      lines.push(`  + ${rewrite.after}`);
+      if (rewrite.needsInput.length > 0) {
+        lines.push(`    you supply: ${rewrite.needsInput.join('; ')}`);
+      }
+      // The second version exists for bullets where no figure was ever
+      // recorded — forcing the XYZ shape onto one of those makes it worse.
+      if (rewrite.noInputAlternative) {
+        lines.push(`  + ${rewrite.noInputAlternative.after}`);
+        lines.push(`    without a figure: ${rewrite.noInputAlternative.rationale}`);
+      }
+      lines.push('');
+    }
+  }
+
   const plan: Array<[string, string[]]> = [
     ['Fix now', report.improvementPlan.immediate],
     ['Needs a figure you have to find', report.improvementPlan.shortTerm],

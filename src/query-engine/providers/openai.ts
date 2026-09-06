@@ -29,6 +29,10 @@ export class OpenAIProvider implements LLMProvider {
         model: params.model,
         messages: toOpenAIMessages(params.messages, params.systemPrompt),
         ...(params.tools?.length ? { tools: params.tools.map(toOpenAITool) } : {}),
+        // Both the OpenAI and DeepSeek APIs require the word "json" somewhere
+        // in the prompt for this; every prompt that sets it says "Reply with
+        // JSON only".
+        ...(params.jsonMode ? { response_format: { type: 'json_object' as const } } : {}),
         max_tokens: params.maxTokens ?? DEFAULT_MAX_TOKENS,
         stream: true,
         // Without this, `chunk.usage` is null on every chunk and the budget

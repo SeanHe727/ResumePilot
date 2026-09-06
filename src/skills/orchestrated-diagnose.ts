@@ -1,4 +1,5 @@
 import type {
+  Bullet,
   DiagnosisReport,
   EntryDiagnosis,
   FormatDiagnosis,
@@ -8,6 +9,7 @@ import type {
   ResumeDocument,
   ResumeEntry,
   ResumeSessionState,
+  RewriteSuggestion,
   WordingDiagnosis,
 } from '../domain.js';
 import type { EntryVerdict, RoleSelection } from '../agent/types.js';
@@ -114,6 +116,9 @@ export const orchestratedDiagnoseSkill: Skill = {
     const report = await buildReport(resume, format, verdicts, narrative, jdMatch, ctx);
     if (!report) return { success: false, error: 'report generation failed' };
 
+    const rewrites = await rewriteWeakBullets(entries, verdicts, ctx);
+    if (rewrites.length > 0) report.rewrites = rewrites;
+
     const state: Partial<ResumeSessionState> = {
       mode: 'diagnose',
       resume,
@@ -142,6 +147,65 @@ export const orchestratedDiagnoseSkill: Skill = {
     };
   },
 };
+
+/** Below this a bullet is worth replacing rather than adjusting. */
+const REWRITE_BELOW = 75;
+
+/**
+ * A finding tells the candidate what is wrong; a rewrite shows them what right
+ * looks like on their own line. The second is what they actually paste back
+ * into the document, and without it a diagnosis is a list of homework.
+ *
+ * Only the weak ones, and through the pool: this is one model call per bullet,
+ * and running it over a bullet already scoring in the eighties spends money to
+ * suggest a change the candidate should not make.
+ */
+async function rewriteWeakBullets(
+  entries: ResumeEntry[],
+  verdicts: EntryVerdict[],
+  ctx: SkillContext,
+): Promise<Array<RewriteSuggestion & { bulletId: string }>> {
+  const byEntry = new Map(verdicts.map((v) => [v.entryId, v]));
+  const targets: Array<{ bullet: Bullet; entry: ResumeEntry; issues: string[] }> = [];
+
+  for (const entry of entries) {
+    const diagnosis = byEntry.get(entry.id)?.substance;
+    if (!diagnosis) continue;
+
+    for (const bullet of entry.bullets) {
+      const scored = diagnosis.bullets.find((b) => b.bulletId === bullet.id);
+      if (!scored || scored.overallScore >= REWRITE_BELOW) continue;
+      targets.push({ bullet, entry, issues: scored.issues });
+    }
+  }
+
+  const tool = ctx.toolRegistry.resolve('rewrite_bullet');
+  const toolCtx = {
+    session: ctx.session,
+    queryEngine: ctx.queryEngine,
+    knowledge: ctx.knowledge,
+    abortSignal: ctx.session.abortController.signal,
+  };
+
+  const results = await Promise.all(
+    targets.map(async ({ bullet, entry, issues }) => {
+      const result = await tool.execute(
+        {
+          bullet: bullet.text,
+          entryContext: entry.headerLines.join(' | '),
+          issues,
+        } as never,
+        toolCtx,
+      );
+
+      return result.success
+        ? { bulletId: bullet.id, ...(result.data as RewriteSuggestion) }
+        : null;
+    }),
+  );
+
+  return results.filter((r): r is RewriteSuggestion & { bulletId: string } => r !== null);
+}
 
 async function buildReport(
   resume: ResumeDocument,

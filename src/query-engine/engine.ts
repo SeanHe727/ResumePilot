@@ -77,6 +77,7 @@ export class QueryEngine implements QueryEngineContract {
       ...(params.systemPrompt ? { systemPrompt: params.systemPrompt } : {}),
       ...(params.tools?.length ? { tools: params.tools } : {}),
       ...(params.maxTokens ? { maxTokens: params.maxTokens } : {}),
+      ...(params.jsonMode ? { jsonMode: true } : {}),
       ...(effort ? { effort } : {}),
       ...(params.cacheSystemPrompt !== undefined
         ? { cacheSystemPrompt: params.cacheSystemPrompt }

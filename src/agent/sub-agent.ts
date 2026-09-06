@@ -87,6 +87,10 @@ export class SubAgentRuntime {
         systemPrompt: window.systemPrompt,
         messages: window.messages,
         ...(tools.length > 0 && !finalTurn ? { tools } : {}),
+        // Constrained on the turns where an answer is what we want. Left off
+        // while tools are on the table, so a turn that should be a lookup is
+        // not pushed into answering early.
+        ...(tools.length === 0 || finalTurn ? { jsonMode: true } : {}),
         abortSignal: deadline,
       });
 

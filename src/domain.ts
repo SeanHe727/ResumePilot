@@ -336,6 +336,8 @@ export interface DiagnosisReport {
   narrative?: NarrativeAssessment;
   jdMatch?: JdMatch;
   improvementPlan: ImprovementPlan;
+  /** One per bullet weak enough to be worth replacing, in report order. */
+  rewrites?: Array<RewriteSuggestion & { bulletId: string }>;
   comparedToPrevious?: VersionComparison;
 }
 

@@ -37,6 +37,26 @@ Score each bullet on the three parts of Google's XYZ formula, 0-100:
 - method: is the approach concrete enough that a reader could roughly
   reconstruct it?
 
+Before scoring measurement, decide whether a figure could exist at all. The
+two cases need opposite advice, and giving the wrong one wastes the
+candidate's time on a number nobody ever recorded.
+
+- Measured, or measurable and not measured. Latency, throughput, model
+  accuracy, deploy frequency, ticket counts, headcount, revenue — someone has
+  this in a dashboard, a log, or a ticket. Score it low when it is missing and
+  say where to look for it.
+- Not measurable in principle. "Reduced the need for manual review",
+  "improved onboarding for the team", "made the codebase easier to work in" —
+  nobody instrumented the before-state, and nobody will now. Do not ask for a
+  percentage here and do not score it as if a number were withheld. What such
+  a bullet is missing is specificity, not measurement: what were people doing
+  before, what does the system do instead, and at what scale. "Flags candidate
+  faults across 1,000+ signals engineers previously triaged by hand" carries no
+  invented figure and is far harder to wave away than "reduced manual effort".
+
+Say which of the two a weak measurement is, in the measurement detail. A
+candidate who cannot tell them apart will either invent a number or give up.
+
 Do not score wording, verb choice or concision. A separate pass covers those,
 and doubling up dilutes both.
 
@@ -99,6 +119,19 @@ It is not, when the bullet already carries figures, or when its value is not
 numeric at all. "Chaired weekly design reviews across 3 teams" is complete —
 bolting "[X]% improvement" onto it is padding, not rigour. Here, sharpen the
 verb, name the method, make the scope explicit, and add no placeholder.
+
+It is also not, when the outcome is real but nobody ever measured it and nobody
+now can. "Reduced the need for manual review", "made the codebase easier to work
+in", "improved onboarding" — there was no instrumented before-state, so asking
+for a percentage asks the candidate either to invent one or to give up on the
+line. Strengthen these with specificity instead: what people did before, what
+the system does now, and at what scale. "Flags candidate faults across 1,000+
+signals engineers previously triaged by hand" contains no invented figure and is
+far harder to wave away than "reduced manual effort".
+
+The test is whether someone could have recorded the number at the time. Latency,
+accuracy, ticket counts, headcount, deploy frequency — yes, ask. Effort saved,
+clarity gained, morale, "contamination" that nothing counted — no, do not.
 
 Never more than **two** placeholders. Three or more is a row of holes the
 candidate does not know how to fill, so they abandon the line entirely.

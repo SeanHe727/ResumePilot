@@ -47,6 +47,7 @@ export const rewriteBulletTool: Tool<RewriteBulletInput, RewriteSuggestion> = {
       task: 'rewrite_bullet',
       systemPrompt: REWRITE_PROMPT,
       messages: [{ role: 'user', content: buildUserMessage(input, bullet) }],
+      jsonMode: true,
       ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
     });
 
