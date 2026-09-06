@@ -86,11 +86,17 @@ async function runOn(fixture: string): Promise<{ out: SkillOutput; seen: QueryPa
 }
 
 describe('skill registry', () => {
-  it('routes a plain sentence to the pipeline without asking the model', () => {
+  it('routes a plain sentence to the sub-agent skill, without asking the model', () => {
+    // Both skills diagnose a resume; only one carries triggers, so which runs
+    // does not depend on registration order.
     const registry = createSkillRegistry();
 
-    expect(registry.find('diagnose my resume')?.name).toBe('diagnose-resume');
-    expect(registry.find('please review my resume')?.name).toBe('diagnose-resume');
+    expect(registry.find('diagnose my resume')?.name).toBe('orchestrated-diagnose');
+    expect(registry.find('please review my resume')?.name).toBe('orchestrated-diagnose');
+  });
+
+  it('reaches the deterministic pipeline by name', () => {
+    expect(createSkillRegistry().resolve('diagnose-resume').name).toBe('diagnose-resume');
   });
 
   it('returns null when nothing matches, leaving the loop to plan', () => {

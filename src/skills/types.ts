@@ -1,3 +1,4 @@
+import type { Orchestrator, RoleSelector } from '../agent/types.js';
 import type { HookPipeline } from '../hooks/types.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
 import type { QueryEngine } from '../query-engine/types.js';
@@ -29,6 +30,13 @@ export interface SkillContext {
   knowledge: KnowledgeSearch;
   session: Session;
   hooks: HookPipeline;
+  /**
+   * Present only for skills that fan out to sub-agents. A skill that runs a
+   * fixed pipeline has no use for one, and asking for it would make the
+   * deterministic path depend on the adaptive one.
+   */
+  orchestrator?: Orchestrator;
+  roleSelector?: RoleSelector;
 }
 
 export interface SkillOutput {

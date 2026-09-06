@@ -68,6 +68,16 @@ export class LayeredContextManager implements ContextManager {
       this.appendToHistory(message);
     }
 
+    // Eviction cuts by token count, which lands mid-exchange. The assistant
+    // turn carrying tool calls costs nothing by `countMessageTokens` — empty
+    // content, uncounted calls — so it is the first thing the loop above
+    // reaches for, and the tool results it leaves behind answer a call that is
+    // no longer there. Every provider rejects that outright.
+    while (this.recent.length > 0 && this.recent[0]?.role === 'tool') {
+      const orphan = this.recent.shift()!;
+      this.evicted.push(orphan);
+    }
+
     // Evicted turns are held so a later summariser can read them verbatim, but
     // that queue only drains when compaction runs — and on a typical resume it
     // never does. Capping it keeps a long session from holding every message it
@@ -202,7 +212,16 @@ export class LayeredContextManager implements ContextManager {
     // cache breakpoint must not sit inside the cached prefix.
     if (this.taskBlock) {
       messages.push({ role: 'user', content: this.taskBlock });
-      messages.push({ role: 'assistant', content: 'Understood. Ready for the next instruction.' });
+
+      // The acknowledgement exists only to close the task block into a valid
+      // user/assistant pair. When the window already opens with an assistant
+      // turn — which is what eviction inside an exchange leaves behind — the
+      // pair is closed by that instead, and adding this one puts two assistant
+      // turns back to back. Providers reject that, and DeepSeek reports it as
+      // a missing `reasoning_content`, which sends you looking elsewhere.
+      if (this.recent[0]?.role !== 'assistant') {
+        messages.push({ role: 'assistant', content: 'Understood. Ready for the next instruction.' });
+      }
     }
 
     return [...messages, ...this.recent];

@@ -160,9 +160,12 @@ describe('sliding window', () => {
 
   it('compresses a tool result on the way in rather than at compaction time', () => {
     const cm = new LayeredContextManager({ toolResultBudget: 50, recentBudget: 5000 });
+    // Paired, the way the loop does it: an unanswered tool result is not a
+    // message any provider accepts.
+    cm.addMessage({ role: 'assistant', content: '', toolCalls: [{ id: 'c1', name: 't', input: {} }] });
     cm.addToolResult('c1', JSON.stringify({ items: Array.from({ length: 50 }, () => 'x'.repeat(300)) }));
 
-    const [message] = cm.getRecentMessages();
+    const message = cm.getRecentMessages()[1];
     expect(message?.role).toBe('tool');
     expect(message?.toolCallId).toBe('c1');
     expect(estimateTokens(message?.content ?? '')).toBeLessThanOrEqual(50);
@@ -194,6 +197,7 @@ describe('autoCompact', () => {
     const cm = new LayeredContextManager(tight);
     cm.setSystemPrompt('You diagnose resumes.');
     // Added raw, as an already-resident result would be after a config change.
+    cm.addMessage({ role: 'assistant', content: '', toolCalls: [{ id: 'c1', name: 't', input: {} }] });
     cm.addMessage({
       role: 'tool',
       toolCallId: 'c1',
@@ -384,5 +388,57 @@ describe('defaults', () => {
     // The newest lines are the ones kept.
     expect(cm.build().systemPrompt).toContain('entry 19');
     expect(cm.build().systemPrompt).not.toContain('entry 0 ');
+  });
+});
+
+describe('tool call pairing', () => {
+  it('never puts two assistant turns back to back', () => {
+    // The task block is closed with a synthetic acknowledgement. When eviction
+    // leaves the window opening on a real assistant turn, adding that one too
+    // makes a shape providers reject — and DeepSeek reports it as a missing
+    // `reasoning_content`, which sends you looking somewhere else entirely.
+    const cm = new LayeredContextManager({ recentBudget: 60 });
+    cm.setTaskContext('Entry: ByteDance');
+    cm.addMessage({ role: 'user', content: 'x'.repeat(400) });
+    cm.addMessage({ role: 'assistant', content: 'y'.repeat(100), toolCalls: [{ id: 'c1', name: 't', input: {} }] });
+
+    const roles = cm.build().messages.map((m) => m.role);
+    for (let i = 1; i < roles.length; i++) {
+      expect(roles[i] === 'assistant' && roles[i - 1] === 'assistant', roles.join(',')).toBe(false);
+    }
+  });
+
+  it('never leaves a tool result without the turn that asked for it', () => {
+    // Providers reject a `tool` message that does not answer a preceding
+    // `tool_calls`. The assistant turn carrying them costs nothing by
+    // `countMessageTokens` — empty content, uncounted calls — so it is the
+    // first thing the sliding window drops, and the request then 400s.
+    const cm = new LayeredContextManager({ recentBudget: 60, toolResultBudget: 40 });
+    cm.addMessage(said('x'.repeat(200)));
+    cm.addMessage({
+      role: 'assistant',
+      content: '',
+      toolCalls: [
+        { id: 'c1', name: 'query_knowledge_base', input: {} },
+        { id: 'c2', name: 'query_knowledge_base', input: {} },
+      ],
+    });
+    cm.addToolResult('c1', 'y'.repeat(400));
+    cm.addToolResult('c2', 'z'.repeat(400));
+
+    const messages = cm.getRecentMessages();
+    for (const [index, message] of messages.entries()) {
+      if (message.role !== 'tool') continue;
+      const before = messages.slice(0, index);
+      expect(before.some((m) => m.toolCalls?.some((c) => c.id === message.toolCallId))).toBe(true);
+    }
+  });
+
+  it('keeps a pair intact when there is room for it', () => {
+    const cm = new LayeredContextManager();
+    cm.addMessage({ role: 'assistant', content: '', toolCalls: [{ id: 'c1', name: 't', input: {} }] });
+    cm.addToolResult('c1', '{"ok":true}');
+
+    expect(cm.getRecentMessages().map((m) => m.role)).toEqual(['assistant', 'tool']);
   });
 });

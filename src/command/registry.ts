@@ -6,10 +6,12 @@ import { createBudgetCommand } from './handlers/budget.js';
 import { createConfigCommand } from './handlers/config.js';
 import { createContinueCommand } from './handlers/continue.js';
 import { createDetailCommand } from './handlers/detail.js';
+import { createDiagnoseCommand, type SkillRunner } from './handlers/diagnose.js';
 import { createExportCommand } from './handlers/export.js';
 import { createHelpCommand } from './handlers/help.js';
 import { createHistoryCommand } from './handlers/history.js';
 import { createHooksCommand } from './handlers/hooks.js';
+import { createJdCommand } from './handlers/jd.js';
 import { createReportCommand } from './handlers/report.js';
 import { createResetCommand } from './handlers/reset.js';
 import { createSkipCommand } from './handlers/skip.js';
@@ -21,6 +23,8 @@ export interface CommandDeps {
   restorer: SessionRestorer;
   hooks: HookPipeline;
   engine: QueryEngine;
+  /** Absent in tests that exercise only the commands needing no skill. */
+  runSkill?: SkillRunner;
 }
 
 /**
@@ -31,15 +35,18 @@ export interface CommandDeps {
  * handler untestable without building the whole application. Here a handler
  * receives exactly what it uses.
  *
- * Commands whose backing skill does not exist yet are absent rather than
- * stubbed: `/diagnose`, `/grill`, `/compare`, `/jd` and `/diff` arrive with the
- * Agent Loop and the skills they run.
+ * `/diagnose` appears only when a skill runner is supplied — a parser built
+ * without one is for the commands that need no skill, and a stub that failed
+ * at call time would be worse than an absent command.
+ *
+ * `/grill`, `/compare` and `/diff` are still absent: their skills do not exist.
  */
 export function createCommandParser(deps: CommandDeps): DefaultCommandParser {
   const parser = new DefaultCommandParser();
 
   for (const command of [
     createUploadCommand(deps.sessions),
+    createJdCommand(deps.sessions),
     createStatusCommand(deps.engine),
     createReportCommand(),
     createDetailCommand(),
@@ -51,6 +58,7 @@ export function createCommandParser(deps: CommandDeps): DefaultCommandParser {
     createBudgetCommand(deps.engine),
     createConfigCommand(deps.sessions),
     createHooksCommand(deps.hooks),
+    ...(deps.runSkill ? [createDiagnoseCommand(deps.sessions, deps.runSkill)] : []),
   ]) {
     parser.register(command);
   }

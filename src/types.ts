@@ -37,6 +37,16 @@ export interface Message {
   toolCalls?: ToolCall[];
   /** Present on `role: 'tool'` turns, linking back to the originating call. */
   toolCallId?: string;
+  /**
+   * A reasoning model's own working, carried so it can be handed back.
+   *
+   * DeepSeek's thinking models refuse the next request in a tool-calling
+   * exchange unless the reasoning that produced the tool call comes with it —
+   * the model is stateless, and without it the turn it is being asked to
+   * continue is one it cannot see. Not shown to the user, and never counted as
+   * content.
+   */
+  reasoning?: string;
 }
 
 export interface ToolSchema {

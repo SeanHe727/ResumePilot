@@ -29,7 +29,11 @@ export const diagnoseResumeSkill: Skill = {
   description:
     'Parse a resume, score its format, diagnose every entry against the knowledge base, and ' +
     'produce a report.',
-  triggers: ['diagnose', 'review my resume', 'check my resume', 'what is wrong with my resume'],
+  // No triggers. Both skills diagnose a resume, and two entries matching the
+  // same words would make which one runs depend on registration order. The
+  // sub-agent skill owns the words; this one is reached by name, or by
+  // `--fast`, which is what asking for it deliberately looks like.
+  triggers: [],
   requiredTools: ['analyze_format', 'query_knowledge_base', 'analyze_entry', 'generate_report'],
 
   async execute(input: SkillInput, ctx: SkillContext): Promise<SkillOutput> {
@@ -208,6 +212,28 @@ export function render(report: DiagnosisReport): string {
       lines.push(`     ${String(bullet.score).padStart(3)}  ${truncate(bullet.text, 64)}`);
       if (bullet.topIssue) lines.push(`          ${truncate(bullet.topIssue, 70)}`);
     }
+    lines.push('');
+  }
+
+  if (report.narrative) {
+    const { narrative } = report;
+    lines.push(`Career narrative  ${narrative.overallScore}/100`);
+    if (narrative.arc) lines.push(`  ${narrative.arc}`);
+    for (const gap of narrative.gaps) lines.push(`  gap: ${gap}`);
+    for (const note of narrative.orderingNotes) lines.push(`  order: ${note}`);
+    lines.push('');
+  }
+
+  if (report.jdMatch) {
+    const { jdMatch } = report;
+    lines.push(`Job description  ${jdMatch.overallScore}/100 coverage`);
+    if (jdMatch.covered.length > 0) {
+      lines.push(`  covered: ${jdMatch.covered.map((c) => c.keyword).join(', ')}`);
+    }
+    for (const missing of jdMatch.missing) {
+      lines.push(`  missing${missing.required ? ' (required)' : ''}: ${missing.keyword}`);
+    }
+    for (const gap of jdMatch.gaps) lines.push(`  gap: ${gap}`);
     lines.push('');
   }
 

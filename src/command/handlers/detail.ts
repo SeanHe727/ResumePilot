@@ -8,7 +8,8 @@ import type { Command, CommandResult, ParsedArgs } from '../types.js';
 export function createDetailCommand(): Command {
   return {
     name: 'detail',
-    aliases: ['d'],
+    // 'd' belongs to /diagnose, which is asked for far more often.
+    aliases: [],
     description: 'Show the full diagnosis for one entry',
     args: [{ name: 'n', description: 'Entry number as shown in the report', required: true, type: 'number' }],
     examples: ['/detail 2'],

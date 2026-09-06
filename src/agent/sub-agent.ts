@@ -12,8 +12,18 @@ export interface SubAgentDeps {
   session: Session;
 }
 
-/** Each sub-agent gets its own window, well under the main loop's. */
-const SUB_AGENT_CONTEXT_TOKENS = 8_000;
+/**
+ * A sub-agent's whole run is one exchange, and it is bounded by `maxTurns`
+ * rather than by length. So `recent` is budgeted to hold all of it: cutting
+ * inside an exchange drops the entry being diagnosed, and what survives is a
+ * conversation the provider rejects.
+ */
+const SUB_AGENT_CONTEXT = {
+  maxTotalTokens: 24_000,
+  recentBudget: 16_000,
+  taskBudget: 1_000,
+  toolResultBudget: 1_500,
+} as const;
 
 /**
  * One sub-agent run: its own system prompt, its own tool subset, its own
@@ -41,7 +51,7 @@ export class SubAgentRuntime {
     const usage = { inputTokens: 0, outputTokens: 0 };
     let turns = 0;
 
-    const context = new LayeredContextManager({ maxTotalTokens: SUB_AGENT_CONTEXT_TOKENS });
+    const context = new LayeredContextManager(SUB_AGENT_CONTEXT);
     context.setSystemPrompt(config.systemPrompt);
     context.setTaskContext(buildTaskBlock(config, task.context));
     context.addMessage({ role: 'user', content: task.input });
@@ -75,6 +85,9 @@ export class SubAgentRuntime {
           role: 'assistant',
           content: response.content ?? '',
           toolCalls: response.toolCalls,
+          // Carried, not read: a thinking model needs its own working back on
+          // the next turn or it refuses to continue the exchange.
+          ...(response.reasoning ? { reasoning: response.reasoning } : {}),
         });
         for (const call of response.toolCalls) {
           context.addToolResult(call.id, await this.callTool(call, deadline));

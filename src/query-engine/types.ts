@@ -28,6 +28,8 @@ export interface StreamParams {
  */
 export type StreamEvent =
   | { type: 'text_delta'; content: string }
+  /** A thinking model's working. Separate from text so it never reaches the user. */
+  | { type: 'reasoning_delta'; content: string }
   | { type: 'tool_use_start'; id: string; name: string }
   | { type: 'tool_use_delta'; input: string }
   | { type: 'tool_use_end' }
@@ -43,6 +45,8 @@ export interface LLMProvider {
 export interface ParsedResponse {
   type: 'text' | 'tool_use';
   content?: string;
+  /** Present only from thinking models; must be echoed back on the next turn. */
+  reasoning?: string;
   toolCalls?: ToolCall[];
   usage: TokenUsage;
   stopReason: StopReason;

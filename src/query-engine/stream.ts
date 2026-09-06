@@ -12,6 +12,7 @@ export async function parseStream(
   onTextDelta?: (text: string) => void,
 ): Promise<ParsedResponse> {
   let text = '';
+  let reasoning = '';
   const toolCalls: ToolCall[] = [];
   let current: { id: string; name: string; input: string } | null = null;
   let usage: TokenUsage = { inputTokens: 0, outputTokens: 0 };
@@ -22,6 +23,12 @@ export async function parseStream(
       case 'text_delta':
         text += event.content;
         onTextDelta?.(event.content);
+        break;
+
+      // Deliberately not passed to `onTextDelta`: this is the model's working,
+      // not its answer, and printing it would bury the diagnosis.
+      case 'reasoning_delta':
+        reasoning += event.content;
         break;
 
       case 'tool_use_start':
@@ -81,6 +88,7 @@ export async function parseStream(
   return {
     type: toolCalls.length > 0 ? 'tool_use' : 'text',
     ...(text ? { content: text } : {}),
+    ...(reasoning ? { reasoning } : {}),
     ...(toolCalls.length > 0 ? { toolCalls } : {}),
     usage,
     stopReason,

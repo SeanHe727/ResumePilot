@@ -56,6 +56,12 @@ export class OpenAIProvider implements LLMProvider {
         yield { type: 'text_delta', content: choice.delta.content };
       }
 
+      // Not in the OpenAI schema — DeepSeek's thinking models add it, and
+      // refuse the next request in a tool-calling exchange without it.
+      const reasoning = (choice.delta as { reasoning_content?: string } | undefined)
+        ?.reasoning_content;
+      if (reasoning) yield { type: 'reasoning_delta', content: reasoning };
+
       for (const call of choice.delta?.tool_calls ?? []) {
         const slot = partials.get(call.index) ?? { id: '', name: '', args: '' };
         if (call.id) slot.id = call.id;
@@ -126,6 +132,10 @@ export function toOpenAIMessages(
         out.push({
           role: 'assistant',
           content: message.content || null,
+          // Handed back verbatim. The model is stateless, so without its own
+          // working it cannot see the turn it is being asked to continue, and
+          // DeepSeek rejects the request rather than guessing.
+          ...(message.reasoning ? { reasoning_content: message.reasoning } : {}),
           ...(message.toolCalls?.length
             ? {
                 tool_calls: message.toolCalls.map((call) => ({
