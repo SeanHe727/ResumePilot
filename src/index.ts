@@ -38,20 +38,56 @@ program
     console.log(chalk.bold('ResumePilot'), chalk.dim(`· session ${session.id.slice(0, 8)}`));
     console.log(chalk.dim(file ? `Loaded ${file}. /diagnose to start, /help for commands.` : '/upload <file> to begin, /help for commands.'));
 
-    const { createInterface } = await import('node:readline/promises');
-    const rl = createInterface({ input: process.stdin, output: process.stdout });
+    const { createInterface } = await import('node:readline');
+    const rl = createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      prompt: chalk.cyan('\n> '),
+    });
+
+    // Lines are queued as they arrive rather than pulled one at a time.
+    // `question()` never settles once stdin ends, so Ctrl-D hangs; and the
+    // async iterator throws mid-loop when stdin closes while a command is
+    // still running, losing everything typed behind it. A diagnosis takes
+    // minutes, so that is the normal case, not an edge one.
+    const pending: string[] = [];
+    let ended = false;
+    let wake: (() => void) | null = null;
+
+    rl.on('line', (line) => {
+      pending.push(line);
+      wake?.();
+    });
+    rl.on('close', () => {
+      ended = true;
+      wake?.();
+    });
 
     try {
+      rl.prompt();
       for (;;) {
-        const line = (await rl.question(chalk.cyan('\n> '))).trim();
-        if (line === '/exit' || line === '/quit') break;
+        while (pending.length === 0 && !ended) {
+          await new Promise<void>((resolve) => {
+            wake = resolve;
+          });
+          wake = null;
+        }
+
+        const line = pending.shift();
+        // Drained and closed: everything typed has been handled.
+        if (line === undefined) break;
+
+        const trimmed = line.trim();
+        if (trimmed === '/exit' || trimmed === '/quit') break;
+
         try {
-          await app.handle(line, session);
+          await app.handle(trimmed, session);
         } catch (err) {
           // One bad turn must not end the session: the work so far is on disk
           // and the user can /continue or ask something else.
           console.error(chalk.red(describe(err)));
         }
+        if (!ended) rl.prompt();
       }
     } finally {
       rl.close();

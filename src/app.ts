@@ -141,7 +141,16 @@ export class App {
 
   /** Starts a session and primes its context with what memory knows. */
   start(sourcePath: string): Session {
-    const session = this.sessions.create({ sourcePath });
+    // Seeded from the loaded configuration, not from the session manager's
+    // defaults. Otherwise `/config` reports a model and a budget that nothing
+    // is using, which is worse than reporting none.
+    const session = this.sessions.create(
+      { sourcePath },
+      {
+        model: this.options.config.models.primary,
+        maxCostUsd: this.options.config.maxCostUsd,
+      },
+    );
     const recalled = this.retriever.retrieveForDiagnosis();
     const profile = this.retriever.formatForContext(recalled);
     if (profile) session.contextManager.setProfile(profile);
