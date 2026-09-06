@@ -165,6 +165,25 @@ describe('SubAgentRuntime', () => {
     expect((result.output as { bullets: unknown[] }).bullets).toHaveLength(1);
   });
 
+  it('treats an answer that never arrived as a failure', async () => {
+    // A thinking model can spend a whole turn reasoning and write nothing.
+    // Reported as success it becomes an entry scoring zero, which reads as a
+    // verdict on the resume rather than as a gap in the diagnosis.
+    const { engine } = scriptedEngine({
+      type: 'text',
+      content: '   ',
+      reasoning: 'Let me work through each bullet in turn...',
+      usage,
+      stopReason: 'end_turn',
+    });
+    const { runtime } = runtimeWith(engine);
+
+    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/finished its reasoning without writing an answer/);
+  });
+
   it('keeps the prose when there is no JSON in it at all', async () => {
     const { engine } = scriptedEngine(text('The bullet reads fine to me.'));
     const { runtime } = runtimeWith(engine);
@@ -251,7 +270,9 @@ describe('SubAgentRuntime', () => {
     expect(JSON.stringify(seen[0])).not.toContain('No more lookups');
   });
 
-  it('ignores tool calls the model makes anyway on the last turn', async () => {
+  it('fails cleanly when the last turn asks for another tool instead of answering', async () => {
+    // Tools are not offered on the last turn, so a reply that carries only
+    // calls carries no answer. Saying so lets the orchestrator run it again.
     const { engine } = scriptedEngine(
       toolUse('query_knowledge_base', { query: 'x' }),
       toolUse('query_knowledge_base', { query: 'y' }),
@@ -260,10 +281,9 @@ describe('SubAgentRuntime', () => {
 
     const result = await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
 
-    // No JSON in that reply, so the output is the prose — but the run
-    // completed and the caller can see what came back.
     expect(result.turns).toBe(2);
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/returned nothing/);
   });
 
   it('hands a tool failure back as a result the agent can read', async () => {
@@ -321,6 +341,20 @@ describe('DefaultOrchestrator', () => {
     expect(verdict.wording?.perBullet[0]?.verbStrength.score).toBe(20);
     expect(verdict.overallScore).toBe(30);
     expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Entry Substance', 'Entry Wording']);
+  });
+
+  it('does not dispatch an entry with no bullets', async () => {
+    // A degree is a header with no bullets, and both per-entry roles score
+    // bullets. Sending it buys two calls that can only come back empty.
+    const { engine, seen } = scriptedEngine(text(SUBSTANCE_JSON));
+    const verdict = await orchestrator(engine).diagnoseEntry(
+      { ...entry, bullets: [] },
+      bothRoles,
+    );
+
+    expect(seen).toHaveLength(0);
+    expect(verdict.agentStats).toEqual([]);
+    expect(verdict.substance).toBeNull();
   });
 
   it('keeps the surviving role when the other fails', async () => {

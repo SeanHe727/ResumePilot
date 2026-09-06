@@ -83,10 +83,18 @@ export class HeuristicSectionDetector implements SectionDetector {
         continue;
       }
 
-      // Unrecognised label, but drawn at section rank: structurally a section
-      // whose name we do not know. Kept as `other` so the shape of the document
+      // Unrecognised label drawn at section rank: structurally a section whose
+      // name we do not know. Kept as `other` so the shape of the document
       // survives, flagged low so a model-assisted pass can revisit just these.
-      if (emphasized && size >= sectionSize && text.split(/\s+/).length <= 5) {
+      //
+      // The size has to be *near* that rank, not merely at or above it. Whether
+      // an entry heading is drawn larger or smaller than its section is a
+      // choice the template makes, and it goes both ways: Markdown nests `###`
+      // under `##`, while a LaTeX resume commonly sets section names in small
+      // caps at body size and the employer above them in bold. Accepting
+      // anything at or above the rank turns every employer into a section and
+      // leaves EXPERIENCE empty.
+      if (emphasized && nearSectionRank(size, sectionSize) && text.split(/\s+/).length <= 5) {
         candidates.push({ kind: 'other', heading: text, confidence: 0.45, span: block.span });
       }
     }
@@ -150,6 +158,14 @@ export function isBulletLine(text: string): boolean {
 
 export function stripBulletMarker(text: string): string {
   return text.replace(/^\s*([-*+•‧◦·▪▫●○–—]|\d{1,2}[.)])\s+/, '').trim();
+}
+
+/**
+ * Font sizes vary by fractions of a point between a heading and its body, so
+ * the comparison is a band rather than an equality.
+ */
+function nearSectionRank(size: number, sectionSize: number): boolean {
+  return size >= sectionSize * 0.98 && size <= sectionSize * 1.02;
 }
 
 function medianFontSize(blocks: TextBlock[]): number {

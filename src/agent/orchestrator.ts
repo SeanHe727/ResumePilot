@@ -26,7 +26,12 @@ import type {
 const DEFAULTS: OrchestratorConfig = {
   maxConcurrency: 3,
   timeoutMs: 120_000,
-  failureStrategy: 'continue',
+  // `retry` rather than `continue`, and it is still `continue`'s promise that
+  // holds: a role that fails twice is dropped, not allowed to fail the batch.
+  // The failures worth retrying here are transient — a thinking model that
+  // reasoned its way past writing an answer lands it on the second attempt —
+  // and the alternative is an entry that scores zero for the whole run.
+  failureStrategy: 'retry',
 };
 
 /**
@@ -80,6 +85,19 @@ export class DefaultOrchestrator {
   }
 
   async diagnoseEntry(entry: ResumeEntry, roles: RoleSelection): Promise<EntryVerdict> {
+    // Both per-entry roles score bullets, and a degree is a header with none —
+    // school, qualification, dates. Dispatching it buys two model calls that
+    // can only come back empty, and an entry the report then shows at zero.
+    if (entry.bullets.length === 0) {
+      return {
+        entryId: entry.id,
+        substance: null,
+        wording: null,
+        overallScore: 0,
+        agentStats: [],
+      };
+    }
+
     const chosen = roles.roles.filter((role) => PER_ENTRY.has(role));
     const results = await this.parallel(chosen.map((role) => taskFor(role, entry)));
 

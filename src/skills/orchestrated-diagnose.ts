@@ -205,9 +205,22 @@ function renderAgents(
   // An agent can return JSON the normaliser then rejects — no bullet scores,
   // or none whose ids match. It counts as `ok` above and lands in the report
   // as an entry scoring zero, which reads as a verdict rather than a gap.
-  const unusable = verdicts.filter((v) => v.substance === null).length;
-  if (unusable > 0) {
-    lines.push(`  ${'unusable'.padEnd(18)}${unusable} entries scored nothing — the agent replied, the reply did not parse`);
+  // Counted only where an agent actually ran: an entry with no bullets is
+  // skipped upstream, and reporting it here as a failure would be a report on
+  // our own routing rather than on the resume.
+  const attempted = verdicts.filter((v) => v.agentStats.length > 0);
+  for (const [label, missing] of [
+    ['no substance', attempted.filter((v) => v.substance === null).length],
+    ['no wording', attempted.filter((v) => v.wording === null).length],
+  ] as const) {
+    if (missing > 0) {
+      lines.push(`  ${label.padEnd(18)}${missing} entries — the agent ran but nothing usable came back`);
+    }
+  }
+
+  const skipped = verdicts.length - attempted.length;
+  if (skipped > 0) {
+    lines.push(`  ${'not scored'.padEnd(18)}${skipped} entries have no bullets to score`);
   }
   for (const [name, status] of wholeDocument) {
     lines.push(`  ${name.padEnd(18)}${status}`);

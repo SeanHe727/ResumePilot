@@ -68,6 +68,11 @@ export class HeuristicStructureBuilder implements StructureBuilder {
     const ordered = [...sections].sort((a, b) => a.span.start - b.span.start);
     const built: ResumeSection[] = [];
 
+    // Taken across the document, not per section. A section can be half
+    // headings and half body — education usually is — and its own median then
+    // lands on the heading size, so nothing in it ever reads as emphasized.
+    const bodySize = medianSize(result.blocks);
+
     for (const [index, candidate] of ordered.entries()) {
       const from = candidate.span.start;
       const to = ordered[index + 1]?.span.start ?? Number.MAX_SAFE_INTEGER;
@@ -85,7 +90,7 @@ export class HeuristicStructureBuilder implements StructureBuilder {
         kind: candidate.kind,
         heading: candidate.heading,
         ...(isEntryBearing(candidate.kind, bodyBlocks)
-          ? { entries: buildEntries(sectionId, bodyBlocks), looseLines: [] }
+          ? { entries: buildEntries(sectionId, bodyBlocks, bodySize), looseLines: [] }
           : { entries: [], looseLines: bodyBlocks.map((b) => b.text) }),
         span: {
           start: from,
@@ -119,7 +124,7 @@ export class HeuristicStructureBuilder implements StructureBuilder {
  * (still collecting company/title/dates) or — once bullets have started —
  * begins the next entry.
  */
-function buildEntries(sectionId: string, blocks: TextBlock[]): ResumeEntry[] {
+function buildEntries(sectionId: string, blocks: TextBlock[], bodySize: number): ResumeEntry[] {
   const entries: ResumeEntry[] = [];
   let current: { headerLines: string[]; bullets: string[]; start: number; end: number } | null =
     null;
@@ -159,7 +164,27 @@ function buildEntries(sectionId: string, blocks: TextBlock[]): ResumeEntry[] {
       continue;
     }
 
-    // A non-bullet line after bullets means the previous position is finished.
+    // A non-bullet line after bullets usually means the previous position is
+    // finished — unless the bullet above it was cut off mid-sentence, in which
+    // case this is the rest of it. PDF extraction gives one block per visual
+    // line, so a bullet long enough to wrap arrives as two or three blocks and
+    // only the first carries the marker. Read as new entries, a nine-bullet
+    // position becomes fourteen entries whose "employer" is half a sentence.
+    // A section with no bullets at all — education is the usual one — never
+    // reaches the flush below, so two degrees accumulate into one entry with
+    // one school's name and the other's dates. An emphasized line is where the
+    // next position starts, bullets or not.
+    if (current && current.headerLines.length > 0 && isEmphasized(block, bodySize)) {
+      flush();
+    }
+
+    const continues = current !== null && continuesPrevious(current.bullets.at(-1));
+    if (continues) {
+      current!.bullets[current!.bullets.length - 1] += ` ${block.text.trim()}`;
+      current!.end = block.span.end;
+      continue;
+    }
+
     if (current && current.bullets.length > 0) flush();
     if (!current) current = { headerLines: [], bullets: [], start: block.span.start, end: 0 };
     current.headerLines.push(block.text);
@@ -168,6 +193,34 @@ function buildEntries(sectionId: string, blocks: TextBlock[]): ResumeEntry[] {
 
   flush();
   return attachBulletSpans(entries, blocks);
+}
+
+/** Drawn larger or bolder than the body around it. */
+function isEmphasized(block: TextBlock, bodySize: number): boolean {
+  return block.bold === true || (block.fontSize ?? bodySize) > bodySize;
+}
+
+/** The size most of the document's lines are set at. */
+function medianSize(blocks: TextBlock[]): number {
+  const sizes = blocks
+    .map((b) => b.fontSize)
+    .filter((size): size is number => size !== undefined)
+    .sort((a, b) => a - b);
+
+  return sizes.length === 0 ? 0 : (sizes[Math.floor(sizes.length / 2)] ?? 0);
+}
+
+/**
+ * Whether the line above was cut off rather than finished.
+ *
+ * Terminal punctuation is the signal: a wrapped line ends wherever the column
+ * ran out — "…role responsibilities, forming a" — while a finished bullet ends
+ * on a full stop. Crude, and it is the same judgement a reader makes at a
+ * glance.
+ */
+function continuesPrevious(previousBullet: string | undefined): boolean {
+  if (previousBullet === undefined) return false;
+  return !/[.。!?！？:：]\s*$/.test(previousBullet);
 }
 
 /** Re-links each bullet to its source offsets so diagnoses can cite the original. */

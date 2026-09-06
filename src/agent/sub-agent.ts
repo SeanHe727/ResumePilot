@@ -111,11 +111,31 @@ export class SubAgentRuntime {
         continue;
       }
 
+      // A thinking model can spend a whole turn reasoning and emit nothing —
+      // twelve thousand characters of working and an empty answer. Reported as
+      // success it becomes an entry scoring zero, which reads as a verdict on
+      // the resume; reported as a failure the orchestrator can run it again,
+      // and it usually lands the second time.
+      const answer = response.content?.trim();
+      if (!answer) {
+        return {
+          agentId: config.id,
+          agentName: config.name,
+          success: false,
+          usage,
+          turns,
+          durationMs: Date.now() - started,
+          error: response.reasoning
+            ? 'the model finished its reasoning without writing an answer'
+            : 'the model returned nothing',
+        };
+      }
+
       return {
         agentId: config.id,
         agentName: config.name,
         success: true,
-        output: parseOutput(response.content ?? ''),
+        output: parseOutput(answer),
         usage,
         turns,
         durationMs: Date.now() - started,
