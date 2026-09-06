@@ -13,7 +13,7 @@ import type {
   WordingDiagnosis,
 } from '../domain.js';
 import type { EntryVerdict, RoleSelection } from '../agent/types.js';
-import { DefaultResumeParser } from '../document/index.js';
+import { DefaultResumeParser, ModelDocumentSegmenter } from '../document/index.js';
 import type { ResumeParser } from '../document/types.js';
 import { analyzeFormat } from '../tools/analyze-format.js';
 import { render } from './diagnose-resume.js';

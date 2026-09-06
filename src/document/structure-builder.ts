@@ -8,6 +8,7 @@ import type {
 import { isBulletLine, stripBulletMarker } from './section-detector.js';
 import type {
   ExtractionResult,
+  LabelledLine,
   SectionCandidate,
   StructureBuilder,
   TextBlock,
@@ -64,7 +65,12 @@ export class HeuristicStructureBuilder implements StructureBuilder {
     result: ExtractionResult,
     sections: SectionCandidate[],
     sourcePath: string,
+    labels?: LabelledLine[],
   ): ResumeDocument {
+    if (labels && labels.length === result.blocks.length) {
+      return buildFromLabels(result, labels, sourcePath);
+    }
+
     const ordered = [...sections].sort((a, b) => a.span.start - b.span.start);
     const built: ResumeSection[] = [];
 
@@ -114,6 +120,179 @@ export class HeuristicStructureBuilder implements StructureBuilder {
       },
     };
   }
+}
+
+/**
+ * Assembly when every line already has a role.
+ *
+ * Nothing is inferred here — no font sizes, no date patterns, no guessing at
+ * where a bullet ended. The heuristics below exist for the same document when
+ * no model was available to label it, and the two agree on the output shape so
+ * everything downstream is unaware of which one ran.
+ */
+function buildFromLabels(
+  result: ExtractionResult,
+  labels: LabelledLine[],
+  sourcePath: string,
+): ResumeDocument {
+  const sections: ResumeSection[] = [];
+
+  // Held in one object rather than in separate bindings: the flush and open
+  // helpers are closures, and TypeScript's narrowing cannot see through them —
+  // it concludes the bindings are always null by the end of the loop.
+  const open: { section: OpenSection | null; entry: OpenEntry | null; lastEnd: number } = {
+    section: null,
+    entry: null,
+    lastEnd: 0,
+  };
+
+  const flushEntry = (): void => {
+    const { section, entry } = open;
+    if (!section || !entry) return;
+
+    open.entry = null;
+    if (entry.headerLines.length === 0 && entry.bullets.length === 0) return;
+
+    const sectionId = sectionIdOf(sections.length);
+    const id = `${sectionId}:e${section.entries.length}`;
+    section.entries.push({
+      id,
+      sectionId,
+      index: section.entries.length,
+      ...parseHeader(entry.headerLines),
+      headerLines: entry.headerLines,
+      bullets: entry.bullets.map<Bullet>((text, i) => ({
+        id: `${id}:b${i}`,
+        entryId: id,
+        index: i,
+        text,
+        span: { start: 0, end: 0 },
+      })),
+      span: { start: entry.start, end: open.lastEnd },
+    });
+  };
+
+  const flushSection = (): void => {
+    flushEntry();
+    const { section } = open;
+    if (!section) return;
+
+    sections.push({
+      id: sectionIdOf(sections.length),
+      kind: section.kind,
+      heading: section.heading,
+      entries: section.entries,
+      looseLines: section.looseLines,
+      span: { start: section.start, end: open.lastEnd },
+    });
+    open.section = null;
+  };
+
+  const openSection = (kind: SectionKind, heading: string, start: number): void => {
+    flushSection();
+    open.section = { kind, heading, entries: [], looseLines: [], start, end: start };
+  };
+
+  for (const label of labels) {
+    const block = result.blocks[label.index];
+    if (!block) continue;
+
+    // Everything before the first heading is the contact block: a name, an
+    // email, a row of links, never introduced by a heading of its own.
+    if (!open.section && label.role !== 'section-heading') {
+      openSection('contact', '', block.span.start);
+    }
+
+    switch (label.role) {
+      case 'section-heading':
+        openSection(label.kind ?? 'other', block.text.trim(), block.span.start);
+        break;
+
+      case 'entry-header':
+        // `startsEntry` is what separates two degrees listed one after another
+        // from one degree whose header wrapped — the lines look identical.
+        if (open.entry && (label.startsEntry || open.entry.bullets.length > 0)) flushEntry();
+        open.entry ??= { headerLines: [], bullets: [], start: block.span.start, end: block.span.end };
+        open.entry.headerLines.push(block.text.trim());
+        break;
+
+      case 'bullet':
+        open.entry ??= { headerLines: [], bullets: [], start: block.span.start, end: block.span.end };
+        open.entry.bullets.push(stripBulletMarker(block.text));
+        break;
+
+      case 'continuation':
+        appendContinuation(open.section, open.entry, block.text.trim());
+        break;
+
+      case 'loose':
+        flushEntry();
+        open.section?.looseLines.push(block.text.trim());
+        break;
+    }
+
+    // Tracked rather than written back through the bindings: the flush and
+    // open helpers are closures, so narrowing inside the loop cannot see that
+    // either one is still set.
+    open.lastEnd = block.span.end;
+  }
+
+  flushSection();
+
+  return {
+    sourcePath,
+    format: result.format,
+    rawText: result.rawText,
+    sections: sections.map((s) => ({
+      ...s,
+      entries: s.entries,
+    })),
+    meta: {
+      ...(result.pageCount !== undefined ? { pageCount: result.pageCount } : {}),
+      wordCount: countWords(result.rawText),
+      quality: result.quality,
+      layoutWarnings: result.layoutWarnings,
+    },
+  };
+}
+
+interface OpenSection {
+  kind: SectionKind;
+  heading: string;
+  entries: ResumeEntry[];
+  looseLines: string[];
+  start: number;
+  end: number;
+}
+
+interface OpenEntry {
+  headerLines: string[];
+  bullets: string[];
+  start: number;
+  end: number;
+}
+
+function sectionIdOf(index: number): string {
+  return `s${index}`;
+}
+
+/** Joins onto whatever the line above was — a bullet, a header, or a loose line. */
+function appendContinuation(section: OpenSection | null, entry: OpenEntry | null, text: string): void {
+  if (!text) return;
+
+  if (entry && entry.bullets.length > 0) {
+    entry.bullets[entry.bullets.length - 1] += ` ${text}`;
+    return;
+  }
+  if (entry && entry.headerLines.length > 0) {
+    entry.headerLines[entry.headerLines.length - 1] += ` ${text}`;
+    return;
+  }
+  if (section && section.looseLines.length > 0) {
+    section.looseLines[section.looseLines.length - 1] += ` ${text}`;
+    return;
+  }
+  section?.looseLines.push(text);
 }
 
 /**

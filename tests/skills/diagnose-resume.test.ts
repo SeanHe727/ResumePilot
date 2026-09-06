@@ -120,7 +120,11 @@ describe('diagnose-resume', () => {
 
     expect(out.success).toBe(true);
     const tasks = new Set(seen.map((s) => s.task));
-    expect(tasks).toEqual(new Set(['diagnose_bullet', 'judge_wording', 'generate_report']));
+    // `split_sections` is the line labeller, which runs before anything can be
+    // diagnosed and falls back to the rules when its reply is unusable.
+    expect(tasks).toEqual(
+      new Set(['split_sections', 'diagnose_bullet', 'judge_wording', 'generate_report']),
+    );
   });
 
   it('scopes every knowledge lookup to a dimension', async () => {
@@ -267,15 +271,20 @@ describe('what leaves the machine', () => {
   /** Everything in the fixtures that identifies a person rather than a job. */
   const CONTACT_DETAILS = ['Sean Chen', 'sean@example.com', '138 0000 0000', 'github.com/seanchen'];
 
-  it('sends no contact detail to the model', async () => {
+  it('sends no contact detail to the agents that diagnose', async () => {
     // Not because anything strips them: the diagnosis loop walks `entries`,
     // and `isEntryBearing` keeps contact, skills and summary out of entries
     // whatever their body looks like. That line was written for a different
     // reason, so this pins the consequence rather than the cause.
+    //
+    // The line labeller is excluded, and has to be: deciding that a line is
+    // the contact block means reading it. It returns roles by line number and
+    // never returns text, so nothing it sees can reach a diagnosis.
     const { seen } = await runOn('sample-resume.md');
-    const sent = JSON.stringify(seen);
+    const diagnostic = seen.filter((s) => s.task !== 'split_sections');
+    const sent = JSON.stringify(diagnostic);
 
-    expect(seen.length).toBeGreaterThan(0);
+    expect(diagnostic.length).toBeGreaterThan(0);
     for (const detail of CONTACT_DETAILS) {
       expect(sent, `sent to the model: ${detail}`).not.toContain(detail);
     }
@@ -285,7 +294,8 @@ describe('what leaves the machine', () => {
     // The shape-based fallback in `isEntryBearing` treats a bulleted body as
     // entries — which is right for an unrecognised heading and wrong here.
     const { out, seen } = await runOn('bulleted-contact.md');
-    const everything = JSON.stringify(seen) + render(out.result as DiagnosisReport);
+    const diagnostic = seen.filter((s) => s.task !== 'split_sections');
+    const everything = JSON.stringify(diagnostic) + render(out.result as DiagnosisReport);
 
     for (const detail of CONTACT_DETAILS) {
       expect(everything, `leaked: ${detail}`).not.toContain(detail);

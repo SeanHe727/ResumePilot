@@ -4,5 +4,6 @@ export { PdfExtractor } from './extractors/pdf.js';
 export { DocxExtractor } from './extractors/docx.js';
 export { HeuristicSectionDetector, isBulletLine, stripBulletMarker } from './section-detector.js';
 export { HeuristicStructureBuilder, countWords } from './structure-builder.js';
+export { ModelDocumentSegmenter } from './segmenter.js';
 export * from './layout.js';
 export * from './types.js';

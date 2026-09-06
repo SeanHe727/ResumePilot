@@ -61,7 +61,13 @@ export interface SectionDetector {
  * and only an entry holds bullets — the level diagnosis actually runs on.
  */
 export interface StructureBuilder {
-  build(result: ExtractionResult, sections: SectionCandidate[], sourcePath: string): ResumeDocument;
+  build(
+    result: ExtractionResult,
+    sections: SectionCandidate[],
+    sourcePath: string,
+    /** When present, every line already has a role and none is inferred. */
+    labels?: LabelledLine[],
+  ): ResumeDocument;
 }
 
 export interface ResumeParser {
@@ -74,5 +80,45 @@ export type LineRole =
   /** Company, title, dates — the header of one position or project. */
   | 'entry-header'
   | 'bullet'
+  /**
+   * The rest of the line above. PDF extraction gives one block per visual line
+   * and only the first carries the marker, so a bullet long enough to wrap
+   * arrives as two or three blocks.
+   */
+  | 'continuation'
   /** Prose that belongs to no entry, e.g. a skills list or the contact block. */
   | 'loose';
+
+export interface LabelledLine {
+  /** Index into the block list the labels were produced from. */
+  index: number;
+  role: LineRole;
+  /** Present when `role` is `section-heading`. */
+  kind?: SectionKind;
+  /**
+   * Set on the first line of an entry's header.
+   *
+   * A header can run to two lines — employer on one, title and dates on the
+   * next — so consecutive header lines are ambiguous on their own: two degrees
+   * listed one after another look exactly like one degree whose header wrapped.
+   * Only the labeller can tell them apart.
+   */
+  startsEntry?: boolean;
+}
+
+/**
+ * Decides what each line is, when the markup does not say.
+ *
+ * The reference project met the same problem one layer over: a transcript with
+ * speaker labels was split by rule, and one without was handed to the model.
+ * A Markdown resume marks its own structure with `##` and `-`; a PDF marks it
+ * with font size and indentation, and those mean opposite things in different
+ * templates — a LaTeX resume commonly sets section names smaller than the
+ * employers under them.
+ *
+ * Returns null when it cannot help — no key, a failed call, a reply that does
+ * not line up with the input — and the caller falls back to the rules.
+ */
+export interface DocumentSegmenter {
+  segment(result: ExtractionResult): Promise<LabelledLine[] | null>;
+}

@@ -7,7 +7,7 @@ import type {
   ResumeSessionState,
   WordingDiagnosis,
 } from '../domain.js';
-import { DefaultResumeParser } from '../document/index.js';
+import { DefaultResumeParser, ModelDocumentSegmenter } from '../document/index.js';
 import type { ResumeParser } from '../document/types.js';
 import { analyzeFormat } from '../tools/analyze-format.js';
 import type { Skill, SkillContext, SkillInput, SkillOutput } from './types.js';
@@ -188,8 +188,17 @@ function toolCtx(ctx: SkillContext): never {
 }
 
 function parserFrom(ctx: SkillContext): ResumeParser {
-  // Injected for tests; a real session gets the default pipeline.
-  return (ctx.session.state.parser as ResumeParser | undefined) ?? new DefaultResumeParser();
+  // Injected for tests; a real session gets the default pipeline, with the
+  // model available to label lines a Markdown file would have marked itself.
+  return (
+    (ctx.session.state.parser as ResumeParser | undefined) ??
+    new DefaultResumeParser(
+      undefined,
+      undefined,
+      undefined,
+      new ModelDocumentSegmenter(ctx.queryEngine),
+    )
+  );
 }
 
 function describe(err: unknown): string {

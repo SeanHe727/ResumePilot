@@ -8,6 +8,7 @@ import { HeuristicSectionDetector } from './section-detector.js';
 import { HeuristicStructureBuilder } from './structure-builder.js';
 import type {
   DocumentExtractor,
+  DocumentSegmenter,
   ResumeParser,
   SectionDetector,
   StructureBuilder,
@@ -43,6 +44,12 @@ export class DefaultResumeParser implements ResumeParser {
     ],
     private readonly detector: SectionDetector = new HeuristicSectionDetector(),
     private readonly builder: StructureBuilder = new HeuristicStructureBuilder(),
+    /**
+     * Optional. Absent, the rules decide every line's role, which is what the
+     * whole pipeline did before and still does for a Markdown resume that
+     * marks its own structure.
+     */
+    private readonly segmenter?: DocumentSegmenter,
   ) {}
 
   async parse(filePath: string): Promise<ResumeDocument> {
@@ -56,6 +63,12 @@ export class DefaultResumeParser implements ResumeParser {
 
     const extracted = await extractor.extract(filePath);
     const sections = this.detector.detect(extracted);
-    return this.builder.build(extracted, sections, filePath);
+
+    // The rules are the fallback, not the failure case. They read a Markdown
+    // resume correctly, and on a PDF they are a working answer when there is
+    // no key, the call fails, or the reply does not line up with the input.
+    const labels = (await this.segmenter?.segment(extracted)) ?? undefined;
+
+    return this.builder.build(extracted, sections, filePath, labels);
   }
 }
