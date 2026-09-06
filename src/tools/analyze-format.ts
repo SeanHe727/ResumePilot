@@ -1,11 +1,4 @@
-import type {
-  Bullet,
-  FormatDiagnosis,
-  ResumeDocument,
-  RuleViolation,
-  ScoredDimension,
-} from '../domain.js';
-import { violation } from './rules.js';
+import type { Bullet, FormatDiagnosis, ResumeDocument, ScoredDimension } from '../domain.js';
 import {
   bystanderOpener,
   dateFormat,
@@ -21,6 +14,51 @@ import {
   weakVerb,
   type DateFormat,
 } from './text-signals.js';
+
+/**
+ * Plain sentences rather than structured findings.
+ *
+ * An earlier version carried a catalogue of ~20 rules with stable ids, sources
+ * and severities. The reference project reports `keyMissing: string[]` — a list
+ * of sentences — and that is enough for a report to render and a reader to act
+ * on, without a second vocabulary to keep in step with the corpus.
+ */
+const MESSAGES: Readonly<Record<string, string>> = {
+  'harvard.no-pronouns': 'uses a personal pronoun; resume lines are phrases, not sentences',
+  'harvard.passive-voice': 'passive voice hides who did the work',
+  'harvard.no-references': 'references are requested separately; the line spends space to say nothing',
+  'harvard.no-personal-details': 'age, gender and photos are excluded by convention',
+  'harvard.date-first-line':
+    'opens with a date, putting the reader on the timeline instead of the achievement',
+  'harvard.missing-contact': 'no email or phone in the body — the application cannot be answered',
+  'google.xyz.missing-measure': 'claims an outcome with nothing to verify it against',
+  'faang.bystander-language':
+    '"responsible for" / "worked on" describes an assigned slot, not an action taken',
+  'faang.weak-verb': 'the opening verb does not name an action a reader could ask about',
+  'faang.unquantified-majority':
+    'fewer than half the bullets carry a figure, which reads as duties rather than results',
+  'faang.overlong-bullet': 'runs past two lines, which means it is narrating process',
+  'faang.self-rating': 'proficiency ratings are neither quantifiable nor checkable',
+  'ats.multi-column':
+    'multi-column layout — extractors read across the page and weave the columns into one garbled stream (~34% of ATS parsing failures)',
+  'ats.margin-contact': 'contact details in a header or footer, which many parsers discard entirely',
+  'ats.decorative-bullets': 'decorative bullet glyphs tokenize as unknown entities',
+  'ats.unknown-heading': 'heading outside the vocabulary parsers match against',
+  'ats.no-text-layer': 'no text layer — an applicant tracking system reads nothing from this file',
+  'ats.tables': 'tables are commonly flattened row-wise, scrambling the fields',
+  'ats.length': 'length is outside the one-page convention',
+  'ats.inconsistent-dates': 'mixed date formats break the pattern a parser matches on',
+};
+
+function describe(rule: string, evidence: string): string {
+  const message = MESSAGES[rule] ?? rule;
+  return evidence ? `${message} — "${truncate(evidence)}"` : message;
+}
+
+function truncate(text: string, max = 70): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  return clean.length > max ? `${clean.slice(0, max)}...` : clean;
+}
 
 /** One page holds roughly this many words at a readable density. */
 const WORDS_PER_PAGE = 500;
@@ -42,7 +80,7 @@ const QUANTIFIED_TARGET = 0.5;
  */
 export function analyzeFormat(resume: ResumeDocument): FormatDiagnosis {
   const bullets = resume.sections.flatMap((s) => s.entries).flatMap((e) => e.bullets);
-  const issues: RuleViolation[] = [];
+  const issues: string[] = [];
 
   const length = scoreLength(resume, issues);
   const quantifiedRatio = scoreQuantified(bullets, issues);
@@ -74,7 +112,7 @@ export function analyzeFormat(resume: ResumeDocument): FormatDiagnosis {
 
 function scoreLength(
   resume: ResumeDocument,
-  issues: RuleViolation[],
+  issues: string[],
 ): FormatDiagnosis['metrics']['length'] {
   const { wordCount } = resume.meta;
   const pageCount = resume.meta.pageCount ?? Math.max(1, Math.ceil(wordCount / WORDS_PER_PAGE));
@@ -84,7 +122,7 @@ function scoreLength(
   }
 
   if (wordCount < 150) {
-    issues.push(violation('ats.length', `${wordCount} words`, { severity: 'medium' }));
+    issues.push(describe('ats.length', `${wordCount} words`));
     return {
       score: 45,
       pageCount,
@@ -93,7 +131,7 @@ function scoreLength(
     };
   }
 
-  issues.push(violation('ats.length', `${pageCount} pages`));
+  issues.push(describe('ats.length', `${pageCount} pages`));
   return {
     score: Math.max(30, 100 - (pageCount - 2) * 25),
     pageCount,
@@ -104,7 +142,7 @@ function scoreLength(
 
 function scoreQuantified(
   bullets: Bullet[],
-  issues: RuleViolation[],
+  issues: string[],
 ): FormatDiagnosis['metrics']['quantifiedRatio'] {
   if (bullets.length === 0) {
     return { score: 0, ratio: 0, detail: 'no bullets found' };
@@ -116,7 +154,7 @@ function scoreQuantified(
   if (ratio < QUANTIFIED_TARGET) {
     // Cite the worst offender rather than the rule in the abstract.
     const example = bullets.find((b) => !hasMeasurement(b.text));
-    issues.push(violation('faang.unquantified-majority', example?.text ?? ''));
+    issues.push(describe('faang.unquantified-majority', example?.text ?? ''));
   }
 
   return {
@@ -130,7 +168,7 @@ function scoreQuantified(
 
 function scoreVerbFirst(
   bullets: Bullet[],
-  issues: RuleViolation[],
+  issues: string[],
 ): FormatDiagnosis['metrics']['verbFirstRatio'] {
   if (bullets.length === 0) return { score: 0, ratio: 0, detail: 'no bullets found' };
 
@@ -140,11 +178,11 @@ function scoreVerbFirst(
   for (const bullet of bullets) {
     const opener = bystanderOpener(bullet.text);
     if (opener) {
-      issues.push(violation('faang.bystander-language', bullet.text.slice(0, opener.length)));
+      issues.push(describe('faang.bystander-language', bullet.text.slice(0, opener.length)));
       continue;
     }
     const weak = weakVerb(bullet.text);
-    if (weak) issues.push(violation('faang.weak-verb', weak));
+    if (weak) issues.push(describe('faang.weak-verb', weak));
   }
 
   return {
@@ -156,7 +194,7 @@ function scoreVerbFirst(
 
 function scoreConsistency(
   resume: ResumeDocument,
-  issues: RuleViolation[],
+  issues: string[],
 ): FormatDiagnosis['metrics']['consistency'] {
   const inconsistencies: string[] = [];
   const ranges = resume.sections
@@ -169,7 +207,7 @@ function scoreConsistency(
 
   if (formats.size > 1) {
     inconsistencies.push(`${formats.size} date formats: ${[...formats.values()].join(', ')}`);
-    issues.push(violation('ats.inconsistent-dates', [...formats.values()].join(' / ')));
+    issues.push(describe('ats.inconsistent-dates', [...formats.values()].join(' / ')));
   }
 
   // Trailing punctuation applied to some bullets and not others.
@@ -192,12 +230,12 @@ function scoreConsistency(
  */
 function scoreAtsParsability(
   resume: ResumeDocument,
-  issues: RuleViolation[],
+  issues: string[],
 ): FormatDiagnosis['metrics']['atsParsability'] {
   const blockers: string[] = [];
 
   if (resume.meta.quality === 'unreadable') {
-    issues.push(violation('ats.no-text-layer', resume.sourcePath));
+    issues.push(describe('ats.no-text-layer', resume.sourcePath));
     return {
       score: 0,
       blockers: ['no text layer — an ATS reads nothing from this file'],
@@ -207,10 +245,10 @@ function scoreAtsParsability(
 
   for (const warning of resume.meta.layoutWarnings) {
     blockers.push(warning);
-    if (/multi-column/.test(warning)) issues.push(violation('ats.multi-column', warning));
-    else if (/header or footer/.test(warning)) issues.push(violation('ats.margin-contact', warning));
-    else if (/decorative/.test(warning)) issues.push(violation('ats.decorative-bullets', warning));
-    else if (/table/.test(warning)) issues.push(violation('ats.tables', warning));
+    if (/multi-column/.test(warning)) issues.push(describe('ats.multi-column', warning));
+    else if (/header or footer/.test(warning)) issues.push(describe('ats.margin-contact', warning));
+    else if (/decorative/.test(warning)) issues.push(describe('ats.decorative-bullets', warning));
+    else if (/table/.test(warning)) issues.push(describe('ats.tables', warning));
   }
 
   // A heading our own vocabulary could not place is a heading a commercial
@@ -218,7 +256,7 @@ function scoreAtsParsability(
   for (const section of resume.sections) {
     if (section.kind === 'other' && section.heading) {
       blockers.push(`unrecognised section heading "${section.heading}"`);
-      issues.push(violation('ats.unknown-heading', section.heading));
+      issues.push(describe('ats.unknown-heading', section.heading));
     }
   }
 
@@ -229,38 +267,38 @@ function scoreAtsParsability(
   };
 }
 
-function collectLineLevelIssues(bullets: Bullet[], issues: RuleViolation[]): void {
+function collectLineLevelIssues(bullets: Bullet[], issues: string[]): void {
   for (const bullet of bullets) {
     if (hasPronoun(bullet.text)) {
-      issues.push(violation('harvard.no-pronouns', bullet.text));
+      issues.push(describe('harvard.no-pronouns', bullet.text));
     }
     if (isPassive(bullet.text)) {
-      issues.push(violation('harvard.passive-voice', bullet.text));
+      issues.push(describe('harvard.passive-voice', bullet.text));
     }
     if (startsWithDate(bullet.text)) {
-      issues.push(violation('harvard.date-first-line', bullet.text.slice(0, 20)));
+      issues.push(describe('harvard.date-first-line', bullet.text.slice(0, 20)));
     }
     if (estimateLines(bullet.text) > MAX_BULLET_LINES) {
-      issues.push(violation('faang.overlong-bullet', bullet.text.slice(0, 60)));
+      issues.push(describe('faang.overlong-bullet', bullet.text.slice(0, 60)));
     }
     if (!hasMeasurement(bullet.text)) {
-      issues.push(violation('google.xyz.missing-measure', bullet.text, { severity: 'medium' }));
+      issues.push(describe('google.xyz.missing-measure', bullet.text));
     }
   }
 }
 
-function collectSkillsIssues(resume: ResumeDocument, issues: RuleViolation[]): void {
+function collectSkillsIssues(resume: ResumeDocument, issues: string[]): void {
   const lines = resume.sections
     .filter((s) => s.kind === 'skills')
     .flatMap((s) => s.looseLines);
 
   for (const line of lines) {
     const rating = selfRating(line);
-    if (rating) issues.push(violation('faang.self-rating', line));
+    if (rating) issues.push(describe('faang.self-rating', line));
   }
 }
 
-function collectContactIssues(resume: ResumeDocument, issues: RuleViolation[]): void {
+function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
   const contact = resume.sections.find((s) => s.kind === 'contact');
   const text = contact?.looseLines.join(' ') ?? '';
 
@@ -269,7 +307,7 @@ function collectContactIssues(resume: ResumeDocument, issues: RuleViolation[]): 
 
   if (!hasEmail || !hasPhone) {
     const missing = [!hasEmail && 'email', !hasPhone && 'phone'].filter(Boolean).join(' and ');
-    issues.push(violation('harvard.missing-contact', `missing ${missing} in the body`));
+    issues.push(describe('harvard.missing-contact', `missing ${missing} in the body`));
   }
 }
 
@@ -278,17 +316,17 @@ function collectContactIssues(resume: ResumeDocument, issues: RuleViolation[]): 
  * bullet — checked over every line, since a references note or a date of birth
  * can appear in a section this analysis does not otherwise model.
  */
-function collectConventionIssues(resume: ResumeDocument, issues: RuleViolation[]): void {
+function collectConventionIssues(resume: ResumeDocument, issues: string[]): void {
   const lines = resume.sections.flatMap((s) => [
     ...s.looseLines,
     ...s.entries.flatMap((e) => [...e.headerLines, ...e.bullets.map((b) => b.text)]),
   ]);
 
   for (const line of lines) {
-    if (mentionsReferences(line)) issues.push(violation('harvard.no-references', line));
+    if (mentionsReferences(line)) issues.push(describe('harvard.no-references', line));
 
     const detail = personalDetail(line);
-    if (detail) issues.push(violation('harvard.no-personal-details', line));
+    if (detail) issues.push(describe('harvard.no-personal-details', line));
   }
 }
 

@@ -28,6 +28,10 @@ export interface ModelSpec {
  * DeepSeek bills different rates at peak and off-peak hours; the peak rate is
  * recorded so the budget guard over-estimates rather than under-estimates.
  * `deepseek-chat` is a deprecated alias — use the v4 model ids.
+ *
+ * The OpenAI chat models are here so a session holding only an OpenAI key can
+ * still run: `RESUMEPILOT_MODEL_PRIMARY=gpt-4.1` swaps the whole pipeline over
+ * without a code change. Verified 2026-09-05.
  */
 export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
   'claude-opus-5': {
@@ -47,6 +51,18 @@ export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
     provider: 'claude',
     pricing: { inputPerMTok: 1.0, outputPerMTok: 5.0 },
     contextWindow: 200_000,
+  },
+  'gpt-4.1': {
+    id: 'gpt-4.1',
+    provider: 'openai',
+    pricing: { inputPerMTok: 2.0, outputPerMTok: 8.0 },
+    contextWindow: 1_000_000,
+  },
+  'gpt-4.1-mini': {
+    id: 'gpt-4.1-mini',
+    provider: 'openai',
+    pricing: { inputPerMTok: 0.4, outputPerMTok: 1.6 },
+    contextWindow: 1_000_000,
   },
   'deepseek-v4-flash': {
     id: 'deepseek-v4-flash',

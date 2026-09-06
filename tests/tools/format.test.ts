@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 
 import { DefaultResumeParser } from '../../src/document/index.js';
 import { analyzeFormat } from '../../src/tools/analyze-format.js';
-import { RULES, violation } from '../../src/tools/rules.js';
 import {
   bystanderOpener,
   dateFormat,
@@ -24,7 +23,9 @@ async function diagnose(fixture: string): Promise<FormatDiagnosis> {
   return analyzeFormat(doc);
 }
 
-const rulesIn = (d: FormatDiagnosis): Set<string> => new Set(d.issues.map((i) => i.rule));
+/** Findings are plain sentences, so tests match on what they say. */
+const mentions = (d: FormatDiagnosis, phrase: string): boolean =>
+  d.issues.some((i) => i.toLowerCase().includes(phrase.toLowerCase()));
 
 describe('text signals', () => {
   it.each([
@@ -138,43 +139,6 @@ describe('convention signals', () => {
   });
 });
 
-describe('rule catalogue', () => {
-  it('enforces every rule it defines', async () => {
-    // A catalogue entry nothing checks is a rule the product claims to apply
-    // and silently does not.
-    const src = await import('node:fs').then((fs) =>
-      fs.readFileSync('src/tools/analyze-format.ts', 'utf-8'),
-    );
-    const enforced = new Set([...src.matchAll(/violation\('([^']+)'/g)].map((m) => m[1]));
-
-    expect([...Object.keys(RULES)].filter((r) => !enforced.has(r))).toEqual([]);
-  });
-
-  it('gives every rule an id matching its key', () => {
-    for (const [key, rule] of Object.entries(RULES)) expect(rule.id).toBe(key);
-  });
-
-  it('namespaces every rule by where it comes from', () => {
-    for (const rule of Object.values(RULES)) {
-      expect(rule.id).toMatch(/^(harvard|google|faang|ats)\./);
-      expect(rule.source.length).toBeGreaterThan(10);
-    }
-  });
-
-  it('carries the evidence through verbatim', () => {
-    // The report quotes this back; a paraphrase the reader cannot find in their
-    // own resume costs trust in the whole diagnosis.
-    const v = violation('faang.bystander-language', 'Responsible for');
-
-    expect(v.evidence).toBe('Responsible for');
-    expect(v.dimension).toBe('action-verbs');
-  });
-
-  it('lets a caller override severity for context', () => {
-    expect(violation('ats.length', '3 pages', { severity: 'high' }).severity).toBe('high');
-  });
-});
-
 describe('analyzeFormat on a clean resume', () => {
   it('scores it well overall', async () => {
     const d = await diagnose('sample-resume.md');
@@ -186,7 +150,7 @@ describe('analyzeFormat on a clean resume', () => {
   it('still catches the bystander openers it contains', async () => {
     const d = await diagnose('sample-resume.md');
 
-    expect(rulesIn(d).has('faang.bystander-language')).toBe(true);
+    expect(mentions(d, 'assigned slot')).toBe(true);
   });
 
   it('reports the quantified ratio it measured', async () => {
@@ -211,21 +175,21 @@ describe('analyzeFormat on a messy resume', () => {
     // unrecognised heading would silently cost the whole content diagnosis.
     const messy = await diagnose('messy-resume.md');
 
-    expect(rulesIn(messy).has('faang.bystander-language')).toBe(true);
-    expect(rulesIn(messy).has('harvard.no-pronouns')).toBe(true);
+    expect(mentions(messy, 'assigned slot')).toBe(true);
+    expect(mentions(messy, 'personal pronoun')).toBe(true);
     expect(messy.metrics.quantifiedRatio.ratio).toBeGreaterThan(0);
   });
 
   it.each([
-    ['ats.unknown-heading', 'a heading outside the known vocabulary'],
-    ['harvard.missing-contact', 'no email or phone in the body'],
-    ['faang.self-rating', 'star ratings in the skills section'],
-    ['ats.inconsistent-dates', 'two date formats in one resume'],
-    ['faang.weak-verb', '"assisted" as an opener'],
-    ['faang.overlong-bullet', 'a bullet running past two lines'],
-    ['harvard.date-first-line', 'a bullet opening with a year'],
-  ])('reports %s (%s)', async (rule) => {
-    expect(rulesIn(await diagnose('messy-resume.md')).has(rule)).toBe(true);
+    ['a heading outside the known vocabulary', 'outside the vocabulary'],
+    ['no email or phone in the body', 'no email or phone'],
+    ['star ratings in the skills section', 'proficiency ratings'],
+    ['two date formats in one resume', 'mixed date formats'],
+    ['"assisted" as an opener', 'does not name an action'],
+    ['a bullet running past two lines', 'narrating process'],
+    ['a bullet opening with a year', 'opens with a date'],
+  ])('reports %s', async (_label, phrase) => {
+    expect(mentions(await diagnose('messy-resume.md'), phrase)).toBe(true);
   });
 });
 
@@ -234,13 +198,13 @@ describe('analyzeFormat scoring', () => {
     const d = await diagnose('scanned.pdf');
 
     expect(d.metrics.atsParsability.score).toBe(0);
-    expect(rulesIn(d).has('ats.no-text-layer')).toBe(true);
+    expect(mentions(d, 'no text layer')).toBe(true);
   });
 
   it('flags a multi-column layout as a parsing blocker', async () => {
     const d = await diagnose('two-column.pdf');
 
-    expect(rulesIn(d).has('ats.multi-column')).toBe(true);
+    expect(mentions(d, 'multi-column layout')).toBe(true);
     expect(d.metrics.atsParsability.score).toBeLessThan(100);
   });
 

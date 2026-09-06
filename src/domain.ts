@@ -139,22 +139,6 @@ export const DIAGNOSIS_DIMENSIONS = [
 
 export type DiagnosisDimension = (typeof DIAGNOSIS_DIMENSIONS)[number];
 
-export type Severity = 'low' | 'medium' | 'high';
-
-/**
- * A specific, citable rule the bullet breaks.
- * `rule` is a stable id such as `harvard.no-pronouns` or `xyz.missing-measure`
- * so violations can be counted across versions and rendered with a source.
- */
-export interface RuleViolation {
-  rule: string;
-  dimension: DiagnosisDimension;
-  /** The exact substring that triggered it — never a paraphrase. */
-  evidence: string;
-  severity: Severity;
-  explanation: string;
-}
-
 export interface ScoredDimension {
   /** 0–100. */
   score: number;
@@ -167,12 +151,29 @@ export interface ScoredDimension {
  * `needsInput` is load-bearing: the Agent must never invent a metric it was not
  * given. When a bullet lacks a number, the rewrite carries a placeholder and
  * names what the user has to supply, rather than fabricating plausible figures.
+ *
+ * Two suggestions rather than one, because forcing the XYZ shape onto every
+ * bullet makes some of them worse. A line like "Chaired weekly design reviews
+ * across 3 teams" has no missing metric to add — bolting "[X]% improvement"
+ * onto it is padding. And a rewrite carrying four placeholders is a row of
+ * holes the user has no idea how to fill.
  */
 export interface RewriteSuggestion {
   before: string;
+  /** The recommended rewrite. Carries at most two placeholders. */
   after: string;
   rationale: string;
+  /** Questions the user can answer from memory, one per placeholder in `after`. */
   needsInput: string[];
+  /**
+   * A version that asks nothing of the user — stronger verb, concrete method,
+   * explicit scope, no figures. Present only when `after` needs input, since
+   * otherwise the two would be the same sentence.
+   */
+  noInputAlternative?: {
+    after: string;
+    rationale: string;
+  };
 }
 
 /**
@@ -194,7 +195,8 @@ export interface BulletDiagnosis {
     /** Z — is the method concrete enough to be credible? */
     method: ScoredDimension;
   };
-  violations: RuleViolation[];
+  /** What is wrong with this bullet, one plain sentence each. */
+  issues: string[];
   strengths: string[];
   rewrite?: RewriteSuggestion;
 }
@@ -229,7 +231,7 @@ export interface WordingDiagnosis {
     verbStrength: ScoredDimension;
     /** Filler, hedging, repetition within the line. */
     concision: ScoredDimension;
-    violations: RuleViolation[];
+    issues: string[];
   }>;
 }
 
@@ -262,7 +264,7 @@ export interface FormatDiagnosis {
     /** Multi-column layout, tables, text in images, unusual glyphs. */
     atsParsability: ScoredDimension & { blockers: string[] };
   };
-  issues: RuleViolation[];
+  issues: string[];
 }
 
 export interface KeywordHit {

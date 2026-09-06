@@ -67,6 +67,11 @@ function defaultRules(config: AppConfig): RouteRule[] {
       reason: 'needs domain judgement about technical depth and credibility',
     },
     {
+      task: 'judge_wording',
+      model: cheap,
+      reason: 'mechanical language judgement, no domain knowledge or retrieval needed',
+    },
+    {
       task: 'rewrite_bullet',
       model: primary,
       reason: 'must rewrite without inventing metrics — the hardest constraint here',
@@ -106,6 +111,7 @@ function defaultRules(config: AppConfig): RouteRule[] {
  */
 const DEFAULT_EFFORTS: ReadonlyArray<[TaskKind, Effort]> = [
   ['diagnose_bullet', 'high'],
+  ['judge_wording', 'low'],
   ['rewrite_bullet', 'xhigh'],
   ['match_jd', 'high'],
   ['generate_report', 'high'],

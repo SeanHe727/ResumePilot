@@ -100,6 +100,8 @@ export interface RetryConfig {
  */
 export type TaskKind =
   | 'diagnose_bullet'
+  /** Verb strength and concision — no retrieval, so a cheap model suffices. */
+  | 'judge_wording'
   | 'rewrite_bullet'
   | 'match_jd'
   | 'generate_report'

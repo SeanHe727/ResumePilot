@@ -1,5 +1,4 @@
 import { DIAGNOSIS_DIMENSIONS, type DiagnosisDimension } from '../domain.js';
-import { ruleSource } from './rules.js';
 import type { Tool, ToolResult } from './types.js';
 
 interface KnowledgeQueryInput {
@@ -82,9 +81,7 @@ export const queryKnowledgeBaseTool: Tool<KnowledgeQueryInput, KnowledgeQueryOut
             weakExample: r.weakAnswer,
             strongExample: r.strongAnswer,
             gap: r.gapAnalysis,
-            // Prefer the catalogue's wording when the corpus names a known rule,
-            // so the citation matches what a violation would report.
-            ...(r.source ? { source: ruleSource(r.source) ?? r.source } : {}),
+            ...(r.source ? { source: r.source } : {}),
             similarity: Number(r.similarity.toFixed(3)),
             matchedBy: r.matchType,
           })),
