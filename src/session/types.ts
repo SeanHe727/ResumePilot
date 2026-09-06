@@ -1,6 +1,5 @@
 import type { Message } from '../types.js';
 import type { ContextManager } from '../context/types.js';
-import type { RedactionMap } from '../permission/types.js';
 
 export type SessionStatus = 'created' | 'processing' | 'paused' | 'completed' | 'failed';
 
@@ -37,8 +36,6 @@ export interface Session {
   config: SessionConfig;
   progress: SessionProgress;
   state: SessionState;
-  /** Session-scoped and never persisted: placeholders must not outlive the run. */
-  redactionMap: RedactionMap;
   contextManager: ContextManager;
   abortController: AbortController;
   createdAt: string;
