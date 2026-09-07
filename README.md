@@ -1,90 +1,93 @@
 # ResumePilot
 
-上传简历（可选附带 JD），自动诊断质量问题，并对每一条 bullet 给出 before/after 改写建议。
+A light weight resume improving agent, which diagnoses resume bullets and give analysis from 5 perspectives (Content depth, Wording, Career Narrative, Format, and optional JD match).
 
-底座是一套**手写的 10 层 Harness**——Agent Loop、tool dispatch、流式解析、上下文压缩、权限门禁全部自己实现，
-不用 LangChain、不用 LangGraph、不用 ORM。架构继承自 zero2Agent「面试诊断 Agent」Final Project，
-原文存档在 [`docs/reference/`](docs/reference/)。
+ResumePilot features with agent loop, tool dispatch, stream parsing, context compaction, sub-agent orchestration and permission gate. No LangChain, no LangGraph, no ORM.
 
-## 它诊断什么
+## Features
 
-不是"帮你润色一下"，而是对照可引用的公开规范逐条指出问题、说明为什么是问题、给出改法：
+- **Sourced, not vibe** — checked against published guidance that can be cited: Google's XYZ formula, Harvard FAS resume rules, and FAANG bullet conventions.
 
-- **Google XYZ 公式**——`Accomplished [X] as measured by [Y] by doing [Z]`，成果 / 度量 / 方法三段是否齐全
-- **Harvard FAS 简历规范**——禁人称代词、禁叙述体、主动优于被动、"express not impress"、事实可量化
-- **FAANG bullet 惯例**——动词 + 做了什么 + 用了什么技术 + 可度量影响；剔除 "responsible for" 这类旁观者语言
+- **Rewrites you can act on** — placeholders say what to go and find, `[% smaller than the FP16 baseline]` rather than `[X]`, plus a version for when the number does not exist.
 
-## 架构：10 层
+- **Sensitive information stay out** — they never reach a diagnosis agent and never appear in the report, pinned by tests.
 
-| # | 层 | 职责 | 目录 |
-|---|---|---|---|
-| 1 | Tools | 原子能力，统一 schema，永不抛异常 | `src/tools/` |
-| 2 | Skills | Tool 的有意义组合，可被关键词触发 | `src/skills/` |
-| 3 | Query Engine | Provider 抽象 / 流式 / 重试 / 限流 / 缓存 / 路由 / 预算 | `src/query-engine/` |
-| 4 | Context | 5 层分区预算 + 3 级压缩 | `src/context/` |
-| 5 | Memory | 跨会话画像、弱点趋势，白名单写入 | `src/memory/` |
-| 6 | Permission | 默认拒绝 + 风险分级 + 可逆 PII 脱敏 + 审计 | `src/permission/` |
-| 7 | Session | 状态机 + checkpoint + 简历版本回溯 | `src/session/` |
-| 8 | Command | `/` 前缀确定性入口，在进入 LLM 之前拦截 | `src/command/` |
-| 9 | Hook | pre/post 管线，把治理逻辑从 Dispatcher 里剥出来 | `src/hooks/` |
-| 10 | Sub-agent | Agent-as-Tool，独立 Context，并发池 | `src/agent/` |
+- **Resumable** — checkpoints as it goes, so a dropped connection costs the last entries rather than the run.
 
-配套模块：`src/document/`（简历解析管线）、`src/knowledge/`（知识库）、`src/db/`（SQLite）。
+- **Specialised sub-agents** — each is a miniature agent loop of its own: its own system prompt, its own subset of the tools, its own context window.
 
-## 开发路线
+- **Decoupled Structure** — backend (routing, retry, rate limiting, caching, budgeting, accounting) are decoupled with frontend `query()`.
 
-| Phase | 内容 | 对应原文 | 状态 |
-|---|---|---|---|
-| 0 | 脚手架与接口契约 | 02 | 进行中 |
-| 1 | Query Engine | 03 | |
-| 2 | 简历解析管线 | 替换 10 | |
-| 3 | 知识库（12 维语料 + FTS5 + embedding） | 05 | |
-| 4 | Tools & Skills | 04 | |
-| 5 | Context & Memory | 06 | |
-| 6 | Permission & Session | 07 | |
-| 7 | Hook & Command | 08 | |
-| 8 | Sub-agent 编排 | 09 | |
-| 9 | CLI 组装、Demo、测试 | 11 | |
+- **Governed by construction** — every tool call passes a permission gate and a budget check; long-term memory is written from one hook and nowhere else.
 
-与原项目的顺序差异：简历解析（Phase 2）从原文的第 10 篇提前。
-原项目的音频是可选入口，文字稿可以直接粘贴；简历的 PDF 解析是必经之路，
-不先做，后面每一层都没有数据可跑。
+- **Token efficient** — prompt caching on the shared system prefix, plus per-role routing that keeps cheap work off the expensive model.
 
-## 环境要求
+- **Costs** — with `deepseek-v4-flash`, about 36 calls and ~$0.31 per resume.
 
-- **Node.js >= 22.12**（`better-sqlite3` / `commander` / `chalk` 均要求 >= 22）
-- pnpm
+## Architecture
 
-若用 Homebrew 安装 `node@24`，它是 keg-only 的，不会链接到 `bin/`，需要手动加进 PATH：
+![Agent topology](assets/structure.PNG)
+
+The orchestrator fans one resume out to four roles — substance and wording per entry, narrative and JD match once per document — and their results compose into one report.
+
+## Environment
+
+Node.js >= 22.12, pnpm, and one provider API key.
+
+**macOS**
+
+```bash
+brew install node pnpm
+```
+
+**Linux**
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt install -y nodejs
+npm install -g pnpm
+```
+
+**Windows** (PowerShell as administrator — `better-sqlite3` builds from source)
+
+```powershell
+winget install OpenJS.NodeJS.LTS Microsoft.VisualStudio.2022.BuildTools
+npm install -g pnpm
+```
+
+<details>
+<summary>Homebrew: two pitfalls</summary>
+
+`node@24` is keg-only and is not linked into `bin/`:
 
 ```bash
 export PATH="$(brew --prefix)/opt/node@24/bin:$PATH"
 ```
 
-另外 Homebrew 从源码编译 Node 时会链接到 brew 自己的 `openssl@3`，
-若其 post-install 步骤失败，`pnpm install` 会报 `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`——
-执行 `brew postinstall openssl@3` 补上 `cert.pem` 软链即可。
+Homebrew builds Node against its own `openssl@3`. If that formula's post-install step failed, `pnpm install` reports `UNABLE_TO_GET_ISSUER_CERT_LOCALLY` — `brew postinstall openssl@3` restores the missing `cert.pem` symlink.
 
-## 快速开始
+</details>
+
+## Quick start
 
 ```bash
+git clone https://github.com/SeanHe727/ResumePilot.git && cd ResumePilot
 pnpm install
-cp .env.example .env      # 填入 API Key
-pnpm build-kb             # 构建知识库
-pnpm start                # 启动交互式会话
+cp .env.example .env      # one provider key is enough
+pnpm build-kb             # 46 corpus entries + embeddings, ~$0.0003
 ```
 
-## 技术选型
+Then diagnose something:
 
-| 用途 | 选择 |
-|---|---|
-| Runtime | Node.js + TypeScript 7 (ESM) |
-| Agent Loop | 手写，无框架 |
-| LLM | `@anthropic-ai/sdk`（主力 `claude-opus-5`）+ `openai`（embedding / DeepSeek 兼容） |
-| 存储 | `better-sqlite3` — session / memory / cache / audit / knowledge 五合一 |
-| 检索 | SQLite FTS5 全文 + embedding 语义，双通道合并 |
-| CLI | Commander + chalk + ora |
-| 测试 | Vitest |
+```bash
+pnpm diagnose resume.pdf                       # non-interactive, prints the report
+pnpm diagnose resume.pdf --jd posting.txt      # also score coverage against the posting
+pnpm diagnose resume.pdf --fast                # deterministic pipeline, five calls
+pnpm start resume.pdf                          # interactive session
+```
 
-**不用什么**：不用 LangChain（模型调用、tool schema、output parser 全部手写，保持透明）；
-不用 LangGraph（状态机用 TypeScript 原生实现）；不用 ORM（SQLite 直接写 SQL）。
+Reads `.pdf`, `.docx`, `.md` and `.txt`. In a session, `/help` lists the commands — `/diagnose`, `/detail <n>`, `/export md|json`, `/continue`, `/status` and the rest.
+
+```bash
+pnpm test
+pnpm typecheck
+```

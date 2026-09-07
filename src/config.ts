@@ -64,6 +64,15 @@ export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
     pricing: { inputPerMTok: 0.4, outputPerMTok: 1.6 },
     contextWindow: 1_000_000,
   },
+  'deepseek-v4-pro': {
+    id: 'deepseek-v4-pro',
+    provider: 'deepseek',
+    // ESTIMATE, not verified against the price list. The budget guard divides
+    // by these, so an understated rate lets a run spend past its ceiling —
+    // check them before relying on `maxCostUsd` with this model selected.
+    pricing: { inputPerMTok: 1.1, outputPerMTok: 4.4 },
+    contextWindow: 128_000,
+  },
   'deepseek-v4-flash': {
     id: 'deepseek-v4-flash',
     provider: 'deepseek',
