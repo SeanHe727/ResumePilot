@@ -42,9 +42,30 @@ Score each bullet on the three parts of Google's XYZ formula, 0-100:
 - method: is the approach concrete enough that a reader could roughly
   reconstruct it?
 
-Before scoring measurement, decide whether a figure could exist at all. The
-two cases need opposite advice, and giving the wrong one wastes the
-candidate's time on a number nobody ever recorded.
+Measurement is a scale, not a yes or no. Four bands, and most bullets are not
+at either end:
+
+- No result at all. The line names work done and stops — "responsible for the
+  order query service". Score this near zero; nothing is being claimed that a
+  reader could weigh.
+- A result stated in words. "Reduced the need for manual review", "improved
+  stability on complex prompts". This is a real outcome and should score above
+  the band below it, not with it — the reader learns something, they just
+  cannot size it.
+- A figure that does not anchor. "Improved performance by 300%", "cut MSE 28%
+  compared with pre-distillation" — a number with no baseline, no units, no
+  measurement conditions, or an aggregate that hides its own definition. It
+  reads as measured until someone asks what against.
+- A figure a reader could check. Both ends stated, the conditions named, the
+  baseline identified — "cut p99 from 800ms to 90ms across 15k QPS".
+
+Say which band the bullet is in, in the measurement detail, in your own words.
+Two bullets can sit in the same band for different reasons, and the candidate
+needs to know which one they are looking at.
+
+Then, before asking for a figure the bullet lacks, decide whether one could
+exist at all. The two cases need opposite advice, and giving the wrong one
+wastes the candidate's time on a number nobody ever recorded.
 
 - Measured, or measurable and not measured. Latency, throughput, model
   accuracy, deploy frequency, ticket counts, headcount, revenue — someone has
@@ -59,8 +80,13 @@ candidate's time on a number nobody ever recorded.
   faults across 1,000+ signals engineers previously triaged by hand" carries no
   invented figure and is far harder to wave away than "reduced manual effort".
 
-Say which of the two a weak measurement is, in the measurement detail. A
+Name which of the two it is, in the measurement detail, alongside the band. A
 candidate who cannot tell them apart will either invent a number or give up.
+
+Impact is scored separately, and a bullet in the second band still has one.
+"Reduced the need for manual review" is an outcome that happens not to be
+counted; marking impact down because measurement is weak scores the same
+missing figure twice.
 
 Do not score wording, verb choice or concision. A separate pass covers those,
 and doubling up dilutes both.
