@@ -41,11 +41,29 @@ export interface NumberCheck {
  * without asserting one, so they are exempt.
  */
 export function checkNoFabricatedNumbers(before: string, after: string): NumberCheck {
-  const original = new Set(extractNumbers(before));
+  const original = new Set(extractNumbers(stripIdentifiers(before)));
   const withoutPlaceholders = after.replace(/[[{<][^\]}>]*[\]}>]/g, ' ');
 
-  const invented = extractNumbers(withoutPlaceholders).filter((n) => !original.has(n));
+  const invented = extractNumbers(stripIdentifiers(withoutPlaceholders)).filter(
+    (n) => !original.has(n),
+  );
   return { ok: invented.length === 0, figures: invented };
+}
+
+/**
+ * Digits that name a thing rather than measure one.
+ *
+ * `FP16`, `INT8`, `p99`, `HTTP/2`, `GPT-4`, `S3`, `BM25` — the digits belong to
+ * the identifier, and a rewrite that names the baseline it compared against is
+ * doing what it was asked to. Read as figures they are inventions the original
+ * never stated, and the whole rewrite is thrown away over the word `FP16`.
+ *
+ * The tell is what precedes the digits. An identifier carries letters into
+ * them; a measurement does not — `800ms` and `40%` and `12 services` all start
+ * at a word boundary, and only the unit comes after.
+ */
+function stripIdentifiers(text: string): string {
+  return text.replace(/[A-Za-z][-/.]?\d[\d.]*/g, ' ');
 }
 
 /**
