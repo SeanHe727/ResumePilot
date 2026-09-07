@@ -117,6 +117,8 @@ export type TaskKind =
   | 'judge_wording'
   | 'rewrite_bullet'
   | 'match_jd'
+  /** The career arc across entries — one pass over the whole document. */
+  | 'assess_narrative'
   | 'generate_report'
   | 'split_sections'
   | 'split_bullets'

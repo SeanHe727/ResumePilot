@@ -34,6 +34,7 @@ When you have what you need, stop calling tools and reply with the JSON.`;
 
 export const ENTRY_SUBSTANCE_AGENT: SubAgentConfig = {
   id: 'entry-substance',
+  task: 'diagnose_bullet',
   name: 'Entry Substance',
   description: 'Scores one entry on the three parts of the XYZ formula and reads it as a whole',
   systemPrompt: `${ENTRY_SUBSTANCE_PROMPT}\n\n${RETRIEVAL_ADDENDUM}`,
@@ -48,6 +49,7 @@ export const ENTRY_SUBSTANCE_AGENT: SubAgentConfig = {
 
 export const ENTRY_WORDING_AGENT: SubAgentConfig = {
   id: 'entry-wording',
+  task: 'judge_wording',
   name: 'Entry Wording',
   description: 'Judges verb strength and concision, without touching content',
   systemPrompt: `${ENTRY_WORDING_PROMPT}\n\n${RETRIEVAL_ADDENDUM}`,
@@ -73,6 +75,7 @@ export const ENTRY_WORDING_AGENT: SubAgentConfig = {
  */
 export const NARRATIVE_AGENT: SubAgentConfig = {
   id: 'narrative',
+  task: 'assess_narrative',
   name: 'Career Narrative',
   description: 'Reads the entries in sequence and judges the arc, the gaps and the ordering',
   systemPrompt: `You are a hiring manager reading a resume end to end, deciding in thirty
@@ -123,6 +126,7 @@ Reply with JSON only:
  */
 export const JD_MATCH_AGENT: SubAgentConfig = {
   id: 'jd-match',
+  task: 'match_jd',
   name: 'JD Match',
   description: 'Scores the resume against a job description, and names what is missing',
   systemPrompt: `You compare a resume against the job description it is being sent to.

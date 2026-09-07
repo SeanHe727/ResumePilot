@@ -82,6 +82,11 @@ function defaultRules(config: AppConfig): RouteRule[] {
       reason: 'requires reading intent behind a job description, not keyword overlap',
     },
     {
+      task: 'assess_narrative',
+      model: primary,
+      reason: 'reads every entry at once to judge whether they form one story',
+    },
+    {
       task: 'generate_report',
       model: primary,
       reason: 'long structured output synthesising every other result',
@@ -114,6 +119,7 @@ const DEFAULT_EFFORTS: ReadonlyArray<[TaskKind, Effort]> = [
   ['judge_wording', 'low'],
   ['rewrite_bullet', 'xhigh'],
   ['match_jd', 'high'],
+  ['assess_narrative', 'high'],
   ['generate_report', 'high'],
   ['split_sections', 'low'],
   ['split_bullets', 'low'],

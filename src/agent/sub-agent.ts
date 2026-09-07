@@ -83,7 +83,7 @@ export class SubAgentRuntime {
       const window = context.build();
 
       const response = await this.deps.queryEngine.query({
-        task: 'diagnose_bullet',
+        task: config.task,
         systemPrompt: window.systemPrompt,
         messages: window.messages,
         ...(tools.length > 0 && !finalTurn ? { tools } : {}),

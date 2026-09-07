@@ -230,6 +230,21 @@ describe('SubAgentRuntime', () => {
     expect(seen[1]?.messages.some((m) => m.role === 'tool')).toBe(true);
   });
 
+  it('asks the router for the kind of work its role actually is', async () => {
+    // Without this every role ran as `diagnose_bullet`, so wording — no
+    // retrieval, and already routed to the cheap model at low effort in the
+    // table — was paying for the top tier on every entry.
+    const { engine, seen } = scriptedEngine(text(WORDING_JSON));
+    const { runtime } = runtimeWith(engine);
+
+    await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
+    expect(seen[0]?.task).toBe('judge_wording');
+
+    seen.length = 0;
+    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    expect(seen[0]?.task).toBe('diagnose_bullet');
+  });
+
   it('offers only the tools its role declares', async () => {
     const { engine, seen } = scriptedEngine(text(SUBSTANCE_JSON));
     const { runtime } = runtimeWith(engine);

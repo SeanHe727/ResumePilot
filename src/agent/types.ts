@@ -1,4 +1,5 @@
 import type { TokenUsage } from '../types.js';
+import type { TaskKind } from '../query-engine/types.js';
 import type {
   EntryDiagnosis,
   ExtractionQuality,
@@ -21,6 +22,15 @@ export interface SubAgentConfig {
   name: string;
   description: string;
   systemPrompt: string;
+  /**
+   * What kind of work this is, for the router.
+   *
+   * Without it every role runs on whichever model the heaviest one needs.
+   * Wording is the clear case: it judges verb strength and concision with no
+   * retrieval, which the routing table already sends to the cheap model at low
+   * effort — and it was paying for the top tier on every entry.
+   */
+  task: TaskKind;
   /** Tool names this agent may call. Anything else is unavailable to it. */
   tools: string[];
   /** Guards against a sub-agent looping forever. */
