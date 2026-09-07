@@ -313,7 +313,17 @@ function renderAgents(
 }
 
 function parserFrom(ctx: SkillContext): ResumeParser {
-  return (ctx.session.state.parser as ResumeParser | undefined) ?? new DefaultResumeParser();
+  // Injected for tests; a real session gets the default pipeline, with the
+  // model available to label lines a Markdown file would have marked itself.
+  return (
+    (ctx.session.state.parser as ResumeParser | undefined) ??
+    new DefaultResumeParser(
+      undefined,
+      undefined,
+      undefined,
+      new ModelDocumentSegmenter(ctx.queryEngine),
+    )
+  );
 }
 
 function describe(err: unknown): string {
