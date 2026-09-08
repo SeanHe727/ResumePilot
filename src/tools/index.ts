@@ -5,6 +5,8 @@ import { analyzeWordingTool } from './analyze-wording.js';
 import { generateReportTool } from './generate-report.js';
 import { queryKnowledgeBaseTool } from './query-knowledge-base.js';
 import { rewriteBulletTool } from './rewrite-bullet.js';
+import type { SearchProvider } from './search-provider.js';
+import { webSearchTool } from './web-search.js';
 import type { ToolRegistry } from './types.js';
 
 export { MapToolRegistry } from './registry.js';
@@ -15,6 +17,8 @@ export { analyzeWordingTool } from './analyze-wording.js';
 export { rewriteBulletTool } from './rewrite-bullet.js';
 export { generateReportTool } from './generate-report.js';
 export { queryKnowledgeBaseTool } from './query-knowledge-base.js';
+export { webSearchTool } from './web-search.js';
+export * from './search-provider.js';
 export * from './prompts.js';
 export * from './verify.js';
 export * from './text-signals.js';
@@ -27,7 +31,14 @@ export * from './types.js';
  * so paths arrive through the CLI or `/upload` and a Skill calls the parser in
  * ordinary code — see the trust-boundary note in `types.ts`.
  */
-export function createToolRegistry(): ToolRegistry {
+/**
+ * `web_search` is registered only when a provider exists.
+ *
+ * A tool in the schema list is an offer, and a model takes it: registering one
+ * that can only answer "no search provider is configured" spends a turn and a
+ * tool call to learn what the caller already knew.
+ */
+export function createToolRegistry(deps: { search?: SearchProvider } = {}): ToolRegistry {
   const registry = new MapToolRegistry();
   registry.register(analyzeFormatTool as never);
   registry.register(analyzeEntryTool as never);
@@ -35,5 +46,6 @@ export function createToolRegistry(): ToolRegistry {
   registry.register(rewriteBulletTool as never);
   registry.register(generateReportTool as never);
   registry.register(queryKnowledgeBaseTool as never);
+  if (deps.search) registry.register(webSearchTool as never);
   return registry;
 }

@@ -33,7 +33,16 @@ export class OpenAIProvider implements LLMProvider {
         // in the prompt for this; every prompt that sets it says "Reply with
         // JSON only".
         ...(params.jsonMode ? { response_format: { type: 'json_object' as const } } : {}),
-        max_tokens: params.maxTokens ?? DEFAULT_MAX_TOKENS,
+        // Which name to use is a property of the model, not of the provider:
+        // the newer reasoning models reject `max_tokens` outright.
+        ...(params.usesMaxCompletionTokens
+          ? { max_completion_tokens: params.maxTokens ?? DEFAULT_MAX_TOKENS }
+          : { max_tokens: params.maxTokens ?? DEFAULT_MAX_TOKENS }),
+        // Only where the model takes it, and never alongside tools — the two
+        // are mutually exclusive on this endpoint.
+        ...(params.reasoningEffort && !params.tools?.length
+          ? { reasoning_effort: params.reasoningEffort }
+          : {}),
         stream: true,
         // Without this, `chunk.usage` is null on every chunk and the budget
         // guard silently records zero cost for the whole session.

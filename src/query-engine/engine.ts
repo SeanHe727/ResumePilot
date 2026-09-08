@@ -1,13 +1,14 @@
-import type { AppConfig, ProviderName } from '../config.js';
+import { resolveModel, type AppConfig, type ProviderName } from '../config.js';
 import { QueryCache } from './cache.js';
 import { ClaudeProvider } from './providers/claude.js';
 import { DeepSeekProvider, OpenAIProvider } from './providers/openai.js';
+import { OpenAIResponsesProvider } from './providers/responses.js';
 import { TokenBucketLimiter, type RateLimiter } from './rate-limiter.js';
 import { DEFAULT_RETRY_CONFIG, withRetry } from './retry.js';
 import { ModelRouter } from './router.js';
 import { parseStream } from './stream.js';
 import { TokenCounter } from './token-counter.js';
-import {
+import { type Effort,
   QueryEngineError,
   type LLMProvider,
   type ParsedResponse,
@@ -69,6 +70,7 @@ export class QueryEngine implements QueryEngineContract {
     }
 
     const route = this.router.resolve(params.task, params.model);
+    const spec = resolveModel(route.model);
     // An explicit effort from the caller wins over the route's default.
     const effort = params.effort ?? route.effort;
     const streamParams: StreamParams = {
@@ -79,6 +81,10 @@ export class QueryEngine implements QueryEngineContract {
       ...(params.maxTokens ? { maxTokens: params.maxTokens } : {}),
       ...(params.jsonMode ? { jsonMode: true } : {}),
       ...(effort ? { effort } : {}),
+      // Model-shaped differences, not provider-shaped: which token-cap name to
+      // send, and whether the model takes a reasoning setting at all.
+      ...(spec.usesMaxCompletionTokens ? { usesMaxCompletionTokens: true } : {}),
+      ...(spec.reasoningEffort ? { reasoningEffort: toReasoningEffort(effort) } : {}),
       ...(params.cacheSystemPrompt !== undefined
         ? { cacheSystemPrompt: params.cacheSystemPrompt }
         : {}),
@@ -96,7 +102,7 @@ export class QueryEngine implements QueryEngineContract {
       }
     }
 
-    const provider = this.providerFor(route.provider);
+    const provider = this.providerFor(route.provider, spec.responsesApi === true);
 
     const response = await withRetry(
       async () => {
@@ -113,7 +119,12 @@ export class QueryEngine implements QueryEngineContract {
 
     // Tool calls are decisions, not answers: replaying one from cache would
     // re-issue a side effect the model only meant to request once.
-    if (cacheKey && response.type === 'text') {
+    //
+    // A response cut off at the token cap is not an answer either, and caching
+    // one is worse than not caching it: a single truncated run then serves
+    // every later identical call from a poisoned entry. Same rule that keeps
+    // an aborted stream out.
+    if (cacheKey && response.type === 'text' && response.stopReason !== 'max_tokens') {
       this.cache.set(cacheKey, response, params.cacheTtlSeconds ?? this.defaultCacheTtl);
     }
 
@@ -122,6 +133,7 @@ export class QueryEngine implements QueryEngineContract {
 
   async countTokens(params: Pick<QueryParams, 'task' | 'model' | 'messages' | 'tools'>): Promise<number> {
     const route = this.router.resolve(params.task, params.model);
+    const spec = resolveModel(route.model);
     return this.providerFor(route.provider).countTokens(params.messages, params.tools);
   }
 
@@ -149,8 +161,11 @@ export class QueryEngine implements QueryEngineContract {
    * Providers are built on first use, so a session that never touches DeepSeek
    * does not need a DeepSeek key to start.
    */
-  private providerFor(name: ProviderName): LLMProvider {
-    const existing = this.providers.get(name);
+  private providerFor(name: ProviderName, responsesApi = false): LLMProvider {
+    // Keyed by endpoint too: one OpenAI key can be behind both adapters, and
+    // they speak different protocols.
+    const key = responsesApi ? `${name}:responses` : name;
+    const existing = this.providers.get(key as ProviderName);
     if (existing) return existing;
 
     const { apiKeys } = this.options.config;
@@ -163,16 +178,31 @@ export class QueryEngine implements QueryEngineContract {
         created = new ClaudeProvider(apiKeys.anthropic);
         break;
       case 'openai':
-        created = new OpenAIProvider(requireKey(apiKeys.openai, 'OPENAI_API_KEY'));
+        created = responsesApi
+          ? new OpenAIResponsesProvider(requireKey(apiKeys.openai, 'OPENAI_API_KEY'))
+          : new OpenAIProvider(requireKey(apiKeys.openai, 'OPENAI_API_KEY'));
         break;
       case 'deepseek':
         created = new DeepSeekProvider(requireKey(apiKeys.deepseek, 'DEEPSEEK_API_KEY'));
         break;
     }
 
-    this.providers.set(name, created);
+    this.providers.set(key as ProviderName, created);
     return created;
   }
+}
+
+/**
+ * Our five levels map onto the three the API takes.
+ *
+ * `none` is not reachable from here: it is what the chat endpoint demands
+ * before it will accept tools, and this provider exists so that trade does not
+ * have to be made.
+ */
+function toReasoningEffort(effort: Effort | undefined): 'low' | 'medium' | 'high' {
+  if (effort === 'low') return 'low';
+  if (effort === 'medium') return 'medium';
+  return 'high';
 }
 
 function requireKey(key: string | undefined, envName: string): string {

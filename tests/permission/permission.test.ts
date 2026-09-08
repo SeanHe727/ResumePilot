@@ -205,3 +205,27 @@ describe('SqliteAuditLogger', () => {
     expect(audit.getSessionLog('s1')).toHaveLength(1);
   });
 });
+
+describe('web search at the gate', () => {
+  it('runs without a prompt, so a non-interactive diagnosis can use it', async () => {
+    // A `confirm` rule here would be a silent deny in `pnpm diagnose`, where
+    // the confirmer refuses everything — the tool would look broken rather
+    // than gated. Consent to this destination is the API key: without it the
+    // tool is never registered.
+    const gate = new DefaultPermissionGate({ confirm: new DenyAllConfirm() });
+
+    const decision = await gate.checkTool(call('web_search', { query: 'int8 vram' }), 's1');
+
+    expect(decision.allowed).toBe(true);
+    expect(decision.rule.id).toBe('allow-web-search');
+  });
+
+  it('still refuses a tool no rule accounts for', async () => {
+    const gate = new DefaultPermissionGate({ confirm: new DenyAllConfirm() });
+
+    const decision = await gate.checkTool(call('fetch_url', { url: 'https://example.com' }), 's1');
+
+    expect(decision.allowed).toBe(false);
+    expect(decision.rule.id).toBe('default-deny');
+  });
+});

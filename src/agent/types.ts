@@ -33,6 +33,25 @@ export interface SubAgentConfig {
   task: TaskKind;
   /** Tool names this agent may call. Anything else is unavailable to it. */
   tools: string[];
+  /**
+   * Tools used when they are there, skipped when they are not.
+   *
+   * `tools` stays strict on purpose — a name that resolves to nothing is a
+   * typo, and failing loudly is what catches it. But a tool can also be absent
+   * because the operator did not configure it, and `web_search` without a key
+   * is exactly that. Declaring it in `tools` took the whole sub-agent path
+   * down for anyone without a search provider.
+   */
+  optionalTools?: string[];
+  /**
+   * Appended to `systemPrompt` only when at least one optional tool resolved.
+   *
+   * Telling a model it can search and then handing it no search tool is worse
+   * than saying nothing: it spends the budget reasoning about a capability it
+   * does not have. Appended rather than interpolated so the cached prefix
+   * stays byte-identical either way.
+   */
+  optionalPrompt?: string;
   /** Guards against a sub-agent looping forever. */
   maxTurns: number;
   timeoutMs: number;
@@ -134,7 +153,7 @@ export interface Orchestrator {
   /** Why a whole-document role returned null, keyed by role id. */
   readonly failures: ReadonlyMap<string, string>;
   /** Whole-document roles, run once rather than per entry. Null when the agent failed. */
-  assessNarrative(entries: ResumeEntry[]): Promise<NarrativeAssessment | null>;
+  assessNarrative(resume: ResumeDocument): Promise<NarrativeAssessment | null>;
   matchJd(resume: ResumeDocument, jd: JobDescription): Promise<JdMatch | null>;
   parallel(tasks: SubAgentTask[]): Promise<SubAgentResult[]>;
 }

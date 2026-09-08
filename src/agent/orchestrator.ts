@@ -133,14 +133,14 @@ export class DefaultOrchestrator {
    * Returns null rather than an empty assessment when the agent fails, so the
    * report can leave the section out instead of printing a confident zero.
    */
-  async assessNarrative(entries: ResumeEntry[]): Promise<NarrativeAssessment | null> {
-    if (entries.length === 0) return null;
+  async assessNarrative(resume: ResumeDocument): Promise<NarrativeAssessment | null> {
+    if (resume.sections.every((section) => section.entries.length === 0)) return null;
 
     const [result] = await this.parallel([
       {
         agentConfig: ROLES['narrative']!,
         input: 'Read these entries in sequence and return the JSON described above.',
-        context: { entries: renderEntries(entries) },
+        context: { entries: renderSections(resume) },
       },
     ]);
 
@@ -157,14 +157,12 @@ export class DefaultOrchestrator {
 
   /** Keyword coverage against the posting the resume is being sent to. */
   async matchJd(resume: ResumeDocument, jd: JobDescription): Promise<JdMatch | null> {
-    const entries = resume.sections.flatMap((s) => s.entries);
-
     const [result] = await this.parallel([
       {
         agentConfig: ROLES['jd-match']!,
         input: 'Compare the resume against the job description and return the JSON described above.',
         context: {
-          resume: renderEntries(entries),
+          resume: renderSections(resume),
           jobDescription: jd.rawText,
         },
       },
@@ -257,12 +255,30 @@ export class DefaultOrchestrator {
 }
 
 /** Whole entries, in document order, wrapped as untrusted data. */
-function renderEntries(entries: ResumeEntry[]): string {
-  const body = entries
-    .map((entry) => {
-      const header = entry.headerLines.join(' | ');
-      const bullets = entry.bullets.map((b) => `  - ${b.text}`).join('\n');
-      return `${header}\n${bullets}`;
+/**
+ * The document as the model sees it, section headings included.
+ *
+ * The headings are the point. Flattened to a bare list of entries — which is
+ * what this did — the one role whose whole job is document-level structure was
+ * the only role that could not see any, and both models spent an ordering note
+ * asking for a Projects section the resume already had.
+ *
+ * `contact` is skipped. It is the one section that carries a phone number and
+ * an email, and no career arc is decided by either.
+ */
+function renderSections(resume: ResumeDocument): string {
+  const body = resume.sections
+    .filter((section) => section.kind !== 'contact' && section.entries.length > 0)
+    .map((section) => {
+      const entries = section.entries
+        .map((entry) => {
+          const header = entry.headerLines.join(' | ');
+          const bullets = entry.bullets.map((b) => `  - ${b.text}`).join('\n');
+          return `${header}\n${bullets}`;
+        })
+        .join('\n\n');
+
+      return `# ${section.heading.trim() || section.kind.toUpperCase()}\n\n${entries}`;
     })
     .join('\n\n');
 

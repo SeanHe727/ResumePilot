@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { ResumeEntry } from '../../src/domain.js';
+import type { FormatDiagnosis, ResumeDocument, ResumeEntry } from '../../src/domain.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
 import { analyzeEntryTool } from '../../src/tools/analyze-entry.js';
 import { analyzeWordingTool } from '../../src/tools/analyze-wording.js';
+import { generateReportTool } from '../../src/tools/generate-report.js';
 import { rewriteBulletTool } from '../../src/tools/rewrite-bullet.js';
 import {
   ENTRY_SUBSTANCE_PROMPT,
@@ -490,5 +491,105 @@ describe('prompts', () => {
     for (const prompt of [ENTRY_SUBSTANCE_PROMPT, REWRITE_PROMPT]) {
       expect(prompt.length).toBeGreaterThan(1000);
     }
+  });
+});
+
+describe('generate_report: the improvement plan', () => {
+  const RESUME: ResumeDocument = {
+    sourcePath: 'r.md',
+    format: 'markdown',
+    rawText: '',
+    sections: [
+      { id: 's1', kind: 'experience', heading: 'EXPERIENCE', entries: [ENTRY], looseLines: [], span: { start: 0, end: 1 } },
+    ],
+    meta: { wordCount: 20, quality: 'clean', layoutWarnings: [] },
+  };
+
+  const FORMAT: FormatDiagnosis = {
+    overallScore: 80,
+    metrics: {
+      length: { score: 100, pageCount: 1, wordCount: 20, detail: '' },
+      quantifiedRatio: { score: 50, ratio: 0.5, detail: '' },
+      verbFirstRatio: { score: 50, ratio: 0.5, detail: '' },
+      consistency: { score: 100, inconsistencies: [], detail: '' },
+      atsParsability: { score: 100, blockers: [], detail: '' },
+    },
+    issues: ['opens with a duty rather than an action — "Responsible for the order query service"'],
+  };
+
+  const ENTRIES = [{
+    entryId: 's1:e0',
+    overallScore: 30,
+    bullets: [{
+      bulletId: 's1:e0:b0',
+      overallScore: 30,
+      dimensions: {
+        impact: { score: 20, detail: '' },
+        measurement: { score: 0, detail: '' },
+        method: { score: 20, detail: '' },
+      },
+      issues: ['"Responsible for" states a duty, not an outcome'],
+      strengths: [],
+    }],
+  }];
+
+  const PLAN = JSON.stringify({ immediate: ['drop "Responsible for"'], shortTerm: [], longTerm: [] });
+
+  /** Replies in the order given, so a test can script a retry. */
+  function scriptedCtx(replies: ParsedResponse[]) {
+    let call = 0;
+    const engine: QueryEngine = {
+      async query() {
+        return replies[Math.min(call++, replies.length - 1)]!;
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+    return {
+      ctx: { queryEngine: engine } as unknown as ToolContext,
+      calls: () => call,
+    };
+  }
+
+  const truncated: ParsedResponse = {
+    type: 'text',
+    content: '',
+    usage: { inputTokens: 0, outputTokens: 0 },
+    stopReason: 'max_tokens',
+  };
+  const answered: ParsedResponse = {
+    type: 'text',
+    content: PLAN,
+    usage: { inputTokens: 0, outputTokens: 0 },
+    stopReason: 'end_turn',
+  };
+
+  it('retries when the model reasoned past writing an answer', async () => {
+    // A thinking model charges reasoning against the same cap. Without the
+    // retry this returns three empty lists and the report drops the plan with
+    // no error raised anywhere.
+    const { ctx, calls } = scriptedCtx([truncated, answered]);
+
+    const result = await generateReportTool.execute(
+      { resume: RESUME, format: FORMAT, entries: ENTRIES } as never,
+      ctx,
+    );
+
+    expect(calls()).toBe(2);
+    expect(result.data?.improvementPlan.immediate).toEqual(['drop "Responsible for"']);
+  });
+
+  it('does not retry an answer that merely ran long', async () => {
+    // Truncated but non-empty is still an answer; retrying it buys a second
+    // full-price call for content already in hand.
+    const { ctx, calls } = scriptedCtx([{ ...answered, stopReason: 'max_tokens' }]);
+
+    const result = await generateReportTool.execute(
+      { resume: RESUME, format: FORMAT, entries: ENTRIES } as never,
+      ctx,
+    );
+
+    expect(calls()).toBe(1);
+    expect(result.data?.improvementPlan.immediate).toHaveLength(1);
   });
 });

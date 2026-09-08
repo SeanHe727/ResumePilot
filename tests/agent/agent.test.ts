@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { ResumeEntry } from '../../src/domain.js';
+import type { ResumeDocument, ResumeEntry, SectionKind } from '../../src/domain.js';
 import {
   DefaultOrchestrator,
   DefaultRoleSelector,
@@ -13,6 +13,8 @@ import {
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
 import { createToolRegistry } from '../../src/tools/index.js';
+import type { SearchProvider } from '../../src/tools/search-provider.js';
+import type { ToolRegistry } from '../../src/tools/types.js';
 
 const entry: ResumeEntry = {
   id: 'experience:0',
@@ -70,12 +72,18 @@ const toolUse = (name: string, input: Record<string, unknown>): ParsedResponse =
   stopReason: 'tool_use',
 });
 
-function runtimeWith(engine: QueryEngine, hits: unknown[] = []) {
+function runtimeWith(
+  engine: QueryEngine,
+  hits: unknown[] = [],
+  registry?: ToolRegistry,
+  search?: SearchProvider,
+) {
   const sessions = new SqliteSessionManager();
   const searches: Array<{ query: string; dimension?: string }> = [];
   const runtime = new SubAgentRuntime({
     queryEngine: engine,
-    toolRegistry: createToolRegistry(),
+    toolRegistry: registry ?? createToolRegistry(),
+    ...(search ? { search } : {}),
     knowledge: {
       async search(query: string, opts?: { dimension?: string }) {
         searches.push({ query, ...(opts?.dimension ? { dimension: opts.dimension } : {}) });
@@ -252,6 +260,62 @@ describe('SubAgentRuntime', () => {
     await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
 
     expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base']);
+  });
+
+  it('offers an optional tool once something is behind it', async () => {
+    const { engine, seen } = scriptedEngine(text(SUBSTANCE_JSON));
+    const search = { name: 'fake', async search() { return []; } };
+    const { runtime } = runtimeWith(engine, [], createToolRegistry({ search: search as never }));
+
+    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'web_search']);
+  });
+
+  it('does not promise a capability the run does not have', async () => {
+    // Telling a model it can search and handing it no search tool is worse
+    // than saying nothing: it spends budget reasoning about a way out it does
+    // not have, or reports that it would have looked something up.
+    const { engine, seen } = scriptedEngine(text(SUBSTANCE_JSON));
+    const search = { name: 'fake', async search() { return []; } };
+
+    const { runtime: without } = runtimeWith(engine);
+    await without.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    const { runtime: with_ } = runtimeWith(
+      engine,
+      [],
+      createToolRegistry({ search: search as never }),
+    );
+    await with_.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    expect(seen[0]?.systemPrompt).not.toMatch(/web_results/);
+    expect(seen[1]?.systemPrompt).toMatch(/web_results/);
+  });
+
+  it('hands the search provider to the tool it registered it for', async () => {
+    // A sub-agent builds its own ToolContext instead of going through the
+    // Dispatcher. Wiring the provider into the Dispatcher alone left the
+    // fan-out — the path a diagnosis actually runs on — calling web_search and
+    // getting "not configured" back in a millisecond.
+    const calls: Array<Record<string, unknown>> = [];
+    const provider = {
+      name: 'fake',
+      async search(query: string) {
+        calls.push({ query });
+        return [];
+      },
+    };
+    const registry = createToolRegistry({ search: provider as never });
+    const { engine } = scriptedEngine(
+      toolUse('web_search', { query: 'int8 vram' }),
+      text(SUBSTANCE_JSON),
+    );
+    const { runtime } = runtimeWith(engine, [], registry, provider as never);
+
+    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    expect(calls).toEqual([{ query: 'int8 vram' }]);
   });
 
   it('passes down only the keys on the boundary list', async () => {
@@ -543,11 +607,26 @@ describe('whole-document roles', () => {
     return new DefaultOrchestrator(runtime);
   }
 
+  /** A one-section document around whatever entries the test cares about. */
+  function doc(
+    entries: ResumeEntry[],
+    kind: SectionKind = 'experience',
+    heading = 'EXPERIENCE',
+  ): ResumeDocument {
+    return {
+      sourcePath: 'r.md',
+      format: 'markdown',
+      rawText: '',
+      sections: [{ id: kind, kind, heading, entries, looseLines: [], span: { start: 0, end: 1 } }],
+      meta: { wordCount: 10, quality: 'clean', layoutWarnings: [] },
+    };
+  }
+
   it('reads the entries in sequence', async () => {
     const { engine, seen } = scriptedEngine(text(NARRATIVE_JSON));
     const entries = [entry, { ...entry, id: 'experience:1', organization: 'Tencent' }];
 
-    const narrative = await orch(engine).assessNarrative(entries);
+    const narrative = await orch(engine).assessNarrative(doc(entries));
 
     expect(narrative?.arc).toMatch(/no visible progression/);
     expect(narrative?.gaps).toHaveLength(1);
@@ -555,10 +634,40 @@ describe('whole-document roles', () => {
     expect(seen[0]?.messages.some((m) => m.content.includes('<resume_content>'))).toBe(true);
   });
 
+  it('shows the agent which section each entry sits under', async () => {
+    // Without the heading, the one role whose job is document-level structure
+    // cannot see any, and spends an ordering note asking for a section the
+    // resume already has.
+    const { engine, seen } = scriptedEngine(text(NARRATIVE_JSON));
+
+    await orch(engine).assessNarrative(doc([entry], 'project', 'PROJECTS'));
+
+    const sent = seen[0]?.messages.map((m) => m.content).join('\n') ?? '';
+    expect(sent).toContain('PROJECTS');
+  });
+
+  it('keeps the contact block away from the agent', async () => {
+    // The only section carrying a phone number and an email, and no career arc
+    // is decided by either.
+    const { engine, seen } = scriptedEngine(text(NARRATIVE_JSON));
+    const resume = doc([entry]);
+    resume.sections.unshift({
+      id: 'contact', kind: 'contact', heading: '',
+      entries: [{ ...entry, id: 'contact:0', sectionId: 'contact', headerLines: ['+1 555 0100 | a@b.com'], bullets: [] }],
+      looseLines: [], span: { start: 0, end: 1 },
+    });
+
+    await orch(engine).assessNarrative(resume);
+
+    const sent = seen[0]?.messages.map((m) => m.content).join('\n') ?? '';
+    expect(sent).not.toContain('a@b.com');
+    expect(sent).toContain('ByteDance');
+  });
+
   it('has nothing to read with no entries', async () => {
     const { engine, seen } = scriptedEngine(text(NARRATIVE_JSON));
 
-    expect(await orch(engine).assessNarrative([])).toBeNull();
+    expect(await orch(engine).assessNarrative(doc([]))).toBeNull();
     expect(seen).toHaveLength(0);
   });
 
@@ -588,12 +697,12 @@ describe('whole-document roles', () => {
       checkBudget: () => ({ ok: true }),
     };
 
-    expect(await orch(engine).assessNarrative([entry, entry])).toBeNull();
+    expect(await orch(engine).assessNarrative(doc([entry, entry]))).toBeNull();
   });
 
   it('survives an agent that answered in prose', async () => {
     const { engine } = scriptedEngine(text('The career looks fine overall.'));
 
-    expect(await orch(engine).assessNarrative([entry, entry])).toBeNull();
+    expect(await orch(engine).assessNarrative(doc([entry, entry]))).toBeNull();
   });
 });

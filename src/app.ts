@@ -30,6 +30,7 @@ import type { Session } from './session/types.js';
 import { createSkillRegistry } from './skills/index.js';
 import type { SkillContext, SkillOutput } from './skills/types.js';
 import { createToolRegistry } from './tools/index.js';
+import { TavilyProvider } from './tools/search-provider.js';
 
 export interface AppOptions {
   config: AppConfig;
@@ -53,6 +54,8 @@ export class App {
   readonly memory: SqliteMemoryStore<CandidateProfile>;
   readonly metrics = new MetricCollector();
   readonly knowledge: DualChannelSearch;
+  /** Undefined without a search key; both tool paths check before using it. */
+  readonly search: TavilyProvider | undefined;
   readonly hooks: DefaultHookPipeline;
   private readonly loopDeps: LoopDeps;
   private readonly retriever: DefaultMemoryRetriever;
@@ -106,13 +109,21 @@ export class App {
       this.hooks.register(hook);
     }
 
-    const tools = createToolRegistry();
+    // No key, no provider, no tool. Web search is the one capability that is
+    // optional rather than degraded: everything else runs identically without it.
+    const search = config.apiKeys.tavily
+      ? new TavilyProvider(config.apiKeys.tavily)
+      : undefined;
+    this.search = search;
+
+    const tools = createToolRegistry(search ? { search } : {});
     const skills = createSkillRegistry();
     const dispatcher = new Dispatcher({
       registry: tools,
       hooks: this.hooks,
       queryEngine: this.queryEngine,
       knowledge: this.knowledge,
+      ...(search ? { search } : {}),
     });
 
     const commands = createCommandParser({
@@ -174,6 +185,7 @@ export class App {
       queryEngine: this.queryEngine,
       toolRegistry: this.loopDeps.tools,
       knowledge: this.knowledge,
+      ...(this.search ? { search: this.search } : {}),
       session,
     });
 

@@ -21,6 +21,10 @@ export interface StreamParams {
    * that have no equivalent.
    */
   jsonMode?: boolean;
+  /** Send the token cap as `max_completion_tokens`; see `ModelSpec`. */
+  usesMaxCompletionTokens?: boolean;
+  /** Reasoning depth, for models that take it. Suppressed when tools are sent. */
+  reasoningEffort?: 'none' | 'low' | 'medium' | 'high';
   effort?: Effort;
   /**
    * Mark the system prompt as a prompt-cache breakpoint (Anthropic only).

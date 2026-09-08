@@ -2,9 +2,15 @@ import { describe, expect, it } from 'vitest';
 
 import { loadConfig } from '../../src/config.js';
 import { QueryCache } from '../../src/query-engine/cache.js';
+import { QueryEngine } from '../../src/query-engine/engine.js';
 import { ModelRouter } from '../../src/query-engine/router.js';
 import { TokenCounter } from '../../src/query-engine/token-counter.js';
-import type { ParsedResponse, StreamParams } from '../../src/query-engine/types.js';
+import type {
+  LLMProvider,
+  ParsedResponse,
+  StreamEvent,
+  StreamParams,
+} from '../../src/query-engine/types.js';
 
 const baseParams: StreamParams = {
   model: 'claude-opus-5',
@@ -170,5 +176,60 @@ describe('TokenCounter', () => {
     counter.record({ inputTokens: 200, outputTokens: 0 }, 'deepseek-v4-flash');
 
     expect(counter.checkBudget()).toMatchObject({ ok: false });
+  });
+});
+
+describe('what reaches the cache', () => {
+  /**
+   * Seeded straight into the private provider map.
+   *
+   * The engine builds its own providers from the config, and adding an
+   * injection seam only so a test can reach in would be a production change
+   * made for a test's benefit.
+   */
+  function engineWith(events: StreamEvent[][]) {
+    let call = 0;
+    const provider: LLMProvider = {
+      name: 'claude',
+      async *stream(): AsyncIterable<StreamEvent> {
+        for (const event of events[Math.min(call, events.length - 1)]!) yield event;
+        call += 1;
+      },
+      async countTokens() { return 0; },
+    };
+
+    const engine = new QueryEngine({ config: loadConfig({}), cachePath: ':memory:' });
+    (engine as unknown as { providers: Map<string, LLMProvider> }).providers.set('claude', provider);
+    return { engine, calls: () => call };
+  }
+
+  const say = (content: string, stopReason: 'end_turn' | 'max_tokens'): StreamEvent[] => [
+    { type: 'text_delta', content },
+    { type: 'message_end', usage: { inputTokens: 1, outputTokens: 1 }, stopReason },
+  ];
+
+  it('serves a completed answer to the next identical request', async () => {
+    const { engine, calls } = engineWith([say('{"ok":true}', 'end_turn')]);
+    const params = { task: 'diagnose_bullet' as const, messages: baseParams.messages };
+
+    await engine.query(params);
+    const second = await engine.query(params);
+
+    expect(second.content).toBe('{"ok":true}');
+    expect(calls()).toBe(1);
+  });
+
+  it('keeps an answer cut off at the token cap out of the cache', async () => {
+    // A thinking model can spend the whole cap on reasoning and return nothing.
+    // Cached, that one truncated run is then replayed for every identical call
+    // that follows — the same way an aborted stream used to poison a session.
+    const { engine, calls } = engineWith([say('', 'max_tokens'), say('{"ok":true}', 'end_turn')]);
+    const params = { task: 'diagnose_bullet' as const, messages: baseParams.messages };
+
+    await engine.query(params);
+    const second = await engine.query(params);
+
+    expect(second.content).toBe('{"ok":true}');
+    expect(calls()).toBe(2);
   });
 });

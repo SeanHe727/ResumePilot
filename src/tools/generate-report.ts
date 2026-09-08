@@ -163,7 +163,7 @@ async function buildImprovementPlan(
     return { immediate: [], shortTerm: [], longTerm: [] };
   }
 
-  const response = await ctx.queryEngine.query({
+  const ask = () => ctx.queryEngine.query({
     task: 'generate_report',
     systemPrompt: IMPROVEMENT_PLAN_PROMPT,
     messages: [
@@ -182,6 +182,17 @@ Return JSON of exactly this shape:
     ],
     ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
   });
+
+  // A thinking model charges its reasoning against the same token cap, so a
+  // long deliberation can leave nothing over for the answer: `content` comes
+  // back empty, all three lists parse as empty, and the report drops the plan
+  // with no error raised anywhere. One retry, for the same reason the
+  // orchestrator gives a sub-agent one — the second attempt usually reasons
+  // its way to writing something down.
+  let response = await ask();
+  if (response.stopReason === 'max_tokens' && !response.content?.trim()) {
+    response = await ask();
+  }
 
   const parsed = parseJsonObject(response.content ?? '');
   return {

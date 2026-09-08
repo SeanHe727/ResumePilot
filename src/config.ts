@@ -20,6 +20,27 @@ export interface ModelSpec {
   provider: ProviderName;
   pricing: ModelPricing;
   contextWindow: number;
+  /**
+   * Newer OpenAI reasoning models reject `max_tokens` outright and want
+   * `max_completion_tokens`. The two mean the same thing to us.
+   */
+  usesMaxCompletionTokens?: boolean;
+  /**
+   * Takes `reasoning_effort`, and refuses function tools unless it is `none`.
+   *
+   * On `/v1/chat/completions` those two are mutually exclusive: a model that
+   * reasons cannot be handed tools. Sub-agents need tools, so they run without
+   * reasoning; the deterministic pipeline calls no tools and gets the full
+   * setting. Lifting that would mean an adapter for `/v1/responses`.
+   */
+  reasoningEffort?: boolean;
+  /**
+   * Reachable only through `/v1/responses`.
+   *
+   * The chat endpoint refuses function tools on these models unless reasoning
+   * is off, and a sub-agent needs both.
+   */
+  responsesApi?: boolean;
 }
 
 /**
@@ -79,6 +100,17 @@ export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
     pricing: { inputPerMTok: 0.44, outputPerMTok: 1.32 },
     contextWindow: 128_000,
   },
+  'gpt-5.6-luna': {
+    id: 'gpt-5.6-luna',
+    provider: 'openai',
+    // ESTIMATE, not verified against the price list — see the note on
+    // `deepseek-v4-pro`. The budget guard divides by these.
+    pricing: { inputPerMTok: 1.25, outputPerMTok: 10 },
+    contextWindow: 400_000,
+    usesMaxCompletionTokens: true,
+    reasoningEffort: true,
+    responsesApi: true,
+  },
   'text-embedding-3-small': {
     id: 'text-embedding-3-small',
     provider: 'openai',
@@ -102,6 +134,8 @@ export interface AppConfig {
     anthropic?: string;
     openai?: string;
     deepseek?: string;
+    /** Web search. Absent disables the tool rather than failing the run. */
+    tavily?: string;
   };
   models: {
     /** Bullet diagnosis, rewriting, final report. */
@@ -153,6 +187,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
       ...(env.ANTHROPIC_API_KEY ? { anthropic: env.ANTHROPIC_API_KEY } : {}),
       ...(env.OPENAI_API_KEY ? { openai: env.OPENAI_API_KEY } : {}),
       ...(env.DEEPSEEK_API_KEY ? { deepseek: env.DEEPSEEK_API_KEY } : {}),
+      ...(env.TAVILY_API_KEY ? { tavily: env.TAVILY_API_KEY } : {}),
     },
     models,
     maxCostUsd,

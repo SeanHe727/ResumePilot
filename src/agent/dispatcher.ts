@@ -1,3 +1,4 @@
+import type { SearchProvider } from '../tools/search-provider.js';
 import type { ToolCall } from '../types.js';
 import type { HookContext, HookPipeline } from '../hooks/types.js';
 import { TOOL_START_TIME } from '../hooks/post-tool/metric-emit.js';
@@ -11,6 +12,8 @@ export interface DispatcherDeps {
   hooks: HookPipeline;
   queryEngine: QueryEngine;
   knowledge: KnowledgeSearch;
+  /** Absent when no search key is configured; `web_search` is unregistered too. */
+  search?: SearchProvider;
 }
 
 /**
@@ -60,6 +63,7 @@ export class Dispatcher {
         session,
         queryEngine: this.deps.queryEngine,
         knowledge: this.deps.knowledge,
+        ...(this.deps.search ? { search: this.deps.search } : {}),
         abortSignal: session.abortController.signal,
       });
     } catch (err) {

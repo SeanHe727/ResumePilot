@@ -1,3 +1,4 @@
+import type { SearchProvider } from '../tools/search-provider.js';
 import { LayeredContextManager } from '../context/manager.js';
 import type { QueryEngine } from '../query-engine/types.js';
 import type { Session } from '../session/types.js';
@@ -11,6 +12,15 @@ export interface SubAgentDeps {
   toolRegistry: ToolRegistry;
   knowledge: KnowledgeSearch;
   session: Session;
+  /**
+   * Absent when no search key is configured.
+   *
+   * A sub-agent builds its own `ToolContext` rather than going through the
+   * Dispatcher, so wiring the provider into the Dispatcher alone left the
+   * fan-out — the path that actually runs a diagnosis — calling `web_search`
+   * and getting "not configured" back in a millisecond.
+   */
+  search?: SearchProvider;
 }
 
 /**
@@ -53,13 +63,21 @@ export class SubAgentRuntime {
     let turns = 0;
 
     const context = new LayeredContextManager(SUB_AGENT_CONTEXT);
-    context.setSystemPrompt(config.systemPrompt);
+    // Set below, once it is known whether the optional tools resolved.
     context.setTaskContext(buildTaskBlock(config, task.context));
     context.addMessage({ role: 'user', content: task.input });
 
     // Only the tools this role is allowed. A role cannot reach past its
     // remit even if the model asks for something else by name.
-    const tools = this.deps.toolRegistry.getSchemasFor(config.tools);
+    const available = (config.optionalTools ?? []).filter((name) =>
+      this.deps.toolRegistry.has(name),
+    );
+    const tools = this.deps.toolRegistry.getSchemasFor([...config.tools, ...available]);
+    context.setSystemPrompt(
+      available.length > 0 && config.optionalPrompt
+        ? `${config.systemPrompt}\n\n${config.optionalPrompt}`
+        : config.systemPrompt,
+    );
     const deadline = AbortSignal.timeout(config.timeoutMs);
 
     while (turns < config.maxTurns) {
@@ -205,6 +223,7 @@ export class SubAgentRuntime {
         session: this.deps.session,
         queryEngine: this.deps.queryEngine,
         knowledge: this.deps.knowledge,
+        ...(this.deps.search ? { search: this.deps.search } : {}),
         abortSignal,
       });
       return JSON.stringify(result);

@@ -107,7 +107,7 @@ export const orchestratedDiagnoseSkill: Skill = {
     // agent reads the entries and the JD agent reads the resume: neither needs
     // the per-entry scores, but both are cheaper to wait for than to interleave.
     const narrative = roles.roles.includes('narrative')
-      ? await ctx.orchestrator.assessNarrative(entries)
+      ? await ctx.orchestrator.assessNarrative(resume)
       : null;
     const jdMatch = jd && roles.roles.includes('jd-match')
       ? await ctx.orchestrator.matchJd(resume, jd)

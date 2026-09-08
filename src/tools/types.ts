@@ -1,3 +1,4 @@
+import type { SearchProvider } from './search-provider.js';
 import type { JsonSchema, ToolSchema } from '../types.js';
 import type { QueryEngine } from '../query-engine/types.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
@@ -48,6 +49,12 @@ export interface ToolContext {
   queryEngine: QueryEngine;
   knowledge: KnowledgeSearch;
   abortSignal: AbortSignal;
+  /**
+   * Absent when no search key is configured. The tool is not registered in
+   * that case either, so a model never sees an option it cannot take — this
+   * only guards the direct callers.
+   */
+  search?: SearchProvider;
 }
 
 export interface Tool<TInput = unknown, TOutput = unknown> {

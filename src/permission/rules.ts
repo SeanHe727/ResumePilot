@@ -54,6 +54,21 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
     reason: 'Proposes replacement text; the user decides whether to use it.',
   },
   {
+    id: 'allow-web-search',
+    name: 'Web search',
+    match: { type: 'tool_name', pattern: 'web_search' },
+    level: 'low',
+    action: 'allow',
+    reason:
+      'Sends a query to the configured search provider. Low rather than confirm ' +
+      'for the reason the analysis tools are: the gate decides which operations ' +
+      'run, and consent to this destination is the API key the user supplied — ' +
+      'without it the tool is not registered at all. A confirm here would also ' +
+      'be a silent deny in a non-interactive run, where the confirmer refuses ' +
+      'everything. What must not leave is handled where it is composed, in the ' +
+      'tool itself.',
+  },
+  {
     id: 'allow-generate-report',
     name: 'Report generation',
     match: { type: 'tool_name', pattern: 'generate_report' },
