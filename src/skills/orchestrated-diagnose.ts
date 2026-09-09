@@ -249,11 +249,11 @@ function renderAgents(
 ): string {
   const totals = new Map<
     string,
-    { ok: number; failed: number; ms: number; tokens: number; peakMs: number; peakTurns: number }
+    { ok: number; failed: number; ms: number; tokens: number; peakMs: number; peakTurns: number; compactions: number }
   >();
 
   for (const stat of verdicts.flatMap((v) => v.agentStats)) {
-    const row = totals.get(stat.name) ?? { ok: 0, failed: 0, ms: 0, tokens: 0, peakMs: 0, peakTurns: 0 };
+    const row = totals.get(stat.name) ?? { ok: 0, failed: 0, ms: 0, tokens: 0, peakMs: 0, peakTurns: 0, compactions: 0 };
     if (stat.success) row.ok += 1;
     else row.failed += 1;
     row.ms += stat.durationMs;
@@ -262,6 +262,7 @@ function renderAgents(
     // hit the ceiling, and that run is the whole reason the limit matters.
     row.peakMs = Math.max(row.peakMs, stat.durationMs);
     row.peakTurns = Math.max(row.peakTurns, stat.turns);
+    row.compactions += stat.compactions;
     totals.set(stat.name, row);
   }
 
@@ -272,7 +273,11 @@ function renderAgents(
         (row.failed ? `, ${row.failed} failed` : '') +
         `  ${Math.round(row.ms / 1000)}s total` +
         `  peak ${Math.round(row.peakMs / 1000)}s / ${row.peakTurns} turns` +
-        `  ${row.tokens} tokens`,
+        `  ${row.tokens} tokens` +
+        // Printed only once it has happened. Until this run the ladder had
+        // never executed anywhere, and an always-zero counter would have read
+        // as a working mechanism idling rather than an unreachable one.
+        (row.compactions ? `  compacted ${row.compactions}x` : ''),
     );
   }
 

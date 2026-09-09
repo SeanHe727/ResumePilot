@@ -75,5 +75,6 @@ export interface ContextManager {
   /** Returns the level reached, or null if nothing ran — not needed, or out of rounds. */
   autoCompact(queryEngine: QueryEngine): Promise<CompactionLevel | null>;
   getRecentMessages(): Message[];
+  getCompactions(): number;
   getStats(): string;
 }

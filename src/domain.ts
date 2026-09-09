@@ -183,6 +183,25 @@ export interface RewriteSuggestion {
  * knowledge base nor the surrounding bullets, so it runs as a separate, cheaper
  * pass (`WordingDiagnosis`) rather than diluting this one.
  */
+/** Which axis a check was made on. Recorded so a run can be audited for breadth. */
+export type CheckKind =
+  /** Is the named technology recognised vocabulary, and is it current? */
+  | 'technology'
+  /** Is the size of this figure ordinary for what produced it? */
+  | 'figure'
+  /** Is this how the work is normally done, and does it produce what is claimed? */
+  | 'method';
+
+export interface ClaimCheck {
+  kind: CheckKind;
+  /** What was checked, quoted from the bullet where possible. */
+  claim: string;
+  /** The technology, figure source or approach the claim rests on. */
+  basis: string;
+  /** What the check showed, or that nothing established was found. */
+  finding: string;
+}
+
 export interface BulletDiagnosis {
   bulletId: string;
   /** 0–100, weighted across the three dimensions below. */
@@ -198,6 +217,26 @@ export interface BulletDiagnosis {
   /** What is wrong with this bullet, one plain sentence each. */
   issues: string[];
   strengths: string[];
+  /**
+   * Figures whose size depends on a named technique, and what checking that
+   * technique showed.
+   *
+   * A required field rather than an invitation. Told only that it *may* look
+   * something up, the loop reaches for the corpus, finds a rule about missing
+   * baselines, and scores a figure as checkable without ever asking whether
+   * the figure is ordinary — which is how a 71% saving from a format that
+   * halves a weight passed as the strongest bullet in its entry, twice.
+   *
+   * Empty is a legitimate answer, and so is a `finding` of "no published
+   * norm": a technique nobody has benchmarked is a fact about the technique.
+   *
+   * `kind` exists so a run can be audited for breadth rather than only for
+   * effort. The first version of this field had no axis and no per-axis
+   * requirement, and a full run produced twelve checks of which twelve were
+   * numeric — the loop reaches for figures unprompted and leaves terminology
+   * and method alone unless told otherwise.
+   */
+  claimsToVerify: ClaimCheck[];
   rewrite?: RewriteSuggestion;
 }
 

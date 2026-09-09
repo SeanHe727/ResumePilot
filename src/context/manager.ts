@@ -183,6 +183,11 @@ export class LayeredContextManager implements ContextManager {
     return [...this.recent];
   }
 
+  /** The counter `getStats` prints, for callers that report rather than display. */
+  getCompactions(): number {
+    return this.compactions;
+  }
+
   getStats(): string {
     const window = this.build();
     const { layers } = window;

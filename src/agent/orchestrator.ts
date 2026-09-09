@@ -247,6 +247,7 @@ export class DefaultOrchestrator {
         success: false,
         usage: { inputTokens: 0, outputTokens: 0 },
         turns: 0,
+        compactions: 0,
         durationMs: 0,
         error: err instanceof Error ? err.message : String(err),
       };
@@ -334,6 +335,7 @@ function aggregate(
         name: r.agentName,
         success: r.success,
         turns: r.turns,
+        compactions: r.compactions,
         durationMs: r.durationMs,
         tokens: r.usage.inputTokens + r.usage.outputTokens,
       }),

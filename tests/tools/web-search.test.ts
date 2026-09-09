@@ -79,7 +79,7 @@ describe('web_search', () => {
     await webSearchTool.execute({ query: 'q', limit: 50 }, ctxWith(provider));
     await webSearchTool.execute({ query: 'q', limit: 0 }, ctxWith(provider));
 
-    expect(seen[0]?.options.limit).toBe(5);
+    expect(seen[0]?.options.limit).toBe(8);
     expect(seen[1]?.options.limit).toBe(1);
   });
 
@@ -166,7 +166,7 @@ describe('TavilyProvider', () => {
       () => provider.search('q', { limit: 3 }),
     );
 
-    expect(results[0]?.content.length).toBeLessThanOrEqual(800);
+    expect(results[0]?.content.length).toBeLessThanOrEqual(2_500);
   });
 
   it('classifies a non-OK response as a service error', async () => {
@@ -265,5 +265,30 @@ describe('degrading without a search provider', () => {
     expect(wanted.filter((n) => with_.has(n))).toEqual(['web_search']);
     // The promise lives in `optionalPrompt`, appended only when one resolved.
     expect(ROLES['entry-substance'].systemPrompt).not.toMatch(/web_results/);
+  });
+});
+
+describe('how deep one search goes', () => {
+  it('asks the provider for its deeper mode', async () => {
+    // Started on `basic`, to keep the window small. That was the wrong thing
+    // to economise on: whether a claim is ordinary is not a question a
+    // search-result blurb settles, and the window had headroom nobody used.
+    const provider = new TavilyProvider('k');
+    let body: Record<string, unknown> = {};
+    const capture = (async (_url: unknown, init: { body: string }) => {
+      body = JSON.parse(init.body);
+      return new Response(JSON.stringify({ results: [] }), { status: 200 });
+    }) as unknown as typeof fetch;
+
+    const original = globalThis.fetch;
+    globalThis.fetch = capture;
+    try {
+      await provider.search('int8 vram', { limit: 4 });
+    } finally {
+      globalThis.fetch = original;
+    }
+
+    expect(body.search_depth).toBe('advanced');
+    expect(body.max_results).toBe(4);
   });
 });

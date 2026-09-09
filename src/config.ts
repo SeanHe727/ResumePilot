@@ -103,9 +103,8 @@ export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
   'gpt-5.6-luna': {
     id: 'gpt-5.6-luna',
     provider: 'openai',
-    // ESTIMATE, not verified against the price list — see the note on
-    // `deepseek-v4-pro`. The budget guard divides by these.
-    pricing: { inputPerMTok: 1.25, outputPerMTok: 10 },
+    // Published rates, confirmed against the price list.
+    pricing: { inputPerMTok: 0.2, outputPerMTok: 1.2 },
     contextWindow: 400_000,
     usesMaxCompletionTokens: true,
     reasoningEffort: true,

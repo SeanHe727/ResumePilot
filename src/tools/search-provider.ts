@@ -45,12 +45,14 @@ export class SearchError extends Error {
 /**
  * How much of one result's extract survives.
  *
- * A search that answers "is this figure typical?" needs enough prose to carry a
- * claim and a condition, and nothing beyond that. Five results at this cap sit
- * near a thousand tokens, which a diagnosis agent can hold alongside the entry
- * it is judging.
+ * Started at 800, chosen to keep the window small. That was the wrong thing to
+ * economise on: a question like "are low-sensitivity layers the right
+ * quantisation target" needs a comparison, and a paragraph and a half of
+ * evidence only supports a hedge. The window has room — a measured peak of
+ * 16,617 against a 32,000 budget, inside model windows of 128k and up — so the
+ * cap now buys depth instead of protecting headroom nobody was using.
  */
-const CONTENT_CAP = 800;
+const CONTENT_CAP = 2_500;
 
 const DEFAULT_TIMEOUT_MS = 15_000;
 
@@ -86,7 +88,10 @@ export class TavilyProvider implements SearchProvider {
         body: JSON.stringify({
           query,
           max_results: options.limit,
-          search_depth: 'basic',
+          // The deeper mode. It costs two credits instead of one and returns
+          // extracts worth comparing rather than blurbs worth quoting, and
+          // whether a claim is ordinary is not a question a blurb settles.
+          search_depth: 'advanced',
           ...(options.recencyDays ? { days: options.recencyDays } : {}),
           ...(options.domains?.length ? { include_domains: options.domains } : {}),
         }),

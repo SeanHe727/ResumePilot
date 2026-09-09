@@ -442,3 +442,55 @@ describe('tool call pairing', () => {
     expect(cm.getRecentMessages().map((m) => m.role)).toEqual(['assistant', 'tool']);
   });
 });
+
+describe('what survives level 2', () => {
+  it('folds what was looked up, not only what was concluded', async () => {
+    // Filtering to assistant messages threw away every lookup the session
+    // made: a search result was not compressed, it was dropped, and the
+    // summariser was then asked to keep every figure from prose that no longer
+    // had any.
+    const seen: string[] = [];
+    const engine = {
+      async query(params: { messages: Array<{ content: string }> }) {
+        seen.push(params.messages.map((m) => m.content).join('\n'));
+        return { type: 'text' as const, content: '- kept', usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' as const };
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+
+    const compressor = new Compressor();
+    await compressor.summarizeHistory(
+      '',
+      [
+        { role: 'assistant', content: 'The VRAM figure looks strong.' },
+        { role: 'tool', toolCallId: 't1', content: 'INT8 halves a weight: roughly 50% versus FP16.' },
+      ] as never,
+      engine as never,
+    );
+
+    expect(seen[0]).toContain('50% versus FP16');
+    // And labelled, because retrieved evidence is not the agent's own finding.
+    expect(seen[0]).toContain('looked up:');
+    expect(seen[0]).toContain('concluded:');
+  });
+
+  it('keeps a figure long enough to carry its baseline', async () => {
+    // A 300-character slice cut retrieved evidence before the model saw it, so
+    // "keep every figure" applied to an opening sentence.
+    const seen: string[] = [];
+    const engine = {
+      async query(params: { messages: Array<{ content: string }> }) {
+        seen.push(params.messages.map((m) => m.content).join('\n'));
+        return { type: 'text' as const, content: '- kept', usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' as const };
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+
+    const long = 'x'.repeat(600) + ' the answer is 1.72x versus torch.compile FP16';
+    await new Compressor().summarizeHistory('', [{ role: 'tool', toolCallId: 't', content: long }] as never, engine as never);
+
+    expect(seen[0]).toContain('1.72x versus torch.compile FP16');
+  });
+});

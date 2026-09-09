@@ -593,3 +593,186 @@ describe('generate_report: the improvement plan', () => {
     expect(result.data?.improvementPlan.immediate).toHaveLength(1);
   });
 });
+
+describe('analyze_entry: claims that need checking against the world', () => {
+  const withClaims = JSON.stringify({
+    bullets: [
+      {
+        bulletId: 's1:e0:b0',
+        overallScore: 70,
+        dimensions: {
+          impact: { score: 70, detail: '' },
+          measurement: { score: 70, detail: '' },
+          method: { score: 70, detail: '' },
+        },
+        issues: [],
+        strengths: [],
+        claimsToVerify: [
+          { kind: 'figure', claim: '71% peak VRAM reduction', basis: 'INT8 TensorRT', finding: 'INT8 halves a weight; the ordinary saving is ~50%' },
+          { kind: 'technology', claim: 'Agent-as-Tool', basis: 'multi-agent vocabulary', finding: 'a recognised pattern name, though usually written "Agents as Tools"' },
+          { kind: 'method', claim: 'KL-divergence sensitivity profiling', basis: 'layer selection for INT8', finding: 'standard practice for choosing quantisation targets' },
+          { claim: '', basis: 'dropped', finding: 'no claim text' },
+          'not an object',
+          { claim: 'unlabelled check', basis: 'something' },
+        ],
+      },
+    ],
+  });
+
+  it('keeps the checks the model recorded, including a null result', async () => {
+    // "No published norm" is a fact about the technique, not a missing answer.
+    const { ctx } = ctxWith(withClaims);
+
+    const result = await analyzeEntryTool.execute(
+      { entry: singleBulletEntry({ id: 's1:e0:b0', text: 'Reduced peak VRAM by 71% using INT8' }) },
+      ctx,
+    );
+
+    const checks = result.data?.bullets[0]?.claimsToVerify ?? [];
+    expect(checks).toHaveLength(4);
+    expect(checks.map((c) => c.kind)).toEqual(['figure', 'technology', 'method', 'figure']);
+    expect(checks[0]?.finding).toMatch(/~50%/);
+    // An unlabelled check lands on `figure`: that is the axis a model reaches
+    // for unprompted, so an untagged one is overwhelmingly likely to be one.
+    expect(checks[3]).toEqual({ kind: 'figure', claim: 'unlabelled check', basis: 'something', finding: '' });
+  });
+
+  it('survives a model that skipped the field entirely', async () => {
+    // Forgiving like the rest of this parser: a diagnosis minus one section
+    // serves the user better than no diagnosis.
+    const noClaims = JSON.stringify({
+      bullets: [{
+        bulletId: 's1:e0:b0',
+        overallScore: 20,
+        dimensions: {
+          impact: { score: 20, detail: '' },
+          measurement: { score: 0, detail: '' },
+          method: { score: 10, detail: '' },
+        },
+        issues: ['a duty, not an outcome'],
+        strengths: [],
+      }],
+    });
+    const { ctx } = ctxWith(noClaims);
+
+    const result = await analyzeEntryTool.execute(
+      { entry: singleBulletEntry({ id: 's1:e0:b0', text: 'Responsible for the order query service' }) },
+      ctx,
+    );
+
+    expect(result.success).toBe(true);
+    expect(result.data?.bullets[0]?.claimsToVerify).toEqual([]);
+  });
+
+  it('tells the model when a figure only looks checkable', async () => {
+    // Both models scored the 71% bullet highest in its entry, twice, because
+    // every number was present. Neither asked whether the number was ordinary.
+    //
+    // Matched against the prompt with its line wrapping flattened: these
+    // sentences get rewrapped whenever the surrounding paragraph changes, and
+    // a test that breaks on a reflow is testing the layout, not the rule.
+    const prompt = ENTRY_SUBSTANCE_PROMPT.replace(/\s+/g, ' ');
+
+    expect(prompt).toContain('ordinary for the technique');
+    expect(prompt).toContain('claimsToVerify');
+    // Not only figures: a term the reader will not recognise, and a method
+    // nobody would choose, are findings the numbers never reveal.
+    expect(prompt).toContain('A term the reader will not recognise');
+    expect(prompt).toContain('a method nobody would choose');
+    // Scope counts sit on none of the three axes.
+    expect(prompt).toContain('29k+ stars');
+  });
+});
+
+describe('what the roles are told to look outward for', () => {
+  it('makes all three axes required, not just the one it reaches for', async () => {
+    // A full run under the first version produced twelve checks, of which
+    // twelve were numeric. Figures are the axis a model takes unprompted;
+    // terminology and method were listed as things it *could* look up, and so
+    // it never did.
+    const { ROLES } = await import('../../src/agent/roles.js');
+    const prompt = (ROLES['entry-substance'].optionalPrompt ?? '').replace(/\s+/g, ' ');
+
+    expect(prompt).toContain('at least one search on each');
+    expect(prompt).toContain('The technology.');
+    expect(prompt).toContain('The figures.');
+    expect(prompt).toContain('The method.');
+  });
+
+  it('gives each role the axes its own judgement turns on', async () => {
+    const { ROLES } = await import('../../src/agent/roles.js');
+    const flat = (id: string) => (ROLES[id].optionalPrompt ?? '').replace(/\s+/g, ' ');
+
+    // The whole-document role asks about standing, not about bullets.
+    expect(flat('narrative')).toContain('Employers, programmes and institutions');
+    expect(flat('narrative')).not.toContain('The figures.');
+    // And the per-entry role does not ask about employer standing.
+    expect(flat('entry-substance')).not.toContain('Employers, programmes');
+    expect(flat('jd-match')).toContain('comparable live postings');
+  });
+
+  it('asks the loop whether it knows enough before it converges', async () => {
+    // ReAct is there mechanically — reasoning carries across turns, tool
+    // results come back into the window — but nothing asked "do I know enough
+    // yet?", and the loop stopped at 3 of its 6 turns every single run.
+    const { ROLES } = await import('../../src/agent/roles.js');
+
+    for (const id of ['entry-substance', 'narrative', 'jd-match'] as const) {
+      const prompt = (ROLES[id].optionalPrompt ?? '').replace(/\s+/g, ' ');
+      expect(prompt, id).toContain('name what you still do not know');
+      expect(prompt, id).toContain('you have turns left');
+    }
+  });
+});
+
+describe('checks the model did not actually make', () => {
+  it('drops a finding that only reports what the resume left out', async () => {
+    // Nothing couples this field to a tool call, so satisfying a required
+    // check by writing a sentence is cheaper than making one — and 61% of a
+    // real run's checks came back as some form of "the resume does not prove
+    // this", which is true of every bullet ever written.
+    const reply = JSON.stringify({
+      bullets: [{
+        bulletId: 's1:e0:b0',
+        overallScore: 60,
+        dimensions: {
+          impact: { score: 60, detail: '' },
+          measurement: { score: 60, detail: '' },
+          method: { score: 60, detail: '' },
+        },
+        issues: [],
+        strengths: [],
+        claimsToVerify: [
+          { kind: 'method', claim: 'role-aware routing', basis: 'implementation',
+            finding: 'The approach is plausible, but the exact rules came back empty from the resume text.' },
+          { kind: 'method', claim: 'assistant-only loss masking', basis: 'collator',
+            finding: 'The method is specific, but the resume provides no artifact confirming which tokens received loss.' },
+          { kind: 'figure', claim: '71% VRAM', basis: 'INT8',
+            finding: 'INT8 halves a weight, so roughly 50% is the ordinary bit-width effect; 71% needs activation evidence.' },
+          { kind: 'technology', claim: 'Agents as Tools', basis: 'multi-agent vocabulary',
+            finding: 'A recognised hierarchical-delegation pattern, widely used in vendor and practitioner writing.' },
+        ],
+      }],
+    });
+    const { ctx } = ctxWith(reply);
+
+    const result = await analyzeEntryTool.execute(
+      { entry: singleBulletEntry({ id: 's1:e0:b0', text: 'Reduced peak VRAM by 71% using INT8' }) },
+      ctx,
+    );
+
+    const checks = result.data?.bullets[0]?.claimsToVerify ?? [];
+    // The two that describe reading the line are gone; the two that describe
+    // what came back from outside it survive.
+    expect(checks.map((c) => c.kind)).toEqual(['figure', 'technology']);
+  });
+
+  it('sends an empty search back to the corpus rather than to silence', async () => {
+    const { ROLES } = await import('../../src/agent/roles.js');
+    const prompt = (ROLES['entry-substance'].optionalPrompt ?? '').replace(/\s+/g, ' ');
+
+    expect(prompt).toContain('that is a result, not a dead end');
+    expect(prompt).toContain('put a corpus lookup to work with it');
+    expect(prompt).toContain('Record only what you actually looked up');
+  });
+});

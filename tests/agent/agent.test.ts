@@ -12,7 +12,7 @@ import {
 } from '../../src/agent/index.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
-import { createToolRegistry } from '../../src/tools/index.js';
+import { MapToolRegistry, createToolRegistry } from '../../src/tools/index.js';
 import type { SearchProvider } from '../../src/tools/search-provider.js';
 import type { ToolRegistry } from '../../src/tools/types.js';
 
@@ -316,6 +316,55 @@ describe('SubAgentRuntime', () => {
     await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
 
     expect(calls).toEqual([{ query: 'int8 vram' }]);
+  });
+
+  it('compacts its own window once a run fills it', async () => {
+    // The main loop always did this; a sub-agent never did, so the compaction
+    // ladder could not run on the one path that actually fills a window — the
+    // fan-out, where a role makes several lookups and carries every result
+    // forward. Level 2 is visible from outside as a `summarize` query.
+    // A bare registry holding one heavy tool: the real one cannot be replaced,
+    // and re-registering a name is refused on purpose.
+    //
+    // Sized just under `toolResultBudget`, because `compressToolOutput` does
+    // not compress *to* a budget — over it, it guts the JSON structurally,
+    // cutting every string to 120 characters. A payload built to be oversized
+    // therefore arrives tiny and never fills anything. Real search results
+    // land under the budget and pass through whole, which is the case worth
+    // testing.
+    const huge = 'x'.repeat(23_000);
+    const registry = new MapToolRegistry();
+    registry.register({
+      name: 'query_knowledge_base',
+      description: 'stand-in that returns more than a window can hold',
+      parameters: { type: 'object', properties: {}, additionalProperties: false },
+      async execute() {
+        return { success: true, data: { hits: [{ gap: huge }] } };
+      },
+    } as never);
+
+    // Three lookups a turn, which is what a searching role actually does.
+    const lookup: ParsedResponse = {
+      type: 'tool_use',
+      toolCalls: [1, 2, 3].map((n) => ({ id: `c${n}`, name: 'query_knowledge_base', input: { query: 'q' } })),
+      usage,
+      stopReason: 'tool_use',
+    };
+    const { engine, seen } = scriptedEngine(
+      lookup, lookup, lookup, lookup, lookup, text(SUBSTANCE_JSON),
+    );
+    const { runtime } = runtimeWith(engine, [], registry);
+
+    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+
+    // Asserted on the window rather than on which rung was reached: level 1
+    // re-compresses tool output for free and usually settles it there, and a
+    // test that demanded the model call of level 2 would be asserting that
+    // the cheap fix failed.
+    const size = (i: number) =>
+      (seen[i]?.messages ?? []).reduce((n, m) => n + m.content.length, 0);
+
+    expect(size(1)).toBeGreaterThan(size(2));
   });
 
   it('passes down only the keys on the boundary list', async () => {

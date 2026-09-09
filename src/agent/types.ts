@@ -77,6 +77,14 @@ export interface SubAgentResult<T = unknown> {
   usage: TokenUsage;
   turns: number;
   durationMs: number;
+  /**
+   * How many times this run's window had to be compacted.
+   *
+   * Reported because a mechanism that fires and leaves no trace cannot be
+   * told apart from one that never fires — which is how the compaction ladder
+   * sat unreachable for the whole project without anything noticing.
+   */
+  compactions: number;
   error?: string;
 }
 
@@ -99,6 +107,7 @@ export interface AgentRunStat {
   turns: number;
   durationMs: number;
   tokens: number;
+  compactions: number;
 }
 
 /** One entry, seen from every angle the per-entry agents cover. */

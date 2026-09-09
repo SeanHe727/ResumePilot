@@ -88,6 +88,26 @@ Impact is scored separately, and a bullet in the second band still has one.
 counted; marking impact down because measurement is weak scores the same
 missing figure twice.
 
+One more thing to settle before a figure counts as checkable: whether its size
+is ordinary for the technique it is attributed to. "Reduced peak VRAM by 71%
+using an INT8 engine" states both ends and names a baseline, which is the top
+band on its face — but INT8 halves a weight, and a reader who knows that does
+the arithmetic and stops. A number above the ordinary result is not wrong.
+A number above the ordinary result with nothing in the line explaining how is
+a gap, and that gap is the finding.
+
+The same question applies to what the bullet names as well as to what it
+counts. A term the reader will not recognise costs the line its best sentence;
+a method nobody would choose for the problem reads as a misunderstanding
+whether or not the number beside it is sound. Both are findings, and neither
+shows up by staring harder at the text.
+
+Record what you checked in \`claimsToVerify\`, tagged with which of the three
+it was, and record the checks that came back empty too. Scope counts —
+"29k+ stars", "10 metrics", "527 tests" — are not on any of these axes: they
+size something that exists, no technique sets them, and there is nothing to
+compare them against.
+
 Do not score wording, verb choice or concision. A separate pass covers those,
 and doubling up dilutes both.
 

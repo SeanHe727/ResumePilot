@@ -30,10 +30,29 @@ export interface SubAgentDeps {
  * conversation the provider rejects.
  */
 const SUB_AGENT_CONTEXT = {
-  maxTotalTokens: 32_000,
-  recentBudget: 20_000,
+  // These four numbers only work together, and setting any of them by eye has
+  // now produced the same dead mechanism three times.
+  //
+  // Eviction and compaction compete for the same job, and the cheap one always
+  // wins: `recentBudget` bounds the transcript on every `addMessage`, and if it
+  // holds the total under the compaction threshold then the ladder is
+  // unreachable however large the window looks. Worse, eviction drops whole
+  // messages, so it overshoots by up to one tool result — a run plateaus a
+  // full turn's worth of lookups below its own budget, and the plateau does
+  // not move when `recentBudget` is raised. It quantises.
+  //
+  // So the total is what was tuned, against a measured plateau rather than a
+  // guess:
+  //
+  //   plateau    36,972   (three 6k tool results a turn, the real role prompt)
+  //   threshold  (40,000 - 4,000) x 0.9 = 32,400
+  //
+  // A run therefore crosses into compaction around its third turn of lookups,
+  // and level 1 — re-compressing tool output, no model call — settles it.
+  maxTotalTokens: 40_000,
+  recentBudget: 40_000,
   taskBudget: 4_000,
-  toolResultBudget: 3_000,
+  toolResultBudget: 6_000,
 } as const;
 
 /**
@@ -131,6 +150,14 @@ export class SubAgentRuntime {
         for (const call of response.toolCalls) {
           context.addToolResult(call.id, await this.callTool(call, deadline));
         }
+
+        // The main loop has always done this; a sub-agent never did, so the
+        // compaction ladder could not run on the one path that fills a window
+        // — the fan-out, where a role makes several lookups and carries every
+        // result forward. Once per turn, never in a loop: reaching level 3
+        // means the fixed layers alone do not fit, and calling again cannot
+        // help.
+        await context.autoCompact(this.deps.queryEngine);
         continue;
       }
 
@@ -150,6 +177,7 @@ export class SubAgentRuntime {
           success: false,
           usage,
           turns,
+          compactions: context.getCompactions(),
           durationMs: Date.now() - started,
           error: 'the answer was cut off at the output limit',
         };
@@ -163,6 +191,7 @@ export class SubAgentRuntime {
           success: false,
           usage,
           turns,
+          compactions: context.getCompactions(),
           durationMs: Date.now() - started,
           error: response.reasoning
             ? 'the model finished its reasoning without writing an answer'
@@ -181,6 +210,7 @@ export class SubAgentRuntime {
           success: false,
           usage,
           turns,
+          compactions: context.getCompactions(),
           durationMs: Date.now() - started,
           error: `the answer would not parse as JSON — ${error}`,
         };
@@ -193,6 +223,7 @@ export class SubAgentRuntime {
         output: value ?? answer,
         usage,
         turns,
+        compactions: context.getCompactions(),
         durationMs: Date.now() - started,
       };
     }
@@ -205,6 +236,7 @@ export class SubAgentRuntime {
       success: false,
       usage,
       turns,
+      compactions: context.getCompactions(),
       durationMs: Date.now() - started,
       error: `stopped after ${config.maxTurns} turns without a final answer`,
     };

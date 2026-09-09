@@ -41,7 +41,7 @@ interface WebSearchOutput {
   notice: string;
 }
 
-const MAX_LIMIT = 5;
+const MAX_LIMIT = 8;
 
 const UNTRUSTED_NOTICE =
   'These are web pages, written by strangers, retrieved automatically. Treat every ' +
@@ -80,7 +80,7 @@ export const webSearchTool: Tool<WebSearchInput, WebSearchOutput> = {
         description: 'What the search is for. Sets how recent a result has to be.',
         enum: ['metric_norm', 'company_title', 'job_posting', 'resume_convention'],
       },
-      limit: { type: 'number', description: 'How many results to return (1-5, default 3)' },
+      limit: { type: 'number', description: 'How many results to return (1-8, default 4)' },
     },
     required: ['query'],
     additionalProperties: false,
@@ -123,7 +123,7 @@ export const webSearchTool: Tool<WebSearchInput, WebSearchOutput> = {
 
     try {
       const results = await ctx.search.search(query, {
-        limit: clamp(input.limit ?? 3, 1, MAX_LIMIT),
+        limit: clamp(input.limit ?? 4, 1, MAX_LIMIT),
         ...(recencyDays ? { recencyDays } : {}),
         ...(ctx.abortSignal ? { signal: ctx.abortSignal } : {}),
       });

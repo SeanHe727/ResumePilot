@@ -1,4 +1,5 @@
 import type {
+  ClaimCheck,
   BulletDiagnosis,
   EntryDiagnosis,
   EntryNarrative,
@@ -106,7 +107,15 @@ Return JSON of exactly this shape:
         "method":      { "score": 0-100, "detail": "one sentence" }
       },
       "issues": ["what is wrong with this bullet, one sentence each"],
-      "strengths": ["..."]
+      "strengths": ["..."],
+      "claimsToVerify": [
+        {
+          "kind": "technology|figure|method",
+          "claim": "what you checked, quoted from the bullet where possible",
+          "basis": "the technology, figure source or approach it rests on",
+          "finding": "what the check showed, or what came back empty"
+        }
+      ]
     }
   ],
   "narrative": {
@@ -151,6 +160,7 @@ export function normaliseEntryDiagnosis(
       dimensions: { impact, measurement, method },
       issues: stringArray(raw.issues),
       strengths: stringArray(raw.strengths),
+      claimsToVerify: claimChecks(raw.claimsToVerify),
     };
   });
 
@@ -194,6 +204,54 @@ function normaliseNarrative(raw: unknown): EntryNarrative {
 function scored(raw: unknown): ScoredDimension {
   const r = (raw ?? {}) as Record<string, unknown>;
   return { score: typeof r.score === 'number' ? r.score : 0, detail: String(r.detail ?? '') };
+}
+
+/**
+ * A finding that only reports what the resume left out.
+ *
+ * "Not externally verifiable from the bullet", "came back empty from the
+ * resume text" — these describe reading the line, not searching for anything,
+ * and they are true of every bullet ever written. Nothing couples this field
+ * to an actual tool call, so satisfying a required check by writing a sentence
+ * is cheaper than making one, and a run under the first version filled 61% of
+ * its checks this way.
+ *
+ * Narrow on purpose: it fires only where the finding names the resume as the
+ * thing that came back empty. A search that genuinely found nothing is a
+ * result worth keeping.
+ */
+const READ_NOT_SEARCHED =
+  /(?:from|in|within) the (?:resume|bullet|line|entry)\b|(?:resume|bullet) (?:text |itself )?provides no|not (?:externally )?verifiable from/i;
+
+/**
+ * Forgiving, like the rest of this parser.
+ *
+ * A model that skipped the field, or filled it with the wrong shape, has
+ * produced a diagnosis worth keeping minus one section — dropping the whole
+ * entry over it serves the user worse than a finding they can judge.
+ */
+function claimChecks(raw: unknown): ClaimCheck[] {
+  if (!Array.isArray(raw)) return [];
+
+  return raw.flatMap((item) => {
+    if (!item || typeof item !== 'object') return [];
+    const row = item as Record<string, unknown>;
+    const claim = typeof row.claim === 'string' ? row.claim.trim() : '';
+    if (!claim) return [];
+
+    const finding = typeof row.finding === 'string' ? row.finding : '';
+    if (READ_NOT_SEARCHED.test(finding)) return [];
+
+    const kind = row.kind;
+    return [{
+      // Defaults to `figure` because that is the axis a model reaches for on
+      // its own, so an unlabelled check is overwhelmingly likely to be one.
+      kind: kind === 'technology' || kind === 'method' ? kind : 'figure',
+      claim,
+      basis: typeof row.basis === 'string' ? row.basis : '',
+      finding,
+    }];
+  });
 }
 
 function stringArray(raw: unknown): string[] {

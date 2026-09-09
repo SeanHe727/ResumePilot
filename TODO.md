@@ -117,18 +117,43 @@ sub-agent 路径能触发(峰值 27,818 > 阈值 25,200),但 `maxTurns` 6 / 实�
 这不是要修的 bug —— 分层预算作为设计是对的,只是这个域用不上它。
 但**不能在简历上写 `staged compaction`**:面试官问"跑过吗"答案是没有。
 
-### 10. web_search 没有缓存,免费额度会被开发测试烧完
-Tavily 免费额度 1,000 次/月。一次诊断 4 个 entry × substance + narrative
-≈ 5 个能搜的 agent,每个最多 2 次 → **一次 run 约 10 次搜索**。
+### 10. web_search 没有缓存
+**不是配额问题** —— 一次完整 run 约 8-15 次搜索,免费档 1,000/月就够 65-125 次,
+而整个项目开发至今一共跑了 30 次。(用户在 researcher 档,额度更高。)
 
-两处重复,都归缓存管:
-- **重试**:`orchestrator.ts:194` 的 `retry` 重跑**整个 agent**,不是重发一个
-  请求,所以第一次做过的搜索会原样再做一遍
-- **跨 run**:同一份简历 + 同一套 prompt → 同样的 query。我们已经跑了 30 次
-  完整诊断,按这个节奏大概四五天开发测试就把一个月配额烧完
+真正的三个理由,都不紧急:
 
-同一次 run 内部大多不重复(不同 entry 问不同的事),所以缓存治的是重试和跨 run。
+1. **重试**:`orchestrator.ts:194` 的 `retry` 重跑**整个 agent**,不是重发一个
+   请求,所以第一次做过的搜索会原样再做一遍
+2. **同一次 run 内撞车**:NIO 的 LoRA 和 Amazon 的 LoRA distillation 会问出
+   几乎一样的 query,不同 agent 各查各的
+3. **延迟**:3 次搜索 x 1.4s,重跑同一份简历时纯属白等
 
-做法:一张自己的表(搜索结果几小时内稳定,而 `QueryCache` 的 key 是
-`StreamParams`,复用不了),key = query + purpose + limit,TTL 按 purpose 分
-(`job_posting` 短,`metric_norm` 长)。
+做法:一张自己的表(`QueryCache` 的 key 是 `StreamParams`,形状不同,复用不了),
+key = query + purpose + limit,TTL 按 purpose 分(`job_posting` 短,岗位会下架;
+`metric_norm` 长,INT8 是 1 byte 这件事不会变)。
+
+### 11. 角色的时间/轮次上限是按"加搜索之前"的负载标定的
+`roles.ts` 的注释写着这些上限是 "2-3x what a measured run actually used:
+peak 67s and 3 turns"。那次测量在 `web_search` 之前。
+
+加上搜索后第一次完整跑:
+
+```
+Entry Substance   2 ok, 2 failed  277s total  peak 165s / 4 turns
+no substance      2 — Request aborted
+```
+
+180s 从 2.7 倍余量变成 **1.09 倍**,NIO 和 Amazon(技术数字最密的两条)直接撞线。
+已放宽到 420s,**但这是临时值** —— 按项目一贯做法,要拿一次干净的完整运行
+重新测出峰值,再缩回 2-3 倍。
+
+更一般的问题:**每次给角色加能力,所有按旧负载标定的上限都失效了**,而失效
+方式是静默的(`Request aborted`,报告里那一条 entry 直接 0 分)。其他按实测
+标定的常量同样有风险:`maxTurns: 6`、`DEFAULT_ENTRY_CONCURRENCY: 2`、
+限流器的 `rateCapacity: 4`。
+
+### 12. `OrchestratorConfig.timeoutMs` 是死配置
+`orchestrator.ts:28` 声明 `timeoutMs: 300_000`,全项目没有任何地方读它。
+真正生效的只有 `sub-agent.ts:81` 的 `config.timeoutMs`(角色自己那个)。
+要么接上,要么删掉 —— 现在它看起来像在管事,实际不管。
