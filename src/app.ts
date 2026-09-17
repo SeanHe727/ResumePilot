@@ -1,8 +1,7 @@
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { DefaultOrchestrator, DefaultRoleSelector, SubAgentRuntime } from './agent/index.js';
-import { Dispatcher } from './agent/dispatcher.js';
+import { DefaultOrchestrator, SubAgentRuntime } from './agent/index.js';
 import { handleInput, type LoopDeps } from './agent/loop.js';
 import { createCommandParser } from './command/index.js';
 import type { AppConfig } from './config.js';
@@ -13,7 +12,8 @@ import {
   createAuditLogHook,
   createDispatchTraceHook,
   createBudgetCheckHook,
-  createMemoryTriggerHook,
+  createProfileHook,
+  createWeakPointHook,
   createPermissionCheckHook,
   createProgressUpdateHook,
   createResultCompressHook,
@@ -28,8 +28,6 @@ import {
   SqliteSessionManager,
 } from './session/index.js';
 import type { Session } from './session/types.js';
-import { createSkillRegistry } from './skills/index.js';
-import type { SkillContext, SkillOutput } from './skills/types.js';
 import { createToolRegistry } from './tools/index.js';
 import { TavilyProvider } from './tools/search-provider.js';
 
@@ -62,7 +60,6 @@ export class App {
   readonly hooks: DefaultHookPipeline;
   private readonly loopDeps: LoopDeps;
   private readonly retriever: DefaultMemoryRetriever;
-  private readonly roleSelector = new DefaultRoleSelector();
   private readonly closers: Array<() => void> = [];
 
   constructor(private readonly options: AppOptions) {
@@ -112,7 +109,8 @@ export class App {
       createDispatchTraceHook(options.print ?? ((text) => process.stdout.write(`${text}\n`))),
       createAuditLogHook(audit),
       createResultCompressHook(),
-      createMemoryTriggerHook(triggers),
+      createWeakPointHook(triggers),
+      createProfileHook(triggers),
       createProgressUpdateHook(),
       this.metrics.createHook(),
     ]) {
@@ -127,16 +125,6 @@ export class App {
     this.search = search;
 
     const tools = createToolRegistry({ ...(search ? { search } : {}), orchestrator: true });
-    const skills = createSkillRegistry();
-    const dispatcher = new Dispatcher({
-      registry: tools,
-      hooks: this.hooks,
-      queryEngine: this.queryEngine,
-      knowledge: this.knowledge,
-      ...(search ? { search } : {}),
-      orchestratorFor: (session) => this.orchestratorFor(session),
-    });
-
     const commands = createCommandParser({
       sessions: this.sessions,
       restorer,
@@ -145,14 +133,28 @@ export class App {
       audit,
       gate,
       checkpoints,
-      runSkill: (name, input, sessionId) => this.runSkill(name, input, sessionId),
+      memory: this.memory,
+      // The same tool the coordinator calls, so a path typed at the prompt and
+      // a path mentioned in conversation are read by one piece of code.
+      parseFile: async (path, session) => {
+        const result = await tools.resolve('parse_resume').execute({ path } as never, {
+          session,
+          queryEngine: this.queryEngine,
+          knowledge: this.knowledge,
+          abortSignal: session.abortController.signal,
+        });
+        return result.success
+          ? { success: true }
+          : { success: false, error: result.error?.message ?? 'could not read the file' };
+      },
     });
 
     this.loopDeps = {
       commands,
-      skills,
       tools,
-      dispatcher,
+      hooks: this.hooks,
+      orchestratorFor: (session) => this.orchestratorFor(session),
+      ...(search ? { search } : {}),
       queryEngine: this.queryEngine,
       knowledge: this.knowledge,
       sessions: this.sessions,
@@ -206,32 +208,6 @@ export class App {
         session,
       }),
     );
-  }
-
-  async runSkill(
-    name: string,
-    input: { rawInput: string; parsedArgs?: Record<string, unknown> },
-    sessionId: string,
-  ): Promise<SkillOutput> {
-    const session = this.sessions.get(sessionId);
-    if (!session) return { success: false, error: `session ${sessionId} not found` };
-
-    const ctx: SkillContext = {
-      session,
-      toolRegistry: this.loopDeps.tools,
-      queryEngine: this.queryEngine,
-      knowledge: this.knowledge,
-      hooks: this.hooks,
-      checkpoints: this.checkpoints,
-      memory: this.triggers,
-      // Built per session: a sub-agent runs tools against the session it was
-      // started for, so one shared instance would attribute them all to the
-      // first session the process ever opened.
-      orchestrator: this.orchestratorFor(session),
-      roleSelector: this.roleSelector,
-    };
-
-    return this.loopDeps.skills.resolve(name).execute(input, ctx);
   }
 
   close(): void {

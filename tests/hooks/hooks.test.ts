@@ -3,14 +3,14 @@ import { describe, expect, it, vi } from 'vitest';
 import type { ToolCall } from '../../src/types.js';
 import type { CandidateProfile, DiagnosisReport, EntryDiagnosis } from '../../src/domain.js';
 import {
-  CURRENT_DIMENSION,
   DefaultHookPipeline,
   MetricCollector,
   TOOL_START_TIME,
   createAuditLogHook,
   createBudgetCheckHook,
   createDispatchTraceHook,
-  createMemoryTriggerHook,
+  createProfileHook,
+  createWeakPointHook,
   createPermissionCheckHook,
   createProgressUpdateHook,
   createResultCompressHook,
@@ -186,6 +186,57 @@ describe('DefaultHookPipeline', () => {
   });
 });
 
+describe('what a hook waits for', () => {
+  function counting(watches?: readonly string[]): { hook: Hook; ran: string[] } {
+    const ran: string[] = [];
+    return {
+      ran,
+      hook: {
+        name: 'counter',
+        timing: 'post-tool',
+        priority: 1,
+        ...(watches ? { watches } : {}),
+        enabled: true,
+        async execute(ctx): Promise<HookOutcome> {
+          ran.push(ctx.toolCall.name);
+          return { action: 'continue' };
+        },
+      },
+    };
+  }
+
+  it('runs only on the tools it declared', async () => {
+    const pipeline = new DefaultHookPipeline();
+    const { hook, ran } = counting(['review_content']);
+    pipeline.register(hook);
+
+    await pipeline.runPost(context('review_content'));
+    await pipeline.runPost(context('query_knowledge_base'));
+
+    expect(ran).toEqual(['review_content']);
+  });
+
+  it('runs on everything when it declared nothing', async () => {
+    const pipeline = new DefaultHookPipeline();
+    const { hook, ran } = counting();
+    pipeline.register(hook);
+
+    await pipeline.runPost(context('review_content'));
+    await pipeline.runPost(context('query_knowledge_base'));
+
+    expect(ran).toHaveLength(2);
+  });
+
+  it('lists what each one is waiting for', async () => {
+    // Declaring it is only half of it: a name no tool provides has to be
+    // readable from outside, or it is the same silent nothing as before.
+    const pipeline = new DefaultHookPipeline();
+    pipeline.register(counting(['review_content']).hook);
+
+    expect(pipeline.list()[0]?.watches).toEqual(['review_content']);
+  });
+});
+
 describe('permission-check', () => {
   it('blocks a tool no rule allows, naming the rule', async () => {
     const hook = createPermissionCheckHook(new DefaultPermissionGate());
@@ -294,12 +345,9 @@ describe('dispatch-trace', () => {
     expect(written[0]).toContain('(no briefing)');
   });
 
-  it('ignores every tool that is not a dispatch', async () => {
-    const { written, hook } = traced();
-
-    await hook.execute(context('query_knowledge_base', { query: 'xyz' }));
-
-    expect(written).toHaveLength(0);
+  it('names the dispatches it waits for rather than filtering inside itself', async () => {
+    expect(traced().hook.watches).toContain('review_content');
+    expect(traced().hook.watches).not.toContain('query_knowledge_base');
   });
 
   it('is off until someone turns it on', async () => {
@@ -351,10 +399,11 @@ describe('result-compress', () => {
   });
 });
 
-describe('memory-trigger', () => {
-  function triggers() {
+describe('the memory writes', () => {
+  function stores() {
     const store = new SqliteMemoryStore<CandidateProfile>(':memory:');
-    return { store, hook: createMemoryTriggerHook(new MemoryTriggers(store)) };
+    const triggers = new MemoryTriggers(store);
+    return { store, weakPoint: createWeakPointHook(triggers), profile: createProfileHook(triggers) };
   }
 
   const weakEntry: EntryDiagnosis = {
@@ -376,41 +425,44 @@ describe('memory-trigger', () => {
     narrative: { redundantPairs: [], weakLead: false, coherence: { score: 40, detail: '' } },
   };
 
-  it('files a weak entry under the dimension the skill retrieved against', async () => {
-    const { store, hook } = triggers();
-    const ctx = context('analyze_entry');
-    ctx.result = { success: true, data: weakEntry };
-    ctx.metadata.set(CURRENT_DIMENSION, 'xyz-structure');
+  it('says which tool it is waiting for, rather than checking inside itself', async () => {
+    // These were one hook with two `if (toolCall.name === ...)` branches, and
+    // one of those names stopped existing. Nothing failed: the hook ran, found
+    // no match, and returned, every time. Declared, a stale name is visible.
+    const { weakPoint, profile } = stores();
 
-    await hook.execute(ctx);
-
-    expect(store.retrieve({ type: 'weak_point', minConfidence: 0 })[0]?.key).toBe('xyz-structure');
+    expect(weakPoint.watches).toEqual(['review_content']);
+    expect(profile.watches).toEqual(['generate_report']);
   });
 
-  it('writes nothing when no dimension was set', async () => {
-    // An unscoped weak point is never recalled, so storing one is pure noise.
-    const { store, hook } = triggers();
-    const ctx = context('analyze_entry');
+  it('files a weak entry under the dimension it actually scored worst on', async () => {
+    // Read off the result rather than off a tool argument: nothing chooses a
+    // rule family out here any more — that happens inside a specialist, whose
+    // tool calls never reach this pipeline.
+    const { store, weakPoint } = stores();
+    const ctx = context('review_content');
     ctx.result = { success: true, data: weakEntry };
 
-    await hook.execute(ctx);
+    await weakPoint.execute(ctx);
 
-    expect(store.getStats().total).toBe(0);
+    // measurement is the lowest of the three, and that is its shelf.
+    expect(store.retrieve({ type: 'weak_point', minConfidence: 0 })[0]?.key).toBe(
+      'impact-quantification',
+    );
   });
 
-  it('ignores a dimension that is not one of ours', async () => {
-    const { store, hook } = triggers();
-    const ctx = context('analyze_entry');
-    ctx.result = { success: true, data: weakEntry };
-    ctx.metadata.set(CURRENT_DIMENSION, 'made-up-dimension');
+  it('writes nothing for an entry with no bullets to score', async () => {
+    const { store, weakPoint } = stores();
+    const ctx = context('review_content');
+    ctx.result = { success: true, data: { ...weakEntry, bullets: [] } };
 
-    await hook.execute(ctx);
+    await weakPoint.execute(ctx);
 
     expect(store.getStats().total).toBe(0);
   });
 
   it('records the run when the report lands', async () => {
-    const { store, hook } = triggers();
+    const { store, profile } = stores();
     const ctx = context('generate_report');
     ctx.result = {
       success: true,
@@ -431,18 +483,18 @@ describe('memory-trigger', () => {
       } satisfies DiagnosisReport,
     };
 
-    await hook.execute(ctx);
+    await profile.execute(ctx);
 
     expect(store.getProfile().lastOverallScore).toBe(42);
     expect(store.retrieve({ type: 'diagnosis_summary' })).toHaveLength(1);
   });
 
   it('writes nothing when the tool failed', async () => {
-    const { store, hook } = triggers();
+    const { store, profile } = stores();
     const ctx = context('generate_report');
     ctx.result = { success: false, error: { code: 'model_error', message: 'x' } };
 
-    await hook.execute(ctx);
+    await profile.execute(ctx);
 
     expect(store.getStats().total).toBe(0);
   });

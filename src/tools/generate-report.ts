@@ -8,11 +8,20 @@ import type {
   NarrativeAssessment,
   ResumeDocument,
   ResumeEntry,
+  ResumeSessionState,
   WordingDiagnosis,
 } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
 
+/**
+ * What the reviews left behind, gathered off the session.
+ *
+ * Not tool arguments. Passing them in would mean the coordinator reproducing
+ * every diagnosis as JSON, and a diagnosis retyped by a model is a reading of
+ * text nobody wrote — the same reason the scoring role is not given a tool that
+ * takes a bullet's text.
+ */
 interface GenerateReportInput {
   resume: ResumeDocument;
   format: FormatDiagnosis;
@@ -29,32 +38,40 @@ interface GenerateReportInput {
  * here rather than by the model, because it is arithmetic. Only the improvement
  * plan needs judgement, and that is the single model call this tool makes.
  */
-export const generateReportTool: Tool<GenerateReportInput, DiagnosisReport> = {
+export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = {
   name: 'generate_report',
   description:
-    'Combine the format, substance, wording and job-description diagnoses into one report: ' +
-    'overall score, per-entry summary, recurring strengths and weaknesses, and a plan split ' +
-    'into what can be fixed now, what needs the candidate to dig up figures, and what needs ' +
-    'new experience.',
-  parameters: {
-    type: 'object',
-    properties: {
-      resume: { type: 'object', description: 'The parsed resume' },
-      format: { type: 'object', description: 'Output of analyze_format' },
-      entries: { type: 'array', description: 'One EntryDiagnosis per entry', items: { type: 'object' } },
-      wording: { type: 'array', description: 'One WordingDiagnosis per entry', items: { type: 'object' } },
-      narrative: { type: 'object', description: 'Cross-entry narrative assessment' },
-      jdMatch: { type: 'object', description: 'Job-description match' },
-    },
-    required: ['resume', 'format', 'entries'],
-    additionalProperties: false,
-  },
+    'Combine everything the specialists have found so far into one report: overall score, ' +
+    'per-entry summary, recurring strengths and weaknesses, and a plan split into what can be ' +
+    'fixed now, what needs the candidate to dig up figures, and what needs new experience. ' +
+    'Reads what the reviews already returned, so run the reviews first — at minimum the format ' +
+    'check and one content review.',
+  parameters: { type: 'object', properties: {}, additionalProperties: false },
 
-  async execute(input, ctx): Promise<ToolResult<DiagnosisReport>> {
-    if (!input?.resume || !input.format || !Array.isArray(input.entries)) {
+  async execute(_args, ctx): Promise<ToolResult<DiagnosisReport>> {
+    const state = (ctx.session?.state ?? {}) as ResumeSessionState;
+    const input: GenerateReportInput = {
+      resume: state.resume as ResumeDocument,
+      format: state.formatDiagnosis as FormatDiagnosis,
+      entries: state.entryDiagnoses ?? [],
+      ...(state.wordingDiagnoses ? { wording: state.wordingDiagnoses } : {}),
+      ...(state.narrative ? { narrative: state.narrative } : {}),
+      ...(state.jdMatch ? { jdMatch: state.jdMatch } : {}),
+    };
+
+    if (!input.resume) {
+      return { success: false, error: { code: 'input_error', message: 'no resume in this session' } };
+    }
+    if (!input.format) {
       return {
         success: false,
-        error: { code: 'input_error', message: 'resume, format and entries are all required' },
+        error: { code: 'input_error', message: 'run review_format first — the layout score anchors the rest' },
+      };
+    }
+    if (input.entries.length === 0) {
+      return {
+        success: false,
+        error: { code: 'input_error', message: 'nothing has been reviewed yet — run review_content on an entry first' },
       };
     }
 
@@ -62,17 +79,20 @@ export const generateReportTool: Tool<GenerateReportInput, DiagnosisReport> = {
     const summary = summarise(input, allEntries);
     const improvementPlan = await buildImprovementPlan(input, summary.topWeaknesses, ctx);
 
-    return {
-      success: true,
-      data: {
-        summary,
-        perEntry: perEntry(allEntries, input.entries),
-        format: input.format,
-        ...(input.narrative ? { narrative: input.narrative } : {}),
-        ...(input.jdMatch ? { jdMatch: input.jdMatch } : {}),
-        improvementPlan,
-      },
+    const report: DiagnosisReport = {
+      summary,
+      perEntry: perEntry(allEntries, input.entries),
+      format: input.format,
+      ...(input.narrative ? { narrative: input.narrative } : {}),
+      ...(input.jdMatch ? { jdMatch: input.jdMatch } : {}),
+      improvementPlan,
     };
+
+    // Left where `/report` and `/export` read it: the coordinator is not asked
+    // to carry a whole report back through a tool result and put it somewhere.
+    if (ctx.session) ctx.session.state = { ...state, latestReport: report };
+
+    return { success: true, data: report };
   },
 };
 

@@ -40,7 +40,10 @@ export function createHooksCommand(pipeline: HookPipeline): Command {
           .map(
             (h) =>
               `  ${h.enabled ? 'on ' : 'off'}  ${String(h.priority).padStart(3)}  ` +
-              `${h.timing.padEnd(10)}${h.name}`,
+              `${h.timing.padEnd(10)}${h.name.padEnd(20)}` +
+              // What a hook is waiting for, because a hook waiting for a tool
+              // nobody registers any more does its nothing silently otherwise.
+              (h.watches ? `on ${h.watches.join(', ')}` : 'on every tool'),
           )
           .join('\n'),
       };

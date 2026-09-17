@@ -39,15 +39,30 @@ function setup() {
   const checkpoints = new SqliteCheckpointManager(sessions.db);
   const hooks = new DefaultHookPipeline();
   hooks.register(createProgressUpdateHook());
+  const cleared: number[] = [];
+  const parsed: string[] = [];
 
   const parser = createCommandParser({
     sessions,
     restorer: new DefaultSessionRestorer(sessions, checkpoints),
     hooks,
     engine,
+    memory: { deleteAll: () => cleared.push(1) },
+    parseFile: async (path) => {
+      parsed.push(path);
+      return { success: true };
+    },
   });
 
-  return { parser, sessions, checkpoints, hooks, session: sessions.create({ sourcePath: 'resume.md' }) };
+  return {
+    parser,
+    sessions,
+    checkpoints,
+    hooks,
+    cleared,
+    parsed,
+    session: sessions.create({ sourcePath: 'resume.md' }),
+  };
 }
 
 const REPORT: DiagnosisReport = {
@@ -88,8 +103,8 @@ describe('DefaultCommandParser', () => {
   it('takes a leading slash as a command', () => {
     const { parser } = setup();
 
-    expect(parser.isCommand('/status')).toBe(true);
-    expect(parser.isCommand('  /status')).toBe(true);
+    expect(parser.isCommand('/history')).toBe(true);
+    expect(parser.isCommand('  /history')).toBe(true);
     expect(parser.isCommand('diagnose my resume')).toBe(false);
   });
 
@@ -107,9 +122,9 @@ describe('DefaultCommandParser', () => {
   it('resolves aliases', () => {
     const { parser } = setup();
 
-    expect(parser.parse('/s')?.command.name).toBe('status');
-    expect(parser.parse('/resume')?.command.name).toBe('continue');
-    expect(parser.parse('/STATUS')?.command.name).toBe('status');
+    expect(parser.parse('/load')?.command.name).toBe('upload');
+    expect(parser.parse('/open')?.command.name).toBe('upload');
+    expect(parser.parse('/RESET')?.command.name).toBe('new');
   });
 
   it('splits positional arguments from flags', () => {
@@ -139,10 +154,10 @@ describe('DefaultCommandParser', () => {
 
   it('names the missing argument instead of failing', async () => {
     const { parser, session } = setup();
-    const result = await parser.execute('/detail', session);
+    const result = await parser.execute('/upload', session);
 
-    expect(result.output).toMatch(/needs n/);
-    expect(result.output).toMatch(/\/detail 2/);
+    expect(result.output).toMatch(/needs/);
+    expect(result.output).toMatch(/\/upload /);
   });
 
   it('reports a handler that throws rather than taking the session down', async () => {
@@ -176,23 +191,12 @@ describe('handlers', () => {
     const { parser, session } = setup();
 
     const all = await parser.execute('/help', session);
-    expect(all.output).toContain('/status');
-    expect(all.output).toContain('/export');
+    expect(all.output).toContain('/upload');
+    expect(all.output).toContain('/new');
 
     const one = await parser.execute('/help export', session);
     expect(one.output).toContain('aliases: /save');
     expect(one.output).toContain('md or json');
-  });
-
-  it('/status shows progress, context and spend', async () => {
-    const { parser, sessions, session } = setup();
-    sessions.updateProgress(session.id, 2, 4, 'diagnosing entries (2/4)');
-
-    const output = (await parser.execute('/status', session)).output;
-
-    expect(output).toContain('2/4');
-    expect(output).toContain('context');
-    expect(output).toContain('$0.08');
   });
 
   it('/history lists newest first and honours a limit', async () => {
@@ -203,33 +207,30 @@ describe('handlers', () => {
     expect((await parser.execute('/history 1', session)).data).toHaveLength(1);
   });
 
-  it('/continue picks a paused session back up', async () => {
-    const { parser, sessions, session } = setup();
-    sessions.updateStatus(session.id, 'processing');
-    sessions.updateProgress(session.id, 2, 4);
-    sessions.updateStatus(session.id, 'paused');
-
-    const result = await parser.execute('/continue', session);
-
-    expect(result.output).toMatch(/Continuing .* from 2\/4/);
-    expect(sessions.get(session.id)?.status).toBe('processing');
-  });
-
-  it('/continue reports a finished session instead of restarting it', async () => {
-    const { parser, sessions, session } = setup();
-    sessions.updateStatus(session.id, 'processing');
-    sessions.updateStatus(session.id, 'completed');
-
-    expect((await parser.execute('/continue', session)).output).toMatch(/already completed/);
-  });
-
-  it('/reset keeps the old diagnosis reachable', async () => {
-    const { parser, sessions, session } = setup();
-    const result = await parser.execute('/reset', session);
+  it('/new keeps the old diagnosis reachable, and forgets what it learned', async () => {
+    // Everything else here accumulates — the session, the transcript, what the
+    // memory store learned across resumes — because someone refining one resume
+    // is doing that until they say otherwise. This is how they say otherwise.
+    const { parser, sessions, session, cleared } = setup();
+    const result = await parser.execute('/new', session);
 
     expect(result.action).toBe('new_session');
     expect((result.data as Session).parentSessionId).toBe(session.id);
+    // On disk, so `/history` can still reach it.
     expect(sessions.list()).toHaveLength(2);
+    expect(cleared).toHaveLength(1);
+  });
+
+  it('reads the file it was given, without knowing how', async () => {
+    // Uploading is choosing a file; parsing is reading one. Only the second is
+    // worth doing again when a path turns up mid-conversation, which is why the
+    // command calls the same tool the coordinator does rather than parsing here.
+    const { parser, session, parsed } = setup();
+
+    await parser.execute('/upload tests/fixtures/sample-resume.md', session);
+
+    expect(parsed).toHaveLength(1);
+    expect(parsed[0]).toContain('sample-resume.md');
   });
 
   it('/hooks lists them and switches one off', async () => {
@@ -240,30 +241,6 @@ describe('handlers', () => {
     expect(hooks.list()[0]?.enabled).toBe(false);
 
     expect((await parser.execute('/hooks disable nope', session)).output).toMatch(/No hook/);
-  });
-
-  it('/config shows settings and changes one', async () => {
-    const { parser, session } = setup();
-
-    expect((await parser.execute('/config', session)).output).toContain('maxCostUsd');
-    await parser.execute('/config maxCostUsd 5', session);
-    expect(session.config.maxCostUsd).toBe(5);
-  });
-
-  it('/config refuses a value that is not a number', async () => {
-    // `Number('cheap')` is NaN, and a NaN budget compares false against every
-    // limit — so nothing would ever stop.
-    const { parser, session } = setup();
-    const result = await parser.execute('/config maxCostUsd cheap', session);
-
-    expect(result.output).toMatch(/must be a number/);
-    expect(session.config.maxCostUsd).toBe(1);
-  });
-
-  it('/config refuses a setting that is not settable', async () => {
-    const { parser, session } = setup();
-
-    expect((await parser.execute('/config id abc', session)).output).toMatch(/Cannot set id/);
   });
 
   it('/upload checks the file is there and is a kind we read', async () => {
@@ -285,47 +262,6 @@ describe('handlers', () => {
 
     expect(result.action).toBe('new_session');
     expect((result.data as Session).sourcePath).toMatch(/sample-resume\.md$/);
-  });
-
-  it('/report and /detail need a diagnosis first', async () => {
-    const { parser, session } = setup();
-
-    expect((await parser.execute('/report', session)).output).toMatch(/Nothing diagnosed yet/);
-    expect((await parser.execute('/detail 1', session)).output).toMatch(/Nothing diagnosed yet/);
-  });
-
-  it('/detail shows the dimensions the report only summarised', async () => {
-    const { parser, session } = setup();
-    withReport(session);
-
-    const output = (await parser.execute('/detail 1', session)).output;
-
-    expect(output).toContain('ByteDance');
-    expect(output).toContain('impact 20  measurement 0  method 10');
-    expect(output).toContain('- no measurable outcome');
-    expect(output).toContain('+ names the system');
-  });
-
-  it('/detail reports a number out of range', async () => {
-    const { parser, session } = setup();
-    withReport(session);
-
-    expect((await parser.execute('/detail 9', session)).output).toMatch(/Range: 1-1/);
-  });
-
-  it('/skip stores the entry id, not its position', async () => {
-    const { parser, sessions, session } = setup();
-    const doc = await new DefaultResumeParser().parse('tests/fixtures/sample-resume.md');
-    sessions.updateState(session.id, { resume: doc });
-
-    const result = await parser.execute('/skip 1', session);
-
-    expect(result.output).toMatch(/^Skipped 1: /);
-    const skipped = (session.state as ResumeSessionState).skipped;
-    expect(skipped?.[0]).toBe(doc.sections.flatMap((s) => s.entries)[0]?.id);
-
-    expect((await parser.execute('/skip 1', session)).output).toMatch(/already skipped/);
-    expect((await parser.execute('/skip 99', session)).output).toMatch(/Range: 1-/);
   });
 
   it('/export writes markdown by default and json on request', async () => {

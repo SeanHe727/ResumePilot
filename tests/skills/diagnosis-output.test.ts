@@ -4,8 +4,15 @@ import type { DiagnosisReport, ResumeDocument } from '../../src/domain.js';
 import { DefaultResumeParser } from '../../src/document/index.js';
 import type { ParsedResponse, QueryParams } from '../../src/query-engine/types.js';
 import { createToolRegistry } from '../../src/tools/index.js';
-import { createSkillRegistry, render } from '../../src/skills/index.js';
-import type { SkillContext, SkillOutput } from '../../src/skills/types.js';
+import { render } from '../../src/skills/index.js';
+import type { DiagnosisReport as Report } from '../../src/domain.js';
+import {
+  generateReportTool,
+  reviewContentTool,
+  reviewFormatTool,
+  reviewWordingTool,
+} from '../../src/tools/index.js';
+import type { ToolContext } from '../../src/tools/types.js';
 import {
   DefaultOrchestrator,
   DefaultRoleSelector,
@@ -72,18 +79,19 @@ const REPLIES: Record<string, string> = {
 };
 
 /**
- * The only diagnosis path there is.
+ * A whole-resume review, driven the way the coordinator drives it.
  *
- * These cases ran against the deterministic pipeline until it was removed. The
- * report shape and the contact-detail guarantee are properties of the product
- * rather than of that pipeline, so they moved here rather than going with it —
- * and the guarantee in particular had to be proved again on this path, which
- * builds its messages somewhere else entirely.
+ * These cases ran against the deterministic pipeline, then against the batch
+ * skill, and both are gone. What they check — the report's shape, and that no
+ * contact detail reaches a model — are properties of the product rather than of
+ * whatever was orchestrating it, so they follow the tools instead: format
+ * first, then each entry, then the report over what those left on the session.
  */
-async function runOn(fixture: string): Promise<{ out: SkillOutput; seen: QueryParams[] }> {
+async function runOn(fixture: string): Promise<{ out: Report; seen: QueryParams[] }> {
   const { engine, seen } = fakeEngine();
   const tools = createToolRegistry();
-  const session = new SqliteSessionManager().create({ sourcePath: `tests/fixtures/${fixture}` });
+  const sessions = new SqliteSessionManager();
+  const session = sessions.create({ sourcePath: `tests/fixtures/${fixture}` });
   const knowledge = { search: async () => [] } as never;
   const runtime = new SubAgentRuntime({
     queryEngine: engine as never,
@@ -97,47 +105,27 @@ async function runOn(fixture: string): Promise<{ out: SkillOutput; seen: QueryPa
     knowledge,
     session,
     orchestrator: new DefaultOrchestrator(runtime),
-    roleSelector: new DefaultRoleSelector(),
-  } as unknown as SkillContext;
+    abortSignal: new AbortController().signal,
+  } as unknown as ToolContext;
 
-  const skill = createSkillRegistry().resolve('orchestrated-diagnose');
-  const out = await skill.execute({ rawInput: `tests/fixtures/${fixture}` }, ctx);
-  return { out, seen };
+  const resume = await new DefaultResumeParser().parse(`tests/fixtures/${fixture}`);
+  session.state = { resume };
+
+  await reviewFormatTool.execute({}, ctx);
+  for (const entry of resume.sections.flatMap((section) => section.entries)) {
+    if (entry.bullets.length === 0) continue;
+    await reviewContentTool.execute({ entryId: entry.id }, ctx);
+    await reviewWordingTool.execute({ entryId: entry.id }, ctx);
+  }
+  const report = await generateReportTool.execute({} as never, ctx);
+
+  return { out: report.data as Report, seen };
 }
-
-describe('skill registry', () => {
-  it('routes a plain sentence to the diagnosis skill, without asking the model', () => {
-    // Matched on triggers rather than by a model call, so the same sentence
-    // routes the same way every run.
-    const registry = createSkillRegistry();
-
-    expect(registry.find('diagnose my resume')?.name).toBe('orchestrated-diagnose');
-    expect(registry.find('please review my resume')?.name).toBe('orchestrated-diagnose');
-  });
-
-  it('reaches the skill by name as well as by trigger', () => {
-    expect(createSkillRegistry().resolve('orchestrated-diagnose').name).toBe('orchestrated-diagnose');
-  });
-
-  it('returns null when nothing matches, leaving the loop to plan', () => {
-    expect(createSkillRegistry().find('what is the weather')).toBeNull();
-  });
-
-  it('refuses to register the same name twice', () => {
-    // Silent replacement would make the live implementation depend on import order.
-    const registry = createSkillRegistry();
-    const skill = registry.resolve('orchestrated-diagnose');
-
-    expect(() => (registry as never as { register: (s: unknown) => void }).register(skill)).toThrow(
-      /already registered/,
-    );
-  });
-});
 
 describe('report rendering', () => {
   it('leads with the score and lists the plan by what it costs to act', async () => {
     const { out } = await runOn('sample-resume.md');
-    const text = render(out.result as DiagnosisReport);
+    const text = render(out);
 
     expect(text).toMatch(/^Overall \d+\/100/);
     expect(text).toContain('Fix now');
@@ -146,7 +134,7 @@ describe('report rendering', () => {
 
   it('quotes the bullet alongside its score', async () => {
     const { out } = await runOn('sample-resume.md');
-    const text = render(out.result as DiagnosisReport);
+    const text = render(out);
 
     expect(text).toContain('Reduced P99 latency');
   });
@@ -155,7 +143,7 @@ describe('report rendering', () => {
 describe('generate_report aggregation', () => {
   it('weights format heaviest, since every other axis assumes the text was read', async () => {
     const { out } = await runOn('sample-resume.md');
-    const report = out.result as DiagnosisReport;
+    const report = out;
 
     expect(report.summary.formatScore).toBeGreaterThan(report.summary.substanceAvg);
     // Format 30% of a much higher score pulls the overall above pure substance.
@@ -169,12 +157,12 @@ describe('generate_report aggregation', () => {
     const expected = doc.sections.flatMap((s) => s.entries);
     const { out } = await runOn('sample-resume.md');
 
-    expect((out.result as DiagnosisReport).summary.totalEntries).toBe(expected.length);
+    expect((out).summary.totalEntries).toBe(expected.length);
   });
 
   it('surfaces the weaknesses that recur across bullets', async () => {
     const { out } = await runOn('messy-resume.md');
-    const report = out.result as DiagnosisReport;
+    const report = out;
 
     expect(report.summary.topWeaknesses.length).toBeGreaterThan(0);
   });
@@ -209,7 +197,7 @@ describe('what leaves the machine', () => {
     // entries — which is right for an unrecognised heading and wrong here.
     const { out, seen } = await runOn('bulleted-contact.md');
     const diagnostic = seen.filter((s) => s.task !== 'split_sections');
-    const everything = JSON.stringify(diagnostic) + render(out.result as DiagnosisReport);
+    const everything = JSON.stringify(diagnostic) + render(out);
 
     for (const detail of CONTACT_DETAILS) {
       expect(everything, `leaked: ${detail}`).not.toContain(detail);
@@ -220,7 +208,7 @@ describe('what leaves the machine', () => {
     // The employer stays: `20  ByteDance — Backend Engineer Intern` is how the
     // reader knows which entry a score belongs to.
     const { out } = await runOn('sample-resume.md');
-    const text = render(out.result as DiagnosisReport);
+    const text = render(out);
 
     for (const detail of CONTACT_DETAILS) {
       expect(text, `printed: ${detail}`).not.toContain(detail);

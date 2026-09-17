@@ -143,12 +143,14 @@ describe('what the coordinator can and cannot reach', () => {
     await handleInput('is the NIO bullet any good?', session, deps);
 
     const offered = seen[0]?.tools?.map((t) => t.name) ?? [];
+    // `generate_report` is not on this list: aggregating what the specialists
+    // returned is arithmetic, and the one judgement inside it — what to fix
+    // first — is a call that tool makes rather than one the coordinator makes.
     for (const judging of [
       'analyze_entry',
       'analyze_wording',
       'analyze_format',
       'rewrite_bullet',
-      'generate_report',
       'query_knowledge_base',
     ]) {
       expect(offered, `offered ${judging}`).not.toContain(judging);
@@ -165,6 +167,8 @@ describe('what the coordinator can and cannot reach', () => {
 
     expect(seen[0]?.tools?.map((t) => t.name).sort()).toEqual([
       'apply_revision',
+      'generate_report',
+      'parse_resume',
       'record_fact',
       'review_content',
       'review_format',

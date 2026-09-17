@@ -545,8 +545,14 @@ describe('generate_report: the improvement plan', () => {
       getUsageSummary: () => '',
       checkBudget: () => ({ ok: true }),
     };
+    // The tool reads what the reviews left on the session rather than taking
+    // them as arguments: a diagnosis retyped by a model is a reading of text
+    // nobody wrote.
     return {
-      ctx: { queryEngine: engine } as unknown as ToolContext,
+      ctx: {
+        queryEngine: engine,
+        session: { state: { resume: RESUME, formatDiagnosis: FORMAT, entryDiagnoses: ENTRIES } },
+      } as unknown as ToolContext,
       calls: () => call,
     };
   }
@@ -570,10 +576,7 @@ describe('generate_report: the improvement plan', () => {
     // no error raised anywhere.
     const { ctx, calls } = scriptedCtx([truncated, answered]);
 
-    const result = await generateReportTool.execute(
-      { resume: RESUME, format: FORMAT, entries: ENTRIES } as never,
-      ctx,
-    );
+    const result = await generateReportTool.execute({} as never, ctx);
 
     expect(calls()).toBe(2);
     expect(result.data?.improvementPlan.immediate).toEqual(['drop "Responsible for"']);
@@ -584,10 +587,7 @@ describe('generate_report: the improvement plan', () => {
     // full-price call for content already in hand.
     const { ctx, calls } = scriptedCtx([{ ...answered, stopReason: 'max_tokens' }]);
 
-    const result = await generateReportTool.execute(
-      { resume: RESUME, format: FORMAT, entries: ENTRIES } as never,
-      ctx,
-    );
+    const result = await generateReportTool.execute({} as never, ctx);
 
     expect(calls()).toBe(1);
     expect(result.data?.improvementPlan.immediate).toHaveLength(1);

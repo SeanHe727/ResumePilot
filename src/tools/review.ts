@@ -63,6 +63,28 @@ function resumeFrom(ctx: ToolContext) {
   return (ctx.session?.state as ResumeSessionState | undefined)?.resume;
 }
 
+/**
+ * Every review leaves its result on the session, and that is how a report gets
+ * written.
+ *
+ * The alternative is the coordinator passing each diagnosis back as a tool
+ * argument, which means the model reproducing them — and a diagnosis retyped by
+ * a model is a diagnosis of text nobody wrote. It reads them back off the
+ * session instead, so what reaches the report is what the specialist returned.
+ */
+function remember(ctx: ToolContext, change: (state: ResumeSessionState) => void): void {
+  if (!ctx.session) return;
+  const state = (ctx.session.state ?? {}) as ResumeSessionState;
+  change(state);
+  ctx.session.state = state;
+}
+
+/** One per entry, replacing any earlier reading of the same one. */
+function upsert<T extends { entryId: string }>(existing: T[] | undefined, next: T): T[] {
+  const kept = (existing ?? []).filter((d) => d.entryId !== next.entryId);
+  return [...kept, next];
+}
+
 function noResume(): ToolResult<never> {
   return {
     success: false,
@@ -163,7 +185,24 @@ function entryReview(
           { roles: [role], reasons: { [role]: 'dispatched from the conversation' } },
           briefingFrom(input),
         );
-        return { success: true, data: role === 'entry-substance' ? verdict.substance : verdict.wording };
+
+        if (role === 'entry-substance') {
+          if (verdict.substance) {
+            const found = verdict.substance;
+            remember(ctx, (state) => {
+              state.entryDiagnoses = upsert(state.entryDiagnoses, found);
+            });
+          }
+          return { success: true, data: verdict.substance };
+        }
+
+        if (verdict.wording) {
+          const found = verdict.wording;
+          remember(ctx, (state) => {
+            state.wordingDiagnoses = upsert(state.wordingDiagnoses, found);
+          });
+        }
+        return { success: true, data: verdict.wording };
       } catch (err) {
         return {
           success: false,
@@ -204,6 +243,7 @@ export const reviewNarrativeTool: Tool<WithBriefing, unknown> = {
     if (!resume) return noResume();
 
     const assessment = await ctx.orchestrator.assessNarrative(resume, briefingFrom(input));
+    if (assessment) remember(ctx, (state) => { state.narrative = assessment; });
     return assessment
       ? { success: true, data: assessment }
       : { success: false, error: { code: 'service_error', message: 'the narrative specialist returned nothing' } };
@@ -230,6 +270,7 @@ export const reviewJdMatchTool: Tool<WithBriefing, unknown> = {
     }
 
     const match = await ctx.orchestrator.matchJd(resume, state.jd, briefingFrom(input));
+    if (match) remember(ctx, (s) => { s.jdMatch = match; });
     return match
       ? { success: true, data: match }
       : { success: false, error: { code: 'service_error', message: 'the posting specialist returned nothing' } };
@@ -254,6 +295,9 @@ export const reviewFormatTool: Tool<Record<string, never>, unknown> = {
   async execute(_input, ctx): Promise<ToolResult<unknown>> {
     const resume = resumeFrom(ctx);
     if (!resume) return noResume();
-    return { success: true, data: analyzeFormat(resume) };
+
+    const diagnosis = analyzeFormat(resume);
+    remember(ctx, (state) => { state.formatDiagnosis = diagnosis; });
+    return { success: true, data: diagnosis };
   },
 };

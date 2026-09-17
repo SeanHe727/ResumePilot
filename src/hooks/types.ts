@@ -27,6 +27,17 @@ export interface Hook {
   readonly timing: HookTiming;
   /** Lower runs first. */
   readonly priority: number;
+  /**
+   * The tools this hook acts on. Absent means every tool.
+   *
+   * Declared rather than checked inside `execute`, because a hook that opens
+   * with `if (name !== 'x') return` is a hook that does nothing, silently,
+   * from the day tool `x` is renamed — which is exactly what happened to the
+   * memory writes. Here the pipeline does the matching, `/hooks` prints what
+   * each one is waiting for, and a name no registered tool provides shows up
+   * as a name no registered tool provides.
+   */
+  readonly watches?: readonly string[];
   enabled: boolean;
   execute(ctx: HookContext): Promise<HookOutcome>;
 }
@@ -38,7 +49,13 @@ export interface HookPipeline {
   disable(name: string): void;
   runPre(ctx: HookContext): Promise<HookOutcome>;
   runPost(ctx: HookContext): Promise<HookOutcome>;
-  list(): Array<{ name: string; timing: HookTiming; priority: number; enabled: boolean }>;
+  list(): Array<{
+    name: string;
+    timing: HookTiming;
+    priority: number;
+    enabled: boolean;
+    watches?: readonly string[];
+  }>;
 }
 
 /**
@@ -62,7 +79,8 @@ export const DEFAULT_HOOK_ORDER = [
   { name: 'dispatch-trace', timing: 'pre-tool', priority: 50 },
   { name: 'audit-log', timing: 'post-tool', priority: 10 },
   { name: 'result-compress', timing: 'post-tool', priority: 20 },
-  { name: 'memory-trigger', timing: 'post-tool', priority: 30 },
+  { name: 'memory-weak-point', timing: 'post-tool', priority: 30 },
+  { name: 'memory-profile', timing: 'post-tool', priority: 31 },
   { name: 'progress-update', timing: 'post-tool', priority: 40 },
   { name: 'metric-emit', timing: 'post-tool', priority: 50 },
 ] as const;

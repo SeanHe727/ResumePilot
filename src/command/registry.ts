@@ -5,21 +5,14 @@ import type { HookPipeline } from '../hooks/types.js';
 import type { QueryEngine } from '../query-engine/types.js';
 import type { CheckpointManager, SessionManager, SessionRestorer } from '../session/types.js';
 import { DefaultCommandParser } from './parser.js';
-import { createBudgetCommand } from './handlers/budget.js';
-import { createConfigCommand } from './handlers/config.js';
-import { createContinueCommand } from './handlers/continue.js';
-import { createDetailCommand } from './handlers/detail.js';
-import { createDiagnoseCommand, type SkillRunner } from './handlers/diagnose.js';
 import { createExportCommand } from './handlers/export.js';
 import { createHelpCommand } from './handlers/help.js';
 import { createHistoryCommand } from './handlers/history.js';
 import { createHooksCommand } from './handlers/hooks.js';
 import { createJdCommand } from './handlers/jd.js';
-import { createReportCommand } from './handlers/report.js';
-import { createResetCommand } from './handlers/reset.js';
-import { createSkipCommand } from './handlers/skip.js';
-import { createStatusCommand } from './handlers/status.js';
-import { createUploadCommand } from './handlers/upload.js';
+
+import { createNewCommand } from './handlers/new.js';
+import { createUploadCommand, type ParseFile } from './handlers/upload.js';
 
 export interface CommandDeps {
   sessions: SessionManager;
@@ -31,8 +24,11 @@ export interface CommandDeps {
   gate?: PermissionGate;
   /** Makes `/rewind` possible: without it there is nothing to list or return to. */
   checkpoints?: CheckpointManager;
+  /** Runs the parse tool, so uploading a file and reading one stay separate. */
+  parseFile: ParseFile;
+  /** Cleared by `/new`, which is the only thing that clears it. */
+  memory: { deleteAll(): void };
   /** Absent in tests that exercise only the commands needing no skill. */
-  runSkill?: SkillRunner;
 }
 
 /**
@@ -53,24 +49,16 @@ export function createCommandParser(deps: CommandDeps): DefaultCommandParser {
   const parser = new DefaultCommandParser();
 
   for (const command of [
-    createUploadCommand(deps.sessions),
+    createUploadCommand(deps.sessions, deps.parseFile),
     createJdCommand(deps.sessions),
-    createStatusCommand(deps.engine),
-    createReportCommand(),
-    createDetailCommand(),
-    createSkipCommand(deps.sessions),
     createExportCommand(),
     createHistoryCommand(deps.sessions),
-    createContinueCommand(deps.restorer),
-    createResetCommand(deps.sessions),
-    createBudgetCommand(deps.engine),
-    createConfigCommand(deps.sessions),
+    createNewCommand(deps.sessions, deps.memory),
     createHooksCommand(deps.hooks),
     ...(deps.audit && deps.gate ? [createAuditCommand(deps.audit, deps.gate)] : []),
     ...(deps.checkpoints
       ? [createRewindCommand(deps.restorer, deps.checkpoints, deps.sessions)]
       : []),
-    ...(deps.runSkill ? [createDiagnoseCommand(deps.sessions, deps.runSkill)] : []),
   ]) {
     parser.register(command);
   }

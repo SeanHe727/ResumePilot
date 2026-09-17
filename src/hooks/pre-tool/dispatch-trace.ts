@@ -22,11 +22,10 @@ export function createDispatchTraceHook(write: (line: string) => void): Hook {
     name: 'dispatch-trace',
     timing: 'pre-tool',
     priority: 50,
+    watches: ['review_content', 'review_wording', 'review_narrative', 'review_jd_match'],
     enabled: false,
 
     async execute(ctx: HookContext): Promise<HookOutcome> {
-      if (!ctx.toolCall.name.startsWith('review_')) return { action: 'continue' };
-
       const input = ctx.toolCall.input as Record<string, unknown>;
       const target = typeof input.entryId === 'string' ? ` ${input.entryId}` : ' whole document';
       const lines = [`→ ${ctx.toolCall.name}${target}`];

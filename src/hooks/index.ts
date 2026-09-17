@@ -4,7 +4,7 @@ export { createBudgetCheckHook } from './pre-tool/budget-check.js';
 export { createDispatchTraceHook } from './pre-tool/dispatch-trace.js';
 export { createAuditLogHook } from './post-tool/audit-log.js';
 export { createResultCompressHook } from './post-tool/result-compress.js';
-export { createMemoryTriggerHook, CURRENT_DIMENSION } from './post-tool/memory-trigger.js';
+export { createProfileHook, createWeakPointHook } from './post-tool/memory-trigger.js';
 export { createProgressUpdateHook } from './post-tool/progress-update.js';
 export {
   MetricCollector,

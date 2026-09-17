@@ -3,6 +3,7 @@ import { analyzeEntryTool } from './analyze-entry.js';
 import { analyzeFormatTool } from './analyze-format-tool.js';
 import { analyzeWordingTool } from './analyze-wording.js';
 import { generateReportTool } from './generate-report.js';
+import { parseResumeTool } from './parse-resume.js';
 import { queryKnowledgeBaseTool } from './query-knowledge-base.js';
 import {
   reviewContentTool,
@@ -24,6 +25,7 @@ export { analyzeEntryTool } from './analyze-entry.js';
 export { analyzeWordingTool } from './analyze-wording.js';
 export { rewriteBulletTool } from './rewrite-bullet.js';
 export { generateReportTool } from './generate-report.js';
+export { parseResumeTool } from './parse-resume.js';
 export { queryKnowledgeBaseTool } from './query-knowledge-base.js';
 export {
   reviewContentTool,
@@ -63,6 +65,7 @@ export function createToolRegistry(
   registry.register(rewriteBulletTool as never);
   registry.register(generateReportTool as never);
   registry.register(queryKnowledgeBaseTool as never);
+  registry.register(parseResumeTool as never);
   if (deps.search) registry.register(webSearchTool as never);
   // Registered only where the roles can actually be dispatched. A sub-agent
   // holds the same registry, and one that could dispatch roles would recurse

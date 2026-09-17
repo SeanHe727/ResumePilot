@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest';
 import type { ResumeDocument, ResumeEntry, SectionKind } from '../../src/domain.js';
 import {
   DefaultOrchestrator,
-  DefaultRoleSelector,
   ENTRY_SUBSTANCE_AGENT,
   ENTRY_WORDING_AGENT,
   SemaphorePool,
@@ -595,44 +594,6 @@ describe('DefaultOrchestrator', () => {
     expect(verdicts).toHaveLength(3);
     expect(seen.map(([d]) => d)).toEqual([1, 2, 3]);
     expect(seen.every(([, t]) => t === 3)).toBe(true);
-  });
-});
-
-describe('DefaultRoleSelector', () => {
-  const selector = new DefaultRoleSelector();
-
-  it('runs every role a clean multi-entry resume supports', () => {
-    const selection = selector.select({ entryCount: 4, hasJd: false, quality: 'clean' });
-
-    expect(selection.roles).toEqual(['entry-substance', 'entry-wording', 'narrative']);
-  });
-
-  it('adds the JD role only when there is a job description', () => {
-    expect(selector.select({ entryCount: 4, hasJd: true, quality: 'clean' }).roles).toContain('jd-match');
-    expect(selector.select({ entryCount: 4, hasJd: false, quality: 'clean' }).roles).not.toContain('jd-match');
-  });
-
-  it('drops wording when the text was barely readable', () => {
-    // Judging verb choice on a degraded extraction reports the extractor's
-    // mistakes as the candidate's.
-    const selection = selector.select({ entryCount: 4, hasJd: false, quality: 'degraded' });
-
-    expect(selection.roles).not.toContain('entry-wording');
-    expect(selection.reasons['entry-wording']).toMatch(/degraded/);
-  });
-
-  it('skips the narrative on a single entry, which has no sequence', () => {
-    const selection = selector.select({ entryCount: 1, hasJd: false, quality: 'clean' });
-
-    expect(selection.roles).not.toContain('narrative');
-    expect(selection.reasons['narrative']).toMatch(/more than one entry/);
-  });
-
-  it('runs nothing when there are no entries, and says so', () => {
-    const selection = selector.select({ entryCount: 0, hasJd: false, quality: 'clean' });
-
-    expect(selection.roles).toEqual([]);
-    expect(selection.reasons['entry-substance']).toMatch(/no entries/);
   });
 });
 

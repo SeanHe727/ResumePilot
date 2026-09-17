@@ -5,15 +5,25 @@ import type { ResumeSessionState } from '../domain.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
 import type { QueryEngine } from '../query-engine/types.js';
 import type { CheckpointManager, Session, SessionManager } from '../session/types.js';
-import type { SkillContext, SkillRegistry } from '../skills/types.js';
-import type { ToolRegistry } from '../tools/types.js';
-import type { Dispatcher } from './dispatcher.js';
+import type { SearchProvider } from '../tools/search-provider.js';
+import type { ToolRegistry, ToolResult } from '../tools/types.js';
+import type { HookContext, HookPipeline } from '../hooks/types.js';
+import { TOOL_START_TIME } from '../hooks/index.js';
+import type { ToolCall } from '../types.js';
+import type { Orchestrator } from './types.js';
 
 export interface LoopDeps {
   commands: CommandParser;
-  skills: SkillRegistry;
   tools: ToolRegistry;
-  dispatcher: Dispatcher;
+  hooks: HookPipeline;
+  /**
+   * Built per session rather than shared: a sub-agent runs tools against the
+   * session it was started for, so one instance would attribute every call to
+   * whichever session the process opened first.
+   */
+  orchestratorFor?: (session: Session) => Orchestrator;
+  /** Absent when no search key is configured; `web_search` is unregistered too. */
+  search?: SearchProvider;
   queryEngine: QueryEngine;
   knowledge: KnowledgeSearch;
   sessions: SessionManager;
@@ -50,22 +60,31 @@ const MAX_TURNS = 12;
  * there throws.
  */
 const MAIN_AGENT_TOOLS = [
+  'parse_resume',
   'review_content',
   'review_wording',
   'review_narrative',
   'review_jd_match',
   'review_format',
+  // Reads what the reviews left on the session and does the arithmetic over
+  // them. Aggregating is not judging, and the one judgement inside it — what to
+  // fix first — is a model call this tool makes, not one the coordinator makes.
+  'generate_report',
   'record_fact',
   'apply_revision',
 ] as const;
 
 /**
- * Three ways in, tried in order.
+ * Two ways in.
  *
  * A command is unambiguous and costs nothing, so it never reaches the model.
- * A matched Skill is a known sequence, so it does not pay for the model to
- * plan one. Only what neither covers goes to the free loop, where the model
- * chooses its own tools — the expensive, flexible path.
+ * Everything else is the coordinator's.
+ *
+ * A third used to sit between them: a registry of Skills, each a named sequence
+ * of tool calls that ran without the model planning one. It held exactly one —
+ * the batch diagnosis — and that turned out to be the thing the coordinator is
+ * for. A layer with one member, bypassing the agent that was supposed to be the
+ * only way in, was not paying for itself.
  */
 export async function handleInput(input: string, session: Session, deps: LoopDeps): Promise<void> {
   const trimmed = input.trim();
@@ -77,23 +96,16 @@ export async function handleInput(input: string, session: Session, deps: LoopDep
     return;
   }
 
-  const skill = session.config.preferSkills ? deps.skills.find(trimmed) : null;
-  if (skill) {
-    const output = await skill.execute({ rawInput: trimmed }, skillContext(session, deps));
-    deps.print(output.report ?? output.error ?? 'done');
-    return;
-  }
-
-  await freeLoop(trimmed, session, deps);
+  await runMainAgent(trimmed, session, deps);
 }
 
 /**
- * The model plans, the dispatcher executes, the results come back.
+ * The model plans, the tools run, the results come back.
  *
  * Every turn goes through the Context manager rather than an accumulating
  * array, so the window stays inside its budget however long the exchange runs.
  */
-async function freeLoop(input: string, session: Session, deps: LoopDeps): Promise<void> {
+async function runMainAgent(input: string, session: Session, deps: LoopDeps): Promise<void> {
   const context = session.contextManager;
   // Counted from the phase already recorded rather than from a field of its
   // own, so it survives a restart the same way the rest of the session does.
@@ -122,7 +134,7 @@ async function freeLoop(input: string, session: Session, deps: LoopDeps): Promis
       // Serially, not in parallel: a tool call the model issued alongside
       // another may depend on it, and it has no way to say so.
       for (const call of response.toolCalls) {
-        const result = await deps.dispatcher.execute(call, session);
+        const result = await runTool(call, session, deps);
         context.addToolResult(call.id, JSON.stringify(result));
       }
 
@@ -214,11 +226,59 @@ function setResumeContext(context: ContextManager, session: Session): void {
   );
 }
 
-export function skillContext(session: Session, deps: LoopDeps): SkillContext {
-  return {
+/**
+ * One tool call, with governance around it.
+ *
+ * This lived in a `Dispatcher` class of its own, on the argument that the loop
+ * should not have to know about permission, audit and compression. It is four
+ * steps and it belongs to the turn it is part of — the thing that must stay
+ * clear of governance is the agent's *context*, not the function that runs
+ * beside it.
+ *
+ * Sub-agents deliberately do not come through here. One is already inside a
+ * call this gate approved, and re-running permission, audit and memory writes
+ * per inner call would multiply all three.
+ */
+async function runTool(call: ToolCall, session: Session, deps: LoopDeps): Promise<ToolResult> {
+  const ctx: HookContext = {
+    toolCall: call,
     session,
-    toolRegistry: deps.tools,
-    queryEngine: deps.queryEngine,
-    knowledge: deps.knowledge,
-  } as SkillContext;
+    metadata: new Map<string, unknown>([[TOOL_START_TIME, Date.now()]]),
+  };
+
+  const pre = await deps.hooks.runPre(ctx);
+  if (pre.action === 'block') {
+    return { success: false, error: { code: 'permission_denied', message: pre.reason } };
+  }
+
+  // Read back off the context, because a pre-tool hook may have rewritten the
+  // name or the arguments and the tool that runs must be the one they approved.
+  ctx.result = await invoke(ctx.toolCall, session, deps);
+
+  const post = await deps.hooks.runPost(ctx);
+  return post.action === 'modify_result' ? post.result : ctx.result;
+}
+
+async function invoke(call: ToolCall, session: Session, deps: LoopDeps): Promise<ToolResult> {
+  if (!deps.tools.has(call.name)) {
+    // Handed back as a result rather than thrown, so the model can pick a real
+    // tool on the next turn instead of the run ending here.
+    return { success: false, error: { code: 'input_error', message: `no tool called ${call.name}` } };
+  }
+
+  try {
+    return await deps.tools.resolve(call.name).execute(call.input as never, {
+      session,
+      queryEngine: deps.queryEngine,
+      knowledge: deps.knowledge,
+      ...(deps.search ? { search: deps.search } : {}),
+      ...(deps.orchestratorFor ? { orchestrator: deps.orchestratorFor(session) } : {}),
+      abortSignal: session.abortController.signal,
+    });
+  } catch (err) {
+    return {
+      success: false,
+      error: { code: 'service_error', message: err instanceof Error ? err.message : String(err) },
+    };
+  }
 }

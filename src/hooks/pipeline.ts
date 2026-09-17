@@ -44,10 +44,17 @@ export class DefaultHookPipeline implements HookPipeline {
     return this.run('post-tool', ctx);
   }
 
-  list(): Array<{ name: string; timing: HookTiming; priority: number; enabled: boolean }> {
+  list(): Array<{
+    name: string;
+    timing: HookTiming;
+    priority: number;
+    enabled: boolean;
+    watches?: readonly string[];
+  }> {
     return this.hooks.map((h) => ({
       name: h.name,
       timing: h.timing,
+      ...(h.watches ? { watches: h.watches } : {}),
       priority: h.priority,
       enabled: h.enabled,
     }));
@@ -61,6 +68,9 @@ export class DefaultHookPipeline implements HookPipeline {
   private async run(timing: HookTiming, ctx: HookContext): Promise<HookOutcome> {
     for (const hook of this.hooks) {
       if (hook.timing !== timing || !hook.enabled) continue;
+      // Declared on the hook rather than checked inside it, so what a hook is
+      // waiting for is visible from outside and a stale name is visible at all.
+      if (hook.watches && !hook.watches.includes(ctx.toolCall.name)) continue;
 
       let outcome: HookOutcome;
       try {
