@@ -95,6 +95,11 @@ function harness() {
     session,
   });
 
+  // Recorded rather than stubbed away, because the whole finding was that
+  // nothing called either of these.
+  const checkpointed: number[] = [];
+  const remembered: string[] = [];
+
   const ctx: SkillContext = {
     session,
     toolRegistry: tools,
@@ -103,18 +108,32 @@ function harness() {
     hooks: new DefaultHookPipeline(),
     orchestrator: new DefaultOrchestrator(runtime),
     roleSelector: new DefaultRoleSelector(),
+    checkpoints: {
+      shouldCheckpoint: (s) => s.progress.done > 0 && s.progress.done % 2 === 0,
+      create: (s) => {
+        checkpointed.push(s.progress.done);
+        return 'cp';
+      },
+      list: () => [],
+      getLatest: () => null,
+      rewind: () => null,
+    },
+    memory: {
+      afterEntry: () => remembered.push('entry'),
+      afterDiagnosis: () => remembered.push('diagnosis'),
+    } as never,
   };
 
-  return { ctx, seen, session };
+  return { ctx, seen, session, checkpointed, remembered };
 }
 
 async function run(fixture = 'sample-resume.md') {
-  const { ctx, seen, session } = harness();
+  const { ctx, seen, session, checkpointed, remembered } = harness();
   const out = await createSkillRegistry()
     .resolve('orchestrated-diagnose')
     .execute({ rawInput: `tests/fixtures/${fixture}` }, ctx);
 
-  return { out, seen, session };
+  return { out, seen, session, checkpointed, remembered };
 }
 
 describe('orchestrated-diagnose', () => {
@@ -185,6 +204,27 @@ describe('orchestrated-diagnose', () => {
       } as SkillContext);
 
     expect(out.success).toBe(false);
-    expect(out.error).toMatch(/diagnose-resume instead/);
+    expect(out.error).toMatch(/no orchestrator/);
+  });
+});
+
+describe('what an interrupted run leaves behind', () => {
+  it('checkpoints as entries complete', async () => {
+    // Forty-two sessions produced no checkpoints at all, so a dropped
+    // connection cost the whole run rather than the last entry — while the
+    // README said otherwise and the restore path sat finished and unused.
+    const { checkpointed } = await run();
+
+    expect(checkpointed.length).toBeGreaterThan(0);
+  });
+
+  it('records what it learned about the candidate, not only about the file', async () => {
+    // The memory hook fires on the Dispatcher, and this path never goes near
+    // one: the skill calls tools itself and each sub-agent calls its own, both
+    // deliberately outside the pipeline. So the store had a hook, a retriever,
+    // triggers and a table, and the table stayed empty.
+    const { remembered } = await run();
+
+    expect(remembered).toContain('diagnosis');
   });
 });

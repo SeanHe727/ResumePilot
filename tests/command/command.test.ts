@@ -1,3 +1,5 @@
+import { createAuditCommand } from '../../src/command/handlers/audit.js';
+import { createRewindCommand } from '../../src/command/handlers/rewind.js';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -340,5 +342,125 @@ describe('handlers', () => {
     });
 
     expect((await parser.execute('/export pdf', session)).output).toMatch(/Unknown format/);
+  });
+
+});
+
+describe('/audit', () => {
+  const ENTRY = {
+    id: 1, sessionId: 's1', toolName: 'web_search', toolArgs: '{}',
+    ruleId: 'allow-web-search', riskLevel: 'low' as const,
+    decision: 'allowed' as const, timestamp: '2026-09-08T00:00:00Z',
+  };
+  const REFUSED = { ...ENTRY, id: 2, toolName: 'fetch_url', ruleId: 'default-deny', decision: 'denied' as const };
+  const RUN = {
+    id: 1, sessionId: 's1', toolName: 'web_search',
+    inputSummary: '{"query":"int8"}', outputSummary: '3 results',
+    success: true, timestamp: '2026-09-08T00:00:00Z',
+  };
+
+  function auditWith(entries = [ENTRY, REFUSED], runs = [RUN]) {
+    return {
+      getSessionLog: () => entries,
+      getSessionExecutions: () => runs,
+    } as never;
+  }
+
+  const gate = {
+    getRules: () => [
+      { id: 'deny-network-unknown', name: 'Unrecognised network call', match: { type: 'tool_name' as const, pattern: '' }, level: 'critical' as const, action: 'deny' as const, reason: '' },
+      { id: 'allow-web-search', name: 'Web search', match: { type: 'tool_name' as const, pattern: '' }, level: 'low' as const, action: 'allow' as const, reason: '' },
+    ],
+  } as never;
+
+  it('reads back what was already being written', async () => {
+    // Every tool call in forty-two sessions went into a table no command could
+    // read: `getSessionLog` and `getSessionExecutions` existed and nothing
+    // called either. Capability that cannot be reached cannot be told apart
+    // from capability that was never built.
+    const cmd = createAuditCommand(auditWith(), gate);
+
+    const result = await cmd.execute({ positional: [], flags: {} } as never, { id: 's1' } as never);
+
+    expect(result.output).toContain('1 tool call(s), 1 refused, 0 failed');
+    expect(result.output).toContain('web_search');
+    expect(result.output).toContain('refused fetch_url by rule default-deny');
+  });
+
+  it('lists the rules, most restrictive first', async () => {
+    const cmd = createAuditCommand(auditWith(), gate);
+
+    const result = await cmd.execute({ positional: ['rules'], flags: {} } as never, { id: 's1' } as never);
+
+    expect(result.output.indexOf('critical')).toBeLessThan(result.output.indexOf('low'));
+    expect(result.output).toContain('Anything unmatched is refused');
+  });
+
+  it('says so plainly before anything has run', async () => {
+    const cmd = createAuditCommand(auditWith([], []), gate);
+
+    const result = await cmd.execute({ positional: [], flags: {} } as never, { id: 's1' } as never);
+
+    expect(result.output).toMatch(/Nothing has run/);
+  });
+});
+
+describe('/rewind', () => {
+  const CP = (id: string, done: number, messages: number) => ({
+    id, sessionId: 's1', progress: { done, total: 6, current: done, phase: '' },
+    state: {}, messages: Array.from({ length: messages }, () => ({ role: 'user' as const, content: 'x' })),
+    createdAt: '2026-09-08T11:20:30Z',
+  });
+
+  function harness(saved = [CP('a', 2, 4), CP('b', 4, 8)]) {
+    const rewound: string[] = [];
+    const restorer = {
+      resume: async () => ({}) as never,
+      rewindTo: async (_s: string, id: string) => {
+        rewound.push(id);
+        return { id: 's1', progress: { done: 2, total: 6, current: 2, phase: '' } } as never;
+      },
+    };
+    const checkpoints = { list: () => saved, shouldCheckpoint: () => false, create: () => '', getLatest: () => null, rewind: () => null };
+    const sessions = { save: () => {} } as never;
+    return { cmd: createRewindCommand(restorer as never, checkpoints as never, sessions), rewound };
+  }
+
+  it('lists what there is to go back to', async () => {
+    // `rewindTo` was written, tested and unreachable — defensible while nothing
+    // wrote a checkpoint, and not once every exchange leaves one.
+    const { cmd } = harness();
+
+    const result = await cmd.execute({ positional: [], flags: {} } as never, { id: 's1' } as never);
+
+    expect(result.output).toContain('2 checkpoint(s)');
+    expect(result.output).toContain('4 message(s)');
+  });
+
+  it('returns to one by the number it was listed under', async () => {
+    // The ids are UUIDs; the person reading the list has an ordinal.
+    const { cmd, rewound } = harness();
+
+    const result = await cmd.execute({ positional: ['1'], flags: {} } as never, { id: 's1' } as never);
+
+    expect(rewound).toEqual(['a']);
+    expect(result.output).toContain('1 later checkpoint(s) discarded');
+  });
+
+  it('refuses a number that is not on the list', async () => {
+    const { cmd, rewound } = harness();
+
+    const result = await cmd.execute({ positional: ['9'], flags: {} } as never, { id: 's1' } as never);
+
+    expect(result.output).toContain('There are 2');
+    expect(rewound).toEqual([]);
+  });
+
+  it('says so before the session has written any', async () => {
+    const { cmd } = harness([]);
+
+    const result = await cmd.execute({ positional: [], flags: {} } as never, { id: 's1' } as never);
+
+    expect(result.output).toMatch(/No checkpoints yet/);
   });
 });

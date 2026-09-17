@@ -68,15 +68,7 @@ export class LayeredContextManager implements ContextManager {
       this.appendToHistory(message);
     }
 
-    // Eviction cuts by token count, which lands mid-exchange. The assistant
-    // turn carrying tool calls costs nothing by `countMessageTokens` — empty
-    // content, uncounted calls — so it is the first thing the loop above
-    // reaches for, and the tool results it leaves behind answer a call that is
-    // no longer there. Every provider rejects that outright.
-    while (this.recent.length > 0 && this.recent[0]?.role === 'tool') {
-      const orphan = this.recent.shift()!;
-      this.evicted.push(orphan);
-    }
+    this.dropOrphanedToolResults();
 
     // Evicted turns are held so a later summariser can read them verbatim, but
     // that queue only drains when compaction runs — and on a typical resume it
@@ -95,10 +87,10 @@ export class LayeredContextManager implements ContextManager {
     // What it drops is real: strings past 120 characters and array items past
     // the third, so on an entry with eight bullets the last five diagnoses go,
     // leaving a `... 5 more` marker. Scores survive — only prose is cut. That
-    // is tolerable today because the diagnose-resume pipeline holds tool
-    // results in ordinary variables and never routes them through here. When
-    // the conversational loop lands, decide then whether to raise the budget
-    // or keep the authoritative diagnosis in session state and pass a handle.
+    // is tolerable today because the batch diagnosis holds tool results in
+    // ordinary variables and never routes them through here. Revisit if the
+    // conversation starts carrying whole diagnoses, and decide then whether to
+    // raise the budget or keep the authoritative copy in session state.
     this.addMessage({
       role: 'tool',
       toolCallId,
@@ -159,6 +151,14 @@ export class LayeredContextManager implements ContextManager {
     );
     this.evicted = [];
     this.recent = this.recent.slice(-KEEP_VERBATIM);
+    // Level 2 shortens the window too, and by a fixed count rather than by
+    // tokens — so it lands mid-exchange more readily than eviction does. Three
+    // messages back from a turn that made five tool calls is three results and
+    // no call to answer, which the provider refuses with a 400 naming a
+    // `call_id` that appears nowhere. It went unseen because compaction had
+    // never once run; the first conversation long enough to trigger it broke
+    // on the next request.
+    this.dropOrphanedToolResults();
     if (!this.needsCompaction()) return 2;
 
     // Guarded because the ladder is walked unconditionally: with no task block
@@ -239,6 +239,32 @@ export class LayeredContextManager implements ContextManager {
    * what eventually trips compaction and replaces this accumulation with a
    * proper summary.
    */
+  /**
+   * A tool result whose call is no longer in the window.
+   *
+   * Anything that shortens `recent` can cut inside an exchange: the assistant
+   * turn carrying the calls costs nothing by `countMessageTokens` — empty
+   * content, uncounted calls — so it is the cheapest thing to drop and the one
+   * the results depend on. Every provider rejects a result with no call, and
+   * the responses API does it with a `call_id` that leads nowhere.
+   *
+   * Leading results are dropped rather than kept because the call cannot be
+   * recovered; the answer they carry is already folded into the running
+   * history by the eviction that removed it.
+   */
+  private dropOrphanedToolResults(): void {
+    const live = new Set(
+      this.recent.flatMap((m) => (m.role === 'assistant' ? (m.toolCalls ?? []).map((c) => c.id) : [])),
+    );
+
+    this.recent = this.recent.filter((message) => {
+      if (message.role !== 'tool') return true;
+      const kept = message.toolCallId !== undefined && live.has(message.toolCallId);
+      if (!kept) this.evicted.push(message);
+      return kept;
+    });
+  }
+
   private appendToHistory(message: Message): void {
     if (message.role !== 'assistant' || !message.content) return;
     this.historySummary += `\n- ${message.content.slice(0, 120)}`;

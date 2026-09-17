@@ -1,8 +1,9 @@
 import type { Orchestrator, RoleSelector } from '../agent/types.js';
 import type { HookPipeline } from '../hooks/types.js';
+import type { MemoryTriggers } from '../memory/triggers.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
 import type { QueryEngine } from '../query-engine/types.js';
-import type { Session } from '../session/types.js';
+import type { CheckpointManager, Session } from '../session/types.js';
 import type { ToolRegistry } from '../tools/types.js';
 
 /**
@@ -26,10 +27,29 @@ export interface SkillInput {
 
 export interface SkillContext {
   toolRegistry: ToolRegistry;
+  /**
+   * Written as entries complete, so an interrupted diagnosis resumes from the
+   * last one rather than from nothing.
+   *
+   * Optional because a skill that finishes in one call has nothing to save
+   * halfway through.
+   */
+  checkpoints?: CheckpointManager;
   queryEngine: QueryEngine;
   knowledge: KnowledgeSearch;
   session: Session;
   hooks: HookPipeline;
+  /**
+   * Long-term memory, reached directly rather than through the hook.
+   *
+   * The memory hook fires on the Dispatcher, and a batch diagnosis never goes
+   * near it: the skill calls tools itself and each sub-agent calls its own,
+   * both deliberately outside the pipeline. So the store had a hook, a
+   * retriever, a trigger set and a table, and forty-two sessions later the
+   * table was still empty. The hook keeps the conversational path; this is how
+   * the path that produces the findings reaches the same triggers.
+   */
+  memory?: MemoryTriggers;
   /**
    * Present only for skills that fan out to sub-agents. A skill that runs a
    * fixed pipeline has no use for one, and asking for it would make the

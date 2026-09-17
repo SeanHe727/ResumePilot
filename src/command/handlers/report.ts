@@ -1,5 +1,5 @@
 import type { DiagnosisReport, ResumeSessionState } from '../../domain.js';
-import { render } from '../../skills/diagnose-resume.js';
+import { render } from '../../skills/render-report.js';
 import type { Command, CommandResult, ParsedArgs } from '../types.js';
 
 export function createReportCommand(): Command {

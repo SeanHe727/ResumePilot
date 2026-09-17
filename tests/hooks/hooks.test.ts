@@ -9,6 +9,7 @@ import {
   TOOL_START_TIME,
   createAuditLogHook,
   createBudgetCheckHook,
+  createDispatchTraceHook,
   createMemoryTriggerHook,
   createPermissionCheckHook,
   createProgressUpdateHook,
@@ -253,6 +254,59 @@ describe('audit-log', () => {
     await createAuditLogHook(logger).execute(ctx);
 
     expect(logger.getSessionExecutions(ctx.session.id)).toHaveLength(0);
+  });
+});
+
+describe('dispatch-trace', () => {
+  function traced() {
+    const written: string[] = [];
+    return { written, hook: createDispatchTraceHook((line) => written.push(line)) };
+  }
+
+  it('shows what a specialist was pointed at, while it is being sent', async () => {
+    // The briefing is written fresh on every dispatch, so nothing about a
+    // result explains what produced it — and everything else about a sub-agent
+    // run is already invisible: the audit log stops at the tool boundary and
+    // the cache keeps only final answers.
+    const { written, hook } = traced();
+
+    await hook.execute(
+      context('review_content', {
+        entryId: 'experience:0',
+        understanding: 'an inference-optimisation internship',
+        goal: 'check the technical depth',
+      }),
+    );
+
+    expect(written[0]).toContain('review_content experience:0');
+    expect(written[0]).toContain('understood as: an inference-optimisation internship');
+    expect(written[0]).toContain('asked for: check the technical depth');
+  });
+
+  it('says so when a dispatch carried no aim at all', async () => {
+    // Printing nothing would make an empty briefing and an absent one look
+    // identical, which is the distinction a trace exists to show.
+    const { written, hook } = traced();
+
+    await hook.execute(context('review_narrative', {}));
+
+    expect(written[0]).toContain('whole document');
+    expect(written[0]).toContain('(no briefing)');
+  });
+
+  it('ignores every tool that is not a dispatch', async () => {
+    const { written, hook } = traced();
+
+    await hook.execute(context('query_knowledge_base', { query: 'xyz' }));
+
+    expect(written).toHaveLength(0);
+  });
+
+  it('is off until someone turns it on', async () => {
+    // On demand rather than on disk: the audit log summarises to 200 characters
+    // precisely so it does not become a second copy of the resume, and this
+    // would undo that if it were always on.
+    expect(traced().hook.enabled).toBe(false);
   });
 });
 

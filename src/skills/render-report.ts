@@ -1,0 +1,92 @@
+import type { DiagnosisReport } from '../domain.js';
+
+/**
+ * The report as text, for the terminal and for `/export md` alike.
+ *
+ * Lived next to the deterministic pipeline because that pipeline was written
+ * first; every path renders through this one function, so it outlived the
+ * pipeline it was filed under.
+ */
+export function render(report: DiagnosisReport): string {
+  const { summary } = report;
+  const lines: string[] = [
+    `Overall ${summary.overallScore}/100`,
+    `  format ${summary.formatScore}  substance ${summary.substanceAvg}  wording ${summary.wordingAvg}`,
+    `  ${summary.totalEntries} entries, ${summary.totalBullets} bullets`,
+    '',
+  ];
+
+  for (const entry of report.perEntry) {
+    lines.push(`${String(entry.score).padStart(3)}  ${entry.label}`);
+    for (const bullet of entry.bullets) {
+      lines.push(`     ${String(bullet.score).padStart(3)}  ${truncate(bullet.text, 64)}`);
+      if (bullet.topIssue) lines.push(`          ${truncate(bullet.topIssue, 70)}`);
+    }
+    lines.push('');
+  }
+
+  if (report.narrative) {
+    const { narrative } = report;
+    lines.push(`Career narrative  ${narrative.overallScore}/100`);
+    if (narrative.arc) lines.push(`  ${narrative.arc}`);
+    for (const gap of narrative.gaps) lines.push(`  gap: ${gap}`);
+    for (const note of narrative.orderingNotes) lines.push(`  order: ${note}`);
+    lines.push('');
+  }
+
+  if (report.jdMatch) {
+    const { jdMatch } = report;
+    lines.push(`Job description  ${jdMatch.overallScore}/100 coverage`);
+    if (jdMatch.covered.length > 0) {
+      lines.push(`  covered: ${jdMatch.covered.map((c) => c.keyword).join(', ')}`);
+    }
+    for (const missing of jdMatch.missing) {
+      lines.push(`  missing${missing.required ? ' (required)' : ''}: ${missing.keyword}`);
+    }
+    for (const gap of jdMatch.gaps) lines.push(`  gap: ${gap}`);
+    lines.push('');
+  }
+
+  if (summary.topWeaknesses.length > 0) {
+    lines.push('Recurring weaknesses');
+    for (const w of summary.topWeaknesses) lines.push(`  - ${w}`);
+    lines.push('');
+  }
+
+  if (report.rewrites?.length) {
+    lines.push('Suggested rewrites');
+    for (const rewrite of report.rewrites) {
+      lines.push(`  - ${truncate(rewrite.before, 74)}`);
+      lines.push(`  + ${rewrite.after}`);
+      if (rewrite.needsInput.length > 0) {
+        lines.push(`    you supply: ${rewrite.needsInput.join('; ')}`);
+      }
+      // The second version exists for bullets where no figure was ever
+      // recorded — forcing the XYZ shape onto one of those makes it worse.
+      if (rewrite.noInputAlternative) {
+        lines.push(`  + ${rewrite.noInputAlternative.after}`);
+        lines.push(`    without a figure: ${rewrite.noInputAlternative.rationale}`);
+      }
+      lines.push('');
+    }
+  }
+
+  const plan: Array<[string, string[]]> = [
+    ['Fix now', report.improvementPlan.immediate],
+    ['Needs a figure you have to find', report.improvementPlan.shortTerm],
+    ['Needs new experience', report.improvementPlan.longTerm],
+  ];
+  for (const [heading, items] of plan) {
+    if (items.length === 0) continue;
+    lines.push(heading);
+    for (const item of items) lines.push(`  - ${item}`);
+    lines.push('');
+  }
+
+  return lines.join('\n').trimEnd();
+}
+
+function truncate(text: string, max: number): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  return clean.length > max ? `${clean.slice(0, max)}...` : clean;
+}

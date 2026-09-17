@@ -40,8 +40,25 @@ export interface NumberCheck {
  * Bracketed placeholders are how a rewrite shows the shape of a missing figure
  * without asserting one, so they are exempt.
  */
-export function checkNoFabricatedNumbers(before: string, after: string): NumberCheck {
-  const original = new Set(extractNumbers(stripIdentifiers(before)));
+export function checkNoFabricatedNumbers(
+  before: string,
+  after: string,
+  /**
+   * Figures the candidate supplied in conversation, which the page does not
+   * carry and the rewrite is entitled to use.
+   *
+   * Without this the refine loop contradicts itself: someone reads "no figure
+   * here", says what the figure was, and every rewrite carrying it is thrown
+   * out as an invention. The guard is not about where a number came from
+   * originally — it is about whether the model made it up, and a number the
+   * candidate typed two messages ago it did not.
+   */
+  supplied = '',
+): NumberCheck {
+  const original = new Set([
+    ...extractNumbers(stripIdentifiers(before)),
+    ...extractNumbers(stripIdentifiers(supplied)),
+  ]);
   const withoutPlaceholders = after.replace(/[[{<][^\]}>]*[\]}>]/g, ' ');
 
   const invented = extractNumbers(stripIdentifiers(withoutPlaceholders)).filter(

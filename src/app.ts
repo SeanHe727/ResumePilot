@@ -11,6 +11,7 @@ import {
   DefaultHookPipeline,
   MetricCollector,
   createAuditLogHook,
+  createDispatchTraceHook,
   createBudgetCheckHook,
   createMemoryTriggerHook,
   createPermissionCheckHook,
@@ -56,6 +57,8 @@ export class App {
   readonly knowledge: DualChannelSearch;
   /** Undefined without a search key; both tool paths check before using it. */
   readonly search: TavilyProvider | undefined;
+  readonly checkpoints: SqliteCheckpointManager;
+  readonly triggers: MemoryTriggers;
   readonly hooks: DefaultHookPipeline;
   private readonly loopDeps: LoopDeps;
   private readonly retriever: DefaultMemoryRetriever;
@@ -82,11 +85,16 @@ export class App {
 
     this.sessions = new SqliteSessionManager(join(dir, 'sessions.db'));
     const checkpoints = new SqliteCheckpointManager(this.sessions.db);
+    this.checkpoints = checkpoints;
     const restorer = new DefaultSessionRestorer(this.sessions, checkpoints);
     this.closers.push(() => this.sessions.close());
 
     this.memory = new SqliteMemoryStore<CandidateProfile>(join(dir, 'memory.db'));
+    // Offered by the store since it was written and never called, so every
+    // memory the retriever ever wrote outlived its own expiry.
+    this.memory.evictExpired();
     const triggers = new MemoryTriggers(this.memory);
+    this.triggers = triggers;
     this.closers.push(() => this.memory.close());
 
     const audit = new SqliteAuditLogger(join(dir, 'audit.db'));
@@ -100,6 +108,8 @@ export class App {
     for (const hook of [
       createPermissionCheckHook(gate),
       createBudgetCheckHook(this.queryEngine),
+      // Shares the loop's own sink, so a trace lands where the answer will.
+      createDispatchTraceHook(options.print ?? ((text) => process.stdout.write(`${text}\n`))),
       createAuditLogHook(audit),
       createResultCompressHook(),
       createMemoryTriggerHook(triggers),
@@ -116,7 +126,7 @@ export class App {
       : undefined;
     this.search = search;
 
-    const tools = createToolRegistry(search ? { search } : {});
+    const tools = createToolRegistry({ ...(search ? { search } : {}), orchestrator: true });
     const skills = createSkillRegistry();
     const dispatcher = new Dispatcher({
       registry: tools,
@@ -124,6 +134,7 @@ export class App {
       queryEngine: this.queryEngine,
       knowledge: this.knowledge,
       ...(search ? { search } : {}),
+      orchestratorFor: (session) => this.orchestratorFor(session),
     });
 
     const commands = createCommandParser({
@@ -131,6 +142,9 @@ export class App {
       restorer,
       hooks: this.hooks,
       engine: this.queryEngine,
+      audit,
+      gate,
+      checkpoints,
       runSkill: (name, input, sessionId) => this.runSkill(name, input, sessionId),
     });
 
@@ -142,6 +156,7 @@ export class App {
       queryEngine: this.queryEngine,
       knowledge: this.knowledge,
       sessions: this.sessions,
+      checkpoints,
       print: options.print ?? ((text) => process.stdout.write(`${text}\n`)),
     };
 
@@ -173,6 +188,26 @@ export class App {
     return handleInput(input, session, this.loopDeps);
   }
 
+  /**
+   * One per session, on both paths.
+   *
+   * A sub-agent runs tools against the session it was started for, so a shared
+   * instance would attribute every call to whichever session the process
+   * opened first. Cheap enough to rebuild: it holds two semaphores and a
+   * reference to the runtime.
+   */
+  private orchestratorFor(session: Session): DefaultOrchestrator {
+    return new DefaultOrchestrator(
+      new SubAgentRuntime({
+        queryEngine: this.queryEngine,
+        toolRegistry: this.loopDeps.tools,
+        knowledge: this.knowledge,
+        ...(this.search ? { search: this.search } : {}),
+        session,
+      }),
+    );
+  }
+
   async runSkill(
     name: string,
     input: { rawInput: string; parsedArgs?: Record<string, unknown> },
@@ -181,24 +216,18 @@ export class App {
     const session = this.sessions.get(sessionId);
     if (!session) return { success: false, error: `session ${sessionId} not found` };
 
-    const runtime = new SubAgentRuntime({
-      queryEngine: this.queryEngine,
-      toolRegistry: this.loopDeps.tools,
-      knowledge: this.knowledge,
-      ...(this.search ? { search: this.search } : {}),
-      session,
-    });
-
     const ctx: SkillContext = {
       session,
       toolRegistry: this.loopDeps.tools,
       queryEngine: this.queryEngine,
       knowledge: this.knowledge,
       hooks: this.hooks,
+      checkpoints: this.checkpoints,
+      memory: this.triggers,
       // Built per session: a sub-agent runs tools against the session it was
       // started for, so one shared instance would attribute them all to the
       // first session the process ever opened.
-      orchestrator: new DefaultOrchestrator(runtime),
+      orchestrator: this.orchestratorFor(session),
       roleSelector: this.roleSelector,
     };
 

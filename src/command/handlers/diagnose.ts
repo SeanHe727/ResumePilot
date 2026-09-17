@@ -10,14 +10,14 @@ export type SkillRunner = (
 ) => Promise<SkillOutput>;
 
 const SUB_AGENT = 'orchestrated-diagnose';
-const DETERMINISTIC = 'diagnose-resume';
 
 /**
  * Runs a diagnosis on the loaded resume.
  *
- * Two paths, and `--fast` is the only way to the second. The sub-agent path is
- * the default because it retrieves better; the deterministic one exists for
- * when a run has to cost a known amount and produce the same answer twice.
+ * One path. A deterministic pipeline ran alongside this one for a while, on the
+ * argument that a run should be able to cost a known amount and produce the
+ * same answer twice — but nobody wanting a good resume trades the quality for
+ * the latency, and two paths meant every change had to be made twice.
  */
 export function createDiagnoseCommand(sessions: SessionManager, run: SkillRunner): Command {
   return {
@@ -27,7 +27,7 @@ export function createDiagnoseCommand(sessions: SessionManager, run: SkillRunner
     args: [
       { name: 'path', description: 'Resume file, if none is loaded yet', required: false, type: 'string' },
     ],
-    examples: ['/diagnose', '/diagnose resume.pdf', '/diagnose --fast'],
+    examples: ['/diagnose', '/diagnose resume.pdf'],
 
     async execute(args: ParsedArgs, session): Promise<CommandResult> {
       const path = args.positional.join(' ').trim() || session.sourcePath;
@@ -38,10 +38,9 @@ export function createDiagnoseCommand(sessions: SessionManager, run: SkillRunner
         sessions.save(session);
       }
 
-      const skill = args.flags.fast ? DETERMINISTIC : SUB_AGENT;
       sessions.updateStatus(session.id, 'processing');
 
-      const output = await run(skill, { rawInput: path, parsedArgs: { path } }, session.id);
+      const output = await run(SUB_AGENT, { rawInput: path, parsedArgs: { path } }, session.id);
 
       // Paused, not failed: the work already done is on disk and `/continue`
       // can pick it up. A failed run would have to start over.

@@ -1,5 +1,5 @@
 import type { ResumeEntry, ScoredDimension, WordingDiagnosis } from '../domain.js';
-import { ENTRY_WORDING_PROMPT } from './prompts.js';
+import { ENTRY_WORDING_PROMPT } from '../prompts/index.js';
 import type { Tool, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
 

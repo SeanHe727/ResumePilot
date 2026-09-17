@@ -132,6 +132,29 @@ export interface EntryVerdict {
  */
 export type RoleId = 'entry-substance' | 'entry-wording' | 'jd-match' | 'narrative';
 
+/**
+ * What the coordinator passes down with a dispatch.
+ *
+ * Every field is optional and a specialist works without any of them — its own
+ * prompt is what makes it able to do the job. This only says which way to point
+ * it: what this resume appears to be, what the candidate has said that the page
+ * does not carry, and what they actually asked for. A specialist given none of
+ * it reviews the entry on its merits, which is right and slightly blind.
+ *
+ * Deliberately three named fields rather than one block of prose. A free-text
+ * add-on is where a coordinator forbidden from judging starts writing its
+ * judgement, and three questions with obvious answers are harder to smuggle one
+ * into than an empty box is.
+ */
+export interface Briefing {
+  /** What the coordinator takes the work to be, in a sentence or two. */
+  understanding?: string;
+  /** What the candidate has said in conversation that the resume does not say. */
+  supplied?: string;
+  /** What they asked to have looked at, in their terms. */
+  goal?: string;
+}
+
 export interface RoleSelectionInput {
   entryCount: number;
   hasJd: boolean;
@@ -152,7 +175,11 @@ export interface RoleSelector {
 
 export interface Orchestrator {
   /** Runs the per-entry roles over one entry, in parallel. */
-  diagnoseEntry(entry: ResumeEntry, roles: RoleSelection): Promise<EntryVerdict>;
+  diagnoseEntry(
+    entry: ResumeEntry,
+    roles: RoleSelection,
+    briefing?: Briefing,
+  ): Promise<EntryVerdict>;
   /** Entries are independent, so the pool decides how many run at once. */
   diagnoseAll(
     entries: ResumeEntry[],
@@ -162,8 +189,8 @@ export interface Orchestrator {
   /** Why a whole-document role returned null, keyed by role id. */
   readonly failures: ReadonlyMap<string, string>;
   /** Whole-document roles, run once rather than per entry. Null when the agent failed. */
-  assessNarrative(resume: ResumeDocument): Promise<NarrativeAssessment | null>;
-  matchJd(resume: ResumeDocument, jd: JobDescription): Promise<JdMatch | null>;
+  assessNarrative(resume: ResumeDocument, briefing?: Briefing): Promise<NarrativeAssessment | null>;
+  matchJd(resume: ResumeDocument, jd: JobDescription, briefing?: Briefing): Promise<JdMatch | null>;
   parallel(tasks: SubAgentTask[]): Promise<SubAgentResult[]>;
 }
 

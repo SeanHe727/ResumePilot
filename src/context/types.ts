@@ -30,16 +30,35 @@ export interface ContextConfig {
   maxCompactions: number;
 }
 
+/**
+ * Sized for a conversation, which is what this loop is for.
+ *
+ * The first version of these numbers was sized for one exchange: 3,000 tokens
+ * of `recent` is six or eight messages, so a session where someone explains a
+ * metric, edits a line and asks again had forgotten the explanation by the
+ * time the edit arrived. Worse, eviction held the total so far under the
+ * compaction threshold that the ladder was unreachable — a plateau of 5,663
+ * against a threshold of 10,800, measured over thirty messages.
+ *
+ * Measured again at these values, over forty messages with a tool call every
+ * third: compaction engages at message 11 and roughly every eight after,
+ * always at level 2, and the window settles at 43% of budget. At the old cap
+ * of three rounds it ran out by message 27 and crept back to 91%.
+ */
 export const DEFAULT_CONTEXT_CONFIG: ContextConfig = {
   maxTotalTokens: 16_000,
   systemPromptBudget: 2_000,
   profileBudget: 500,
   taskBudget: 4_000,
-  historyBudget: 2_000,
-  recentBudget: 3_000,
+  historyBudget: 4_000,
+  recentBudget: 12_000,
   toolResultBudget: 1_000,
   outputReserve: 4_000,
-  maxCompactions: 3,
+  // Twelve, not three. Three is a sensible ceiling for a single diagnosis and
+  // a hard stop halfway through a conversation, and the difference is not the
+  // model call it saves — it is that the layer stops summarising and the
+  // running history degrades into a truncated log.
+  maxCompactions: 12,
 };
 
 export interface ContextWindow {

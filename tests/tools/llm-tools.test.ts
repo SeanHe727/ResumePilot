@@ -10,7 +10,7 @@ import {
   ENTRY_SUBSTANCE_PROMPT,
   ENTRY_WORDING_PROMPT,
   REWRITE_PROMPT,
-} from '../../src/tools/prompts.js';
+} from '../../src/prompts/index.js';
 import type { ToolContext } from '../../src/tools/types.js';
 import {
   checkNoErasedNumbers,
@@ -673,14 +673,18 @@ describe('analyze_entry: claims that need checking against the world', () => {
     // a test that breaks on a reflow is testing the layout, not the rule.
     const prompt = ENTRY_SUBSTANCE_PROMPT.replace(/\s+/g, ' ');
 
-    expect(prompt).toContain('ordinary for the technique');
-    expect(prompt).toContain('claimsToVerify');
-    // Not only figures: a term the reader will not recognise, and a method
-    // nobody would choose, are findings the numbers never reveal.
-    expect(prompt).toContain('A term the reader will not recognise');
-    expect(prompt).toContain('a method nobody would choose');
-    // Scope counts sit on none of the three axes.
-    expect(prompt).toContain('29k+ stars');
+    expect(prompt).toContain('ordinary for the technique credited with it');
+    // Named as something earlier runs got wrong rather than as a rule, which is
+    // the only kind of notice a role prompt carries.
+    expect(prompt).toContain('Both models have scored');
+    // Counts that size something which exists measure no outcome.
+    expect(prompt).toContain('repository stars');
+    // And no example carries content from anyone's actual resume: the resume
+    // varies, the prompt does not.
+    expect(prompt).not.toMatch(/INT8|VRAM|29k/);
+    // What was checked against the world is recorded by whoever checks it, and
+    // that is the searching prompt rather than this one.
+    expect(prompt).not.toContain('claimsToVerify');
   });
 });
 
@@ -774,5 +778,57 @@ describe('checks the model did not actually make', () => {
     expect(prompt).toContain('that is a result, not a dead end');
     expect(prompt).toContain('put a corpus lookup to work with it');
     expect(prompt).toContain('Record only what you actually looked up');
+  });
+});
+
+describe('figures the candidate supplied in conversation', () => {
+  const ORIGINAL = 'Reduced context contamination by enforcing context isolation across 4 diagnostic agents';
+  const WITH_FIGURES = 'Cut context contamination from 12% to 3% on held-out cases across 4 diagnostic agents';
+
+  it('are not fabrications', () => {
+    // The refine loop contradicted itself: someone reads "no figure here",
+    // says what the figure was, and every rewrite carrying it was thrown out.
+    expect(checkNoFabricatedNumbers(ORIGINAL, WITH_FIGURES).ok).toBe(false);
+    expect(
+      checkNoFabricatedNumbers(ORIGINAL, WITH_FIGURES, 'contamination went from 12% to 3%').ok,
+    ).toBe(true);
+  });
+
+  it('still catch a figure nobody ever gave', () => {
+    const invented = 'Cut context contamination from 12% to 3%, cutting review time 40%';
+
+    const check = checkNoFabricatedNumbers(ORIGINAL, invented, 'contamination went from 12% to 3%');
+
+    expect(check.ok).toBe(false);
+    expect(check.figures).toEqual(['40']);
+  });
+
+  it('only reach the line they were given about', async () => {
+    // A figure given about the quantisation bullet is not licence to put it
+    // into the fine-tuning one, and the two sit next to each other.
+    const rewrite = JSON.stringify({
+      after: 'Cut context contamination from 12% to 3% across 4 diagnostic agents',
+      rationale: 'uses the measured figure',
+      needsInput: [],
+    });
+    const { engine } = fakeEngine(rewrite);
+    const ctx = {
+      queryEngine: engine,
+      session: {
+        state: {
+          suppliedFacts: [{ fact: 'contamination went from 12% to 3%', bulletId: 's2:e0:b1' }],
+        },
+      },
+    } as unknown as ToolContext;
+
+    const mine = await rewriteBulletTool.execute({ bullet: ORIGINAL, bulletId: 's2:e0:b1' }, ctx);
+    const someoneElses = await rewriteBulletTool.execute({ bullet: ORIGINAL, bulletId: 's2:e1:b0' }, ctx);
+    const unscoped = await rewriteBulletTool.execute({ bullet: ORIGINAL }, ctx);
+
+    expect(mine.success).toBe(true);
+    expect(someoneElses.success).toBe(false);
+    // The batch path passes no id, and widening the guard for it would let a
+    // figure supplied about one line pass into any other.
+    expect(unscoped.success).toBe(false);
   });
 });

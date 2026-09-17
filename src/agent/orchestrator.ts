@@ -14,6 +14,7 @@ import { ROLES } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
 import type {
   AgentRunStat,
+  Briefing,
   ConcurrencyPool,
   EntryVerdict,
   OrchestratorConfig,
@@ -84,7 +85,11 @@ export class DefaultOrchestrator {
     this.entryPool = new SemaphorePool(config.entryConcurrency ?? DEFAULT_ENTRY_CONCURRENCY);
   }
 
-  async diagnoseEntry(entry: ResumeEntry, roles: RoleSelection): Promise<EntryVerdict> {
+  async diagnoseEntry(
+    entry: ResumeEntry,
+    roles: RoleSelection,
+    briefing?: Briefing,
+  ): Promise<EntryVerdict> {
     // Both per-entry roles score bullets, and a degree is a header with none —
     // school, qualification, dates. Dispatching it buys two model calls that
     // can only come back empty, and an entry the report then shows at zero.
@@ -99,7 +104,7 @@ export class DefaultOrchestrator {
     }
 
     const chosen = roles.roles.filter((role) => PER_ENTRY.has(role));
-    const results = await this.parallel(chosen.map((role) => taskFor(role, entry)));
+    const results = await this.parallel(chosen.map((role) => taskFor(role, entry, briefing)));
 
     return aggregate(entry, results, this.failures);
   }
@@ -133,14 +138,17 @@ export class DefaultOrchestrator {
    * Returns null rather than an empty assessment when the agent fails, so the
    * report can leave the section out instead of printing a confident zero.
    */
-  async assessNarrative(resume: ResumeDocument): Promise<NarrativeAssessment | null> {
+  async assessNarrative(
+    resume: ResumeDocument,
+    briefing?: Briefing,
+  ): Promise<NarrativeAssessment | null> {
     if (resume.sections.every((section) => section.entries.length === 0)) return null;
 
     const [result] = await this.parallel([
       {
         agentConfig: ROLES['narrative']!,
         input: 'Read these entries in sequence and return the JSON described above.',
-        context: { entries: renderSections(resume) },
+        context: { entries: renderSections(resume), ...briefingContext(briefing) },
       },
     ]);
 
@@ -156,7 +164,11 @@ export class DefaultOrchestrator {
   }
 
   /** Keyword coverage against the posting the resume is being sent to. */
-  async matchJd(resume: ResumeDocument, jd: JobDescription): Promise<JdMatch | null> {
+  async matchJd(
+    resume: ResumeDocument,
+    jd: JobDescription,
+    briefing?: Briefing,
+  ): Promise<JdMatch | null> {
     const [result] = await this.parallel([
       {
         agentConfig: ROLES['jd-match']!,
@@ -164,6 +176,7 @@ export class DefaultOrchestrator {
         context: {
           resume: renderSections(resume),
           jobDescription: jd.rawText,
+          ...briefingContext(briefing),
         },
       },
     ]);
@@ -298,7 +311,7 @@ function strings(raw: unknown): string[] {
   return Array.isArray(raw) ? raw.filter((s): s is string => typeof s === 'string') : [];
 }
 
-function taskFor(role: RoleId, entry: ResumeEntry): SubAgentTask {
+function taskFor(role: RoleId, entry: ResumeEntry, briefing?: Briefing): SubAgentTask {
   const agentConfig = ROLES[role]!;
 
   // The same user message the matching tool builds, so the sub-agent and the
@@ -306,7 +319,30 @@ function taskFor(role: RoleId, entry: ResumeEntry): SubAgentTask {
   const input =
     role === 'entry-substance' ? buildEntryMessage({ entry }) : buildWordingMessage(entry);
 
-  return { agentConfig, input, context: { entry: entry.headerLines.join(' | ') } };
+  return {
+    agentConfig,
+    input,
+    context: { entry: entry.headerLines.join(' | '), ...briefingContext(briefing) },
+  };
+}
+
+/**
+ * The briefing as one task-layer field, or nothing at all.
+ *
+ * Rendered rather than passed as an object so the specialist reads a labelled
+ * paragraph instead of JSON, and omitted entirely when empty — an empty heading
+ * reads as a coordinator who had nothing to say, which is not the same as one
+ * that was never asked.
+ */
+function briefingContext(briefing?: Briefing): { briefing?: string } {
+  if (!briefing) return {};
+  const parts = [
+    briefing.understanding && `What this appears to be: ${briefing.understanding}`,
+    briefing.supplied && `What the candidate has said, which the page does not: ${briefing.supplied}`,
+    briefing.goal && `What they asked for: ${briefing.goal}`,
+  ].filter((line): line is string => Boolean(line && line.trim()));
+
+  return parts.length > 0 ? { briefing: parts.join('\n') } : {};
 }
 
 function aggregate(

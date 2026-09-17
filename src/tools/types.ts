@@ -1,3 +1,4 @@
+import type { Orchestrator } from '../agent/types.js';
 import type { SearchProvider } from './search-provider.js';
 import type { JsonSchema, ToolSchema } from '../types.js';
 import type { QueryEngine } from '../query-engine/types.js';
@@ -55,6 +56,15 @@ export interface ToolContext {
    * only guards the direct callers.
    */
   search?: SearchProvider;
+  /**
+   * The specialist roles, reachable from a tool.
+   *
+   * Present only on the conversational path. A sub-agent must not be handed
+   * one: a role that could dispatch roles would recurse, and the two
+   * concurrency pools that keep the fan-out from deadlocking assume a fixed
+   * two levels.
+   */
+  orchestrator?: Orchestrator;
 }
 
 export interface Tool<TInput = unknown, TOutput = unknown> {

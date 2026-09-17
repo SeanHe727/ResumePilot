@@ -55,7 +55,7 @@ const UNTRUSTED_NOTICE =
  * Everything else this agent knows comes from the corpus or the model's own
  * priors, and both are frozen: the corpus is 46 entries someone wrote once, and
  * the priors are whatever the training cut-off left behind. Neither can say
- * whether a Kendall's tau of 0.91 is impressive or whether an employer's name
+ * whether a given correlation figure is impressive or whether an employer's name
  * carries weight in the market the candidate is applying to, which are exactly
  * the judgements the measurement and impact scores turn on.
  */

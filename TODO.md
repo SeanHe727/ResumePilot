@@ -157,3 +157,73 @@ no substance      2 — Request aborted
 `orchestrator.ts:28` 声明 `timeoutMs: 300_000`,全项目没有任何地方读它。
 真正生效的只有 `sub-agent.ts:81` 的 `config.timeoutMs`(角色自己那个)。
 要么接上,要么删掉 —— 现在它看起来像在管事,实际不管。
+
+
+### 13. 建了但接不到的东西 —— 一次审计
+起因:`checkpoints` 表 0 条 / 42 个 session,`memories` 表 0 条。两个完整子系统
+从没运行过,而读取它们的代码早就写完在等着。
+
+**已修:**
+- `checkpoints`:对话每轮写一条(transcript),诊断每 2 个 entry 写一条(state)
+- `memories`:memory hook 只在 Dispatcher 上跑,而诊断流程两条路都刻意绕开它
+  (skill 直接 `tool.execute`,sub-agent 明确不走 hook)。改成 skill 显式调
+  `ctx.memory` 触发器
+- `getSessionLog` / `getSessionExecutions` / `getRules` → `/audit`
+- `rewindTo` / `list` → `/rewind`
+- `evictExpired` → 启动时调用一次
+
+**剩下没接的**(src 里零调用,不算 bug,但按"留出访问路径"的原则记着):
+
+| 方法 | 在哪 | 说明 |
+|---|---|---|
+| `sampleEntries` | knowledge | **抽题用的 —— 正是 grill / mock-interview 需要的** |
+| `getEntry` | knowledge | 按 id 取单条 |
+| `checkOperation` | permission | `operation` 类规则的入口(`memory_write` 那条靠它) |
+| `addRule` / `clearApprovalCache` | permission | 运行期改规则,没有命令暴露 |
+| `unregister` | hooks | `/hooks` 只能开关,不能注销 |
+| `updateProgress` | session | 进度直接赋值,没走这个方法 |
+| `deleteAll` | memory | 只有测试用 |
+| `open` / `closeAll` / `pathFor` | db/types.ts | **只有类型没有实现** —— 是没落地的设计,不是死代码 |
+
+**教训**:这一类都是"一端接好、另一端从不触发",而且没有测试就发现不了。
+今天一共查出五处同类问题(压缩阶梯、`OrchestratorConfig.timeoutMs`、
+`EntryDiagnosis.narrative`、checkpoint、memory)。
+
+
+---
+
+## 实测记录(2026-09-17,架构中立)
+
+这一轮的代码全部回退了,但下面是跑出来的、重建时要用上的事实。
+
+**两个潜伏 bug,都不是那轮引入的,回退后仍然存在:**
+
+1. **零工具 sub-agent 发不出请求。** `sub-agent.ts` 里 `jsonMode` 在
+   `tools.length === 0 || finalTurn` 打开,但满足 OpenAI "输入消息须含 json" 那条约束的
+   只有 `FINAL_TURN_NUDGE`,而它只在 `finalTurn && turns > 1` 才加。现有角色个个至少一个
+   工具、maxTurns ≥ 3,所以第一轮从不开 JSON 模式、最后一轮必带 nudge —— 洞一直空着。
+   **一旦出现真正零工具的角色,第一轮就 400,请求到不了模型。**
+   报错原文:`400 Response input messages must contain the word 'json' in some form
+   to use 'text.format' of type 'json_object'.`
+
+2. **失败的 sub-agent 凭空消失。** `orchestrator.attempt` 抓到异常后返回
+   `turns: 0, durationMs: 0`,读取方若只看 `success` 不看 `error`,一个 400 报上来的
+   样子就是"这份简历没什么可问的"。
+
+**跑出来的数字:**
+
+| | |
+|---|---|
+| 整份诊断(4 个有 bullet 的 entry,含领域层) | 51 次调用 · 301,692 in · 113,528 out · **$0.2075** |
+| 单个 entry 走完整产品路径 | 3 次调用 · **$0.0216** · 151s |
+| 打分 run-to-run 噪声 | **±7 分** |
+
+**关于观测:sub-agent 内部现在没有任何记录。**
+`audit.db` 的 `tool_executions` 最后写入停在 9 月 8 日;`sub-agent.ts` 的注释写明工具调用
+故意不走 hook / 审计。`cache.db` 只留最终响应,没有 tool_use。所以"某个 agent 六轮里
+到底搜了什么、查了哪条 rubric"**无从回答**。
+
+**prompt 写法(用户指正):**
+- 不要写成状态机。给目的、目标、一个宽松的建议动作,就够了。
+- 不要 "达到 xxx 条件给 xxx 分",要 "综合考虑 A、B、C 等,目的是 D"。
+- 角色特殊 prompt 里**只放实测出来的 bug 和要点**,推测的不放。

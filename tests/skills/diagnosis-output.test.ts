@@ -6,6 +6,12 @@ import type { ParsedResponse, QueryParams } from '../../src/query-engine/types.j
 import { createToolRegistry } from '../../src/tools/index.js';
 import { createSkillRegistry, render } from '../../src/skills/index.js';
 import type { SkillContext, SkillOutput } from '../../src/skills/types.js';
+import {
+  DefaultOrchestrator,
+  DefaultRoleSelector,
+  SubAgentRuntime,
+} from '../../src/agent/index.js';
+import { SqliteSessionManager } from '../../src/session/index.js';
 
 /**
  * Answers each prompt with a canned reply chosen by which task was asked for,
@@ -65,38 +71,52 @@ const REPLIES: Record<string, string> = {
   }),
 };
 
+/**
+ * The only diagnosis path there is.
+ *
+ * These cases ran against the deterministic pipeline until it was removed. The
+ * report shape and the contact-detail guarantee are properties of the product
+ * rather than of that pipeline, so they moved here rather than going with it —
+ * and the guarantee in particular had to be proved again on this path, which
+ * builds its messages somewhere else entirely.
+ */
 async function runOn(fixture: string): Promise<{ out: SkillOutput; seen: QueryParams[] }> {
   const { engine, seen } = fakeEngine();
-  const session = {
-    id: 'test',
-    state: {},
-    progress: { total: 0, done: 0, current: 0, phase: '' },
-    abortController: new AbortController(),
-  };
-  const ctx = {
-    toolRegistry: createToolRegistry(),
-    queryEngine: engine,
-    knowledge: { search: async () => [] },
+  const tools = createToolRegistry();
+  const session = new SqliteSessionManager().create({ sourcePath: `tests/fixtures/${fixture}` });
+  const knowledge = { search: async () => [] } as never;
+  const runtime = new SubAgentRuntime({
+    queryEngine: engine as never,
+    toolRegistry: tools,
+    knowledge,
     session,
+  });
+  const ctx = {
+    toolRegistry: tools,
+    queryEngine: engine,
+    knowledge,
+    session,
+    orchestrator: new DefaultOrchestrator(runtime),
+    roleSelector: new DefaultRoleSelector(),
   } as unknown as SkillContext;
 
-  const skill = createSkillRegistry().resolve('diagnose-resume');
+  const skill = createSkillRegistry().resolve('orchestrated-diagnose');
   const out = await skill.execute({ rawInput: `tests/fixtures/${fixture}` }, ctx);
   return { out, seen };
 }
 
 describe('skill registry', () => {
-  it('routes a plain sentence to the sub-agent skill, without asking the model', () => {
-    // Both skills diagnose a resume; only one carries triggers, so which runs
-    // does not depend on registration order.
+  it('routes a plain sentence to the diagnosis skill, without asking the model', () => {
+    // Matched on triggers rather than by a model call, so the same sentence
+    // routes the same way every run.
     const registry = createSkillRegistry();
 
     expect(registry.find('diagnose my resume')?.name).toBe('orchestrated-diagnose');
     expect(registry.find('please review my resume')?.name).toBe('orchestrated-diagnose');
   });
 
-  it('reaches the deterministic pipeline by name', () => {
-    expect(createSkillRegistry().resolve('diagnose-resume').name).toBe('diagnose-resume');
+  it('reaches the skill by name as well as by trigger', () => {
+    expect(createSkillRegistry().resolve('orchestrated-diagnose').name).toBe('orchestrated-diagnose');
   });
 
   it('returns null when nothing matches, leaving the loop to plan', () => {
@@ -106,117 +126,11 @@ describe('skill registry', () => {
   it('refuses to register the same name twice', () => {
     // Silent replacement would make the live implementation depend on import order.
     const registry = createSkillRegistry();
-    const skill = registry.resolve('diagnose-resume');
+    const skill = registry.resolve('orchestrated-diagnose');
 
     expect(() => (registry as never as { register: (s: unknown) => void }).register(skill)).toThrow(
       /already registered/,
     );
-  });
-});
-
-describe('diagnose-resume', () => {
-  it('runs parse, format, per-entry diagnosis and report', async () => {
-    const { out, seen } = await runOn('sample-resume.md');
-
-    expect(out.success).toBe(true);
-    const tasks = new Set(seen.map((s) => s.task));
-    // `split_sections` is the line labeller, which runs before anything can be
-    // diagnosed and falls back to the rules when its reply is unusable.
-    expect(tasks).toEqual(
-      new Set(['split_sections', 'diagnose_bullet', 'judge_wording', 'generate_report']),
-    );
-  });
-
-  it('scopes every knowledge lookup to a dimension', async () => {
-    // Measured on the real corpus: unscoped lookups pick the wrong rule family
-    // for about a third of bullets, because similarity tracks topic overlap.
-    const scopes: Array<string | undefined> = [];
-    const { engine } = fakeEngine();
-    const ctx = {
-      toolRegistry: createToolRegistry(),
-      queryEngine: engine,
-      knowledge: {
-        search: async (_q: string, opts?: { dimension?: string }) => {
-          scopes.push(opts?.dimension);
-          return [];
-        },
-      },
-      session: {
-        id: 't',
-        state: {},
-        progress: { total: 0, done: 0, current: 0, phase: '' },
-        abortController: new AbortController(),
-      },
-    } as unknown as SkillContext;
-
-    await createSkillRegistry()
-      .resolve('diagnose-resume')
-      .execute({ rawInput: 'tests/fixtures/sample-resume.md' }, ctx);
-
-    expect(scopes.length).toBeGreaterThan(0);
-    expect(scopes.every((s) => s !== undefined)).toBe(true);
-  });
-
-  it('stops on a scanned file rather than diagnosing an empty document', async () => {
-    const { out } = await runOn('scanned.pdf');
-
-    expect(out.success).toBe(false);
-    expect(out.error).toMatch(/no text layer/);
-    expect(out.error).toMatch(/text PDF or a \.docx/);
-  });
-
-  it('reports a missing file as a normal error', async () => {
-    const { out } = await runOn('does-not-exist.md');
-
-    expect(out.success).toBe(false);
-    expect(out.error).toMatch(/could not read the resume/);
-  });
-
-  it('leaves the diagnosis on the session for later commands', async () => {
-    const { engine } = fakeEngine();
-    const session = {
-      id: 't',
-      state: {} as Record<string, unknown>,
-      progress: { total: 0, done: 0, current: 0, phase: '' },
-      abortController: new AbortController(),
-    };
-    const ctx = {
-      toolRegistry: createToolRegistry(),
-      queryEngine: engine,
-      knowledge: { search: async () => [] },
-      session,
-    } as unknown as SkillContext;
-
-    await createSkillRegistry()
-      .resolve('diagnose-resume')
-      .execute({ rawInput: 'tests/fixtures/sample-resume.md' }, ctx);
-
-    expect(session.state.mode).toBe('diagnose');
-    expect(session.state.latestReport).toBeDefined();
-    expect((session.state.resume as ResumeDocument).sections.length).toBeGreaterThan(0);
-  });
-
-  it('tracks progress so a long run is not silent', async () => {
-    const { engine } = fakeEngine();
-    const session = {
-      id: 't',
-      state: {},
-      progress: { total: 0, done: 0, current: 0, phase: '' },
-      abortController: new AbortController(),
-    };
-    const ctx = {
-      toolRegistry: createToolRegistry(),
-      queryEngine: engine,
-      knowledge: { search: async () => [] },
-      session,
-    } as unknown as SkillContext;
-
-    await createSkillRegistry()
-      .resolve('diagnose-resume')
-      .execute({ rawInput: 'tests/fixtures/sample-resume.md' }, ctx);
-
-    expect(session.progress.done).toBe(session.progress.total);
-    expect(session.progress.phase).toMatch(/diagnosing entries/);
   });
 });
 

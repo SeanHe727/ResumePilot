@@ -1,6 +1,6 @@
-import type { RewriteSuggestion } from '../domain.js';
-import { REWRITE_PROMPT } from './prompts.js';
-import type { Tool, ToolResult } from './types.js';
+import type { ResumeSessionState, RewriteSuggestion } from '../domain.js';
+import { REWRITE_PROMPT } from '../prompts/index.js';
+import type { Tool, ToolContext, ToolResult } from './types.js';
 import {
   checkNoErasedNumbers,
   checkNoFabricatedNumbers,
@@ -10,10 +10,45 @@ import {
 
 interface RewriteBulletInput {
   bullet: string;
+  /**
+   * Which line this is, when the caller knows.
+   *
+   * Only the conversation does — the batch path rewrites text it already has
+   * in hand. It decides which of the candidate's supplied figures this rewrite
+   * is allowed to use, so an id given wrongly is worse than none.
+   */
+  bulletId?: string;
   /** Company, role and dates, so the rewrite can use real context. */
   entryContext?: string;
   /** What the diagnosis found wrong, so the rewrite addresses it. */
   issues?: string[];
+}
+
+/**
+ * What the candidate has said that bears on this bullet.
+ *
+ * Facts pinned to a different bullet are left out: a figure given about the
+ * quantisation line is not licence to put that figure into the fine-tuning
+ * one, and the two sit next to each other on the page. Facts with nothing
+ * attached are general and count everywhere.
+ *
+ * A caller that does not say which bullet this is gets only the general ones.
+ * The batch path is such a caller, and widening the guard for it would let a
+ * figure supplied about one line pass into any other.
+ */
+function suppliedFigures(ctx: ToolContext, input: RewriteBulletInput): string {
+  const facts = (ctx.session?.state as ResumeSessionState | undefined)?.suppliedFacts ?? [];
+  const bulletId = input?.bulletId;
+  const entryId = bulletId?.split(':').slice(0, 2).join(':');
+
+  return facts
+    .filter((f) => {
+      if (!f.bulletId && !f.entryId) return true;
+      if (!bulletId) return false;
+      return f.bulletId ? f.bulletId === bulletId : f.entryId === entryId;
+    })
+    .map((f) => f.fact)
+    .join('\n');
 }
 
 export const rewriteBulletTool: Tool<RewriteBulletInput, RewriteSuggestion> = {
@@ -26,6 +61,12 @@ export const rewriteBulletTool: Tool<RewriteBulletInput, RewriteSuggestion> = {
     type: 'object',
     properties: {
       bullet: { type: 'string', description: 'The bullet to rewrite, verbatim' },
+      bulletId: {
+        type: 'string',
+        description:
+          'The id of that bullet. Pass it when you know it: it is what lets the rewrite use ' +
+          'figures the candidate gave you for this line rather than only what is on the page.',
+      },
       entryContext: { type: 'string', description: 'Company, role and dates for context' },
       issues: {
         type: 'array',
@@ -65,7 +106,12 @@ export const rewriteBulletTool: Tool<RewriteBulletInput, RewriteSuggestion> = {
     // but both are requests. This is the constraint: any number in the rewrite
     // that never appeared in the original is a fabrication, and a fabricated
     // metric on a real resume is a question the candidate cannot answer.
-    const fabrication = checkNoFabricatedNumbers(bullet, after);
+    //
+    // Anything the candidate said in this session counts as the original for
+    // this purpose. The point of the conversation is to get a figure onto a
+    // line that lacked one, and a guard reading only the page rejects every
+    // rewrite that succeeds at it.
+    const fabrication = checkNoFabricatedNumbers(bullet, after, suppliedFigures(ctx, input));
     if (!fabrication.ok) {
       return {
         success: false,

@@ -1,3 +1,4 @@
+import type { Orchestrator } from './types.js';
 import type { SearchProvider } from '../tools/search-provider.js';
 import type { ToolCall } from '../types.js';
 import type { HookContext, HookPipeline } from '../hooks/types.js';
@@ -14,6 +15,12 @@ export interface DispatcherDeps {
   knowledge: KnowledgeSearch;
   /** Absent when no search key is configured; `web_search` is unregistered too. */
   search?: SearchProvider;
+  /**
+   * Built per session rather than shared: a sub-agent runs tools against the
+   * session it was started for, so one instance would attribute every call to
+   * whichever session the process opened first.
+   */
+  orchestratorFor?: (session: Session) => Orchestrator;
 }
 
 /**
@@ -64,6 +71,7 @@ export class Dispatcher {
         queryEngine: this.deps.queryEngine,
         knowledge: this.deps.knowledge,
         ...(this.deps.search ? { search: this.deps.search } : {}),
+        ...(this.deps.orchestratorFor ? { orchestrator: this.deps.orchestratorFor(session) } : {}),
         abortSignal: session.abortController.signal,
       });
     } catch (err) {

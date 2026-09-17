@@ -1,3 +1,4 @@
+import { HISTORY_SUMMARY_PROMPT } from '../prompts/index.js';
 import type { Message } from '../types.js';
 import type { QueryEngine } from '../query-engine/types.js';
 
@@ -166,16 +167,3 @@ const SUMMARY_INPUT_CAP = 1_200;
 /** And a ceiling on the whole request, so compaction cannot cost more than it saves. */
 const SUMMARY_INPUT_TOTAL = 24_000;
 
-const HISTORY_SUMMARY_PROMPT = `You compress the history of a resume diagnosis so a long session stays inside
-its context window.
-
-Keep every score, figure and conclusion, and keep what each one was measured
-against — a figure without its baseline cannot be used again. Drop the
-reasoning that produced them, the phrasing, and anything the next turn could
-re-derive from the resume itself.
-
-Lines marked "looked up" came from outside the document and lines marked
-"concluded" are the agent's own. Keep that distinction: a retrieved figure is
-evidence about the world, never a finding about this candidate.
-
-Write bullet points. No preamble, no closing remark.`;

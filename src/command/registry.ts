@@ -1,6 +1,9 @@
+import type { AuditLogger, PermissionGate } from '../permission/types.js';
+import { createAuditCommand } from './handlers/audit.js';
+import { createRewindCommand } from './handlers/rewind.js';
 import type { HookPipeline } from '../hooks/types.js';
 import type { QueryEngine } from '../query-engine/types.js';
-import type { SessionManager, SessionRestorer } from '../session/types.js';
+import type { CheckpointManager, SessionManager, SessionRestorer } from '../session/types.js';
 import { DefaultCommandParser } from './parser.js';
 import { createBudgetCommand } from './handlers/budget.js';
 import { createConfigCommand } from './handlers/config.js';
@@ -23,6 +26,11 @@ export interface CommandDeps {
   restorer: SessionRestorer;
   hooks: HookPipeline;
   engine: QueryEngine;
+  /** Together they make `/audit` possible; absent, the command is not offered. */
+  audit?: AuditLogger;
+  gate?: PermissionGate;
+  /** Makes `/rewind` possible: without it there is nothing to list or return to. */
+  checkpoints?: CheckpointManager;
   /** Absent in tests that exercise only the commands needing no skill. */
   runSkill?: SkillRunner;
 }
@@ -58,6 +66,10 @@ export function createCommandParser(deps: CommandDeps): DefaultCommandParser {
     createBudgetCommand(deps.engine),
     createConfigCommand(deps.sessions),
     createHooksCommand(deps.hooks),
+    ...(deps.audit && deps.gate ? [createAuditCommand(deps.audit, deps.gate)] : []),
+    ...(deps.checkpoints
+      ? [createRewindCommand(deps.restorer, deps.checkpoints, deps.sessions)]
+      : []),
     ...(deps.runSkill ? [createDiagnoseCommand(deps.sessions, deps.runSkill)] : []),
   ]) {
     parser.register(command);

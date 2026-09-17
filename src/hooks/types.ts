@@ -59,6 +59,7 @@ export interface HookPipeline {
 export const DEFAULT_HOOK_ORDER = [
   { name: 'permission-check', timing: 'pre-tool', priority: 10 },
   { name: 'budget-check', timing: 'pre-tool', priority: 30 },
+  { name: 'dispatch-trace', timing: 'pre-tool', priority: 50 },
   { name: 'audit-log', timing: 'post-tool', priority: 10 },
   { name: 'result-compress', timing: 'post-tool', priority: 20 },
   { name: 'memory-trigger', timing: 'post-tool', priority: 30 },

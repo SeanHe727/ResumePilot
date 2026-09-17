@@ -1,4 +1,5 @@
 import type {
+  DiagnosisDimension,
   Bullet,
   DiagnosisReport,
   EntryDiagnosis,
@@ -16,22 +17,23 @@ import type { EntryVerdict, RoleSelection } from '../agent/types.js';
 import { DefaultResumeParser, ModelDocumentSegmenter } from '../document/index.js';
 import type { ResumeParser } from '../document/types.js';
 import { analyzeFormat } from '../tools/analyze-format.js';
-import { render } from './diagnose-resume.js';
+import { render } from './render-report.js';
 import type { Skill, SkillContext, SkillInput, SkillOutput } from './types.js';
 
 /**
- * The same diagnosis, run by sub-agents instead of a fixed pipeline.
+ * The diagnosis: every entry handed to agents that read it before deciding what
+ * to consult.
  *
- * `diagnose-resume` decides what to retrieve before it has read anything: two
- * fixed rule families, every entry, always. This one hands each entry to an
- * agent that reads it, chooses which families to consult, and looks again if
- * the first answer did not fit. On bullets with one planted defect each that
- * found the right family 73% of the time against 27% for the fixed pair.
+ * A deterministic pipeline ran alongside this one for a while — two fixed rule
+ * families, every entry, always — for the runs that had to cost a known amount
+ * and produce the same answer twice. It is gone: nobody wanting a good resume
+ * trades the quality for the latency, and two paths meant every change had to
+ * be made twice.
  *
- * What it costs is reproducibility. Two runs over the same resume can consult
- * different rules and land on different scores, and the token bill moves with
- * them. Both skills exist because that trade goes the other way in CI, in a
- * budget-capped run, and any time a result has to be explainable afterwards.
+ * What remains true is the cost. Two runs over the same resume can consult
+ * different rules and land on different scores — measured at about seven points
+ * of run-to-run movement with nothing else changed — and the token bill moves
+ * with them.
  */
 export const orchestratedDiagnoseSkill: Skill = {
   name: 'orchestrated-diagnose',
@@ -43,7 +45,7 @@ export const orchestratedDiagnoseSkill: Skill = {
 
   async execute(input: SkillInput, ctx: SkillContext): Promise<SkillOutput> {
     if (!ctx.orchestrator || !ctx.roleSelector) {
-      return { success: false, error: 'no orchestrator available — use diagnose-resume instead' };
+      return { success: false, error: 'no orchestrator available on this path' };
     }
 
     const path = (input.parsedArgs?.path as string | undefined) ?? input.rawInput.trim();
@@ -97,6 +99,18 @@ export const orchestratedDiagnoseSkill: Skill = {
         current: Math.min(done + 1, total),
         phase: `diagnosing entries (${done}/${total})`,
       };
+
+      // What a dropped connection costs. Without this the checkpoint table
+      // stayed empty across forty-two sessions while the code that reads it
+      // sat ready, so an interrupted run lost every entry it had paid for.
+      //
+      // No messages: a batch diagnosis holds its work in ordinary variables
+      // and each sub-agent has a window of its own, so there is no transcript
+      // to keep — the state and the progress are the whole of it.
+      if (ctx.checkpoints?.shouldCheckpoint(ctx.session)) {
+        ctx.session.state = { ...(ctx.session.state as ResumeSessionState), resume, formatDiagnosis: format };
+        ctx.checkpoints.create(ctx.session, []);
+      }
     });
 
     if (verdicts.every((v) => v.substance === null)) {
@@ -115,6 +129,15 @@ export const orchestratedDiagnoseSkill: Skill = {
 
     const report = await buildReport(resume, format, verdicts, narrative, jdMatch, ctx);
     if (!report) return { success: false, error: 'report generation failed' };
+
+    // What this session learned about the candidate rather than about the
+    // document. A weak entry is recorded once and only recalled if a later
+    // resume repeats it, so a bad line is forgotten and a habit is not.
+    for (const verdict of verdicts) {
+      const dimension = weakestDimension(verdict.substance);
+      if (verdict.substance && dimension) ctx.memory?.afterEntry(verdict.substance, dimension);
+    }
+    ctx.memory?.afterDiagnosis(report);
 
     const rewrites = await rewriteWeakBullets(entries, verdicts, ctx);
     if (rewrites.length > 0) report.rewrites = rewrites;
@@ -315,6 +338,33 @@ function renderAgents(
   }
 
   return lines.join('\n');
+}
+
+/**
+ * The dimension an entry scored worst on, which is what a weak point is about.
+ *
+ * The hook read this off a tool argument, because the model had just chosen
+ * which rule family to consult. Nothing has chosen one here, so it comes from
+ * the scores that already exist.
+ */
+function weakestDimension(diagnosis: EntryDiagnosis | null): DiagnosisDimension | null {
+  if (!diagnosis || diagnosis.bullets.length === 0) return null;
+
+  const totals = { impact: 0, measurement: 0, method: 0 };
+  for (const bullet of diagnosis.bullets) {
+    totals.impact += bullet.dimensions.impact.score;
+    totals.measurement += bullet.dimensions.measurement.score;
+    totals.method += bullet.dimensions.method.score;
+  }
+
+  const worst = (Object.entries(totals).sort(([, a], [, b]) => a - b)[0]?.[0] ?? 'impact') as
+    keyof typeof totals;
+  const dimensions = {
+    impact: 'xyz-structure',
+    measurement: 'impact-quantification',
+    method: 'tech-specificity',
+  } as const;
+  return dimensions[worst];
 }
 
 function parserFrom(ctx: SkillContext): ResumeParser {

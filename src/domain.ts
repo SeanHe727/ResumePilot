@@ -224,8 +224,8 @@ export interface BulletDiagnosis {
    * A required field rather than an invitation. Told only that it *may* look
    * something up, the loop reaches for the corpus, finds a rule about missing
    * baselines, and scores a figure as checkable without ever asking whether
-   * the figure is ordinary — which is how a 71% saving from a format that
-   * halves a weight passed as the strongest bullet in its entry, twice.
+   * the figure is ordinary — which is how a saving that the named technique
+   * produces most of by definition passes as the strongest line in its entry.
    *
    * Empty is a legitimate answer, and so is a `finding` of "no published
    * norm": a technique nobody has benchmarked is a fact about the technique.
@@ -403,6 +403,15 @@ export interface ResumeSessionState {
   latestReport?: DiagnosisReport;
   /** Entry or bullet ids the user chose to exclude. */
   skipped?: string[];
+  /**
+   * What the candidate told the agent that the page does not say.
+   *
+   * Kept in state rather than left in the transcript because a conversation
+   * outruns its own window: a figure given at message four is evicted by
+   * message twenty, and asking for it twice is how a tool stops being worth
+   * talking to. Rendered into the task layer, where compaction cannot reach it.
+   */
+  suppliedFacts?: SuppliedFact[];
   [key: string]: unknown;
 }
 
@@ -412,6 +421,13 @@ export interface ResumeSessionState {
  * Passed to `MemoryStore<CandidateProfile>` — the store itself is generic and
  * has no idea a candidate exists.
  */
+export interface SuppliedFact {
+  /** Their words, not a claim distilled out of them. */
+  fact: string;
+  bulletId?: string;
+  entryId?: string;
+}
+
 export interface CandidateProfile {
   targetRole?: string;
   targetLevel?: string;

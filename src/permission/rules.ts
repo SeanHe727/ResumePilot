@@ -69,6 +69,35 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
       'tool itself.',
   },
   {
+    id: 'allow-review-entry',
+    name: 'Specialist review',
+    match: { type: 'tool_name', pattern: 'review_entry' },
+    level: 'low',
+    action: 'allow',
+    reason: 'Dispatches the same roles the batch diagnosis runs; writes nothing.',
+  },
+  {
+    id: 'allow-record-fact',
+    name: 'Record something the candidate said',
+    match: { type: 'tool_name', pattern: 'record_fact' },
+    level: 'low',
+    action: 'allow',
+    reason:
+      'Writes to the working copy in this session only. Nothing reaches long-term ' +
+      'memory from here — that stays behind the memory-write confirmation below.',
+  },
+  {
+    id: 'allow-apply-revision',
+    name: 'Keep a rewritten bullet',
+    match: { type: 'tool_name', pattern: 'apply_revision' },
+    level: 'low',
+    action: 'allow',
+    reason:
+      'Replaces a line in the session working copy, never the file on disk, and only ' +
+      'after the candidate has said which wording they are keeping. A conversation that ' +
+      'went wrong is undone by not saving it.',
+  },
+  {
     id: 'allow-generate-report',
     name: 'Report generation',
     match: { type: 'tool_name', pattern: 'generate_report' },

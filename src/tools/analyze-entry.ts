@@ -6,7 +6,7 @@ import type {
   ResumeEntry,
   ScoredDimension,
 } from '../domain.js';
-import { ENTRY_SUBSTANCE_PROMPT } from './prompts.js';
+import { ENTRY_SUBSTANCE_PROMPT } from '../prompts/index.js';
 import type { Tool, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
 
@@ -213,8 +213,8 @@ function scored(raw: unknown): ScoredDimension {
  * resume text" — these describe reading the line, not searching for anything,
  * and they are true of every bullet ever written. Nothing couples this field
  * to an actual tool call, so satisfying a required check by writing a sentence
- * is cheaper than making one, and a run under the first version filled 61% of
- * its checks this way.
+ * is cheaper than making one — and under the first version most of the checks
+ * a run reported had been filled that way.
  *
  * Narrow on purpose: it fires only where the finding names the resume as the
  * thing that came back empty. A search that genuinely found nothing is a

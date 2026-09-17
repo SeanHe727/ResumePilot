@@ -1,3 +1,4 @@
+import { FINAL_TURN_NUDGE } from '../prompts/index.js';
 import type { SearchProvider } from '../tools/search-provider.js';
 import { LayeredContextManager } from '../context/manager.js';
 import type { QueryEngine } from '../query-engine/types.js';
@@ -60,17 +61,16 @@ const SUB_AGENT_CONTEXT = {
  * context, sharing only the Query Engine — and through it the rate limiter,
  * the cache and the budget.
  *
- * The loop is the point. A fixed pipeline decides what to retrieve before it
- * has seen anything; an agent retrieves, reads what came back, and decides
- * whether that was the right question. Measured on a set of bullets with one
- * planted defect each, letting the model choose which of the twelve rule
- * families to consult found the planted one 73% of the time against 27% for a
- * fixed pair — and on real bullets it wanted something outside that fixed pair
- * for 79% of them.
+ * The loop is the point. A fixed set of rules is chosen before anything has
+ * been read; an agent retrieves, reads what came back, and decides whether that
+ * was the right question.
  *
- * The cost is a second model call on the turns where it changes its mind, and
- * a run that is no longer byte-identical between invocations. Which is why the
- * deterministic `diagnose-resume` pipeline still exists alongside this.
+ * How much the choosing is worth has not been shown. A comparison that once
+ * stood here claimed it was worth a great deal and turned out to be measuring
+ * something else; the reruns are in TODO.md, where a number can be corrected.
+ * What the loop demonstrably buys is a second look when the first answer does
+ * not fit, at the cost of a run that is no longer byte-identical between
+ * invocations.
  */
 export class SubAgentRuntime {
   constructor(private readonly deps: SubAgentDeps) {}
@@ -290,6 +290,3 @@ function stringify(value: unknown): string {
   return typeof value === 'string' ? value : JSON.stringify(value, null, 2);
 }
 
-const FINAL_TURN_NUDGE = `No more lookups. Answer now, with the JSON described above and nothing else —
-no preamble, no explanation around it. Work from what you already have; an
-answer built on partial reference material is worth more than none.`;

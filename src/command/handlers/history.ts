@@ -19,7 +19,10 @@ export function createHistoryCommand(sessions: SessionManager): Command {
         output: entries
           .map(
             (e) =>
-              `  ${e.id.slice(0, 8)}  ${e.status.padEnd(11)}${String(e.progress.done).padStart(2)}/${e.progress.total}  ` +
+              `  ${e.id.slice(0, 8)}  ${e.status.padEnd(11)}` +
+              (e.progress.total > 0
+                ? `${String(e.progress.done).padStart(2)}/${e.progress.total}  `
+                : `${(e.progress.phase || '—').padEnd(5)}  `) +
               `${e.updatedAt.slice(0, 16).replace('T', ' ')}  ${e.sourcePath}`,
           )
           .join('\n'),

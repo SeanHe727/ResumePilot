@@ -100,8 +100,7 @@ program
   .description('Diagnose a resume file non-interactively')
   .option('--jd <path>', 'job description to diagnose against')
   .option('-o, --output <path>', 'write the report here')
-  .option('--fast', 'use the deterministic pipeline instead of sub-agents')
-  .action(async (file: string, opts: { jd?: string; output?: string; fast?: boolean }) => {
+  .action(async (file: string, opts: { jd?: string; output?: string }) => {
     const { App } = await import('./app.js');
     // Nothing can answer a confirmation prompt here, and a gate that opens
     // when no one is watching is not a gate — so confirmations refuse.
@@ -110,7 +109,7 @@ program
 
     try {
       if (opts.jd) await app.handle(`/jd ${opts.jd}`, session);
-      await app.handle(`/diagnose ${file}${opts.fast ? ' --fast' : ''}`, session);
+      await app.handle(`/diagnose ${file}`, session);
       if (opts.output) await app.handle(`/export md ${opts.output}`, session);
 
       console.log(chalk.dim(`\n${app.queryEngine.getUsageSummary()}`));

@@ -494,3 +494,123 @@ describe('what survives level 2', () => {
     expect(seen[0]).toContain('1.72x versus torch.compile FP16');
   });
 });
+
+describe('budgets sized for a conversation', () => {
+  /** A summariser stand-in, so the ladder can be walked without a provider. */
+  const engine = {
+    async query(p: { messages: Array<{ content: string }> }) {
+      const input = p.messages.map((m) => m.content).join('\n');
+      return {
+        type: 'text' as const,
+        content: '- ' + input.slice(0, Math.floor(input.length * 0.12)).replace(/\n/g, ' '),
+        usage: { inputTokens: 0, outputTokens: 0 },
+        stopReason: 'end_turn' as const,
+      };
+    },
+    getUsageSummary: () => '',
+    checkBudget: () => ({ ok: true }),
+  };
+
+  const USER = 'I measured it on the held-out set. '.repeat(18);
+  const AGENT = 'Here is the rewrite and why it lands harder. '.repeat(55);
+
+  async function converse(config: Partial<ContextConfig>, messages: number) {
+    const ctx = new LayeredContextManager(config);
+    ctx.setSystemPrompt('s'.repeat(6_000));
+    ctx.setTaskContext('t'.repeat(3_000));
+
+    let compactions = 0;
+    let peak = 0;
+    for (let i = 0; i < messages; i++) {
+      ctx.addMessage({ role: 'user', content: USER });
+      ctx.addMessage({ role: 'assistant', content: AGENT });
+      if (await ctx.autoCompact(engine as never)) compactions += 1;
+      peak = Math.max(peak, ctx.build().tokenCount);
+    }
+    return { compactions, peak, final: ctx.build().tokenCount };
+  }
+
+  it('lets a long conversation reach compaction at all', async () => {
+    // At 3,000 tokens of `recent`, eviction held the total at 5,663 against a
+    // threshold of 10,800: the ladder could not be reached however long the
+    // conversation ran, so the layer that was supposed to protect it never did.
+    const cramped = await converse({ recentBudget: 3_000, historyBudget: 2_000 }, 30);
+    const sized = await converse({}, 30);
+
+    expect(cramped.compactions).toBe(0);
+    expect(sized.compactions).toBeGreaterThan(0);
+  });
+
+  it('holds the window down instead of creeping back to the ceiling', async () => {
+    // Three rounds is a sensible ceiling for one diagnosis and a hard stop
+    // halfway through a conversation: it ran out by message 27 and the window
+    // climbed back to 91% of budget.
+    const capped = await converse({ maxCompactions: 3 }, 40);
+    const sized = await converse({}, 40);
+
+    expect(sized.final).toBeLessThan(capped.final);
+    expect(sized.final).toBeLessThan(DEFAULT_CONTEXT_CONFIG.maxTotalTokens / 2);
+  });
+});
+
+describe('tool results whose call is gone', () => {
+  const engine = {
+    async query() {
+      return { type: 'text' as const, content: '- folded', usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' as const };
+    },
+    getUsageSummary: () => '',
+    checkBudget: () => ({ ok: true }),
+  };
+
+  function orphansIn(ctx: LayeredContextManager): string[] {
+    const msgs = ctx.build().messages;
+    const live = new Set(msgs.flatMap((m) => (m.toolCalls ?? []).map((c) => c.id)));
+    return msgs
+      .filter((m) => m.role === 'tool')
+      .map((m) => m.toolCallId ?? '')
+      .filter((id) => !live.has(id));
+  }
+
+  it('do not survive level 2', async () => {
+    // Compaction shortens `recent` by a fixed count, so it lands mid-exchange
+    // more readily than eviction does: three messages back from a turn that
+    // made five calls is three results and no call to answer them. The
+    // provider refuses with a 400 naming a `call_id` that appears nowhere.
+    //
+    // Unseen until now because compaction had never once run — the first
+    // conversation long enough to trigger it broke on the next request.
+    const ctx = new LayeredContextManager({});
+    ctx.setSystemPrompt('s'.repeat(700));
+    ctx.setTaskContext('t'.repeat(5_000));
+    for (let i = 0; i < 9; i++) {
+      ctx.addMessage({ role: 'user', content: 'q'.repeat(700) });
+      ctx.addMessage({ role: 'assistant', content: 'a'.repeat(3_400) });
+    }
+
+    const ids = ['c1', 'c2', 'c3', 'c4', 'c5'];
+    ctx.addMessage({ role: 'assistant', content: '', toolCalls: ids.map((id) => ({ id, name: 't', input: {} })) });
+    for (const id of ids) ctx.addToolResult(id, JSON.stringify({ ok: true, body: 'r'.repeat(600) }));
+
+    expect(await ctx.autoCompact(engine as never)).toBe(2);
+    expect(orphansIn(ctx)).toEqual([]);
+  });
+
+  it('do not survive eviction either', async () => {
+    const ctx = new LayeredContextManager({ recentBudget: 1_500 });
+    ctx.addMessage({ role: 'assistant', content: '', toolCalls: [{ id: 'c1', name: 't', input: {} }] });
+    ctx.addToolResult('c1', JSON.stringify({ body: 'r'.repeat(3_000) }));
+    ctx.addMessage({ role: 'user', content: 'q'.repeat(4_000) });
+
+    expect(orphansIn(ctx)).toEqual([]);
+  });
+
+  it('keeps a result whose call is still in the window', async () => {
+    // The guard must not eat the pairs it exists to protect.
+    const ctx = new LayeredContextManager({});
+    ctx.addMessage({ role: 'assistant', content: '', toolCalls: [{ id: 'c1', name: 't', input: {} }] });
+    ctx.addToolResult('c1', '{"ok":true}');
+
+    const msgs = ctx.build().messages;
+    expect(msgs.filter((m) => m.role === 'tool')).toHaveLength(1);
+  });
+});

@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 import type { DiagnosisReport, ResumeSessionState } from '../../domain.js';
-import { render } from '../../skills/diagnose-resume.js';
+import { render } from '../../skills/render-report.js';
 import type { Command, CommandResult, ParsedArgs } from '../types.js';
 
 const FORMATS = ['md', 'json'] as const;
