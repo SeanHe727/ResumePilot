@@ -90,7 +90,7 @@ describe('one tool per specialist', () => {
     await reviewContentTool.execute({ entryId: 'experience:0' }, ctx);
     await reviewWordingTool.execute({ entryId: 'experience:0' }, ctx);
 
-    expect(seen.map((s) => s.roles.roles)).toEqual([['entry-substance'], ['entry-wording']]);
+    expect(seen.map((s) => s.roles.roles)).toEqual([['content'], ['wording']]);
   });
 
   it('returns the specialist that was asked for, not the whole verdict', async () => {

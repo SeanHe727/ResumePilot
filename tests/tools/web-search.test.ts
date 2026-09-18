@@ -242,7 +242,7 @@ describe('degrading without a search provider', () => {
     // everyone without a search key, the first time this was wired.
     const { ROLES } = await import('../../src/agent/roles.js');
 
-    for (const id of ['entry-substance', 'narrative', 'jd-match'] as const) {
+    for (const id of ['content', 'narrative', 'jd-match'] as const) {
       expect(ROLES[id].tools, id).not.toContain('web_search');
       expect(ROLES[id].optionalTools, id).toContain('web_search');
       expect(ROLES[id].optionalPrompt, id).toMatch(/web_results/);
@@ -250,7 +250,7 @@ describe('degrading without a search provider', () => {
 
     // Wording judges verb strength and concision, which retrieval never
     // settles, and it runs on the cheap model.
-    expect(ROLES['entry-wording'].optionalTools ?? []).not.toContain('web_search');
+    expect(ROLES['wording'].optionalTools ?? []).not.toContain('web_search');
   });
 
   it('only promises the model a search when one is actually available', async () => {
@@ -259,12 +259,12 @@ describe('degrading without a search provider', () => {
 
     const without = createToolRegistry();
     const with_ = createToolRegistry({ search: provider });
-    const wanted = ROLES['entry-substance'].optionalTools ?? [];
+    const wanted = ROLES['content'].optionalTools ?? [];
 
     expect(wanted.filter((n) => without.has(n))).toEqual([]);
     expect(wanted.filter((n) => with_.has(n))).toEqual(['web_search']);
     // The promise lives in `optionalPrompt`, appended only when one resolved.
-    expect(ROLES['entry-substance'].systemPrompt).not.toMatch(/web_results/);
+    expect(ROLES['content'].systemPrompt).not.toMatch(/web_results/);
   });
 });
 

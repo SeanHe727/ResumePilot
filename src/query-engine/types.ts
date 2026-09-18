@@ -119,6 +119,8 @@ export type TaskKind =
   | 'diagnose_bullet'
   /** Verb strength and concision — no retrieval, so a cheap model suffices. */
   | 'judge_wording'
+  /** One question about the field an entry comes from. */
+  | 'research_domain'
   | 'rewrite_bullet'
   | 'match_jd'
   /** The career arc across entries — one pass over the whole document. */

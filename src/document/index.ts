@@ -7,3 +7,4 @@ export { HeuristicStructureBuilder, countWords } from './structure-builder.js';
 export { ModelDocumentSegmenter } from './segmenter.js';
 export * from './layout.js';
 export * from './types.js';
+export { renderEntry, renderResume } from './render.js';

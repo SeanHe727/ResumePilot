@@ -2,11 +2,11 @@ import type {
   ClaimCheck,
   BulletDiagnosis,
   EntryDiagnosis,
-  EntryNarrative,
   ResumeEntry,
   ScoredDimension,
 } from '../domain.js';
-import { ENTRY_SUBSTANCE_PROMPT } from '../prompts/index.js';
+import { renderEntry } from '../document/index.js';
+import { CONTENT_PROMPT } from '../prompts/index.js';
 import type { Tool, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
 
@@ -56,7 +56,7 @@ export const analyzeEntryTool: Tool<AnalyzeEntryInput, EntryDiagnosis> = {
 
     const response = await ctx.queryEngine.query({
       task: 'diagnose_bullet',
-      systemPrompt: ENTRY_SUBSTANCE_PROMPT,
+      systemPrompt: CONTENT_PROMPT,
       messages: [{ role: 'user', content: buildEntryMessage(input) }],
       ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
     });
@@ -76,8 +76,7 @@ export const analyzeEntryTool: Tool<AnalyzeEntryInput, EntryDiagnosis> = {
 /** Exported so a sub-agent asks for the same shape this tool does. */
 export function buildEntryMessage(input: AnalyzeEntryInput): string {
   const { entry, references } = input;
-  const header = entry.headerLines.join(' | ');
-  const bullets = entry.bullets.map((b) => `  ${b.id}: ${b.text}`).join('\n');
+
 
   const referenceBlock = references?.length
     ? `\nRules to judge against:\n${references
@@ -89,9 +88,7 @@ export function buildEntryMessage(input: AnalyzeEntryInput): string {
     : '';
 
   return `<resume_content>
-Entry: ${header}
-Bullets:
-${bullets}
+${renderEntry(entry)}
 </resume_content>
 ${referenceBlock}
 Return JSON of exactly this shape:
@@ -118,12 +115,6 @@ Return JSON of exactly this shape:
       ]
     }
   ],
-  "narrative": {
-    "redundantPairs": [{ "bulletA": "<id>", "bulletB": "<id>", "note": "..." }],
-    "weakLead": true|false,
-    "coherence": { "score": 0-100, "detail": "one sentence" },
-    "suggestedOrder": ["<id>", "<id>"]
-  }
 }`;
 }
 
@@ -152,7 +143,11 @@ export function normaliseEntryDiagnosis(
     const method = scored(dims.method);
 
     return {
-      bulletId: String(raw.bulletId ?? ''),
+      // Every line is shown as `- [id] text`, and a model handed a bracketed
+      // id hands it back bracketed. Left alone it matches no bullet in the
+      // document, so the score lands on nothing: the report finds no line to
+      // attach it to and a rewrite cannot find the text it is rewriting.
+      bulletId: bareId(raw.bulletId),
       overallScore:
         typeof raw.overallScore === 'number'
           ? raw.overallScore
@@ -179,27 +174,10 @@ export function normaliseEntryDiagnosis(
         bullets.reduce((sum, b) => sum + b.overallScore, 0) / bullets.length,
       ),
       bullets,
-      narrative: normaliseNarrative(parsed.narrative),
     },
   };
 }
 
-function normaliseNarrative(raw: unknown): EntryNarrative {
-  const n = (raw ?? {}) as Record<string, unknown>;
-  const pairs = Array.isArray(n.redundantPairs) ? n.redundantPairs : [];
-  const order = stringArray(n.suggestedOrder);
-
-  return {
-    redundantPairs: (pairs as Array<Record<string, unknown>>).map((p) => ({
-      bulletA: String(p.bulletA ?? ''),
-      bulletB: String(p.bulletB ?? ''),
-      note: String(p.note ?? ''),
-    })),
-    weakLead: n.weakLead === true,
-    coherence: scored(n.coherence),
-    ...(order.length > 0 ? { suggestedOrder: order } : {}),
-  };
-}
 
 function scored(raw: unknown): ScoredDimension {
   const r = (raw ?? {}) as Record<string, unknown>;
@@ -256,4 +234,9 @@ function claimChecks(raw: unknown): ClaimCheck[] {
 
 function stringArray(raw: unknown): string[] {
   return Array.isArray(raw) ? raw.filter((s): s is string => typeof s === 'string') : [];
+}
+
+/** Ids are shown bracketed, so they come back bracketed. */
+function bareId(raw: unknown): string {
+  return String(raw ?? '').replace(/[[\]]/g, '').trim();
 }

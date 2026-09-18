@@ -3,15 +3,16 @@ import { describe, expect, it } from 'vitest';
 import type { ResumeDocument, ResumeEntry, SectionKind } from '../../src/domain.js';
 import {
   DefaultOrchestrator,
-  ENTRY_SUBSTANCE_AGENT,
-  ENTRY_WORDING_AGENT,
+  CONTENT_AGENT,
+  DEEP_RESEARCH_AGENT,
+  WORDING_AGENT,
   SemaphorePool,
   SubAgentRuntime,
   type SubAgentConfig,
 } from '../../src/agent/index.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
-import { MapToolRegistry, createToolRegistry } from '../../src/tools/index.js';
+import { MapToolRegistry, createToolRegistry, examineDepthTool } from '../../src/tools/index.js';
 import type { SearchProvider } from '../../src/tools/search-provider.js';
 import type { ToolRegistry } from '../../src/tools/types.js';
 
@@ -141,7 +142,7 @@ describe('SubAgentRuntime', () => {
     const { engine } = scriptedEngine(text(SUBSTANCE_JSON));
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(result.success).toBe(true);
     expect(result.turns).toBe(1);
@@ -153,7 +154,7 @@ describe('SubAgentRuntime', () => {
     const { engine } = scriptedEngine(text(`Here you go:\n\`\`\`json\n${SUBSTANCE_JSON}\n\`\`\``));
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect((result.output as { narrative: unknown }).narrative).toBeDefined();
   });
@@ -167,7 +168,7 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect((result.output as { bullets: unknown[] }).bullets).toHaveLength(1);
   });
@@ -185,7 +186,7 @@ describe('SubAgentRuntime', () => {
     });
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(result.success).toBe(false);
     expect(result.error).toMatch(/finished its reasoning without writing an answer/);
@@ -202,7 +203,7 @@ describe('SubAgentRuntime', () => {
     });
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(result.success).toBe(false);
     expect(result.error).toMatch(/cut off at the output limit/);
@@ -212,7 +213,7 @@ describe('SubAgentRuntime', () => {
     const { engine } = scriptedEngine(text('The bullet reads fine to me.'));
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(typeof result.output).toBe('string');
   });
@@ -228,7 +229,7 @@ describe('SubAgentRuntime', () => {
       { id: 'k1', dimension: 'impact-quantification', dimensionLabel: 'Impact', question: 'q', weakAnswer: 'w', strongAnswer: 's', gapAnalysis: 'g', keywords: [], similarity: 0.8, matchedBy: 'both' },
     ]);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(result.turns).toBe(2);
     expect(result.success).toBe(true);
@@ -244,11 +245,11 @@ describe('SubAgentRuntime', () => {
     const { engine, seen } = scriptedEngine(text(WORDING_JSON));
     const { runtime } = runtimeWith(engine);
 
-    await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
+    await runtime.run({ agentConfig: WORDING_AGENT, input: 'judge' });
     expect(seen[0]?.task).toBe('judge_wording');
 
     seen.length = 0;
-    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
     expect(seen[0]?.task).toBe('diagnose_bullet');
   });
 
@@ -256,9 +257,12 @@ describe('SubAgentRuntime', () => {
     const { engine, seen } = scriptedEngine(text(SUBSTANCE_JSON));
     const { runtime } = runtimeWith(engine);
 
-    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base']);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
+      'query_knowledge_base',
+      'examine_technical_depth',
+    ]);
   });
 
   it('offers an optional tool once something is behind it', async () => {
@@ -266,9 +270,13 @@ describe('SubAgentRuntime', () => {
     const search = { name: 'fake', async search() { return []; } };
     const { runtime } = runtimeWith(engine, [], createToolRegistry({ search: search as never }));
 
-    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'web_search']);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
+      'query_knowledge_base',
+      'examine_technical_depth',
+      'web_search',
+    ]);
   });
 
   it('does not promise a capability the run does not have', async () => {
@@ -279,14 +287,14 @@ describe('SubAgentRuntime', () => {
     const search = { name: 'fake', async search() { return []; } };
 
     const { runtime: without } = runtimeWith(engine);
-    await without.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    await without.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     const { runtime: with_ } = runtimeWith(
       engine,
       [],
       createToolRegistry({ search: search as never }),
     );
-    await with_.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    await with_.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(seen[0]?.systemPrompt).not.toMatch(/web_results/);
     expect(seen[1]?.systemPrompt).toMatch(/web_results/);
@@ -312,7 +320,7 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine, [], registry, provider as never);
 
-    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(calls).toEqual([{ query: 'int8 vram' }]);
   });
@@ -333,6 +341,10 @@ describe('SubAgentRuntime', () => {
     // testing.
     const huge = 'x'.repeat(23_000);
     const registry = new MapToolRegistry();
+    // The role declares this too, and `getSchemasFor` throws on a name the
+    // registry does not hold — a bare registry has to carry every tool the role
+    // names, not only the one the test exercises.
+    registry.register(examineDepthTool as never);
     registry.register({
       name: 'query_knowledge_base',
       description: 'stand-in that returns more than a window can hold',
@@ -354,7 +366,7 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine, [], registry);
 
-    await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     // Asserted on the window rather than on which rung was reached: level 1
     // re-compresses tool output for free and usually settles it there, and a
@@ -373,7 +385,7 @@ describe('SubAgentRuntime', () => {
     const { runtime } = runtimeWith(engine);
 
     await runtime.run({
-      agentConfig: ENTRY_WORDING_AGENT,
+      agentConfig: WORDING_AGENT,
       input: 'judge',
       context: { entry: 'ByteDance — Backend Intern', secretPlan: 'do not leak', previousFindings: 'nope' },
     });
@@ -395,7 +407,7 @@ describe('SubAgentRuntime', () => {
     const { runtime } = runtimeWith(engine);
 
     const result = await runtime.run({
-      agentConfig: { ...ENTRY_WORDING_AGENT, maxTurns: 2 },
+      agentConfig: { ...WORDING_AGENT, maxTurns: 2 },
       input: 'judge',
     });
 
@@ -412,7 +424,7 @@ describe('SubAgentRuntime', () => {
     const { engine, seen } = scriptedEngine(text(SUBSTANCE_JSON));
     const { runtime } = runtimeWith(engine);
 
-    await runtime.run({ agentConfig: ENTRY_WORDING_AGENT, input: 'judge' });
+    await runtime.run({ agentConfig: WORDING_AGENT, input: 'judge' });
 
     expect(JSON.stringify(seen[0])).not.toContain('No more lookups');
   });
@@ -427,7 +439,7 @@ describe('SubAgentRuntime', () => {
     const { runtime } = runtimeWith(engine);
 
     const result = await runtime.run({
-      agentConfig: { ...ENTRY_WORDING_AGENT, maxTurns: 2 },
+      agentConfig: { ...WORDING_AGENT, maxTurns: 2 },
       input: 'judge',
     });
 
@@ -445,14 +457,14 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine);
 
-    const result = await runtime.run({ agentConfig: ENTRY_SUBSTANCE_AGENT, input: 'diagnose' });
+    const result = await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
     expect(result.success).toBe(true);
     expect(result.turns).toBe(2);
   });
 
   it('reports a tool the role cannot reach', async () => {
-    const rogue: SubAgentConfig = { ...ENTRY_SUBSTANCE_AGENT, maxTurns: 2 };
+    const rogue: SubAgentConfig = { ...CONTENT_AGENT, maxTurns: 2 };
     const { engine } = scriptedEngine(toolUse('rewrite_bullet', {}), text(SUBSTANCE_JSON));
     const { runtime } = runtimeWith(engine);
 
@@ -463,13 +475,40 @@ describe('SubAgentRuntime', () => {
   });
 });
 
+describe('the one-time specialist', () => {
+  it('carries the word the API needs into a turn with no tools', async () => {
+    // `json_object` is refused unless "json" appears in an input message, and
+    // the system prompt does not count. Every agent with a tool asks only on
+    // its last turn, which always carries the nudge; this one has no tools at
+    // all, asks on turn one, and the request came back 400 before reaching the
+    // model — one caught exception, and a review reporting nothing found.
+    const { engine, seen } = scriptedEngine(text(JSON.stringify({ domain: 'x', findings: [] })));
+    const { runtime } = runtimeWith(engine);
+
+    await runtime.run({ agentConfig: DEEP_RESEARCH_AGENT, input: 'examine this' });
+
+    expect(seen[0]?.jsonMode).toBe(true);
+    expect(seen[0]?.messages.map((m) => m.content).join('\n')).toMatch(/json/i);
+  });
+
+  it('is not a role: nothing can dispatch it', async () => {
+    // It is what one tool runs, and its whole life is that call. Putting it in
+    // `ROLES` would make it selectable by the coordinator, which is the one
+    // thing it must not be.
+    const { ROLES } = await import('../../src/agent/roles.js');
+
+    expect(Object.keys(ROLES)).not.toContain('deep-research');
+    expect(DEEP_RESEARCH_AGENT.id).toBe('deep-research');
+  });
+});
+
 describe('DefaultOrchestrator', () => {
   function orchestrator(engine: QueryEngine, config = {}) {
     const { runtime } = runtimeWith(engine);
     return new DefaultOrchestrator(runtime, config);
   }
 
-  const bothRoles = { roles: ['entry-substance', 'entry-wording'] as const, reasons: {} };
+  const bothRoles = { roles: ['content', 'wording'] as const, reasons: {} };
 
   it('runs the per-entry roles together and aggregates them', async () => {
     let call = 0;
@@ -550,7 +589,7 @@ describe('DefaultOrchestrator', () => {
 
     const verdict = await orchestrator(engine, { failureStrategy: 'retry' }).diagnoseEntry(
       entry,
-      { roles: ['entry-substance'], reasons: {} },
+      { roles: ['content'], reasons: {} },
     );
 
     expect(attempts).toBe(2);
@@ -587,7 +626,7 @@ describe('DefaultOrchestrator', () => {
 
     const verdicts = await orchestrator(engine).diagnoseAll(
       entries,
-      { roles: ['entry-substance'], reasons: {} },
+      { roles: ['content'], reasons: {} },
       (done, total) => seen.push([done, total]),
     );
 

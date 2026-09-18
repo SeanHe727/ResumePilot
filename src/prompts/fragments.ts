@@ -42,7 +42,7 @@ into a real resume and cannot defend it in an interview.`;
 /**
  * Added only for the roles that can act on outside evidence.
  *
- * `entry-wording` is deliberately not one of them. It judges verb strength and
+ * `wording` is deliberately not one of them. It judges verb strength and
  * concision, which no amount of retrieval settles, and it runs on the cheap
  * model — giving it the tool would double the searches a run makes and buy
  * nothing.

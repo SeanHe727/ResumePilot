@@ -3,8 +3,9 @@ export { SubAgentRuntime, type SubAgentDeps } from './sub-agent.js';
 export { DefaultOrchestrator } from './orchestrator.js';
 export {
   ROLES,
-  ENTRY_SUBSTANCE_AGENT,
-  ENTRY_WORDING_AGENT,
+  CONTENT_AGENT,
+  DEEP_RESEARCH_AGENT,
+  WORDING_AGENT,
   NARRATIVE_AGENT,
   JD_MATCH_AGENT,
 } from './roles.js';

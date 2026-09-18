@@ -1,4 +1,4 @@
-import { RETRIEVAL_ADDENDUM, UNTRUSTED_NOTICE } from './shared.js';
+import { RETRIEVAL_ADDENDUM, UNTRUSTED_NOTICE } from './fragments.js';
 
 export const JD_MATCH_PROMPT = `You compare a resume against the job description it is being sent to.
 

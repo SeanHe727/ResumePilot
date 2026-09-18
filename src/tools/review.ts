@@ -1,5 +1,11 @@
-import type { Briefing } from '../agent/types.js';
-import type { Bullet, ResumeEntry, ResumeSessionState } from '../domain.js';
+import type { Briefing, EntryVerdict } from '../agent/types.js';
+import type {
+  Bullet,
+  EntryDiagnosis,
+  ResumeEntry,
+  ResumeSessionState,
+  WordingDiagnosis,
+} from '../domain.js';
 import { analyzeFormat } from './analyze-format.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 
@@ -85,6 +91,37 @@ function upsert<T extends { entryId: string }>(existing: T[] | undefined, next: 
   return [...kept, next];
 }
 
+type EntryRole = 'content' | 'wording';
+
+/**
+ * Which half of a verdict each role produced, and where it goes, as a table.
+ *
+ * It was an `if (role === 'content')` with the other case falling
+ * through, which is typed and still wrong in the way that matters: a third
+ * per-entry role would compile, run, and quietly file its reading under
+ * wording. A `Record` keyed by the role union makes that a compile error.
+ */
+const VERDICT_FOR: Record<
+  EntryRole,
+  {
+    read: (verdict: EntryVerdict) => EntryDiagnosis | WordingDiagnosis | null;
+    store: (state: ResumeSessionState, found: never) => void;
+  }
+> = {
+  'content': {
+    read: (verdict) => verdict.substance,
+    store: (state, found: EntryDiagnosis) => {
+      state.entryDiagnoses = upsert(state.entryDiagnoses, found);
+    },
+  },
+  'wording': {
+    read: (verdict) => verdict.wording,
+    store: (state, found: WordingDiagnosis) => {
+      state.wordingDiagnoses = upsert(state.wordingDiagnoses, found);
+    },
+  },
+};
+
 function noResume(): ToolResult<never> {
   return {
     success: false,
@@ -121,11 +158,7 @@ function applyRevisions(
   return { ...entry, bullets };
 }
 
-function entryReview(
-  name: string,
-  role: 'entry-substance' | 'entry-wording',
-  description: string,
-): Tool<EntryReviewInput, unknown> {
+function entryReview(name: string, role: EntryRole, description: string): Tool<EntryReviewInput, unknown> {
   return {
     name,
     description,
@@ -186,23 +219,11 @@ function entryReview(
           briefingFrom(input),
         );
 
-        if (role === 'entry-substance') {
-          if (verdict.substance) {
-            const found = verdict.substance;
-            remember(ctx, (state) => {
-              state.entryDiagnoses = upsert(state.entryDiagnoses, found);
-            });
-          }
-          return { success: true, data: verdict.substance };
-        }
+        const { read, store } = VERDICT_FOR[role];
+        const found = read(verdict);
+        if (found) remember(ctx, (state) => store(state, found as never));
 
-        if (verdict.wording) {
-          const found = verdict.wording;
-          remember(ctx, (state) => {
-            state.wordingDiagnoses = upsert(state.wordingDiagnoses, found);
-          });
-        }
-        return { success: true, data: verdict.wording };
+        return { success: true, data: found };
       } catch (err) {
         return {
           success: false,
@@ -218,14 +239,14 @@ function entryReview(
 
 export const reviewContentTool = entryReview(
   'review_content',
-  'entry-substance',
+  'content',
   'Have the content specialist read one entry: whether each line says what was done and what came ' +
     'of it, whether its figures mean what they appear to, and how the lines read against each other.',
 );
 
 export const reviewWordingTool = entryReview(
   'review_wording',
-  'entry-wording',
+  'wording',
   'Have the wording specialist read one entry: opening verbs and whether the words carry their ' +
     'weight. Says nothing about whether the content is any good.',
 );

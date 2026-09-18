@@ -1,5 +1,6 @@
 import type {
   EntryDiagnosis,
+  EntryRead,
   JdMatch,
   JobDescription,
   NarrativeAssessment,
@@ -7,6 +8,7 @@ import type {
   ResumeEntry,
   WordingDiagnosis,
 } from '../domain.js';
+import { renderResume } from '../document/index.js';
 import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
 import { buildWordingMessage } from '../tools/analyze-wording.js';
 import { SemaphorePool } from './pool.js';
@@ -47,7 +49,26 @@ const DEFAULTS: OrchestratorConfig = {
 const DEFAULT_ENTRY_CONCURRENCY = 2;
 
 /** Roles that run once per entry, as opposed to once per document. */
-const PER_ENTRY: ReadonlySet<RoleId> = new Set(['entry-substance', 'entry-wording']);
+const PER_ENTRY_ROLES = ['content', 'wording'] as const;
+type PerEntryRole = (typeof PER_ENTRY_ROLES)[number];
+
+const PER_ENTRY: ReadonlySet<RoleId> = new Set(PER_ENTRY_ROLES);
+
+/**
+ * What each per-entry role is sent, as a table rather than a branch.
+ *
+ * It was `role === 'content' ? a : b`, which is typed and still wrong in the
+ * way that matters: a third per-entry role would compile, run, and quietly
+ * receive the wording message. A `Record` keyed by the role union does not —
+ * adding a role without saying what it reads is a compile error, which is where
+ * that mistake belongs.
+ */
+const MESSAGE_FOR: Record<PerEntryRole, (entry: ResumeEntry) => string> = {
+  // The same user message the matching tool builds, so a sub-agent and a direct
+  // call ask for the same JSON and agree on bullet ids.
+  content: (entry) => buildEntryMessage({ entry }),
+  wording: (entry) => buildWordingMessage(entry),
+};
 
 /**
  * The single entry point from a Skill into the sub-agent layer.
@@ -103,7 +124,7 @@ export class DefaultOrchestrator {
       };
     }
 
-    const chosen = roles.roles.filter((role) => PER_ENTRY.has(role));
+    const chosen = roles.roles.filter((role): role is PerEntryRole => PER_ENTRY.has(role));
     const results = await this.parallel(chosen.map((role) => taskFor(role, entry, briefing)));
 
     return aggregate(entry, results, this.failures);
@@ -148,7 +169,7 @@ export class DefaultOrchestrator {
       {
         agentConfig: ROLES['narrative']!,
         input: 'Read these entries in sequence and return the JSON described above.',
-        context: { entries: renderSections(resume), ...briefingContext(briefing) },
+        context: { entries: renderResume(resume), ...briefingContext(briefing) },
       },
     ]);
 
@@ -160,6 +181,7 @@ export class DefaultOrchestrator {
       arc: typeof raw.arc === 'string' ? raw.arc : '',
       gaps: strings(raw.gaps),
       orderingNotes: strings(raw.orderingNotes),
+      withinEntries: readEntryReads(resume, raw.withinEntries),
     };
   }
 
@@ -174,7 +196,7 @@ export class DefaultOrchestrator {
         agentConfig: ROLES['jd-match']!,
         input: 'Compare the resume against the job description and return the JSON described above.',
         context: {
-          resume: renderSections(resume),
+          resume: renderResume(resume),
           jobDescription: jd.rawText,
           ...briefingContext(briefing),
         },
@@ -311,17 +333,57 @@ function strings(raw: unknown): string[] {
   return Array.isArray(raw) ? raw.filter((s): s is string => typeof s === 'string') : [];
 }
 
-function taskFor(role: RoleId, entry: ResumeEntry, briefing?: Briefing): SubAgentTask {
-  const agentConfig = ROLES[role]!;
+/**
+ * The per-entry half of the narrative reply.
+ *
+ * Ids are checked against the document for the same reason they are everywhere
+ * else: an invented one would report a repetition between lines nobody wrote.
+ */
+function readEntryReads(resume: ResumeDocument, raw: unknown): EntryRead[] {
+  if (!Array.isArray(raw)) return [];
 
-  // The same user message the matching tool builds, so the sub-agent and the
-  // deterministic path ask for the same JSON and agree on bullet ids.
-  const input =
-    role === 'entry-substance' ? buildEntryMessage({ entry }) : buildWordingMessage(entry);
+  const entries = new Map(
+    resume.sections.flatMap((section) => section.entries).map((entry) => [entry.id, entry]),
+  );
 
+  return raw.flatMap((item): EntryRead[] => {
+    const record = asObject(item);
+    const entryId = String(record?.entryId ?? '').replace(/[[\]]/g, '').trim();
+    const entry = entries.get(entryId);
+    if (!entry) return [];
+
+    const ids = new Set(entry.bullets.map((b) => b.id));
+    const bare = (raw: unknown): string => String(raw ?? '').replace(/[[\]]/g, '').trim();
+    const pairs = Array.isArray(record?.redundantPairs) ? record.redundantPairs : [];
+    const coherence = asObject(record?.coherence);
+
+    return [
+      {
+        entryId,
+        redundantPairs: pairs.flatMap((pair) => {
+          const p = asObject(pair);
+          const bulletA = bare(p?.bulletA);
+          const bulletB = bare(p?.bulletB);
+          return ids.has(bulletA) && ids.has(bulletB)
+            ? [{ bulletA, bulletB, note: String(p?.note ?? '') }]
+            : [];
+        }),
+        coherence: {
+          score: numeric(coherence?.score),
+          detail: typeof coherence?.detail === 'string' ? coherence.detail : '',
+        },
+        ...(Array.isArray(record?.suggestedOrder)
+          ? { suggestedOrder: record.suggestedOrder.map(bare).filter((id) => ids.has(id)) }
+          : {}),
+      },
+    ];
+  });
+}
+
+function taskFor(role: PerEntryRole, entry: ResumeEntry, briefing?: Briefing): SubAgentTask {
   return {
-    agentConfig,
-    input,
+    agentConfig: ROLES[role]!,
+    input: MESSAGE_FOR[role](entry),
     context: { entry: entry.headerLines.join(' | '), ...briefingContext(briefing) },
   };
 }
@@ -350,8 +412,8 @@ function aggregate(
   results: SubAgentResult[],
   failures: Map<string, string>,
 ): EntryVerdict {
-  const substance = readSubstance(entry, results, (r) => failures.set(`entry-substance:${entry.id}`, r));
-  const wording = readWording(entry, results, (r) => failures.set(`entry-wording:${entry.id}`, r));
+  const substance = readSubstance(entry, results, (r) => failures.set(`content:${entry.id}`, r));
+  const wording = readWording(entry, results, (r) => failures.set(`wording:${entry.id}`, r));
 
   const scores = [substance?.overallScore, wording?.overallScore].filter(
     (s): s is number => typeof s === 'number',
@@ -384,7 +446,7 @@ function readSubstance(
   results: SubAgentResult[],
   note: (reason: string) => void,
 ): EntryDiagnosis | null {
-  const raw = successOutput(results, 'entry-substance', note);
+  const raw = successOutput(results, 'content', note);
   if (!raw) return null;
 
   const normalised = normaliseEntryDiagnosis(raw, entry);
@@ -401,7 +463,7 @@ function readWording(
   results: SubAgentResult[],
   note: (reason: string) => void,
 ): WordingDiagnosis | null {
-  const raw = successOutput(results, 'entry-wording', note);
+  const raw = successOutput(results, 'wording', note);
   if (!raw) return null;
 
   const perBullet = Array.isArray(raw.perBullet) ? raw.perBullet : null;
@@ -443,4 +505,19 @@ function successOutput(
   }
 
   return result.output as Record<string, unknown>;
+}
+
+/**
+ * Whether the strongest bullet opens the entry.
+ *
+ * Arithmetic over scores the content reader already produced, rather than a
+ * judgement made a second time. Deciding which bullet is strongest is exactly
+ * what that reader just did; asking the narrative reader to decide it again
+ * gives a second opinion, not a check.
+ */
+export function weakLead(diagnosis: EntryDiagnosis): boolean {
+  const scores = diagnosis.bullets.map((bullet) => bullet.overallScore);
+  if (scores.length < 2) return false;
+
+  return scores[0]! < Math.max(...scores);
 }

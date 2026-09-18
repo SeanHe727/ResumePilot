@@ -130,7 +130,7 @@ export interface EntryVerdict {
  * between resumes is absorbed by which roles run (below) and by what the
  * knowledge base retrieves — not by rewiring the graph.
  */
-export type RoleId = 'entry-substance' | 'entry-wording' | 'jd-match' | 'narrative';
+export type RoleId = 'content' | 'wording' | 'jd-match' | 'narrative';
 
 /**
  * What the coordinator passes down with a dispatch.

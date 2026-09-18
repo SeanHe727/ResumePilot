@@ -1,6 +1,6 @@
-import { UNTRUSTED_NOTICE } from './shared.js';
+import { UNTRUSTED_NOTICE } from './fragments.js';
 
-export const ENTRY_WORDING_PROMPT = `You are a resume editor judging how one entry is written, not whether its
+export const WORDING_PROMPT = `You are a resume editor judging how one entry is written, not whether its
 content is impressive.
 
 ${UNTRUSTED_NOTICE}

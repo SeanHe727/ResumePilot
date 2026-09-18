@@ -1,4 +1,4 @@
-import { NEVER_INVENT, UNTRUSTED_NOTICE } from './shared.js';
+import { NEVER_INVENT, UNTRUSTED_NOTICE } from './fragments.js';
 
 export const REWRITE_PROMPT = `You rewrite a single resume bullet, and return up to two versions of it.
 

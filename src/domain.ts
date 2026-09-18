@@ -257,7 +257,6 @@ export interface EntryDiagnosis {
   entryId: string;
   overallScore: number;
   bullets: BulletDiagnosis[];
-  narrative: EntryNarrative;
 }
 
 /** Output of the Entry Wording agent — no knowledge base, cheap model. */
@@ -283,6 +282,34 @@ export interface NarrativeAssessment {
   gaps: string[];
   /** Entries that would land better reordered, shortened or cut. */
   orderingNotes: string[];
+  /**
+   * How each entry reads as a unit — the same judgement at a smaller scale.
+   *
+   * This lived on `EntryDiagnosis`, produced by the reader that scores bullets,
+   * because that reader had the entry in front of it. That was convenience
+   * rather than a reason: whether two lines repeat each other and what order
+   * they would land in is the same question being asked across a whole resume
+   * here, and asking it in two places meant two readers judging order.
+   */
+  withinEntries: EntryRead[];
+}
+
+export interface EntryRead {
+  entryId: string;
+  /** Bullets that restate one another. */
+  redundantPairs: Array<{ bulletA: string; bulletB: string; note: string }>;
+  /** Does the entry read as one story, or as an unordered task list? */
+  coherence: ScoredDimension;
+  /** Bullet ids in the order they would land harder. */
+  suggestedOrder?: string[];
+  /**
+   * Set when the strongest bullet is not the opening one.
+   *
+   * Computed from the content reader's own scores rather than judged here.
+   * Deciding which bullet is strongest is exactly what that reader just did,
+   * and a second opinion on it is a second opinion, not a check.
+   */
+  weakLead?: boolean;
 }
 
 /**

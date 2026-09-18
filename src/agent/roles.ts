@@ -1,12 +1,14 @@
 import {
-  ENTRY_SUBSTANCE_PROMPT,
-  ENTRY_WORDING_PROMPT,
+  CONTENT_PROMPT,
+  DEEP_RESEARCH_PROMPT,
+  DEEP_RESEARCH_SEARCH,
+  WORDING_PROMPT,
   JD_MATCH_PROMPT,
   JD_SEARCH_TRIGGERS,
   NARRATIVE_PROMPT,
   NARRATIVE_SEARCH_TRIGGERS,
   RETRIEVAL_ADDENDUM,
-  SUBSTANCE_SEARCH_TRIGGERS,
+  CONTENT_SEARCH_TRIGGERS,
   WEB_SEARCH_CORE,
 } from '../prompts/index.js';
 import type { SubAgentConfig } from './types.js';
@@ -18,18 +20,21 @@ import type { SubAgentConfig } from './types.js';
  * role config is the wrong place to read six paragraphs of instruction from:
  * the turn count and the deadline are the things worth seeing side by side.
  */
-export const ENTRY_SUBSTANCE_AGENT: SubAgentConfig = {
-  id: 'entry-substance',
+export const CONTENT_AGENT: SubAgentConfig = {
+  id: 'content',
   task: 'diagnose_bullet',
   name: 'Entry Substance',
   description: 'Scores one entry on the three parts of the XYZ formula and reads it as a whole',
-  systemPrompt: `${ENTRY_SUBSTANCE_PROMPT}\n\n${RETRIEVAL_ADDENDUM}`,
+  systemPrompt: `${CONTENT_PROMPT}\n\n${RETRIEVAL_ADDENDUM}`,
   // Retrieval only. Giving this role `analyze_entry` would mean the model
   // reproducing the entry as a tool argument, and a paraphrased bullet is a
   // diagnosis of text the candidate never wrote.
-  tools: ['query_knowledge_base'],
+  // `examine_technical_depth` runs a second agent inside one of these turns.
+  // It takes no pool slot, so it costs latency and a call rather than a place
+  // in the fan-out.
+  tools: ['query_knowledge_base', 'examine_technical_depth'],
   optionalTools: ['web_search'],
-  optionalPrompt: `${WEB_SEARCH_CORE}\n\n${SUBSTANCE_SEARCH_TRIGGERS}`,
+  optionalPrompt: `${WEB_SEARCH_CORE}\n\n${CONTENT_SEARCH_TRIGGERS}`,
   maxTurns: 6,
   // 180s was 2-3x a measured peak of 67s — measured before this role could
   // search. Checking a figure against the world costs a turn per claim, and on
@@ -42,12 +47,12 @@ export const ENTRY_SUBSTANCE_AGENT: SubAgentConfig = {
   contextBoundary: ['briefing', 'entry', 'previousFindings'],
 };
 
-export const ENTRY_WORDING_AGENT: SubAgentConfig = {
-  id: 'entry-wording',
+export const WORDING_AGENT: SubAgentConfig = {
+  id: 'wording',
   task: 'judge_wording',
   name: 'Entry Wording',
   description: 'Judges verb strength and concision, without touching content',
-  systemPrompt: `${ENTRY_WORDING_PROMPT}\n\n${RETRIEVAL_ADDENDUM}`,
+  systemPrompt: `${WORDING_PROMPT}\n\n${RETRIEVAL_ADDENDUM}`,
   tools: ['query_knowledge_base'],
   // Three, not two. This role has two rule families worth consulting, and at
   // two turns it spent the first looking them up and met the forced final turn
@@ -108,9 +113,33 @@ export const JD_MATCH_AGENT: SubAgentConfig = {
   contextBoundary: ['briefing', 'resume', 'jobDescription'],
 };
 
+/**
+ * Created by the content reader for one question, and gone when it answers.
+ *
+ * Deliberately absent from `ROLES` and from `RoleId`: nothing dispatches it, the
+ * coordinator cannot reach it, and it is not one of the four specialists. It is
+ * what `examine_technical_depth` runs, and its whole life is that call.
+ */
+export const DEEP_RESEARCH_AGENT: SubAgentConfig = {
+  id: 'deep-research',
+  task: 'research_domain',
+  name: 'Deep Research',
+  description: 'Answers one question about the technical field an entry comes from',
+  systemPrompt: DEEP_RESEARCH_PROMPT,
+  tools: [],
+  optionalTools: ['web_search'],
+  optionalPrompt: DEEP_RESEARCH_SEARCH,
+  maxTurns: 6,
+  // Nested inside a content review, whose own deadline is running. Kept well
+  // under it so a slow specialist fails on its own rather than taking the
+  // review down with it.
+  timeoutMs: 240_000,
+  contextBoundary: ['entry'],
+};
+
 export const ROLES: Readonly<Record<string, SubAgentConfig>> = {
-  'entry-substance': ENTRY_SUBSTANCE_AGENT,
-  'entry-wording': ENTRY_WORDING_AGENT,
+  'content': CONTENT_AGENT,
+  'wording': WORDING_AGENT,
   narrative: NARRATIVE_AGENT,
   'jd-match': JD_MATCH_AGENT,
 };

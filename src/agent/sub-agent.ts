@@ -1,4 +1,4 @@
-import { FINAL_TURN_NUDGE } from '../prompts/index.js';
+import { ANSWER_NOW, FINAL_TURN_NUDGE } from '../prompts/index.js';
 import type { SearchProvider } from '../tools/search-provider.js';
 import { LayeredContextManager } from '../context/manager.js';
 import type { QueryEngine } from '../query-engine/types.js';
@@ -98,6 +98,7 @@ export class SubAgentRuntime {
         : config.systemPrompt,
     );
     const deadline = AbortSignal.timeout(config.timeoutMs);
+    let toldToAnswer = false;
 
     while (turns < config.maxTurns) {
       turns += 1;
@@ -110,9 +111,22 @@ export class SubAgentRuntime {
       // Taking the tools away is not enough on its own: a model that was about
       // to look something up writes about what it would have looked up. It has
       // to be told that this turn is the answer.
+      // An agent with no tools is in its final turn from the start: there is
+      // nothing for it to do but answer.
       const finalTurn = turns === config.maxTurns;
-      if (finalTurn && turns > 1) {
-        context.addMessage({ role: 'user', content: FINAL_TURN_NUDGE });
+      const mustAnswer = finalTurn || tools.length === 0;
+      if (mustAnswer && !toldToAnswer) {
+        toldToAnswer = true;
+        // Two reasons, and they are not the same reason. The behavioural one is
+        // above. The mechanical one is that `json_object` is refused unless the
+        // word "json" appears in an input message — the system prompt does not
+        // count — so a request asking for JSON with no message carrying the word
+        // never reaches the model. Every role with a tool asks only on its last
+        // turn, which always carries the nudge; a toolless one asks on turn one.
+        context.addMessage({
+          role: 'user',
+          content: turns > 1 ? FINAL_TURN_NUDGE : ANSWER_NOW,
+        });
       }
 
       // Built after the nudge, not before: the window is a snapshot, and one
@@ -127,7 +141,7 @@ export class SubAgentRuntime {
         // Constrained on the turns where an answer is what we want. Left off
         // while tools are on the table, so a turn that should be a lookup is
         // not pushed into answering early.
-        ...(tools.length === 0 || finalTurn ? { jsonMode: true } : {}),
+        ...(mustAnswer ? { jsonMode: true } : {}),
         abortSignal: deadline,
       });
 
@@ -256,6 +270,10 @@ export class SubAgentRuntime {
         queryEngine: this.deps.queryEngine,
         knowledge: this.deps.knowledge,
         ...(this.deps.search ? { search: this.deps.search } : {}),
+        // So a role can hand part of its job to a specialist it creates for
+        // that one question. Safe because `run` takes no pool slot — see the
+        // note on ToolContext.
+        subAgents: this,
         abortSignal,
       });
       return JSON.stringify(result);

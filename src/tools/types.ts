@@ -1,4 +1,4 @@
-import type { Orchestrator } from '../agent/types.js';
+import type { Orchestrator, SubAgentResult, SubAgentTask } from '../agent/types.js';
 import type { SearchProvider } from './search-provider.js';
 import type { JsonSchema, ToolSchema } from '../types.js';
 import type { QueryEngine } from '../query-engine/types.js';
@@ -65,6 +65,20 @@ export interface ToolContext {
    * two levels.
    */
   orchestrator?: Orchestrator;
+  /**
+   * One nested agent, for the role that needs a specialist rather than a lookup.
+   *
+   * Not the orchestrator, and the difference is what makes it safe: the
+   * orchestrator dispatches through the two concurrency pools, so a role
+   * holding a slot and asking for another would deadlock. `run` takes no slot —
+   * it is the loop itself — so a sub-agent calling this occupies exactly the
+   * one it already has.
+   *
+   * Nothing is kept. `run` builds a context manager, spends it, and returns;
+   * the agent exists for the length of one call and there is nothing to clean
+   * up afterwards.
+   */
+  subAgents?: { run(task: SubAgentTask): Promise<SubAgentResult> };
 }
 
 export interface Tool<TInput = unknown, TOutput = unknown> {

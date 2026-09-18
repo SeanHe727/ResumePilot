@@ -1,5 +1,6 @@
 import type { ResumeEntry, ScoredDimension, WordingDiagnosis } from '../domain.js';
-import { ENTRY_WORDING_PROMPT } from '../prompts/index.js';
+import { renderEntry } from '../document/index.js';
+import { WORDING_PROMPT } from '../prompts/index.js';
 import type { Tool, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
 
@@ -44,7 +45,7 @@ export const analyzeWordingTool: Tool<AnalyzeWordingInput, WordingDiagnosis> = {
       // reason wording is a separate pass rather than more fields on the
       // substance one.
       task: 'judge_wording',
-      systemPrompt: ENTRY_WORDING_PROMPT,
+      systemPrompt: WORDING_PROMPT,
       messages: [{ role: 'user', content: buildWordingMessage(entry) }],
       ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
     });
@@ -90,10 +91,9 @@ export const analyzeWordingTool: Tool<AnalyzeWordingInput, WordingDiagnosis> = {
 
 /** Exported so a sub-agent asks for the same shape this tool does. */
 export function buildWordingMessage(entry: ResumeEntry): string {
-  const bullets = entry.bullets.map((b) => `  ${b.id}: ${b.text}`).join('\n');
 
   return `<resume_content>
-${bullets}
+${renderEntry(entry)}
 </resume_content>
 
 Return JSON of exactly this shape:

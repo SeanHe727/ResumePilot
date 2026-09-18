@@ -5,10 +5,11 @@ import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-e
 import { analyzeEntryTool } from '../../src/tools/analyze-entry.js';
 import { analyzeWordingTool } from '../../src/tools/analyze-wording.js';
 import { generateReportTool } from '../../src/tools/generate-report.js';
+import { weakLead } from '../../src/agent/orchestrator.js';
 import { rewriteBulletTool } from '../../src/tools/rewrite-bullet.js';
 import {
-  ENTRY_SUBSTANCE_PROMPT,
-  ENTRY_WORDING_PROMPT,
+  CONTENT_PROMPT,
+  WORDING_PROMPT,
   REWRITE_PROMPT,
 } from '../../src/prompts/index.js';
 import type { ToolContext } from '../../src/tools/types.js';
@@ -213,14 +214,57 @@ describe('analyze_entry', () => {
     expect(result.success).toBe(true);
     expect(result.data!.entryId).toBe('s1:e0');
     expect(result.data!.bullets[0]!.dimensions.measurement.score).toBe(0);
-    expect(result.data!.narrative.weakLead).toBe(true);
+    // How the bullets sit against each other is the narrative reader's now, and
+    // whether the strongest one opens is arithmetic over these same scores. The
+    // model used to declare it, and on this one-bullet entry it declared `true`
+    // — a single line is its own strongest and it opens. Nothing checked.
+    expect(weakLead(result.data!)).toBe(false);
+  });
+
+  it('takes the brackets off an id the model echoed back', async () => {
+    // Every line is shown as `- [id] text`, so a model hands the id back
+    // bracketed. Nothing caught it: the diagnosis parsed, scored, and came back
+    // keyed to `[s2:e0:b0]`, which matches no bullet in the document — the
+    // report finds no line to attach it to and a rewrite cannot find the text
+    // it is rewriting. A real run surfaced it; no unit test did.
+    const bracketed = JSON.parse(goodReply) as { bullets: Array<{ bulletId: string }> };
+    bracketed.bullets[0]!.bulletId = `[${bracketed.bullets[0]!.bulletId}]`;
+    const { ctx } = ctxWith(JSON.stringify(bracketed));
+
+    const result = await analyzeEntryTool.execute({ entry: ONE_BULLET }, ctx);
+
+    expect(result.data!.bullets[0]!.bulletId).toBe(ONE_BULLET.bullets[0]!.id);
+  });
+
+  it('calls the lead weak when a later bullet scores higher', () => {
+    const scored = (scores: number[]) =>
+      ({
+        entryId: 'e0',
+        overallScore: 0,
+        bullets: scores.map((overallScore, i) => ({
+          bulletId: `e0:${i}`,
+          overallScore,
+          dimensions: {
+            impact: { score: overallScore, detail: '' },
+            measurement: { score: overallScore, detail: '' },
+            method: { score: overallScore, detail: '' },
+          },
+          issues: [],
+          strengths: [],
+        })),
+      }) as EntryDiagnosis;
+
+    expect(weakLead(scored([40, 80]))).toBe(true);
+    expect(weakLead(scored([80, 40]))).toBe(false);
+    // Equal scores are not a weak lead: nothing is stronger than the opener.
+    expect(weakLead(scored([60, 60]))).toBe(false);
   });
 
   it('sends the frozen system prompt, so the cache prefix stays stable', async () => {
     const { ctx, seen } = ctxWith(goodReply);
     await analyzeEntryTool.execute({ entry: ENTRY }, ctx);
 
-    expect(seen[0]!.systemPrompt).toBe(ENTRY_SUBSTANCE_PROMPT);
+    expect(seen[0]!.systemPrompt).toBe(CONTENT_PROMPT);
     expect(seen[0]!.task).toBe('diagnose_bullet');
   });
 
@@ -266,7 +310,7 @@ describe('analyze_wording', () => {
     // The whole reason wording is a separate pass: it needs no retrieval, so it
     // must not be billed at frontier rates.
     expect(seen[0]!.task).toBe('judge_wording');
-    expect(seen[0]!.systemPrompt).toBe(ENTRY_WORDING_PROMPT);
+    expect(seen[0]!.systemPrompt).toBe(WORDING_PROMPT);
   });
 
   it('averages verb strength and concision into the entry score', async () => {
@@ -455,8 +499,8 @@ describe('rewrite_bullet', () => {
 
 describe('prompts', () => {
   it.each([
-    ['substance', ENTRY_SUBSTANCE_PROMPT],
-    ['wording', ENTRY_WORDING_PROMPT],
+    ['substance', CONTENT_PROMPT],
+    ['wording', WORDING_PROMPT],
     ['rewrite', REWRITE_PROMPT],
   ])('states that %s prompt content is untrusted data', (_name, prompt) => {
     expect(prompt).toMatch(/<resume_content>/);
@@ -464,7 +508,7 @@ describe('prompts', () => {
   });
 
   it.each([
-    ['substance', ENTRY_SUBSTANCE_PROMPT],
+    ['substance', CONTENT_PROMPT],
     ['rewrite', REWRITE_PROMPT],
   ])('forbids inventing figures in the %s prompt', (_name, prompt) => {
     expect(prompt).toMatch(/Never state a figure the source does not contain/);
@@ -480,7 +524,7 @@ describe('prompts', () => {
     // Prompt caching matches on a byte-exact prefix; one interpolated timestamp
     // would drop the hit rate to zero across an entire fan-out.
     const volatile = /\d{4}-\d{2}-\d{2}|\bnow\(\)|\$\{/;
-    for (const prompt of [ENTRY_SUBSTANCE_PROMPT, ENTRY_WORDING_PROMPT, REWRITE_PROMPT]) {
+    for (const prompt of [CONTENT_PROMPT, WORDING_PROMPT, REWRITE_PROMPT]) {
       expect(prompt).not.toMatch(volatile);
     }
   });
@@ -488,7 +532,7 @@ describe('prompts', () => {
   it('is long enough to be worth caching', () => {
     // Claude Opus 5 will not cache a prefix under 512 tokens; roughly 4
     // characters per token puts the floor around 2,000 characters.
-    for (const prompt of [ENTRY_SUBSTANCE_PROMPT, REWRITE_PROMPT]) {
+    for (const prompt of [CONTENT_PROMPT, REWRITE_PROMPT]) {
       expect(prompt.length).toBeGreaterThan(1000);
     }
   });
@@ -664,21 +708,23 @@ describe('analyze_entry: claims that need checking against the world', () => {
     expect(result.data?.bullets[0]?.claimsToVerify).toEqual([]);
   });
 
-  it('tells the model when a figure only looks checkable', async () => {
+  it('names what earlier runs got wrong, as notes rather than as rules', async () => {
     // Both models scored the 71% bullet highest in its entry, twice, because
     // every number was present. Neither asked whether the number was ordinary.
     //
     // Matched against the prompt with its line wrapping flattened: these
     // sentences get rewrapped whenever the surrounding paragraph changes, and
     // a test that breaks on a reflow is testing the layout, not the rule.
-    const prompt = ENTRY_SUBSTANCE_PROMPT.replace(/\s+/g, ' ');
+    const prompt = CONTENT_PROMPT.replace(/\s+/g, ' ');
 
-    expect(prompt).toContain('ordinary for the technique credited with it');
-    // Named as something earlier runs got wrong rather than as a rule, which is
-    // the only kind of notice a role prompt carries.
-    expect(prompt).toContain('Both models have scored');
-    // Counts that size something which exists measure no outcome.
-    expect(prompt).toContain('repository stars');
+    // Whether a figure's size is ordinary for the technique behind it was a
+    // notice here and was taken out deliberately: judging the technique is not
+    // this reader's job. What stays is the reason a figure gets read as a
+    // strength at all, and what scale counts are and are not.
+    expect(prompt).toContain('A figure reads as a strength');
+    expect(prompt).toContain('Repository stars');
+    // Two axes, one gap: the fault this prompt is likeliest to produce.
+    expect(prompt).toContain('counts one gap twice');
     // And no example carries content from anyone's actual resume: the resume
     // varies, the prompt does not.
     expect(prompt).not.toMatch(/INT8|VRAM|29k/);
@@ -689,18 +735,19 @@ describe('analyze_entry: claims that need checking against the world', () => {
 });
 
 describe('what the roles are told to look outward for', () => {
-  it('makes all three axes required, not just the one it reaches for', async () => {
+  it('names all three axes, not just the one it reaches for', async () => {
     // A full run under the first version produced twelve checks, of which
-    // twelve were numeric. Figures are the axis a model takes unprompted;
-    // terminology and method were listed as things it *could* look up, and so
-    // it never did.
+    // twelve were numeric. Figures are the axis a model takes unprompted, so
+    // the other two are named. Making one search on each *mandatory* was the
+    // fix after that and is gone: prior knowledge that settles it settles it,
+    // and a search to confirm what you already know is a turn spent on nothing.
     const { ROLES } = await import('../../src/agent/roles.js');
-    const prompt = (ROLES['entry-substance'].optionalPrompt ?? '').replace(/\s+/g, ' ');
+    const prompt = (ROLES['content'].optionalPrompt ?? '').replace(/\s+/g, ' ');
 
-    expect(prompt).toContain('at least one search on each');
-    expect(prompt).toContain('The technology.');
-    expect(prompt).toContain('The figures.');
-    expect(prompt).toContain('The method.');
+    expect(prompt).toContain('technology named');
+    expect(prompt).toContain('method named');
+    expect(prompt).toContain("figure's size is ordinary");
+    expect(prompt).toContain('Reaching for figures alone is the easy habit');
   });
 
   it('gives each role the axes its own judgement turns on', async () => {
@@ -711,7 +758,7 @@ describe('what the roles are told to look outward for', () => {
     expect(flat('narrative')).toContain('Employers, programmes and institutions');
     expect(flat('narrative')).not.toContain('The figures.');
     // And the per-entry role does not ask about employer standing.
-    expect(flat('entry-substance')).not.toContain('Employers, programmes');
+    expect(flat('content')).not.toContain('Employers, programmes');
     expect(flat('jd-match')).toContain('comparable live postings');
   });
 
@@ -721,7 +768,7 @@ describe('what the roles are told to look outward for', () => {
     // yet?", and the loop stopped at 3 of its 6 turns every single run.
     const { ROLES } = await import('../../src/agent/roles.js');
 
-    for (const id of ['entry-substance', 'narrative', 'jd-match'] as const) {
+    for (const id of ['content', 'narrative', 'jd-match'] as const) {
       const prompt = (ROLES[id].optionalPrompt ?? '').replace(/\s+/g, ' ');
       expect(prompt, id).toContain('name what you still do not know');
       expect(prompt, id).toContain('you have turns left');
@@ -773,7 +820,7 @@ describe('checks the model did not actually make', () => {
 
   it('sends an empty search back to the corpus rather than to silence', async () => {
     const { ROLES } = await import('../../src/agent/roles.js');
-    const prompt = (ROLES['entry-substance'].optionalPrompt ?? '').replace(/\s+/g, ' ');
+    const prompt = (ROLES['content'].optionalPrompt ?? '').replace(/\s+/g, ' ');
 
     expect(prompt).toContain('that is a result, not a dead end');
     expect(prompt).toContain('put a corpus lookup to work with it');
