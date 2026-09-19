@@ -62,7 +62,10 @@ export const analyzeWordingTool: Tool<AnalyzeWordingInput, WordingDiagnosis> = {
     const perBullet: WordingDiagnosis['perBullet'] = (
       rows as Array<Record<string, unknown>>
     ).map((raw) => ({
-      bulletId: String(raw.bulletId ?? ''),
+      // Lines are shown as `- [id] text`, so a model hands the id back
+      // bracketed. The substance reader was fixed for this and this one was
+      // not, so every wording score has been keyed to an id matching no bullet.
+      bulletId: String(raw.bulletId ?? '').replace(/[[\]]/g, '').trim(),
       verbStrength: scored(raw.verbStrength),
       concision: scored(raw.concision),
       issues: stringArray(raw.issues),

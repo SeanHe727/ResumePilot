@@ -15,7 +15,7 @@ export function createResultCompressHook(maxTokens = 1_000): Hook {
   return {
     name: 'result-compress',
     timing: 'post-tool',
-    priority: 20,
+    priority: 30,
     enabled: true,
 
     async execute(ctx: HookContext): Promise<HookOutcome> {

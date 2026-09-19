@@ -33,10 +33,20 @@ program
     if (opts.model) config.models.primary = opts.model;
 
     const app = new App({ config, interactive: true });
-    const session = app.start(file ?? '');
+    // Reassigned by `/new` and by loading a different file, which open a
+    // session of their own. Carrying on with the old one would mean talking
+    // to a session whose memory was just cleared out from under it.
+    let session = await app.start(file ?? '');
 
     console.log(chalk.bold('ResumePilot'), chalk.dim(`· session ${session.id.slice(0, 8)}`));
-    console.log(chalk.dim(file ? `Loaded ${file}. /diagnose to start, /help for commands.` : '/upload <file> to begin, /help for commands.'));
+    const loaded = (session.state as { resume?: unknown }).resume !== undefined;
+    console.log(
+      chalk.dim(
+        loaded
+          ? `Loaded ${file}. Say what you want looked at, or /help for commands.`
+          : '/upload <file> to begin, /help for commands.',
+      ),
+    );
 
     const { createInterface } = await import('node:readline');
     const rl = createInterface({
@@ -81,7 +91,7 @@ program
         if (trimmed === '/exit' || trimmed === '/quit') break;
 
         try {
-          await app.handle(trimmed, session);
+          session = await app.handle(trimmed, session);
         } catch (err) {
           // One bad turn must not end the session: the work so far is on disk
           // and the user can /continue or ask something else.
@@ -105,12 +115,28 @@ program
     // Nothing can answer a confirmation prompt here, and a gate that opens
     // when no one is watching is not a gate — so confirmations refuse.
     const app = new App({ config: loadConfig(), interactive: false });
-    const session = app.start(file);
+    let session = await app.start(file);
 
     try {
-      if (opts.jd) await app.handle(`/jd ${opts.jd}`, session);
-      await app.handle(`/diagnose ${file}`, session);
-      if (opts.output) await app.handle(`/export md ${opts.output}`, session);
+      if ((session.state as { resume?: unknown }).resume === undefined) {
+        // `start` already printed why. This is the part a script can act on.
+        process.exitCode = 1;
+        return;
+      }
+
+      if (opts.jd) session = await app.handle(`/jd ${opts.jd}`, session);
+
+      // The same path a person takes: ask the coordinator, and let it decide
+      // which specialists this resume needs. There was a `/diagnose` command
+      // that ran a fixed batch, and this sent to it for a while after it was
+      // deleted — printing "Unknown command", making no model call, and
+      // exiting zero.
+      session = await app.handle(
+        'Review this whole resume and give me a report on it.',
+        session,
+      );
+
+      if (opts.output) session = await app.handle(`/export md ${opts.output}`, session);
 
       console.log(chalk.dim(`\n${app.queryEngine.getUsageSummary()}`));
       const metrics = app.metrics.getSummary();

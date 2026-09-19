@@ -136,17 +136,7 @@ export class App {
       memory: this.memory,
       // The same tool the coordinator calls, so a path typed at the prompt and
       // a path mentioned in conversation are read by one piece of code.
-      parseFile: async (path, session) => {
-        const result = await tools.resolve('parse_resume').execute({ path } as never, {
-          session,
-          queryEngine: this.queryEngine,
-          knowledge: this.knowledge,
-          abortSignal: session.abortController.signal,
-        });
-        return result.success
-          ? { success: true }
-          : { success: false, error: result.error?.message ?? 'could not read the file' };
-      },
+      parseFile: (path, session) => this.parseFile(path, session),
     });
 
     this.loopDeps = {
@@ -168,7 +158,15 @@ export class App {
   }
 
   /** Starts a session and primes its context with what memory knows. */
-  start(sourcePath: string): Session {
+  /**
+   * A session, with the file read if one was named.
+   *
+   * It used to record the path and stop, which left the banner saying `Loaded
+   * resume.pdf` over a session holding no document — and every review tool
+   * refusing, because `state.resume` was empty. Parsing is the same tool the
+   * upload command runs.
+   */
+  async start(sourcePath: string): Promise<Session> {
     // Seeded from the loaded configuration, not from the session manager's
     // defaults. Otherwise `/config` reports a model and a budget that nothing
     // is using, which is worse than reporting none.
@@ -183,10 +181,51 @@ export class App {
     const profile = this.retriever.formatForContext(recalled);
     if (profile) session.contextManager.setProfile(profile);
 
+    if (sourcePath) {
+      const read = await this.parseFile(sourcePath, session);
+      if (!read.success) {
+        // Said out loud rather than left for the first review to discover.
+        this.loopDeps.print(`Could not read ${sourcePath}: ${read.error ?? 'unknown'}`);
+      } else {
+        this.sessions.save(session);
+      }
+    }
+
     return session;
   }
 
-  async handle(input: string, session: Session): Promise<void> {
+  /**
+   * One exchange, and the session to carry on with.
+   *
+   * Usually the one that was passed in. A command that opens a new session —
+   * `/new`, or loading a different file over a finished diagnosis — returns
+   * that one instead, and the caller has to keep it. The transition used to be
+   * reported in `CommandResult.action` and read by nobody, so `/new` printed a
+   * new session id and left the conversation attached to the old one.
+   */
+  /**
+   * Reads a file onto a session, wherever the path came from.
+   *
+   * `/upload` calls it, a path in conversation reaches the same tool, and
+   * starting with a file argument goes through here too — three doors, one
+   * piece of code, so none of them can quietly diverge.
+   */
+  private async parseFile(
+    path: string,
+    session: Session,
+  ): Promise<{ success: boolean; error?: string }> {
+    const result = await this.loopDeps.tools.resolve('parse_resume').execute({ path } as never, {
+      session,
+      queryEngine: this.queryEngine,
+      knowledge: this.knowledge,
+      abortSignal: session.abortController.signal,
+    });
+    return result.success
+      ? { success: true }
+      : { success: false, error: result.error?.message ?? 'could not read the file' };
+  }
+
+  async handle(input: string, session: Session): Promise<Session> {
     return handleInput(input, session, this.loopDeps);
   }
 

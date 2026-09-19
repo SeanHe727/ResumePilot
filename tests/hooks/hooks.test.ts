@@ -358,6 +358,47 @@ describe('dispatch-trace', () => {
   });
 });
 
+describe('who reads before who rewrites', () => {
+  it('lets the memory writes see the result before it is compressed', async () => {
+    // `result-compress` guts nested structure to fit a budget. It ran first, so
+    // the memory hooks read a report whose `summary` had been compressed away,
+    // threw on it, and were logged and skipped — nothing reached long-term
+    // memory and the run printed one stderr line and looked fine.
+    const { DEFAULT_HOOK_ORDER } = await import('../../src/hooks/types.js');
+    const priority = (name: string) =>
+      DEFAULT_HOOK_ORDER.find((h) => h.name === name)?.priority ?? Infinity;
+
+    for (const reader of ['audit-log', 'memory-weak-point', 'memory-profile']) {
+      expect(priority(reader), `${reader} must read before the rewrite`).toBeLessThan(
+        priority('result-compress'),
+      );
+    }
+  });
+
+  it('runs them in that order for real, not only on paper', async () => {
+    const pipeline = new DefaultHookPipeline();
+    const order: string[] = [];
+    for (const name of ['result-compress', 'memory-profile', 'audit-log']) {
+      pipeline.register({
+        name,
+        timing: 'post-tool',
+        priority:
+          (await import('../../src/hooks/types.js')).DEFAULT_HOOK_ORDER.find((h) => h.name === name)
+            ?.priority ?? 0,
+        enabled: true,
+        async execute(): Promise<HookOutcome> {
+          order.push(name);
+          return { action: 'continue' };
+        },
+      });
+    }
+
+    await pipeline.runPost(context('generate_report'));
+
+    expect(order.indexOf('result-compress')).toBe(order.length - 1);
+  });
+});
+
 describe('result-compress', () => {
   it('leaves a result that already fits', async () => {
     const ctx = context('analyze_entry');

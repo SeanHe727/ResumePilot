@@ -18,7 +18,7 @@ export function createWeakPointHook(triggers: MemoryTriggers): Hook {
   return {
     name: 'memory-weak-point',
     timing: 'post-tool',
-    priority: 30,
+    priority: 20,
     watches: ['review_content'],
     enabled: true,
 
@@ -40,7 +40,7 @@ export function createProfileHook(triggers: MemoryTriggers): Hook {
   return {
     name: 'memory-profile',
     timing: 'post-tool',
-    priority: 31,
+    priority: 21,
     watches: ['generate_report'],
     enabled: true,
 

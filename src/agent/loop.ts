@@ -1,5 +1,6 @@
 import { MAIN_AGENT_PROMPT } from '../prompts/index.js';
 import type { CommandParser } from '../command/types.js';
+import { renderResume } from '../document/index.js';
 import type { ContextManager } from '../context/types.js';
 import type { ResumeSessionState } from '../domain.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
@@ -86,17 +87,28 @@ const MAIN_AGENT_TOOLS = [
  * for. A layer with one member, bypassing the agent that was supposed to be the
  * only way in, was not paying for itself.
  */
-export async function handleInput(input: string, session: Session, deps: LoopDeps): Promise<void> {
+export async function handleInput(
+  input: string,
+  session: Session,
+  deps: LoopDeps,
+): Promise<Session> {
   const trimmed = input.trim();
-  if (!trimmed) return;
+  if (!trimmed) return session;
 
   if (deps.commands.isCommand(trimmed)) {
     const result = await deps.commands.execute(trimmed, session);
     deps.print(result.output);
-    return;
+    // A command that starts a new session hands it back, and whoever called
+    // has to keep it. `/new` clears the memory store and opens a fresh
+    // session; carrying on with the old one afterwards means talking to a
+    // session whose memory has just been emptied out from under it.
+    return result.action === 'new_session' && result.data
+      ? (result.data as Session)
+      : session;
   }
 
   await runMainAgent(trimmed, session, deps);
+  return session;
 }
 
 /**
@@ -198,20 +210,6 @@ function setResumeContext(context: ContextManager, session: Session): void {
   const resume = state.resume;
   if (!resume) return;
 
-  const body = resume.sections
-    .filter((section) => section.kind !== 'contact')
-    .map((section) => {
-      const entries = section.entries
-        .map((entry) => {
-          const bullets = entry.bullets.map((b) => `  - [${b.id}] ${b.text}`).join('\n');
-          return `${entry.headerLines.join(' | ')}\n${bullets}`;
-        })
-        .join('\n\n');
-      const loose = section.looseLines.join('\n');
-      return `# ${section.heading.trim() || section.kind.toUpperCase()}\n${entries}${loose ? `\n${loose}` : ''}`;
-    })
-    .join('\n\n');
-
   // What the candidate has said sits beside what they wrote, and in the same
   // layer: a number given at message four is evicted from the transcript long
   // before the conversation is done with it, and asking for it a second time
@@ -221,7 +219,11 @@ function setResumeContext(context: ContextManager, session: Session): void {
     .join('\n');
 
   context.setTaskContext(
-    `<resume_content>\n${body}\n</resume_content>` +
+    // The same renderer every specialist reads from. There were three of these
+    // — this one, the whole-document one, and the per-entry one — and the entry
+    // ids added to the shared one never reached the coordinator, which was
+    // still building its own.
+    renderResume(resume) +
       (facts ? `\n\n<supplied_by_candidate>\n${facts}\n</supplied_by_candidate>` : ''),
   );
 }

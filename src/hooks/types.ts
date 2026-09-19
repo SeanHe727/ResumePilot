@@ -77,10 +77,15 @@ export const DEFAULT_HOOK_ORDER = [
   { name: 'permission-check', timing: 'pre-tool', priority: 10 },
   { name: 'budget-check', timing: 'pre-tool', priority: 30 },
   { name: 'dispatch-trace', timing: 'pre-tool', priority: 50 },
+  // Everything that reads the result runs before the one that rewrites it.
+  // `result-compress` guts nested structure to fit a budget, and it used to run
+  // first: the memory hooks then read a report whose `summary` had been
+  // compressed away, threw, and were logged and skipped — so nothing was ever
+  // written to long-term memory and the run looked fine.
   { name: 'audit-log', timing: 'post-tool', priority: 10 },
-  { name: 'result-compress', timing: 'post-tool', priority: 20 },
-  { name: 'memory-weak-point', timing: 'post-tool', priority: 30 },
-  { name: 'memory-profile', timing: 'post-tool', priority: 31 },
+  { name: 'memory-weak-point', timing: 'post-tool', priority: 20 },
+  { name: 'memory-profile', timing: 'post-tool', priority: 21 },
+  { name: 'result-compress', timing: 'post-tool', priority: 30 },
   { name: 'progress-update', timing: 'post-tool', priority: 40 },
   { name: 'metric-emit', timing: 'post-tool', priority: 50 },
 ] as const;

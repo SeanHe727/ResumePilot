@@ -43,10 +43,19 @@ export function renderEntry(entry: ResumeEntry): string {
  */
 export function renderResume(resume: ResumeDocument): string {
   const body = resume.sections
-    .filter((section) => section.kind !== 'contact' && section.entries.length > 0)
+    .filter((section) => section.kind !== 'contact')
+    .filter((section) => section.entries.length > 0 || section.looseLines.length > 0)
     .map((section) => {
       const heading = section.heading.trim() || section.kind.toUpperCase();
-      return `# ${heading}\n\n${section.entries.map(renderEntry).join('\n\n')}`;
+      // Sections like Skills and Summary hold bare lines rather than entries.
+      // Dropping them — which this did, while the coordinator's own copy of
+      // this function kept them — meant the reader comparing a resume against
+      // a posting could not see the skills list it was matching against.
+      const body = [
+        ...section.entries.map(renderEntry),
+        ...(section.looseLines.length > 0 ? [section.looseLines.join('\n')] : []),
+      ].join('\n\n');
+      return `# ${heading}\n\n${body}`;
     })
     .join('\n\n');
 

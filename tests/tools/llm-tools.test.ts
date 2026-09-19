@@ -221,6 +221,30 @@ describe('analyze_entry', () => {
     expect(weakLead(result.data!)).toBe(false);
   });
 
+  it('takes the brackets off a wording id too', async () => {
+    // The substance reader was fixed for this and this one was not, so every
+    // wording score was keyed to an id matching no bullet in the document.
+    const { analyzeWordingTool } = await import('../../src/tools/analyze-wording.js');
+    const entry = ONE_BULLET;
+    const reply = JSON.stringify({
+      perBullet: [
+        {
+          bulletId: `[${entry.bullets[0]!.id}]`,
+          verbStrength: { score: 40, detail: '' },
+          concision: { score: 60, detail: '' },
+          issues: [],
+        },
+      ],
+    });
+    const { ctx } = ctxWith(reply);
+
+    const result = await analyzeWordingTool.execute({ entry } as never, ctx);
+
+    expect((result.data as { perBullet: Array<{ bulletId: string }> }).perBullet[0]?.bulletId).toBe(
+      entry.bullets[0]!.id,
+    );
+  });
+
   it('takes the brackets off an id the model echoed back', async () => {
     // Every line is shown as `- [id] text`, so a model hands the id back
     // bracketed. Nothing caught it: the diagnosis parsed, scored, and came back
