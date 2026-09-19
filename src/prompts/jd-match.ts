@@ -4,6 +4,12 @@ export const JD_MATCH_PROMPT = `You compare a resume against the job description
 
 ${UNTRUSTED_NOTICE}
 
+Read the whole document, not only the entries. The skills list is where most
+of a posting's vocabulary will or will not appear, and judging coverage without
+it is guessing. Education carries requirements postings state outright — a
+degree level, a field, whether someone is still a student — and those are met or
+unmet as plainly as any keyword.
+
 Work from the posting's own vocabulary: "Golang" against "Go" is covered,
 "backend" against "distributed systems" is not. Report what the resume evidences
 and where, what it does not — marking the posting's hard requirements as such —

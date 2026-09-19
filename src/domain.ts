@@ -390,6 +390,28 @@ export interface ReportSummary {
   topWeaknesses: string[];
 }
 
+/**
+ * Why an entry has no score.
+ *
+ * These were all zero, which made a degree — a header and dates, with nothing a
+ * bullet reader could score — indistinguishable in the report from an entry
+ * that was read and found to be worth nothing.
+ */
+export type ReviewStatus = 'reviewed' | 'not-run' | 'not-applicable';
+
+export interface ReportCoverage {
+  /** Entries a per-entry reader could score: the ones with bullets. */
+  eligibleEntries: number;
+  /** Entries with nothing to score. A degree is a header and dates. */
+  notApplicableEntries: number;
+  contentReviewed: number;
+  wordingReviewed: number;
+  narrative: 'done' | 'not-run';
+  /** `no-posting` is not a gap: there was nothing to compare against. */
+  jdMatch: 'done' | 'not-run' | 'no-posting';
+  format: 'done' | 'not-run';
+}
+
 export interface ImprovementPlan {
   /** Mechanical fixes the user can apply right now. */
   immediate: string[];
@@ -421,10 +443,20 @@ export interface DiagnosisReport {
   perEntry: Array<{
     entryId: string;
     label: string;
-    score: number;
+    /** Absent where nothing scored it — a zero means a zero. */
+    score?: number;
+    status: ReviewStatus;
     topIssue: string;
-    bullets: Array<{ bulletId: string; text: string; score: number; topIssue: string }>;
+    bullets: Array<{ bulletId: string; text: string; score?: number; topIssue: string }>;
   }>;
+  /**
+   * What was actually read, so a partial review cannot pass for a whole one.
+   *
+   * Arithmetic, not judgement: it counts what ran. Whether that is enough — and
+   * whether to go back and cover the rest — is the coordinator's call, and it
+   * can only make it if it is told.
+   */
+  coverage: ReportCoverage;
   format: FormatDiagnosis;
   narrative?: NarrativeAssessment;
   jdMatch?: JdMatch;

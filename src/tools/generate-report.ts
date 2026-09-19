@@ -8,7 +8,9 @@ import type {
   NarrativeAssessment,
   ResumeDocument,
   ResumeEntry,
+  ReportCoverage,
   ResumeSessionState,
+  ReviewStatus,
   WordingDiagnosis,
 } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
@@ -82,6 +84,7 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
     const report: DiagnosisReport = {
       summary,
       perEntry: perEntry(allEntries, input.entries),
+      coverage: coverage(allEntries, input, state),
       format: input.format,
       ...(input.narrative ? { narrative: input.narrative } : {}),
       ...(input.jdMatch ? { jdMatch: input.jdMatch } : {}),
@@ -106,14 +109,23 @@ function summarise(
 
   // Format carries the most weight for the same reason it does inside
   // `analyzeFormat`: every other axis assumes the text was read intact.
+  //
+  // A dimension that did not run is left out and the rest are renormalised. It
+  // used to be filled in with the substance average, so a review that ran only
+  // the content reader had that one score standing in for four of the five
+  // weights — 70% of an overall score presented as though five readers had
+  // agreed on it.
   const parts: Array<[number, number]> = [
     [formatScore, 0.3],
     [substanceAvg, 0.4],
-    [wordingAvg || substanceAvg, 0.15],
-    [input.narrative?.overallScore ?? substanceAvg, 0.075],
-    [input.jdMatch?.overallScore ?? substanceAvg, 0.075],
+    ...(wordingAvg ? ([[wordingAvg, 0.15]] as Array<[number, number]>) : []),
+    ...(input.narrative ? ([[input.narrative.overallScore, 0.075]] as Array<[number, number]>) : []),
+    ...(input.jdMatch ? ([[input.jdMatch.overallScore, 0.075]] as Array<[number, number]>) : []),
   ];
-  const overallScore = Math.round(parts.reduce((sum, [score, weight]) => sum + score * weight, 0));
+  const weight = parts.reduce((sum, [, w]) => sum + w, 0);
+  const overallScore = Math.round(
+    parts.reduce((sum, [score, w]) => sum + score * w, 0) / (weight || 1),
+  );
 
   const bullets = input.entries.flatMap((e) => e.bullets);
 
@@ -143,18 +155,28 @@ function perEntry(
   return allEntries.map((entry) => {
     const diagnosis = byId.get(entry.id);
     const bulletScores = new Map(diagnosis?.bullets.map((b) => [b.bulletId, b]) ?? []);
+    // Three ways to have no score, and they used to be one: zero. A degree
+    // carries no bullets and cannot be scored; an entry nothing got to yet has
+    // not been judged; and an entry that was read and came back at zero is a
+    // verdict. Printed identically, the first two read as the third.
+    const status: ReviewStatus = diagnosis
+      ? 'reviewed'
+      : entry.bullets.length === 0
+        ? 'not-applicable'
+        : 'not-run';
 
     return {
       entryId: entry.id,
       label: [entry.organization, entry.title].filter(Boolean).join(' — ') || entry.headerLines[0] || entry.id,
-      score: diagnosis?.overallScore ?? 0,
-      topIssue: diagnosis?.bullets.flatMap((b) => b.issues)[0]?.what ?? 'not diagnosed',
+      ...(diagnosis ? { score: diagnosis.overallScore } : {}),
+      status,
+      topIssue: diagnosis?.bullets.flatMap((b) => b.issues)[0]?.what ?? '',
       bullets: entry.bullets.map((bullet) => {
         const scored = bulletScores.get(bullet.id);
         return {
           bulletId: bullet.id,
           text: bullet.text,
-          score: scored?.overallScore ?? 0,
+          ...(scored ? { score: scored.overallScore } : {}),
           topIssue: scored?.issues[0]?.what ?? '',
         };
       }),
@@ -282,4 +304,33 @@ function setAside(raw: unknown): NonNullable<ImprovementPlan['setAside']> {
     const what = typeof record?.what === 'string' ? record.what.trim() : '';
     return what ? [{ what, because: String(record?.because ?? '') }] : [];
   });
+}
+
+/**
+ * What ran, counted rather than judged.
+ *
+ * A report used to appear once the format check and a single entry had been
+ * read, looking exactly like one where every reader had covered everything. The
+ * counting belongs here, in code; deciding whether it is enough belongs to
+ * whoever is talking to the candidate.
+ */
+function coverage(
+  allEntries: ResumeEntry[],
+  input: GenerateReportInput,
+  state: ResumeSessionState,
+): ReportCoverage {
+  const eligible = allEntries.filter((entry) => entry.bullets.length > 0);
+  const scored = new Set(input.entries.map((d) => d.entryId));
+  const worded = new Set((input.wording ?? []).map((d) => d.entryId));
+
+  return {
+    eligibleEntries: eligible.length,
+    notApplicableEntries: allEntries.length - eligible.length,
+    contentReviewed: eligible.filter((entry) => scored.has(entry.id)).length,
+    wordingReviewed: eligible.filter((entry) => worded.has(entry.id)).length,
+    narrative: input.narrative ? 'done' : 'not-run',
+    // No posting is not a gap. Nothing was asked for, so nothing is missing.
+    jdMatch: input.jdMatch ? 'done' : state.jd ? 'not-run' : 'no-posting',
+    format: 'done',
+  };
 }

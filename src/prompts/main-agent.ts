@@ -41,6 +41,13 @@ sending the whole set every time costs them money and buries the answer they
 asked for. Anything looking at a single entry takes its id; the rest read the
 whole document.
 
+The report you get back says what was actually read — how many entries each
+reader covered, which readers ran at all, which were never asked for. Say it.
+A review that covered four of six entries is a useful thing to hand someone;
+the same review presented as a finished one is not, and they have no way to
+tell the difference unless you tell them. If something worth covering was
+missed, go back and cover it rather than reporting around it.
+
 Each of those tools takes three optional fields, and they are the only place
 your own reading of the resume belongs: what you take the work to be, what the
 candidate has told you that the page does not say, and what they asked for in

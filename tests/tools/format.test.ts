@@ -147,10 +147,39 @@ describe('analyzeFormat on a clean resume', () => {
     expect(d.metrics.atsParsability.score).toBe(100);
   });
 
-  it('still catches the bystander openers it contains', async () => {
+  it('scores only what a machine reading the file can decide', async () => {
+    // The quantified and verb-first ratios used to carry 45% of this. Both are
+    // judged better by a reader than by a pattern, and counted here as well one
+    // missing figure was scored twice — once through substance, again through
+    // format. They are still measured; they no longer vote.
+    const d = await diagnose('messy-resume.md');
+    const { atsParsability, consistency, length } = d.metrics;
+
+    expect(d.overallScore).toBe(
+      Math.round(atsParsability.score * 0.6 + consistency.score * 0.2 + length.score * 0.2),
+    );
+  });
+
+  it('leaves verbs and figures to the readers that judge them', async () => {
+    // Format is what a machine reading the file can decide. Whether a line
+    // should carry a figure is a semantic question the content reader already
+    // asks, and whether its verb names an action is the wording reader's —
+    // raised here as well, one fault appeared twice in the report and a regex
+    // was outvoting a model on its own subject.
     const d = await diagnose('sample-resume.md');
 
-    expect(mentions(d, 'assigned slot')).toBe(true);
+    expect(mentions(d, 'assigned slot')).toBe(false);
+    expect(mentions(d, 'does not name an action')).toBe(false);
+    expect(mentions(d, 'nothing to verify it against')).toBe(false);
+    expect(mentions(d, 'narrating process')).toBe(false);
+    expect(mentions(d, 'passive voice')).toBe(false);
+  });
+
+  it('still measures them, as statistics rather than as a verdict', async () => {
+    const d = await diagnose('sample-resume.md');
+
+    expect(d.metrics.quantifiedRatio.ratio).toBeGreaterThan(0);
+    expect(d.metrics.verbFirstRatio.ratio).toBeGreaterThan(0);
   });
 
   it('reports the quantified ratio it measured', async () => {
@@ -175,9 +204,11 @@ describe('analyzeFormat on a messy resume', () => {
     // unrecognised heading would silently cost the whole content diagnosis.
     const messy = await diagnose('messy-resume.md');
 
-    expect(mentions(messy, 'assigned slot')).toBe(true);
     expect(mentions(messy, 'personal pronoun')).toBe(true);
+    // Measured on the bullets, which is the point: had the heading dropped them
+    // into looseLines, there would be nothing to measure.
     expect(messy.metrics.quantifiedRatio.ratio).toBeGreaterThan(0);
+    expect(messy.metrics.verbFirstRatio.ratio).toBeGreaterThan(0);
   });
 
   it.each([
@@ -185,8 +216,6 @@ describe('analyzeFormat on a messy resume', () => {
     ['no email or phone in the body', 'no email or phone'],
     ['star ratings in the skills section', 'proficiency ratings'],
     ['two date formats in one resume', 'mixed date formats'],
-    ['"assisted" as an opener', 'does not name an action'],
-    ['a bullet running past two lines', 'narrating process'],
     ['a bullet opening with a year', 'opens with a date'],
   ])('reports %s', async (_label, phrase) => {
     expect(mentions(await diagnose('messy-resume.md'), phrase)).toBe(true);

@@ -20,6 +20,13 @@ entry reads as one piece of work or an unordered task list, and what order its
 lines would land hardest in. Every bullet is given to you with the id that
 addresses it — say which lines you mean.
 
+Education, Skills and a Summary are part of the story, not decoration around
+it. A degree explains where the technical ground came from and where the
+timeline starts; a skills list says what the person believes they are, which
+either matches what the entries show or does not; a summary states the
+through-line explicitly, and a summary pointing one way while the work points
+another is worth saying out loud. Read them alongside the entries.
+
 What you are not doing is scoring the bullets. Whether a line says what it
 achieved, whether its figures hold up, whether the method is credible — another
 reader has those, and a second opinion on them is a second opinion rather than a

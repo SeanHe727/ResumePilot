@@ -8,18 +8,51 @@ import type { DiagnosisReport } from '../domain.js';
  * pipeline it was filed under.
  */
 export function render(report: DiagnosisReport): string {
-  const { summary } = report;
+  const { summary, coverage } = report;
+  const dimensions = [
+    `format ${summary.formatScore}`,
+    `substance ${summary.substanceAvg}`,
+    ...(summary.wordingAvg ? [`wording ${summary.wordingAvg}`] : []),
+    ...(summary.narrativeScore !== undefined ? [`narrative ${summary.narrativeScore}`] : []),
+    ...(summary.jdScore !== undefined ? [`jd ${summary.jdScore}`] : []),
+  ];
   const lines: string[] = [
     `Overall ${summary.overallScore}/100`,
-    `  format ${summary.formatScore}  substance ${summary.substanceAvg}  wording ${summary.wordingAvg}`,
+    `  ${dimensions.join('  ')}`,
     `  ${summary.totalEntries} entries, ${summary.totalBullets} bullets`,
     '',
   ];
 
+  // What was read, before what it found. A partial review that says so is a
+  // partial review; one that does not is a whole review that happens to be
+  // wrong.
+  if (coverage) {
+    const per = `${coverage.contentReviewed}/${coverage.eligibleEntries}`;
+    lines.push(
+      'Covered',
+      `  content ${per}  wording ${coverage.wordingReviewed}/${coverage.eligibleEntries}` +
+        (coverage.notApplicableEntries > 0
+          ? `  (${coverage.notApplicableEntries} entries have no bullets to score)`
+          : ''),
+      `  narrative ${coverage.narrative}  job description ${coverage.jdMatch}`,
+      '',
+    );
+  }
+
   for (const entry of report.perEntry) {
-    lines.push(`${String(entry.score).padStart(3)}  ${entry.label}`);
+    // A missing score is said in words. Printed as 0 it reads as a verdict,
+    // which is how a degree with nothing to score looked exactly like an entry
+    // that had been read and found worthless.
+    const mark =
+      entry.score !== undefined
+        ? String(entry.score).padStart(3)
+        : entry.status === 'not-applicable'
+          ? ' — '
+          : ' ? ';
+    lines.push(`${mark}  ${entry.label}${entry.status === 'not-run' ? '  (not reviewed)' : ''}`);
     for (const bullet of entry.bullets) {
-      lines.push(...wrap(bullet.text, `     ${String(bullet.score).padStart(3)}  `, '          '));
+      const score = bullet.score !== undefined ? String(bullet.score).padStart(3) : ' ? ';
+      lines.push(...wrap(bullet.text, `     ${score}  `, '          '));
       if (bullet.topIssue) lines.push(...wrap(bullet.topIssue, '          ', '          '));
     }
     lines.push('');

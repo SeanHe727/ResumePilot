@@ -104,14 +104,19 @@ export function analyzeFormat(resume: ResumeDocument): FormatDiagnosis {
   collectContactIssues(resume, issues);
   collectConventionIssues(resume, issues);
 
-  // Parsability dominates: a resume the machine cannot read scores nothing on
-  // the axes that assume it could.
+  // Only what a machine reading the file can decide.
+  //
+  // The quantified and verb-first ratios used to carry 45% of this score, and
+  // both are judged better elsewhere: whether a line should have a figure is a
+  // semantic question the content reader already asks, and whether its verb is
+  // a strong one is the wording reader's. Counted here as well, one missing
+  // figure was scored twice — once through substance and again through format —
+  // and a regex was outvoting a model on its own subject.
+  //
+  // The ratios are still measured and still reported. They are statistics about
+  // the document, not a verdict on it.
   const overallScore = Math.round(
-    atsParsability.score * 0.35 +
-      quantifiedRatio.score * 0.25 +
-      verbFirstRatio.score * 0.2 +
-      consistency.score * 0.1 +
-      length.score * 0.1,
+    atsParsability.score * 0.6 + consistency.score * 0.2 + length.score * 0.2,
   );
 
   return {
@@ -162,12 +167,6 @@ function scoreQuantified(
   const quantified = bullets.filter((b) => hasMeasurement(b.text));
   const ratio = quantified.length / bullets.length;
 
-  if (ratio < QUANTIFIED_TARGET) {
-    // Cite the worst offender rather than the rule in the abstract.
-    const example = bullets.find((b) => !hasMeasurement(b.text));
-    issues.push(describe('faang.unquantified-majority', example?.text ?? ''));
-  }
-
   return {
     // Meeting the target is a pass, not a perfect score; the ceiling is reached
     // when nearly every bullet carries a figure.
@@ -185,16 +184,6 @@ function scoreVerbFirst(
 
   const verbFirst = bullets.filter((b) => startsWithActionVerb(b.text));
   const ratio = verbFirst.length / bullets.length;
-
-  for (const bullet of bullets) {
-    const opener = bystanderOpener(bullet.text);
-    if (opener) {
-      issues.push(describe('faang.bystander-language', bullet.text.slice(0, opener.length)));
-      continue;
-    }
-    const weak = weakVerb(bullet.text);
-    if (weak) issues.push(describe('faang.weak-verb', weak));
-  }
 
   return {
     score: Math.round(ratio * 100),
@@ -283,18 +272,14 @@ function collectLineLevelIssues(bullets: Bullet[], issues: string[]): void {
     if (hasPronoun(bullet.text)) {
       issues.push(describe('harvard.no-pronouns', bullet.text));
     }
-    if (isPassive(bullet.text)) {
-      issues.push(describe('harvard.passive-voice', bullet.text));
-    }
     if (startsWithDate(bullet.text)) {
       issues.push(describe('harvard.date-first-line', bullet.text));
     }
-    if (estimateLines(bullet.text) > MAX_BULLET_LINES) {
-      issues.push(describe('faang.overlong-bullet', bullet.text));
-    }
-    if (!hasMeasurement(bullet.text)) {
-      issues.push(describe('google.xyz.missing-measure', bullet.text));
-    }
+    // Neither length nor a missing figure is raised here any more. The wording
+    // reader judges whether a line is carrying its words and the content reader
+    // judges whether a figure was possible, and both of them read the line
+    // rather than matching it. A pattern saying the same thing from here only
+    // gave the report two entries for one fault.
   }
 }
 

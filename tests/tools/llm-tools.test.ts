@@ -585,6 +585,17 @@ describe('generate_report: the improvement plan', () => {
     issues: ['opens with a duty rather than an action — "Responsible for the order query service"'],
   };
 
+  /** One entry shape the coverage cases reuse with different ids. */
+  const ENTRY_FIXTURE = {
+    sectionId: 's1',
+    index: 0,
+    headerLines: ['A Company | Engineer | 2025'],
+    bullets: [
+      { id: 'b0', entryId: 's1:e0', index: 0, text: 'Responsible for the service', span: { start: 0, end: 1 } },
+    ],
+    span: { start: 0, end: 2 },
+  };
+
   const ENTRIES = [{
     entryId: 's1:e0',
     overallScore: 30,
@@ -640,6 +651,97 @@ describe('generate_report: the improvement plan', () => {
     usage: { inputTokens: 0, outputTokens: 0 },
     stopReason: 'end_turn',
   };
+
+  it('says how much of the resume it actually read', async () => {
+    // A report appeared once the format check and a single entry had been read,
+    // and looked exactly like one where every reader covered everything.
+    const { ctx } = scriptedCtx([answered]);
+    const state = (ctx as { session: { state: Record<string, unknown> } }).session.state;
+    // Two entries with bullets, one without: only two are eligible, and only
+    // one of those was read.
+    state.resume = {
+      sections: [
+        {
+          id: 's1',
+          kind: 'experience',
+          heading: '',
+          looseLines: [],
+          span: { start: 0, end: 1 },
+          entries: [
+            { ...ENTRY_FIXTURE, id: 's1:e0' },
+            { ...ENTRY_FIXTURE, id: 's1:e1' },
+            { ...ENTRY_FIXTURE, id: 's1:e2', bullets: [] },
+          ],
+        },
+      ],
+    };
+    state.entryDiagnoses = [{ ...ENTRIES[0]!, entryId: 's1:e0' }];
+    state.wordingDiagnoses = undefined;
+
+    const result = await generateReportTool.execute({} as never, ctx);
+    const { coverage } = result.data!;
+
+    expect(coverage.eligibleEntries).toBe(2);
+    expect(coverage.notApplicableEntries).toBe(1);
+    expect(coverage.contentReviewed).toBe(1);
+    expect(coverage.wordingReviewed).toBe(0);
+    expect(coverage.narrative).toBe('not-run');
+    // Nothing was asked for, so nothing is missing.
+    expect(coverage.jdMatch).toBe('no-posting');
+  });
+
+  it('tells an unscored entry apart from one scored at zero', async () => {
+    // All three were zero, so a degree — a header and dates, with nothing a
+    // bullet reader could score — read exactly like an entry judged worthless.
+    const { ctx } = scriptedCtx([answered]);
+    const state = (ctx as { session: { state: Record<string, unknown> } }).session.state;
+    state.resume = {
+      sections: [
+        {
+          id: 's1',
+          kind: 'experience',
+          heading: '',
+          looseLines: [],
+          span: { start: 0, end: 1 },
+          entries: [
+            { ...ENTRY_FIXTURE, id: 's1:e0' },
+            { ...ENTRY_FIXTURE, id: 's1:e1' },
+            { ...ENTRY_FIXTURE, id: 's1:e2', bullets: [] },
+          ],
+        },
+      ],
+    };
+    state.entryDiagnoses = [{ ...ENTRIES[0]!, entryId: 's1:e0' }];
+
+    const result = await generateReportTool.execute({} as never, ctx);
+    const byId = new Map(result.data!.perEntry.map((e) => [e.entryId, e]));
+
+    expect(byId.get('s1:e0')?.status).toBe('reviewed');
+    expect(byId.get('s1:e1')?.status).toBe('not-run');
+    expect(byId.get('s1:e2')?.status).toBe('not-applicable');
+    // And no invented zero on either of the two that were not read.
+    expect(byId.get('s1:e1')?.score).toBeUndefined();
+    expect(byId.get('s1:e2')?.score).toBeUndefined();
+  });
+
+  it('does not let one dimension stand in for four', async () => {
+    // Missing dimensions were filled with the substance average, so a review
+    // that ran only the content reader had that score carrying 70% of the
+    // weights while the report presented it as five readers agreeing.
+    const { ctx } = scriptedCtx([answered]);
+    const state = (ctx as { session: { state: Record<string, unknown> } }).session.state;
+    state.wordingDiagnoses = undefined;
+    state.narrative = undefined;
+    state.jdMatch = undefined;
+
+    const result = await generateReportTool.execute({} as never, ctx);
+    const { summary } = result.data!;
+
+    // Format 0.3 and substance 0.4, renormalised over the 0.7 that ran.
+    expect(summary.overallScore).toBe(
+      Math.round((summary.formatScore * 0.3 + summary.substanceAvg * 0.4) / 0.7),
+    );
+  });
 
   it('puts every finding in front of the chooser, not the first eight', async () => {
     // It used to take `issues.slice(0, 8)` in array order, which meant the
