@@ -148,6 +148,66 @@ describe('from the entry point to a report', () => {
     app.close();
   });
 
+  it('opens the file the person named mid-conversation', async () => {
+    // The other half, and the one the tool exists for: a path pasted into the
+    // conversation is read without starting over. Left untested, a guard that
+    // refuses everything looks exactly like a guard that works.
+    const { app } = scriptedApp();
+    const session = await app.start('');
+
+    const engine = (app as unknown as { queryEngine: { query: unknown } }).queryEngine;
+    let asked = false;
+    vi.spyOn(engine as never, 'query').mockImplementation((async () => {
+      if (asked) {
+        return {
+          type: 'text',
+          content: 'Loaded.',
+          usage: { inputTokens: 0, outputTokens: 0 },
+          stopReason: 'end_turn',
+        };
+      }
+      asked = true;
+      return {
+        type: 'tool_use',
+        toolCalls: [
+          { id: 't1', name: 'parse_resume', input: { path: 'tests/fixtures/sample-resume.md' } },
+        ],
+        usage: { inputTokens: 0, outputTokens: 0 },
+        stopReason: 'tool_use',
+      };
+    }) as never);
+
+    await app.handle('here is my resume: tests/fixtures/sample-resume.md', session);
+
+    expect((session.state as ResumeSessionState).resume).toBeDefined();
+    app.close();
+  });
+
+  it('will not open a file the person never named', async () => {
+    // The coordinator holds `parse_resume` so a path pasted mid-conversation can
+    // be read without starting over, and the same tool in the same hands will
+    // read any path a model writes down. The permission rule said the path came
+    // from the candidate; nothing checked.
+    const { app, seen } = scriptedApp();
+    const session = await app.start('');
+
+    // The scripted model answers this turn by reaching for a file nobody
+    // mentioned.
+    seen.length = 0;
+    const engine = (app as unknown as { queryEngine: { query: unknown } }).queryEngine;
+    vi.spyOn(engine as never, 'query').mockImplementation((async () => ({
+      type: 'tool_use',
+      toolCalls: [{ id: 't1', name: 'parse_resume', input: { path: '/etc/passwd' } }],
+      usage: { inputTokens: 0, outputTokens: 0 },
+      stopReason: 'tool_use',
+    })) as never);
+
+    await app.handle('what do you think of my resume?', session);
+
+    expect((session.state as ResumeSessionState).resume).toBeUndefined();
+    app.close();
+  });
+
   it('puts the resume in front of the coordinator, with ids the tools take', async () => {
     const { app, seen } = scriptedApp();
     const session = await app.start('tests/fixtures/sample-resume.md');

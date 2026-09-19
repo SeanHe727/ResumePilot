@@ -75,6 +75,7 @@ export interface HookPipeline {
  */
 export const DEFAULT_HOOK_ORDER = [
   { name: 'permission-check', timing: 'pre-tool', priority: 10 },
+  { name: 'path-source', timing: 'pre-tool', priority: 20 },
   { name: 'budget-check', timing: 'pre-tool', priority: 30 },
   { name: 'dispatch-trace', timing: 'pre-tool', priority: 50 },
   // Everything that reads the result runs before the one that rewrites it.

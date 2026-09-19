@@ -2,6 +2,7 @@ export { DefaultHookPipeline } from './pipeline.js';
 export { createPermissionCheckHook } from './pre-tool/permission-check.js';
 export { createBudgetCheckHook } from './pre-tool/budget-check.js';
 export { createDispatchTraceHook } from './pre-tool/dispatch-trace.js';
+export { createPathSourceHook } from './pre-tool/path-source.js';
 export { createAuditLogHook } from './post-tool/audit-log.js';
 export { createResultCompressHook } from './post-tool/result-compress.js';
 export { createProfileHook, createWeakPointHook } from './post-tool/memory-trigger.js';

@@ -1,6 +1,7 @@
 import { MAIN_AGENT_PROMPT } from '../prompts/index.js';
 import type { CommandParser } from '../command/types.js';
 import { renderResume } from '../document/index.js';
+import { grantPathsIn } from '../session/granted-paths.js';
 import type { ContextManager } from '../context/types.js';
 import type { ResumeSessionState } from '../domain.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
@@ -124,6 +125,9 @@ async function runMainAgent(input: string, session: Session, deps: LoopDeps): Pr
   let exchanges = exchangesSoFar(session);
   context.setSystemPrompt(MAIN_AGENT_PROMPT);
   setResumeContext(context, session);
+  // Anything that looks like a path in what they just said is theirs to open.
+  // Granted before the model gets a turn, so the model cannot grant its own.
+  grantPathsIn(input, session);
   context.addMessage({ role: 'user', content: input });
 
   for (let turn = 0; turn < MAX_TURNS; turn++) {

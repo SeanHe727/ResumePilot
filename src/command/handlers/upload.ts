@@ -2,6 +2,7 @@ import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 import type { ResumeSessionState } from '../../domain.js';
+import { grantPath } from '../../session/granted-paths.js';
 import type { Session, SessionManager } from '../../session/types.js';
 
 /** Runs `parse_resume` against the session, leaving the document on it. */
@@ -60,6 +61,8 @@ export function createUploadCommand(sessions: SessionManager, parse: ParseFile):
         };
       }
 
+      // Typed at the prompt: the candidate naming a file as plainly as it gets.
+      grantPath(path, session);
       session.sourcePath = path;
       sessions.save(session);
 

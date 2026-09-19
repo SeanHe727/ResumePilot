@@ -11,6 +11,7 @@ import {
   MetricCollector,
   createAuditLogHook,
   createDispatchTraceHook,
+  createPathSourceHook,
   createBudgetCheckHook,
   createProfileHook,
   createWeakPointHook,
@@ -28,6 +29,7 @@ import {
   SqliteSessionManager,
 } from './session/index.js';
 import type { Session } from './session/types.js';
+import { grantPath } from './session/granted-paths.js';
 import { createToolRegistry } from './tools/index.js';
 import { TavilyProvider } from './tools/search-provider.js';
 
@@ -104,6 +106,7 @@ export class App {
     this.hooks = new DefaultHookPipeline();
     for (const hook of [
       createPermissionCheckHook(gate),
+      createPathSourceHook(),
       createBudgetCheckHook(this.queryEngine),
       // Shares the loop's own sink, so a trace lands where the answer will.
       createDispatchTraceHook(options.print ?? ((text) => process.stdout.write(`${text}\n`))),
@@ -214,6 +217,9 @@ export class App {
     path: string,
     session: Session,
   ): Promise<{ success: boolean; error?: string }> {
+    // Named on the command line or at the prompt, which is the candidate
+    // naming it. The guard exists for paths a model produces.
+    grantPath(path, session);
     const result = await this.loopDeps.tools.resolve('parse_resume').execute({ path } as never, {
       session,
       queryEngine: this.queryEngine,

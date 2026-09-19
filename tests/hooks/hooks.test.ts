@@ -9,6 +9,7 @@ import {
   createAuditLogHook,
   createBudgetCheckHook,
   createDispatchTraceHook,
+  createPathSourceHook,
   createProfileHook,
   createWeakPointHook,
   createPermissionCheckHook,
@@ -18,6 +19,7 @@ import {
   type HookContext,
   type HookOutcome,
 } from '../../src/hooks/index.js';
+import { grantPathsIn } from '../../src/session/granted-paths.js';
 import { MemoryTriggers, SqliteMemoryStore } from '../../src/memory/index.js';
 import { DefaultPermissionGate, SqliteAuditLogger } from '../../src/permission/index.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
@@ -305,6 +307,65 @@ describe('audit-log', () => {
     await createAuditLogHook(logger).execute(ctx);
 
     expect(logger.getSessionExecutions(ctx.session.id)).toHaveLength(0);
+  });
+});
+
+describe('path-source', () => {
+  async function asked(said: string | undefined, path: string) {
+    const ctx = context('parse_resume', { path });
+    if (said !== undefined) grantPathsIn(said, ctx.session);
+    return createPathSourceHook().execute(ctx);
+  }
+
+  it('opens a file the candidate named', async () => {
+    const outcome = await asked('have a look at ./resume.pdf', './resume.pdf');
+
+    expect(outcome.action).toBe('continue');
+  });
+
+  it('takes the expanded form of a path they wrote', async () => {
+    // Someone types a relative path and the model sends the absolute one. Both
+    // sides resolve the same way, so it is one entry rather than a near miss.
+    const outcome = await asked('try ./resume.pdf', `${process.cwd()}/resume.pdf`);
+
+    expect(outcome.action).toBe('continue');
+  });
+
+  it('refuses a path the model produced on its own', async () => {
+    // The permission rule that lets this tool through says the path comes from
+    // the candidate, and nothing checked. A model holding a résumé full of
+    // third-party text is not the place to decide which files get opened.
+    const outcome = await asked('what do you think of my resume?', '/etc/passwd');
+
+    expect(outcome.action).toBe('block');
+  });
+
+  it('refuses a neighbour of a file they did name', async () => {
+    // The first version compared basenames, so naming `resume.pdf` opened any
+    // `resume.pdf` anywhere. Resolving at grant time makes the check exact.
+    const outcome = await asked('read ./resume.pdf', '/somewhere/else/resume.pdf');
+
+    expect(outcome.action).toBe('block');
+  });
+
+  it('refuses when nothing has been granted at all', async () => {
+    expect((await asked(undefined, '/etc/passwd')).action).toBe('block');
+  });
+
+  it('keeps a grant past the turn it was made in', async () => {
+    // A path given at message three is still theirs at message ten. Checking
+    // only the current turn meant re-pasting it every time.
+    const ctx = context('parse_resume', { path: './resume.pdf' });
+    grantPathsIn('here it is: ./resume.pdf', ctx.session);
+    // Several turns go by, saying nothing about files.
+    grantPathsIn('what do you think?', ctx.session);
+    grantPathsIn('and the second bullet?', ctx.session);
+
+    expect((await createPathSourceHook().execute(ctx)).action).toBe('continue');
+  });
+
+  it('leaves every other tool alone', async () => {
+    expect(createPathSourceHook().watches).toEqual(['parse_resume']);
   });
 });
 
