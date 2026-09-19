@@ -30,7 +30,7 @@ export interface SubAgentDeps {
  * inside an exchange drops the entry being diagnosed, and what survives is a
  * conversation the provider rejects.
  */
-const SUB_AGENT_CONTEXT = {
+export const SUB_AGENT_CONTEXT = {
   // These four numbers only work together, and setting any of them by eye has
   // now produced the same dead mechanism three times.
   //
@@ -54,6 +54,13 @@ const SUB_AGENT_CONTEXT = {
   recentBudget: 40_000,
   taskBudget: 4_000,
   toolResultBudget: 6_000,
+  // A role's own instructions are not a window that fills up: they are fixed,
+  // they are written deliberately, and truncating them drops whatever was put
+  // last. The content prompt crossed the 2,000 default the day it gained a
+  // section on what a fix costs, and what fell off the end was the block
+  // telling a searching role not to promote an adjacent result into a norm —
+  // silently, because truncation reports nothing.
+  systemPromptBudget: 8_000,
 } as const;
 
 /**

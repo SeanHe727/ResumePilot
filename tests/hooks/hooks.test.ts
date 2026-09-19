@@ -418,7 +418,7 @@ describe('the memory writes', () => {
           measurement: { score: 0, detail: '' },
           method: { score: 20, detail: '' },
         },
-        issues: ['no measurable outcome'],
+        issues: [{ what: 'no measurable outcome', costWords: 4 }],
         strengths: [],
       },
     ],

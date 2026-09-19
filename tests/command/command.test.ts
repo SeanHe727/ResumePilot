@@ -90,7 +90,7 @@ function withReport(session: Session): void {
         bullets: [{
           bulletId: 'b0', overallScore: 20,
           dimensions: { impact: { score: 20, detail: '' }, measurement: { score: 0, detail: '' }, method: { score: 10, detail: '' } },
-          issues: ['no measurable outcome'], strengths: ['names the system'],
+          issues: [{ what: 'no measurable outcome', costWords: 4 }], strengths: ['names the system'],
         }],
         narrative: { redundantPairs: [], weakLead: true, coherence: { score: 40, detail: '' } },
       },
@@ -262,6 +262,25 @@ describe('handlers', () => {
 
     expect(result.action).toBe('new_session');
     expect((result.data as Session).sourcePath).toMatch(/sample-resume\.md$/);
+  });
+
+  it('/report prints the report the coordinator only narrated', async () => {
+    // The coordinator picks what to say and how much, which is what makes a
+    // conversation bearable and what makes it partial. This is the other
+    // document: every score, the plan, and what the plan set aside.
+    const { parser, session } = setup();
+    withReport(session);
+
+    const result = await parser.execute('/report', session);
+
+    expect(result.output).toContain('Overall');
+    expect(result.output).toContain('ByteDance');
+  });
+
+  it('/report says so before anything has been reported', async () => {
+    const { parser, session } = setup();
+
+    expect((await parser.execute('/report', session)).output).toMatch(/Nothing has been reported/);
   });
 
   it('/export writes markdown by default and json on request', async () => {

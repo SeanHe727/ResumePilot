@@ -55,7 +55,7 @@ const REPLIES: Record<string, string> = {
           measurement: { score: 0, detail: 'no figure' },
           method: { score: 10, detail: 'no approach' },
         },
-        issues: ['no measurable outcome'],
+        issues: [{ what: 'no measurable outcome', costWords: 4 }],
         strengths: [],
       },
     ],

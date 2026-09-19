@@ -19,8 +19,8 @@ export function render(report: DiagnosisReport): string {
   for (const entry of report.perEntry) {
     lines.push(`${String(entry.score).padStart(3)}  ${entry.label}`);
     for (const bullet of entry.bullets) {
-      lines.push(`     ${String(bullet.score).padStart(3)}  ${truncate(bullet.text, 64)}`);
-      if (bullet.topIssue) lines.push(`          ${truncate(bullet.topIssue, 70)}`);
+      lines.push(`     ${String(bullet.score).padStart(3)}  ${truncate(bullet.text, 88)}`);
+      if (bullet.topIssue) lines.push(`          ${truncate(bullet.topIssue, 96)}`);
     }
     lines.push('');
   }
@@ -31,6 +31,21 @@ export function render(report: DiagnosisReport): string {
     if (narrative.arc) lines.push(`  ${narrative.arc}`);
     for (const gap of narrative.gaps) lines.push(`  gap: ${gap}`);
     for (const note of narrative.orderingNotes) lines.push(`  order: ${note}`);
+
+    // How each entry reads as a unit. Produced since the arrangement reading
+    // moved here, and rendered nowhere until someone asked to see the report.
+    for (const entry of narrative.withinEntries ?? []) {
+      const label = report.perEntry.find((e) => e.entryId === entry.entryId)?.label ?? entry.entryId;
+      lines.push(`  ${label}  coherence ${entry.coherence.score}/100`);
+      if (entry.coherence.detail) lines.push(`    ${entry.coherence.detail}`);
+      for (const pair of entry.redundantPairs) {
+        lines.push(`    repeats: ${pair.bulletA} and ${pair.bulletB} — ${pair.note}`);
+      }
+      if (entry.suggestedOrder?.length) {
+        lines.push(`    order: ${entry.suggestedOrder.join(' → ')}`);
+      }
+      if (entry.weakLead) lines.push('    the strongest line is not the opening one');
+    }
     lines.push('');
   }
 
@@ -75,6 +90,8 @@ export function render(report: DiagnosisReport): string {
     ['Fix now', report.improvementPlan.immediate],
     ['Needs a figure you have to find', report.improvementPlan.shortTerm],
     ['Needs new experience', report.improvementPlan.longTerm],
+    // Shown, because a list nobody can see was trimmed reads as a short list.
+    ['Set aside for now', (report.improvementPlan.setAside ?? []).map((s) => `${s.what} — ${s.because}`)],
   ];
   for (const [heading, items] of plan) {
     if (items.length === 0) continue;

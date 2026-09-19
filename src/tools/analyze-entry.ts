@@ -5,6 +5,7 @@ import type {
   ResumeEntry,
   ScoredDimension,
 } from '../domain.js';
+import type { BulletIssue } from '../domain.js';
 import { renderEntry } from '../document/index.js';
 import { CONTENT_PROMPT } from '../prompts/index.js';
 import type { Tool, ToolResult } from './types.js';
@@ -103,7 +104,12 @@ Return JSON of exactly this shape:
         "measurement": { "score": 0-100, "detail": "one sentence" },
         "method":      { "score": 0-100, "detail": "one sentence" }
       },
-      "issues": ["what is wrong with this bullet, one sentence each"],
+      "issues": [
+        {
+          "what": "what is wrong with this bullet, one sentence",
+          "costWords": "roughly how many words answering it adds to the line, as a number"
+        }
+      ],
       "strengths": ["..."],
       "claimsToVerify": [
         {
@@ -153,7 +159,7 @@ export function normaliseEntryDiagnosis(
           ? raw.overallScore
           : Math.round((impact.score + measurement.score + method.score) / 3),
       dimensions: { impact, measurement, method },
-      issues: stringArray(raw.issues),
+      issues: bulletIssues(raw.issues),
       strengths: stringArray(raw.strengths),
       claimsToVerify: claimChecks(raw.claimsToVerify),
     };
@@ -239,4 +245,27 @@ function stringArray(raw: unknown): string[] {
 /** Ids are shown bracketed, so they come back bracketed. */
 function bareId(raw: unknown): string {
   return String(raw ?? '').replace(/[[\]]/g, '').trim();
+}
+
+/**
+ * Cheapest first, so a reader who stops partway has stopped at the right place.
+ *
+ * A missing or unreadable cost sorts last rather than being dropped: the fault
+ * is still real, and only its price is unknown.
+ */
+function bulletIssues(raw: unknown): BulletIssue[] {
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .flatMap((item): BulletIssue[] => {
+      // A bare string is what the model returns when it ignores the shape, and
+      // the finding is worth more than the omission costs.
+      if (typeof item === 'string') return item.trim() ? [{ what: item, costWords: 0 }] : [];
+
+      const record = item as Record<string, unknown> | null;
+      const what = typeof record?.what === 'string' ? record.what.trim() : '';
+      const cost = typeof record?.costWords === 'number' ? Math.round(record.costWords) : 0;
+      return what ? [{ what, costWords: cost > 0 ? cost : 0 }] : [];
+    })
+    .sort((a, b) => (a.costWords || Number.MAX_SAFE_INTEGER) - (b.costWords || Number.MAX_SAFE_INTEGER));
 }

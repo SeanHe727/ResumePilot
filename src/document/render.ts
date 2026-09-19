@@ -13,10 +13,20 @@ import type { ResumeDocument, ResumeEntry } from '../domain.js';
  * an agent that never gets them cannot say "these two repeat each other".
  */
 
-/** One entry: its header, then every bullet with the id that addresses it. */
+/**
+ * One entry: its own id, its header, then every bullet with the id that
+ * addresses it.
+ *
+ * The entry id is written out rather than left to be inferred from the bullet
+ * ids beneath it. It is inferable — an entry id is a bullet id without its last
+ * segment — but an entry with no bullets has nothing to infer from, and a
+ * degree is exactly that. A reader asked which entry it means should not have
+ * to do arithmetic on strings.
+ */
 export function renderEntry(entry: ResumeEntry): string {
   const bullets = entry.bullets.map((bullet) => `  - [${bullet.id}] ${bullet.text}`).join('\n');
-  return `${entry.headerLines.join(' | ')}\n${bullets}`;
+  const header = `[${entry.id}] ${entry.headerLines.join(' | ')}`;
+  return bullets ? `${header}\n${bullets}` : header;
 }
 
 /**

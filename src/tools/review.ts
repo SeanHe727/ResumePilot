@@ -56,6 +56,27 @@ const BRIEFING_PROPS = {
  * A dispatch with no aim and one whose aim came out blank are different things,
  * and only the second is worth looking at in a trace.
  */
+/**
+ * How much room is left on the page, if anything has looked.
+ *
+ * Sent down with the review rather than left to the coordinator, because it is
+ * a measurement rather than a judgement — and because the reader that makes the
+ * demands is the only one that cannot see the page it is spending.
+ */
+function pageRoom(ctx: ToolContext): string | undefined {
+  const format = (ctx.session?.state as ResumeSessionState | undefined)?.formatDiagnosis;
+  const length = format?.metrics.length;
+  if (!length) return undefined;
+
+  const room = length.pageCount <= 1 ? Math.max(0, 650 - length.wordCount) : 0;
+  return (
+    `The resume runs ${length.wordCount} words over ${length.pageCount} page(s). ` +
+    (room > 0
+      ? `Roughly ${room} words of room are left before it spills onto another page.`
+      : 'It is already at or over its length, so anything added has to displace something.')
+  );
+}
+
 function briefingFrom(input: WithBriefing | undefined): Briefing | undefined {
   const briefing: Briefing = {
     ...(input?.understanding?.trim() ? { understanding: input.understanding.trim() } : {}),

@@ -229,3 +229,30 @@ describe('web search at the gate', () => {
     expect(decision.rule.id).toBe('default-deny');
   });
 });
+
+describe('every tool a coordinator can reach', () => {
+  it('matches a rule of its own, never the fallback', async () => {
+    // A rule keyed on a tool name goes quiet when that tool is renamed, and
+    // says nothing about it. `review_entry` became five `review_*` tools and
+    // the rule kept matching the name that no longer existed: every dispatch
+    // fell through to the default deny, and a run reported "the specialists are
+    // unavailable due to a tool-permission error" with nothing to point at.
+    //
+    // Same shape as a hook watching a tool nobody registers. Hooks declare what
+    // they watch so a stale name is readable; rules cannot, so this checks the
+    // other end — that nothing registered lands on the fallback.
+    const { createToolRegistry } = await import('../../src/tools/index.js');
+    const { DefaultPermissionGate } = await import('../../src/permission/index.js');
+
+    const registry = createToolRegistry({ orchestrator: true } as never);
+    const gate = new DefaultPermissionGate({
+      audit: { log: () => {}, logExecution: () => {} } as never,
+      confirm: { ask: async () => false } as never,
+    });
+
+    for (const schema of registry.getSchemas()) {
+      const decision = await gate.checkTool({ id: 't', name: schema.name, input: {} }, 's');
+      expect(decision.rule.id, `${schema.name} has no rule of its own`).not.toBe('default-deny');
+    }
+  });
+});

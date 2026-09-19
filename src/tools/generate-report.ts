@@ -77,7 +77,7 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
 
     const allEntries = input.resume.sections.flatMap((s) => s.entries);
     const summary = summarise(input, allEntries);
-    const improvementPlan = await buildImprovementPlan(input, summary.topWeaknesses, ctx);
+    const improvementPlan = await buildImprovementPlan(input, ctx);
 
     const report: DiagnosisReport = {
       summary,
@@ -128,7 +128,7 @@ function summarise(
     ...(input.jdMatch ? { jdScore: input.jdMatch.overallScore } : {}),
     topStrengths: topRecurring(bullets.flatMap((b) => b.strengths), 3),
     topWeaknesses: topRecurring(
-      [...bullets.flatMap((b) => b.issues), ...input.format.issues],
+      [...bullets.flatMap((b) => b.issues.map((i) => i.what)), ...input.format.issues],
       3,
     ),
   };
@@ -148,14 +148,14 @@ function perEntry(
       entryId: entry.id,
       label: [entry.organization, entry.title].filter(Boolean).join(' — ') || entry.headerLines[0] || entry.id,
       score: diagnosis?.overallScore ?? 0,
-      topIssue: diagnosis?.bullets.flatMap((b) => b.issues)[0] ?? 'not diagnosed',
+      topIssue: diagnosis?.bullets.flatMap((b) => b.issues)[0]?.what ?? 'not diagnosed',
       bullets: entry.bullets.map((bullet) => {
         const scored = bulletScores.get(bullet.id);
         return {
           bulletId: bullet.id,
           text: bullet.text,
           score: scored?.overallScore ?? 0,
-          topIssue: scored?.issues[0] ?? '',
+          topIssue: scored?.issues[0]?.what ?? '',
         };
       }),
     };
@@ -171,18 +171,32 @@ function perEntry(
  */
 async function buildImprovementPlan(
   input: GenerateReportInput,
-  topWeaknesses: string[],
   ctx: ToolContext,
 ): Promise<ImprovementPlan> {
+  // Every finding, priced and placed. It used to be the first eight, sliced in
+  // array order — which meant the first entry read filled the list and the rest
+  // never appeared, and nothing said so. Choosing among all of them is the
+  // whole reason this call exists.
   const findings = [
-    ...topWeaknesses,
-    ...input.format.issues.slice(0, 5),
-    ...input.entries.flatMap((e) => e.bullets.flatMap((b) => b.issues)).slice(0, 8),
+    ...input.format.issues.map((what) => `- [format] ${what}`),
+    ...input.entries.flatMap((entry) =>
+      entry.bullets.flatMap((bullet) =>
+        bullet.issues.map(
+          (issue) => `- [${bullet.bulletId}, ~${issue.costWords} words] ${issue.what}`,
+        ),
+      ),
+    ),
   ];
 
   if (findings.length === 0) {
     return { immediate: [], shortTerm: [], longTerm: [] };
   }
+
+  const length = input.format.metrics.length;
+  const room =
+    length.pageCount <= 1
+      ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${Math.max(0, 650 - length.wordCount)} words of room.`
+      : `The resume runs ${length.wordCount} words over ${length.pageCount} pages. It is already long, so anything added has to displace something.`;
 
   const ask = () => ctx.queryEngine.query({
     task: 'generate_report',
@@ -190,14 +204,15 @@ async function buildImprovementPlan(
     messages: [
       {
         role: 'user',
-        content: `Findings from the diagnosis:\n${findings.map((f) => `- ${f}`).join('\n')}
+        content: `${room}\n\nEverything the review found:\n${findings.join('\n')}
 
 Return JSON of exactly this shape:
 
 {
   "immediate": ["fixes the candidate can apply right now, without looking anything up"],
   "shortTerm": ["rewrites that need the candidate to dig up real figures"],
-  "longTerm": ["gaps only new experience can close"]
+  "longTerm": ["gaps only new experience can close"],
+  "setAside": [{ "what": "the finding you left out", "because": "one line on why" }]
 }`,
       },
     ],
@@ -220,6 +235,7 @@ Return JSON of exactly this shape:
     immediate: stringArray(parsed?.immediate),
     shortTerm: stringArray(parsed?.shortTerm),
     longTerm: stringArray(parsed?.longTerm),
+    ...(setAside(parsed?.setAside).length > 0 ? { setAside: setAside(parsed?.setAside) } : {}),
   };
 }
 
@@ -255,4 +271,15 @@ function topRecurring(items: string[], limit: number): string[] {
 
 function stringArray(raw: unknown): string[] {
   return Array.isArray(raw) ? raw.filter((s): s is string => typeof s === 'string') : [];
+}
+
+/** What the plan chose not to spend the page on, and why. */
+function setAside(raw: unknown): NonNullable<ImprovementPlan['setAside']> {
+  if (!Array.isArray(raw)) return [];
+
+  return raw.flatMap((item) => {
+    const record = item as Record<string, unknown> | null;
+    const what = typeof record?.what === 'string' ? record.what.trim() : '';
+    return what ? [{ what, because: String(record?.because ?? '') }] : [];
+  });
 }

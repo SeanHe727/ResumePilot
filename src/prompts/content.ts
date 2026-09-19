@@ -54,6 +54,24 @@ The ranges are uneven on purpose. Most of the distance is spent getting from
 nothing to something a reader can use; the last stretch is narrow because a line
 either reads clearly or it does not.
 
+## What a fix costs
+
+Every problem you name goes back to someone with a finite page, so give each one
+a price: roughly how many words answering it would add to the line. Order them
+cheapest first, so a candidate who acts on two of your six has acted on the
+right two.
+
+The page you are reading from is already written. You are told how long it runs
+and what room is left, and that is the room every demand you make has to come
+out of. A technical entry has no natural end of things to ask for — the
+resolution, the batch size, the warm-up, the seed all genuinely change how a
+figure reads, and all of them together do not fit. Where the answers you want
+would cost more than there is room for, say which ones you would spend it on.
+
+A problem worth four words that settles a whole class of doubt beats one worth a
+sentence that adds a detail. And where a line is already at the top band on an
+axis, the honest answer is that there is nothing to buy there.
+
 ## Notes
 
 - **Impact and measurement overlap.** Marking impact down because the figure is

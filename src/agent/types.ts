@@ -153,6 +153,15 @@ export interface Briefing {
   supplied?: string;
   /** What they asked to have looked at, in their terms. */
   goal?: string;
+  /**
+   * How much room the page has left, measured rather than judged.
+   *
+   * Not something the coordinator says — it comes off the format reading. It is
+   * here because the reader that names what is missing is the only one that
+   * cannot see the page its demands are spent on, and a demand with no budget
+   * behind it has no reason to stop.
+   */
+  pageRoom?: string;
 }
 
 export interface RoleSelectionInput {

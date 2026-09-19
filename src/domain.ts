@@ -202,6 +202,23 @@ export interface ClaimCheck {
   finding: string;
 }
 
+/**
+ * One fault, with what fixing it would cost the line.
+ *
+ * The cost is here because nothing else in the reading has one. Asked what a
+ * bullet is missing, a model answers for as long as there is anything missing —
+ * and in a technical entry there always is: the resolution, the batch size, the
+ * warm-up, the seed. Every one of those genuinely changes how a figure reads,
+ * and all of them together do not fit on a page. A price beside each demand is
+ * what makes "worth it" a question that can be asked at all.
+ */
+export interface BulletIssue {
+  /** What is wrong, one plain sentence. */
+  what: string;
+  /** Roughly how many words answering it would add to the line. */
+  costWords: number;
+}
+
 export interface BulletDiagnosis {
   bulletId: string;
   /** 0–100, weighted across the three dimensions below. */
@@ -214,8 +231,8 @@ export interface BulletDiagnosis {
     /** Z — is the method concrete enough to be credible? */
     method: ScoredDimension;
   };
-  /** What is wrong with this bullet, one plain sentence each. */
-  issues: string[];
+  /** What is wrong with this bullet, dearest-to-answer last. */
+  issues: BulletIssue[];
   strengths: string[];
   /**
    * Figures whose size depends on a named technique, and what checking that
@@ -380,6 +397,16 @@ export interface ImprovementPlan {
   shortTerm: string[];
   /** Gaps only new experience can close. */
   longTerm: string[];
+  /**
+   * Findings that did not fit, and why.
+   *
+   * The page is finite and the readings are not: a resume can attract three
+   * times more demands than it has room to answer. Something has to be left
+   * out, and the choice is worth more than the omission — a candidate who can
+   * see what was set aside can disagree with the ordering, where one who sees a
+   * shorter list cannot tell it was ever longer.
+   */
+  setAside?: Array<{ what: string; because: string }>;
 }
 
 export interface VersionComparison {

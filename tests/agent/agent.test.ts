@@ -35,7 +35,7 @@ const SUBSTANCE_JSON = JSON.stringify({
       bulletId: 'experience:0:0',
       overallScore: 20,
       dimensions: { impact: { score: 20, detail: 'a duty' }, measurement: { score: 0, detail: 'no figure' }, method: { score: 10, detail: '' } },
-      issues: ['no measurable outcome'],
+      issues: [{ what: 'no measurable outcome', costWords: 4 }],
       strengths: [],
     },
   ],
@@ -277,6 +277,28 @@ describe('SubAgentRuntime', () => {
       'examine_technical_depth',
       'web_search',
     ]);
+  });
+
+  it('sends a role its whole prompt, however long it has grown', async () => {
+    // `setSystemPrompt` truncates to a budget, silently, and what falls off is
+    // whatever was written last. The content prompt crossed the 2,000-token
+    // default the day it gained a section on what a fix costs, and the part
+    // that went was the block telling a searching role not to promote an
+    // adjacent result into a norm. Nothing reported it; a test asserting on the
+    // tail of that block failed and looked like a test problem.
+    const { ROLES } = await import('../../src/agent/roles.js');
+    const { estimateTokens } = await import('../../src/context/compressor.js');
+    const { SUB_AGENT_CONTEXT } = await import('../../src/agent/sub-agent.js');
+
+    for (const role of Object.values(ROLES)) {
+      const whole = role.optionalPrompt
+        ? `${role.systemPrompt}\n\n${role.optionalPrompt}`
+        : role.systemPrompt;
+      expect(
+        estimateTokens(whole),
+        `${role.id}'s prompt does not fit its budget and will be cut`,
+      ).toBeLessThan(SUB_AGENT_CONTEXT.systemPromptBudget);
+    }
   });
 
   it('does not promise a capability the run does not have', async () => {
@@ -526,7 +548,9 @@ describe('DefaultOrchestrator', () => {
     const verdict = await orchestrator(engine).diagnoseEntry(entry, bothRoles);
 
     expect(call).toBe(2);
-    expect(verdict.substance?.bullets[0]?.issues).toEqual(['no measurable outcome']);
+    expect(verdict.substance?.bullets[0]?.issues).toEqual([
+      { what: 'no measurable outcome', costWords: 4 },
+    ]);
     expect(verdict.wording?.perBullet[0]?.verbStrength.score).toBe(20);
     expect(verdict.overallScore).toBe(30);
     expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Entry Substance', 'Entry Wording']);

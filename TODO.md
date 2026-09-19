@@ -227,3 +227,25 @@ no substance      2 — Request aborted
 - 不要写成状态机。给目的、目标、一个宽松的建议动作,就够了。
 - 不要 "达到 xxx 条件给 xxx 分",要 "综合考虑 A、B、C 等,目的是 D"。
 - 角色特殊 prompt 里**只放实测出来的 bug 和要点**,推测的不放。
+
+---
+
+## 解析:项目条目被日期行切开(2026-09-18,实测)
+
+`/Users/sean/Downloads/sean_0908.pdf` 的 PROJECTS 段,每个项目解析成了两条:
+
+```
+[s3:e0] 0 条  ResumePilot | Owner | TypeScript, Agent Runtime, Multi-Agent Systems
+[s3:e1] 3 条  Aug 2026 - Present ⏎ github.com/SeanHe727/ResumePilot
+```
+
+PDF 里项目名和日期排在同一行的两端,文本提取后变成两行;`structure-builder.ts` 的
+"日期范围是新 entry 最可靠的开始标记"把日期那行判成了新 entry 的表头。
+
+**后果:**
+- 报告里项目标题显示成 GitHub 链接,真正的标题挂在一个 0 分的空条目上
+- content 拿到的 entry 表头是 `Aug 2026 - Present`,**它不知道自己在读哪个项目**
+- entry 数从 6 变成 8,其中两条永远是 0 分
+
+**没查的:** 是提取阶段(PDF 两端对齐的行拆成两行)还是结构阶段(表头续行的判定)。
+两端对齐的表头在简历里很常见,所以这多半不是这一份文件特有的。

@@ -572,7 +572,7 @@ describe('generate_report: the improvement plan', () => {
         measurement: { score: 0, detail: '' },
         method: { score: 20, detail: '' },
       },
-      issues: ['"Responsible for" states a duty, not an outcome'],
+      issues: [{ what: '"Responsible for" states a duty, not an outcome', costWords: 6 }],
       strengths: [],
     }],
   }];
@@ -582,8 +582,10 @@ describe('generate_report: the improvement plan', () => {
   /** Replies in the order given, so a test can script a retry. */
   function scriptedCtx(replies: ParsedResponse[]) {
     let call = 0;
+    const seen: QueryParams[] = [];
     const engine: QueryEngine = {
-      async query() {
+      async query(params) {
+        seen.push(params);
         return replies[Math.min(call++, replies.length - 1)]!;
       },
       getUsageSummary: () => '',
@@ -598,6 +600,7 @@ describe('generate_report: the improvement plan', () => {
         session: { state: { resume: RESUME, formatDiagnosis: FORMAT, entryDiagnoses: ENTRIES } },
       } as unknown as ToolContext,
       calls: () => call,
+      seen,
     };
   }
 
@@ -613,6 +616,51 @@ describe('generate_report: the improvement plan', () => {
     usage: { inputTokens: 0, outputTokens: 0 },
     stopReason: 'end_turn',
   };
+
+  it('puts every finding in front of the chooser, not the first eight', async () => {
+    // It used to take `issues.slice(0, 8)` in array order, which meant the
+    // first entry read filled the list and the rest never appeared — a greedy
+    // allocation by accident, and a silent one. Choosing among all of them is
+    // the reason this call exists at all.
+    const { ctx, seen } = scriptedCtx([answered]);
+    const many = structuredClone(ENTRIES);
+    many[0]!.bullets[0]!.issues = Array.from({ length: 12 }, (_, i) => ({
+      what: `finding number ${i}`,
+      costWords: i + 1,
+    }));
+    (ctx as { session: { state: { entryDiagnoses: unknown } } }).session.state.entryDiagnoses = many;
+
+    await generateReportTool.execute({} as never, ctx);
+
+    const sent = seen[0]?.messages.map((m) => m.content).join('\n') ?? '';
+    expect(sent).toContain('finding number 0');
+    expect(sent).toContain('finding number 11');
+    // Priced and placed, so the chooser can compare across entries.
+    expect(sent).toMatch(/~12 words/);
+    // And told what it is spending.
+    expect(sent).toMatch(/words of room|has to displace/);
+  });
+
+  it('keeps what it left out, with a reason', async () => {
+    // A list nobody can see was trimmed reads as a short list. Someone who can
+    // see what was set aside can disagree with the order.
+    const withSetAside: ParsedResponse = {
+      ...answered,
+      content: JSON.stringify({
+        immediate: ['reorder'],
+        shortTerm: [],
+        longTerm: [],
+        setAside: [{ what: 'the batch size', because: 'the page has no room left' }],
+      }),
+    };
+    const { ctx } = scriptedCtx([withSetAside]);
+
+    const result = await generateReportTool.execute({} as never, ctx);
+
+    expect(result.data?.improvementPlan.setAside).toEqual([
+      { what: 'the batch size', because: 'the page has no room left' },
+    ]);
+  });
 
   it('retries when the model reasoned past writing an answer', async () => {
     // A thinking model charges reasoning against the same cap. Without the

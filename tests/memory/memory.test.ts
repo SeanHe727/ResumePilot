@@ -45,7 +45,7 @@ function entry(score: number, issue = 'no measurable outcome'): EntryDiagnosis {
           measurement: { score, detail: '' },
           method: { score, detail: '' },
         },
-        issues: [issue],
+        issues: [{ what: issue, costWords: 4 }],
         strengths: [],
       },
     ],

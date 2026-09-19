@@ -69,12 +69,33 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
       'tool itself.',
   },
   {
-    id: 'allow-review-entry',
+    id: 'allow-specialist-review',
     name: 'Specialist review',
-    match: { type: 'tool_name', pattern: 'review_entry' },
+    match: { type: 'tool_name', pattern: /^review_/ },
     level: 'low',
     action: 'allow',
-    reason: 'Dispatches the same roles the batch diagnosis runs; writes nothing.',
+    reason: 'Hands one entry or the document to a specialist and reads back what it found.',
+  },
+  {
+    id: 'allow-parse-resume',
+    name: 'Read a resume file',
+    match: { type: 'tool_name', pattern: 'parse_resume' },
+    level: 'low',
+    action: 'allow',
+    reason:
+      'Reads a path the candidate gave and parses it onto the session. It opens a file, ' +
+      'which is why it is named here rather than left to the fallback — but the path comes ' +
+      'from the person whose resume it is, and nothing is written back to disk.',
+  },
+  {
+    id: 'allow-examine-depth',
+    name: 'Ask a field specialist',
+    match: { type: 'tool_name', pattern: 'examine_technical_depth' },
+    level: 'low',
+    action: 'allow',
+    reason:
+      'Runs one nested agent over one entry and returns what it found. Costs a model call ' +
+      'and writes nothing.',
   },
   {
     id: 'allow-record-fact',

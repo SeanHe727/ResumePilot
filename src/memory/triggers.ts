@@ -52,7 +52,7 @@ export class MemoryTriggers {
   afterEntry(diagnosis: EntryDiagnosis, dimension: DiagnosisDimension): void {
     if (diagnosis.overallScore >= WEAK_ENTRY_SCORE) return;
 
-    const description = diagnosis.bullets.flatMap((b) => b.issues)[0];
+    const description = diagnosis.bullets.flatMap((b) => b.issues)[0]?.what;
     if (!description) return;
 
     const existing = this.store.retrieve({ type: 'weak_point', key: dimension });
