@@ -25,7 +25,13 @@ import type { ResumeDocument, ResumeEntry } from '../domain.js';
  */
 export function renderEntry(entry: ResumeEntry): string {
   const bullets = entry.bullets.map((bullet) => `  - [${bullet.id}] ${bullet.text}`).join('\n');
-  const header = `[${entry.id}] ${entry.headerLines.join(' | ')}`;
+  // The parsed dates, in front, because the parser already found them. Left in
+  // the raw header they sit at the end of a long string of employer, title,
+  // team and location, and a reader asked whether two entries are in order has
+  // to extract them again before it can compare — which it did correctly once
+  // and wrongly the next time, on the same document.
+  const dates = entry.dateRange ? `(${entry.dateRange}) ` : '';
+  const header = `[${entry.id}] ${dates}${entry.headerLines.join(' | ')}`;
   return bullets ? `${header}\n${bullets}` : header;
 }
 

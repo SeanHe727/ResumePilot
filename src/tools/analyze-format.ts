@@ -55,9 +55,20 @@ function describe(rule: string, evidence: string): string {
   return evidence ? `${message} — "${truncate(evidence)}"` : message;
 }
 
+/**
+ * Cuts at a word, never through one.
+ *
+ * A quote severed mid-word — "that cut the pe" — reads as a bug in the tool
+ * rather than as a shortened quote, and the reader cannot tell which of the two
+ * it is looking at. The ellipsis is doing the work; the byte count is not.
+ */
 function truncate(text: string, max = 70): string {
   const clean = text.replace(/\s+/g, ' ').trim();
-  return clean.length > max ? `${clean.slice(0, max)}...` : clean;
+  if (clean.length <= max) return clean;
+
+  const cut = clean.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut}...`;
 }
 
 /** One page holds roughly this many words at a readable density. */
@@ -276,10 +287,10 @@ function collectLineLevelIssues(bullets: Bullet[], issues: string[]): void {
       issues.push(describe('harvard.passive-voice', bullet.text));
     }
     if (startsWithDate(bullet.text)) {
-      issues.push(describe('harvard.date-first-line', bullet.text.slice(0, 20)));
+      issues.push(describe('harvard.date-first-line', bullet.text));
     }
     if (estimateLines(bullet.text) > MAX_BULLET_LINES) {
-      issues.push(describe('faang.overlong-bullet', bullet.text.slice(0, 60)));
+      issues.push(describe('faang.overlong-bullet', bullet.text));
     }
     if (!hasMeasurement(bullet.text)) {
       issues.push(describe('google.xyz.missing-measure', bullet.text));

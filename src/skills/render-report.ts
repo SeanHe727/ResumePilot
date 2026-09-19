@@ -19,8 +19,8 @@ export function render(report: DiagnosisReport): string {
   for (const entry of report.perEntry) {
     lines.push(`${String(entry.score).padStart(3)}  ${entry.label}`);
     for (const bullet of entry.bullets) {
-      lines.push(`     ${String(bullet.score).padStart(3)}  ${truncate(bullet.text, 88)}`);
-      if (bullet.topIssue) lines.push(`          ${truncate(bullet.topIssue, 96)}`);
+      lines.push(...wrap(bullet.text, `     ${String(bullet.score).padStart(3)}  `, '          '));
+      if (bullet.topIssue) lines.push(...wrap(bullet.topIssue, '          ', '          '));
     }
     lines.push('');
   }
@@ -71,7 +71,7 @@ export function render(report: DiagnosisReport): string {
   if (report.rewrites?.length) {
     lines.push('Suggested rewrites');
     for (const rewrite of report.rewrites) {
-      lines.push(`  - ${truncate(rewrite.before, 74)}`);
+      lines.push(...wrap(rewrite.before, '  - ', '    '));
       lines.push(`  + ${rewrite.after}`);
       if (rewrite.needsInput.length > 0) {
         lines.push(`    you supply: ${rewrite.needsInput.join('; ')}`);
@@ -103,7 +103,31 @@ export function render(report: DiagnosisReport): string {
   return lines.join('\n').trimEnd();
 }
 
-function truncate(text: string, max: number): string {
-  const clean = text.replace(/\s+/g, ' ').trim();
-  return clean.length > max ? `${clean.slice(0, max)}...` : clean;
+/**
+ * Folds a long line instead of cutting it.
+ *
+ * Everything here used to be truncated to fit a terminal width — the bullet to
+ * 88 characters, the finding to 96 — which is fine for an index and wrong for
+ * the one command whose job is to show the whole report. A reader who wants the
+ * summary reads the coordinator; a reader who runs `/report` wants what was
+ * actually found, and a report that hides the end of every sentence is not it.
+ */
+function wrap(text: string, first: string, rest: string, width = 96): string[] {
+  const words = text.replace(/\s+/g, ' ').trim().split(' ');
+  const lines: string[] = [];
+  let line = first;
+  let prefix = first;
+
+  for (const word of words) {
+    if (line.length > prefix.length && line.length + 1 + word.length > width) {
+      lines.push(line);
+      prefix = rest;
+      line = rest + word;
+    } else {
+      line = line.length > prefix.length ? `${line} ${word}` : line + word;
+    }
+  }
+
+  if (line.trim()) lines.push(line);
+  return lines;
 }
