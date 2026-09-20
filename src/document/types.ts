@@ -135,35 +135,56 @@ export interface RowFeatures {
   startsWithBullet: boolean;
   hasDateRange: boolean;
   hasContact: boolean;
+  /** Closes on a full stop or its like, the way a statement does and a label does not. */
+  endsSentence: boolean;
+  /** Commas and their CJK equivalents: how much this row reads as a list. */
+  listSeparators: number;
   charCount: number;
   wordCount: number;
 }
 
 /**
- * What a row is, inside the section it belongs to.
+ * What a row is.
  *
  * `section-heading` is missing on purpose: where the sections start is settled
  * before this runs, and a labeller that could also move a boundary would be
  * deciding the same thing twice from less evidence.
+ *
+ * The names are deliberately level-free. A heading line, a line of prose and a
+ * bullet all occur both directly under a section and inside one of its
+ * entries; which of the two it is, `owner` says. Naming the roles for the
+ * level instead would need a second set of them for the other level, and a
+ * section that turned out to hold entries would need all its rows relabelled.
  */
 export type RowRole =
-  /** Employer, title, dates — the header of one position, project or degree. */
-  | 'entry-header'
+  /** Employer, title, project name, school, dates — a line that names something. */
+  | 'header'
+  /** Prose that names nothing: a skills list, a summary, a line of links. */
+  | 'info'
   | 'bullet'
   /**
    * The rest of the row above. A page gives one row per printed line, so a
    * bullet long enough to wrap arrives as two or three rows and only the
    * first carries the marker.
    */
-  | 'continuation'
-  /** Prose belonging to no entry — a skills list, the block above the first heading. */
-  | 'loose';
+  | 'continuation';
+
+/**
+ * Which level a row belongs to.
+ *
+ * Settled here, row by row, rather than by deciding up front whether a section
+ * holds entries at all. A section can open with a sentence and a bullet or two
+ * of its own and then list positions, and a rule that had to pick one shape
+ * for the whole section would file half of it in the wrong place.
+ */
+export type RowOwner = 'section' | 'entry';
 
 export interface RowLabel {
   rowIndex: number;
   role: RowRole;
+  owner: RowOwner;
   /**
-   * Set on the row that opens an entry. Only meaningful on `entry-header`.
+   * Set on the row that opens an entry. Meaningful only on an entry's header.
    *
    * A header can run to two rows — employer on one, title and dates on the
    * next — so consecutive header rows are ambiguous on their own: two degrees

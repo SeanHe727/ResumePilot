@@ -9,6 +9,16 @@ PDF ─A0─▶ Page[] ─A1─▶ VisualRow[] ─B1─▶ SectionBoundary[] ─
 
 **判断集中在 B1 / B2;B3 只执行标签;B4 只贴标签不改结构;A0 / A1 / B5 是几何与对账。**
 
+### 当前格式范围
+
+本轮结构化解析**只支持 PDF**。A0–B5 都建立在 PDF 的视觉行、字号、坐标和缩进证据上,不为其他格式编造这些证据。
+
+- PDF —— 走完整 A0–B5,产出结构化 `ResumeDocument`
+- Markdown / TXT —— 只作为 `rawText` 交给 agent,明确标记 `structured: false`,不运行依赖 section / entry / bullet 的诊断
+- DOCX —— 暂时返回 `unsupported`,提示转换为 PDF
+
+以后支持 Markdown / DOCX 时,各自用标题、列表、段落样式产出相同的 `SectionBoundary[]` / `RowLabel[]`;从 B3 开始共用组装、分类和完整性验证。**共用输出协议,不强行共用 PDF 的几何启发式。**
+
 ---
 
 ## 前置决定:只支持单栏简历
@@ -113,21 +123,32 @@ interface RowFeatures {
   charCount: number; wordCount: number;
 }
 
-type RowRole = 'entry-header' | 'bullet' | 'continuation' | 'loose';
+type RowRole = 'header' | 'info' | 'bullet' | 'continuation';
+type RowOwner = 'section' | 'entry';
 
 interface RowLabel {
   rowIndex: number;
   role: RowRole;
-  startsEntry?: boolean;     // 只在 entry-header 上有意义
+  owner: RowOwner;           // 明确归属,不靠 B3 猜
+  startsEntry?: boolean;     // 只在 owner=entry、role=header 时有意义
   contentFrom?: number;      // 正文起始字符偏移,让 B3 不必用正则剥项目符号
   confidence: number;
   evidence: string[];
 }
 ```
 
-现有 `LineRole` 拆成两套:`section-heading` 归 B1,其余四个归 B2。
+`section-heading` 仍由 B1 的 `headingRow` 表达,不重复进入 B2。B2 中的 `header` 是 entry 内部的公司、职位、项目名、学校、日期等标题行;它之所以用通用名字,是因为真正的层级由 `owner` 表达。
 
-**"一个条目至少要有一条 bullet,或者一个被强调的标题行"这条规则属于这一层** —— 它决定某行是 `entry-header` 还是 `loose`,不属于组装器。
+**不再先把整个 section 二选一为 entry 型或 loose 型。** B2 逐行判断归属:
+
+- 当前已有 entry 时,属于该条目的 header / info / bullet 标成 `owner: 'entry'`
+- 尚无 entry 时,说明文字和 bullet 标成 `owner: 'section'`
+- section-level bullet 保留 bullet 身份和原始 marker,不降级成无法区分的 loose 文本
+- `continuation` 继承被接续行的 owner
+
+这样 `SUMMARY` / `SKILLS` 可以直接拥有 bullet,`EXPERIENCE` / `PROJECTS` 的 bullet 则属于具体 entry,不需要 B4 先知道 section.kind。
+
+**纯日期规则先于所有开条目规则。** date-only 行永远不能 `startsEntry`;已有 entry 时作为其 header 的延续,尚无 entry 时作为 section info 并留下低置信度证据,不能制造无归属 header。
 
 **`contentFrom` 的用途** — 今天 `stripBulletMarker` 是正则,而 B3 不许用正则。改由标注方给出正文起点,B3 只做切片。
 
@@ -135,11 +156,36 @@ interface RowLabel {
 
 ## B3 纯状态机组装
 
-**做什么** — 按标签把行折成 Section / Entry / Bullet。
+**做什么** — 按标签把行折成固定两层嵌套的 Section / Entry / Bullet。
 
-**怎么做** — 四条转移:`entry-header` 且 `startsEntry` 开新条目、`entry-header` 非 `startsEntry` 追加到当前条目的 headerLines、`bullet` 挂进当前条目、`continuation` 接上一条、`loose` 进散行。
+目标语义结构:
 
-**约束** — 不读 `kind`、不读字号、不用正则。小型纯函数,同一份实现同时服务启发式和模型两条路。今天的 `isEntryBearing(kind, blocks)` 在这里删除:哪个数组被填由标签决定,不由类型决定。
+```ts
+Section {
+  heading?: string;
+  info: string[];
+  bullets: SectionBullet[];
+  entries: Entry[];
+}
+
+Entry {
+  heading: string[];         // 实现中保留现名 headerLines
+  info: string[];
+  bullets: Bullet[];
+}
+```
+
+不是无限递归树:层级固定为 `ResumeDocument → Section → Entry → Bullet`。Section 与 Entry 都可以有自己的 info / bullets,从而保留 heading 与内容的真实从属关系。
+
+**怎么做** — B3 只按 `role + owner` 转移:
+
+- `owner=entry + header + startsEntry` —— 开新 entry
+- `owner=entry + header` —— 追加到当前 entry.headerLines
+- `owner=entry + info/bullet` —— 追加到当前 entry
+- `owner=section + info/bullet` —— 追加到当前 section
+- `continuation` —— 接到它继承的 owner 中上一项
+
+**约束** — 不读 `kind`、不读字号、不用正则、不重新判断 owner。小型纯函数,同一份实现同时服务启发式和模型两条路。今天的 `isEntryBearing(kind, blocks)` 在这里删除:哪个数组被填由标签决定,不由类型决定。
 
 ```ts
 function assemble(
@@ -162,7 +208,7 @@ function assemble(
 | 类 | 例子 | 权重 |
 |---|---|---|
 | 标题证据 | 标题命中词表 | 3 |
-| 结构证据 | 有条目有 bullet → experience/project;有条目无 bullet 有日期 → education;无条目 + 冒号逗号列表 → skills | 2 |
+| 结构证据 | 有 entry 且 entry 有 bullet → experience/project;有 entry 无 bullet 有日期 → education;无 entry + info/section bullet → summary/skills | 2 |
 | 内容证据 | 学位词 / 公司后缀 / 职位词 / 代码托管 URL | 1 |
 
 **冲突规则:结构 > 标题。** 标题是候选人写的一个词,结构是整段的形状。叫 `Leadership` 但有三个带日期带 bullet 的条目,按 experience 处理;叫 `EXPERIENCE` 但只有一行逗号分隔的技能,它不是 experience。3:2:1 的效果是词表命中不是否决权,但推翻它需要两条以上结构证据 —— 比例应由 fixture 回归得出。
@@ -207,8 +253,8 @@ interface Classification {
 
 **② 非空与合法**
 
-- 空 section(无条目且无散行)
-- 空 entry(无 headerLines 且无 bullet)
+- 空 section(无 entry、info 和 section bullet)
+- 空 entry(无 headerLines、info 和 bullet)
 - 空 bullet(剥完标记后无内容)
 - 非法空 heading(有 `headingRow` 却拿到空字符串)
 
@@ -222,7 +268,7 @@ interface Classification {
 **④ 结构异常(记录,不判错)**
 
 - date-only entry —— 只有日期没有名字的条目,A1 修好后仍出现说明还有别的路径
-- orphan bullet —— 不属于任何条目的 bullet
+- orphan bullet —— 声明 `owner=entry` 却没有当前 entry 的 bullet;`owner=section` 的 bullet 合法
 - 无目标的 continuation —— 前面没有可接续的行
 
 ```ts
@@ -257,13 +303,27 @@ interface ParseIntegrity {
 
 ---
 
-## 不改什么
+## 领域结构兼容策略
 
-- `ResumeDocument` / `ResumeSection` / `ResumeEntry` / `Bullet` 结构不变
-- `bullets` 不改名(`bulletId` 在 src 里 52 处、`.bullets` 45 处,十个 prompt 文件依赖它)
+- 不做无限递归的通用节点,只增加 Section / Entry 两层明确归属
+- `ResumeEntry.headerLines` 保留为 entry heading 的 canonical 内容,不改名
+- `ResumeEntry.bullets` 与现有 `Bullet` 保持不变
+- `ResumeSection` 新增可选 `infoLines` 与 `bullets`;section bullet 使用单独的 `SectionBullet`,不把 `Bullet.entryId` 改成可选
+- `ResumeEntry` 新增可选 `infoLines`
+- `ResumeSection.looseLines` 保留用于读取旧 session;新解析写 `infoLines`,下游在迁移期读取 `infoLines ?? looseLines`
 - `section.kind` 保留,17 处读它的代码一行不用改
 - `ResumeEntry` 的 `organization` / `title` / `location` / `dateRange` 四个可选字段保留(旧 session 里有值),但新解析不再填充
 - session 不迁移 —— `checkpoint.ts` 是 `JSON.parse(row.state) as SessionState`,裸转换不校验不迁移,因此只能新增可选字段
+
+```ts
+interface SectionBullet {
+  id: string;
+  sectionId: string;
+  index: number;
+  text: string;
+  span: SourceSpan;
+}
+```
 
 ## 顺序与验证
 
@@ -275,13 +335,13 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 - 每一步至少有一条测试走真实 PDF 链路,不能全是合成数据
 - 变异测试:逐条还原被删的守卫,确认对应测试转红
 
-**遗留的红测试** — `tests/document/parser.test.ts` 的 "still separates two entries listed one after the other" 目前是红的,原因是 fixture 字段名写成 `size` 而 `isEmphasized` 读 `fontSize`,恒为 undefined。改名后还需补 body 行:现有 6 个 block 的字号中位数正好落在 12,`12 > 12` 仍为假。
+`tests/document/parser.test.ts` 的历史红测试已在 B2 修复:fixture 使用 `fontSize`,并补足正文行使中位数落在正文大小。
 
 ---
 
 # 进度
 
-**当前状态:B2 完成并验证。下一步 B3。**
+**当前状态:B2 初版完成;review 后确定新的嵌套所有权协议。先修订 B2,再进入 B3。**
 
 写这一段是为了让一次全新的会话只读这份文档就能接着做,不需要之前的对话。
 
@@ -311,7 +371,7 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 | `src/document/extractors/pdf.ts` | 导出 `layOutRows()`。`PageLayout` 新增 `runs`。`serialise` 换成 `toBlock`,不再用对象身份的 Map 回查样式 |
 | `tests/fixtures/make-pdfs.py` | 新增 `late-date.pdf`(右对齐日期在下一行之后才绘制,且字号更大)、`banner-two-column.pdf`(全宽姓名栏 + 下方双栏)、`split-two-column.pdf`(页中全宽小标题 + 上下双栏) |
 
-**`ExtractionResult` 同时带 `blocks` 和 `rows`。** `TextBlock` 是有损的:整行一个样式、没有行号、回不到片段。下游今天读 `blocks`,B1 该读 `rows`。`rows` 是可选的 —— Markdown / DOCX 自己标结构,给它们编坐标就是编证据。
+**`ExtractionResult` 同时带 `blocks` 和 `rows`。** `TextBlock` 是有损的:整行一个样式、没有行号、回不到片段。下游今天读 `blocks`,B1 该读 `rows`。`rows` 仍是可选字段,但本轮只有 PDF 进入结构化解析;以后 Markdown / DOCX 使用各自的逻辑行与标签适配器,不给它们编造 PDF 坐标。
 
 **分栏守卫重写(原实现有洞,实测)。** 原来找的是"横跨整页的空白带",而双栏简历几乎都在顶部横排姓名 —— 那一行覆盖了栏间空白经过的每一个桶。实测:六行对六行的双栏页,上面加一行全宽标题,就从"检出"变成"检不出"。
 
@@ -404,18 +464,19 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 | 文件 | 改动 |
 |---|---|
 | `src/document/vocabulary.ts` | `DATE_RANGE` 从 `structure-builder.ts` 搬入,B2 读它、B4 会拿它当分类证据 |
-| `src/document/types.ts` | 新增 `RowFeatures` / `RowRole` / `RowLabel` |
+| `src/document/types.ts` | 新增 `RowFeatures`(含 `endsSentence` / `listSeparators`)/ `RowRole` / `RowOwner` / `RowLabel` |
 | `src/document/row-labels.ts` | 新增。`labelRows(rows, boundaries): RowLabel[]` |
 | `src/document/structure-builder.ts` | 删除 `isDateOnly` 与两个调用点 |
+| `tests/fixtures/make-pdfs.py` | 新增 `hanging-indent.pdf` |
 | `tests/document/parser.test.ts` | 修掉遗留红测试 |
 
-**同样没有接线。** 组装器换掉是 B3。真实简历解析结果逐行未变。
+**没有接线。** 组装器换掉是 B3。真实简历解析结果逐行未变,B2 产出的标签与今天的解析一一对应(6 个 entry:教育 2、经历 2、项目 2)。
 
 **核心发现:`indent` 是这一层最强的信号,而且之前整条管线都没在读它。** 同一段内实测:
 
 | 角色 | 距段落左边界 |
 |---|---|
-| entry-header | 0.0pt |
+| header | 0.0pt |
 | bullet | 1.7pt(标记悬挂在正文左边) |
 | continuation | **10.8pt**(与上一行的正文对齐) |
 
@@ -423,25 +484,64 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 **兜底仍然保留**:不是每个模板都做悬挂缩进,此时退回"上一行是被截断还是写完了"——按标点判断。两者不一致时**以缩进为准**:一条 bullet 可以以句号结尾却仍然换行。有测试专门锁这一条。
 
-**`isDateOnly` 已删除**,它的实测发现搬进了 `opensEntry`:一行若只有日期,无论怎么排都不开启条目。A1 之后这个补丁可证明多余(关掉重解析输出逐行相同),但规则留着——没有任何东西保证模板不会把日期单独放一行,而留着它只花一条测试。
+**带标记的行先判为 bullet,再谈续行。** 标记不含糊而换行含糊:一条 bullet 跟在"被截断的续行"之后,若先走续行判断就会被吃成那条续行的一部分。实测踩到过。
 
-`parser.test.ts` 里专测它的那条测试一并删除:主题搬到了 `row-labels.test.ts`,而且它恒真 —— fixture 的 6 个 block 字号中位数正好 12、日期行也是 12,`isEmphasized` 永远为假,守卫压根没被走到。
+#### 归属逐行判定
 
-**一个敞口,B3 关闭。** 旧组装器的模型标注路径现在没有"只有日期不开条目"的守卫了。PDF 走不到:A1 之后日期会被拼回它所在的行,单独成行的日期不再出现。Markdown / DOCX 不带字号字重,`isEmphasized` 恒假,也走不到。**只有模型把某行标成 `startsEntry` 时才可能**,而 B3 把标注改走 B2 就关上了。
+`owner: 'section' | 'entry'`,不再用 `bearsEntries` 把整段提前二选一。
 
-**没有标题的块里没有条目,连 bullet 也不是 bullet。** bullet 标记的是某个职位下的一条,没有职位可标时它就是一行前面带短横的散文。反过来读,一个带项目符号的联系方式块会把候选人自己的邮箱,当成一个以他名字命名的雇主下面的成绩。
+- 尚未开启 entry 的 bullet → `owner: 'section'`,**保留 bullet 身份与 `contentFrom`**,不降级成无法区分的散文
+- 开启 entry 后的 bullet → `owner: 'entry'`
+- `continuation` 继承上一条非续行的 owner,不自己猜:两条换行排法完全相同,差别只在它们是谁的后半句
 
-**"一个条目至少要有一条 bullet,或者一个被强调的标题行"这条规则在这一层**(计划要求),不在组装器:技能段三行逗号分隔、排法相同,读成条目就是三个"雇主是一串语言名"的职位。
+`SUMMARY` / `SKILLS` 因此可以直接拥有 bullet,不需要 B4 先知道 `section.kind`。
 
-变异验证七条,逐条转红:去掉悬挂缩进判断、去掉句末标点兜底、去掉只有日期的例外、bullet 之后不开新条目、无标题块也承载条目、所有段都承载条目、标注越过区间右界。
+#### `place()` 里判定顺序就是设计本身
 
-测试:`tests/document/row-labels.test.ts`(新,20 条)。前 16 条用合成行(缩进值取自实测),最后 4 条走 **`PdfExtractor` → `rows` → `findSectionBoundaries` → `labelRows` 的真实链路**。
+1. **纯日期最先**。date-only 行永远不 `startsEntry`:已有 entry 时作为其 header 延续;没有 entry 时作为 `section/info`,置信度 0.35 记下来。
+2. **被强调则开新条目**,必须排在"进入条目内部"之前 —— 教育段没有 bullet 来关闭上一个条目,唯一说明第二个学位从哪开始的就是校名被强调。初版把这条排在后面,实测真实简历的第二个学位直接丢了。
+3. **带日期范围且(尚无 entry,或上一个 entry 已被 bullet 关闭)则开新条目** —— 整页没有任何东西被强调时,日期是仅有的线索。已有 entry 且其后尚无 bullet 的情形不在此列:那时表头还在写,第 4 条会把它读成表头的一部分。
+4. **已有 entry:分 header 还是 info**(见下)。
+5. 剩下的既不命名也不开启任何东西,归 `section/info`。
 
-**遗留红测试已修** —— `parser.test.ts` 的 fixture 字段名 `size` 改成 `fontSize`,并补第 4 条正文行把字号中位数压到 10(原来 6 个 block 的中位数正好落在 12,`12 > 12` 恒假)。修完做了变异验证:关掉 `isEmphasized` 那次 flush,这条测试连同另外三条一起转红。**全量测试首次全绿。**
+**bullet 之后不再无条件开新条目。** 旧规则"bullet 后的第一行开新条目"会把同一段经历里的第二个项目名当成新雇主,把上一个条目的 bullet 一起带走。现在只有**强证据**才开:被强调,或带非纯日期的日期范围。没有强证据的项目名、说明句留在当前 entry,标成 `entry/info` —— 同一份工作里的多个项目因此扁平地留在一个 entry 里,不需要额外加一层 group。
+
+#### entry 内部:header 还是 info
+
+`within()`。日期给身份,链接/句子/列表给说明,都没有时看在 bullet 的哪一侧。
+
+| 证据 | 结果 | conf |
+|---|---|---|
+| 带日期范围 | `entry/header` —— 日期和雇主一样是身份 | 0.80 |
+| 含链接、邮箱、电话 | `entry/info` —— 是链接不是名字 | 0.80 |
+| 以句号等终止标点结尾 | `entry/info` —— 是写完的句子不是标签 | 0.80 |
+| ≥2 个逗号 | `entry/info` —— 是一串东西不是名字 | 0.80 |
+| 都没有,**在 bullet 之前** | `entry/header` —— 表头还在写 | 0.35 |
+| 都没有,**在 bullet 之后** | `entry/info` —— 表头已随 bullet 关闭 | 0.35 |
+
+**无法可靠区分时优先留作 header**(计划要求):把公司名错放进说明会让条目丢掉名字,而一行杂项混在表头里对读者没有代价。两个方向的存疑都写进 `evidence` 并压低置信度。
+
+实测真实简历:6 条非开条目的 header 里,4 条带日期(留 header)、2 条是裸 URL(改判 `entry/info`)。第 5 条 `M.S. ... Sep 2025 - Expected Jun 2027` 落到 0.35 —— `DATE_RANGE` 认不出中间夹着 `Expected` 的范围,于是走了保守默认。标签仍是 header,正确,但这条正则是 B4 要看的。
+
+#### 仍然保留的唯一段级判断
+
+**没有标题的前导块不开启任何 entry。** 这是关于**切分**而非关于**内容**的事实:条目属于介绍过它的段落,而没人介绍过的块是页眉——姓名、一行链接、也许一句话。反过来读,姓名是整页最大最短的行,会变成一个雇主,候选人自己的邮箱被当成它下面的成绩。该块里的 bullet 仍是 `section/bullet`,身份不丢。
+
+**`isDateOnly` 已从 `structure-builder.ts` 删除**,发现搬进 `place()`。A1 之后这个补丁可证明多余(关掉重解析输出逐行相同),但规则留着——没有任何东西保证模板不会把日期单独放一行。`parser.test.ts` 里专测它的那条测试一并删除:主题搬到了 `row-labels.test.ts`,而且它恒真(fixture 6 个 block 字号中位数正好 12、日期行也是 12,`isEmphasized` 永远为假)。
+
+**一个敞口,B3 关闭。** 旧组装器的模型标注路径现在没有 date-only 守卫。PDF 走不到(A1 后日期被拼回所在行),Markdown / DOCX 不带字号字重也走不到,只有模型主动标 `startsEntry` 时才可能。B3 把标注改走 B2 就关上。
+
+变异验证二十一条,逐条转红。
+
+- 初版七条:去掉悬挂缩进判断、去掉句末标点兜底、去掉只有日期的例外、bullet 之后不开新条目、无标题块也承载条目、所有段都承载条目、标注越过区间右界。
+- 归属改版七条:bullet 恒为 entry 所有、continuation 不继承 owner、去掉 date-only 分支、date-only 反过来开条目、去掉"被强调优先"、无标题块也开条目、bullet 不给 `contentFrom`。
+- header/info 改版七条:bullet 之后什么都能开条目、日期不算身份、链接不算说明、句子不算说明、列表不算说明、bullet 前默认 info、bullet 后默认 header。
+
+测试:`tests/document/row-labels.test.ts`(34 条)。29 条用合成行(缩进值取自实测),5 条走 **`PdfExtractor` → `rows` → `findSectionBoundaries` → `labelRows` 的真实链路**。新增 fixture `hanging-indent.pdf`:悬挂缩进的换行、SUMMARY 的 section-level bullet、EXPERIENCE 的 entry bullet,以及纯日期的两个位置(bullet 之后接续 entry 表头、无 entry 时归 section)。
 
 ## 下一步:B3 纯状态机组装
 
-`assemble(rows, boundaries, labels): ResumeSection[]`,四条转移,不读 `kind`、不读字号、不用正则。
+实现 `assemble(rows, boundaries, labels): ResumeSection[]`;它不读 `kind`、不读字号、不用正则、不重新判断 owner。
 
 **这一步才接线。** B1/B2 至今都是纯函数 + 测试,`HeuristicSectionDetector` 与 `HeuristicStructureBuilder` 一行没动。B3 把三者串起来替换掉组装路径,届时:
 
@@ -449,7 +549,7 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 - `section-detector.ts` 里 re-export 的 `isBulletLine` / `stripBulletMarker` 随该文件一起搬走,改从 `vocabulary.ts` 引。
 - `isEntryBearing(kind, blocks)` 删除 —— 哪个数组被填由标签决定,不由类型决定。
 - `stripBulletMarker` 在组装器里的两个调用点换成按 `contentFrom` 切片。
-- **Markdown / DOCX 没有 `rows`**,得先决定:要么让它们也产出行,要么这两种格式继续走旧路径。这是 B3 动手前要定的第一件事。
+- 本轮只给 PDF 接线。Markdown / TXT 明确为 raw-text-only;DOCX 返回 unsupported。不得为了兼容它们保留第二套结构组装器。
 
 ## 验证方式(全部本地,不调模型)
 
@@ -490,7 +590,7 @@ A1 之前,真实简历的项目段解析如下 —— 这是 `isDateOnly` **打�
 
 **有大量与本重构无关的未提交改动**,来自更早的几批工作(两种报告、prompt 调整、generate_report 选择逻辑等)。动手前先 `git status`,不要把它们和本重构混为一谈,也不要顺手清理。
 
-**已知红测试一条**:`tests/document/parser.test.ts > still separates two entries listed one after the other`。原因是 fixture 构造的字段名写成 `size`,而 `isEmphasized` 读 `fontSize`,恒为 `undefined`;改名后还需补 body 行,因为现有 6 个 block 的字号中位数正好落在 12,`12 > 12` 仍为假。**它属于 B2 的范围,A1 不要修。**
+当前 B2 提交后全量测试已转绿。下一次改动必须继续保留完整测试与真实 PDF 链路验证。
 
 ## 工作约定
 

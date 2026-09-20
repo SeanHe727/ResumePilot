@@ -122,9 +122,36 @@ caps = [(72, 740, 17, "Sean He"),
         (72, 535, 10, "Programming: Python, TypeScript, SQL, Bash, Git")]
 (here / "caps-headings.pdf").write_bytes(pdf(caps))
 
+# Wrapped lines set flush with the text above them, which is what says they
+# are the rest of it. Also the two levels a bullet can belong to — SUMMARY has
+# bullets of its own before any entry exists, EXPERIENCE has bullets under one —
+# and a bare date range in both positions: after an entry's bullets, where it
+# carries on that entry's header, and with no entry open at all, where it is
+# something the section says and must not open anything.
+hanging = [(72, 740, 17, "Sean He"),
+           (72, 726, 10, "+1 555 0100 | sean@example.com"),
+           (72, 706, 10, "SUMMARY"),
+           (74, 690, 10, "- Backend engineer with six years on payment systems,"),
+           (83, 678, 10, "measuring what shipped rather than what was planned."),
+           (72, 658, 10, "EXPERIENCE"),
+           (72, 642, 10.9, "NIO Inc. Hefei, China"),
+           (72, 630, 10, "AI Research Intern  Oct 2024 - May 2025"),
+           (74, 618, 10, "- Built an agent system that cut the inspection backlog by 74%,"),
+           (83, 606, 10, "automating triage of 1,000+ signals per case."),
+           (74, 594, 10, "- Designed a role-aware routing layer for four specialists"),
+           (72, 574, 10, "PROJECTS"),
+           (72, 558, 10.9, "ResumePilot | Owner | TypeScript"),
+           (74, 546, 10, "- Improved planted-defect localization from 27% to 73%"),
+           (72, 534, 10, "Aug 2026 - Present"),
+           (72, 514, 10, "AWARDS"),
+           (72, 498, 10, "2023 - 2024"),
+           (72, 486, 10, "Dean's List, University of Washington")]
+(here / "hanging-indent.pdf").write_bytes(pdf(hanging))
+
 # A page with no text operators at all — what a scanned resume looks like.
 (here / "scanned.pdf").write_bytes(pdf([]))
 
 for f in ("single-column.pdf", "two-column.pdf", "banner-two-column.pdf",
-          "split-two-column.pdf", "late-date.pdf", "caps-headings.pdf", "scanned.pdf"):
+          "split-two-column.pdf", "late-date.pdf", "caps-headings.pdf",
+          "hanging-indent.pdf", "scanned.pdf"):
     print(f, (here / f).stat().st_size, "bytes")
