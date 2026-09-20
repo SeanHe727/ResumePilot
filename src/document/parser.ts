@@ -24,6 +24,21 @@ export class UnsupportedFormatError extends Error {
 }
 
 /**
+ * A layout the pipeline will not read, as opposed to one it reads badly.
+ *
+ * Thrown rather than returned so no `ResumeDocument` is ever built from a
+ * multi-column page. A garbled document that looks structurally fine is worse
+ * than no document: every reader downstream would take it at face value and
+ * report on lines that were assembled from two columns at once.
+ */
+export class UnsupportedLayoutError extends Error {
+  constructor(readonly reason: string) {
+    super(reason);
+    this.name = 'UnsupportedLayoutError';
+  }
+}
+
+/**
  * Three stages, one per hard problem: get text off the page, work out where the
  * sections are, then assemble the three-level document.
  *
@@ -62,6 +77,12 @@ export class DefaultResumeParser implements ResumeParser {
     }
 
     const extracted = await extractor.extract(filePath);
+    if (extracted.quality === 'unsupported') {
+      throw new UnsupportedLayoutError(
+        extracted.layoutWarnings[0] ?? 'this layout is not one the parser reads',
+      );
+    }
+
     const sections = this.detector.detect(extracted);
 
     // The rules are the fallback, not the failure case. They read a Markdown

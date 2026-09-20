@@ -1,4 +1,8 @@
-export { DefaultResumeParser, UnsupportedFormatError } from './parser.js';
+export {
+  DefaultResumeParser,
+  UnsupportedFormatError,
+  UnsupportedLayoutError,
+} from './parser.js';
 export { MarkdownExtractor, extractFromText } from './extractors/markdown.js';
 export { PdfExtractor } from './extractors/pdf.js';
 export { DocxExtractor } from './extractors/docx.js';

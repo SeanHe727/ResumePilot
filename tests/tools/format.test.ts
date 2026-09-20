@@ -230,10 +230,26 @@ describe('analyzeFormat scoring', () => {
     expect(mentions(d, 'no text layer')).toBe(true);
   });
 
-  it('flags a multi-column layout as a parsing blocker', async () => {
-    const d = await diagnose('two-column.pdf');
+  it('still prices a layout warning as a parsing blocker', () => {
+    // Multi-column PDFs no longer reach this: the extractor refuses them, so
+    // there is no document to score. Every other layout warning — margin
+    // contact, decorative glyphs, a format that carries its own — still lands
+    // here, and this is the arithmetic they land on.
+    const warned: ResumeDocument = {
+      sourcePath: 'warned.pdf',
+      format: 'pdf',
+      rawText: '',
+      sections: [],
+      meta: {
+        wordCount: 200,
+        quality: 'degraded',
+        layoutWarnings: ['contact details sit in the page header or footer'],
+      },
+    };
 
-    expect(mentions(d, 'multi-column layout')).toBe(true);
+    const d = analyzeFormat(warned);
+
+    expect(mentions(d, 'header or footer')).toBe(true);
     expect(d.metrics.atsParsability.score).toBeLessThan(100);
   });
 

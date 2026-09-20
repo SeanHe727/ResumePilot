@@ -1,0 +1,44 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 625>>
+stream
+BT /F1 16 Tf 72 740 Td (Sean Chen) Tj ET
+BT /F1 10 Tf 72 700 Td (Experience) Tj ET
+BT /F1 10 Tf 72 680 Td (ByteDance - Backend Intern) Tj ET
+BT /F1 10 Tf 72 664 Td (- Reduced P99 latency to 90ms) Tj ET
+BT /F1 10 Tf 72 648 Td (- Migrated 12 services) Tj ET
+BT /F1 10 Tf 72 620 Td (Tencent - SWE Intern) Tj ET
+BT /F1 10 Tf 72 604 Td (- Built a log aggregation tool) Tj ET
+BT /F1 10 Tf 340 700 Td (Skills) Tj ET
+BT /F1 10 Tf 340 680 Td (TypeScript) Tj ET
+BT /F1 10 Tf 340 664 Td (Python) Tj ET
+BT /F1 10 Tf 340 648 Td (Kubernetes) Tj ET
+BT /F1 10 Tf 340 620 Td (Education) Tj ET
+BT /F1 10 Tf 340 604 Td (Tongji University) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+954
+%%EOF

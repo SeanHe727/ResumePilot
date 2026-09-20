@@ -1,4 +1,8 @@
-import { DefaultResumeParser, ModelDocumentSegmenter } from '../document/index.js';
+import {
+  DefaultResumeParser,
+  ModelDocumentSegmenter,
+  UnsupportedLayoutError,
+} from '../document/index.js';
 import type { ResumeParser } from '../document/types.js';
 import type { ResumeSessionState } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
@@ -47,6 +51,12 @@ export const parseResumeTool: Tool<ParseResumeInput, unknown> = {
     try {
       resume = await parserFor(ctx).parse(path);
     } catch (err) {
+      // A layout we decline to read is reported as itself. Folded into the
+      // generic message it would read as a broken file, and the one thing the
+      // candidate can act on — re-export in a single column — would be buried.
+      if (err instanceof UnsupportedLayoutError) {
+        return { success: false, error: { code: 'input_error', message: err.reason } };
+      }
       return {
         success: false,
         error: {

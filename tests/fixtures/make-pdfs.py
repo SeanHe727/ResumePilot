@@ -63,8 +63,45 @@ right = [(340, y, 10, t) for y, t in [
     (648, "Kubernetes"), (620, "Education"), (604, "Tongji University")]]
 (here / "two-column.pdf").write_bytes(pdf(left + right))
 
+# An entry header whose right-aligned date is drawn *after* the line below it,
+# and in a larger size — pdf.js hands back drawing order, not reading order, and
+# a rebuild that trusts it files the date as a line of its own. Bullets run past
+# the date's left edge on purpose, so the page has no gutter and the column
+# guard has no opinion about it.
+late_date = [(72, 720, 16, "Sean Chen"),
+             (72, 700, 10, "sean@example.com"),
+             (72, 660, 13, "Experience"),
+             (72, 640, 11, "ByteDance - Backend Intern"),
+             (72, 624, 10, "- Reduced P99 latency from 800ms to 90ms across every service in the fleet"),
+             (72, 608, 10, "- Migrated 12 services to the new pipeline with no downtime at all for users"),
+             (430, 640, 12, "2025.06 - 2025.09")]
+(here / "late-date.pdf").write_bytes(pdf(late_date))
+
+# Two columns under a full-width name banner — what a real two-column resume
+# looks like. The banner covers every bucket the gutter runs through, so a
+# guard that looks for whitespace spanning the whole page sees one column.
+banner = [(72, 740, 16, "Sean Chen")] + left + right
+(here / "banner-two-column.pdf").write_bytes(pdf(banner))
+
+# Two columns interrupted by a full-width section heading halfway down. A line
+# running across the page divides it; it does not settle what is above and
+# below, and reading either half straight across still garbles it.
+split = [(72, 740, 16, "Sean Chen")]
+split += [(72, y, 10, t) for y, t in [
+    (700, "Experience"), (680, "ByteDance - Backend Intern"),
+    (664, "- Reduced P99 latency to 90ms")]]
+split += [(340, y, 10, t) for y, t in [
+    (700, "Skills"), (680, "TypeScript"), (664, "Python")]]
+split += [(72, 640, 13, "PROJECTS AND OPEN SOURCE CONTRIBUTIONS OVER THE YEARS")]
+split += [(72, y, 10, t) for y, t in [
+    (610, "ResumePilot"), (594, "- Agent runtime"), (578, "- Document parsing")]]
+split += [(340, y, 10, t) for y, t in [
+    (610, "Education"), (594, "Tongji University"), (578, "B.S. Computer Science")]]
+(here / "split-two-column.pdf").write_bytes(pdf(split))
+
 # A page with no text operators at all — what a scanned resume looks like.
 (here / "scanned.pdf").write_bytes(pdf([]))
 
-for f in ("single-column.pdf", "two-column.pdf", "scanned.pdf"):
+for f in ("single-column.pdf", "two-column.pdf", "banner-two-column.pdf",
+          "split-two-column.pdf", "late-date.pdf", "scanned.pdf"):
     print(f, (here / f).stat().st_size, "bytes")

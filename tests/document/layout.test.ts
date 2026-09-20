@@ -1,12 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  columnAwareReadingOrder,
   detectColumns,
   detectDecorativeBullets,
   detectMarginContent,
   naiveReadingOrder,
-  readingOrderDivergence,
   type PageGeometry,
   type PositionedLine,
 } from '../../src/document/layout.js';
@@ -32,6 +30,51 @@ describe('detectColumns', () => {
     expect(report.rightLines).toBe(6);
     expect(report.gutter!.from).toBeGreaterThan(250);
     expect(report.gutter!.to).toBeLessThan(345);
+  });
+
+  it('finds the gutter under a full-width heading', () => {
+    // The ordinary shape of a two-column resume: the name runs across the top
+    // and the columns start below it. Looked for as whitespace spanning the
+    // whole page, that one line covers every bucket the gutter runs through,
+    // and the guard saw a single column.
+    const report = detectColumns([line(72, 740, 468, 'Sean Chen'), ...twoColumnPage()], PAGE);
+
+    expect(report.multiColumn).toBe(true);
+    expect(report.leftLines).toBe(6);
+    expect(report.rightLines).toBe(6);
+  });
+
+  it('finds a two-column region split by a full-width heading', () => {
+    // A line running across the page divides it; it does not settle what is
+    // above and below. Columns either side of a full-width heading are still
+    // columns, and reading either side straight across still garbles it.
+    const report = detectColumns(
+      [
+        ...[700, 680, 660].map((y) => line(72, y, 180)),
+        ...[700, 680, 660].map((y) => line(340, y, 180)),
+        line(72, 640, 468, 'SKILLS'),
+        ...[620, 600, 580].map((y) => line(72, y, 180)),
+        ...[620, 600, 580].map((y) => line(340, y, 180)),
+      ],
+      PAGE,
+    );
+
+    expect(report.multiColumn).toBe(true);
+  });
+
+  it('does not flag right-aligned dates between full-width lines', () => {
+    // The shape a single-column resume takes when its dates are drawn out of
+    // order: each date becomes a line of its own, far enough right to look
+    // like a column. The full-width bullets between them cut the page into
+    // stretches holding one date each, and one date is not a column.
+    const lines = [700, 640, 580, 520].flatMap((y) => [
+      line(72, y, 180, 'employer'),
+      line(430, y, 100, '2025.06 - 2025.09'),
+      line(72, y - 20, 468, 'a bullet running the width of the page'),
+      line(72, y - 40, 468, 'another bullet running the width of the page'),
+    ]);
+
+    expect(detectColumns(lines, PAGE).multiColumn).toBe(false);
   });
 
   it('does not flag a single column', () => {
@@ -84,33 +127,6 @@ describe('reading order', () => {
     // Same baseline, so left and right interleave — this is the garbling.
     expect(naive[0]!.x).toBe(72);
     expect(naive[1]!.x).toBe(340);
-  });
-
-  it('reads one column at a time the way a human does', () => {
-    const ordered = columnAwareReadingOrder(twoColumnPage(), 300);
-
-    expect(ordered.slice(0, 6).every((l) => l.x === 72)).toBe(true);
-    expect(ordered.slice(6).every((l) => l.x === 340)).toBe(true);
-  });
-
-  it('measures how much the two orders disagree', () => {
-    const lines = twoColumnPage();
-    const divergence = readingOrderDivergence(
-      naiveReadingOrder(lines),
-      columnAwareReadingOrder(lines, 300),
-    );
-
-    expect(divergence).toBeGreaterThan(0.3);
-  });
-
-  it('reports no divergence for a single column', () => {
-    const lines = [700, 680, 660, 640].map((y) => line(72, y, 460));
-    const divergence = readingOrderDivergence(
-      naiveReadingOrder(lines),
-      columnAwareReadingOrder(lines, 300),
-    );
-
-    expect(divergence).toBe(0);
   });
 });
 

@@ -87,7 +87,15 @@ export type ExtractionQuality =
   /** Read, but layout signals say a parser will mangle it — columns, tables. */
   | 'degraded'
   /** No text layer at all: a scanned image. Nothing downstream can run. */
-  | 'unreadable';
+  | 'unreadable'
+  /**
+   * Read, but in a layout this system does not claim to handle: multi-column.
+   *
+   * Distinct from `degraded`, which says a diagnosis is still worth having.
+   * Here the extraction order itself is wrong, so every finding downstream
+   * would be about a document nobody wrote. Parsing stops.
+   */
+  | 'unsupported';
 
 export interface ResumeMeta {
   pageCount?: number;

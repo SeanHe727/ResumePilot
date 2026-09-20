@@ -10,6 +10,7 @@ import type {
   SourceFormat,
   SourceSpan,
 } from '../domain.js';
+import type { PositionedLine } from './layout.js';
 
 /** A run of text with its position on the page, before sections are inferred. */
 export interface TextBlock {
@@ -22,10 +23,84 @@ export interface TextBlock {
   span: SourceSpan;
 }
 
+/**
+ * One run of glyphs, exactly as the page drew it.
+ *
+ * pdf.js hands back one item per run, often mid-word, and the order it hands
+ * them back in is the order the content stream draws them — which is not the
+ * order anybody reads them in. This is the atom; a row is what gets rebuilt.
+ */
+export interface TextRun extends PositionedLine {
+  fontSize: number;
+  bold: boolean;
+}
+
+/** A run once it has been placed in `rawText`, so its characters are findable. */
+export interface Fragment extends TextRun {
+  span: SourceSpan;
+}
+
+/** Type as the page set it, for one run or for the stretch of a row. */
+export interface RowStyle {
+  fontSize: number;
+  bold: boolean;
+}
+
+/**
+ * One visual row: everything printed on one baseline of one page, left to
+ * right, regardless of when the file got round to drawing it.
+ *
+ * Rebuilt by geometry rather than by drawing order, which is the whole point.
+ * An entry header whose right-hand date is emitted after the line below it
+ * used to become a row of its own — and, being set in a larger size than the
+ * title beside it, the one the structure builder picked as the entry's name.
+ * Measured on a real resume: one section parsed into four entries, two empty
+ * shells and two named after a date range, where there were two.
+ *
+ * `fragments` is the provenance. Style, page and character offsets all resolve
+ * back through it, which the old identity-keyed lookup could not survive.
+ */
+export interface VisualRow extends PositionedLine {
+  /** Position in reading order across the whole document. */
+  index: number;
+  /** Largest of the runs. Says whether anything on the row is emphasized. */
+  fontSize: number;
+  /** True if any run is bold. Same reading as `fontSize`: anywhere, not all. */
+  bold: boolean;
+  /**
+   * The style the row starts in, and the style most of its characters are set
+   * in — two readings of the row that `fontSize` and `bold` cannot give.
+   *
+   * Those two answer "is anything here emphasized", which is the wrong
+   * question for deciding whether a row is a section heading: a body line with
+   * a larger date on the right, or one bold word in the middle, reads as a
+   * heading through the maximum and reads as body through either of these.
+   * Whoever is labelling rows should say which reading it wants.
+   */
+  leading: RowStyle;
+  dominant: RowStyle;
+  fragments: Fragment[];
+  span: SourceSpan;
+}
+
 export interface ExtractionResult {
   format: SourceFormat;
   rawText: string;
   blocks: TextBlock[];
+  /**
+   * The rebuilt rows the blocks were flattened from, where the source has a
+   * geometry to rebuild them from.
+   *
+   * A `TextBlock` is what the stages downstream read today, and it is lossy:
+   * one style for the whole row, no index, and no way back to the runs. The
+   * rows are kept alongside so that a stage which wants the gap above a row,
+   * the style its first fragment was set in, or the run a phrase came from
+   * does not have to re-derive any of it from offsets.
+   *
+   * Absent for sources with no geometry — Markdown and DOCX mark their own
+   * structure, and inventing coordinates for them would be inventing evidence.
+   */
+  rows?: VisualRow[];
   pageCount?: number;
   quality: ExtractionQuality;
   /** Multi-column layout, tables, glyph problems — things that break ATS too. */

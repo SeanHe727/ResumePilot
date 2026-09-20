@@ -43,67 +43,132 @@ const MARGIN_FRACTION = 0.12;
 /** Both sides must carry real content before this counts as two columns. */
 const MIN_LINES_PER_SIDE = 3;
 
+/** A stretch of page that is genuinely printing in two columns. */
+interface ColumnRegion {
+  gutter: { from: number; to: number };
+  left: number;
+  right: number;
+}
+
 /**
- * Finds a vertical gutter with text on both sides that overlap vertically.
+ * Finds a stretch of page printing in two columns either side of a gutter.
  *
- * The vertical-overlap test is what separates a real two-column layout from a
- * page that merely has short lines: a gutter with content only above-left and
- * below-right is one column with ragged edges, and flagging it would cry wolf
- * on perfectly good resumes.
+ * Scans candidate boundaries rather than looking for whitespace across the
+ * whole page. Page-wide whitespace was the first attempt and it does not
+ * survive contact with real documents: a two-column resume almost always
+ * carries the candidate's name across the full width at the top, and one such
+ * line covers every bucket the gutter runs through. Measured — a page with six
+ * lines each side goes from detected to undetected the moment a banner is
+ * added above it, which is to say the guard was blind to the ordinary shape of
+ * the layout it exists to refuse.
+ *
+ * A stretch, not the page, because a line running across the boundary is not a
+ * verdict on everything above and below it. A full-width section heading in
+ * the middle of a two-column resume leaves two-column layout either side of
+ * it, and reading either side straight across still garbles it.
  */
 export function detectColumns(lines: PositionedLine[], page: PageGeometry): ColumnReport {
   if (lines.length < MIN_LINES_PER_SIDE * 2 || page.width <= 0) {
     return { multiColumn: false, leftLines: 0, rightLines: 0 };
   }
 
-  const covered = new Array<boolean>(BUCKETS).fill(false);
-  const toBucket = (x: number): number =>
-    Math.max(0, Math.min(BUCKETS - 1, Math.floor((x / page.width) * BUCKETS)));
-
-  for (const line of lines) {
-    const from = toBucket(line.x);
-    const to = toBucket(line.x + line.width);
-    for (let i = from; i <= to; i++) covered[i] = true;
-  }
-
+  const minGutter = page.width * MIN_GUTTER_FRACTION;
   const marginBuckets = Math.floor(BUCKETS * MARGIN_FRACTION);
-  const minGutterBuckets = Math.max(2, Math.floor(BUCKETS * MIN_GUTTER_FRACTION));
+  const byHeight = [...lines].sort((a, b) => b.y - a.y);
+  let best: ColumnRegion | null = null;
 
-  let best: { from: number; to: number } | null = null;
-  let runStart = -1;
-
-  for (let i = marginBuckets; i <= BUCKETS - marginBuckets; i++) {
-    const isGap = i < BUCKETS && !covered[i];
-    if (isGap && runStart === -1) runStart = i;
-    if ((!isGap || i === BUCKETS - marginBuckets) && runStart !== -1) {
-      const run = { from: runStart, to: i };
-      if (run.to - run.from >= minGutterBuckets && (!best || run.to - run.from > best.to - best.from)) {
-        best = run;
-      }
-      runStart = -1;
-    }
+  for (let bucket = marginBuckets; bucket <= BUCKETS - marginBuckets; bucket++) {
+    const found = strongestRegion(byHeight, (bucket / BUCKETS) * page.width, minGutter);
+    if (found && strongerRegion(found, best)) best = found;
   }
 
   if (!best) return { multiColumn: false, leftLines: lines.length, rightLines: 0 };
 
-  const boundary = ((best.from + best.to) / 2 / BUCKETS) * page.width;
-  const left = lines.filter((l) => l.x + l.width <= boundary);
-  const right = lines.filter((l) => l.x >= boundary);
+  return {
+    multiColumn: true,
+    gutter: best.gutter,
+    leftLines: best.left,
+    rightLines: best.right,
+  };
+}
 
-  if (left.length < MIN_LINES_PER_SIDE || right.length < MIN_LINES_PER_SIDE) {
-    return { multiColumn: false, leftLines: left.length, rightLines: right.length };
+/**
+ * Which of two candidate regions describes the page better.
+ *
+ * Content either side, not the width of the hole between. Ranked by gutter
+ * width the widest hole wins, and the widest hole is the one with the least
+ * text beside it: on a six-by-six page a boundary drawn through the left
+ * column keeps only the two or three shortest lines on its left and reports
+ * the page as three-by-four. The refusal names these counts, and understating
+ * them understates the fault.
+ */
+function strongerRegion(candidate: ColumnRegion, best: ColumnRegion | null): boolean {
+  if (!best) return true;
+  const lines = candidate.left + candidate.right - (best.left + best.right);
+  return lines !== 0
+    ? lines > 0
+    : candidate.gutter.to - candidate.gutter.from > best.gutter.to - best.gutter.from;
+}
+
+/**
+ * The strongest two-column stretch at one candidate boundary.
+ *
+ * Lines arrive top to bottom, and one that runs across the boundary closes
+ * whatever stretch was accumulating: a banner, a full-width heading and a
+ * footer all divide the page rather than describing it. What survives is the
+ * run of rows that sat either side of the same gutter without interruption.
+ *
+ * This is also what keeps a single-column resume from being refused. Dates set
+ * hard right can end up as lines of their own, far enough right to look like a
+ * column of their own; the full-width bullets between them cut the page into
+ * stretches holding one such date each, and one is not a column.
+ */
+function strongestRegion(
+  byHeight: PositionedLine[],
+  at: number,
+  minGutter: number,
+): ColumnRegion | null {
+  const stretches: Array<{ left: PositionedLine[]; right: PositionedLine[] }> = [];
+  let open: { left: PositionedLine[]; right: PositionedLine[] } = { left: [], right: [] };
+
+  for (const line of byHeight) {
+    if (line.x + line.width <= at) open.left.push(line);
+    else if (line.x >= at) open.right.push(line);
+    else {
+      stretches.push(open);
+      open = { left: [], right: [] };
+    }
+  }
+  stretches.push(open);
+
+  let best: ColumnRegion | null = null;
+  for (const stretch of stretches) {
+    const region = columnRegion(stretch.left, stretch.right, minGutter);
+    if (region && strongerRegion(region, best)) best = region;
   }
 
-  const overlaps = verticalRangesOverlap(left, right);
+  return best;
+}
 
-  return {
-    multiColumn: overlaps,
-    ...(overlaps
-      ? { gutter: { from: (best.from / BUCKETS) * page.width, to: (best.to / BUCKETS) * page.width } }
-      : {}),
-    leftLines: left.length,
-    rightLines: right.length,
-  };
+/** Whether one uninterrupted stretch is really two columns. */
+function columnRegion(
+  left: PositionedLine[],
+  right: PositionedLine[],
+  minGutter: number,
+): ColumnRegion | null {
+  if (left.length < MIN_LINES_PER_SIDE || right.length < MIN_LINES_PER_SIDE) return null;
+
+  const from = Math.max(...left.map((l) => l.x + l.width));
+  const to = Math.min(...right.map((l) => l.x));
+  if (to - from < minGutter) return null;
+
+  // The vertical-overlap test is what separates a real two-column layout from
+  // a page that merely has short lines: a gutter with content only above-left
+  // and below-right is one column with an indented block, and flagging it
+  // would cry wolf on perfectly good resumes.
+  if (!verticalRangesOverlap(left, right)) return null;
+
+  return { gutter: { from, to }, left: left.length, right: right.length };
 }
 
 function verticalRangesOverlap(left: PositionedLine[], right: PositionedLine[]): boolean {
@@ -123,36 +188,13 @@ function verticalRangesOverlap(left: PositionedLine[], right: PositionedLine[]):
 /**
  * Reading order as a naive extractor produces it: straight across the page,
  * top to bottom, ignoring columns entirely. This is the sequence an ATS sees.
+ *
+ * Generic so that whatever is being ordered keeps its own type. Glyph runs
+ * carry a font size and a provenance the rebuilt rows need, and narrowing them
+ * to `PositionedLine` on the way through would throw exactly that away.
  */
-export function naiveReadingOrder(lines: PositionedLine[]): PositionedLine[] {
+export function naiveReadingOrder<T extends PositionedLine>(lines: T[]): T[] {
   return [...lines].sort((a, b) => a.page - b.page || b.y - a.y || a.x - b.x);
-}
-
-/**
- * Reading order a human follows: each column top to bottom, left column first.
- */
-export function columnAwareReadingOrder(
-  lines: PositionedLine[],
-  boundary: number,
-): PositionedLine[] {
-  const side = (l: PositionedLine): number => (l.x >= boundary ? 1 : 0);
-  return [...lines].sort(
-    (a, b) => a.page - b.page || side(a) - side(b) || b.y - a.y || a.x - b.x,
-  );
-}
-
-/** Fraction of adjacent pairs that the two orderings disagree about. */
-export function readingOrderDivergence(a: PositionedLine[], b: PositionedLine[]): number {
-  if (a.length < 2) return 0;
-  const rank = new Map(b.map((line, i) => [line, i]));
-  let inversions = 0;
-
-  for (let i = 0; i < a.length - 1; i++) {
-    const here = rank.get(a[i]!);
-    const next = rank.get(a[i + 1]!);
-    if (here !== undefined && next !== undefined && here > next) inversions++;
-  }
-  return inversions / (a.length - 1);
 }
 
 /**
