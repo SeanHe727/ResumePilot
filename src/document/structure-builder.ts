@@ -5,7 +5,7 @@ import type {
   ResumeSection,
   SectionKind,
 } from '../domain.js';
-import { isBulletLine, stripBulletMarker } from './section-detector.js';
+import { DATE_RANGE, isBulletLine, stripBulletMarker } from './vocabulary.js';
 import type {
   ExtractionResult,
   LabelledLine,
@@ -32,30 +32,6 @@ function isEntryBearing(kind: SectionKind, blocks: TextBlock[]): boolean {
   if (kind === 'contact' || kind === 'skills' || kind === 'summary') return false;
   return blocks.some((b) => isBulletLine(b.text));
 }
-
-/**
- * `2025.06 – 2025.09`, `Jun 2024 – Sep 2024`, `2023 – Present`, `2024年6月至今`.
- *
- * A date range is the single most reliable marker that a line opens a new
- * position: bullets describe the work, headers say where and when it happened.
- *
- * Both ends use the same sub-pattern deliberately. Written asymmetrically — a
- * month allowed on the start but not the end — it still matches, just short,
- * swallowing `2025.06 – 2025` and silently dropping the closing month.
- */
-const MONTH_NAME = '(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*';
-const DATE_POINT = `(?:${MONTH_NAME}\\.?\\s+)?(?:19|20)\\d{2}(?:\\s*[.\\-/年]\\s*\\d{1,2}\\s*月?)?`;
-const OPEN_ENDED = 'present|now|current|ongoing|至今|现在';
-/**
- * The separator is optional so that `至` can serve both roles it has in
- * Chinese: a range separator in `2024年6月至2025年3月`, and the first character
- * of `至今`. Required, it would consume the `至` of `至今` and then fail on the
- * dangling `今`; optional, the engine backtracks and matches `至今` whole.
- */
-const DATE_RANGE = new RegExp(
-  `(${DATE_POINT})\\s*(?:[-–—~至到]+\\s*)?(${DATE_POINT}|${OPEN_ENDED})`,
-  'i',
-);
 
 /** Separators people use between company and title on one line. */
 const HEADER_SEPARATOR = /\s*[|｜·•‧—–]\s*|\s+[-–—]\s+/;

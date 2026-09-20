@@ -281,7 +281,7 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 # 进度
 
-**当前状态:B1 完成并验证。下一步 B2。**
+**当前状态:B2 完成并验证。下一步 B3。**
 
 写这一段是为了让一次全新的会话只读这份文档就能接着做,不需要之前的对话。
 
@@ -399,19 +399,57 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 测试:`tests/document/section-boundaries.test.ts`(新,27 条)。前 23 条用合成行,最后 4 条走 **`PdfExtractor` → `rows` → `findSectionBoundaries` 的真实链路**,确保真实字号、间距、分页数据与合成行的假设一致。新增 fixture `caps-headings.pdf` —— 正文字号全大写段标题 + 更大的条目标题 + 段内全大写职位名 + 词表外的 `LEADERSHIP`,真实简历的形状,其余 fixture 都不覆盖。
 
-## 下一步:B2 段内标注
+### B2 段内标注 ✅
 
-在每个 `SectionBoundary` 的 `[fromRow, toRow)` 内给每行贴 `RowRole`。
+| 文件 | 改动 |
+|---|---|
+| `src/document/vocabulary.ts` | `DATE_RANGE` 从 `structure-builder.ts` 搬入,B2 读它、B4 会拿它当分类证据 |
+| `src/document/types.ts` | 新增 `RowFeatures` / `RowRole` / `RowLabel` |
+| `src/document/row-labels.ts` | 新增。`labelRows(rows, boundaries): RowLabel[]` |
+| `src/document/structure-builder.ts` | 删除 `isDateOnly` 与两个调用点 |
+| `tests/document/parser.test.ts` | 修掉遗留红测试 |
 
-**从 B1 带过来的**:
+**同样没有接线。** 组装器换掉是 B3。真实简历解析结果逐行未变。
 
-- `gapAbove` 是弱信号(实测数字见上),不要把它当条目边界的判据。
-- `dominant` / `leading` 已经在 `VisualRow` 上,别用 `fontSize`(max)/ `bold`(any)。
-- 真实简历里条目标题的字号比段标题**大**;"被强调 = 段标题"这个直觉在这份文档上是反的。
+**核心发现:`indent` 是这一层最强的信号,而且之前整条管线都没在读它。** 同一段内实测:
 
-**`isDateOnly` 在这一步删除。** A1 之后它可证明多余(关掉重解析,输出逐行相同)。它注释里记的实测发现要搬进 B2 的标注规则,不能直接丢。
+| 角色 | 距段落左边界 |
+|---|---|
+| entry-header | 0.0pt |
+| bullet | 1.7pt(标记悬挂在正文左边) |
+| continuation | **10.8pt**(与上一行的正文对齐) |
 
-**遗留的红测试在这一步修** —— `tests/document/parser.test.ts > still separates two entries listed one after the other`。
+换行的 bullet 要缩进让开自己的标记,这条线比字号(三者都是 1.00)和上方留白(bullet 与 continuation 都是 1.00)都锐利得多。**计划原本寄予厚望的 `gapAbove` 在这一层同样没用**,只留作证据。
+
+**兜底仍然保留**:不是每个模板都做悬挂缩进,此时退回"上一行是被截断还是写完了"——按标点判断。两者不一致时**以缩进为准**:一条 bullet 可以以句号结尾却仍然换行。有测试专门锁这一条。
+
+**`isDateOnly` 已删除**,它的实测发现搬进了 `opensEntry`:一行若只有日期,无论怎么排都不开启条目。A1 之后这个补丁可证明多余(关掉重解析输出逐行相同),但规则留着——没有任何东西保证模板不会把日期单独放一行,而留着它只花一条测试。
+
+`parser.test.ts` 里专测它的那条测试一并删除:主题搬到了 `row-labels.test.ts`,而且它恒真 —— fixture 的 6 个 block 字号中位数正好 12、日期行也是 12,`isEmphasized` 永远为假,守卫压根没被走到。
+
+**一个敞口,B3 关闭。** 旧组装器的模型标注路径现在没有"只有日期不开条目"的守卫了。PDF 走不到:A1 之后日期会被拼回它所在的行,单独成行的日期不再出现。Markdown / DOCX 不带字号字重,`isEmphasized` 恒假,也走不到。**只有模型把某行标成 `startsEntry` 时才可能**,而 B3 把标注改走 B2 就关上了。
+
+**没有标题的块里没有条目,连 bullet 也不是 bullet。** bullet 标记的是某个职位下的一条,没有职位可标时它就是一行前面带短横的散文。反过来读,一个带项目符号的联系方式块会把候选人自己的邮箱,当成一个以他名字命名的雇主下面的成绩。
+
+**"一个条目至少要有一条 bullet,或者一个被强调的标题行"这条规则在这一层**(计划要求),不在组装器:技能段三行逗号分隔、排法相同,读成条目就是三个"雇主是一串语言名"的职位。
+
+变异验证七条,逐条转红:去掉悬挂缩进判断、去掉句末标点兜底、去掉只有日期的例外、bullet 之后不开新条目、无标题块也承载条目、所有段都承载条目、标注越过区间右界。
+
+测试:`tests/document/row-labels.test.ts`(新,20 条)。前 16 条用合成行(缩进值取自实测),最后 4 条走 **`PdfExtractor` → `rows` → `findSectionBoundaries` → `labelRows` 的真实链路**。
+
+**遗留红测试已修** —— `parser.test.ts` 的 fixture 字段名 `size` 改成 `fontSize`,并补第 4 条正文行把字号中位数压到 10(原来 6 个 block 的中位数正好落在 12,`12 > 12` 恒假)。修完做了变异验证:关掉 `isEmphasized` 那次 flush,这条测试连同另外三条一起转红。**全量测试首次全绿。**
+
+## 下一步:B3 纯状态机组装
+
+`assemble(rows, boundaries, labels): ResumeSection[]`,四条转移,不读 `kind`、不读字号、不用正则。
+
+**这一步才接线。** B1/B2 至今都是纯函数 + 测试,`HeuristicSectionDetector` 与 `HeuristicStructureBuilder` 一行没动。B3 把三者串起来替换掉组装路径,届时:
+
+- `LineRole` / `LabelledLine`(`types.ts`)退役,`DocumentSegmenter` 的模型路径改产出 `RowLabel[]`。
+- `section-detector.ts` 里 re-export 的 `isBulletLine` / `stripBulletMarker` 随该文件一起搬走,改从 `vocabulary.ts` 引。
+- `isEntryBearing(kind, blocks)` 删除 —— 哪个数组被填由标签决定,不由类型决定。
+- `stripBulletMarker` 在组装器里的两个调用点换成按 `contentFrom` 切片。
+- **Markdown / DOCX 没有 `rows`**,得先决定:要么让它们也产出行,要么这两种格式继续走旧路径。这是 B3 动手前要定的第一件事。
 
 ## 验证方式(全部本地,不调模型)
 
@@ -426,6 +464,8 @@ npx tsx tmp/fixture-probe.mts                    # 三个 fixture 的 quality �
 npx tsx tmp/row-probe.mts <同上>                 # 重建后的 VisualRow,带页码/基线/字号
 npx tsx tmp/feature-probe.mts <同上>             # 每行的版面特征:字号比/大写率/gapAbove/词数
 npx tsx tmp/boundary-probe.mts <同上>            # B1 切出的区间,带置信度与证据
+npx tsx tmp/role-probe.mts <同上>                # 段内每行的 x/缩进/字号比/bullet/日期
+npx tsx tmp/label-probe.mts <同上>               # B2 的标注,带置信度与剥好的正文
 ```
 
 真实简历的路径记录在 `data/sessions.db` 的 `source_path` 列;`/tmp` 下那几份已被系统清掉,还在的是 `~/Downloads/sean_0908.pdf`。`tmp/` 已被 gitignore。

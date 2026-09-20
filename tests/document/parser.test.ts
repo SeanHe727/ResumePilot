@@ -239,3 +239,43 @@ describe('DefaultResumeParser', () => {
     );
   });
 });
+
+describe('a header split across printed lines', () => {
+  it('still separates two entries listed one after the other', async () => {
+    // The same signal carries both cases: two degrees back to back look like
+    // one wrapped header until you read what the second line says.
+    const { HeuristicStructureBuilder } = await import('../../src/document/index.js');
+
+    const block = (text: string, start: number, fontSize: number) => ({
+      text,
+      span: { start, end: start + text.length },
+      fontSize,
+    });
+    // Body lines included because emphasis is measured against the document's
+    // median size, and there have to be enough of them to carry it: with three,
+    // the median lands on the headings themselves and nothing stands out.
+    const blocks = [
+      block('EDUCATION', 0, 14),
+      block('A University | M.S. in Engineering 2025 - 2027', 20, 12),
+      block('B University | B.S. in Engineering 2021 - 2025', 80, 12),
+      block('- some body text that sets the median', 140, 10),
+      block('- more body text at the same size', 190, 10),
+      block('- and a third line of it', 240, 10),
+      block('- and a fourth, so the median is the body', 280, 10),
+    ];
+
+    const built = new HeuristicStructureBuilder().build(
+      {
+        format: 'pdf',
+        rawText: blocks.map((b) => b.text).join('\n'),
+        blocks,
+        quality: 'clean',
+        layoutWarnings: [],
+      } as never,
+      [{ kind: 'education', heading: 'EDUCATION', span: { start: 0, end: 9 } }] as never,
+      'cv.pdf',
+    );
+
+    expect(built.sections.flatMap((s) => s.entries)).toHaveLength(2);
+  });
+});

@@ -115,6 +115,74 @@ export interface SectionBoundary {
   evidence: string[];
 }
 
+/**
+ * What a row looks like, measured before anything is decided from it.
+ *
+ * The features are computed once and the rules read only these, so that a
+ * model asked to label rows and the rules that label them by hand are looking
+ * at the same thing and answering in the same vocabulary. A rule reaching past
+ * this into the row itself is a rule the model cannot be held to.
+ */
+export interface RowFeatures {
+  /** Dominant font size over the document's body size. */
+  sizeRatio: number;
+  bold: boolean;
+  capsRatio: number;
+  /** Points right of the leftmost row in this section's body. */
+  indent: number;
+  /** Distance from the row above, in body line spacings. Zero at a page top. */
+  gapAbove: number;
+  startsWithBullet: boolean;
+  hasDateRange: boolean;
+  hasContact: boolean;
+  charCount: number;
+  wordCount: number;
+}
+
+/**
+ * What a row is, inside the section it belongs to.
+ *
+ * `section-heading` is missing on purpose: where the sections start is settled
+ * before this runs, and a labeller that could also move a boundary would be
+ * deciding the same thing twice from less evidence.
+ */
+export type RowRole =
+  /** Employer, title, dates — the header of one position, project or degree. */
+  | 'entry-header'
+  | 'bullet'
+  /**
+   * The rest of the row above. A page gives one row per printed line, so a
+   * bullet long enough to wrap arrives as two or three rows and only the
+   * first carries the marker.
+   */
+  | 'continuation'
+  /** Prose belonging to no entry — a skills list, the block above the first heading. */
+  | 'loose';
+
+export interface RowLabel {
+  rowIndex: number;
+  role: RowRole;
+  /**
+   * Set on the row that opens an entry. Only meaningful on `entry-header`.
+   *
+   * A header can run to two rows — employer on one, title and dates on the
+   * next — so consecutive header rows are ambiguous on their own: two degrees
+   * listed one after another look exactly like one degree whose header
+   * wrapped. Only the labeller can tell them apart.
+   */
+  startsEntry?: boolean;
+  /**
+   * Where the row's own words start, past any bullet marker.
+   *
+   * Given here so the assembler can slice rather than match. Stripping a
+   * marker is a judgement about what counts as one, and it belongs with the
+   * other judgements rather than in the one stage that is meant to have none.
+   */
+  contentFrom?: number;
+  confidence: number;
+  evidence: string[];
+}
+
 export interface ExtractionResult {
   format: SourceFormat;
   rawText: string;
