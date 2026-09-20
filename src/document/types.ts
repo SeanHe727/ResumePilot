@@ -83,6 +83,32 @@ export interface VisualRow extends PositionedLine {
   span: SourceSpan;
 }
 
+/**
+ * One section of the document, as a range of rows. Not yet a kind.
+ *
+ * Cutting and classifying are separated on purpose. A cut is decided from
+ * layout — how the row is set, how much air is above it, how short it is —
+ * and what the section *is* can only be decided once its whole body is
+ * visible. Answering both at once is what let a heading the vocabulary did not
+ * recognise become a section of unknown kind and then be treated as prose.
+ *
+ * `headingRow` is not inside `[fromRow, toRow)`: the range is the body. A
+ * section covers its heading row plus its body, and the leading block of a
+ * resume — name, email, links — is a section with a body and no heading.
+ */
+export interface SectionBoundary {
+  /** Position in the cut, counting from the top of the document. */
+  index: number;
+  /** The row that names the section. Absent for the block above the first. */
+  headingRow?: number;
+  fromRow: number;
+  /** Half-open: the first row of the next section, or the end of the document. */
+  toRow: number;
+  /** How sure the cut is — the evidence, weighed. Low is recorded, not fixed. */
+  confidence: number;
+  evidence: string[];
+}
+
 export interface ExtractionResult {
   format: SourceFormat;
   rawText: string;

@@ -279,7 +279,7 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 # 进度
 
-**当前状态:A1 完成并验证。下一步 B1。**
+**当前状态:B1 完成并验证。下一步 B2。**
 
 写这一段是为了让一次全新的会话只读这份文档就能接着做,不需要之前的对话。
 
@@ -347,15 +347,58 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 **注意:`tsconfig.json` 的 `exclude` 含 `tests`,`tsc --noEmit` 不检查测试。** A0 的测试辅助函数少了新字段是靠人看出来的,不是靠 tsc。
 
-## 下一步:B1 只切分 Section 边界
+### B1 只切分 Section 边界 ✅
 
-B1 的输入是 `ExtractionResult.rows`,不再是 `blocks`。今天 `section-detector.ts` 读 `blocks`,`gapAbove` 这个信号在 block 上拿不到(block 只有 bbox,没有"上一行"的概念),在 `VisualRow` 上是现成的。
+| 文件 | 改动 |
+|---|---|
+| `src/document/vocabulary.ts` | 新增。`SECTION_PATTERNS` 与 `isBulletLine` / `stripBulletMarker` 从 `section-detector.ts` 抽出,B1 与 B4 共用。`section-detector.ts` 暂时 re-export 后两个,等组装器重建时随它一起搬走 |
+| `src/document/types.ts` | 新增 `SectionBoundary` |
+| `src/document/section-boundaries.ts` | 新增。`findSectionBoundaries(rows): SectionBoundary[]` |
 
-**判段标题时用 `dominant` / `leading`,不要用 `fontSize` / `bold`。** 后两者是 max / any,正文行右边一个大一号的日期就能骗过去。`fontSize` 保留是因为 `toBlock` 和下游的 `isEmphasized` 还在用它 —— 换掉它是 B2 的事。
+**没有接线。** 切分与分类分家要到 B3 重建组装器才落地,现在 `HeuristicSectionDetector` 一行没动,解析结果与 A1 完成时逐行相同。B1 是纯函数 + 测试,按计划"每步可独立测试"。
 
-**`rows` 是可选的。** Markdown / DOCX 抽取器不产出它,B1 要么对这两种格式走另一条路,要么先让它们也产出行。
+**核心发现:没有任何单一版面特征能同时管用于两份模板(实测)。**
 
-**`VisualRow.column` 没有实现。** 计划的接口草图里有,但"只支持单栏"这个前置决定让它恒为 0:守卫在重建之前就把多栏文档拒掉了。要加回来的前提是先支持多栏阅读顺序 —— 那是另一个决定。
+| | 段标题 | 条目标题 |
+|---|---|---|
+| 真实简历 | 字号比 1.00、**全大写**、1 词 | 字号比 **1.10**、大写率 0.11–0.38 |
+| `single-column.pdf` | 字号比 **1.30**、大写率 0.10 | 字号比 1.00 |
+
+按字号排名,真实简历里**每个雇主都比 EXPERIENCE 大**,段标题全成了正文;按全大写排名,fixture 一个段标题都没有。**两种读法各把一份文档判反。**
+
+`gapAbove` 也测了,比预想弱:真实简历段标题 1.21 / 1.53,条目标题 1.05–1.66 —— 区间重叠,`ResumePilot | Owner | ...` 的 1.66 比任何段标题都大。它只够当一条旁证,不能当判据。这条要带进 B2。
+
+**所以:词表锚定尺度,版面泛化它。** 被词表认出的行,它们在**这份文档上**是怎么排的,就是段标题的排法;排法相同的行也是段标题,不管它自己的词认不认得(`LEADERSHIP` / `AWARDS` / `PUBLICATIONS`)。这样既不会把雇主提成段,也不会把生僻标题读成正文。
+
+三条路径,置信度分开记:
+
+| 路径 | 条件 | conf |
+|---|---|---|
+| named | 命中词表 | 0.95 |
+| ranked | 字号比在词表行的 ±2% 内,且全大写、粗体都一致 | 0.75 |
+| guessed | 整份文档没有一个词表命中 —— 短、被强调、上方有空 | 0.45 |
+
+**分页断点算"上方有空"。** `gapAbove` 在页首恒为 0,第二页顶部的段标题按行距量等于"上面什么都没有"。分页本身就是断点。文档第一行仍然不算 —— 它两样都没有,而这正是把候选人姓名挡在外面的那条规则(姓名是整页最大、最短、最被强调的行)。
+
+`headingRow` **不在** `[fromRow, toRow)` 里:区间是正文。一个 section 覆盖"标题行 ∪ 正文区间",而联系方式那一块是有正文、没标题的 section。
+
+变异验证九条,逐条转红:忽略大写/粗体一致性、字号只判下界、字号"大于等于即可"、去掉上方留白下限、页首当成有留白、允许 bullet 当标题、允许句末标点、标题长度上限放大、全大写阈值降到 0.05、分页不算留白。
+
+测试:`tests/document/section-boundaries.test.ts`(新,18 条,合成行不依赖 pdf.js)。
+
+## 下一步:B2 段内标注
+
+在每个 `SectionBoundary` 的 `[fromRow, toRow)` 内给每行贴 `RowRole`。
+
+**从 B1 带过来的**:
+
+- `gapAbove` 是弱信号(实测数字见上),不要把它当条目边界的判据。
+- `dominant` / `leading` 已经在 `VisualRow` 上,别用 `fontSize`(max)/ `bold`(any)。
+- 真实简历里条目标题的字号比段标题**大**;"被强调 = 段标题"这个直觉在这份文档上是反的。
+
+**`isDateOnly` 在这一步删除。** A1 之后它可证明多余(关掉重解析,输出逐行相同)。它注释里记的实测发现要搬进 B2 的标注规则,不能直接丢。
+
+**遗留的红测试在这一步修** —— `tests/document/parser.test.ts > still separates two entries listed one after the other`。
 
 ## 验证方式(全部本地,不调模型)
 
@@ -368,6 +411,8 @@ npx tsx tmp/line-probe.mts <同上>                # pdf.js 原始片段,带基�
 npx tsx tmp/block-probe.mts <同上>               # 抽取后的 blocks,带 y/x/字号
 npx tsx tmp/fixture-probe.mts                    # 三个 fixture 的 quality 与 warnings
 npx tsx tmp/row-probe.mts <同上>                 # 重建后的 VisualRow,带页码/基线/字号
+npx tsx tmp/feature-probe.mts <同上>             # 每行的版面特征:字号比/大写率/gapAbove/词数
+npx tsx tmp/boundary-probe.mts <同上>            # B1 切出的区间,带置信度与证据
 ```
 
 真实简历的路径记录在 `data/sessions.db` 的 `source_path` 列;`/tmp` 下那几份已被系统清掉,还在的是 `~/Downloads/sean_0908.pdf`。`tmp/` 已被 gitignore。
