@@ -539,17 +539,43 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 测试:`tests/document/row-labels.test.ts`(34 条)。29 条用合成行(缩进值取自实测),5 条走 **`PdfExtractor` → `rows` → `findSectionBoundaries` → `labelRows` 的真实链路**。新增 fixture `hanging-indent.pdf`:悬挂缩进的换行、SUMMARY 的 section-level bullet、EXPERIENCE 的 entry bullet,以及纯日期的两个位置(bullet 之后接续 entry 表头、无 entry 时归 section)。
 
-## 下一步:B3 纯状态机组装
+### B3 纯状态机组装 —— 组装器已完成,**接线未做**
 
-实现 `assemble(rows, boundaries, labels): ResumeSection[]`;它不读 `kind`、不读字号、不用正则、不重新判断 owner。
+| 文件 | 改动 |
+|---|---|
+| `src/domain.ts` | 新增 `SectionBullet`;`ResumeSection` 新增 `infoLines?` / `bullets?`;`ResumeEntry` 新增 `infoLines?` |
+| `src/document/types.ts` | 新增 `LabelledRow` |
+| `src/document/assemble.ts` | 新增。`assemble(rows, boundaries, labels): ResumeSection[]` |
 
-**这一步才接线。** B1/B2 至今都是纯函数 + 测试,`HeuristicSectionDetector` 与 `HeuristicStructureBuilder` 一行没动。B3 把三者串起来替换掉组装路径,届时:
+**`assemble` 的入参窄化成 `LabelledRow`(只有 `text` 和 `span`)。** "不读字号、不读缩进"因此是编译期保证而不是注释里的承诺;同时这也是没有几何信息的格式(Markdown 自己标结构)将来能满足的类型,不必编造坐标。
+
+**`kind` 不由 B3 设定**,一律留 `'other'`,由 B4 从组装好的形状判。
+
+**continuation 接到"上一行去了哪里"而不是"上一行是什么 owner"。** owner 只说层级,说不出是接到该 entry 的 bullet 尾巴还是它的 header 尾巴 —— 五种落点各有一条测试。
+
+**没有标签的行不放置。** 静默丢行正是这条管线要暴露的失败,留给 B5 的覆盖检查去发现。
+
+**owner=entry 但没有 entry 开着**:规则产不出这种标签,模型可以。选择是丢掉这一行,还是开一个没有名字的 entry —— 保留行,让完整性验证去报这个无名 entry。
+
+变异验证六条,逐条转红:忽略 owner、忽略 `startsEntry`、忽略 `contentFrom`、continuation 一律归 section info、放置未标注的行、section bullet 降级成 info。
+
+测试:`tests/document/assemble.test.ts`(21 条)。17 条用手写标签(不依赖 B2 的判断),4 条走 **`PdfExtractor` → B1 → B2 → B3 的真实链路**。
+
+---
+
+## 下一步:B3 接线
+
+**接线尚未做,因为它需要先定格式路由。** B1/B2 至今都是纯函数 + 测试,`HeuristicSectionDetector` 与 `HeuristicStructureBuilder` 一行没动。B3 把三者串起来替换掉组装路径,届时:
 
 - `LineRole` / `LabelledLine`(`types.ts`)退役,`DocumentSegmenter` 的模型路径改产出 `RowLabel[]`。
 - `section-detector.ts` 里 re-export 的 `isBulletLine` / `stripBulletMarker` 随该文件一起搬走,改从 `vocabulary.ts` 引。
 - `isEntryBearing(kind, blocks)` 删除 —— 哪个数组被填由标签决定,不由类型决定。
 - `stripBulletMarker` 在组装器里的两个调用点换成按 `contentFrom` 切片。
 - 本轮只给 PDF 接线。Markdown / TXT 明确为 raw-text-only;DOCX 返回 unsupported。不得为了兼容它们保留第二套结构组装器。
+
+**实测代价(未动手前的调查):** 7 个测试文件、约 36 处调用依赖 Markdown 被结构化解析 —— `parse-resume.test.ts`(5)、`format.test.ts`(9)、`render.test.ts`(4)、`diagnosis-output.test.ts`(8)、`command.test.ts`(3)、`full-path.test.ts`(6)、`parser.test.ts`(1)。它们测的多半不是解析器而是 agent,改成 raw-text-only 之后需要各自改挂 PDF fixture。`looseLines` 的读取方只有 3 处(`analyze-format.ts` × 3、`render.ts` × 2),改成 `infoLines ?? looseLines` 很轻。
+
+另一条路是给 Markdown 写它自己的 `SectionBoundary[]` / `RowLabel[]` 产出器(从 `#` 与 `-` 读),喂同一个 `assemble` —— 组装器只有一个,不违反"不得保留第二套",也不必编造几何(`LabelledRow` 已经为此窄化)。计划的"当前格式范围"一节把这条写成"以后"。两条路的工作量与风险不同,需要 Sean 定。
 
 ## 验证方式(全部本地,不调模型)
 

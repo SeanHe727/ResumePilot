@@ -39,6 +39,24 @@ export interface Bullet {
 }
 
 /**
+ * A bullet a section carries itself, under no entry.
+ *
+ * A summary or a skills section is free to be written as a list, and those
+ * bullets belong to nobody in particular. Kept a type of its own rather than
+ * making `Bullet.entryId` optional: every reader of a `Bullet` today may
+ * assume there is an entry behind it, and an optional field would let a
+ * section's bullet reach code that cannot place it.
+ */
+export interface SectionBullet {
+  /** `${sectionId}:b${index}`. */
+  id: string;
+  sectionId: string;
+  index: number;
+  text: string;
+  span: SourceSpan;
+}
+
+/**
  * One position, project or degree — the unit diagnosis works on.
  *
  * A section such as "Experience" holds several of these, which is why the
@@ -59,6 +77,14 @@ export interface ResumeEntry {
   location?: string;
   /** The header as it appeared, for when the fields above could not be parsed. */
   headerLines: string[];
+  /**
+   * What the entry says about itself that is not part of what it is called: a
+   * repository link, a line of technologies, a sentence of description.
+   *
+   * Optional because a session written before this existed has no such field,
+   * and sessions are read back with a bare cast.
+   */
+  infoLines?: string[];
   bullets: Bullet[];
   span: SourceSpan;
 }
@@ -68,8 +94,17 @@ export interface ResumeSection {
   kind: SectionKind;
   heading: string;
   entries: ResumeEntry[];
-  /** Sections like `skills` or `contact` carry bare lines, not entries. */
+  /**
+   * Sections like `skills` or `contact` carry bare lines, not entries.
+   *
+   * Superseded by `infoLines`, and kept because a session saved before the
+   * rename is read back with a bare cast and would otherwise lose its text.
+   * Read `infoLines ?? looseLines`; write `infoLines`.
+   */
   looseLines: string[];
+  infoLines?: string[];
+  /** Bullets the section carries itself, under no entry. */
+  bullets?: SectionBullet[];
   span: SourceSpan;
 }
 
@@ -420,6 +455,36 @@ export interface ReportCoverage {
   format: 'done' | 'not-run';
 }
 
+/**
+ * The diagnosis written out, once, at the length a person can look things up in.
+ *
+ * Two documents come from this and only one is written: the brief is this with
+ * every point's `what` kept and the rest dropped. Deriving it rather than
+ * writing it twice is what makes them consistent — a brief written separately
+ * can say something the full report does not, and nothing here could ever
+ * notice.
+ */
+export interface FullReport {
+  sections: Array<{
+    /** An entry, or a heading for what runs across the whole resume. */
+    heading: string;
+    points: FullReportPoint[];
+  }>;
+}
+
+export interface FullReportPoint {
+  /** The finding in one sentence. This, alone, is the brief. */
+  what: string;
+  /** What a reader would do differently knowing it. */
+  why: string;
+  /** The words from the résumé it rests on, quoted. */
+  evidence?: string;
+  /** Which readings raised it — several, where they agreed. */
+  from: string[];
+  /** Roughly what answering it adds to the line, where it adds anything. */
+  cost?: string;
+}
+
 export interface ImprovementPlan {
   /** Mechanical fixes the user can apply right now. */
   immediate: string[];
@@ -465,6 +530,15 @@ export interface DiagnosisReport {
    * can only make it if it is told.
    */
   coverage: ReportCoverage;
+  /**
+   * The long form, for looking things up in.
+   *
+   * Kept on the session rather than returned to the coordinator: it runs to
+   * about twice the rest of the report, and the coordinator's window is twelve
+   * thousand tokens. It reads the short form, which is this with every point's
+   * first sentence kept.
+   */
+  full?: FullReport;
   format: FormatDiagnosis;
   narrative?: NarrativeAssessment;
   jdMatch?: JdMatch;

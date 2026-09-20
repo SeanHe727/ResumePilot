@@ -204,6 +204,20 @@ export interface RowLabel {
   evidence: string[];
 }
 
+/**
+ * All the assembler is given of a row: its words, and where they came from.
+ *
+ * Narrower than `VisualRow` on purpose. The assembler is meant to read nothing
+ * but the labels, and a type that cannot reach a font size or an indent proves
+ * that at compile time instead of promising it in a comment. It is also what a
+ * source with no geometry to offer — a Markdown resume marks its own structure
+ * — could satisfy without inventing coordinates it does not have.
+ */
+export interface LabelledRow {
+  text: string;
+  span: SourceSpan;
+}
+
 export interface ExtractionResult {
   format: SourceFormat;
   rawText: string;
