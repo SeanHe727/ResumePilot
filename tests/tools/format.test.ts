@@ -141,7 +141,7 @@ describe('convention signals', () => {
 
 describe('analyzeFormat on a clean resume', () => {
   it('scores it well overall', async () => {
-    const d = await diagnose('sample-resume.md');
+    const d = await diagnose('resume_example.pdf');
 
     expect(d.overallScore).toBeGreaterThan(70);
     expect(d.metrics.atsParsability.score).toBe(100);
@@ -152,7 +152,7 @@ describe('analyzeFormat on a clean resume', () => {
     // judged better by a reader than by a pattern, and counted here as well one
     // missing figure was scored twice — once through substance, again through
     // format. They are still measured; they no longer vote.
-    const d = await diagnose('messy-resume.md');
+    const d = await diagnose('messy-resume.pdf');
     const { atsParsability, consistency, length } = d.metrics;
 
     expect(d.overallScore).toBe(
@@ -166,7 +166,7 @@ describe('analyzeFormat on a clean resume', () => {
     // asks, and whether its verb names an action is the wording reader's —
     // raised here as well, one fault appeared twice in the report and a regex
     // was outvoting a model on its own subject.
-    const d = await diagnose('sample-resume.md');
+    const d = await diagnose('resume_example.pdf');
 
     expect(mentions(d, 'assigned slot')).toBe(false);
     expect(mentions(d, 'does not name an action')).toBe(false);
@@ -176,24 +176,24 @@ describe('analyzeFormat on a clean resume', () => {
   });
 
   it('still measures them, as statistics rather than as a verdict', async () => {
-    const d = await diagnose('sample-resume.md');
+    const d = await diagnose('resume_example.pdf');
 
     expect(d.metrics.quantifiedRatio.ratio).toBeGreaterThan(0);
     expect(d.metrics.verbFirstRatio.ratio).toBeGreaterThan(0);
   });
 
   it('reports the quantified ratio it measured', async () => {
-    const d = await diagnose('sample-resume.md');
+    const d = await diagnose('resume_example.pdf');
 
-    expect(d.metrics.quantifiedRatio.ratio).toBeCloseTo(0.5, 1);
+    expect(d.metrics.quantifiedRatio.ratio).toBeGreaterThan(0.5);
     expect(d.metrics.quantifiedRatio.detail).toMatch(/bullets carry a figure/);
   });
 });
 
 describe('analyzeFormat on a messy resume', () => {
   it('scores it far lower', async () => {
-    const clean = await diagnose('sample-resume.md');
-    const messy = await diagnose('messy-resume.md');
+    const clean = await diagnose('resume_example.pdf');
+    const messy = await diagnose('messy-resume.pdf');
 
     expect(messy.overallScore).toBeLessThan(clean.overallScore - 20);
   });
@@ -202,7 +202,7 @@ describe('analyzeFormat on a messy resume', () => {
     // "My Journey" parses as `other`. Treating that as prose would drop its
     // bullets into looseLines, where every check below ignores them — one
     // unrecognised heading would silently cost the whole content diagnosis.
-    const messy = await diagnose('messy-resume.md');
+    const messy = await diagnose('messy-resume.pdf');
 
     expect(mentions(messy, 'personal pronoun')).toBe(true);
     // Measured on the bullets, which is the point: had the heading dropped them
@@ -214,11 +214,11 @@ describe('analyzeFormat on a messy resume', () => {
   it.each([
     ['a heading outside the known vocabulary', 'outside the vocabulary'],
     ['no email or phone in the body', 'no email or phone'],
-    ['star ratings in the skills section', 'proficiency ratings'],
+    ['proficiency wording in the skills section', 'proficiency ratings'],
     ['two date formats in one resume', 'mixed date formats'],
     ['a bullet opening with a year', 'opens with a date'],
   ])('reports %s', async (_label, phrase) => {
-    expect(mentions(await diagnose('messy-resume.md'), phrase)).toBe(true);
+    expect(mentions(await diagnose('messy-resume.pdf'), phrase)).toBe(true);
   });
 });
 

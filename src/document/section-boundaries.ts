@@ -186,9 +186,9 @@ interface Rank {
  *
  * The size has to be *near* that rank, not merely at or above it. Whether an
  * entry heading is drawn larger or smaller than its section is a choice the
- * template makes, and it goes both ways: Markdown nests `###` under `##`,
- * while a LaTeX resume commonly sets section names at body size in capitals
- * and the employer above them a point larger. Accepting anything at or above
+ * template makes, and it goes both ways: some nest the entry a size under its
+ * section, while a LaTeX resume commonly sets section names at body size in
+ * capitals and the employer beneath them a point larger. Accepting anything at or above
  * the rank turns every employer into a section and leaves EXPERIENCE empty.
  *
  * Type alone is not enough, which is the measured part. On a resume whose

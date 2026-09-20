@@ -1,3 +1,4 @@
+import { DATE_RANGE } from '../document/vocabulary.js';
 import type { Bullet, FormatDiagnosis, ResumeDocument, ScoredDimension } from '../domain.js';
 import {
   bystanderOpener,
@@ -197,9 +198,14 @@ function scoreConsistency(
   issues: string[],
 ): FormatDiagnosis['metrics']['consistency'] {
   const inconsistencies: string[] = [];
+  // Derived from the header where the parse did not split one out, and never
+  // written back. `dateRange` is filled only by parses old enough to have
+  // guessed at it; taking its absence for "no dates here" would leave this
+  // check reporting every resume consistent, which is the shape a dead check
+  // takes when nothing notices.
   const ranges = resume.sections
     .flatMap((s) => s.entries)
-    .map((e) => e.dateRange)
+    .map((e) => e.dateRange ?? DATE_RANGE.exec(e.headerLines.join(' '))?.[0])
     .filter((r): r is string => Boolean(r));
 
   const formats = new Map<DateFormat, string>();
@@ -286,7 +292,7 @@ function collectLineLevelIssues(bullets: Bullet[], issues: string[]): void {
 function collectSkillsIssues(resume: ResumeDocument, issues: string[]): void {
   const lines = resume.sections
     .filter((s) => s.kind === 'skills')
-    .flatMap((s) => s.looseLines);
+    .flatMap((s) => s.infoLines ?? s.looseLines);
 
   for (const line of lines) {
     const rating = selfRating(line);
@@ -296,7 +302,7 @@ function collectSkillsIssues(resume: ResumeDocument, issues: string[]): void {
 
 function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
   const contact = resume.sections.find((s) => s.kind === 'contact');
-  const text = contact?.looseLines.join(' ') ?? '';
+  const text = (contact?.infoLines ?? contact?.looseLines ?? []).join(' ');
 
   const hasEmail = /[\w.+-]+@[\w-]+\.[\w.]+/.test(text);
   const hasPhone = /\+?\d[\d\s()-]{7,}/.test(text);
@@ -314,8 +320,13 @@ function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
  */
 function collectConventionIssues(resume: ResumeDocument, issues: string[]): void {
   const lines = resume.sections.flatMap((s) => [
-    ...s.looseLines,
-    ...s.entries.flatMap((e) => [...e.headerLines, ...e.bullets.map((b) => b.text)]),
+    ...(s.infoLines ?? s.looseLines),
+    ...(s.bullets ?? []).map((b) => b.text),
+    ...s.entries.flatMap((e) => [
+      ...e.headerLines,
+      ...(e.infoLines ?? []),
+      ...e.bullets.map((b) => b.text),
+    ]),
   ]);
 
   for (const line of lines) {

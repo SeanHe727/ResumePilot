@@ -12,7 +12,7 @@ export type ParseFile = (
 ) => Promise<{ success: boolean; error?: string }>;
 import type { Command, CommandResult, ParsedArgs } from '../types.js';
 
-const SUPPORTED = ['.md', '.markdown', '.txt', '.pdf', '.docx'];
+const SUPPORTED = ['.pdf'];
 
 /**
  * One of only two ways a file path enters the system, the other being the CLI
@@ -33,8 +33,8 @@ export function createUploadCommand(sessions: SessionManager, parse: ParseFile):
     name: 'upload',
     aliases: ['load', 'open'],
     description: 'Load a resume file into the session',
-    args: [{ name: 'path', description: 'Path to a .md, .txt, .pdf or .docx', required: true, type: 'string' }],
-    examples: ['/upload resume.pdf', '/upload ~/Documents/resume.docx'],
+    args: [{ name: 'path', description: 'Path to a .pdf', required: true, type: 'string' }],
+    examples: ['/upload resume.pdf', '/upload ~/Documents/resume.pdf'],
 
     async execute(args: ParsedArgs, session): Promise<CommandResult> {
       const path = resolve(args.positional.join(' '));

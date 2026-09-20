@@ -116,6 +116,31 @@ describe('PdfExtractor', () => {
     expect(result.rawText.slice(header.span.start, header.span.end)).toBe(header.text);
   });
 
+  it('reads weight from the font a page actually embedded', async () => {
+    // A text item names its font by a generated id — `g_d0_f1` — until the
+    // page's fonts are resolved. Measured on two real resumes: every item
+    // reported an id, the weight test never fired once, and the signal was
+    // dead everywhere it was read.
+    const result = await new PdfExtractor().extract('assets/resume_example.pdf');
+    const rows = result.rows!;
+
+    const heading = rows.find((r) => r.text === 'EDUCATION')!;
+    const school = rows.find((r) => r.text.startsWith('Western State University'))!;
+    const bullet = rows.find((r) => r.text.startsWith('- Built an industrial'))!;
+
+    expect(heading.dominant.bold).toBe(true);
+    expect(school.leading.bold).toBe(true);
+    expect(bullet.dominant.bold).toBe(false);
+  });
+
+  it('calls a font it cannot name unbold, rather than guessing', async () => {
+    // The fixtures embed no fonts, so nothing resolves. Reporting them bold on
+    // the strength of an unresolved id would be an invention.
+    const result = await new PdfExtractor().extract(FIXTURE('single-column.pdf'));
+
+    expect(result.rows!.every((r) => !r.bold)).toBe(true);
+  });
+
   it('reports a scanned page as unreadable instead of guessing', async () => {
     const result = await new PdfExtractor().extract(FIXTURE('scanned.pdf'));
 
@@ -141,15 +166,17 @@ describe('PdfExtractor', () => {
 });
 
 describe('PDF through the whole pipeline', () => {
-  it('produces the same structure a Markdown resume would', async () => {
+  it('builds the three levels a diagnosis runs on', async () => {
     const doc = await new DefaultResumeParser().parse(FIXTURE('single-column.pdf'));
 
     expect(doc.format).toBe('pdf');
     expect(doc.sections.map((s) => s.kind)).toEqual(['contact', 'experience', 'skills']);
 
+    // The header is kept as it was printed. Splitting an employer from a title
+    // from a location is a guess about a line whose separators are a choice
+    // the template made, and a wrong guess writes a field nobody wrote.
     const entry = doc.sections[1]!.entries[0]!;
-    expect(entry.organization).toBe('ByteDance');
-    expect(entry.dateRange).toBe('2025.06 - 2025.09');
+    expect(entry.headerLines).toEqual(['ByteDance - Backend Intern | 2025.06 - 2025.09']);
     expect(entry.bullets.map((b) => b.text)).toEqual([
       'Reduced P99 latency from 800ms to 90ms',
       'Migrated 12 services to the new pipeline',
@@ -164,7 +191,7 @@ describe('PDF through the whole pipeline', () => {
     const entries = doc.sections.flatMap((s) => s.entries);
 
     expect(entries).toHaveLength(1);
-    expect(entries[0]!.dateRange).toBe('2025.06 - 2025.09');
+    expect(entries[0]!.headerLines).toEqual(['ByteDance - Backend Intern 2025.06 - 2025.09']);
     expect(entries[0]!.bullets).toHaveLength(2);
   });
 

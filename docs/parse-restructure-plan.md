@@ -9,13 +9,14 @@ PDF ─A0─▶ Page[] ─A1─▶ VisualRow[] ─B1─▶ SectionBoundary[] ─
 
 **判断集中在 B1 / B2;B3 只执行标签;B4 只贴标签不改结构;A0 / A1 / B5 是几何与对账。**
 
-### 当前格式范围
+### 当前格式范围(B3 已落地)
 
-本轮结构化解析**只支持 PDF**。A0–B5 都建立在 PDF 的视觉行、字号、坐标和缩进证据上,不为其他格式编造这些证据。
+结构化解析**只支持 PDF**。A0–B5 都建立在 PDF 的视觉行、字号、坐标和缩进证据上,不为其他格式编造这些证据。
 
 - PDF —— 走完整 A0–B5,产出结构化 `ResumeDocument`
-- Markdown / TXT —— 只作为 `rawText` 交给 agent,明确标记 `structured: false`,不运行依赖 section / entry / bullet 的诊断
-- DOCX —— 暂时返回 `unsupported`,提示转换为 PDF
+- **Markdown / TXT / DOCX 文件 —— 入口已删除,现在是不支持的文件类型**,不是 raw-text-only。抽取器、命令帮助、路径识别一并收成 `.pdf`
+- `SourceFormat` 的 `'markdown' | 'text' | 'docx'` 作为 **legacy 值保留** —— 旧 session 里存着它们,而 session 是裸转换读回的
+- 用户直接粘贴的纯文本仍属纯文本输入,与文件入口无关
 
 以后支持 Markdown / DOCX 时,各自用标题、列表、段落样式产出相同的 `SectionBoundary[]` / `RowLabel[]`;从 B3 开始共用组装、分类和完整性验证。**共用输出协议,不强行共用 PDF 的几何启发式。**
 
@@ -539,43 +540,54 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 测试:`tests/document/row-labels.test.ts`(34 条)。29 条用合成行(缩进值取自实测),5 条走 **`PdfExtractor` → `rows` → `findSectionBoundaries` → `labelRows` 的真实链路**。新增 fixture `hanging-indent.pdf`:悬挂缩进的换行、SUMMARY 的 section-level bullet、EXPERIENCE 的 entry bullet,以及纯日期的两个位置(bullet 之后接续 entry 表头、无 entry 时归 section)。
 
-### B3 纯状态机组装 —— 组装器已完成,**接线未做**
+### B3 纯状态机组装 ✅(含接线)
 
 | 文件 | 改动 |
 |---|---|
-| `src/domain.ts` | 新增 `SectionBullet`;`ResumeSection` 新增 `infoLines?` / `bullets?`;`ResumeEntry` 新增 `infoLines?` |
-| `src/document/types.ts` | 新增 `LabelledRow` |
+| `src/domain.ts` | 新增 `SectionBullet`;`ResumeSection` 新增 `infoLines?` / `bullets?`;`ResumeEntry` 新增 `infoLines?`;`SourceFormat` 旧值标 legacy |
 | `src/document/assemble.ts` | 新增。`assemble(rows, boundaries, labels): ResumeSection[]` |
+| `src/document/parser.ts` | 只剩 PDF 一个抽取器;`fromRows()` 串起 B1→B2→B3;`provisionalKind()` 是 B4 的占位 |
+| `src/document/types.ts` | 新增 `LabelledRow`;删除 `LineRole` / `LabelledLine` / `SectionCandidate` / `SectionDetector` / `StructureBuilder` / `DocumentSegmenter` |
+| `src/document/render.ts` | 输出 section info、section bullet、**entry info** |
+| `src/tools/analyze-format.ts` | `scoreConsistency` 改从 `headerLines` 现场派生日期;全局检查补 entry info 与 section bullet |
+| **删除** | `extractors/markdown.ts`、`extractors/docx.ts`、`section-detector.ts`、`structure-builder.ts`、`segmenter.ts`、`segmenterPrompt` |
+| 入口 | `upload.ts` 只收 `.pdf`;`granted-paths.ts` 只认 `.pdf`;`parse-resume.ts` 不再建议 `.docx`,不再接模型标注器 |
 
-**`assemble` 的入参窄化成 `LabelledRow`(只有 `text` 和 `span`)。** "不读字号、不读缩进"因此是编译期保证而不是注释里的承诺;同时这也是没有几何信息的格式(Markdown 自己标结构)将来能满足的类型,不必编造坐标。
+**`assemble` 的入参窄化成 `LabelledRow`(只有 `text` 和 `span`)。** "不读字号、不读缩进"因此是编译期保证,也是没有几何信息的格式将来能满足的类型。
 
-**`kind` 不由 B3 设定**,一律留 `'other'`,由 B4 从组装好的形状判。
+**`kind` 不由 B3 设定**,一律留 `'other'`,由 `provisionalKind()` 按标题词表临时填,B4 替换。
 
-**continuation 接到"上一行去了哪里"而不是"上一行是什么 owner"。** owner 只说层级,说不出是接到该 entry 的 bullet 尾巴还是它的 header 尾巴 —— 五种落点各有一条测试。
+**continuation 接到"上一行去了哪里"而不是"上一行是什么 owner"** —— 五种落点各有一条测试。**没有标签的行不放置**,留给 B5 的覆盖检查。
 
-**没有标签的行不放置。** 静默丢行正是这条管线要暴露的失败,留给 B5 的覆盖检查去发现。
+变异验证六条:忽略 owner、忽略 `startsEntry`、忽略 `contentFrom`、continuation 一律归 section info、放置未标注的行、section bullet 降级成 info。
 
-**owner=entry 但没有 entry 开着**:规则产不出这种标签,模型可以。选择是丢掉这一行,还是开一个没有名字的 entry —— 保留行,让完整性验证去报这个无名 entry。
+### B3 接线时补的三件事
 
-变异验证六条,逐条转红:忽略 owner、忽略 `startsEntry`、忽略 `contentFrom`、continuation 一律归 section info、放置未标注的行、section bullet 降级成 info。
+**一、`bold` 之前恒为 false。** `pdf.ts` 拿 `item.fontName` 匹配 `/bold|black|heavy/i`,但 pdf.js 给嵌入子集字体的是生成 id(`g_d0_f1`)。两份真实简历上这个信号从来没有为真过。修法:每页先 `getOperatorList()` 填充 `commonObjs`,再解析真名(`MHZSXI+TimesNewRomanPS-BoldMT`);解析不到时回落为非粗体。
 
-测试:`tests/document/assemble.test.ts`(21 条)。17 条用手写标签(不依赖 B2 的判断),4 条走 **`PdfExtractor` → B1 → B2 → B3 的真实链路**。
+**二、bold 变活之后 `setApart` 过火了。** 实测:两份简历的 EXPERIENCE 都从 2 条目裂成 4 —— 这个模板里雇主行和职位行**都是粗体**。
 
----
+改成**entry header block**:条目标题是一个块(雇主、职位、日期、地点),只有块的第一行 `startsEntry`。被强调只在"尚无条目开着"或"本行的设法与开启当前条目那一行相同"时开新条目——后者就是同一个块又开始了,也是**唯一**能把两个学位分开的证据(它们之间没有 bullet 来关闭上一个)。
 
-## 下一步:B3 接线
+比较只按**字号**,不含粗体:`dom.bold` 在雇主行上是掷硬币——`NIO Inc.`(8字)比旁边的 `Hefei, China`(12字)短判为常规,`Amazon x UW` 与 `Seattle, WA` 打平取最左判为粗体。拿它做严格比较,两个一样的雇主行会一个赢一个输。
 
-**接线尚未做,因为它需要先定格式路由。** B1/B2 至今都是纯函数 + 测试,`HeuristicSectionDetector` 与 `HeuristicStructureBuilder` 一行没动。B3 把三者串起来替换掉组装路径,届时:
+**`leading.bold` 没有采用。** 试过,会让 SKILLS 三行全变条目:`Programming:` / `LLM & Agents:` / `Post-Training & Optimization:` 都是粗体前缀,而 `dominant` 按字符数投票正好挡住它们。
 
-- `LineRole` / `LabelledLine`(`types.ts`)退役,`DocumentSegmenter` 的模型路径改产出 `RowLabel[]`。
-- `section-detector.ts` 里 re-export 的 `isBulletLine` / `stripBulletMarker` 随该文件一起搬走,改从 `vocabulary.ts` 引。
-- `isEntryBearing(kind, blocks)` 删除 —— 哪个数组被填由标签决定,不由类型决定。
-- `stripBulletMarker` 在组装器里的两个调用点换成按 `contentFrom` 切片。
-- 本轮只给 PDF 接线。Markdown / TXT 明确为 raw-text-only;DOCX 返回 unsupported。不得为了兼容它们保留第二套结构组装器。
+**三、`entry.infoLines` 之前进不了 agent。** `renderEntry()` 只渲染 header 和 bullets,项目描述、技术栈、仓库链接虽然被 B2/B3 存下来了,模型看不到;更糟的是"只有 info 没有 bullet"的条目会被标成 `no bullets — nothing for a line reader to score`,与实际内容矛盾。现在 info 排在 header 与 bullets 之间,且只有两者都空时才说那句话。
 
-**实测代价(未动手前的调查):** 7 个测试文件、约 36 处调用依赖 Markdown 被结构化解析 —— `parse-resume.test.ts`(5)、`format.test.ts`(9)、`render.test.ts`(4)、`diagnosis-output.test.ts`(8)、`command.test.ts`(3)、`full-path.test.ts`(6)、`parser.test.ts`(1)。它们测的多半不是解析器而是 agent,改成 raw-text-only 之后需要各自改挂 PDF fixture。`looseLines` 的读取方只有 3 处(`analyze-format.ts` × 3、`render.ts` × 2),改成 `infoLines ?? looseLines` 很轻。
+变异验证三条:不解析字体名、去掉 header block 约束、entry info 不进渲染。
 
-另一条路是给 Markdown 写它自己的 `SectionBoundary[]` / `RowLabel[]` 产出器(从 `#` 与 `-` 读),喂同一个 `assemble` —— 组装器只有一个,不违反"不得保留第二套",也不必编造几何(`LabelledRow` 已经为此窄化)。计划的"当前格式范围"一节把这条写成"以后"。两条路的工作量与风险不同,需要 Sean 定。
+### 解析结果(实测)
+
+| 段 | `resume_example.pdf` | 真实简历 |
+|---|---|---|
+| 前导块 | 0 条目 / 2 info | 0 条目 / 2 info |
+| EDUCATION | **2 条目** | **2 条目** |
+| EXPERIENCE | **2 条目** | **2 条目** |
+| PROJECTS | 0 条目 / 4 info / 6 bullet ✗ | **2 条目** |
+| SKILLS | **0 条目** / 3 info | **0 条目** / 3 info |
+
+`resume_example.pdf` 的 PROJECTS 是 fixture 的问题,不是解析器的:项目标题行的字号与正文相同、粗体只是前缀(`dominant` 判为常规),唯一能救它的是行尾日期 `Aug 20XX - Present` —— 而 `20XX` 不是年份。真实简历同位置是 `Aug 2026 - Present`,走日期规则正确开条目。**该 fixture 的文本是十六进制字形索引,无法就地改年份,需要用源文件重新导出。**
 
 ## 验证方式(全部本地,不调模型)
 
@@ -586,7 +598,8 @@ npx vitest run
 npx tsx tmp/ats-probe.mts <真实简历 PDF 路径>     # 解析全链路 + 格式打分
 npx tsx tmp/line-probe.mts <同上>                # pdf.js 原始片段,带基线和 EOL 标记
 npx tsx tmp/block-probe.mts <同上>               # 抽取后的 blocks,带 y/x/字号
-npx tsx tmp/fixture-probe.mts                    # 三个 fixture 的 quality 与 warnings
+npx tsx tmp/fixture-probe.mts                    # fixture 的 quality 与 warnings
+npx tsx tmp/assemble-probe.mts <同上>            # 整条链:段 / 条目 / bullet / info
 npx tsx tmp/row-probe.mts <同上>                 # 重建后的 VisualRow,带页码/基线/字号
 npx tsx tmp/feature-probe.mts <同上>             # 每行的版面特征:字号比/大写率/gapAbove/词数
 npx tsx tmp/boundary-probe.mts <同上>            # B1 切出的区间,带置信度与证据

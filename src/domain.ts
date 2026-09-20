@@ -11,7 +11,16 @@
 // Parsed document
 // ---------------------------------------------------------------------------
 
-export type SourceFormat = 'pdf' | 'docx' | 'markdown' | 'text';
+/**
+ * What a resume was read from.
+ *
+ * Only `pdf` is produced now — every stage after extraction reads visual
+ * evidence a marked-up format has none of. The rest are kept because a session
+ * saved before those entry points were removed carries one of them, and
+ * sessions are read back with a bare cast that would not survive the value
+ * disappearing.
+ */
+export type SourceFormat = 'pdf' | /** legacy, no longer parsed */ 'docx' | 'markdown' | 'text';
 
 export type SectionKind =
   | 'contact'

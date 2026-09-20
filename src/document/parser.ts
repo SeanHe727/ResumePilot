@@ -1,18 +1,12 @@
 import { extname } from 'node:path';
 
-import type { ResumeDocument } from '../domain.js';
-import { DocxExtractor } from './extractors/docx.js';
-import { MarkdownExtractor } from './extractors/markdown.js';
+import type { ResumeDocument, SectionKind } from '../domain.js';
+import { assemble } from './assemble.js';
 import { PdfExtractor } from './extractors/pdf.js';
-import { HeuristicSectionDetector } from './section-detector.js';
-import { HeuristicStructureBuilder } from './structure-builder.js';
-import type {
-  DocumentExtractor,
-  DocumentSegmenter,
-  ResumeParser,
-  SectionDetector,
-  StructureBuilder,
-} from './types.js';
+import { labelRows } from './row-labels.js';
+import { findSectionBoundaries } from './section-boundaries.js';
+import { SECTION_PATTERNS } from './vocabulary.js';
+import type { DocumentExtractor, ExtractionResult, ResumeParser } from './types.js';
 
 export class UnsupportedFormatError extends Error {
   constructor(filePath: string, supported: string[]) {
@@ -39,33 +33,23 @@ export class UnsupportedLayoutError extends Error {
 }
 
 /**
- * Three stages, one per hard problem: get text off the page, work out where the
- * sections are, then assemble the three-level document.
+ * PDF in, three-level document out.
  *
- * The stages are separate because only the first is format-specific. Adding PDF
- * means adding an extractor; detection and assembly are untouched, and their
- * tests keep passing.
+ * One format on purpose. Every stage after extraction reads visual evidence —
+ * where a row sits, how far it is indented, how it is set against the rows
+ * around it — and a Markdown or DOCX resume has none of that to offer. The
+ * pipeline used to map `##` onto a notional font size so that one detector
+ * could serve every format, and what that bought was a second structural
+ * assembler to keep in step with the first. A format that marks its own
+ * structure should produce its own boundaries and labels and share the
+ * assembler from there; until something does, it is not read.
  *
  * The parser is called by a Skill with a path the user supplied — never by the
- * model. See the trust-boundary note in `src/tools/types.ts` for why there is no
- * file-reading tool.
+ * model. See the trust-boundary note in `src/tools/types.ts` for why there is
+ * no file-reading tool.
  */
 export class DefaultResumeParser implements ResumeParser {
-  constructor(
-    private readonly extractors: DocumentExtractor[] = [
-      new MarkdownExtractor(),
-      new PdfExtractor(),
-      new DocxExtractor(),
-    ],
-    private readonly detector: SectionDetector = new HeuristicSectionDetector(),
-    private readonly builder: StructureBuilder = new HeuristicStructureBuilder(),
-    /**
-     * Optional. Absent, the rules decide every line's role, which is what the
-     * whole pipeline did before and still does for a Markdown resume that
-     * marks its own structure.
-     */
-    private readonly segmenter?: DocumentSegmenter,
-  ) {}
+  constructor(private readonly extractors: DocumentExtractor[] = [new PdfExtractor()]) {}
 
   async parse(filePath: string): Promise<ResumeDocument> {
     const extractor = this.extractors.find((e) => e.supports(filePath));
@@ -83,13 +67,63 @@ export class DefaultResumeParser implements ResumeParser {
       );
     }
 
-    const sections = this.detector.detect(extracted);
-
-    // The rules are the fallback, not the failure case. They read a Markdown
-    // resume correctly, and on a PDF they are a working answer when there is
-    // no key, the call fails, or the reply does not line up with the input.
-    const labels = (await this.segmenter?.segment(extracted)) ?? undefined;
-
-    return this.builder.build(extracted, sections, filePath, labels);
+    return fromRows(extracted, filePath);
   }
+}
+
+/**
+ * The document, assembled from the rows the extractor rebuilt.
+ *
+ * Every judgement was taken before this: where the sections start, what each
+ * row is, which level it belongs to. What is left is naming the sections, and
+ * that is done here only until B4 does it properly — from the heading's own
+ * words, which is the weakest of the three kinds of evidence a section offers.
+ */
+function fromRows(extracted: ExtractionResult, sourcePath: string): ResumeDocument {
+  const rows = extracted.rows ?? [];
+  const boundaries = findSectionBoundaries(rows);
+  const labels = labelRows(rows, boundaries);
+
+  const sections = assemble(rows, boundaries, labels).map((section) => ({
+    ...section,
+    kind: provisionalKind(section.heading),
+  }));
+
+  return {
+    sourcePath,
+    format: extracted.format,
+    rawText: extracted.rawText,
+    sections,
+    meta: {
+      ...(extracted.pageCount !== undefined ? { pageCount: extracted.pageCount } : {}),
+      wordCount: countWords(extracted.rawText),
+      quality: extracted.quality,
+      layoutWarnings: extracted.layoutWarnings,
+    },
+  };
+}
+
+/**
+ * What a section is called, read from its heading alone.
+ *
+ * A placeholder for B4, which weighs the shape of the section above the word
+ * at the top of it — a section called `Leadership` holding three dated entries
+ * with bullets is experience whatever its heading says. Until then the heading
+ * is all that is read, and a block with no heading of its own is the contact
+ * block, which is the one case the heading cannot speak for.
+ */
+function provisionalKind(heading: string): SectionKind {
+  if (!heading) return 'contact';
+  const cleaned = heading.trim().replace(/[:：]\s*$/, '');
+  return SECTION_PATTERNS.find(({ pattern }) => pattern.test(cleaned))?.kind ?? 'other';
+}
+
+/** Words, counting CJK characters one apiece. */
+function countWords(text: string): number {
+  const cjk = text.match(/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/g)?.length ?? 0;
+  const latin = text
+    .replace(/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return cjk + latin;
 }

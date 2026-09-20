@@ -148,10 +148,51 @@ hanging = [(72, 740, 17, "Sean He"),
            (72, 486, 10, "Dean's List, University of Washington")]
 (here / "hanging-indent.pdf").write_bytes(pdf(hanging))
 
+# The same resume written badly, for the checks that look for faults: a heading
+# outside the vocabulary, no contact details in the body, star ratings, two
+# date formats in one document, a bullet opening with a year, first-person
+# pronouns, and bullets that carry no figures.
+def messy():
+    out, y = [], 740
+    def row(size, text, x=72, drop=14):
+        nonlocal y
+        out.append((x, y, size, text))
+        y -= drop
+    row(16, "Sean Chen")
+    row(10, "Shanghai, China", drop=24)
+    row(13, "What I Have Done")
+    row(11, "ByteDance - Backend Engineer Intern | 2025.06 - 2025.09")
+    row(10, "- I was responsible for the order query service", x=76)
+    row(10, "- 2024 saw me move onto the monitoring dashboards", x=76)
+    row(10, "- Helped out with whatever the team needed.", x=76, drop=18)
+    row(11, "Tencent - Software Engineer Intern | Jun 2024 - Sep 2024")
+    row(10, "- I built an internal tool for log aggregation", x=76)
+    row(10, "- Migrated 12 services to the new deployment pipeline", x=76, drop=24)
+    row(13, "Skills")
+    row(10, "Languages: Expert in TypeScript, proficient with Python and Go")
+    row(10, "References available upon request")
+    return out
+
+(here / "messy-resume.pdf").write_bytes(pdf(messy()))
+
+# A contact block written as a list. The check that no phone number or email
+# reaches a model has to hold however the block is set, and bullets under a
+# name are the shape that used to slip through.
+bulleted_contact = [(72, 740, 16, "Jordan Lee"),
+                    (76, 722, 10, "- jordan.lee@example.com"),
+                    (76, 708, 10, "- +1 (555) 010-2468"),
+                    (76, 694, 10, "- example.com/code/jordan-lee"),
+                    (72, 672, 13, "Experience"),
+                    (72, 656, 11, "Mobility Systems - ML Engineering Intern | 2024.06 - 2024.09"),
+                    (76, 642, 10, "- Built an industrial-diagnostics branch of an inspection system"),
+                    (76, 628, 10, "- Reduced pending-case backlog by 68% through automated triage")]
+(here / "bulleted-contact.pdf").write_bytes(pdf(bulleted_contact))
+
 # A page with no text operators at all — what a scanned resume looks like.
 (here / "scanned.pdf").write_bytes(pdf([]))
 
 for f in ("single-column.pdf", "two-column.pdf", "banner-two-column.pdf",
           "split-two-column.pdf", "late-date.pdf", "caps-headings.pdf",
-          "hanging-indent.pdf", "scanned.pdf"):
+          "hanging-indent.pdf", "messy-resume.pdf", "bulleted-contact.pdf",
+          "scanned.pdf"):
     print(f, (here / f).stat().st_size, "bytes")

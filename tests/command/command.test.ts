@@ -227,10 +227,10 @@ describe('handlers', () => {
     // command calls the same tool the coordinator does rather than parsing here.
     const { parser, session, parsed } = setup();
 
-    await parser.execute('/upload tests/fixtures/sample-resume.md', session);
+    await parser.execute('/upload tests/fixtures/resume_example.pdf', session);
 
     expect(parsed).toHaveLength(1);
-    expect(parsed[0]).toContain('sample-resume.md');
+    expect(parsed[0]).toContain('resume_example.pdf');
   });
 
   it('/hooks lists them and switches one off', async () => {
@@ -258,10 +258,10 @@ describe('handlers', () => {
     const { parser, session } = setup();
     withReport(session);
 
-    const result = await parser.execute('/upload tests/fixtures/sample-resume.md', session);
+    const result = await parser.execute('/upload tests/fixtures/resume_example.pdf', session);
 
     expect(result.action).toBe('new_session');
-    expect((result.data as Session).sourcePath).toMatch(/sample-resume\.md$/);
+    expect((result.data as Session).sourcePath).toMatch(/resume_example\.pdf$/);
   });
 
   it('/report prints the report the coordinator only narrated', async () => {

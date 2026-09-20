@@ -122,9 +122,18 @@ export class PdfExtractor implements DocumentExtractor {
       const viewport = page.getViewport({ scale: 1 });
       const geometry: PageGeometry = { width: viewport.width, height: viewport.height };
 
+      // Weight is read from the font's name, and the name a text item carries
+      // is a generated id — `g_d0_f1` — until the page's fonts are resolved.
+      // Measured: on both resumes to hand, every item reported an id, so the
+      // bold test never fired once and the whole signal was dead. Building the
+      // operator list is what populates `commonObjs`, and it is the only way
+      // to the real name from here.
+      await page.getOperatorList();
       const content = await page.getTextContent();
-      const runs = readRuns(content.items, pageNumber);
-      const styled = mergeIntoLines(content.items, pageNumber);
+      const named = fontNamer(page);
+
+      const runs = readRuns(content.items, pageNumber, named);
+      const styled = mergeIntoLines(content.items, pageNumber, named);
 
       pages.push({
         number: pageNumber,
@@ -194,6 +203,30 @@ export class PdfExtractor implements DocumentExtractor {
   }
 }
 
+/**
+ * The real name behind a text item's font id.
+ *
+ * Falls back to the id when the font is not resolved — a page whose operator
+ * list could not be built, a font pdf.js declined to load. An id never matches
+ * the weight test, so the fallback reads as "not bold", which is the answer
+ * that claims least.
+ */
+function fontNamer(page: unknown): (id: string | undefined) => string {
+  const objs = (page as { commonObjs?: { get(id: string): unknown } }).commonObjs;
+
+  return (id) => {
+    if (!id) return '';
+    try {
+      return (objs?.get(id) as { name?: string } | undefined)?.name ?? id;
+    } catch {
+      return id;
+    }
+  };
+}
+
+/** Bold, black, heavy — the weights a resume sets a name or a heading in. */
+const BOLD_FONT = /bold|black|heavy/i;
+
 interface PdfTextItem {
   str: string;
   transform: number[];
@@ -204,7 +237,11 @@ interface PdfTextItem {
 }
 
 /** Reads pdf.js items into runs, dropping the whitespace-only ones. */
-function readRuns(items: unknown[], page: number): TextRun[] {
+function readRuns(
+  items: unknown[],
+  page: number,
+  named: (id: string | undefined) => string,
+): TextRun[] {
   const runs: TextRun[] = [];
 
   for (const raw of items) {
@@ -222,7 +259,7 @@ function readRuns(items: unknown[], page: number): TextRun[] {
       // The transform's scale, not the font's nominal size: a 10pt font set in
       // a scaled text matrix prints at whatever the matrix says.
       fontSize: Math.hypot(c ?? 0, d ?? 0),
-      bold: /bold|black|heavy/i.test(item.fontName ?? ''),
+      bold: BOLD_FONT.test(named(item.fontName)),
     });
   }
 
@@ -245,7 +282,11 @@ function readRuns(items: unknown[], page: number): TextRun[] {
  * fills in, leaving `detectColumns` nothing to find. Whitespace-only items are
  * dropped everywhere else and carry nothing but that flag here.
  */
-function mergeIntoLines(items: unknown[], page: number): StyledLine[] {
+function mergeIntoLines(
+  items: unknown[],
+  page: number,
+  named: (id: string | undefined) => string,
+): StyledLine[] {
   const out: StyledLine[] = [];
   let current: StyledLine | null = null;
 
@@ -262,7 +303,7 @@ function mergeIntoLines(items: unknown[], page: number): StyledLine[] {
 
     const [, , c, d, x, y] = item.transform as number[];
     const fontSize = Math.hypot(c ?? 0, d ?? 0);
-    const bold = /bold|black|heavy/i.test(item.fontName ?? '');
+    const bold = BOLD_FONT.test(named(item.fontName));
 
     if (current && Math.abs(current.line.y - (y ?? 0)) <= LINE_TOLERANCE_PT) {
       const gap = (x ?? 0) - (current.line.x + current.line.width);

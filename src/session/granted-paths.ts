@@ -19,7 +19,7 @@ import type { Session } from './types.js';
  */
 
 /** Words that could be a path. Deliberately generous — this reads what a person typed. */
-const PATH_LIKE = /(?:^|\s)((?:~|\.{1,2})?\/[^\s"'`]+|[\w.-]+\/[^\s"'`]+|[\w.-]+\.(?:pdf|docx?|md|txt))/gi;
+const PATH_LIKE = /(?:^|\s)((?:~|\.{1,2})?\/[^\s"'`]+|[\w.-]+\/[^\s"'`]+|[\w.-]+\.pdf)/gi;
 
 export function grantPathsIn(text: string, session: Session): void {
   const found = [...text.matchAll(PATH_LIKE)].map((m) => normalise(m[1]!));

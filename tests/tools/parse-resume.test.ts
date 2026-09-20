@@ -32,19 +32,19 @@ describe('parse_resume', () => {
     const { ctx: c, session } = ctx();
 
     const result = await parseResumeTool.execute(
-      { path: 'tests/fixtures/sample-resume.md' },
+      { path: 'tests/fixtures/resume_example.pdf' },
       c,
     );
 
     expect(result.success).toBe(true);
     expect(state(session).resume?.sections.length).toBeGreaterThan(0);
-    expect(session.sourcePath).toContain('sample-resume.md');
+    expect(session.sourcePath).toContain('resume_example.pdf');
   });
 
   it('reports the entries by id, which is how a review asks for one', async () => {
     const { ctx: c } = ctx();
 
-    const result = await parseResumeTool.execute({ path: 'tests/fixtures/sample-resume.md' }, c);
+    const result = await parseResumeTool.execute({ path: 'tests/fixtures/resume_example.pdf' }, c);
     const data = result.data as { entryCount: number; sections: Array<{ entries: Array<{ id: string }> }> };
 
     expect(data.entryCount).toBeGreaterThan(0);
@@ -57,7 +57,7 @@ describe('parse_resume', () => {
     // second copy in the transcript, to be evicted or compacted separately.
     const { ctx: c } = ctx();
 
-    const result = await parseResumeTool.execute({ path: 'tests/fixtures/sample-resume.md' }, c);
+    const result = await parseResumeTool.execute({ path: 'tests/fixtures/resume_example.pdf' }, c);
 
     expect(JSON.stringify(result.data)).not.toContain('Responsible for');
   });
@@ -71,7 +71,7 @@ describe('parse_resume', () => {
       latestReport: { summary: {} },
     } as unknown as ResumeSessionState;
 
-    await parseResumeTool.execute({ path: 'tests/fixtures/sample-resume.md' }, c);
+    await parseResumeTool.execute({ path: 'tests/fixtures/resume_example.pdf' }, c);
 
     expect(state(session).entryDiagnoses).toBeUndefined();
     expect(state(session).latestReport).toBeUndefined();

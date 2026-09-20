@@ -100,6 +100,8 @@ interface Open {
   entry: boolean;
   /** Whether a bullet has been seen since the entry opened. */
   bulletSinceEntry: boolean;
+  /** How the row that opened the current entry was set. */
+  openedAt: number | null;
 }
 
 function labelSection(
@@ -125,7 +127,13 @@ function labelSection(
   // candidate's own email filed under it as an achievement.
   const headed = boundary.headingRow !== undefined;
 
-  const open: Open = { indent: null, owner: 'section', entry: false, bulletSinceEntry: false };
+  const open: Open = {
+    indent: null,
+    owner: 'section',
+    entry: false,
+    bulletSinceEntry: false,
+    openedAt: null,
+  };
   const labels: RowLabel[] = [];
 
   for (const [i, f] of features.entries()) {
@@ -218,7 +226,12 @@ function labelSection(
  * after that entry's bullets, or carrying dates where no entry is open yet.
  * What is left names nothing and opens nothing, and belongs to the section.
  */
-function place(f: RowFeatures, open: Open, headed: boolean, rowIndex: number): RowLabel {
+function place(
+  f: RowFeatures,
+  open: Open,
+  headed: boolean,
+  rowIndex: number,
+): RowLabel {
   if (isDateOnly(f)) {
     if (open.entry) {
       return {
@@ -244,6 +257,7 @@ function place(f: RowFeatures, open: Open, headed: boolean, rowIndex: number): R
   const opens = (reason: string): RowLabel => {
     open.entry = true;
     open.bulletSinceEntry = false;
+    open.openedAt = weightOf(f);
     return {
       rowIndex,
       role: 'header',
@@ -254,10 +268,24 @@ function place(f: RowFeatures, open: Open, headed: boolean, rowIndex: number): R
     };
   };
 
-  // Ahead of the header-continuation test, not after it: a section that lists
-  // degrees has no bullets to close one entry before the next, and the only
-  // thing saying where the second begins is that its school is set apart.
-  if (headed && setApart(f)) return opens('set apart from the body around it');
+  // An entry's header is a block, not a line: employer, then title, then the
+  // dates and a location, each set differently and all naming one position. So
+  // being set apart opens an entry only where no header block is under way —
+  // or where this row is set the way the row that opened the current one was,
+  // which is that block starting again.
+  //
+  // Measured: this template sets the employer bold a size up and the job title
+  // bold at body size. Read as two emphasized rows, two positions became four
+  // with their bullets split between them; read as one block that repeats,
+  // they are two. The repeat is also the only thing separating two degrees,
+  // which have no bullets between them to close the first.
+  if (headed && setApart(f) && (!open.entry || weightOf(f) === open.openedAt)) {
+    return opens(
+      open.entry
+        ? 'set the way this section opened its last entry'
+        : 'set apart from the body around it',
+    );
+  }
 
   // Dates are the identity evidence that survives when nothing is set apart:
   // with no entry open they say a position starts here, and after an entry's
@@ -359,6 +387,24 @@ function within(f: RowFeatures, open: Open, rowIndex: number): RowLabel {
 /** Drawn larger or heavier than the body around it. */
 function setApart(f: RowFeatures): boolean {
   return f.bold || f.sizeRatio > 1 + SIZE_BAND;
+}
+
+/**
+ * How a row is set, as one number, for recognising the same setting again.
+ *
+ * Size alone, rounded into the band the rest of this file treats as "the same
+ * size". Weight is deliberately left out: whether a row's
+ * dominant style is bold turns on how many characters fall either side of the
+ * bold run, and on an employer line that is a coin toss — `NIO Inc.` is
+ * shorter than the city beside it and reads as regular, `Amazon x UW` is not
+ * and reads as bold. Ranked on that, one of two identical employer lines
+ * outranks the other and the loser stops being an entry at all.
+ *
+ * Bold still decides whether a row is emphasized; it just does not decide
+ * which of two emphasized rows is the header.
+ */
+function weightOf(f: RowFeatures): number {
+  return Math.round(f.sizeRatio / SIZE_BAND);
 }
 
 function hangsUnder(f: RowFeatures, openIndent: number | null, bodySize: number): boolean {

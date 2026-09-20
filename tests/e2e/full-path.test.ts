@@ -108,7 +108,7 @@ describe('from the entry point to a report', () => {
     // over a session with no document and every review tool refused.
     const { app } = scriptedApp();
 
-    const session = await app.start('tests/fixtures/sample-resume.md');
+    const session = await app.start('tests/fixtures/resume_example.pdf');
 
     expect((session.state as ResumeSessionState).resume).toBeDefined();
     expect((session.state as ResumeSessionState).resume?.sections.length).toBeGreaterThan(0);
@@ -130,7 +130,7 @@ describe('from the entry point to a report', () => {
     // was reported in `CommandResult.action` and read by nobody, so the next
     // turn went to the old session — one whose memory had just been emptied.
     const { app } = scriptedApp();
-    const first = await app.start('tests/fixtures/sample-resume.md');
+    const first = await app.start('tests/fixtures/resume_example.pdf');
 
     const next = await app.handle('/new', first);
 
@@ -140,7 +140,7 @@ describe('from the entry point to a report', () => {
 
   it('stays on the same session for an ordinary turn', async () => {
     const { app } = scriptedApp();
-    const session = await app.start('tests/fixtures/sample-resume.md');
+    const session = await app.start('tests/fixtures/resume_example.pdf');
 
     const next = await app.handle('/help', session);
 
@@ -170,14 +170,14 @@ describe('from the entry point to a report', () => {
       return {
         type: 'tool_use',
         toolCalls: [
-          { id: 't1', name: 'parse_resume', input: { path: 'tests/fixtures/sample-resume.md' } },
+          { id: 't1', name: 'parse_resume', input: { path: 'tests/fixtures/resume_example.pdf' } },
         ],
         usage: { inputTokens: 0, outputTokens: 0 },
         stopReason: 'tool_use',
       };
     }) as never);
 
-    await app.handle('here is my resume: tests/fixtures/sample-resume.md', session);
+    await app.handle('here is my resume: tests/fixtures/resume_example.pdf', session);
 
     expect((session.state as ResumeSessionState).resume).toBeDefined();
     app.close();
@@ -210,7 +210,7 @@ describe('from the entry point to a report', () => {
 
   it('puts the resume in front of the coordinator, with ids the tools take', async () => {
     const { app, seen } = scriptedApp();
-    const session = await app.start('tests/fixtures/sample-resume.md');
+    const session = await app.start('tests/fixtures/resume_example.pdf');
 
     await app.handle('what does this resume say?', session);
 

@@ -274,6 +274,49 @@ describe('where one entry ends and the next begins', () => {
     ).toEqual(['entry/header*', 'entry/header', 'entry/header*', 'entry/header']);
   });
 
+  it('opens on the strongest header in the section, not on every emphasized row', () => {
+    // Measured once weight could be read at all: this template sets the
+    // employer bold at one size and the job title bold at another, and
+    // emphasis alone opened an entry on each. Two positions became four, with
+    // their bullets split between them.
+    expect(
+      labelled(
+        rows([
+          { text: 'EXPERIENCE' },
+          { text: 'Mobility Systems Company Metro City', size: 10.9, bold: true },
+          { text: 'Machine Learning Engineering Intern', bold: true },
+          { text: '- Built an industrial-diagnostics branch of an inspection system', indent: 1.7 },
+          { text: 'Cloud Systems Capstone Metro City', size: 10.9, bold: true },
+          { text: 'Machine Learning Engineer, Edge AI Program', bold: true },
+          { text: '- Enabled quantization-aware recovery through LoRA distillation', indent: 1.7 },
+        ]),
+      ),
+    ).toEqual([
+      'entry/header*',
+      'entry/header',
+      'entry/bullet',
+      'entry/header*',
+      'entry/header',
+      'entry/bullet',
+    ]);
+  });
+
+  it('opens on every header where the section sets them all alike', () => {
+    // The other half of the same rule: a section whose entries are one line
+    // each has nothing stronger to rank against, and each of them opens one.
+    expect(
+      labelled(
+        rows([
+          { text: 'EDUCATION' },
+          { text: 'A University, M.S. in Engineering', size: 10.9, bold: true },
+          { text: '- GPA 3.9/4.0', indent: 1.7 },
+          { text: 'B University, B.S. in Engineering', size: 10.9, bold: true },
+          { text: '- GPA 3.8/4.0', indent: 1.7 },
+        ]),
+      ),
+    ).toEqual(['entry/header*', 'entry/bullet', 'entry/header*', 'entry/bullet']);
+  });
+
   it('opens an entry on the first row after the previous one closed with bullets', () => {
     expect(
       labelled(

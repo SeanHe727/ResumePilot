@@ -124,7 +124,7 @@ async function runOn(fixture: string): Promise<{ out: Report; seen: QueryParams[
 
 describe('report rendering', () => {
   it('leads with the score and lists the plan by what it costs to act', async () => {
-    const { out } = await runOn('sample-resume.md');
+    const { out } = await runOn('resume_example.pdf');
     const text = render(out);
 
     expect(text).toMatch(/^Overall \d+\/100/);
@@ -133,16 +133,16 @@ describe('report rendering', () => {
   });
 
   it('quotes the bullet alongside its score', async () => {
-    const { out } = await runOn('sample-resume.md');
+    const { out } = await runOn('resume_example.pdf');
     const text = render(out);
 
-    expect(text).toContain('Reduced P99 latency');
+    expect(text).toContain('Built an industrial-diagnostics');
   });
 });
 
 describe('generate_report aggregation', () => {
   it('weights format heaviest, since every other axis assumes the text was read', async () => {
-    const { out } = await runOn('sample-resume.md');
+    const { out } = await runOn('resume_example.pdf');
     const report = out;
 
     expect(report.summary.formatScore).toBeGreaterThan(report.summary.substanceAvg);
@@ -153,15 +153,15 @@ describe('generate_report aggregation', () => {
   it('counts entries and bullets from the resume, not from the diagnoses', async () => {
     // The model may return fewer rows than there are bullets; the document is
     // the source of truth for what exists.
-    const doc = await new DefaultResumeParser().parse('tests/fixtures/sample-resume.md');
+    const doc = await new DefaultResumeParser().parse('tests/fixtures/resume_example.pdf');
     const expected = doc.sections.flatMap((s) => s.entries);
-    const { out } = await runOn('sample-resume.md');
+    const { out } = await runOn('resume_example.pdf');
 
     expect((out).summary.totalEntries).toBe(expected.length);
   });
 
   it('surfaces the weaknesses that recur across bullets', async () => {
-    const { out } = await runOn('messy-resume.md');
+    const { out } = await runOn('messy-resume.pdf');
     const report = out;
 
     expect(report.summary.topWeaknesses.length).toBeGreaterThan(0);
@@ -182,7 +182,7 @@ describe('what leaves the machine', () => {
     // The line labeller is excluded, and has to be: deciding that a line is
     // the contact block means reading it. It returns roles by line number and
     // never returns text, so nothing it sees can reach a diagnosis.
-    const { seen } = await runOn('sample-resume.md');
+    const { seen } = await runOn('resume_example.pdf');
     const diagnostic = seen.filter((s) => s.task !== 'split_sections');
     const sent = JSON.stringify(diagnostic);
 
@@ -195,7 +195,7 @@ describe('what leaves the machine', () => {
   it('keeps them out even when the contact block is written as bullets', async () => {
     // The shape-based fallback in `isEntryBearing` treats a bulleted body as
     // entries — which is right for an unrecognised heading and wrong here.
-    const { out, seen } = await runOn('bulleted-contact.md');
+    const { out, seen } = await runOn('bulleted-contact.pdf');
     const diagnostic = seen.filter((s) => s.task !== 'split_sections');
     const everything = JSON.stringify(diagnostic) + render(out);
 
@@ -207,12 +207,12 @@ describe('what leaves the machine', () => {
   it('shows no contact detail in the report, but does name the employer', async () => {
     // The employer stays: `20  ByteDance — Backend Engineer Intern` is how the
     // reader knows which entry a score belongs to.
-    const { out } = await runOn('sample-resume.md');
+    const { out } = await runOn('resume_example.pdf');
     const text = render(out);
 
     for (const detail of CONTACT_DETAILS) {
       expect(text, `printed: ${detail}`).not.toContain(detail);
     }
-    expect(text).toContain('ByteDance');
+    expect(text).toContain('Mobility Systems Company');
   });
 });
