@@ -175,15 +175,13 @@ describe('what leaves the machine', () => {
 
   it('sends no contact detail to the agents that diagnose', async () => {
     // Not because anything strips them: the diagnosis loop walks `entries`,
-    // and `isEntryBearing` keeps contact, skills and summary out of entries
-    // whatever their body looks like. That line was written for a different
-    // reason, so this pins the consequence rather than the cause.
+    // and a block no heading introduced holds no entries whatever is in it.
+    // That rule was written for a different reason, so this pins the
+    // consequence rather than the cause.
     //
-    // The line labeller is excluded, and has to be: deciding that a line is
-    // the contact block means reading it. It returns roles by line number and
-    // never returns text, so nothing it sees can reach a diagnosis.
-    const { seen } = await runOn('resume_example.pdf');
-    const diagnostic = seen.filter((s) => s.task !== 'split_sections');
+    // Every call is counted, because every call is a diagnosis now: nothing in
+    // the parse asks a model anything.
+    const { seen: diagnostic } = await runOn('resume_example.pdf');
     const sent = JSON.stringify(diagnostic);
 
     expect(diagnostic.length).toBeGreaterThan(0);
@@ -196,7 +194,7 @@ describe('what leaves the machine', () => {
     // The shape-based fallback in `isEntryBearing` treats a bulleted body as
     // entries — which is right for an unrecognised heading and wrong here.
     const { out, seen } = await runOn('bulleted-contact.pdf');
-    const diagnostic = seen.filter((s) => s.task !== 'split_sections');
+    const diagnostic = seen;
     const everything = JSON.stringify(diagnostic) + render(out);
 
     for (const detail of CONTACT_DETAILS) {

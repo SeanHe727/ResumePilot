@@ -51,8 +51,24 @@ const SIZE_BAND = 0.02;
  */
 const INDENT_STEP = 0.5;
 
-/** An email, a phone number or a link — the things a contact block is made of. */
-const CONTACT = /@|\+?\d[\d\s()-]{7,}|https?:\/\/|(?:github|linkedin)\.com/i;
+/**
+ * An email, a phone number or a link — the things a contact block is made of,
+ * and the things a project names itself by after its own name.
+ *
+ * The trailing slash on the bare-domain form is what keeps it from matching a
+ * filename or a version: a link a resume prints has a path after the host.
+ */
+const CONTACT =
+  /@|\+?\d[\d\s()-]{7,}|https?:\/\/|[a-z0-9-]+\.(?:com|org|net|io|dev|ai|co)\//i;
+
+/**
+ * Air above a row, in body line spacings, before it reads as a break.
+ *
+ * Measured, and the same on both resumes to hand: the rows inside one entry's
+ * header sit 1.13 spacings apart, and the row beginning the next entry sits
+ * 1.39. Ordinary line spacing is 1.00, so this only has to clear the first.
+ */
+const ROOMY_ABOVE = 1.15;
 
 /** Bullet markers, as a prefix rather than a test, so the content start is known. */
 const BULLET_MARKER = /^\s*([-*+•‧◦·▪▫●○–—]|\d{1,2}[.)])\s+/;
@@ -102,6 +118,8 @@ interface Open {
   bulletSinceEntry: boolean;
   /** How the row that opened the current entry was set. */
   openedAt: number | null;
+  /** Air above the first row that carried that entry's header on. */
+  innerGap: number | null;
 }
 
 function labelSection(
@@ -133,6 +151,7 @@ function labelSection(
     entry: false,
     bulletSinceEntry: false,
     openedAt: null,
+    innerGap: null,
   };
   const labels: RowLabel[] = [];
 
@@ -258,6 +277,7 @@ function place(
     open.entry = true;
     open.bulletSinceEntry = false;
     open.openedAt = weightOf(f);
+    open.innerGap = null;
     return {
       rowIndex,
       role: 'header',
@@ -269,21 +289,26 @@ function place(
   };
 
   // An entry's header is a block, not a line: employer, then title, then the
-  // dates and a location, each set differently and all naming one position. So
-  // being set apart opens an entry only where no header block is under way —
-  // or where this row is set the way the row that opened the current one was,
-  // which is that block starting again.
+  // dates and a location, each naming one position. Being set apart is what
+  // opens the block; it is not what ends it.
   //
-  // Measured: this template sets the employer bold a size up and the job title
-  // bold at body size. Read as two emphasized rows, two positions became four
-  // with their bullets split between them; read as one block that repeats,
-  // they are two. The repeat is also the only thing separating two degrees,
-  // which have no bullets between them to close the first.
-  if (headed && setApart(f) && (!open.entry || weightOf(f) === open.openedAt)) {
+  // So it opens an entry outright only where no block is under way, or where
+  // bullets have closed the last one. Inside an open block it takes a second
+  // kind of evidence, because type alone cannot tell an employer from the job
+  // title beneath it — plenty of templates set both the same, and read that
+  // way two positions become four with their bullets divided between them.
+  //
+  // What separates two blocks is air. Measured on two resumes: the rows inside
+  // one header sit 1.13 line spacings apart and the row beginning the next
+  // sits 1.39. It is also the only thing separating two degrees, which have no
+  // bullets between them to close the first.
+  if (headed && setApart(f) && (!open.entry || open.bulletSinceEntry || breaksBlock(f, open))) {
     return opens(
-      open.entry
-        ? 'set the way this section opened its last entry'
-        : 'set apart from the body around it',
+      !open.entry
+        ? 'set apart from the body around it'
+        : open.bulletSinceEntry
+          ? "set apart, after the last entry's bullets closed it"
+          : 'set apart, and set off by more air than this header runs on',
     );
   }
 
@@ -300,7 +325,12 @@ function place(
     );
   }
 
-  if (open.entry) return within(f, open, rowIndex);
+  if (open.entry) {
+    // How far apart this header's own rows sit, learned from the first one to
+    // carry it on: whatever begins the next block has to clear it.
+    if (!open.bulletSinceEntry) open.innerGap ??= f.gapAbove;
+    return within(f, open, rowIndex);
+  }
 
   return {
     rowIndex,
@@ -382,6 +412,24 @@ function within(f: RowFeatures, open: Open, rowIndex: number): RowLabel {
           ...notes(f),
         ],
       };
+}
+
+/**
+ * Whether the air above this row is more than the header it would interrupt
+ * runs on.
+ *
+ * Two tests, because either alone is too easily met: more than an ordinary
+ * line, and more than the gap this particular header keeps between its own
+ * rows. A header set generously — its employer and title a line and a half
+ * apart — would clear the first on its own and split in two.
+ *
+ * The row directly under an opener can never break the block, because that gap
+ * is the one being learned from. Only the first row of a header block opens an
+ * entry, and the row beneath it is the block.
+ */
+function breaksBlock(f: RowFeatures, open: Open): boolean {
+  if (open.innerGap === null) return false;
+  return f.gapAbove >= ROOMY_ABOVE && f.gapAbove > open.innerGap;
 }
 
 /** Drawn larger or heavier than the body around it. */

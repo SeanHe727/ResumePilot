@@ -1,0 +1,42 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 819>>
+stream
+BT /F1 16 Tf 72 740 Td (Jordan Lee) Tj ET
+BT /F1 10 Tf 72 724 Td (jordan.lee@example.com) Tj ET
+BT /F1 13 Tf 72 702 Td (Projects) Tj ET
+BT /F1 10 Tf 72 684 Td (Agent Runtime Suite | Owner | TypeScript    Aug 2024 - Present) Tj ET
+BT /F1 10 Tf 72 670 Td (example.com/code/agent-runtime) Tj ET
+BT /F1 10 Tf 76 656 Td (- Improved planted-defect localization from 82% to 94%) Tj ET
+BT /F1 10 Tf 76 642 Td (- Kept working context below 10K tokens across a 100-turn test) Tj ET
+BT /F1 10 Tf 72 620 Td (Research-Agent Evaluation | Contributor | Python    Feb 2023 - Jul 2023) Tj ET
+BT /F1 10 Tf 72 606 Td (example.com/code/research-evaluation) Tj ET
+BT /F1 10 Tf 76 592 Td (- Built a unified evaluation harness with 8 metrics) Tj ET
+BT /F1 10 Tf 76 578 Td (- Validated evaluator fidelity across 400+ report-level trials) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+1148
+%%EOF

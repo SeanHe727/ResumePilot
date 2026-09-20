@@ -1,7 +1,7 @@
 {
   "name": "resumepilot",
   "version": "0.1.0",
-  "description": "Resume diagnosis Agent built on a hand-written 10-layer Harness \u2014 no LangChain, no LangGraph.",
+  "description": "Resume diagnosis Agent built on a hand-written 10-layer Harness — no LangChain, no LangGraph.",
   "type": "module",
   "engines": {
     "node": ">=22.12.0"
@@ -21,7 +21,6 @@
     "better-sqlite3": "^13.0.3",
     "chalk": "^6.0.0",
     "commander": "^15.0.0",
-    "mammoth": "^1.12.2",
     "openai": "^7.10.0",
     "ora": "^9.4.1",
     "pdfjs-dist": "^6.3.289"

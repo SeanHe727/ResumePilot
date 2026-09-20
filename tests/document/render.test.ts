@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { DefaultResumeParser } from '../../src/document/index.js';
 import { renderEntry, renderResume } from '../../src/document/render.js';
 
-/** Markdown fixtures need no model to label their lines. */
+/** Parsing is all rules and geometry — no model is asked anything. */
 const parse = (fixture: string) => new DefaultResumeParser().parse(`tests/fixtures/${fixture}`);
 
 describe('how a document reaches a model', () => {

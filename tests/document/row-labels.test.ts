@@ -258,20 +258,113 @@ describe('which level a row belongs to', () => {
 });
 
 describe('where one entry ends and the next begins', () => {
-  it('opens an entry on a header set apart from the body', () => {
-    // Education is the usual case: two degrees, no bullets under either, and
-    // nothing but the school being set apart to say where the second starts.
+  it('opens an entry on a header set apart and set off by air', () => {
+    // Education is the usual case: two degrees, no bullets under either, so
+    // the only thing saying where the second starts is that its school is set
+    // apart *and* stands further from the line above it than the degree line
+    // stands from its own school. Measured on two resumes the two gaps are
+    // 1.39 and 1.13; written wider here so that the median gap of five rows
+    // still lands on the body rather than between the two.
     expect(
       labelled(
         rows([
           { text: 'EDUCATION' },
-          { text: 'A University Seattle, WA', size: 10.9 },
+          { text: 'A University Seattle, WA', size: 10.9, gap: 2 },
           { text: 'M.S. in Engineering  2025 - 2027' },
-          { text: 'B University Nanjing, China', size: 10.9 },
+          { text: 'B University Nanjing, China', size: 10.9, gap: 2 },
           { text: 'B.S. in Engineering  2021 - 2025' },
+          { text: 'Thesis on distributed consensus' },
         ]),
       ),
-    ).toEqual(['entry/header*', 'entry/header', 'entry/header*', 'entry/header']);
+    ).toEqual([
+      'entry/header*',
+      'entry/header',
+      'entry/header*',
+      'entry/header',
+      'entry/header',
+    ]);
+  });
+
+  it('keeps an employer and its job title in one entry, set alike or not', () => {
+    // Plenty of templates set both the same size and the same weight. Read as
+    // two emphasized rows, one position becomes two and its bullets go to the
+    // second. What says they are one header is that no more air separates them
+    // than separates any two lines.
+    expect(
+      labelled(
+        rows([
+          { text: 'EXPERIENCE' },
+          { text: 'Mobility Systems Company', size: 10.9, bold: true, gap: 1.5 },
+          { text: 'Machine Learning Engineering Intern', size: 10.9, bold: true, gap: 1.0 },
+          { text: '- Built an industrial-diagnostics branch of an inspection system', indent: 1.7 },
+          { text: '- Designed a role-aware routing layer for three specialists', indent: 1.7 },
+        ]),
+      ),
+    ).toEqual(['entry/header*', 'entry/header', 'entry/bullet', 'entry/bullet']);
+  });
+
+  it('measures the break against the air this header itself runs on', () => {
+    // A header set generously — employer and title a line and a half apart —
+    // would clear a fixed threshold on its own and split in two. What a later
+    // row has to beat is this header's own spacing, and the row directly under
+    // an opener never breaks the block, because that gap is the one being
+    // learned from.
+    expect(
+      labelled(
+        rows([
+          { text: 'EXPERIENCE' },
+          { text: 'Mobility Systems Company', size: 10.9, bold: true, gap: 2 },
+          { text: 'Machine Learning Engineering Intern', size: 10.9, bold: true, gap: 1.5 },
+          { text: 'Metro City, Country', size: 10.9, bold: true, gap: 1.3 },
+          { text: '- Built an industrial-diagnostics branch of an inspection system', indent: 1.7 },
+          { text: '- Designed a role-aware routing layer for three specialists', indent: 1.7 },
+          { text: '- Improved claim correctness by 7% over the base model', indent: 1.7 },
+          { text: '- Applied GRPO with grouped multi-step tool-use rollouts', indent: 1.7 },
+        ]),
+      ),
+    ).toEqual([
+      'entry/header*',
+      'entry/header',
+      'entry/header',
+      'entry/bullet',
+      'entry/bullet',
+      'entry/bullet',
+      'entry/bullet',
+    ]);
+  });
+
+  it('still needs more than an ordinary line, however tightly the header is set', () => {
+    // A header whose own rows sit closer together than the body does would
+    // otherwise be broken by any ordinary line beneath it.
+    expect(
+      labelled(
+        rows([
+          { text: 'EXPERIENCE' },
+          { text: 'Mobility Systems Company', size: 10.9, bold: true, gap: 2 },
+          { text: 'Machine Learning Engineering Intern', size: 10.9, bold: true, gap: 0.8 },
+          { text: 'Metro City, Country', size: 10.9, bold: true },
+          { text: '- Built an industrial-diagnostics branch of an inspection system', indent: 1.7 },
+          { text: '- Designed a role-aware routing layer for three specialists', indent: 1.7 },
+          { text: '- Improved claim correctness by 7% over the base model', indent: 1.7 },
+          { text: '- Applied GRPO with grouped multi-step tool-use rollouts', indent: 1.7 },
+        ]),
+      ).slice(0, 3),
+    ).toEqual(['entry/header*', 'entry/header', 'entry/header']);
+  });
+
+  it('opens on an emphasized row once the bullets have closed the entry', () => {
+    expect(
+      labelled(
+        rows([
+          { text: 'EXPERIENCE' },
+          { text: 'Mobility Systems Company', size: 10.9, bold: true, gap: 1.5 },
+          { text: 'Machine Learning Engineering Intern', size: 10.9, bold: true, gap: 1.0 },
+          { text: '- Built an industrial-diagnostics branch of an inspection system', indent: 1.7 },
+          { text: 'Cloud Systems Capstone', size: 10.9, bold: true, gap: 1.0 },
+          { text: '- Enabled quantization-aware recovery through LoRA distillation', indent: 1.7 },
+        ]),
+      ),
+    ).toEqual(['entry/header*', 'entry/header', 'entry/bullet', 'entry/header*', 'entry/bullet']);
   });
 
   it('opens on the strongest header in the section, not on every emphasized row', () => {

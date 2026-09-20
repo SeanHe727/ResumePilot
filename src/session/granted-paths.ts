@@ -18,8 +18,17 @@ import type { Session } from './types.js';
  * candidate's own words, then nothing loose afterwards.
  */
 
-/** Words that could be a path. Deliberately generous — this reads what a person typed. */
-const PATH_LIKE = /(?:^|\s)((?:~|\.{1,2})?\/[^\s"'`]+|[\w.-]+\/[^\s"'`]+|[\w.-]+\.pdf)/gi;
+/**
+ * Words that could be the path of a resume.
+ *
+ * Generous about the directories in front — this reads what a person typed —
+ * and exact about the end. Only a PDF is read now, and a grant is a standing
+ * permission to open a file: handing one out for a `.docx` the parser will
+ * refuse buys nothing and widens what a sentence can unlock. The suffix used
+ * to be checked only on a bare filename, so `~/Documents/cv.docx` was granted
+ * and `cv.docx` was not.
+ */
+const PATH_LIKE = /(?:^|\s)((?:(?:~|\.{1,2})?\/|[\w.-]+\/)?[^\s"'`]*\.pdf)(?=$|[\s"'`])/gi;
 
 export function grantPathsIn(text: string, session: Session): void {
   const found = [...text.matchAll(PATH_LIKE)].map((m) => normalise(m[1]!));

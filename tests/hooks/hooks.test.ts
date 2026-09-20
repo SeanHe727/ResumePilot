@@ -323,6 +323,25 @@ describe('path-source', () => {
     expect(outcome.action).toBe('continue');
   });
 
+  it('opens one named with directories in front of it', async () => {
+    const outcome = await asked('it is at ~/Documents/cv.pdf', '~/Documents/cv.pdf');
+
+    expect(outcome.action).toBe('continue');
+  });
+
+  it.each(['~/Documents/cv.docx', 'docs/resume.md', './notes.txt', 'cv.docx'])(
+    'grants nothing for %s, which is not a format this reads',
+    async (path) => {
+      // A grant is standing permission to open a file. Handing one out for a
+      // format the parser refuses buys nothing and widens what one sentence
+      // can unlock. The suffix used to be checked only on a bare filename, so
+      // the same name with a directory in front of it was granted.
+      const outcome = await asked(`it is at ${path}`, path);
+
+      expect(outcome.action).not.toBe('continue');
+    },
+  );
+
   it('takes the expanded form of a path they wrote', async () => {
     // Someone types a relative path and the model sends the absolute one. Both
     // sides resolve the same way, so it is one entry rather than a near miss.

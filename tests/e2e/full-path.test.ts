@@ -118,7 +118,7 @@ describe('from the entry point to a report', () => {
   it('says so rather than claiming a file it could not read', async () => {
     const { app, printed } = scriptedApp();
 
-    const session = await app.start('tests/fixtures/does-not-exist.md');
+    const session = await app.start('tests/fixtures/nope.pdf');
 
     expect((session.state as ResumeSessionState).resume).toBeUndefined();
     expect(printed.join('\n')).toMatch(/Could not read/);

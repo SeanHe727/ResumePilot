@@ -314,6 +314,21 @@ describe('the sections a PDF actually produces', () => {
     ]);
   });
 
+  it('folds two dated projects into two entries, each with its own bullets', async () => {
+    // The shape the sample resume has and its anonymised copy lost: with the
+    // years replaced by placeholders there is nothing left to say a project
+    // starts, because the titles are set at body size with a bold prefix only.
+    const projects = (await build('dated-projects.pdf'))[1]!;
+
+    expect(projects.heading).toBe('Projects');
+    expect(projects.entries).toHaveLength(2);
+    expect(projects.entries.map((e) => e.bullets.length)).toEqual([2, 2]);
+    expect(projects.entries.map((e) => e.infoLines)).toEqual([
+      ['example.com/code/agent-runtime'],
+      ['example.com/code/research-evaluation'],
+    ]);
+  });
+
   it("joins a real page's wrapped bullet back into one bullet", async () => {
     const sections = await build('hanging-indent.pdf');
 

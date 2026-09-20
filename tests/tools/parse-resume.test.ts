@@ -13,7 +13,7 @@ function ctx() {
       session,
       queryEngine: {
         query: async () => {
-          throw new Error('a Markdown fixture should not need the line labeller');
+          throw new Error('parsing reads the page; it asks no model anything');
         },
       },
       abortSignal: new AbortController().signal,

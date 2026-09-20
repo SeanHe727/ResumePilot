@@ -97,16 +97,6 @@ function defaultRules(config: AppConfig): RouteRule[] {
       reason: 'long structured output synthesising every other result',
     },
     {
-      task: 'split_sections',
-      model: cheap,
-      reason: 'mechanical structure detection',
-    },
-    {
-      task: 'split_bullets',
-      model: cheap,
-      reason: 'mechanical segmentation',
-    },
-    {
       task: 'summarize',
       model: cheap,
       reason: 'context compaction, where fidelity matters more than insight',
@@ -127,7 +117,5 @@ const DEFAULT_EFFORTS: ReadonlyArray<[TaskKind, Effort]> = [
   ['match_jd', 'high'],
   ['assess_narrative', 'high'],
   ['generate_report', 'high'],
-  ['split_sections', 'low'],
-  ['split_bullets', 'low'],
   ['summarize', 'low'],
 ];

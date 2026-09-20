@@ -126,8 +126,6 @@ export type TaskKind =
   /** The career arc across entries — one pass over the whole document. */
   | 'assess_narrative'
   | 'generate_report'
-  | 'split_sections'
-  | 'split_bullets'
   | 'summarize';
 
 export interface RouteRule {

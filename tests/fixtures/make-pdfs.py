@@ -188,11 +188,29 @@ bulleted_contact = [(72, 740, 16, "Jordan Lee"),
                     (76, 628, 10, "- Reduced pending-case backlog by 68% through automated triage")]
 (here / "bulleted-contact.pdf").write_bytes(pdf(bulleted_contact))
 
+# Two projects, each named on a line carrying its own dates, each with bullets
+# under it. The shape the sample resume has and its anonymised copy lost: with
+# the years replaced by placeholders there is nothing left to say a project
+# starts, since the titles are set at body size with only a bold prefix.
+dated_projects = [(72, 740, 16, "Jordan Lee"),
+                  (72, 724, 10, "jordan.lee@example.com"),
+                  (72, 702, 13, "Projects"),
+                  (72, 684, 10, "Agent Runtime Suite | Owner | TypeScript    Aug 2024 - Present"),
+                  (72, 670, 10, "example.com/code/agent-runtime"),
+                  (76, 656, 10, "- Improved planted-defect localization from 82% to 94%"),
+                  (76, 642, 10, "- Kept working context below 10K tokens across a 100-turn test"),
+                  (72, 620, 10, "Research-Agent Evaluation | Contributor | Python    Feb 2023 - Jul 2023"),
+                  (72, 606, 10, "example.com/code/research-evaluation"),
+                  (76, 592, 10, "- Built a unified evaluation harness with 8 metrics"),
+                  (76, 578, 10, "- Validated evaluator fidelity across 400+ report-level trials")]
+(here / "dated-projects.pdf").write_bytes(pdf(dated_projects))
+
 # A page with no text operators at all — what a scanned resume looks like.
 (here / "scanned.pdf").write_bytes(pdf([]))
 
 for f in ("single-column.pdf", "two-column.pdf", "banner-two-column.pdf",
           "split-two-column.pdf", "late-date.pdf", "caps-headings.pdf",
           "hanging-indent.pdf", "messy-resume.pdf", "bulleted-contact.pdf",
+          "dated-projects.pdf",
           "scanned.pdf"):
     print(f, (here / f).stat().st_size, "bytes")

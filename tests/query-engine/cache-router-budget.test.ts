@@ -94,17 +94,17 @@ describe('ModelRouter', () => {
   });
 
   it('sends mechanical restructuring to the cheap model', () => {
-    expect(router.resolve('split_bullets').model).toBe(config.models.cheap);
+    expect(router.resolve('summarize').model).toBe(config.models.cheap);
     expect(router.resolve('summarize').model).toBe(config.models.cheap);
   });
 
   it('spends the most effort on rewriting, where fabrication is the risk', () => {
     expect(router.resolve('rewrite_bullet').effort).toBe('xhigh');
-    expect(router.resolve('split_bullets').effort).toBe('low');
+    expect(router.resolve('summarize').effort).toBe('low');
   });
 
   it('resolves the provider alongside the model', () => {
-    expect(router.resolve('split_bullets').provider).toBe('deepseek');
+    expect(router.resolve('summarize').provider).toBe('deepseek');
     expect(router.resolve('diagnose_bullet').provider).toBe('claude');
   });
 
@@ -116,15 +116,15 @@ describe('ModelRouter', () => {
   });
 
   it('lets the caller override the model outright', () => {
-    expect(router.resolve('split_bullets', 'claude-opus-5').model).toBe('claude-opus-5');
+    expect(router.resolve('summarize', 'claude-opus-5').model).toBe('claude-opus-5');
   });
 
   it('accepts rule overrides', () => {
     const custom = new ModelRouter(config, [
-      { task: 'split_bullets', model: 'claude-haiku-4-5', reason: 'testing' },
+      { task: 'summarize', model: 'claude-haiku-4-5', reason: 'testing' },
     ]);
 
-    expect(custom.resolve('split_bullets').model).toBe('claude-haiku-4-5');
+    expect(custom.resolve('summarize').model).toBe('claude-haiku-4-5');
   });
 });
 
