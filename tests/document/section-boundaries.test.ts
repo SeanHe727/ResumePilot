@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
+import { PdfExtractor } from '../../src/document/extractors/pdf.js';
 import { findSectionBoundaries } from '../../src/document/section-boundaries.js';
 import type { VisualRow } from '../../src/document/types.js';
 
@@ -175,6 +176,81 @@ describe('generalising from the headings it recognises', () => {
   });
 });
 
+describe('a row set like a heading that is not one', () => {
+  it('needs the air a heading has, not just the type', () => {
+    // An all-capitals job title inside a section, on a resume whose headings
+    // are body-sized capitals, is set identically to them. Measured: it took
+    // the employer's bullets away and filed them under a section of its own.
+    const cut = findSectionBoundaries(
+      rows([
+        { text: 'EXPERIENCE', gap: 1.5 },
+        { text: 'NIO Inc. Hefei, China', size: 10.9, gap: 1.3 },
+        { text: 'SENIOR ENGINEER' },
+        { text: '- Built an agent system that cut the backlog by 74%' },
+        { text: '- Designed a role-aware routing layer' },
+        { text: 'SKILLS', gap: 1.5 },
+        { text: 'Python, TypeScript, SQL, Bash, Git' },
+      ]),
+    );
+
+    expect(cut.map((b) => b.headingRow)).toEqual([0, 5]);
+    expect(cut[0]!.toRow).toBe(5);
+  });
+
+  it('holds a heading to the air this resume gives its own headings', () => {
+    // Not a fixed threshold: body rows measure 0.80 to 1.13 line spacings
+    // apart and headings 0.93 to 1.53, so the two ranges overlap and only the
+    // document can say which side a row falls on. The same candidate, set the
+    // same way, with the same air above it, either side of that line.
+    const resume = (headingAir: number): VisualRow[] =>
+      rows([
+        { text: 'Sean He', size: 16 },
+        { text: 'sean@example.com' },
+        { text: 'EXPERIENCE', gap: headingAir },
+        { text: 'NIO Inc. Hefei, China', size: 10.9 },
+        { text: '- Built an agent system that cut the backlog by 74%' },
+        { text: 'LEADERSHIP', gap: 1.4 },
+        { text: 'Student Council President', size: 10.9 },
+        { text: '- Ran the society for two years' },
+      ]);
+
+    expect(findSectionBoundaries(resume(1.4)).map((b) => b.headingRow)).toEqual([undefined, 2, 5]);
+    expect(findSectionBoundaries(resume(3)).map((b) => b.headingRow)).toEqual([undefined, 2]);
+  });
+
+  it('will not read a sentence as a heading, however it is set', () => {
+    // Set like the headings, with more air above it than they have, and still
+    // a statement about the work rather than a label for it.
+    const cut = findSectionBoundaries(
+      rows([
+        { text: 'EXPERIENCE', gap: 1.2 },
+        { text: 'NIO Inc. Hefei, China', size: 10.9 },
+        { text: 'BUILT AND SHIPPED FOUR SERVICES LAST YEAR', gap: 2 },
+        { text: '- Designed a role-aware routing layer' },
+      ]),
+    );
+
+    expect(cut.map((b) => b.headingRow)).toEqual([0]);
+  });
+
+  it('will not generalise from headings set exactly like body text', () => {
+    // Nothing to match against. On a resume whose script has no capitals to
+    // read, matching on type alone promotes most of the document.
+    const cut = findSectionBoundaries(
+      rows([
+        { text: '工作经历', gap: 1.5 },
+        { text: '蔚来汽车 合肥', gap: 1.3 },
+        { text: '负责智能诊断系统的设计与实现', gap: 1.5 },
+        { text: '将待检车辆积压量降低了百分之七十四' },
+        { text: '技能', gap: 1.5 },
+        { text: 'Python, TypeScript, SQL' },
+      ]),
+    );
+
+    expect(cut.map((b) => b.headingRow)).toEqual([0, 4]);
+  });
+});
+
 describe('a resume that names none of its sections in words we know', () => {
   function unusual(): VisualRow[] {
     return rows([
@@ -226,6 +302,26 @@ describe('a resume that names none of its sections in words we know', () => {
 
     expect(cut.map((b) => b.headingRow)).toEqual([undefined, 2, 6]);
     expect(cut[2]!.evidence).toContain('first row of a new page');
+  });
+
+  it('keeps only the largest family of rows set alike', () => {
+    // A cut here becomes structure with nothing to check it against, so the
+    // guess has to be a pattern: rows set three different ways are three
+    // different things, and at most one of them is the section headings.
+    const cut = findSectionBoundaries(
+      rows([
+        { text: 'Sean He', size: 16 },
+        { text: 'sean@example.com' },
+        { text: 'What I Have Built', size: 13, gap: 2 },
+        { text: 'ByteDance - Backend Intern' },
+        { text: 'A Pull Quote Set Bold', bold: true, gap: 2 },
+        { text: '- Reduced P99 latency from 800ms to 90ms' },
+        { text: 'What I Know', size: 13, gap: 2 },
+        { text: 'TypeScript, Python, Go' },
+      ]),
+    );
+
+    expect(cut.map((b) => b.headingRow)).toEqual([undefined, 2, 6]);
   });
 
   it('leaves the whole document in one range when nothing breaks it up', () => {
@@ -305,3 +401,60 @@ describe('what the cut says about itself', () => {
 function range(from: number, to: number): number[] {
   return Array.from({ length: to - from }, (_, i) => from + i);
 }
+
+describe('the rows a PDF actually produces', () => {
+  // Everything above builds rows by hand. These read them off a page, so that
+  // real sizes, real spacing and real page breaks have to agree with the
+  // assumptions the hand-built ones encode.
+  const FIXTURE = (name: string): string => `tests/fixtures/${name}`;
+
+  async function cutOf(name: string): Promise<{ headings: string[]; confidence: number[] }> {
+    const extracted = await new PdfExtractor().extract(FIXTURE(name));
+    const document = extracted.rows!;
+    const cut = findSectionBoundaries(document);
+
+    return {
+      headings: cut.map((b) => (b.headingRow === undefined ? '' : document[b.headingRow]!.text)),
+      confidence: cut.map((b) => b.confidence),
+    };
+  }
+
+  it('cuts a resume whose headings are the larger rows', async () => {
+    expect(await cutOf('single-column.pdf')).toEqual({
+      headings: ['', 'Experience', 'Skills'],
+      confidence: [0.6, 0.95, 0.95],
+    });
+  });
+
+  it('cuts a resume whose headings are body-sized capitals under larger entries', async () => {
+    // The inversion, off a real page: EDUCATION and EXPERIENCE are body size
+    // and every employer under them is a point larger.
+    expect(await cutOf('caps-headings.pdf')).toEqual({
+      headings: ['', 'EDUCATION', 'EXPERIENCE', 'LEADERSHIP', 'SKILLS'],
+      confidence: [0.6, 0.95, 0.95, 0.75, 0.95],
+    });
+  });
+
+  it('leaves an all-capitals job title inside its entry', async () => {
+    const extracted = await new PdfExtractor().extract(FIXTURE('caps-headings.pdf'));
+    const document = extracted.rows!;
+    const experience = findSectionBoundaries(document).find(
+      (b) => b.headingRow !== undefined && document[b.headingRow]!.text === 'EXPERIENCE',
+    )!;
+
+    const body = document.slice(experience.fromRow, experience.toRow).map((r) => r.text);
+    expect(body).toContain('SENIOR ENGINEER');
+    expect(body.filter((t) => t.startsWith('- '))).toHaveLength(2);
+  });
+
+  it('covers every row a page produced, exactly once', async () => {
+    const extracted = await new PdfExtractor().extract(FIXTURE('caps-headings.pdf'));
+    const document = extracted.rows!;
+    const seen = findSectionBoundaries(document).flatMap((b) => [
+      ...(b.headingRow !== undefined ? [b.headingRow] : []),
+      ...range(b.fromRow, b.toRow),
+    ]);
+
+    expect([...seen].sort((a, b) => a - b)).toEqual(range(0, document.length));
+  });
+});

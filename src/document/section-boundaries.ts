@@ -20,6 +20,13 @@
  *
  * Nothing here decides what a section is. A cut is made from how a row is set;
  * what it holds is only visible once its whole body is.
+ *
+ * Confidence does not soften the cut, because there is no softer cut to make:
+ * a document is split here or it is not, and a boundary held back would leave
+ * two sections silently merged. What `confidence` and `evidence` do is carry
+ * the doubt forward so a later stage can act on it — the integrity pass is
+ * where a cut this module was unsure of becomes something a reader can see.
+ * Until that exists, a low number is a number nothing reads.
  */
 import type { SectionBoundary, VisualRow } from './types.js';
 import { SECTION_PATTERNS, isBulletLine } from './vocabulary.js';
@@ -33,10 +40,19 @@ const ALL_CAPS_SHARE = 0.9;
  * the comparison is a band rather than an equality.
  */
 const RANK_BAND = 0.02;
-/** Air above a row, in body line spacings, before it reads as a break. */
-const ROOMY_ABOVE = 1.25;
-/** With no vocabulary to anchor on, only a short row can open a section. */
-const MAX_UNANCHORED_WORDS = 5;
+/**
+ * Least air above a row, in body line spacings, before it reads as a break.
+ *
+ * A floor, not the test. Measured, body rows sit between 0.80 and 1.13 line
+ * spacings apart and headings between 0.93 and 1.53 — the two ranges overlap,
+ * which is why the air a document gives its *own* headings is what a candidate
+ * is held to, and this only catches the rest.
+ */
+const ROOMY_ABOVE = 1.15;
+/** Headings the document gives less air than this are not a usable anchor. */
+const AIR_BAND = 0.85;
+/** A section heading is a label. Past this it is a sentence about the work. */
+const MAX_HEADING_WORDS = 5;
 
 const CONFIDENCE = {
   /** Its own words say what it is. */
@@ -131,14 +147,21 @@ function findHeadings(shapes: RowShape[]): Array<{ shape: RowShape; confidence: 
 
   if (named.length === 0) return unanchored(shapes);
 
-  const rank = {
+  const rank: Rank = {
     sizeRatio: median(named.map((s) => s.sizeRatio)),
     allCaps: majority(named.map((s) => s.allCaps)),
     bold: majority(named.map((s) => s.bold)),
+    airAbove: Math.max(median(named.map((s) => s.gapAbove)) * AIR_BAND, ROOMY_ABOVE),
   };
 
+  // Nothing to generalise from when the recognised headings are set exactly
+  // like the body around them. Every short row would then match, and on a
+  // resume whose script has no capitals to read — Chinese, Japanese — that is
+  // most of the document. The words that were recognised are all there is.
+  const distinguishable = rank.allCaps || rank.bold || rank.sizeRatio > 1 + RANK_BAND;
+
   return shapes
-    .filter((shape) => shape.named || matchesRank(shape, rank))
+    .filter((shape) => shape.named || (distinguishable && matchesRank(shape, rank)))
     .map((shape) =>
       shape.named
         ? { shape, confidence: CONFIDENCE.named, evidence: ['named in the heading vocabulary', ...setting(shape)] }
@@ -150,8 +173,16 @@ function findHeadings(shapes: RowShape[]): Array<{ shape: RowShape; confidence: 
     );
 }
 
+interface Rank {
+  sizeRatio: number;
+  allCaps: boolean;
+  bold: boolean;
+  airAbove: number;
+}
+
 /**
- * Set the way the recognised headings are set.
+ * Set the way the recognised headings are set, *and* set apart the way they
+ * are set apart.
  *
  * The size has to be *near* that rank, not merely at or above it. Whether an
  * entry heading is drawn larger or smaller than its section is a choice the
@@ -159,13 +190,18 @@ function findHeadings(shapes: RowShape[]): Array<{ shape: RowShape; confidence: 
  * while a LaTeX resume commonly sets section names at body size in capitals
  * and the employer above them a point larger. Accepting anything at or above
  * the rank turns every employer into a section and leaves EXPERIENCE empty.
+ *
+ * Type alone is not enough, which is the measured part. On a resume whose
+ * headings are body-sized capitals, an all-capitals job title inside a section
+ * is set identically to them — `SENIOR ENGINEER` under an employer took the
+ * employer's bullets away from it and filed them under a section of its own.
+ * What it does not have is the air: a heading opens a block and a job title
+ * sits inside one, and this document's own headings say how much air that is.
  */
-function matchesRank(
-  shape: RowShape,
-  rank: { sizeRatio: number; allCaps: boolean; bold: boolean },
-): boolean {
-  if (!shape.eligible) return false;
+function matchesRank(shape: RowShape, rank: Rank): boolean {
+  if (!shape.eligible || shape.words > MAX_HEADING_WORDS) return false;
   if (shape.allCaps !== rank.allCaps || shape.bold !== rank.bold) return false;
+  if (!shape.startsPage && shape.gapAbove < rank.airAbove) return false;
   return (
     shape.sizeRatio >= rank.sizeRatio * (1 - RANK_BAND) &&
     shape.sizeRatio <= rank.sizeRatio * (1 + RANK_BAND)
@@ -188,23 +224,49 @@ function matchesRank(
  * also what keeps the candidate's name out: it is the largest, shortest, most
  * emphasized row on the page, and every other test here would call it a
  * heading.
+ *
+ * What survives is the largest family of candidates set alike, not every
+ * candidate. A cut here becomes structure with nothing to check it against, so
+ * the guess has to be a pattern rather than a collection: rows set three
+ * different ways are three different things, and at most one of them is the
+ * document's section headings.
  */
 function unanchored(
   shapes: RowShape[],
 ): Array<{ shape: RowShape; confidence: number; evidence: string[] }> {
-  return shapes
-    .filter(
-      (shape) =>
-        shape.eligible &&
-        shape.words <= MAX_UNANCHORED_WORDS &&
-        (shape.gapAbove >= ROOMY_ABOVE || shape.startsPage) &&
-        (shape.bold || shape.allCaps || shape.sizeRatio > 1 + RANK_BAND),
-    )
-    .map((shape) => ({
-      shape,
-      confidence: CONFIDENCE.guessed,
-      evidence: ['no heading on this resume is named in the vocabulary', ...setting(shape)],
-    }));
+  const candidates = shapes.filter(
+    (shape) =>
+      shape.eligible &&
+      shape.words <= MAX_HEADING_WORDS &&
+      (shape.gapAbove >= ROOMY_ABOVE || shape.startsPage) &&
+      (shape.bold || shape.allCaps || shape.sizeRatio > 1 + RANK_BAND),
+  );
+
+  const family = largestFamily(candidates);
+
+  return family.map((shape) => ({
+    shape,
+    confidence: CONFIDENCE.guessed,
+    evidence: ['no heading on this resume is named in the vocabulary', ...setting(shape)],
+  }));
+}
+
+/** The biggest group of candidates set the same way; ties keep the topmost. */
+function largestFamily(candidates: RowShape[]): RowShape[] {
+  const families = new Map<string, RowShape[]>();
+
+  for (const shape of candidates) {
+    // Sizes are rounded into the same band the rank comparison uses, so two
+    // headings a fraction of a point apart stay one family.
+    const key = `${shape.allCaps}/${shape.bold}/${(shape.sizeRatio / RANK_BAND).toFixed(0)}`;
+    families.set(key, [...(families.get(key) ?? []), shape]);
+  }
+
+  let best: RowShape[] = [];
+  for (const family of families.values()) {
+    if (family.length > best.length) best = family;
+  }
+  return best;
 }
 
 /** What was measured, in the words a reader of the findings would want. */

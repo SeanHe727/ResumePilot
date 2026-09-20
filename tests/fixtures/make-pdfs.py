@@ -99,9 +99,32 @@ split += [(340, y, 10, t) for y, t in [
     (610, "Education"), (594, "Tongji University"), (578, "B.S. Computer Science")]]
 (here / "split-two-column.pdf").write_bytes(pdf(split))
 
+# The shape the real resume takes, and the one the other fixtures do not cover:
+# section headings set at body size in full capitals, with entry headings a
+# point *larger*. Ranked by size alone every employer here outranks EXPERIENCE.
+# LEADERSHIP is deliberately not in the heading vocabulary, and SENIOR ENGINEER
+# is an all-capitals job title inside a section — set like a heading, with only
+# body spacing above it.
+caps = [(72, 740, 17, "Sean He"),
+        (72, 726, 10, "+1 555 0100 | sean@example.com | github.com/sean"),
+        (72, 712, 10, "EDUCATION"),
+        (72, 697, 10.9, "University of Washington Seattle, WA"),
+        (72, 685, 10, "M.S. in Electrical and Computer Engineering  Sep 2025 - Jun 2027"),
+        (72, 667, 10, "EXPERIENCE"),
+        (72, 651, 10.9, "NIO Inc. Hefei, China"),
+        (72, 639, 10, "SENIOR ENGINEER"),
+        (72, 627, 10, "- Built an agent system that cut the backlog by 74%"),
+        (72, 615, 10, "- Designed a role-aware routing layer for four specialists"),
+        (72, 597, 10, "LEADERSHIP"),
+        (72, 581, 10.9, "Student Council President"),
+        (72, 569, 10, "- Ran the society for two years and doubled its membership"),
+        (72, 551, 10, "SKILLS"),
+        (72, 535, 10, "Programming: Python, TypeScript, SQL, Bash, Git")]
+(here / "caps-headings.pdf").write_bytes(pdf(caps))
+
 # A page with no text operators at all — what a scanned resume looks like.
 (here / "scanned.pdf").write_bytes(pdf([]))
 
 for f in ("single-column.pdf", "two-column.pdf", "banner-two-column.pdf",
-          "split-two-column.pdf", "late-date.pdf", "scanned.pdf"):
+          "split-two-column.pdf", "late-date.pdf", "caps-headings.pdf", "scanned.pdf"):
     print(f, (here / f).stat().st_size, "bytes")

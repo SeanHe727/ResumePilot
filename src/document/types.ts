@@ -104,7 +104,13 @@ export interface SectionBoundary {
   fromRow: number;
   /** Half-open: the first row of the next section, or the end of the document. */
   toRow: number;
-  /** How sure the cut is — the evidence, weighed. Low is recorded, not fixed. */
+  /**
+   * How sure the cut is.
+   *
+   * It does not soften the cut — there is no softer cut than splitting or not
+   * splitting. It is carried so a later stage can weigh a boundary that was
+   * guessed against one the document named.
+   */
   confidence: number;
   evidence: string[];
 }

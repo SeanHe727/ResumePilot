@@ -217,6 +217,7 @@ interface Classification {
 - 重复 ID(section / entry / bullet)
 - 失效的 `sectionId` / `entryId`
 - 无法映射回原文的 `span`
+- **低置信度的 SectionBoundary** —— B1 切分时的疑虑,到这里才第一次有读者
 
 **④ 结构异常(记录,不判错)**
 
@@ -271,6 +272,7 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 - `vitest` 全量 + `tsc --noEmit`
 - 真实 PDF 本地重解析,比对段数 / 条目数 / bullet 数 / `dateRange`
 - `two-column.pdf` / `banner-two-column.pdf` / `split-two-column.pdf` 必须被判为 `unsupported` 并拒绝解析
+- 每一步至少有一条测试走真实 PDF 链路,不能全是合成数据
 - 变异测试:逐条还原被删的守卫,确认对应测试转红
 
 **遗留的红测试** — `tests/document/parser.test.ts` 的 "still separates two entries listed one after the other" 目前是红的,原因是 fixture 字段名写成 `size` 而 `isEmphasized` 读 `fontSize`,恒为 undefined。改名后还需补 body 行:现有 6 个 block 的字号中位数正好落在 12,`12 > 12` 仍为假。
@@ -354,6 +356,7 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 | `src/document/vocabulary.ts` | 新增。`SECTION_PATTERNS` 与 `isBulletLine` / `stripBulletMarker` 从 `section-detector.ts` 抽出,B1 与 B4 共用。`section-detector.ts` 暂时 re-export 后两个,等组装器重建时随它一起搬走 |
 | `src/document/types.ts` | 新增 `SectionBoundary` |
 | `src/document/section-boundaries.ts` | 新增。`findSectionBoundaries(rows): SectionBoundary[]` |
+| `tests/fixtures/make-pdfs.py` | 新增 `caps-headings.pdf` |
 
 **没有接线。** 切分与分类分家要到 B3 重建组装器才落地,现在 `HeuristicSectionDetector` 一行没动,解析结果与 A1 完成时逐行相同。B1 是纯函数 + 测试,按计划"每步可独立测试"。
 
@@ -375,16 +378,26 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 | 路径 | 条件 | conf |
 |---|---|---|
 | named | 命中词表 | 0.95 |
-| ranked | 字号比在词表行的 ±2% 内,且全大写、粗体都一致 | 0.75 |
-| guessed | 整份文档没有一个词表命中 —— 短、被强调、上方有空 | 0.45 |
+| ranked | 排法与词表行一致(字号比 ±2%、全大写、粗体),**且上方留白不少于这份文档给自己标题的留白**,且 ≤5 词 | 0.75 |
+| guessed | 整份文档没有一个词表命中 —— 短、被强调、上方有空,**且与其他候选排法成家族** | 0.45 |
+
+**排法一致还不够,必须还有断点(实测)。** 在"段标题是正文字号的全大写"这种模板里,段内一个全大写的职位名与段标题排法完全相同。`caps-headings.pdf` 实测:`SENIOR ENGINEER` 把雇主那条和它的两条 bullet 拆开,自成一段。它缺的是留白 —— 标题开启一个块,职位名坐在块里面。
+
+**留白阈值也不能是常数。** 实测正文行距 0.80–1.13 倍、标题 0.93–1.53 倍,两个区间重叠;`LEADERSHIP` 的 1.20 低于我最初写死的 1.25。改成同样按文档自身锚定:阈值取"词表行留白中位数 × 0.85",并以 1.15 为下限兜底。
+
+**词表行排法与正文无异时,不做泛化。** 若被认出的标题既不大、不粗、也非全大写,就没有可泛化的东西 —— 短行全都会匹配。中日文简历没有大小写可读,这一条尤其要紧。此时只认词表。
+
+**guessed 路径要求候选成家族。** 这一层的切分会直接变成结构而没有东西能校对它,所以猜必须是规律而不是集合:排法三种不同的行是三种不同的东西,其中至多一种是段标题。只保留最大的同排法家族。
+
+**置信度不会让切分变软。** 文档要么在这里切开、要么不切,压住一个低置信度边界就等于静默地把两段合并。`confidence` / `evidence` 的作用是把疑虑带下去给后面的阶段 —— **B5 的 `ParseIntegrity` 要记录低置信度边界**,在那之前这个数字没有读者。这一点之前写成"低置信度不做自动处理",与实际行为不符,现已改正。
 
 **分页断点算"上方有空"。** `gapAbove` 在页首恒为 0,第二页顶部的段标题按行距量等于"上面什么都没有"。分页本身就是断点。文档第一行仍然不算 —— 它两样都没有,而这正是把候选人姓名挡在外面的那条规则(姓名是整页最大、最短、最被强调的行)。
 
 `headingRow` **不在** `[fromRow, toRow)` 里:区间是正文。一个 section 覆盖"标题行 ∪ 正文区间",而联系方式那一块是有正文、没标题的 section。
 
-变异验证九条,逐条转红:忽略大写/粗体一致性、字号只判下界、字号"大于等于即可"、去掉上方留白下限、页首当成有留白、允许 bullet 当标题、允许句末标点、标题长度上限放大、全大写阈值降到 0.05、分页不算留白。
+变异验证十五条,逐条转红:忽略大写/粗体一致性、字号只判下界、字号"大于等于即可"、去掉上方留白下限、页首当成有留白、允许 bullet 当标题、允许句末标点、标题长度上限放大、全大写阈值降到 0.05、分页不算留白、泛化时不要求断点、留白阈值改回常数、从正文排法泛化、guessed 不要求成家族、去掉 ≤5 词上限。
 
-测试:`tests/document/section-boundaries.test.ts`(新,18 条,合成行不依赖 pdf.js)。
+测试:`tests/document/section-boundaries.test.ts`(新,27 条)。前 23 条用合成行,最后 4 条走 **`PdfExtractor` → `rows` → `findSectionBoundaries` 的真实链路**,确保真实字号、间距、分页数据与合成行的假设一致。新增 fixture `caps-headings.pdf` —— 正文字号全大写段标题 + 更大的条目标题 + 段内全大写职位名 + 词表外的 `LEADERSHIP`,真实简历的形状,其余 fixture 都不覆盖。
 
 ## 下一步:B2 段内标注
 
