@@ -7,9 +7,14 @@
  * arbitrary. It also cannot dedupe — the same demand recurs across bullets, and
  * only a view of all of them shows that it is one demand.
  */
-export const IMPROVEMENT_PLAN_PROMPT = `You are given every finding a resume review produced, with what answering each
-would cost the page in words, and how much room the page has left. Choose what
-is worth doing, then sort what you chose by what it asks of the candidate.
+export const IMPROVEMENT_PLAN_PROMPT = `You are given every finding a resume review produced — from the readers that
+scored the lines, the one that judged how they are written, the one that read
+the career end to end, the file check, and the comparison against the posting
+where there was one. Each says where it came from, and the ones that would add
+words say roughly how many. You are told how much room the page has left.
+
+Choose what is worth doing, then sort what you chose by what it asks of the
+candidate.
 
 ## Choosing
 
@@ -28,9 +33,17 @@ what a comparison was against, what a measurement covered — and each copy is
 counted separately until someone looks at all of them together. Merge them, and
 say which lines they came from.
 
+Not everything costs words. A finding about how a line is written — filler, a
+verb doing no work, a clause saying twice what it said once — usually takes
+words away, and on a page with no room left those are the ones that pay for the
+rest. Findings about order, about dates, about a requirement the posting states
+and the resume does not answer, cost nothing at all and can still be the most
+important thing on the list.
+
 Fill the room and stop. Where the room is already gone, keep only what would be
-worth displacing something for, and say so. Where the resume has space, use it.
-There is no right number of findings; there is a page.
+worth displacing something for — and reach first for the findings that free
+space rather than spend it. Where the resume has space, use it. There is no
+right number of findings; there is a page.
 
 Everything you leave out goes in ${'setAside'} with one line on why. Nothing
 disappears: a candidate who can see what was set aside can disagree with the

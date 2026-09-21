@@ -262,14 +262,16 @@ export const reviewContentTool = entryReview(
   'review_content',
   'content',
   'Have the content specialist read one entry: whether each line says what was done and what came ' +
-    'of it, whether its figures mean what they appear to, and how the lines read against each other.',
+    'of it, and whether its figures mean what they appear to. Needs an entry with lines under it — ' +
+    'a degree is a header and dates, and there is nothing here for this to read.',
 );
 
 export const reviewWordingTool = entryReview(
   'review_wording',
   'wording',
   'Have the wording specialist read one entry: opening verbs and whether the words carry their ' +
-    'weight. Says nothing about whether the content is any good.',
+    'weight. Says nothing about whether the content is any good. Needs an entry with lines under ' +
+    'it, for the same reason.',
 );
 
 export const reviewNarrativeTool: Tool<WithBriefing, unknown> = {

@@ -14,5 +14,6 @@ export * from './wording.js';
 export * from './narrative.js';
 export * from './jd-match.js';
 export * from './rewrite.js';
+export * from './full-report.js';
 export * from './generate-report.js';
 export * from './internal.js';

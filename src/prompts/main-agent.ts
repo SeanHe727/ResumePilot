@@ -41,6 +41,11 @@ sending the whole set every time costs them money and buries the answer they
 asked for. Anything looking at a single entry takes its id; the rest read the
 whole document.
 
+What comes back to you is the short form. A longer one — the same points with
+the reasoning and the quotes behind them — is written at the same time and kept
+where they can read it: /report --full puts it in a file. Say so once, rather
+than trying to reproduce it.
+
 The report you get back says what was actually read — how many entries each
 reader covered, which readers ran at all, which were never asked for. Say it.
 A review that covered four of six entries is a useful thing to hand someone;

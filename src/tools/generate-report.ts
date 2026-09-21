@@ -15,6 +15,7 @@ import type {
 } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
+import { writeFullReport } from './write-report.js';
 
 /**
  * What the reviews left behind, gathered off the session.
@@ -91,11 +92,21 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
       improvementPlan,
     };
 
+    // Written after the choosing, in a call of its own. One model weighing
+    // forty findings against a page budget and then writing them all up gives
+    // the writing whatever attention the weighing left over.
+    const full = await writeFullReport(report, state, ctx);
+    if (full) report.full = full;
+
     // Left where `/report` and `/export` read it: the coordinator is not asked
     // to carry a whole report back through a tool result and put it somewhere.
     if (ctx.session) ctx.session.state = { ...state, latestReport: report };
 
-    return { success: true, data: report };
+    // The long form stays on the session. Handing it back would put it in the
+    // coordinator's window, which is not big enough to hold it and does not
+    // need to: it relays the short form and points at the rest.
+    const { full: _long, ...brief } = report;
+    return { success: true, data: brief };
   },
 };
 
@@ -195,20 +206,7 @@ async function buildImprovementPlan(
   input: GenerateReportInput,
   ctx: ToolContext,
 ): Promise<ImprovementPlan> {
-  // Every finding, priced and placed. It used to be the first eight, sliced in
-  // array order — which meant the first entry read filled the list and the rest
-  // never appeared, and nothing said so. Choosing among all of them is the
-  // whole reason this call exists.
-  const findings = [
-    ...input.format.issues.map((what) => `- [format] ${what}`),
-    ...input.entries.flatMap((entry) =>
-      entry.bullets.flatMap((bullet) =>
-        bullet.issues.map(
-          (issue) => `- [${bullet.bulletId}, ~${issue.costWords} words] ${issue.what}`,
-        ),
-      ),
-    ),
-  ];
+  const findings = everyFinding(input);
 
   if (findings.length === 0) {
     return { immediate: [], shortTerm: [], longTerm: [] };
@@ -333,4 +331,77 @@ function coverage(
     jdMatch: input.jdMatch ? 'done' : state.jd ? 'not-run' : 'no-posting',
     format: 'done',
   };
+}
+
+/**
+ * What every reader found, in one list.
+ *
+ * It was the format check and the content reader, and only the first eight of
+ * the latter, sliced in array order — so the first entry read filled the list
+ * and the rest never appeared. Worse, three readers were missing entirely: the
+ * wording reader raises something on almost every line, the career reading
+ * knows what the dates leave unexplained and what would land better moved, and
+ * the posting comparison knows which requirements are unmet. None of it ever
+ * reached the plan, while the plan was described as choosing among everything.
+ *
+ * Each line carries where it came from and what answering it costs, because the
+ * choice being made is per word: a four-word answer that settles a class of
+ * doubt beats a sentence that adds a detail, and nothing can weigh that without
+ * both halves.
+ */
+function everyFinding(input: GenerateReportInput): string[] {
+  const at = (target: string, cost: number | undefined, what: string): string =>
+    `- [${target}${cost === undefined ? '' : `, ~${cost} words`}] ${what}`;
+
+  return [
+    ...input.format.issues.map((what) => at('format', undefined, what)),
+
+    ...input.entries.flatMap((entry) =>
+      entry.bullets.flatMap((bullet) =>
+        bullet.issues.map((issue) => at(bullet.bulletId, issue.costWords, issue.what)),
+      ),
+    ),
+
+    // Wording findings carry no cost of their own: cutting filler or replacing
+    // a verb takes words away rather than adding them, which is why they often
+    // belong at the top of a page that has no room left.
+    ...(input.wording ?? []).flatMap((diagnosis) =>
+      diagnosis.perBullet.flatMap((bullet) =>
+        bullet.issues.map((what) => at(`${bullet.bulletId}, wording`, undefined, what)),
+      ),
+    ),
+
+    ...(input.narrative
+      ? [
+          ...input.narrative.gaps.map((what) => at('whole resume, dates', undefined, what)),
+          ...input.narrative.orderingNotes.map((what) =>
+            at('whole resume, order', undefined, what),
+          ),
+          ...(input.narrative.withinEntries ?? []).flatMap((entry) => [
+            ...entry.redundantPairs.map((pair) =>
+              at(entry.entryId, undefined, `${pair.bulletA} and ${pair.bulletB} repeat: ${pair.note}`),
+            ),
+            ...(entry.coherence.score < 70 && entry.coherence.detail
+              ? [at(entry.entryId, undefined, entry.coherence.detail)]
+              : []),
+            ...(entry.weakLead
+              ? [at(entry.entryId, undefined, 'the strongest line is not the opening one')]
+              : []),
+          ]),
+        ]
+      : []),
+
+    ...(input.jdMatch
+      ? [
+          ...input.jdMatch.missing.map((keyword) =>
+            at(
+              `posting${keyword.required ? ', required' : ''}`,
+              undefined,
+              `the posting asks for "${keyword.keyword}" and the resume does not evidence it`,
+            ),
+          ),
+          ...input.jdMatch.gaps.map((what) => at('posting', undefined, what)),
+        ]
+      : []),
+  ];
 }

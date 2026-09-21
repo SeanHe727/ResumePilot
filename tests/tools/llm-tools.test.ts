@@ -652,6 +652,83 @@ describe('generate_report: the improvement plan', () => {
     stopReason: 'end_turn',
   };
 
+  it('keeps the long form off the coordinator\'s window', async () => {
+    // The write-up runs to about twice the rest of the report and the
+    // coordinator has twelve thousand tokens. It is stored, not returned: the
+    // coordinator relays the short form and points at the file.
+    const written = {
+      ...JSON.parse(PLAN),
+      sections: [{ heading: 'x', points: [{ what: 'a finding', why: 'w', from: ['content'] }] }],
+    };
+    const { ctx } = scriptedCtx([answered, { ...answered, content: JSON.stringify(written) }]);
+
+    const result = await generateReportTool.execute({} as never, ctx);
+    const stored = (ctx as { session: { state: { latestReport?: { full?: unknown } } } }).session
+      .state.latestReport;
+
+    expect(result.data?.full, 'the long form came back through the tool result').toBeUndefined();
+    expect(stored?.full, 'the long form was not kept anywhere').toBeDefined();
+  });
+
+  it('puts every reader in front of the chooser, not two of them', async () => {
+    // The plan took the format check and the content reader, and only the
+    // first eight of the latter. Three readers never reached it at all: the
+    // wording reader raises something on almost every line, the career reading
+    // knows what the dates leave unexplained, and the posting comparison knows
+    // which requirements are unmet. The plan was described as choosing among
+    // everything the review found.
+    const { ctx, seen } = scriptedCtx([answered]);
+    const state = (ctx as { session: { state: Record<string, unknown> } }).session.state;
+    state.wordingDiagnoses = [
+      {
+        entryId: 's1:e0',
+        overallScore: 40,
+        perBullet: [
+          {
+            bulletId: 's1:e0:b0',
+            verbStrength: { score: 30, detail: '' },
+            concision: { score: 40, detail: '' },
+            issues: ['WORDING-ONLY: three hedges in one clause'],
+          },
+        ],
+      },
+    ];
+    state.narrative = {
+      overallScore: 60,
+      arc: '',
+      gaps: ['eight months between two roles, unexplained'],
+      orderingNotes: ['the newest entry is last'],
+      withinEntries: [
+        {
+          entryId: 's1:e0',
+          redundantPairs: [{ bulletA: 's1:e0:b0', bulletB: 's1:e0:b1', note: 'same result twice' }],
+          coherence: { score: 40, detail: 'reads as an unordered task list' },
+          weakLead: true,
+        },
+      ],
+    };
+    state.jdMatch = {
+      overallScore: 50,
+      covered: [],
+      missing: [{ keyword: 'Kubernetes', required: true, suggestedSection: 'experience' }],
+      gaps: ['the posting asks for eight years'],
+    };
+
+    await generateReportTool.execute({} as never, ctx);
+    const sent = seen[0]?.messages.map((m) => m.content).join('\n') ?? '';
+
+    // Distinct from anything the format fixture says, or this passes on a
+    // string the format check happened to produce.
+    expect(sent, 'wording').toContain('WORDING-ONLY: three hedges in one clause');
+    expect(sent, 'dates').toContain('eight months between two roles');
+    expect(sent, 'ordering').toContain('the newest entry is last');
+    expect(sent, 'redundancy').toContain('same result twice');
+    expect(sent, 'coherence').toContain('unordered task list');
+    expect(sent, 'weak lead').toContain('strongest line is not the opening one');
+    expect(sent, 'posting').toContain('Kubernetes');
+    expect(sent, 'posting gaps').toContain('eight years');
+  });
+
   it('says how much of the resume it actually read', async () => {
     // A report appeared once the format check and a single entry had been read,
     // and looked exactly like one where every reader covered everything.
@@ -796,7 +873,9 @@ describe('generate_report: the improvement plan', () => {
 
     const result = await generateReportTool.execute({} as never, ctx);
 
-    expect(calls()).toBe(2);
+    // Two for the plan — the truncated answer and its retry — then one more
+    // for the write-up, which is a separate call on purpose.
+    expect(calls()).toBe(3);
     expect(result.data?.improvementPlan.immediate).toEqual(['drop "Responsible for"']);
   });
 
@@ -807,7 +886,8 @@ describe('generate_report: the improvement plan', () => {
 
     const result = await generateReportTool.execute({} as never, ctx);
 
-    expect(calls()).toBe(1);
+    // One for the plan, no retry, then the write-up.
+    expect(calls()).toBe(2);
     expect(result.data?.improvementPlan.immediate).toHaveLength(1);
   });
 });

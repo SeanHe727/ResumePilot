@@ -556,6 +556,32 @@ describe('DefaultOrchestrator', () => {
     expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Entry Substance', 'Entry Wording']);
   });
 
+  it('takes the brackets off the ids the wording reader hands back', async () => {
+    // Lines are shown as `- [id] text`, so a model returns the id bracketed and
+    // every wording score lands on an id matching no bullet. This was fixed
+    // once — in the tool the coordinator no longer holds, while this path, the
+    // one that actually runs, kept the brackets.
+    const bracketed = JSON.stringify({
+      perBullet: [
+        {
+          bulletId: `[${entry.bullets[0]!.id}]`,
+          verbStrength: { score: 20, detail: '' },
+          concision: { score: 60, detail: '' },
+          issues: [],
+        },
+      ],
+    });
+    const { engine } = scriptedEngine(text(bracketed));
+    const { runtime } = runtimeWith(engine);
+
+    const verdict = await new DefaultOrchestrator(runtime, {}).diagnoseEntry(entry, {
+      roles: ['wording'] as const,
+      reasons: {},
+    });
+
+    expect(verdict.wording?.perBullet[0]?.bulletId).toBe(entry.bullets[0]!.id);
+  });
+
   it('does not dispatch an entry with no bullets', async () => {
     // A degree is a header with no bullets, and both per-entry roles score
     // bullets. Sending it buys two calls that can only come back empty.

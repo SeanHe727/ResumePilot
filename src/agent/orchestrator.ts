@@ -428,6 +428,11 @@ function readSubstance(
   return normalised.data ?? null;
 }
 
+/** Ids are shown bracketed, so they come back bracketed. */
+function bareId(raw: unknown): string {
+  return String(raw ?? '').replace(/[[\]]/g, '').trim();
+}
+
 function readWording(
   entry: ResumeEntry,
   results: SubAgentResult[],
@@ -442,7 +447,14 @@ function readWording(
     return null;
   }
 
-  const rows = perBullet as WordingDiagnosis['perBullet'];
+  // Lines are shown as `- [id] text`, so a model hands the id back bracketed.
+  // Left alone it matches no bullet in the document and every wording score is
+  // keyed to nothing. The sibling reader was fixed for this — in the tool that
+  // is no longer reachable, while this path, the one that runs, was not.
+  const rows = (perBullet as WordingDiagnosis['perBullet']).map((row) => ({
+    ...row,
+    bulletId: bareId(row.bulletId),
+  }));
   const scores = rows.flatMap((b) => [b.verbStrength?.score ?? 0, b.concision?.score ?? 0]);
 
   return {
