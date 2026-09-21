@@ -1,4 +1,6 @@
 import { resolveModel, type AppConfig, type ProviderName } from '../config.js';
+import { NoTrace, type Trace } from '../trace/index.js';
+import type { Message } from '../types.js';
 import { QueryCache } from './cache.js';
 import { ClaudeProvider } from './providers/claude.js';
 import { DeepSeekProvider, OpenAIProvider } from './providers/openai.js';
@@ -21,6 +23,17 @@ import { type Effort,
 
 export interface QueryEngineOptions {
   config: AppConfig;
+  /**
+   * Where a debug run records what was asked and what came back.
+   *
+   * Absent in production, and absent is the default: the no-op costs an empty
+   * method call. Attached here rather than at each caller because this is the
+   * one place every model call in the system passes through — the main agent,
+   * every specialist, Deep Research, the report writer. Instrumenting the
+   * callers instead would be eight places to keep in step and one of them
+   * always missed.
+   */
+  trace?: Trace;
   cachePath?: string;
   /** Requests that may burst before pacing kicks in. */
   rateCapacity?: number;
@@ -46,6 +59,7 @@ export class QueryEngine implements QueryEngineContract {
   private readonly tokenCounter: TokenCounter;
   private readonly retryConfig: RetryConfig;
   private readonly defaultCacheTtl: number;
+  private readonly trace: Trace;
 
   constructor(private readonly options: QueryEngineOptions) {
     const { config } = options;
@@ -59,6 +73,7 @@ export class QueryEngine implements QueryEngineContract {
     this.tokenCounter = new TokenCounter({ maxTotalCostUsd: config.maxCostUsd });
     this.retryConfig = options.retry ?? DEFAULT_RETRY_CONFIG;
     this.defaultCacheTtl = options.defaultCacheTtlSeconds ?? 3_600;
+    this.trace = options.trace ?? new NoTrace();
   }
 
   async query(params: QueryParams): Promise<ParsedResponse> {
@@ -91,6 +106,18 @@ export class QueryEngine implements QueryEngineContract {
       ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
     };
 
+    const started = Date.now();
+    const asked = {
+      task: params.task,
+      model: route.model,
+      provider: route.provider,
+      systemPrompt: streamParams.systemPrompt,
+      messages: forTrace(streamParams.messages),
+      tools: streamParams.tools?.map((tool) => tool.name),
+      effort,
+      jsonMode: streamParams.jsonMode === true,
+    };
+
     const cacheKey = params.useCache === false ? null : this.cache.generateKey(streamParams);
     if (cacheKey) {
       const hit = this.cache.get(cacheKey);
@@ -98,22 +125,69 @@ export class QueryEngine implements QueryEngineContract {
         // Replay in one go so a cached answer renders like a fresh one, and
         // charge nothing — no request was made.
         if (hit.content) params.onTextDelta?.(hit.content);
+        // Recorded all the same. A run that answered from cache and one that
+        // asked look identical in a conversation and are different runs, and a
+        // reader asking why two identical questions cost different amounts has
+        // nowhere else to find out.
+        this.trace.event({
+          phase: 'result',
+          model: route.model,
+          provider: route.provider,
+          input: asked,
+          output: answerFor(hit),
+          success: true,
+          cached: true,
+          durationMs: Date.now() - started,
+          usage: hit.usage,
+        });
         return hit;
       }
     }
 
     const provider = this.providerFor(route.provider, spec.responsesApi === true);
 
-    const response = await withRetry(
-      async () => {
-        // Inside the retry body: every attempt is a real request and must be
-        // paced like one, or a retry storm walks straight past the limiter.
-        await this.limiter.acquire(params.abortSignal);
-        return parseStream(provider.stream(streamParams), params.onTextDelta);
-      },
-      this.retryConfig,
-      params.onRetry ? { onAttempt: params.onRetry } : {},
-    );
+    let attempts = 0;
+    let response;
+    try {
+      response = await withRetry(
+        async () => {
+          // Inside the retry body: every attempt is a real request and must be
+          // paced like one, or a retry storm walks straight past the limiter.
+          attempts += 1;
+          await this.limiter.acquire(params.abortSignal);
+          return parseStream(provider.stream(streamParams), params.onTextDelta);
+        },
+        this.retryConfig,
+        params.onRetry ? { onAttempt: params.onRetry } : {},
+      );
+    } catch (err) {
+      // A failure is the more interesting half. What was asked is on the
+      // record even when nothing came back, which is the case a reader is
+      // most often trying to explain.
+      this.trace.event({
+        phase: 'failure',
+        model: route.model,
+        provider: route.provider,
+        input: asked,
+        success: false,
+        error: err instanceof Error ? err.message : String(err),
+        durationMs: Date.now() - started,
+        attempts,
+      });
+      throw err;
+    }
+
+    this.trace.event({
+      phase: 'result',
+      model: route.model,
+      provider: route.provider,
+      input: asked,
+      output: answerFor(response),
+      success: true,
+      durationMs: Date.now() - started,
+      usage: response.usage,
+      ...(attempts > 1 ? { attempts } : {}),
+    });
 
     this.tokenCounter.record(response.usage, route.model);
 
@@ -214,4 +288,23 @@ function requireKey(key: string | undefined, envName: string): string {
     );
   }
   return key;
+}
+
+/**
+ * The messages as they were sent, minus the model's own working.
+ *
+ * Reasoning is carried between turns because some models refuse to continue an
+ * exchange without it, and it is the one thing a trace deliberately does not
+ * keep: it is the longest field by far, it is not what the model answered, and
+ * a record of what an agent *said* is what a reviewer can hold it to. Dropped
+ * here, where the type that carries it is still in view.
+ */
+function forTrace(messages: readonly Message[]): Array<Omit<Message, 'reasoning'>> {
+  return messages.map(({ reasoning: _reasoning, ...rest }) => rest);
+}
+
+/** What came back, on the same terms. */
+function answerFor(response: ParsedResponse): Omit<ParsedResponse, 'reasoning'> {
+  const { reasoning: _reasoning, ...rest } = response;
+  return rest;
 }

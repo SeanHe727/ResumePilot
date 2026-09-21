@@ -32,9 +32,18 @@ import type { Session } from './session/types.js';
 import { grantPath } from './session/granted-paths.js';
 import { createToolRegistry } from './tools/index.js';
 import { TavilyProvider } from './tools/search-provider.js';
+import { randomUUID } from 'node:crypto';
+import { JsonlTraceWriter, NoTrace, RecordingTrace, type Trace } from './trace/index.js';
 
 export interface AppOptions {
   config: AppConfig;
+  /**
+   * Turns the trace on for this run and says where it goes.
+   *
+   * Also settable as `RESUMEPILOT_TRACE_DIR`, which is how it is meant to be
+   * used: a debug run, not a configuration anyone maintains.
+   */
+  traceDir?: string;
   /** False in a non-interactive run: confirmations refuse rather than block on stdin. */
   interactive?: boolean;
   print?: (text: string) => void;
@@ -60,6 +69,16 @@ export class App {
   readonly checkpoints: SqliteCheckpointManager;
   readonly triggers: MemoryTriggers;
   readonly hooks: DefaultHookPipeline;
+  /**
+   * Where a debug run wrote what every agent was asked and answered.
+   *
+   * Undefined unless `RESUMEPILOT_TRACE_DIR` is set, which is how this stays a
+   * development instrument: wired in permanently, switched off by default, and
+   * costing an empty method call when off.
+   */
+  readonly tracePath: string | undefined;
+  /** The no-op unless this run is being traced. */
+  readonly trace: Trace;
   private readonly loopDeps: LoopDeps;
   private readonly retriever: DefaultMemoryRetriever;
   private readonly closers: Array<() => void> = [];
@@ -69,7 +88,22 @@ export class App {
     const dir = config.dataDir;
     mkdirSync(dir, { recursive: true });
 
-    this.queryEngine = new QueryEngine({ config, cachePath: join(dir, 'cache.db') });
+    const traceDir = options.traceDir ?? process.env.RESUMEPILOT_TRACE_DIR;
+    let trace: Trace = new NoTrace();
+    if (traceDir) {
+      const traceId = randomUUID();
+      const writer = new JsonlTraceWriter({ dir: traceDir, traceId });
+      // One session id is not known yet — the session is created per run —
+      // so the root carries the trace's own id until a turn opens a span.
+      trace = new RecordingTrace(writer.write, { traceId, sessionId: traceId, turn: 0 });
+      this.tracePath = writer.path;
+      this.trace = trace;
+    } else {
+      this.tracePath = undefined;
+      this.trace = trace;
+    }
+
+    this.queryEngine = new QueryEngine({ config, cachePath: join(dir, 'cache.db'), trace });
 
     const knowledgeStore = new SqliteKnowledgeStore(join(dir, 'knowledge.db'));
     this.knowledge = new DualChannelSearch(
