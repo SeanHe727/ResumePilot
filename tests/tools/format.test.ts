@@ -28,6 +28,17 @@ const mentions = (d: FormatDiagnosis, phrase: string): boolean =>
   d.issues.some((i) => i.toLowerCase().includes(phrase.toLowerCase()));
 
 describe('text signals', () => {
+  it('finds the contact details wherever they were filed', async () => {
+    // Read from the whole document rather than from the section named
+    // `contact`. An address is an address and a run of eight digits is a phone
+    // number, whatever the heading above them turned out to be — and a check
+    // that a classification can switch off reports what the classifier thinks
+    // rather than what the resume says.
+    const d = await diagnose('bulleted-contact.pdf');
+
+    expect(mentions(d, 'no email or phone')).toBe(false);
+  });
+
   it.each([
     ['Responsible for the order query service', 'responsible for'],
     ['Worked on backend systems', 'worked on'],

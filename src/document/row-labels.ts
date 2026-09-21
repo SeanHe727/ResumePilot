@@ -37,7 +37,7 @@ import type {
   SectionBoundary,
   VisualRow,
 } from './types.js';
-import { DATE_RANGE, isBulletLine } from './vocabulary.js';
+import { DATE_RANGE, EMAIL, PHONE, isBulletLine } from './vocabulary.js';
 
 /** Font sizes within this of the body size are the body size. */
 const SIZE_BAND = 0.02;
@@ -58,8 +58,9 @@ const INDENT_STEP = 0.5;
  * The trailing slash on the bare-domain form is what keeps it from matching a
  * filename or a version: a link a resume prints has a path after the host.
  */
-const CONTACT =
-  /@|\+?\d[\d\s()-]{7,}|https?:\/\/|[a-z0-9-]+\.(?:com|org|net|io|dev|ai|co)\//i;
+const LINK = /https?:\/\/|[a-z0-9-]+\.(?:com|org|net|io|dev|ai|co)\//i;
+const hasContactDetail = (text: string): boolean =>
+  EMAIL.test(text) || PHONE.test(text) || LINK.test(text);
 
 /**
  * Air above a row, in body line spacings, before it reads as a break.
@@ -528,7 +529,7 @@ function measure(
     gapAbove: above && above.page === row.page ? (above.y - row.y) / spacing : 0,
     startsWithBullet: isBulletLine(row.text),
     hasDateRange: date !== null,
-    hasContact: CONTACT.test(row.text),
+    hasContact: hasContactDetail(row.text),
     endsSentence: TERMINAL.test(row.text.trim()),
     listSeparators: (row.text.match(LIST_SEPARATOR) ?? []).length,
     // What is left once the date range and the punctuation around it are gone.

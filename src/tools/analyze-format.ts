@@ -1,4 +1,4 @@
-import { DATE_RANGE } from '../document/vocabulary.js';
+import { DATE_RANGE, EMAIL, PHONE } from '../document/vocabulary.js';
 import type { Bullet, FormatDiagnosis, ResumeDocument, ScoredDimension } from '../domain.js';
 import {
   bystanderOpener,
@@ -306,12 +306,28 @@ function collectSkillsIssues(resume: ResumeDocument, issues: string[]): void {
   }
 }
 
+/**
+ * Whether a reader could reach the candidate at all.
+ *
+ * Read from the whole document rather than from the section named `contact`.
+ * Neither shape occurs on a resume for any other reason — an `@` is an address
+ * and a run of eight digits is a phone number — so there is nothing to gain by
+ * looking in one place, and something to lose: a contact block filed under any
+ * other name would have this reporting an email that is plainly there as
+ * missing. A check that can be switched off by a classification is a check
+ * that reports what the classifier thinks rather than what the resume says.
+ */
 function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
-  const contact = resume.sections.find((s) => s.kind === 'contact');
-  const text = (contact?.infoLines ?? contact?.looseLines ?? []).join(' ');
+  const text = resume.sections
+    .flatMap((s) => [
+      ...(s.infoLines ?? s.looseLines),
+      ...(s.bullets ?? []).map((b) => b.text),
+      ...s.entries.flatMap((e) => [...e.headerLines, ...(e.infoLines ?? [])]),
+    ])
+    .join(' ');
 
-  const hasEmail = /[\w.+-]+@[\w-]+\.[\w.]+/.test(text);
-  const hasPhone = /\+?\d[\d\s()-]{7,}/.test(text);
+  const hasEmail = EMAIL.test(text);
+  const hasPhone = PHONE.test(text);
 
   if (!hasEmail || !hasPhone) {
     const missing = [!hasEmail && 'email', !hasPhone && 'phone'].filter(Boolean).join(' and ');

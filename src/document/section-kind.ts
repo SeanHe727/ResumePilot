@@ -36,7 +36,7 @@
  * with three dated bulleted entries is experience.
  */
 import type { ResumeSection, SectionClassification, SectionKind } from '../domain.js';
-import { DATE_RANGE, SECTION_PATTERNS } from './vocabulary.js';
+import { DATE_RANGE, EMAIL, PHONE, SECTION_PATTERNS } from './vocabulary.js';
 
 const HEADING = 3;
 const SHAPE = 2;
@@ -54,7 +54,7 @@ const EMPLOYER =
 const ROLE =
   /\b(?:engineer|developer|intern|manager|analyst|scientist|designer|consultant|lead|architect|researcher|director)\b|工程师|实习生|经理|分析师/i;
 const REPOSITORY = /(?:github|gitlab|bitbucket)\.com|\/(?:code|repo|repos|project)\//i;
-const CONTACT_DETAIL = /@|\+?\d[\d\s()-]{7,}|(?:linkedin|twitter|x)\.com/i;
+const PROFILE = /(?:linkedin|twitter)\.com/i;
 
 /** One signal: what was seen, which kind it speaks for, and what it is worth. */
 interface Signal {
@@ -179,7 +179,8 @@ function contentSignals(section: ResumeSection): Signal[] {
   if (REPOSITORY.test(everything)) {
     signals.push({ kind: 'project', weight: CONTENT, saw: 'links to somewhere code is kept' });
   }
-  if (section.entries.length === 0 && CONTACT_DETAIL.test(everything)) {
+  const reachable = EMAIL.test(everything) || PHONE.test(everything) || PROFILE.test(everything);
+  if (section.entries.length === 0 && reachable) {
     signals.push({ kind: 'contact', weight: CONTENT, saw: 'carries an address or a phone number' });
   }
   return signals;

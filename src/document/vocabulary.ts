@@ -45,6 +45,23 @@ export const SECTION_PATTERNS: ReadonlyArray<{ kind: SectionKind; pattern: RegEx
   },
 ];
 
+/**
+ * An email address, and a phone number.
+ *
+ * Worth recognising by shape alone, because neither shape occurs on a resume
+ * for any other reason: an `@` appears in an address and nowhere else, and a
+ * run of eight digits is a phone number and not a figure anybody quotes.
+ *
+ * The digit count is the part that had to be measured. Counting *characters*
+ * from a class of digits, spaces, parens and hyphens — which is what this did
+ * — reads `COCO-2017 (100K images)` as a phone number, and `2025.06 - 2025.09`
+ * as another. Counting digits, and allowing at most two characters between
+ * them, leaves both alone and still reads every way a number is printed:
+ * `+1 (555) 010-2468`, `+86 138 0000 0000`, `555-010-2468`.
+ */
+export const EMAIL = /[\w.+-]+@[\w-]+\.[\w.]+/;
+export const PHONE = /\+?\d(?:[\s()-]{0,2}\d){7,}/;
+
 export function isBulletLine(text: string): boolean {
   return /^\s*([-*+•‧◦·▪▫●○–—]|\d{1,2}[.)])\s+/.test(text);
 }

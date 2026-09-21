@@ -21,6 +21,7 @@ import type {
   TextRun,
   VisualRow,
 } from '../types.js';
+import { EMAIL, PHONE } from '../vocabulary.js';
 
 /** Baselines closer together than this belong to the same visual line. */
 const LINE_TOLERANCE_PT = 2.5;
@@ -472,7 +473,7 @@ export function analyseLayout(pages: PageLayout[]): string[] {
     detectMarginContent(
       page.styled.map((s) => s.line),
       page.geometry,
-    ).some((l) => /@|\+?\d[\d\s()-]{7,}|https?:\/\//.test(l.text)),
+    ).some((l) => EMAIL.test(l.text) || PHONE.test(l.text) || /https?:\/\//.test(l.text)),
   );
   if (inMargin.length > 0) {
     const where = multiPage ? ` (page ${inMargin.map((page) => page.number).join(', ')})` : '';

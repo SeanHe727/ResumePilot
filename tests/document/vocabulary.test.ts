@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { DATE_RANGE, isBulletLine, stripBulletMarker } from '../../src/document/vocabulary.js';
+import {
+  DATE_RANGE,
+  EMAIL,
+  PHONE,
+  isBulletLine,
+  stripBulletMarker,
+} from '../../src/document/vocabulary.js';
 
 /**
  * What a bullet and a date look like, in words rather than in layout.
@@ -54,5 +60,33 @@ describe('recognising a date range', () => {
   it.each(['Metro City, USA', 'TypeScript, Python, Go', 'Aug 20XX - Present'])(
     'reads no range in %s',
     (text) => expect(DATE_RANGE.test(text)).toBe(false),
+  );
+});
+
+describe('recognising a way to reach someone', () => {
+  it.each(['+1 (555) 010-2468', '+86 138 0000 0000', '(563) 772 9355', '555-010-2468', '13800000000'])(
+    'reads %s as a phone number',
+    (text) => expect(PHONE.test(text)).toBe(true),
+  );
+
+  it.each([
+    // Counting characters from a class of digits, spaces, parens and hyphens
+    // — which is what this did — reads both of these as phone numbers.
+    'on COCO-2017 (100K images) through target-layer distillation',
+    '2025.06 - 2025.09',
+    'Reduced peak VRAM by 68% (8,400 to 2,700 MB)',
+    'M.S. in Engineering Sep 2021 - Jun 2025',
+    'a 100-turn stress test',
+    'Kendall rank correlation of 0.89',
+  ])('reads no phone number in %s', (text) => expect(PHONE.test(text)).toBe(false));
+
+  it.each(['jordan.lee@example.com', 'chenh727@uw.edu', 'a.b+tag@sub.domain.co.uk'])(
+    'reads %s as an address',
+    (text) => expect(EMAIL.test(text)).toBe(true),
+  );
+
+  it.each(['Amazon x UW', 'TypeScript, Python, Go', '8.5pp mean absolute deviation'])(
+    'reads no address in %s',
+    (text) => expect(EMAIL.test(text)).toBe(false),
   );
 });
