@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 
 import { App } from '../../src/app.js';
 import { loadConfig } from '../../src/config.js';
+import { SqliteSessionManager } from '../../src/session/index.js';
 import { NoTrace } from '../../src/trace/index.js';
 import type { Trace } from '../../src/trace/index.js';
 
@@ -60,6 +61,21 @@ describe('attaching the trace to a run', () => {
       if (previous === undefined) delete process.env.RESUMEPILOT_TRACE_DIR;
       else process.env.RESUMEPILOT_TRACE_DIR = previous;
     }
+  });
+
+  it('gives the specialists the same trace as the engine', () => {
+    // A run where the model calls are recorded and the agents making them are
+    // not is a file full of prompts nobody can attribute.
+    const dir = mkdtempSync(join(tmpdir(), 'trace-wiring-'));
+    const a = app(dir);
+    const session = new SqliteSessionManager().create({ sourcePath: 'resume.md' });
+
+    const orchestrator = (
+      a as unknown as { orchestratorFor: (s: unknown) => { runtime: { trace: Trace } } }
+    ).orchestratorFor(session);
+
+    expect(orchestrator.runtime.trace).toBe(a.trace);
+    a.close();
   });
 
   it('opens the run directory when the trace is on, before anything is asked', () => {

@@ -10,11 +10,14 @@ const DIR_MODE = 0o700;
 /**
  * Past this, a run stops recording rather than filling the disk.
  *
- * A stuck agent can loop, and a trace of a loop is both useless and unbounded.
- * Stopping is reported in the file, so a short trace is never mistaken for a
- * short run.
+ * Not a budget for the trace — a debug run can have as much disk as it wants,
+ * and truncating the long conversation is truncating the only one worth
+ * reading. It is there for the stuck agent that loops: a full disk is a
+ * problem for the whole machine, not just for this run. Set high enough that
+ * nothing a person would sit through can reach it, and stopping is reported in
+ * the file, so a short trace is never mistaken for a short run.
  */
-const DEFAULT_MAX_BYTES = 64 * 1024 * 1024;
+const DEFAULT_MAX_BYTES = 2 * 1024 * 1024 * 1024;
 
 /** Traces older than this are removed when a new run starts. */
 const DEFAULT_KEEP_DAYS = 7;

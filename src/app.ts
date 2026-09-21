@@ -285,6 +285,7 @@ export class App {
         knowledge: this.knowledge,
         ...(this.search ? { search: this.search } : {}),
         session,
+        trace: this.trace,
       }),
     );
   }

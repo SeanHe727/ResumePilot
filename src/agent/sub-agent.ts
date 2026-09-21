@@ -6,6 +6,7 @@ import type { Session } from '../session/types.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
 import { readJson } from '../tools/verify.js';
 import type { ToolRegistry } from '../tools/types.js';
+import { NoTrace, type Trace, type TraceActor } from '../trace/index.js';
 import type { SubAgentConfig, SubAgentResult, SubAgentTask } from './types.js';
 
 export interface SubAgentDeps {
@@ -22,6 +23,15 @@ export interface SubAgentDeps {
    * and getting "not configured" back in a millisecond.
    */
   search?: SearchProvider;
+  /**
+   * Where a debug run records what this agent was given and what it did.
+   *
+   * The no-op in production. Attached here because everything a specialist
+   * does that is not a model call — the tools it reaches for, what came back,
+   * the structured result the orchestrator actually reads — happens inside
+   * this class and nowhere else.
+   */
+  trace?: Trace;
 }
 
 /**
@@ -80,9 +90,74 @@ export const SUB_AGENT_CONTEXT = {
  * invocations.
  */
 export class SubAgentRuntime {
-  constructor(private readonly deps: SubAgentDeps) {}
+  private readonly trace: Trace;
 
+  constructor(private readonly deps: SubAgentDeps) {
+    this.trace = deps.trace ?? new NoTrace();
+  }
+
+  /**
+   * One span per agent, so everything the agent does lands under its name.
+   *
+   * The model calls inside are already recorded at the query engine, and that
+   * is precisely the problem this solves: the engine sees every prompt in the
+   * system and cannot say whose it is. Opened here, they arrive attributed —
+   * and Deep Research, which runs through this same class from inside a
+   * specialist's tool call, arrives nested under the specialist that asked.
+   */
   async run(task: SubAgentTask): Promise<SubAgentResult> {
+    return this.trace.span({ actor: this.actorFor(task.agentConfig.id) }, async () => {
+      // What this agent was sent, rather than what it was told: the briefing
+      // text is in the first model call's prompt already, recorded whole. What
+      // is not anywhere else is which role was chosen, what it was allowed to
+      // reach for, and how long it had.
+      this.trace.event(() => ({
+        phase: 'dispatch',
+        purpose: task.agentConfig.name,
+        input: {
+          role: task.agentConfig.id,
+          tools: task.agentConfig.tools,
+          optionalTools: task.agentConfig.optionalTools ?? [],
+          contextKeys: Object.keys(task.context ?? {}),
+          allowedContextKeys: task.agentConfig.contextBoundary,
+          maxTurns: task.agentConfig.maxTurns,
+          timeoutMs: task.agentConfig.timeoutMs,
+        },
+      }));
+
+      const result = await this.execute(task);
+
+      // The structured result, whole. This is the thing the orchestrator reads
+      // and the report is built from; the model's raw answer above it is not
+      // the same object once parsing and validation have had their say.
+      this.trace.event(() => ({
+        phase: result.success ? 'result' : 'failure',
+        status: result.success ? 'success' : 'error',
+        output: result,
+        usage: result.usage,
+        durationMs: result.durationMs,
+        ...(result.error ? { error: { message: result.error } } : {}),
+      }));
+
+      return result;
+    });
+  }
+
+  /**
+   * Specialist, unless this one was started from inside another agent.
+   *
+   * Deep Research is the same class running under a specialist's tool call, so
+   * the level is a fact about the caller rather than about the role.
+   */
+  private actorFor(id: string): TraceActor {
+    const enclosing = this.trace.current()?.actor.kind;
+    return {
+      kind: enclosing === 'specialist' || enclosing === 'nested' ? 'nested' : 'specialist',
+      id,
+    };
+  }
+
+  private async execute(task: SubAgentTask): Promise<SubAgentResult> {
     const { agentConfig: config } = task;
     const started = Date.now();
     const usage = { inputTokens: 0, outputTokens: 0 };
@@ -263,12 +338,56 @@ export class SubAgentRuntime {
     };
   }
 
+  /**
+   * A tool call, on the record with both halves whole.
+   *
+   * The hook pipeline records the main loop's tool calls and keeps 200
+   * characters of each; this is the inner layer, which it does not see at all
+   * — deliberately, since a sub-agent is already inside a call the gate
+   * approved. So this is the only place the arguments a specialist chose and
+   * the result it read exist in full.
+   *
+   * Its own span, so that a tool which starts another agent — Deep Research
+   * arrives this way — shows which call started it rather than leaving a
+   * reader to infer it from what sits next to what.
+   */
   private async callTool(
     call: { id: string; name: string; input: Record<string, unknown> },
     abortSignal: AbortSignal,
   ): Promise<string> {
+    return this.trace.span({}, async () => {
+      const started = Date.now();
+      this.trace.event(() => ({
+        phase: 'tool',
+        tool: call.name,
+        purpose: call.id,
+        input: call.input,
+      }));
+
+      const answer = await this.runTool(call, abortSignal);
+
+      this.trace.event(() => ({
+        phase: answer.ok ? 'result' : 'failure',
+        tool: call.name,
+        purpose: call.id,
+        output: answer.text,
+        status: answer.ok ? 'success' : 'error',
+        durationMs: Date.now() - started,
+      }));
+
+      return answer.text;
+    });
+  }
+
+  private async runTool(
+    call: { id: string; name: string; input: Record<string, unknown> },
+    abortSignal: AbortSignal,
+  ): Promise<{ text: string; ok: boolean }> {
     if (!this.deps.toolRegistry.has(call.name)) {
-      return JSON.stringify({ success: false, error: `no tool called ${call.name}` });
+      return {
+        text: JSON.stringify({ success: false, error: `no tool called ${call.name}` }),
+        ok: false,
+      };
     }
 
     try {
@@ -283,14 +402,17 @@ export class SubAgentRuntime {
         subAgents: this,
         abortSignal,
       });
-      return JSON.stringify(result);
+      return { text: JSON.stringify(result), ok: result.success !== false };
     } catch (err) {
       // Handed back as a tool result rather than thrown: the agent can read the
       // failure and try a different question, which is the whole point of the loop.
-      return JSON.stringify({
-        success: false,
-        error: err instanceof Error ? err.message : String(err),
-      });
+      return {
+        text: JSON.stringify({
+          success: false,
+          error: err instanceof Error ? err.message : String(err),
+        }),
+        ok: false,
+      };
     }
   }
 }
