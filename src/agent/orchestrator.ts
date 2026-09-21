@@ -9,6 +9,7 @@ import type {
   WordingDiagnosis,
 } from '../domain.js';
 import { renderResume } from '../document/index.js';
+import { withoutContactDetails } from '../document/vocabulary.js';
 import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
 import { buildWordingMessage } from '../tools/analyze-wording.js';
 import { SemaphorePool } from './pool.js';
@@ -290,37 +291,6 @@ export class DefaultOrchestrator {
   }
 }
 
-/** Whole entries, in document order, wrapped as untrusted data. */
-/**
- * The document as the model sees it, section headings included.
- *
- * The headings are the point. Flattened to a bare list of entries — which is
- * what this did — the one role whose whole job is document-level structure was
- * the only role that could not see any, and both models spent an ordering note
- * asking for a Projects section the resume already had.
- *
- * `contact` is skipped. It is the one section that carries a phone number and
- * an email, and no career arc is decided by either.
- */
-function renderSections(resume: ResumeDocument): string {
-  const body = resume.sections
-    .filter((section) => section.kind !== 'contact' && section.entries.length > 0)
-    .map((section) => {
-      const entries = section.entries
-        .map((entry) => {
-          const header = entry.headerLines.join(' | ');
-          const bullets = entry.bullets.map((b) => `  - ${b.text}`).join('\n');
-          return `${header}\n${bullets}`;
-        })
-        .join('\n\n');
-
-      return `# ${section.heading.trim() || section.kind.toUpperCase()}\n\n${entries}`;
-    })
-    .join('\n\n');
-
-  return `<resume_content>\n${body}\n</resume_content>`;
-}
-
 function asObject(output: unknown): Record<string, unknown> | null {
   return output && typeof output === 'object' ? (output as Record<string, unknown>) : null;
 }
@@ -384,7 +354,7 @@ function taskFor(role: PerEntryRole, entry: ResumeEntry, briefing?: Briefing): S
   return {
     agentConfig: ROLES[role]!,
     input: MESSAGE_FOR[role](entry),
-    context: { entry: entry.headerLines.join(' | '), ...briefingContext(briefing) },
+    context: { entry: withoutContactDetails(entry.headerLines.join(' | ')), ...briefingContext(briefing) },
   };
 }
 

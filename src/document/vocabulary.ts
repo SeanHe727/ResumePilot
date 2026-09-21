@@ -62,6 +62,25 @@ export const SECTION_PATTERNS: ReadonlyArray<{ kind: SectionKind; pattern: RegEx
 export const EMAIL = /[\w.+-]+@[\w-]+\.[\w.]+/;
 export const PHONE = /\+?\d(?:[\s()-]{0,2}\d){7,}/;
 
+/**
+ * The same two, with every match replaced by what it was.
+ *
+ * Applied where a resume becomes a prompt, and applied to all of it rather
+ * than to the block a classifier called `contact`. Filing is a judgement and
+ * this is not something to be wrong about once: an address written under a
+ * heading that says `Profile` is still an address, and a section named
+ * anything at all would have carried it out of the machine.
+ *
+ * Replaced rather than deleted, because a reader asked why a line is weak
+ * should be able to tell that something stood there. What it was is not
+ * needed to say anything useful about a resume.
+ */
+export function withoutContactDetails(text: string): string {
+  return text
+    .replace(new RegExp(EMAIL.source, 'g'), '[email]')
+    .replace(new RegExp(PHONE.source, 'g'), '[phone]');
+}
+
 export function isBulletLine(text: string): boolean {
   return /^\s*([-*+•‧◦·▪▫●○–—]|\d{1,2}[.)])\s+/.test(text);
 }

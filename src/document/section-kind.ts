@@ -76,12 +76,16 @@ export function classifySection(section: ResumeSection): {
     ...contentSignals(section),
   ];
 
-  const { kind, confidence, runnerUp } = tally(signals, named?.kind);
+  const { kind, margin, runnerUp } = tally(signals, named?.kind);
 
   return {
     kind,
     classification: {
-      confidence,
+      // Never below zero, so that it reads as a distance. Which way a zero
+      // came about is what `margin` and `decisionSource` are for.
+      confidence: Math.max(0, margin),
+      margin,
+      decisionSource: named ? 'heading' : 'evidence',
       evidence: signals.filter((s) => s.kind === kind).map((s) => s.saw),
       ...(runnerUp ? { runnerUp } : {}),
       // A block with no heading of its own is not a heading nobody knows.
@@ -191,7 +195,7 @@ function contentSignals(section: ResumeSection): Signal[] {
  *
  * A heading the vocabulary knows takes it regardless of the totals; what the
  * totals then say is how much the rest of the section agreed. A shape that
- * wanted something else leaves the confidence at zero and its choice in the
+ * wanted something else leaves a negative margin and its choice in the
  * runner-up, which is the whole disagreement, recorded rather than resolved.
  *
  * With nothing to weigh at all the answer is `other` — a heading with no
@@ -202,7 +206,7 @@ function tally(
   named: SectionKind | undefined,
 ): {
   kind: SectionKind;
-  confidence: number;
+  margin: number;
   runnerUp?: { kind: SectionKind; score: number };
 } {
   const scores = new Map<SectionKind, number>();
@@ -216,15 +220,15 @@ function tally(
   // is arbitrary and harmless: neither gates anything a reader would notice.
   const ranked = [...scores.entries()].sort(([, a], [, b]) => b - a);
   const chosen = named !== undefined ? ranked.find(([kind]) => kind === named) : ranked[0];
-  if (!chosen) return { kind: named ?? 'other', confidence: 0 };
+  if (!chosen) return { kind: named ?? 'other', margin: 0 };
 
   const next = ranked.find(([kind]) => kind !== chosen[0]);
 
   return {
     kind: chosen[0],
-    // Never below zero: a heading that overruled the shape did not finish
-    // ahead of it, and saying by how much it lost would read as a margin.
-    confidence: Math.max(0, chosen[1] - (next?.[1] ?? 0)),
+    // Signed. Below zero means a heading was followed over evidence that
+    // pointed elsewhere, which is a different thing from a dead heat.
+    margin: chosen[1] - (next?.[1] ?? 0),
     ...(next ? { runnerUp: { kind: next[0], score: next[1] } } : {}),
   };
 }

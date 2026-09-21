@@ -169,6 +169,29 @@ describe('what the classification says about itself', () => {
     expect(classification.headingUnknown).toBe(true);
   });
 
+  it('tells a dead heat apart from a heading that overruled the evidence', () => {
+    // A zero confidence used to mean either. One is a coin toss between two
+    // kinds that fit equally; the other is a decision taken against what the
+    // section looks like, and a reader asked to check the doubtful ones needs
+    // to know which they are looking at.
+    const tied = classifySection(
+      section({ heading: 'Highlights', entries: [entry(['Something Built'], ['Shipped it'])] }),
+    ).classification;
+
+    expect(tied.confidence).toBe(0);
+    expect(tied.margin).toBe(0);
+    expect(tied.decisionSource).toBe('evidence');
+
+    const overruled = classifySection(
+      section({ heading: 'EXPERIENCE', infoLines: ['Languages: TypeScript, Python, Go'] }),
+    ).classification;
+
+    expect(overruled.confidence).toBe(0);
+    expect(overruled.margin).toBeLessThan(0);
+    expect(overruled.decisionSource).toBe('heading');
+    expect(overruled.runnerUp).toEqual({ kind: 'skills', score: 4 });
+  });
+
   it('reports the margin over the runner-up, not a score out of anything', () => {
     const { classification } = classifySection(
       section({

@@ -1,3 +1,4 @@
+import { sectionText } from '../document/render.js';
 import { DATE_RANGE, EMAIL, PHONE } from '../document/vocabulary.js';
 import type { Bullet, FormatDiagnosis, ResumeDocument, ScoredDimension } from '../domain.js';
 import {
@@ -318,13 +319,7 @@ function collectSkillsIssues(resume: ResumeDocument, issues: string[]): void {
  * that reports what the classifier thinks rather than what the resume says.
  */
 function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
-  const text = resume.sections
-    .flatMap((s) => [
-      ...(s.infoLines ?? s.looseLines),
-      ...(s.bullets ?? []).map((b) => b.text),
-      ...s.entries.flatMap((e) => [...e.headerLines, ...(e.infoLines ?? [])]),
-    ])
-    .join(' ');
+  const text = resume.sections.flatMap(sectionText).join(' ');
 
   const hasEmail = EMAIL.test(text);
   const hasPhone = PHONE.test(text);
@@ -341,15 +336,7 @@ function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
  * can appear in a section this analysis does not otherwise model.
  */
 function collectConventionIssues(resume: ResumeDocument, issues: string[]): void {
-  const lines = resume.sections.flatMap((s) => [
-    ...(s.infoLines ?? s.looseLines),
-    ...(s.bullets ?? []).map((b) => b.text),
-    ...s.entries.flatMap((e) => [
-      ...e.headerLines,
-      ...(e.infoLines ?? []),
-      ...e.bullets.map((b) => b.text),
-    ]),
-  ]);
+  const lines = resume.sections.flatMap(sectionText);
 
   for (const line of lines) {
     if (mentionsReferences(line)) issues.push(describe('harvard.no-references', line));

@@ -62,6 +62,22 @@ describe('parse_resume', () => {
     expect(JSON.stringify(result.data)).not.toContain('Responsible for');
   });
 
+  it('keeps an address out of the headers it does hand back', async () => {
+    // The summary is a tool result, which reaches the model like any prompt.
+    // The headers go in it, and a header is somewhere an address ends up when
+    // a contact block was cut in with the entries above it.
+    const { ctx: c } = ctx();
+
+    const result = await parseResumeTool.execute(
+      { path: 'tests/fixtures/bulleted-contact.pdf' },
+      c,
+    );
+
+    const summary = JSON.stringify(result.data);
+    expect(summary).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.]+/);
+    expect(summary).not.toMatch(/\+?\d(?:[\s()-]{0,2}\d){7,}/);
+  });
+
   it('drops what was found about the document it replaced', async () => {
     // Findings about lines that are no longer there would otherwise reach a
     // report as findings about the lines that are.

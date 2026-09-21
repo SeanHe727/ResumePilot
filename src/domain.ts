@@ -108,8 +108,20 @@ export interface ResumeEntry {
  * would be guessing twice.
  */
 export interface SectionClassification {
-  /** How far ahead the winner finished. Zero means two kinds fit equally. */
+  /** How far ahead the winner finished. Never below zero. */
   confidence: number;
+  /**
+   * The same distance, signed — and the reason there are two of these.
+   *
+   * A zero `confidence` used to mean either of two different things: that two
+   * kinds fitted equally well, or that a heading was followed over evidence
+   * that pointed somewhere else. The first is a coin toss and the second is a
+   * decision, and a reader asked to look at the doubtful ones needs to know
+   * which. Negative here means the evidence wanted the runner-up.
+   */
+  margin: number;
+  /** Which of the two settled it: the word at the top, or the rest. */
+  decisionSource: 'heading' | 'evidence';
   evidence: string[];
   runnerUp?: { kind: SectionKind; score: number };
   /**

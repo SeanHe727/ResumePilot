@@ -2,6 +2,7 @@ import { DEEP_RESEARCH_AGENT } from '../agent/roles.js';
 import { renderEntry } from '../document/index.js';
 import type { ResumeSessionState } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
+import { withoutContactDetails } from '../document/vocabulary.js';
 
 interface ExamineDepthInput {
   entryId: string;
@@ -77,7 +78,7 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
     const result = await ctx.subAgents.run({
       agentConfig: DEEP_RESEARCH_AGENT,
       input: `The question:\n${question}\n\nThe entry:\n<resume_content>\n${renderEntry(entry)}\n</resume_content>`,
-      context: { entry: entry.headerLines.join(' | ') },
+      context: { entry: withoutContactDetails(entry.headerLines.join(' | ')) },
     });
 
     if (!result.success) {

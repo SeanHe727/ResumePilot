@@ -1,4 +1,5 @@
 import type { ResumeDocument, ResumeEntry, ResumeSection } from '../domain.js';
+import { withoutContactDetails } from './vocabulary.js';
 
 /**
  * How a parsed resume reaches a model — one shape, everywhere.
@@ -11,6 +12,12 @@ import type { ResumeDocument, ResumeEntry, ResumeSection } from '../domain.js';
  * Ids are part of the document rather than part of any one prompt. They are
  * stable across re-parses, they are how a review says which line it means, and
  * an agent that never gets them cannot say "these two repeat each other".
+ *
+ * It is also the boundary where a phone number and an email stop. Dropping the
+ * section a classifier called `contact` was the whole guard before, and a
+ * guard that a classification can switch off is not one: an address under a
+ * heading that says `Profile` is filed as a summary and reads out with
+ * everything else. Nothing downstream judges either, so neither leaves.
  */
 
 /**
@@ -24,6 +31,10 @@ import type { ResumeDocument, ResumeEntry, ResumeSection } from '../domain.js';
  * to do arithmetic on strings.
  */
 export function renderEntry(entry: ResumeEntry): string {
+  return withoutContactDetails(entryBody(entry));
+}
+
+function entryBody(entry: ResumeEntry): string {
   const bullets = entry.bullets.map((bullet) => `  - [${bullet.id}] ${bullet.text}`).join('\n');
   // What the entry says about itself, between what it is called and what it
   // claims. A repository link, a line of technologies, a sentence describing
@@ -65,7 +76,7 @@ export function renderResume(resume: ResumeDocument): string {
       // this function kept them — meant the reader comparing a resume against
       // a posting could not see the skills list it was matching against.
       const body = [
-        ...section.entries.map(renderEntry),
+        ...section.entries.map(entryBody),
         ...(lines(section).length > 0 ? [lines(section).join('\n')] : []),
         ...(section.bullets ?? []).map((bullet) => `- ${bullet.text}`),
       ].join('\n\n');
@@ -73,7 +84,28 @@ export function renderResume(resume: ResumeDocument): string {
     })
     .join('\n\n');
 
-  return `<resume_content>\n${body}\n</resume_content>`;
+  return `<resume_content>\n${withoutContactDetails(body)}\n</resume_content>`;
+}
+
+/**
+ * Every word a section holds, at whatever depth it holds it.
+ *
+ * One place that knows the shape of a section, so a check asking whether a
+ * resume contains something cannot miss a field. The contact check reached
+ * headers and prose and section bullets and not an entry's bullets, which is
+ * the kind of gap that opens whenever a new field is added and the walks are
+ * written out by hand in four places.
+ */
+export function sectionText(section: ResumeSection): string[] {
+  return [
+    ...(section.infoLines ?? section.looseLines),
+    ...(section.bullets ?? []).map((bullet) => bullet.text),
+    ...section.entries.flatMap((entry) => [
+      ...entry.headerLines,
+      ...(entry.infoLines ?? []),
+      ...entry.bullets.map((bullet) => bullet.text),
+    ]),
+  ];
 }
 
 /**

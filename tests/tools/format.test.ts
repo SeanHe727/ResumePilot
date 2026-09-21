@@ -28,6 +28,47 @@ const mentions = (d: FormatDiagnosis, phrase: string): boolean =>
   d.issues.some((i) => i.toLowerCase().includes(phrase.toLowerCase()));
 
 describe('text signals', () => {
+  it('finds contact details that only a bullet carries', async () => {
+    // The walk reached headers, prose and a section's own bullets, and not an
+    // entry's — the gap that opens whenever a field is added and four places
+    // each write out the shape of a section by hand.
+    const doc = await new DefaultResumeParser().parse('tests/fixtures/resume_example.pdf');
+    const buried: ResumeDocument = {
+      ...doc,
+      sections: [
+        {
+          id: 's0',
+          kind: 'experience',
+          heading: 'Experience',
+          looseLines: [],
+          infoLines: [],
+          entries: [
+            {
+              id: 's0:e0',
+              sectionId: 's0',
+              index: 0,
+              headerLines: ['Mobility Systems Company'],
+              infoLines: [],
+              bullets: [
+                {
+                  id: 's0:e0:b0',
+                  entryId: 's0:e0',
+                  index: 0,
+                  text: 'Reachable at jordan.lee@example.com or +1 (555) 010-2468',
+                  span: { start: 0, end: 1 },
+                },
+              ],
+              span: { start: 0, end: 1 },
+            },
+          ],
+          span: { start: 0, end: 1 },
+        },
+      ],
+    };
+
+    expect(mentions(analyzeFormat(buried), 'no email or phone')).toBe(false);
+  });
+
   it('finds the contact details wherever they were filed', async () => {
     // Read from the whole document rather than from the section named
     // `contact`. An address is an address and a run of eight digits is a phone

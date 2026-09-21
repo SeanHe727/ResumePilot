@@ -2,6 +2,7 @@ import { DefaultResumeParser, UnsupportedLayoutError } from '../document/index.j
 import type { ResumeParser } from '../document/types.js';
 import type { ResumeSessionState } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
+import { withoutContactDetails } from '../document/vocabulary.js';
 
 interface ParseResumeInput {
   path: string;
@@ -105,7 +106,9 @@ export const parseResumeTool: Tool<ParseResumeInput, unknown> = {
           kind: section.kind,
           entries: section.entries.map((entry) => ({
             id: entry.id,
-            header: entry.headerLines.join(' | '),
+            // The summary goes back to the model as a tool result, which is
+            // a prompt like any other.
+            header: withoutContactDetails(entry.headerLines.join(' | ')),
             bullets: entry.bullets.length,
           })),
         })),

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { DefaultResumeParser } from '../../src/document/index.js';
 import { renderEntry, renderResume } from '../../src/document/render.js';
+import type { ResumeDocument } from '../../src/domain.js';
 
 /** Parsing is all rules and geometry — no model is asked anything. */
 const parse = (fixture: string) => new DefaultResumeParser().parse(`tests/fixtures/${fixture}`);
@@ -122,5 +123,71 @@ describe('what an entry says about itself', () => {
 
   it('still says so when the entry really is empty', () => {
     expect(renderEntry(entry([], []))).toContain('no bullets');
+  });
+});
+
+describe('what stops at the boundary', () => {
+  /** A contact block filed as a summary, which is where a wrong cut puts it. */
+  function misfiled(): ResumeDocument {
+    return {
+      sourcePath: 'cv.pdf',
+      format: 'pdf',
+      rawText: '',
+      sections: [
+        {
+          id: 's0',
+          kind: 'summary',
+          heading: 'Profile',
+          entries: [],
+          looseLines: [],
+          infoLines: ['Jordan Lee', 'jordan.lee@example.com | +1 (555) 010-2468'],
+          span: { start: 0, end: 1 },
+        },
+      ],
+      meta: { wordCount: 8, quality: 'clean', layoutWarnings: [] },
+    };
+  }
+
+  it('keeps an address and a phone number out, whatever section they were filed in', () => {
+    // Dropping the section a classifier called `contact` was the whole guard,
+    // and a guard a classification can switch off is not one.
+    const rendered = renderResume(misfiled());
+
+    expect(rendered).not.toContain('jordan.lee@example.com');
+    expect(rendered).not.toContain('010-2468');
+    expect(rendered).toContain('[email]');
+    expect(rendered).toContain('[phone]');
+  });
+
+  it('keeps everything else in the section it was filed under', () => {
+    const rendered = renderResume(misfiled());
+
+    expect(rendered).toContain('Profile');
+    expect(rendered).toContain('Jordan Lee');
+  });
+
+  it('keeps them out of a single entry too, which is rendered on its own', async () => {
+    const entry = {
+      id: 's0:e0',
+      sectionId: 's0',
+      index: 0,
+      headerLines: ['Mobility Systems | jordan.lee@example.com'],
+      infoLines: ['Reachable on +1 (555) 010-2468'],
+      bullets: [
+        {
+          id: 's0:e0:b0',
+          entryId: 's0:e0',
+          index: 0,
+          text: 'Built an inspection system; questions to jordan.lee@example.com',
+          span: { start: 0, end: 1 },
+        },
+      ],
+      span: { start: 0, end: 1 },
+    };
+
+    const rendered = renderEntry(entry);
+    expect(rendered).not.toContain('jordan.lee@example.com');
+    expect(rendered).not.toContain('010-2468');
+    expect(rendered).toContain('Built an inspection system');
   });
 });
