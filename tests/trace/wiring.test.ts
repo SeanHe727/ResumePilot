@@ -78,6 +78,19 @@ describe('attaching the trace to a run', () => {
     a.close();
   });
 
+  it('gives the conversational loop the same trace', () => {
+    // The turn span lives there, and it is what stamps the session and the
+    // turn on everything below. A loop without it records prompts nobody can
+    // place in a conversation.
+    const dir = mkdtempSync(join(tmpdir(), 'trace-wiring-'));
+    const a = app(dir);
+
+    const deps = (a as unknown as { loopDeps: { trace?: Trace } }).loopDeps;
+
+    expect(deps.trace).toBe(a.trace);
+    a.close();
+  });
+
   it('opens the run directory when the trace is on, before anything is asked', () => {
     const dir = mkdtempSync(join(tmpdir(), 'trace-wiring-'));
     const a = app(dir);

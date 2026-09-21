@@ -134,6 +134,8 @@ export interface TraceEvent {
   model?: string;
   provider?: string;
   tool?: string;
+  /** The model's own id for a tool call, pairing a request with its result. */
+  toolCallId?: string;
   /** Whole and untruncated — a trace that cannot reconstruct answers nothing. */
   input?: unknown;
   output?: unknown;

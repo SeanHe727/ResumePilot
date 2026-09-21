@@ -11,6 +11,7 @@ import type { SearchProvider } from '../tools/search-provider.js';
 import type { ToolRegistry, ToolResult } from '../tools/types.js';
 import type { HookContext, HookPipeline } from '../hooks/types.js';
 import { TOOL_START_TIME } from '../hooks/index.js';
+import { NoTrace, type Trace } from '../trace/index.js';
 import type { ToolCall } from '../types.js';
 import type { Orchestrator } from './types.js';
 
@@ -42,6 +43,15 @@ export interface LoopDeps {
   checkpoints?: CheckpointManager;
   /** Where output goes. Injected so a test can read it and a CLI can colour it. */
   print: (text: string) => void;
+  /**
+   * Where a debug run records the turn.
+   *
+   * The outermost span in the system: it is what gives everything below —
+   * every model call, every specialist, every nested researcher — a session
+   * and a turn number to be read by. Without it a long conversation is one
+   * undifferentiated stream of prompts.
+   */
+  trace?: Trace;
 }
 
 /**
@@ -119,6 +129,33 @@ export async function handleInput(
  * array, so the window stays inside its budget however long the exchange runs.
  */
 async function runMainAgent(input: string, session: Session, deps: LoopDeps): Promise<void> {
+  const trace = deps.trace ?? new NoTrace();
+
+  // The turn is the outermost span, and the only place a session id and a turn
+  // number exist at all: the query engine knows neither, and a specialist knows
+  // only what it was sent. Everything below inherits both from here.
+  return trace.span(
+    {
+      actor: { kind: 'main', id: 'main-agent' },
+      sessionId: session.id,
+      turn: exchangesSoFar(session) + 1,
+    },
+    async () => {
+      // What the user actually typed. It reaches the model inside the window
+      // below, but only if there is a window: this is the one record that
+      // survives a turn that fell over while being assembled.
+      trace.event(() => ({ phase: 'input', input: { message: input } }));
+      await runTurn(input, session, deps, trace);
+    },
+  );
+}
+
+async function runTurn(
+  input: string,
+  session: Session,
+  deps: LoopDeps,
+  trace: Trace,
+): Promise<void> {
   const context = session.contextManager;
   // Counted from the phase already recorded rather than from a field of its
   // own, so it survives a restart the same way the rest of the session does.
@@ -150,7 +187,7 @@ async function runMainAgent(input: string, session: Session, deps: LoopDeps): Pr
       // Serially, not in parallel: a tool call the model issued alongside
       // another may depend on it, and it has no way to say so.
       for (const call of response.toolCalls) {
-        const result = await runTool(call, session, deps);
+        const result = await runTool(call, session, deps, trace);
         context.addToolResult(call.id, JSON.stringify(result));
       }
 
@@ -245,24 +282,93 @@ function setResumeContext(context: ContextManager, session: Session): void {
  * call this gate approved, and re-running permission, audit and memory writes
  * per inner call would multiply all three.
  */
-async function runTool(call: ToolCall, session: Session, deps: LoopDeps): Promise<ToolResult> {
-  const ctx: HookContext = {
-    toolCall: call,
-    session,
-    metadata: new Map<string, unknown>([[TOOL_START_TIME, Date.now()]]),
-  };
+async function runTool(
+  call: ToolCall,
+  session: Session,
+  deps: LoopDeps,
+  trace: Trace,
+): Promise<ToolResult> {
+  // Its own span, so a tool that dispatches specialists — which is how every
+  // diagnosis starts — shows which call started them.
+  return trace.span({}, async () => {
+    const started = Date.now();
+    // Copied, because a pre-tool hook rewrites the arguments in place: without
+    // this the record of what the model asked for changes under it and reads
+    // as though the model had asked for what the hook decided. Only when
+    // something is listening — it is a copy per tool call otherwise.
+    const issued = trace.enabled ? { ...call.input } : call.input;
 
-  const pre = await deps.hooks.runPre(ctx);
-  if (pre.action === 'block') {
-    return { success: false, error: { code: 'permission_denied', message: pre.reason } };
-  }
+    // As the model issued it. The audit hook keeps 200 characters of this and
+    // says so in its own comment: the right amount for recognising a call
+    // later, and not enough to see what the model actually asked for.
+    trace.event(() => ({
+      phase: 'tool',
+      tool: call.name,
+      toolCallId: call.id,
+      input: issued,
+    }));
 
-  // Read back off the context, because a pre-tool hook may have rewritten the
-  // name or the arguments and the tool that runs must be the one they approved.
-  ctx.result = await invoke(ctx.toolCall, session, deps);
+    const ctx: HookContext = {
+      toolCall: call,
+      session,
+      metadata: new Map<string, unknown>([[TOOL_START_TIME, Date.now()]]),
+    };
 
-  const post = await deps.hooks.runPost(ctx);
-  return post.action === 'modify_result' ? post.result : ctx.result;
+    const pre = await deps.hooks.runPre(ctx);
+    if (pre.action === 'block') {
+      // A refusal is a decision about the run, not an absence. Without it the
+      // file shows a model that asked for something and a turn that carried on
+      // as though it never had.
+      trace.event(() => ({
+        phase: 'failure',
+        tool: call.name,
+        toolCallId: call.id,
+        purpose: 'blocked before it ran',
+        status: 'error',
+        error: { message: pre.reason },
+        durationMs: Date.now() - started,
+      }));
+      return { success: false, error: { code: 'permission_denied', message: pre.reason } };
+    }
+
+    // A pre-tool hook may rewrite the name or the arguments, and what runs is
+    // what they approved rather than what the model asked for. Recorded only
+    // when the two differ, because "nothing changed" is the ordinary case and
+    // a second copy of every call would say it loudly.
+    if (trace.enabled && JSON.stringify(issued) !== JSON.stringify(ctx.toolCall.input)) {
+      trace.event(() => ({
+        phase: 'decision',
+        tool: ctx.toolCall.name,
+        toolCallId: call.id,
+        purpose: 'rewritten by a hook before it ran',
+        input: ctx.toolCall.input,
+      }));
+    }
+
+    // Read back off the context, because a pre-tool hook may have rewritten the
+    // name or the arguments and the tool that runs must be the one they approved.
+    ctx.result = await invoke(ctx.toolCall, session, deps);
+
+    const post = await deps.hooks.runPost(ctx);
+    const result = post.action === 'modify_result' ? post.result : ctx.result;
+
+    // Whole. This is the other half of the exchange the model then reasons
+    // from, and a result cut at 200 characters cannot be checked against what
+    // the model did with it.
+    trace.event(() => ({
+      phase: result.success ? 'result' : 'failure',
+      tool: ctx.toolCall.name,
+      toolCallId: call.id,
+      ...(post.action === 'modify_result'
+        ? { purpose: 'rewritten by a hook after it ran' }
+        : {}),
+      output: result,
+      status: result.success ? 'success' : 'error',
+      durationMs: Date.now() - started,
+    }));
+
+    return result;
+  });
 }
 
 async function invoke(call: ToolCall, session: Session, deps: LoopDeps): Promise<ToolResult> {

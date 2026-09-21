@@ -93,8 +93,10 @@ export class App {
     if (traceDir) {
       const traceId = randomUUID();
       const writer = new JsonlTraceWriter({ dir: traceDir, traceId });
-      // One session id is not known yet — the session is created per run —
-      // so the root carries the trace's own id until a turn opens a span.
+      // The session id and the turn are not known here — a session is created
+      // per run and a turn only exists once the user says something — so the
+      // root carries the trace's own id until the main loop opens a turn span
+      // with the real ones. Everything below inherits them from there.
       trace = new RecordingTrace(writer.write, { traceId, sessionId: traceId, turn: 0 });
       this.tracePath = writer.path;
       this.trace = trace;
@@ -187,6 +189,7 @@ export class App {
       sessions: this.sessions,
       checkpoints,
       print: options.print ?? ((text) => process.stdout.write(`${text}\n`)),
+      trace,
     };
 
     // Recall is injected at session start, which is what fills the Context's

@@ -373,7 +373,7 @@ export class SubAgentRuntime {
       this.trace.event(() => ({
         phase: 'tool',
         tool: call.name,
-        purpose: call.id,
+        toolCallId: call.id,
         input: call.input,
       }));
 
@@ -382,7 +382,7 @@ export class SubAgentRuntime {
       this.trace.event(() => ({
         phase: answer.ok ? 'result' : 'failure',
         tool: call.name,
-        purpose: call.id,
+        toolCallId: call.id,
         output: answer.text,
         status: answer.ok ? 'success' : 'error',
         durationMs: Date.now() - started,

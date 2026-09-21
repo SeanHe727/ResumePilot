@@ -70,8 +70,16 @@ export class RecordingTrace implements Trace {
     const started = Date.now();
     this.record(parent, () => ({
       phase: 'span',
+      // The span's own identity, not the one it opened inside. The opening
+      // record is what a reader searches to find a turn, and filled in from
+      // the parent it would carry the session and turn this span was created
+      // to replace.
       eventId: span.eventId,
+      traceId: span.traceId,
+      sessionId: span.sessionId,
+      turn: span.turn,
       actor: span.actor,
+      ...(span.target !== undefined ? { target: span.target } : {}),
       ...(parent?.eventId !== undefined ? { parentEventId: parent.eventId } : {}),
     }));
 
