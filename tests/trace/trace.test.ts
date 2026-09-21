@@ -179,6 +179,23 @@ describe('when the recording itself fails', () => {
     ).not.toThrow();
     expect(trace.dropped).toBe(1);
   });
+
+  it('survives having nowhere to report the loss either', () => {
+    // A closed stderr, a pipe nobody is reading. There is then nothing left to
+    // say, and a run must not fail over a diagnostic about a diagnostic.
+    const trace = new RecordingTrace(
+      () => {
+        throw new Error('ENOSPC');
+      },
+      root,
+      () => {
+        throw new Error('EPIPE');
+      },
+    );
+
+    expect(() => trace.event(() => ({ phase: 'input' }))).not.toThrow();
+    expect(trace.dropped).toBe(1);
+  });
 });
 
 describe('the trace that is switched off', () => {
@@ -211,10 +228,12 @@ describe('storing a second copy of a résumé', () => {
   function run(dir: string, name: string, opts: { aged?: boolean; file?: boolean } = {}): string {
     const path = join(dir, name);
     mkdirSync(path, { recursive: true });
-    if (opts.file !== false) writeFileSync(join(path, 'trace.jsonl'), '{}\n');
+    const file = join(path, 'trace.jsonl');
+    if (opts.file !== false) writeFileSync(file, '{}\n');
     if (opts.aged) {
       const ancient = new Date(Date.now() - 40 * 24 * 60 * 60 * 1000);
       utimesSync(path, ancient, ancient);
+      if (opts.file !== false) utimesSync(file, ancient, ancient);
     }
     return path;
   }
@@ -314,6 +333,19 @@ describe('storing a second copy of a résumé', () => {
 
     expect(existsSync(notARun)).toBe(true);
     expect(existsSync(namedLikeARunButEmpty)).toBe(true);
+  });
+
+  it('goes by when the trace was last written, not when its folder was made', () => {
+    // Appending to a file does not touch the mtime of the directory holding
+    // it, so a run going for longer than the window looks untouched from the
+    // outside — and the next run to start would clear it mid-write.
+    const dir = temp();
+    const active = run(dir, '0f9c1a77-5555-4aaa-8bbb-0123456789ab', { aged: true });
+    writeFileSync(join(active, 'trace.jsonl'), '{"still":"going"}\n');
+
+    new JsonlTraceWriter({ dir, traceId: 'run-1', keepDays: 7 });
+
+    expect(existsSync(active)).toBe(true);
   });
 
   it('leaves this run alone even when its directory is older than the window', () => {

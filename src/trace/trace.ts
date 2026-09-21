@@ -139,8 +139,15 @@ export class RecordingTrace implements Trace {
     } catch (err) {
       this.lost += 1;
       if (this.lost === 1) {
-        const why = err instanceof Error ? err.message : String(err);
-        this.warn(`trace: recording failed (${why}); this trace is incomplete\n`);
+        try {
+          const why = err instanceof Error ? err.message : String(err);
+          this.warn(`trace: recording failed (${why}); this trace is incomplete\n`);
+        } catch {
+          // The channel for reporting a lost event lost it too — a closed
+          // stderr, a pipe nobody is reading. Counted, and that is the end of
+          // it: there is nowhere left to say so, and saying nothing is still
+          // better than failing the run over a diagnostic.
+        }
       }
     }
   }

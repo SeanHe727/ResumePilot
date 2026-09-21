@@ -164,10 +164,18 @@ function sweep(dir: string, keepDays: number, keep: string): void {
     if (!RUN_ID.test(name.name)) continue;
     const path = join(dir, name.name);
     try {
-      if (!existsSync(join(path, TRACE_FILE))) continue;
-      if (statSync(path).mtimeMs < cutoff) rmSync(path, { recursive: true, force: true });
+      // The file's age, not the directory's. Appending to a file does not
+      // touch the mtime of the directory holding it, so a run that has been
+      // going for longer than the window looks untouched from the outside —
+      // and the next run to start would clear it while it was still writing.
+      // Every write moves this, so any run still recording survives; one that
+      // has written nothing for a week is indistinguishable from a finished
+      // one, and is treated as finished.
+      const trace = statSync(join(path, TRACE_FILE));
+      if (trace.mtimeMs < cutoff) rmSync(path, { recursive: true, force: true });
     } catch {
-      // A directory that vanished between reading and stating is already gone.
+      // No trace file, or a directory that vanished between reading and
+      // stating. Either way it is not ours to delete.
     }
   }
 }
