@@ -8,6 +8,7 @@ export { assemble } from './assemble.js';
 export { findSectionBoundaries } from './section-boundaries.js';
 export { labelRows } from './row-labels.js';
 export { classifySection } from './section-kind.js';
+export { checkIntegrity } from './integrity.js';
 export { DATE_RANGE, SECTION_PATTERNS, isBulletLine, stripBulletMarker } from './vocabulary.js';
 export * from './layout.js';
 export * from './types.js';

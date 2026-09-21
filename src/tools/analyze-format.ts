@@ -46,6 +46,7 @@ const MESSAGES: Readonly<Record<string, string>> = {
   'ats.margin-contact': 'contact details in a header or footer, which many parsers discard entirely',
   'ats.decorative-bullets': 'decorative bullet glyphs tokenize as unknown entities',
   'ats.unknown-heading': 'heading outside the vocabulary parsers match against',
+  'ats.unplaceable-lines': 'lines this parser could not place, which another will not place either',
   'ats.no-text-layer': 'no text layer — an applicant tracking system reads nothing from this file',
   'ats.tables': 'tables are commonly flattened row-wise, scrambling the fields',
   'ats.length': 'length is outside the one-page convention',
@@ -271,6 +272,19 @@ function scoreAtsParsability(
       blockers.push(`unrecognised section heading "${section.heading}"`);
       issues.push(describe('ats.unknown-heading', section.heading));
     }
+  }
+
+  // Where our own parser lost the thread, which is the free signal this has
+  // asserted in a comment for as long as it has existed without measuring.
+  // Not every note the reconciliation makes — a section filed by its heading
+  // is a judgement, not a fault — but a line that reached no section, or one
+  // that reached two, is text a reader will not see the way it was written.
+  const integrity = resume.meta.integrity;
+  const lost = integrity ? integrity.droppedRows.length + integrity.duplicatedRows.length : 0;
+  if (lost > 0) {
+    const detail = `${lost} line(s) this parser could not place cleanly`;
+    blockers.push(detail);
+    issues.push(describe('ats.unplaceable-lines', detail));
   }
 
   return {

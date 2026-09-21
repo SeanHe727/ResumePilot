@@ -3,6 +3,7 @@ import { extname } from 'node:path';
 import type { ResumeDocument } from '../domain.js';
 import { assemble } from './assemble.js';
 import { PdfExtractor } from './extractors/pdf.js';
+import { checkIntegrity } from './integrity.js';
 import { labelRows } from './row-labels.js';
 import { findSectionBoundaries } from './section-boundaries.js';
 import { classifySection } from './section-kind.js';
@@ -76,7 +77,8 @@ export class DefaultResumeParser implements ResumeParser {
  *
  * Every judgement was taken before this: where the sections start, what each
  * row is, which level it belongs to, and — from the assembled shape alone —
- * what each section is.
+ * what each section is. What is left is to check that the answers add up, and
+ * to say where they do not.
  */
 function fromRows(extracted: ExtractionResult, sourcePath: string): ResumeDocument {
   const rows = extracted.rows ?? [];
@@ -98,6 +100,9 @@ function fromRows(extracted: ExtractionResult, sourcePath: string): ResumeDocume
       wordCount: countWords(extracted.rawText),
       quality: extracted.quality,
       layoutWarnings: extracted.layoutWarnings,
+      // The parse checked against itself, kept rather than logged: where this
+      // loses the thread is where a commercial parser will too.
+      integrity: checkIntegrity(rows, boundaries, labels, sections, extracted.rawText),
     },
   };
 }

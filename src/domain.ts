@@ -180,12 +180,73 @@ export type ExtractionQuality =
    */
   | 'unsupported';
 
+/**
+ * Something about the shape of the parse worth a second look.
+ *
+ * Recorded, never corrected. Each of these is a place where the pipeline did
+ * something defensible and might have been wrong, and the only honest response
+ * at this distance is to say so where a reader can see it.
+ */
+export interface ParseAnomaly {
+  kind:
+    /** An entry whose header is a date range and nothing a reader would name. */
+    | 'date-only-entry'
+    /** An entry nothing opened — a row owned by one before one existed. */
+    | 'entry-without-header'
+    /** A continuation with nothing above it to carry on from. */
+    | 'dangling-continuation'
+    /** A section cut where no heading was recognised anywhere on the page. */
+    | 'guessed-boundary'
+    /** A section filed by its heading against what its shape argued for. */
+    | 'heading-overruled-evidence';
+  /** The id or row this is about. */
+  at: string;
+  detail?: string;
+}
+
+/**
+ * What became of every row, and what did not add up.
+ *
+ * The parse checked against itself. Rows go in and a document comes out, and
+ * between the two a row can be dropped, counted twice, or left in a section
+ * that ends up empty — none of which raises an error, because each stage did
+ * what it was asked. This is the reconciliation, and it is kept on the
+ * document rather than logged, because it is also a finding: where our own
+ * parser loses the thread is where a commercial one will too.
+ */
+export interface ParseIntegrity {
+  totalRows: number;
+  placedRows: number;
+  /** Rows no section claimed. */
+  droppedRows: number[];
+  /** Rows more than one section claimed. */
+  duplicatedRows: number[];
+  /** Rows inside a section that nothing gave a role to. */
+  unlabelledRows: number[];
+  /** Sections with no entries, no prose and no bullets. */
+  emptySections: string[];
+  /** Entries with no header and nothing under them. */
+  emptyEntries: string[];
+  /** Bullets whose marker was the whole line. */
+  emptyBullets: string[];
+  /** Sections whose heading row resolved to nothing. */
+  invalidHeadings: string[];
+  duplicateIds: string[];
+  /** Entries and bullets naming a parent that is not there. */
+  danglingRefs: string[];
+  /** Bullets whose offsets do not lead back to their own words. */
+  unmappedSpans: string[];
+  anomalies: ParseAnomaly[];
+}
+
 export interface ResumeMeta {
   pageCount?: number;
   wordCount: number;
   quality: ExtractionQuality;
   /** Layout features that commonly break ATS parsers. */
   layoutWarnings: string[];
+  /** Optional: a document parsed before this existed has none. */
+  integrity?: ParseIntegrity;
 }
 
 export interface ResumeDocument {

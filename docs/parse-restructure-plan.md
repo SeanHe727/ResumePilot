@@ -644,6 +644,43 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 **实测分类**(两份简历一致):contact / education / experience / project / skills 全对,每一段的 `confidence` 都大于 0。
 
+### B5 完整性验证 ✅
+
+| 文件 | 改动 |
+|---|---|
+| `src/domain.ts` | 新增 `ParseIntegrity` / `ParseAnomaly`;`ResumeMeta` 新增 `integrity?` |
+| `src/document/integrity.ts` | 新增。`checkIntegrity(rows, boundaries, labels, sections, rawText)` |
+| `src/document/parser.ts` | 组装后对账,结果进 `meta.integrity` |
+| `src/tools/analyze-format.ts` | 放不进任何 section 的行,计入 ATS blocker |
+
+**只记录,不纠正。** 纠正等于用比第一次决定时更少的证据再决定一遍;一条会悄悄自我修补的管线,它的毛病永远不会被修。
+
+四组检查:
+
+| 组 | 内容 |
+|---|---|
+| ① 行覆盖 | `droppedRows`(没有 section 认领)、`duplicatedRows`(两个 section 都认领)、`unlabelledRows`(在区间内但没有角色) |
+| ② 非空与合法 | 空 section / 空 entry / 空 bullet / 标题行解析成空 |
+| ③ 引用一致性 | 重复 ID、失效的 `sectionId` / `entryId`、`span` 回不到自己的字 |
+| ④ 结构异常(只记录) | `date-only-entry`、`entry-without-header`、`dangling-continuation`、`guessed-boundary`、`heading-overruled-evidence` |
+
+**`span` 按前缀校验而非全等。** 换行的 bullet 被用空格拼起来,而原文那里是换行,所以永远不会逐字相等;要成立的是"偏移落在正确的行上"。
+
+**计划里有两个字段在 B3 之后没有数据源,已替换:**
+
+- `labelDisagreements` 需要两套标注器比对,模型标注器在 B3 删除了 —— **去掉**。重新加模型兜底时一并恢复。
+- `orphan-bullet`(不属于任何条目的 bullet)在新的 owner 模型下是**合法的** `section/bullet` —— 换成 `entry-without-header`:标签声称属于某个 entry 而当时并没有 entry 开着,B3 为了不丢行会开一个无名的。
+
+**B4 的低置信度第一次有了读者**:`margin < 0`(标题压过形状)记为 `heading-overruled-evidence`;`confidence < 0.5` 的边界记为 `guessed-boundary`。
+
+**免费的 ATS 信号终于被测量了。** "我们自己的解析器在哪里卡住,本身就是发现"这句话写在 `analyze-format.ts` 的注释里很久,没有任何东西在量它。现在 `droppedRows + duplicatedRows` 进 blocker —— 但**只有这两项**:被标题归类是判断不是故障,不该计入。
+
+实测:七个 fixture 加两份真实简历,全部 `placedRows === totalRows`、零异常。
+
+变异验证七条,逐条转红:标题行不计入覆盖、重复不累加、不查未标注行、不查失效引用、不查 span、不查纯日期条目、不查标题覆盖。
+
+测试:`tests/document/integrity.test.ts`(新,27 条)。21 条用构造的"对不上"的输入(能跑通的解析什么都不报,对账测试必须被喂点东西),6 条走真实 PDF。
+
 ## 验证方式(全部本地,不调模型)
 
 ```bash
