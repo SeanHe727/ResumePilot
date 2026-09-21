@@ -19,6 +19,27 @@ const DEFAULT_MAX_BYTES = 64 * 1024 * 1024;
 /** Traces older than this are removed when a new run starts. */
 const DEFAULT_KEEP_DAYS = 7;
 
+/**
+ * Room kept back so the line that says recording stopped always fits.
+ *
+ * Without it the cap is exceeded by exactly that note — or, if it is refused,
+ * the file ends mid-run with nothing saying why, which is the failure this
+ * whole facility exists to prevent.
+ */
+const STOP_NOTE_BYTES = 256;
+
+/**
+ * A directory this wrote: named like a run, and holding a trace.
+ *
+ * The sweep deletes things, and `dir` is whatever an environment variable
+ * pointed at — a directory someone already keeps other work in, quite
+ * possibly. Two pieces of evidence rather than one, and a directory that
+ * fails either is left alone: accumulating old traces costs disk, deleting
+ * somebody's folder costs them their work.
+ */
+const RUN_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const TRACE_FILE = 'trace.jsonl';
+
 export interface TraceWriterOptions {
   /** Where traces go. One directory per run, named for the trace. */
   dir: string;
@@ -51,7 +72,7 @@ export class JsonlTraceWriter {
 
     const run = join(options.dir, options.traceId);
     mkdirSync(run, { recursive: true, mode: DIR_MODE });
-    this.file = join(run, 'trace.jsonl');
+    this.file = join(run, TRACE_FILE);
     // A run resumed under an id that already has a file starts from what is
     // there. Starting the count at zero would let a reused directory grow to a
     // multiple of the cap, which is the one number this promises.
@@ -72,7 +93,9 @@ export class JsonlTraceWriter {
     // an emoji four, so a cap counted in `length` is a cap that lets a file
     // reach several times the size it declares.
     const size = Buffer.byteLength(line, 'utf8');
-    if (this.written + size > this.maxBytes) {
+    // Against the budget, not the cap: the note below has to fit inside the
+    // number this promised, or the promise is not a cap.
+    if (this.written + size > Math.max(0, this.maxBytes - STOP_NOTE_BYTES)) {
       this.stopped = true;
       const note = `${JSON.stringify({
         traceId: event.traceId,
@@ -82,8 +105,11 @@ export class JsonlTraceWriter {
         error: { message: `trace stopped at ${this.maxBytes} bytes; the run continued` },
         timestamp: new Date().toISOString(),
       })}\n`;
-      appendFileSync(this.file, note, { mode: FILE_MODE });
-      this.written += Buffer.byteLength(note, 'utf8');
+      const noteSize = Buffer.byteLength(note, 'utf8');
+      if (this.written + noteSize <= this.maxBytes) {
+        appendFileSync(this.file, note, { mode: FILE_MODE });
+        this.written += noteSize;
+      }
       return;
     }
 
@@ -123,14 +149,22 @@ function replacer(key: string, value: unknown): unknown {
   return value;
 }
 
-/** Clears runs older than the retention window, leaving the current one. */
+/**
+ * Clears runs older than the retention window, leaving the current one.
+ *
+ * Only runs. Everything else under `dir` is somebody else's, and the one thing
+ * a debug facility must not do is delete a directory it did not create because
+ * an environment variable pointed one level too high.
+ */
 function sweep(dir: string, keepDays: number, keep: string): void {
   const cutoff = Date.now() - keepDays * 24 * 60 * 60 * 1000;
 
   for (const name of readdirSync(dir, { withFileTypes: true })) {
     if (!name.isDirectory() || name.name === keep) continue;
+    if (!RUN_ID.test(name.name)) continue;
     const path = join(dir, name.name);
     try {
+      if (!existsSync(join(path, TRACE_FILE))) continue;
       if (statSync(path).mtimeMs < cutoff) rmSync(path, { recursive: true, force: true });
     } catch {
       // A directory that vanished between reading and stating is already gone.

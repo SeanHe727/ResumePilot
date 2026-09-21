@@ -1,4 +1,12 @@
-import { mkdtempSync, mkdirSync, readFileSync, statSync, utimesSync, existsSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  statSync,
+  utimesSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -36,8 +44,9 @@ describe('attributing an event', () => {
         trace.event(() => ({ phase: 'result', model: 'a-model', status: 'success' }));
       })
       .then(() => {
-        expect(events).toHaveLength(1);
-        expect(events[0]).toMatchObject({
+        // The span's own opening and closing records bracket it.
+        expect(events.map((e) => e.phase)).toEqual(['span', 'result', 'span-end']);
+        expect(events[1]).toMatchObject({
           traceId: 't1',
           sessionId: 's1',
           turn: 3,
@@ -57,7 +66,9 @@ describe('attributing an event', () => {
     });
 
     expect(spanId).toBeDefined();
-    expect(events[0]?.parentEventId).toBe(spanId);
+    // The opening record carries that id, so the parent resolves inside the file.
+    expect(events[0]).toMatchObject({ phase: 'span', eventId: spanId });
+    expect(events[1]?.parentEventId).toBe(spanId);
   });
 
   it('keeps a nested agent under the one that called it', async () => {
@@ -72,7 +83,10 @@ describe('attributing an event', () => {
       });
     });
 
-    expect(events[0]?.actor).toEqual({ kind: 'nested', id: 'deep-research' });
+    expect(events.find((e) => e.phase === 'tool')?.actor).toEqual({
+      kind: 'nested',
+      id: 'deep-research',
+    });
   });
 
   it('keeps two specialists running at once in separate branches', async () => {
@@ -89,7 +103,7 @@ describe('attributing an event', () => {
 
     await Promise.all([run('content', 4), run('wording', 1), run('narrative', 2)]);
 
-    for (const event of events) {
+    for (const event of events.filter((e) => e.purpose !== undefined)) {
       expect(event.actor.id, 'an event landed under the wrong agent').toBe(event.purpose);
     }
   });
@@ -110,6 +124,60 @@ describe('attributing an event', () => {
     await expect(
       trace.span({ actor: { kind: 'main', id: 'main-agent' } }, async () => 'answer'),
     ).resolves.toBe('answer');
+  });
+});
+
+describe('when the recording itself fails', () => {
+  it('does not let a broken sink reach the work being recorded', async () => {
+    // A full disk used to arrive inside `query()`, where it was classified as
+    // a model failure, retried three times against the API, and recorded as a
+    // provider that would not answer.
+    const warnings: string[] = [];
+    const trace = new RecordingTrace(
+      () => {
+        throw new Error('ENOSPC: no space left on device');
+      },
+      root,
+      (text) => warnings.push(text),
+    );
+
+    const answer = await trace.span({ actor: { kind: 'main', id: 'main-agent' } }, async () => {
+      trace.event(() => ({ phase: 'result', status: 'success' }));
+      return 'the work carried on';
+    });
+
+    expect(answer).toBe('the work carried on');
+    expect(trace.dropped).toBeGreaterThan(0);
+  });
+
+  it('says so once, rather than silently or every time', () => {
+    // Silence would leave a reader drawing conclusions from gaps we created;
+    // one line per lost event would bury the run's own output.
+    const warnings: string[] = [];
+    const trace = new RecordingTrace(
+      () => {
+        throw new Error('EACCES');
+      },
+      root,
+      (text) => warnings.push(text),
+    );
+
+    for (let i = 0; i < 5; i++) trace.event(() => ({ phase: 'input' }));
+
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0]).toMatch(/incomplete/);
+    expect(trace.dropped).toBe(5);
+  });
+
+  it('survives an instrumentation point that throws while building an event', () => {
+    const trace = new RecordingTrace(collect().sink, root, () => {});
+
+    expect(() =>
+      trace.event(() => {
+        throw new Error('a getter blew up');
+      }),
+    ).not.toThrow();
+    expect(trace.dropped).toBe(1);
   });
 });
 
@@ -138,6 +206,18 @@ describe('the trace that is switched off', () => {
 
 describe('storing a second copy of a résumé', () => {
   const temp = (): string => mkdtempSync(join(tmpdir(), 'trace-test-'));
+
+  /** A directory shaped like one of ours, optionally older than the window. */
+  function run(dir: string, name: string, opts: { aged?: boolean; file?: boolean } = {}): string {
+    const path = join(dir, name);
+    mkdirSync(path, { recursive: true });
+    if (opts.file !== false) writeFileSync(join(path, 'trace.jsonl'), '{}\n');
+    if (opts.aged) {
+      const ancient = new Date(Date.now() - 40 * 24 * 60 * 60 * 1000);
+      utimesSync(path, ancient, ancient);
+    }
+    return path;
+  }
 
   it('writes one run per directory, readable only by its owner', () => {
     // `.gitignore` is a convention about version control, not a permission.
@@ -219,31 +299,44 @@ describe('storing a second copy of a résumé', () => {
     expect(lines.at(-1)).toContain('the run continued');
   });
 
+  it('leaves alone anything it did not write', () => {
+    // `dir` is whatever an environment variable pointed at, and this deletes
+    // things. A directory one level too high turns a debug switch into a
+    // delete command over somebody's own folders.
+    const dir = temp();
+    const notARun = run(dir, 'my-notes', { aged: true });
+    const namedLikeARunButEmpty = run(dir, '0f9c1a77-3333-4aaa-8bbb-0123456789ab', {
+      aged: true,
+      file: false,
+    });
+
+    new JsonlTraceWriter({ dir, traceId: 'run-1', keepDays: 7 });
+
+    expect(existsSync(notARun)).toBe(true);
+    expect(existsSync(namedLikeARunButEmpty)).toBe(true);
+  });
+
   it('leaves this run alone even when its directory is older than the window', () => {
     // A debug session resumed under the same trace id appends to a directory
     // the sweep would otherwise be entitled to delete — and `mkdir` on an
     // existing directory does not make it look recent.
     const dir = temp();
-    const reused = join(dir, 'run-1');
-    mkdirSync(reused, { recursive: true });
-    const ancient = new Date(Date.now() - 40 * 24 * 60 * 60 * 1000);
-    utimesSync(reused, ancient, ancient);
+    // Shaped like what the app generates, so the sweep would otherwise be
+    // entitled to it — and `mkdir` on an existing directory does not make it
+    // look recent.
+    const id = '0f9c1a77-4444-4aaa-8bbb-0123456789ab';
+    const reused = run(dir, id, { aged: true });
 
-    const writer = new JsonlTraceWriter({ dir, traceId: 'run-1', keepDays: 7 });
+    const writer = new JsonlTraceWriter({ dir, traceId: id, keepDays: 7 });
 
     expect(existsSync(reused)).toBe(true);
-    expect(writer.path).toContain(join('run-1', 'trace.jsonl'));
+    expect(writer.path).toContain(join(id, 'trace.jsonl'));
   });
 
   it('clears runs past the retention window, and leaves this one', () => {
     const dir = temp();
-    const old = join(dir, 'last-month');
-    mkdirSync(old, { recursive: true });
-    const ancient = new Date(Date.now() - 40 * 24 * 60 * 60 * 1000);
-    utimesSync(old, ancient, ancient);
-
-    const recent = join(dir, 'yesterday');
-    mkdirSync(recent, { recursive: true });
+    const old = run(dir, '0f9c1a77-1111-4aaa-8bbb-0123456789ab', { aged: true });
+    const recent = run(dir, '0f9c1a77-2222-4aaa-8bbb-0123456789ab');
 
     new JsonlTraceWriter({ dir, traceId: 'run-1', keepDays: 7 });
 
@@ -317,22 +410,52 @@ describe('the last boundary before disk', () => {
       writer.write(event({ eventId: `e${i}`, output: '负责后端服务的性能优化🚀'.repeat(8) }));
     }
 
-    expect(statSync(writer.path).size).toBeLessThanOrEqual(600 + 200);
+    expect(statSync(writer.path).size).toBeLessThanOrEqual(600);
     expect(readFileSync(writer.path, 'utf8')).toContain('trace stopped at');
+  });
+
+  it('stays inside the cap it declares, note included', () => {
+    // The note saying recording stopped used to be appended unconditionally,
+    // which put the file over the one number this promises by exactly its own
+    // length. Room is kept back for it instead.
+    const dir = temp();
+    const writer = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 900 });
+
+    for (let i = 0; i < 40; i++) {
+      writer.write(event({ eventId: `e${i}`, output: 'x'.repeat(100) }));
+    }
+
+    expect(statSync(writer.path).size).toBeLessThanOrEqual(900);
+    expect(readFileSync(writer.path, 'utf8')).toContain('trace stopped at');
+  });
+
+  it('writes nothing at all rather than overrun an absurd cap', () => {
+    // Below the room kept back for the note, even the note does not fit. The
+    // cap is the promise, so it wins: an empty file is the honest outcome.
+    const dir = temp();
+    const writer = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 100 });
+
+    writer.write(event({ output: 'x'.repeat(50) }));
+
+    const size = existsSync(writer.path) ? statSync(writer.path).size : 0;
+    expect(size).toBeLessThanOrEqual(100);
   });
 
   it('counts what the file already holds when a run is resumed into it', () => {
     // Starting the count at zero lets a reused directory grow to a multiple of
     // the cap, which is the one number this promises.
+    // Sized so exactly one line fits inside the budget: the second writer must
+    // refuse the next one, and only will if it knows what is already there.
     const dir = temp();
-    const first = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 500 });
+    const first = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 1_000 });
     first.write(event({ output: 'x'.repeat(300) }));
     const afterFirst = statSync(first.path).size;
 
-    const second = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 500 });
+    const second = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 1_000 });
     second.write(event({ output: 'y'.repeat(300) }));
 
-    expect(statSync(second.path).size).toBeLessThan(afterFirst + 300);
+    expect(statSync(second.path).size).toBeLessThan(afterFirst * 2);
+    expect(statSync(second.path).size).toBeLessThanOrEqual(1_000);
     expect(readFileSync(second.path, 'utf8')).toContain('trace stopped at');
   });
 });

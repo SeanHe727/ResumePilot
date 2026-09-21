@@ -48,6 +48,15 @@ export interface TraceTarget {
 }
 
 export type TracePhase =
+  /**
+   * A span opening, written under the id its children name as their parent.
+   *
+   * Without it the tree is rebuildable only from memory: the file holds
+   * `parentEventId` values that resolve to nothing in the file.
+   */
+  | 'span'
+  /** The same span closing, with how long it took and whether it threw. */
+  | 'span-end'
   | 'input'
   | 'decision'
   | 'dispatch'

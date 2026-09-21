@@ -159,7 +159,7 @@ describe('the request, as the model saw it', () => {
     const input = of(events, 'input')[0]?.input as TraceRequest;
     expect(input.model).toBeTruthy();
     expect(input.provider).toBe('claude');
-    expect(input.model).toBe(events[0]?.model);
+    expect(input.model).toBe(of(events, 'input')[0]?.model);
   });
 
   it('carries no callback, signal or key into the record', async () => {
@@ -225,7 +225,15 @@ describe('every try, and how it ended', () => {
 
     await engine.query({ task: 'diagnose_bullet', messages: [{ role: 'user', content: 'a bullet' }] });
 
-    expect(phases(events)).toEqual(['input', 'attempt', 'attempt', 'attempt', 'result']);
+    expect(phases(events)).toEqual([
+      'span',
+      'input',
+      'attempt',
+      'attempt',
+      'attempt',
+      'result',
+      'span-end',
+    ]);
     const attempts = of(events, 'attempt');
     expect(attempts.map((e) => e.attempt)).toEqual([1, 2, 3]);
     expect(attempts.map((e) => e.status)).toEqual(['error', 'error', 'success']);
@@ -260,7 +268,16 @@ describe('every try, and how it ended', () => {
       engine.query({ task: 'diagnose_bullet', messages: [{ role: 'user', content: 'a bullet' }] }),
     ).rejects.toThrow();
 
-    expect(phases(events)).toEqual(['input', 'attempt', 'attempt', 'attempt', 'failure']);
+    expect(phases(events)).toEqual([
+      'span',
+      'input',
+      'attempt',
+      'attempt',
+      'attempt',
+      'failure',
+      'span-end',
+    ]);
+    expect(of(events, 'span-end')[0]?.status).toBe('error');
     expect(of(events, 'failure')[0]).toMatchObject({
       stage: 'request',
       status: 'error',
@@ -296,9 +313,12 @@ describe('every try, and how it ended', () => {
 
     await engine.query({ task: 'diagnose_bullet', messages: [{ role: 'user', content: 'a bullet' }] });
 
-    const parents = new Set(events.map((e) => e.parentEventId));
-    expect(parents.size).toBe(1);
-    expect([...parents][0]).toBeDefined();
+    // Everything the call produced hangs off the span's own opening record,
+    // which is in the file under that id — so the tree survives the journey to
+    // disk rather than living only in whoever held the objects.
+    const opened = of(events, 'span')[0];
+    const inside = events.filter((e) => e.phase !== 'span');
+    expect(new Set(inside.map((e) => e.parentEventId))).toEqual(new Set([opened?.eventId]));
   });
 
   it('attributes the whole call to the agent whose span it ran in', async () => {
@@ -334,11 +354,11 @@ describe('failures before anything was sent', () => {
     events.length = 0;
     await expect(engine.query(params)).rejects.toThrow(/Budget exhausted/);
 
-    expect(events).toHaveLength(1);
-    expect(events[0]).toMatchObject({ phase: 'failure', stage: 'budget', attempts: 0 });
+    expect(phases(events)).toEqual(['span', 'failure', 'span-end']);
+    expect(events[1]).toMatchObject({ phase: 'failure', stage: 'budget', attempts: 0 });
     // With what it was about to ask: a ceiling hit halfway through a fan-out
     // looks, from the conversation, like a specialist that chose to say nothing.
-    expect((events[0]?.input as TraceRequest).messages).toHaveLength(1);
+    expect((events[1]?.input as TraceRequest).messages).toHaveLength(1);
   });
 
   it('records an unroutable model as a routing failure, not a provider one', async () => {
@@ -349,9 +369,9 @@ describe('failures before anything was sent', () => {
       engine.query({ model: 'no-such-model', messages: [{ role: 'user', content: 'x' }] }),
     ).rejects.toThrow(/Unknown model/);
 
-    expect(events).toHaveLength(1);
-    expect(events[0]).toMatchObject({ phase: 'failure', stage: 'routing' });
-    expect((events[0]?.input as TraceRequest).model).toBe('no-such-model');
+    expect(phases(events)).toEqual(['span', 'failure', 'span-end']);
+    expect(events[1]).toMatchObject({ phase: 'failure', stage: 'routing' });
+    expect((events[1]?.input as TraceRequest).model).toBe('no-such-model');
   });
 
   it('records a missing key as a failure to build the provider', async () => {
@@ -389,9 +409,9 @@ describe('an answer that was not asked for', () => {
     events.length = 0;
     await engine.query(params);
 
-    expect(phases(events)).toEqual(['input', 'result']);
-    expect(events[1]).toMatchObject({ cached: true, attempts: 0, status: 'success' });
-    expect(events[1]?.output).toMatchObject({ content: '{"verdict":"no figure"}' });
+    expect(phases(events)).toEqual(['span', 'input', 'result', 'span-end']);
+    expect(events[2]).toMatchObject({ cached: true, attempts: 0, status: 'success' });
+    expect(events[2]?.output).toMatchObject({ content: '{"verdict":"no figure"}' });
   });
 });
 
@@ -457,6 +477,63 @@ describe('the one thing left out', () => {
   });
 });
 
+describe('the file on its own terms', () => {
+  it('reconciles: every parent resolves, every span closes, exactly once', async () => {
+    // The in-memory tests prove inheritance. This proves the tree survives the
+    // journey to disk, which is the only copy anyone will read.
+    const dir = mkdtempSync(join(tmpdir(), 'trace-file-'));
+    const writer = new JsonlTraceWriter({ dir, traceId: 'run-1' });
+    const trace = new RecordingTrace(writer.write, {
+      traceId: 'run-1',
+      sessionId: 's1',
+      turn: 1,
+    });
+    const engine = engineWith(sequence([overloaded(), answered]), trace);
+
+    await trace.span({ actor: { kind: 'main', id: 'main-agent' } }, async () => {
+      await trace.span({ actor: { kind: 'specialist', id: 'content' } }, async () => {
+        await engine.query({
+          task: 'diagnose_bullet',
+          messages: [{ role: 'user', content: 'a bullet' }],
+        });
+      });
+    });
+
+    const written = readFileSync(writer.path, 'utf8')
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line) as TraceEvent);
+    const ids = new Set(written.map((e) => e.eventId));
+
+    expect(ids.size).toBe(written.length);
+    for (const e of written) {
+      if (e.parentEventId === undefined) continue;
+      expect(ids.has(e.parentEventId), `${e.phase} points at a parent not in the file`).toBe(true);
+    }
+
+    const opened = written.filter((e) => e.phase === 'span');
+    const closed = written.filter((e) => e.phase === 'span-end');
+    expect(opened).toHaveLength(3); // main, specialist, and the query's own
+    expect(closed).toHaveLength(3);
+    for (const span of opened) {
+      const ends = closed.filter((e) => e.parentEventId === span.eventId);
+      expect(ends, `span ${span.actor.id} did not close exactly once`).toHaveLength(1);
+    }
+  });
+
+  it('records a failed call as a closed span, not an open one', async () => {
+    const { trace, events } = recorder();
+    const engine = engineWith(sequence([overloaded()]), trace);
+
+    await expect(
+      engine.query({ task: 'diagnose_bullet', messages: [{ role: 'user', content: 'x' }] }),
+    ).rejects.toThrow();
+
+    expect(of(events, 'span')).toHaveLength(1);
+    expect(of(events, 'span-end')).toHaveLength(1);
+  });
+});
+
 describe('what the switch may not change', () => {
   it('answers, retries and throws the same either way', async () => {
     // A trace that alters the thing it is measuring is worse than none: every
@@ -488,6 +565,39 @@ describe('what the switch may not change', () => {
         expect(one).toEqual(two);
       }
     }
+  });
+
+  it('answers anyway when the trace cannot be written', async () => {
+    // Observation must not become a finding about the thing observed: a broken
+    // writer used to look exactly like a provider that would not answer, and
+    // cost three retries against the API saying so.
+    let calls = 0;
+    const provider: LLMProvider = {
+      name: 'claude',
+      async *stream(): AsyncIterable<StreamEvent> {
+        calls += 1;
+        for (const e of answered) yield e;
+      },
+      async countTokens() {
+        return 0;
+      },
+    };
+    const broken = new RecordingTrace(
+      () => {
+        throw new Error('ENOSPC: no space left on device');
+      },
+      { traceId: 't1', sessionId: 's1', turn: 1 },
+      () => {},
+    );
+
+    const answer = await engineWith(provider, broken).query({
+      task: 'diagnose_bullet',
+      messages: [{ role: 'user', content: 'a bullet' }],
+    });
+
+    expect(answer.content).toBe('{"verdict":"no figure"}');
+    expect(calls).toBe(1);
+    expect(broken.dropped).toBeGreaterThan(0);
   });
 
   it('counts the same attempts with the trace attached as without it', async () => {
