@@ -12,7 +12,7 @@
  * collecting it in one place on disk is a new exposure, and the storage rules
  * in the writer are part of the feature rather than a detail of it.
  */
-import type { TokenUsage } from '../types.js';
+import type { TokenUsage, ToolSchema } from '../types.js';
 
 /** Who is acting, at which level of the fan-out. */
 export interface TraceActor {
@@ -52,9 +52,63 @@ export type TracePhase =
   | 'decision'
   | 'dispatch'
   | 'tool'
+  /** One try at a request. Several of these can sit under one `input`. */
+  | 'attempt'
   | 'result'
   | 'failure'
   | 'output';
+
+/**
+ * How far a call got before whatever happened to it happened.
+ *
+ * A call that never left the machine and a call the service refused are
+ * different findings about an agent, and both arrive as an exception. Without
+ * this they read the same in the record: a failure, no answer, no request.
+ */
+export type TraceStage = 'budget' | 'routing' | 'provider-init' | 'request';
+
+/**
+ * `success` is about the exchange, not about the answer.
+ *
+ * A model can return 200 and be wrong, which is most of what this facility is
+ * for finding; naming this `ok` or `correct` would quietly claim otherwise.
+ * `cancelled` is separate because a run the user stopped is neither a failure
+ * of ours nor a completed call.
+ */
+export type TraceStatus = 'success' | 'error' | 'cancelled';
+
+/** A failure with its parts kept apart, so a reader can count by category. */
+export interface TraceError {
+  category?: string;
+  message: string;
+  retryable?: boolean;
+  retryAfterMs?: number;
+}
+
+/**
+ * The request as the model saw it, in our own vocabulary rather than a
+ * provider's.
+ *
+ * Enough to reconstruct the call: the tool definitions in full, not their
+ * names, because a model choosing badly among tools it was given and a model
+ * given badly-described tools are the same event in a trace that only kept
+ * the names. The SDK's own request object is deliberately not what is stored —
+ * it carries keys, callbacks and an abort signal.
+ */
+export interface TraceRequest {
+  task?: string;
+  model?: string;
+  provider?: string;
+  systemPrompt?: string;
+  messages: unknown[];
+  tools?: ToolSchema[];
+  maxTokens?: number;
+  jsonMode?: boolean;
+  effort?: string;
+  useCache?: boolean;
+  cacheTtlSeconds?: number;
+  cacheSystemPrompt?: boolean;
+}
 
 export interface TraceEvent {
   traceId: string;
@@ -74,14 +128,26 @@ export interface TraceEvent {
   /** Whole and untruncated — a trace that cannot reconstruct answers nothing. */
   input?: unknown;
   output?: unknown;
-  success?: boolean;
-  error?: string;
+  /** How far the call got. Absent on events that are not about an outcome. */
+  stage?: TraceStage;
+  status?: TraceStatus;
+  error?: TraceError;
   durationMs?: number;
   usage?: TokenUsage;
   /** True where the answer was replayed rather than asked for. */
   cached?: boolean;
-  /** How many attempts the call took, when more than one. */
+  /** Which try this event is about, on a `phase: 'attempt'` event. */
+  attempt?: number;
+  /** How many tries the call took in the end. Zero for a cached answer. */
   attempts?: number;
+  /**
+   * What the tries before the last one failed with.
+   *
+   * On the summary event, so a call that succeeded on its third attempt still
+   * says what the first two hit without a reader having to join the attempts
+   * back up by hand.
+   */
+  priorErrors?: TraceError[];
   /** Which specialist results a finding came from, and where it surfaced. */
   sourceFindingIds?: string[];
   reportPointIds?: string[];
@@ -98,9 +164,39 @@ export interface TraceEvent {
  * signature, and the one that forgot would emit orphans in silence.
  */
 export interface Trace {
-  event(e: Omit<TraceEvent, 'traceId' | 'eventId' | 'sessionId' | 'turn' | 'actor' | 'timestamp'> & Partial<TraceSpan>): void;
-  /** Runs `body` inside a child span, and returns what it returns. */
-  span<T>(within: Partial<TraceSpan> & { actor: TraceActor }, body: () => Promise<T>): Promise<T>;
+  /**
+   * Whether anything is recording.
+   *
+   * For work that cannot be deferred into the factory below — keeping a list
+   * across a retry loop, say. Not for deciding whether to instrument: that
+   * decision belongs at the composition root, and a call site that asks the
+   * environment is a second switch to keep in step with the first.
+   */
+  readonly enabled: boolean;
+  /**
+   * Records an event, built only if anyone is listening.
+   *
+   * A factory rather than a value because the argument is the expensive part:
+   * a copy of the messages, the tool schemas, a snapshot of the answer. Passed
+   * as a value, every switched-off run would pay for all of it and throw it
+   * away.
+   */
+  event(make: () => TraceEventInput): void;
+  /**
+   * Runs `body` inside a child span, and returns what it returns.
+   *
+   * The actor may be left out, in which case the span keeps the one it opened
+   * inside: the query engine knows a call is being made and has no idea whose
+   * it is, which is exactly the case this has to serve.
+   */
+  span<T>(within: Partial<TraceSpan>, body: () => Promise<T>): Promise<T>;
   /** The span in force, for an instrumentation point that needs to read it. */
   current(): TraceSpan | undefined;
 }
+
+/** An event with the parts a span already knows left out. */
+export type TraceEventInput = Omit<
+  TraceEvent,
+  'traceId' | 'eventId' | 'sessionId' | 'turn' | 'actor' | 'timestamp'
+> &
+  Partial<TraceSpan>;

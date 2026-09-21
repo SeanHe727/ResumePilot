@@ -1,10 +1,13 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { randomUUID } from 'node:crypto';
 
-import type { Trace, TraceEvent, TraceSpan, TraceTarget } from './types.js';
+import type { Trace, TraceEvent, TraceEventInput, TraceSpan, TraceTarget } from './types.js';
 
 /** Where an event goes once it has been assembled. */
 export type TraceSink = (event: TraceEvent) => void;
+
+/** Said out loud, so an event nobody claimed reads as the gap it is. */
+const UNATTRIBUTED = { kind: 'system', id: 'unknown' } as const;
 
 /**
  * The recording trace, for a debug run.
@@ -23,6 +26,8 @@ export type TraceSink = (event: TraceEvent) => void;
  * rather than interleaving into nonsense.
  */
 export class RecordingTrace implements Trace {
+  readonly enabled = true;
+
   private readonly spans = new AsyncLocalStorage<TraceSpan>();
 
   constructor(
@@ -36,17 +41,18 @@ export class RecordingTrace implements Trace {
     return this.spans.getStore();
   }
 
-  async span<T>(
-    within: Partial<TraceSpan> & { actor: TraceSpan['actor'] },
-    body: () => Promise<T>,
-  ): Promise<T> {
+  async span<T>(within: Partial<TraceSpan>, body: () => Promise<T>): Promise<T> {
     const parent = this.spans.getStore();
     const span: TraceSpan = {
       traceId: within.traceId ?? parent?.traceId ?? this.root.traceId,
       sessionId: within.sessionId ?? parent?.sessionId ?? this.root.sessionId,
       turn: within.turn ?? parent?.turn ?? this.root.turn,
       eventId: within.eventId ?? randomUUID(),
-      actor: within.actor,
+      // Inherited when not given. A span opened by the query engine belongs to
+      // whichever agent was already running: it is a subdivision of that work,
+      // not a new actor, and naming it `system` would detach every model call
+      // from the agent that made it.
+      actor: within.actor ?? parent?.actor ?? this.root.actor ?? UNATTRIBUTED,
       ...(parent?.eventId !== undefined ? { parentEventId: parent.eventId } : {}),
       ...(within.parentEventId !== undefined ? { parentEventId: within.parentEventId } : {}),
       ...inherited(within.target ?? parent?.target),
@@ -55,14 +61,9 @@ export class RecordingTrace implements Trace {
     return this.spans.run(span, body);
   }
 
-  event(
-    partial: Omit<
-      TraceEvent,
-      'traceId' | 'eventId' | 'sessionId' | 'turn' | 'actor' | 'timestamp'
-    > &
-      Partial<TraceSpan>,
-  ): void {
+  event(make: () => TraceEventInput): void {
     const span = this.spans.getStore();
+    const partial = make();
 
     this.sink({
       ...partial,
@@ -70,7 +71,7 @@ export class RecordingTrace implements Trace {
       sessionId: partial.sessionId ?? span?.sessionId ?? this.root.sessionId,
       turn: partial.turn ?? span?.turn ?? this.root.turn,
       eventId: randomUUID(),
-      actor: partial.actor ?? span?.actor ?? this.root.actor ?? { kind: 'system', id: 'unknown' },
+      actor: partial.actor ?? span?.actor ?? this.root.actor ?? UNATTRIBUTED,
       // The span an event happens inside is that event's parent. An event with
       // no span at all is left parentless rather than given a made-up one:
       // an orphan is a finding about the instrumentation.

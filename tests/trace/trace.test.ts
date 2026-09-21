@@ -33,7 +33,7 @@ describe('attributing an event', () => {
 
     return trace
       .span({ actor: { kind: 'specialist', id: 'content' } }, async () => {
-        trace.event({ phase: 'result', model: 'a-model', success: true });
+        trace.event(() => ({ phase: 'result', model: 'a-model', status: 'success' }));
       })
       .then(() => {
         expect(events).toHaveLength(1);
@@ -53,7 +53,7 @@ describe('attributing an event', () => {
 
     await trace.span({ actor: { kind: 'main', id: 'main-agent' } }, async () => {
       spanId = trace.current()?.eventId;
-      trace.event({ phase: 'result', success: true });
+      trace.event(() => ({ phase: 'result', status: 'success' }));
     });
 
     expect(spanId).toBeDefined();
@@ -68,7 +68,7 @@ describe('attributing an event', () => {
       const outer = trace.current()!.eventId;
       await trace.span({ actor: { kind: 'nested', id: 'deep-research' } }, async () => {
         expect(trace.current()?.parentEventId).toBe(outer);
-        trace.event({ phase: 'tool', tool: 'web_search', success: true });
+        trace.event(() => ({ phase: 'tool', tool: 'web_search', status: 'success' }));
       });
     });
 
@@ -84,7 +84,7 @@ describe('attributing an event', () => {
     const run = (id: string, delay: number) =>
       trace.span({ actor: { kind: 'specialist', id } }, async () => {
         await new Promise((resolve) => setTimeout(resolve, delay));
-        trace.event({ phase: 'result', success: true, purpose: id });
+        trace.event(() => ({ phase: 'result', status: 'success', purpose: id }));
       });
 
     await Promise.all([run('content', 4), run('wording', 1), run('narrative', 2)]);
@@ -98,7 +98,7 @@ describe('attributing an event', () => {
     // An orphan is a finding about the instrumentation. A made-up parent is a
     // finding about nothing.
     const { sink, events } = collect();
-    new RecordingTrace(sink, root).event({ phase: 'input' });
+    new RecordingTrace(sink, root).event(() => ({ phase: 'input' }));
 
     expect(events[0]?.parentEventId).toBeUndefined();
     expect(events[0]?.actor).toEqual({ kind: 'system', id: 'unknown' });
@@ -117,7 +117,18 @@ describe('the trace that is switched off', () => {
   it('records nothing and changes nothing', async () => {
     const trace = new NoTrace();
 
-    trace.event();
+    let built = 0;
+    trace.event(() => {
+      built += 1;
+      return { phase: 'input' };
+    });
+
+    // Not "records nothing": never built. The argument is the expensive part —
+    // a copy of the messages, the tool schemas, a snapshot of the answer — and
+    // a switched-off run that still paid for all of it is the reason this takes
+    // a factory rather than a value.
+    expect(built).toBe(0);
+    expect(trace.enabled).toBe(false);
     expect(trace.current()).toBeUndefined();
     await expect(
       trace.span({ actor: { kind: 'main', id: 'main-agent' } }, async () => 42),
@@ -239,5 +250,89 @@ describe('storing a second copy of a résumé', () => {
     expect(existsSync(old)).toBe(false);
     expect(existsSync(recent)).toBe(true);
     expect(existsSync(join(dir, 'run-1'))).toBe(true);
+  });
+});
+
+describe('the last boundary before disk', () => {
+  const temp = (): string => mkdtempSync(join(tmpdir(), 'trace-writer-'));
+  const event = (extra: Partial<TraceEvent>): TraceEvent => ({
+    traceId: 'run-1',
+    eventId: 'e1',
+    sessionId: 's1',
+    turn: 1,
+    actor: { kind: 'main', id: 'main-agent' },
+    phase: 'result',
+    timestamp: new Date().toISOString(),
+    ...extra,
+  });
+
+  it('withholds a model working under any of the names a provider gives it', () => {
+    // The engine already drops the two fields it can see typed. This is the
+    // same rule at the file, because the next instrumentation points are
+    // written by someone reading the plan rather than this file, and one of
+    // them recording a raw provider payload is how an opaque blob arrives in a
+    // file we said would not hold one.
+    const dir = temp();
+    const writer = new JsonlTraceWriter({ dir, traceId: 'run-1' });
+    writer.write(
+      event({
+        output: {
+          content: 'the visible answer',
+          reasoning: 'A',
+          reasoning_content: 'B',
+          encrypted_content: 'C',
+          thinking: 'D',
+          responses_items: [{ type: 'reasoning', summary: 'E' }],
+        },
+      }),
+    );
+
+    const written = readFileSync(writer.path, 'utf8');
+    for (const secret of ['"A"', '"B"', '"C"', '"D"', '"E"']) {
+      expect(written, `left in: ${secret}`).not.toContain(secret);
+    }
+    expect(written).toContain('the visible answer');
+  });
+
+  it('marks what it withheld rather than deleting the key', () => {
+    // A field that vanishes reads exactly like a field the model never
+    // returned, and a reader drawing a conclusion from an absence we created
+    // is the failure this whole facility exists to prevent.
+    const dir = temp();
+    const writer = new JsonlTraceWriter({ dir, traceId: 'run-1' });
+    writer.write(event({ output: { reasoning: 'at length' } }));
+
+    const line = JSON.parse(readFileSync(writer.path, 'utf8').trim()) as TraceEvent;
+    expect((line.output as { reasoning: string }).reasoning).toBe('[reasoning omitted]');
+  });
+
+  it('counts bytes, so a résumé in Chinese does not overrun the cap it declares', () => {
+    // `line.length` counts characters. Chinese is three bytes each and an emoji
+    // four, so a cap counted that way lets the file reach several times the
+    // size it promises — on exactly the documents this product is for.
+    const dir = temp();
+    const writer = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 600 });
+
+    for (let i = 0; i < 10; i++) {
+      writer.write(event({ eventId: `e${i}`, output: '负责后端服务的性能优化🚀'.repeat(8) }));
+    }
+
+    expect(statSync(writer.path).size).toBeLessThanOrEqual(600 + 200);
+    expect(readFileSync(writer.path, 'utf8')).toContain('trace stopped at');
+  });
+
+  it('counts what the file already holds when a run is resumed into it', () => {
+    // Starting the count at zero lets a reused directory grow to a multiple of
+    // the cap, which is the one number this promises.
+    const dir = temp();
+    const first = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 500 });
+    first.write(event({ output: 'x'.repeat(300) }));
+    const afterFirst = statSync(first.path).size;
+
+    const second = new JsonlTraceWriter({ dir, traceId: 'run-1', maxBytes: 500 });
+    second.write(event({ output: 'y'.repeat(300) }));
+
+    expect(statSync(second.path).size).toBeLessThan(afterFirst + 300);
+    expect(readFileSync(second.path, 'utf8')).toContain('trace stopped at');
   });
 });

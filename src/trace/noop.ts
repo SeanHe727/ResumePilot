@@ -1,4 +1,4 @@
-import type { Trace, TraceSpan } from './types.js';
+import type { Trace, TraceEventInput, TraceSpan } from './types.js';
 
 /**
  * What a production build gets.
@@ -10,7 +10,10 @@ import type { Trace, TraceSpan } from './types.js';
  * writing them again every time under pressure.
  */
 export class NoTrace implements Trace {
-  event(): void {}
+  readonly enabled = false;
+
+  /** The factory is never called: building the event is the expensive part. */
+  event(_make: () => TraceEventInput): void {}
 
   async span<T>(_within: unknown, body: () => Promise<T>): Promise<T> {
     return body();

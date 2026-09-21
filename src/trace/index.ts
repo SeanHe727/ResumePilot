@@ -1,9 +1,14 @@
 export type {
   Trace,
   TraceActor,
+  TraceError,
   TraceEvent,
+  TraceEventInput,
   TracePhase,
+  TraceRequest,
   TraceSpan,
+  TraceStage,
+  TraceStatus,
   TraceTarget,
 } from './types.js';
 export { NoTrace } from './noop.js';

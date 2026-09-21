@@ -1,7 +1,15 @@
 import { resolveModel, type AppConfig, type ProviderName } from '../config.js';
-import { NoTrace, type Trace } from '../trace/index.js';
+import {
+  NoTrace,
+  type Trace,
+  type TraceError,
+  type TraceRequest,
+  type TraceStage,
+  type TraceStatus,
+} from '../trace/index.js';
 import type { Message } from '../types.js';
 import { QueryCache } from './cache.js';
+import { classifyError } from './errors.js';
 import { ClaudeProvider } from './providers/claude.js';
 import { DeepSeekProvider, OpenAIProvider } from './providers/openai.js';
 import { OpenAIResponsesProvider } from './providers/responses.js';
@@ -77,46 +85,76 @@ export class QueryEngine implements QueryEngineContract {
   }
 
   async query(params: QueryParams): Promise<ParsedResponse> {
+    // One span per call, so the tries inside it have a parent to hang from and
+    // a reader sees `input`, the attempts and the outcome as one exchange
+    // rather than four unrelated lines. Switched off this is the closure and
+    // nothing else.
+    return this.trace.span({}, () => this.runQuery(params));
+  }
+
+  private async runQuery(params: QueryParams): Promise<ParsedResponse> {
+    const started = Date.now();
+
     // Checked first so an exhausted budget costs nothing further, not even a
     // cache lookup's worth of work.
     const budget = this.tokenCounter.checkBudget();
     if (!budget.ok) {
-      throw new QueryEngineError(`Budget exhausted: ${budget.reason}`, 'budget', false);
+      const refusal = new QueryEngineError(`Budget exhausted: ${budget.reason}`, 'budget', false);
+      // Recorded with what it was about to ask. A ceiling hit halfway through a
+      // fan-out looks, from the conversation, exactly like a specialist that
+      // chose to say nothing.
+      this.refused('budget', refusal, started, { params });
+      throw refusal;
     }
 
-    const route = this.router.resolve(params.task, params.model);
-    const spec = resolveModel(route.model);
-    // An explicit effort from the caller wins over the route's default.
-    const effort = params.effort ?? route.effort;
-    const streamParams: StreamParams = {
-      model: route.model,
-      messages: params.messages,
-      ...(params.systemPrompt ? { systemPrompt: params.systemPrompt } : {}),
-      ...(params.tools?.length ? { tools: params.tools } : {}),
-      ...(params.maxTokens ? { maxTokens: params.maxTokens } : {}),
-      ...(params.jsonMode ? { jsonMode: true } : {}),
-      ...(effort ? { effort } : {}),
-      // Model-shaped differences, not provider-shaped: which token-cap name to
-      // send, and whether the model takes a reasoning setting at all.
-      ...(spec.usesMaxCompletionTokens ? { usesMaxCompletionTokens: true } : {}),
-      ...(spec.reasoningEffort ? { reasoningEffort: toReasoningEffort(effort) } : {}),
-      ...(params.cacheSystemPrompt !== undefined
-        ? { cacheSystemPrompt: params.cacheSystemPrompt }
-        : {}),
-      ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
-    };
+    let route;
+    let spec;
+    let effort;
+    let streamParams: StreamParams;
+    try {
+      route = this.router.resolve(params.task, params.model);
+      spec = resolveModel(route.model);
+      // An explicit effort from the caller wins over the route's default.
+      effort = params.effort ?? route.effort;
+      streamParams = {
+        model: route.model,
+        messages: params.messages,
+        ...(params.systemPrompt ? { systemPrompt: params.systemPrompt } : {}),
+        ...(params.tools?.length ? { tools: params.tools } : {}),
+        ...(params.maxTokens ? { maxTokens: params.maxTokens } : {}),
+        ...(params.jsonMode ? { jsonMode: true } : {}),
+        ...(effort ? { effort } : {}),
+        // Model-shaped differences, not provider-shaped: which token-cap name to
+        // send, and whether the model takes a reasoning setting at all.
+        ...(spec.usesMaxCompletionTokens ? { usesMaxCompletionTokens: true } : {}),
+        ...(spec.reasoningEffort ? { reasoningEffort: toReasoningEffort(effort) } : {}),
+        ...(params.cacheSystemPrompt !== undefined
+          ? { cacheSystemPrompt: params.cacheSystemPrompt }
+          : {}),
+        ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
+      };
+    } catch (err) {
+      // An unroutable task or an unknown model. No request was made, and a
+      // record that only said "failed" would send a reader looking at the
+      // provider for something that never reached it.
+      this.refused('routing', err, started, { params });
+      throw err;
+    }
 
-    const started = Date.now();
-    const asked = {
-      task: params.task,
+    const resolved: Resolved = {
       model: route.model,
       provider: route.provider,
-      systemPrompt: streamParams.systemPrompt,
-      messages: forTrace(streamParams.messages),
-      tools: streamParams.tools?.map((tool) => tool.name),
-      effort,
-      jsonMode: streamParams.jsonMode === true,
+      ...(effort !== undefined ? { effort } : {}),
     };
+    // The request, once. What follows — every attempt, the outcome — hangs off
+    // this span and names none of it again.
+    this.trace.event(() => ({
+      phase: 'input',
+      stage: 'request',
+      model: route.model,
+      provider: route.provider,
+      input: requested(params, resolved),
+    }));
 
     const cacheKey = params.useCache === false ? null : this.cache.generateKey(streamParams);
     if (cacheKey) {
@@ -128,25 +166,37 @@ export class QueryEngine implements QueryEngineContract {
         // Recorded all the same. A run that answered from cache and one that
         // asked look identical in a conversation and are different runs, and a
         // reader asking why two identical questions cost different amounts has
-        // nowhere else to find out.
-        this.trace.event({
+        // nowhere else to find out. No attempt: nothing was tried.
+        this.trace.event(() => ({
           phase: 'result',
+          stage: 'request',
           model: route.model,
           provider: route.provider,
-          input: asked,
           output: answerFor(hit),
-          success: true,
+          status: 'success',
           cached: true,
+          attempts: 0,
           durationMs: Date.now() - started,
           usage: hit.usage,
-        });
+        }));
         return hit;
       }
     }
 
-    const provider = this.providerFor(route.provider, spec.responsesApi === true);
+    let provider;
+    try {
+      provider = this.providerFor(route.provider, spec.responsesApi === true);
+    } catch (err) {
+      // A missing key for a provider this task routes to. Distinct from a
+      // refusal by that provider, which is a fact about the service.
+      this.refused('provider-init', err, started, { resolved });
+      throw err;
+    }
 
     let attempts = 0;
+    // Kept only while something is listening: a list nobody reads is a list
+    // every production call pays to build.
+    const earlier: TraceError[] = [];
     let response;
     try {
       response = await withRetry(
@@ -154,40 +204,77 @@ export class QueryEngine implements QueryEngineContract {
           // Inside the retry body: every attempt is a real request and must be
           // paced like one, or a retry storm walks straight past the limiter.
           attempts += 1;
-          await this.limiter.acquire(params.abortSignal);
-          return parseStream(provider.stream(streamParams), params.onTextDelta);
+          const attempt = attempts;
+          const tried = Date.now();
+          try {
+            await this.limiter.acquire(params.abortSignal);
+            const answer = await parseStream(provider.stream(streamParams), params.onTextDelta);
+            this.trace.event(() => ({
+              phase: 'attempt',
+              stage: 'request',
+              model: route.model,
+              provider: route.provider,
+              attempt,
+              status: 'success',
+              durationMs: Date.now() - tried,
+            }));
+            return answer;
+          } catch (err) {
+            // Per attempt, not per call. Three tries that each failed
+            // differently — a rate limit, a dropped socket, a refusal — are
+            // three findings, and a single summary line keeps one of them.
+            const failure = outcomeOf(err, params.abortSignal);
+            if (this.trace.enabled) earlier.push(failure.error);
+            this.trace.event(() => ({
+              phase: 'attempt',
+              stage: 'request',
+              model: route.model,
+              provider: route.provider,
+              attempt,
+              status: failure.status,
+              error: failure.error,
+              durationMs: Date.now() - tried,
+            }));
+            throw err;
+          }
         },
         this.retryConfig,
         params.onRetry ? { onAttempt: params.onRetry } : {},
       );
     } catch (err) {
-      // A failure is the more interesting half. What was asked is on the
-      // record even when nothing came back, which is the case a reader is
-      // most often trying to explain.
-      this.trace.event({
+      // The summary of a call that ended with nothing. What was asked is on
+      // the record above it, which is the case a reader is most often trying
+      // to explain.
+      const failure = outcomeOf(err, params.abortSignal);
+      this.trace.event(() => ({
         phase: 'failure',
+        stage: 'request',
         model: route.model,
         provider: route.provider,
-        input: asked,
-        success: false,
-        error: err instanceof Error ? err.message : String(err),
+        status: failure.status,
+        error: failure.error,
         durationMs: Date.now() - started,
         attempts,
-      });
+        ...(earlier.length > 1 ? { priorErrors: earlier.slice(0, -1) } : {}),
+      }));
       throw err;
     }
 
-    this.trace.event({
+    this.trace.event(() => ({
       phase: 'result',
+      stage: 'request',
       model: route.model,
       provider: route.provider,
-      input: asked,
       output: answerFor(response),
-      success: true,
+      status: 'success',
       durationMs: Date.now() - started,
       usage: response.usage,
-      ...(attempts > 1 ? { attempts } : {}),
-    });
+      attempts,
+      // An answer that took three tries is a different fact about the run than
+      // an answer that took one, and the two look the same once only the
+      // outcome is kept.
+      ...(earlier.length > 0 ? { priorErrors: earlier } : {}),
+    }));
 
     this.tokenCounter.record(response.usage, route.model);
 
@@ -203,6 +290,36 @@ export class QueryEngine implements QueryEngineContract {
     }
 
     return response;
+  }
+
+  /**
+   * A failure that happened before anything was sent.
+   *
+   * `stage` is the whole point of it: a budget ceiling, an unroutable task, a
+   * missing key and a provider that refused all arrive as one exception, and
+   * they are four different findings about a run.
+   */
+  private refused(
+    stage: TraceStage,
+    err: unknown,
+    started: number,
+    detail: { params?: QueryParams; resolved?: Resolved },
+  ): void {
+    this.trace.event(() => ({
+      phase: 'failure',
+      stage,
+      status: outcomeOf(err).status,
+      error: outcomeOf(err).error,
+      durationMs: Date.now() - started,
+      attempts: 0,
+      ...(detail.resolved
+        ? { model: detail.resolved.model, provider: detail.resolved.provider }
+        : {}),
+      // Only where the request has not been recorded yet. Past that point it
+      // is on the span already, and a second copy of a prompt is the one thing
+      // this file is careful not to write.
+      ...(detail.params ? { input: requested(detail.params, detail.resolved) } : {}),
+    }));
   }
 
   async countTokens(params: Pick<QueryParams, 'task' | 'model' | 'messages' | 'tools'>): Promise<number> {
@@ -288,6 +405,74 @@ function requireKey(key: string | undefined, envName: string): string {
     );
   }
   return key;
+}
+
+/** What the router settled on, once it has settled on it. */
+interface Resolved {
+  model: string;
+  provider: ProviderName;
+  effort?: Effort;
+}
+
+/**
+ * The request as the model saw it, in our vocabulary rather than a provider's.
+ *
+ * The tool definitions go in whole. They were names until a review asked what
+ * the model had actually been offered: a model choosing badly among good tools
+ * and a model offered a badly-described one are the same line in a record that
+ * kept only the names, and they call for opposite fixes.
+ *
+ * What does not go in is the SDK's own request object — it carries the key, the
+ * callbacks and the abort signal — nor anything the caller passed for the
+ * stream's benefit rather than the model's.
+ */
+function requested(params: QueryParams, resolved?: Resolved): TraceRequest {
+  const effort = resolved?.effort ?? params.effort;
+  const model = resolved?.model ?? params.model;
+
+  return {
+    ...(params.task !== undefined ? { task: params.task } : {}),
+    ...(model !== undefined ? { model } : {}),
+    ...(resolved !== undefined ? { provider: resolved.provider } : {}),
+    ...(params.systemPrompt !== undefined ? { systemPrompt: params.systemPrompt } : {}),
+    messages: forTrace(params.messages),
+    ...(params.tools?.length ? { tools: params.tools } : {}),
+    ...(params.maxTokens !== undefined ? { maxTokens: params.maxTokens } : {}),
+    jsonMode: params.jsonMode === true,
+    ...(effort !== undefined ? { effort } : {}),
+    // Whether the answer was allowed to come from cache, which is why two runs
+    // of the same conversation can cost different amounts.
+    useCache: params.useCache !== false,
+    ...(params.cacheTtlSeconds !== undefined ? { cacheTtlSeconds: params.cacheTtlSeconds } : {}),
+    ...(params.cacheSystemPrompt !== undefined
+      ? { cacheSystemPrompt: params.cacheSystemPrompt }
+      : {}),
+  };
+}
+
+/**
+ * What went wrong, and whether it counts as going wrong.
+ *
+ * A run the user stopped is not a failure of the system, and counting it as one
+ * would put every interrupted session in the same column as the refusals.
+ */
+function outcomeOf(
+  err: unknown,
+  signal?: AbortSignal,
+): { status: TraceStatus; error: TraceError } {
+  const classified = classifyError(err);
+  const cancelled =
+    signal?.aborted === true || (err instanceof Error && err.name === 'AbortError');
+
+  return {
+    status: cancelled ? 'cancelled' : 'error',
+    error: {
+      category: classified.category,
+      message: classified.message,
+      retryable: classified.retryable,
+      ...(classified.retryAfterMs !== undefined ? { retryAfterMs: classified.retryAfterMs } : {}),
+    },
+  };
 }
 
 /**

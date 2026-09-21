@@ -1,4 +1,4 @@
-import { appendFileSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 import type { TraceEvent } from './types.js';
@@ -52,6 +52,10 @@ export class JsonlTraceWriter {
     const run = join(options.dir, options.traceId);
     mkdirSync(run, { recursive: true, mode: DIR_MODE });
     this.file = join(run, 'trace.jsonl');
+    // A run resumed under an id that already has a file starts from what is
+    // there. Starting the count at zero would let a reused directory grow to a
+    // multiple of the cap, which is the one number this promises.
+    if (existsSync(this.file)) this.written = statSync(this.file).size;
 
     sweep(options.dir, options.keepDays ?? DEFAULT_KEEP_DAYS, options.traceId);
   }
@@ -64,23 +68,27 @@ export class JsonlTraceWriter {
     if (this.stopped) return;
 
     const line = `${JSON.stringify(event, replacer)}\n`;
-    if (this.written + line.length > this.maxBytes) {
+    // Bytes, not characters. A résumé in Chinese is three bytes a character and
+    // an emoji four, so a cap counted in `length` is a cap that lets a file
+    // reach several times the size it declares.
+    const size = Buffer.byteLength(line, 'utf8');
+    if (this.written + size > this.maxBytes) {
       this.stopped = true;
-      appendFileSync(
-        this.file,
-        `${JSON.stringify({
-          traceId: event.traceId,
-          phase: 'failure',
-          error: `trace stopped at ${this.maxBytes} bytes; the run continued`,
-          timestamp: new Date().toISOString(),
-        })}\n`,
-        { mode: FILE_MODE },
-      );
+      const note = `${JSON.stringify({
+        traceId: event.traceId,
+        phase: 'failure',
+        stage: 'request',
+        status: 'error',
+        error: { message: `trace stopped at ${this.maxBytes} bytes; the run continued` },
+        timestamp: new Date().toISOString(),
+      })}\n`;
+      appendFileSync(this.file, note, { mode: FILE_MODE });
+      this.written += Buffer.byteLength(note, 'utf8');
       return;
     }
 
     appendFileSync(this.file, line, { mode: FILE_MODE });
-    this.written += line.length;
+    this.written += size;
   };
 }
 
@@ -93,8 +101,23 @@ export class JsonlTraceWriter {
  */
 const SECRET = /^(?:api[-_]?key|authorization|token|secret|password|cookie)$/i;
 
+/**
+ * A model's own working, under every name a provider gives it.
+ *
+ * Dropped at the instrumentation point already, where the type that carries it
+ * is still in view. Repeated here because this is the last place before disk:
+ * the next four instrumentation points are written by someone reading the
+ * plan, not this file, and one of them recording a raw provider payload is how
+ * an opaque reasoning blob ends up in a file we promised would not hold one.
+ */
+const REASONING = /^(?:reasoning(?:[-_]?content|[-_]?items)?|thinking|redacted[-_]?thinking|encrypted[-_]?content|responses[-_]?items)$/i;
+
 function replacer(key: string, value: unknown): unknown {
   if (SECRET.test(key)) return '[redacted]';
+  // Marked rather than deleted. A key that vanishes silently is indistinguishable
+  // from a field the model never returned, and this facility exists to stop a
+  // reader drawing conclusions from something that was quietly removed.
+  if (REASONING.test(key)) return '[reasoning omitted]';
   if (typeof value === 'function') return undefined;
   if (value instanceof AbortSignal) return undefined;
   return value;
