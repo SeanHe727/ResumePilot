@@ -28,8 +28,19 @@ these traces with a scripted judgement of whether an agent acted too early or
 too late.
 
 **The trace is a development instrument, not a product feature.** It is
-attached when something needs looking at and absent otherwise, it stores
-prompts and results in full, and it has nothing to do with the audit log.
+attached only for an explicit debug run and absent otherwise. It stores the
+model-visible prompts and results in full, so it is a second, high-sensitivity
+copy of résumé and conversation data even though it remains separate from the
+audit log. Gitignore is not its security boundary: owner-only files, a
+session-scoped directory, explicit retention/deletion, and credential removal
+are part of the first implementation.
+
+**The first version does not record reasoning.** Runtime behaviour is unchanged
+and providers may still carry reasoning state between turns, but the trace
+writer omits `ParsedResponse.reasoning`, every historical `Message.reasoning`,
+and provider `encrypted_content`. Visible prompts, messages, tool calls, model
+content and results are enough for the first human review. If they are not,
+reasoning summaries can be evaluated later as a separate feature.
 
 ## What is already true, measured against the code
 
@@ -41,7 +52,7 @@ assumptions that turned out to be partly stale.
 | A specialist failure can return an outer success | True — `review.ts:247` returns `{ success: true, data: found }` where `found` may be `undefined` |
 | Inner tool calls bypass the hook pipeline | True, and deliberate: `sub-agent.ts:159` explains that re-running permission, audit and memory per inner call multiplies all three |
 | There is no correlated trace | True. `AuditEntry` and `ExecutionRecord` are flat: `sessionId` + `toolName`, no trace id, no parent, no actor |
-| `pageRoom` is not propagated deterministically | **False, already done.** `review.ts:66` derives it from the session's `formatDiagnosis`. Only `suppliedFacts` is still copied by the Main Agent |
+| `pageRoom` is not propagated deterministically | **True.** `review.ts:66` defines a calculation, but nothing calls it; `briefingFrom()` does not add it and `briefingContext()` does not render it. The conversation sample correctly records it as absent |
 
 Two further findings shape the work:
 
@@ -93,31 +104,43 @@ Committed as `84d7421`. One canonical finding set written at full length, with
 the brief derived from it; the quoting pass that hands the résumé to the report
 writer is redacted like every other prompt. What remains open is making it
 explicit in conversation when a selection is being shown rather than the whole
-report, which belongs with item 6.
+report, which belongs with item 7.
 
 ### 2. Add one detachable trace
 
 Not a new store bolted onto the audit tables, and not a hook set of its own.
-One interface, a no-op by default, injected at the composition root:
+One interface, a no-op by default, injected at the composition root. A trace
+context carries the current span across asynchronous calls; a writer only
+persists events when an explicit debug run enables it:
 
 ```ts
 interface Trace {
   event(e: TraceEvent): void;
+  span<T>(context: TraceSpan, run: () => Promise<T>): Promise<T>;
 }
 ```
 
-Three insertion points cover the entire system, because the call graph already
-funnels through three places:
+Use explicit propagation or Node `AsyncLocalStorage`; do not assume a JavaScript
+call stack gives asynchronous work a parent automatically. This is also what
+keeps future concurrent specialists in separate branches of the same trace.
+
+Three call funnels capture execution, and one acceptance boundary captures
+whether execution affected the product:
 
 | Insertion point | Covers |
 |---|---|
 | `QueryEngine.query()` | **Every** model call — Main Agent, every specialist, Deep Research, the report writer. Nothing reaches a model any other way |
 | `SubAgent.callTool()` | Every inner tool call made by a specialist or by Deep Research |
 | The existing hook pipeline | Main-loop tool calls, which are already hooked — forward them whole rather than truncated |
+| Diagnosis aggregation and report acceptance | Stable finding provenance: which specialist result became which accepted finding and which report point |
 
-Order matters: `QueryEngine` first. It is the single largest yield and it needs
-no per-agent instrumentation. Adding correlation ids before there are events to
-correlate builds an empty skeleton.
+Order matters: build the minimal `TraceContext` and secure writer together with
+the first `QueryEngine` instrumentation. `QueryEngine` is still the largest
+yield and needs no per-agent instrumentation, but its current parameters do not
+contain `sessionId`, actor, turn, target or parent id; without trace context it
+would produce complete prompts that cannot be attributed to a run. Record a
+query span, selected route/model, cache hit, retry attempts, final response or
+failure.
 
 ```ts
 interface TraceEvent {
@@ -126,45 +149,46 @@ interface TraceEvent {
   parentEventId?: string;
   sessionId: string;
   turn: number;
-  actor:
-    | 'main-agent'
-    | 'content'
-    | 'wording'
-    | 'narrative'
-    | 'format'
-    | 'jd-match'
-    | 'deep-research'
-    | 'report-writer';
+  actor: {
+    kind: 'main' | 'specialist' | 'nested' | 'system';
+    id: string; // e.g. content, deep-research, report-writer, history-summary
+  };
   phase: 'input' | 'decision' | 'dispatch' | 'tool' | 'result' | 'failure' | 'output';
   target?: { sectionId?: string; entryId?: string; bulletId?: string };
   purpose?: string;
   promptVersion?: string;
   model?: string;
   tool?: string;
-  /** The whole prompt and the whole result. This is the point of the trace. */
+  /** The whole visible prompt and result, with reasoning and credentials omitted. */
   input?: unknown;
   output?: unknown;
   success?: boolean;
   durationMs?: number;
   inputTokens?: number;
   outputTokens?: number;
-  affectedFindingIds?: string[];
+  sourceFindingIds?: string[];
+  reportPointIds?: string[];
 }
 ```
 
-- Parent-child comes from the call stack rather than from bookkeeping: a
-  `SubAgent` run already has a boundary, so it opens a span and everything
-  beneath it inherits the id.
+- A user turn opens the root span. Main Agent, tool, specialist and nested-agent
+  boundaries open children; every QueryEngine and tool event inherits the
+  current trace context.
 - `purpose` is a short stated reason such as "check whether this technical
   metric is credible", not hidden chain-of-thought.
 - Record prompt/config/model versions so behaviour can be compared across
   changes.
-- Written as JSONL to a gitignored directory. No redaction and no truncation —
-  a trace that cannot reconstruct what happened answers nothing.
-- The privacy line already in place is unaffected: it governs what is *sent to
-  a model*, and the trace records what was already sent.
+- Record full model-visible text without truncation, but serialise a deliberate
+  request/response snapshot rather than raw runtime objects: exclude callbacks,
+  `AbortSignal`, credentials, `Message.reasoning`, `ParsedResponse.reasoning`
+  and provider opaque/encrypted reasoning state.
+- Write JSONL into a gitignored, session-scoped directory with owner-only file
+  permissions, a bounded retention policy, explicit deletion, and a size cap or
+  content-addressed deduplication for repeated prompts. The trace is still
+  sensitive even when every field was already sent to a model.
 - Production injects the no-op, which costs nothing. Removing the facility
-  entirely is deleting three call sites.
+  entirely removes the trace context/writer and the four instrumentation
+  boundaries above without changing agent behaviour.
 
 ### 3. Cover Main-Agent behaviour
 
@@ -203,13 +227,36 @@ inside a call the gate approved, and re-running permission, audit and memory
 per inner call would multiply confirmations, audit rows and memory writes. The
 trace records; it does not govern. `SubAgent.callTool()` is where it attaches.
 
-### 5. Make specialist briefing deterministic
+### 5. Add stable finding identity and provenance
 
-- ~~Populate `pageRoom` from the parsed document~~ — already done in
-  `review.ts:66`.
+Execution trace alone cannot answer whether a specialist result survived
+aggregation or became a report claim. Today most specialist findings are
+strings, and `FullReportPoint` has no stable id; a report-writing pass may
+rewrite or merge the text, so text matching cannot provide that link.
+
+- Give each accepted source finding a stable `findingId`, its source role and
+  résumé target (`sectionId` / `entryId` / `bulletId` where applicable), and
+  the trace event that produced it.
+- Give each report point its own stable id and `sourceFindingIds`. A report
+  point may combine several findings, but it must not invent a source id.
+- Pass the allowlisted source ids through the report-writer contract and
+  validate every returned id before accepting the report.
+- Emit acceptance events at aggregation and report construction, using
+  `sourceFindingIds` and `reportPointIds` to connect execution to product
+  output.
+
+This is provenance, not a requirement that wording remain unchanged from
+specialist output to report prose.
+
+### 6. Make specialist briefing deterministic
+
+- Populate `pageRoom` from the parsed document. `review.ts:66` contains the
+  calculation, but it is currently dead: `briefingFrom()` never calls it and
+  `briefingContext()` does not render the field. Derive it from `resume.meta`
+  at dispatch time so correctness does not depend on `review_format` running
+  first, then attach it to and render it from the final briefing.
 - Select relevant `suppliedFacts` from session state automatically; do not rely
-  on the Main Agent copying them into `supplied` on every dispatch. This is the
-  only half of this item still outstanding.
+  on the Main Agent copying them into `supplied` on every dispatch.
 - Keep `understanding` and `goal` as Main-Agent inputs because they express the
   user's conversational intent.
 - Trace the final briefing actually sent, not merely the fields requested by
@@ -217,7 +264,7 @@ trace records; it does not govern. `SubAgent.callTool()` is where it attaches.
 - Ensure a repeated review after user corrections uses updated facts and
   constraints rather than stale briefing data.
 
-### 6. Make completion and failure observable
+### 7. Make completion and failure observable
 
 Track actual coverage independently from conversational prose. The existing
 `ReportCoverage` counts (`contentReviewed: number`) cannot distinguish "not
@@ -245,7 +292,7 @@ interface ReviewCoverage {
 
 ## Verification before spending
 
-### 7. Add mechanical trace and workflow tests
+### 8. Add mechanical trace and workflow tests
 
 Moved ahead of the live run: these use stubbed agents, cost nothing, and catch
 the structural faults that would otherwise be discovered by paying for a
@@ -254,13 +301,19 @@ ten-step conversation and reading a broken trace.
 - Every agent/tool event has one trace id and a valid parent chain.
 - The trace can reconstruct dispatch order, results, retries, and failures.
 - Prompt versions and the effective context are inspectable.
+- Trace snapshots contain the complete model-visible input and output but omit
+  credentials, `Message.reasoning`, `ParsedResponse.reasoning`, and provider
+  opaque/encrypted reasoning state.
+- Debug traces use the intended session directory, owner-only permissions,
+  bounded retention, and explicit deletion; a normal run creates no trace.
 - **The trace reconciles against itself.** Format checks are not enough. What
   will actually go wrong is semantic: five specialists dispatched and four in
-  the trace; an `affectedFindingIds` pointing at a finding the report does not
-  contain. This is the same failure the parser's integrity pass exists for —
-  every layer did what it was asked and the loss lives in the seam between
-  them. Record dispatched vs completed vs failed, and require every
-  `affectedFindingIds` to resolve to a finding that reached the report.
+  the trace; a `sourceFindingId` pointing at a finding aggregation never
+  accepted; a `reportPointId` with no source. This is the same failure the
+  parser's integrity pass exists for — every layer did what it was asked and
+  the loss lives in the seam between them. Record dispatched vs completed vs
+  failed, and require every source-finding/report-point link to resolve in both
+  directions.
 - Specialist failure remains visible in coverage and report generation.
 - Report citations and IDs resolve to the parsed résumé.
 - Conversation, `/report`, and export use one canonical finding set.
@@ -271,7 +324,7 @@ These tests verify mechanics, not whether an agent's judgement was sensible.
 
 ## Real long-conversation evaluation
 
-### 8. Run one realistic end-to-end user scenario
+### 9. Run one realistic end-to-end user scenario
 
 **This spends real money and needs a budget agreed before it runs.** A four-agent
 diagnosis measured at roughly $0.13–0.17 and ten minutes; this scenario is
@@ -298,7 +351,7 @@ script that preselects the correct route:
 The output of this exercise is the conversation, final report, coverage, and
 complete hierarchical trace.
 
-### 9. Review the trace manually
+### 10. Review the trace manually
 
 Use the trace to answer:
 
@@ -315,14 +368,14 @@ Use the trace to answer:
 Only after reviewing real traces should routing prompts, confirmation policy,
 or automatic full-versus-focused rules be changed.
 
-### 10. Build diagnosis-quality evals after tracing works
+### 11. Build diagnosis-quality evals after tracing works
 
 - Maintain a small fixed-résumé set with expected important findings.
 - Evaluate omissions, unsupported claims, citation/ID accuracy, and run-to-run
   score variance.
 - Compare prompt changes against the eval set before accepting them.
 - Use traces to locate whether a failure came from context, routing, briefing,
-  specialist reasoning, nested tools, aggregation, or report writing.
+  specialist analysis/output, nested tools, aggregation, or report writing.
 
 ## Later work
 
@@ -349,6 +402,8 @@ it, which is why the trace comes before any change to routing or policy.
    deep and not one of them recorded.
 3. Model prompts and responses are recorded nowhere at all. The audit log stops
    at the tool boundary and keeps 200 characters of each side.
-4. Candidate-supplied facts are not propagated deterministically.
-5. Partial, failed, reused, and complete work can be presented too similarly.
-6. Report surfaces are not yet guaranteed to render one canonical finding set.
+4. Findings and report points have no stable identity/provenance, so even a
+   complete execution trace cannot show which result survived aggregation.
+5. `pageRoom` and candidate-supplied facts are not propagated deterministically.
+6. Partial, failed, reused, and complete work can be presented too similarly.
+7. Report surfaces are not yet guaranteed to render one canonical finding set.

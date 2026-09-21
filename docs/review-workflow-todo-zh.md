@@ -29,11 +29,15 @@
 - 输入、结果、失败、耗时和 token；
 - 结果是否进入下一层诊断和最终报告。
 
+Trace 是显式开启的开发工具，不是产品日志。它会形成一份新的高敏感数据副本，因此首版必须使用 session 独立目录、仅文件所有者可读写、有限保留期和显式删除，并始终排除凭证。
+
+**首版不保存 reasoning。** 运行时仍可正常传递 provider 需要的 reasoning 状态，但 trace writer 排除 `ParsedResponse.reasoning`、历史 `Message.reasoning` 和 provider 的 `encrypted_content`。先用完整的可见 prompt、message、tool call、模型正文和结果做人工 review；不足时再单独评估 reasoning summary。
+
 ## 对照代码核查过的三件事
 
 - **审计库要原样保留**，不扩展。它自己的注释写着「够认出来，不够重建」——参数脱敏、两边各截 200 字，因为逐字存简历就等于存第二份拷贝。而 trace 要的正是「重建」。两者放一个库，必有一个失去意义。
 - **参考项目里没有 trace 实现**。它的 hook 清单和本项目一模一样，可借鉴的是 hook 这个**可插拔模式**本身。
-- **`pageRoom` 已经做完了**（`review.ts:66` 从 session 现场算），第 5 条只剩 `suppliedFacts`。
+- **`pageRoom` 还没有真正传给专家**。`review.ts:66` 只有计算函数，但当前无人调用；`briefingFrom()` 不填它，`briefingContext()` 也不渲染。对话样例中写“缺失”是准确的。
 
 ## 当前可见性
 
@@ -55,14 +59,15 @@
 
 ## 当前优先级
 
-1. **完成报告链路** —— 已完成（`84d7421`）。剩下"对话展示的是节选还是全文"要说清楚，归入第 5 条。
+1. **完成报告链路** —— 已完成（`84d7421`）。剩下“对话展示的是节选还是全文”要在 coverage/完成状态中说清楚。
 
 2. **建立可拆卸的 trace**
-   - 一个 `Trace` 接口，生产注入 no-op，开销为零；删除就是删三处调用。
-   - **三个插入点覆盖全系统**：`QueryEngine.query()`（所有模型调用，一个不漏）、`SubAgent.callTool()`（专家与 Deep Research 的内层工具）、现有 hook 管线（主循环工具调用，改为不截断转发）。
-   - **先做 QueryEngine**：杠杆最大，且不需要逐个 agent 插桩。先建 id 关联会得到一副空骨架。
-   - 父子关系由调用栈自然形成：`SubAgent` 的一次 run 开一个 span，其下全部继承。
-   - **不脱敏、不截断**，JSONL 落到 gitignore 的目录。与刚立的隐私线不冲突：那道线守的是"送进模型的内容"，trace 记的是"已经送了什么"。
+   - 一个 `Trace` 接口，生产注入 no-op；显式 debug run 才写入。
+   - 先同时建立最小 `TraceContext`、安全 writer 和 `QueryEngine.query()` 插桩。当前 `QueryEngine` 参数没有 session、actor、turn、target、parent，不能先记一堆无法归属的 prompt。
+   - 用显式 context 传递或 Node `AsyncLocalStorage` 维护父子 span；不能假定异步调用栈会自然形成关联，并发后尤其如此。
+   - **四个边界**：`QueryEngine.query()`（所有模型调用）、`SubAgent.callTool()`（内层工具）、现有 hook 管线（主循环工具）、诊断汇总与报告接纳（finding 是否进入产品输出）。
+   - actor 使用可扩展的 `{ kind, id }`，不要只写死现有专家；报告 writer、历史压缩、改写等也会调用模型。
+   - 完整保存模型**可见**输入输出，不截断；但明确排除 reasoning、opaque/encrypted reasoning、凭证和不可序列化运行时对象。
 
 3. **补齐 Main Agent 可观测性**
    - 能看到它在什么上下文下选择了哪些 role 和目标。
@@ -75,15 +80,25 @@
    - **不要为此扩展 hook 边界**：现有设计是有意的，子 agent 已在批准过的调用内部，逐次重跑权限/审计/记忆会把三者都乘一遍。trace 只记录，不治理。
    - 记录研究结果是否真正影响 Content diagnosis 和最终报告。
 
-5. **确定性生成 briefing 和 coverage**
-   - ~~自动填写 `pageRoom`~~ —— 已完成。只剩自动选择相关 `suppliedFacts`。
+5. **给 finding 和报告点稳定身份与来源链**
+   - 仅有调用 trace 仍无法证明专家输出是否被汇总采用；当前 finding 多为字符串，`FullReportPoint` 也没有稳定 id，不能靠改写后的文本匹配。
+   - 每个被接纳的 source finding 带 `findingId`、来源 role、简历目标和产出它的 trace event。
+   - 每个报告点带自己的 id 与 `sourceFindingIds`；报告 writer 可以合并多个 finding，但只能返回 allowlist 内的来源 id，并在接纳前校验。
+   - 汇总和报告构建发出 acceptance event，用 `sourceFindingIds` / `reportPointIds` 串起“执行 → finding → 报告”。
+
+6. **确定性生成 briefing**
+   - 从 `resume.meta` 在派发时计算 `pageRoom`，加入最终 briefing 并由 `briefingContext()` 渲染；不要依赖 `review_format` 是否先运行。
+   - 自动选择相关 `suppliedFacts`，不要依赖 Main Agent 每次手工复制。
    - 保留 Main Agent 提供的 `understanding` 和 `goal`。
+
+7. **让 completion / failure / coverage 可见**
    - 区分 `reviewed / failed / not-run / not-applicable`。
    - 不允许 specialist 失败被伪装成成功或主动跳过。
+   - 对话、`/report` 和导出报告使用同一 coverage，并说明对话显示的是节选还是全文。
 
 ## 先做机械测试，再花钱
 
-用 stub agent 验证 trace 的父子链完整、失败可见、**trace 能自我对账**——派发数 vs 完成数 vs 失败数，`affectedFindingIds` 必须解析到报告里真实存在的 finding。这和解析层 B5 是同一类问题：每层都做了被要求的事，失败活在层与层之间的缝里。
+用 stub agent 验证 trace 的父子链完整、失败可见、**trace 能自我对账**：派发数 vs 完成数 vs 失败数；每个 `sourceFindingId` 和 `reportPointId` 都必须双向解析；完整可见输入输出被保留，但 reasoning、opaque state 和凭证必须缺席；普通运行不产生 trace，debug trace 满足目录、权限、保留和删除策略。这和解析层 B5 是同一类问题：每层都做了被要求的事，失败活在层与层之间的缝里。
 
 ## 真实长对话测试
 
