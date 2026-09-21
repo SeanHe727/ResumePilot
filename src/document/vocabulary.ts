@@ -63,7 +63,44 @@ export const EMAIL = /[\w.+-]+@[\w-]+\.[\w.]+/;
 export const PHONE = /\+?\d(?:[\s()-]{0,2}\d){7,}/;
 
 /**
- * The same two, with every match replaced by what it was.
+ * Every run of digits that could be a phone number, opening bracket included.
+ *
+ * Wider than `PHONE` on purpose, and never used to answer a question. Asking
+ * whether a resume gives a number at all can afford to be approximate; cutting
+ * a number out of a sentence cannot, so the candidates this finds are each put
+ * to `isPhoneNumber` before anything is removed.
+ */
+const PHONE_CANDIDATE = /\+?\(?\d(?:[\s()-]{0,2}\d){7,}/g;
+
+/**
+ * Whether a run of digits is a phone number rather than a number.
+ *
+ * Detecting one and deleting one are different jobs and had been sharing a
+ * pattern. Eight digits with something between them is a low enough bar to ask
+ * "is there a number here", and far too low to cut: measured, it took
+ * `2025-2026` out of an entry header, `10000000 users` out of a bullet, and
+ * `Employee ID 12345678` out of a line about a system. The first of those is
+ * the dates of a job, and a reader asked whether a career reads in order lost
+ * them without being told.
+ *
+ * So a date range is left alone whatever it is made of, and what is cut has to
+ * look dialled rather than counted: an international prefix, an area code in
+ * brackets, three groups of digits, or ten digits in total. A round number and
+ * a pair of years have none of those.
+ */
+function isPhoneNumber(candidate: string): boolean {
+  const trimmed = candidate.trim();
+  const date = DATE_RANGE.exec(trimmed);
+  if (date && date[0].length === trimmed.length) return false;
+
+  if (trimmed.startsWith('+')) return true;
+  if (/\(\d{2,4}\)/.test(trimmed)) return true;
+  if ((trimmed.match(/\d/g) ?? []).length >= 10) return true;
+  return trimmed.split(/[\s()-]+/).filter(Boolean).length >= 3;
+}
+
+/**
+ * The text with any way of reaching the candidate taken out of it.
  *
  * Applied where a resume becomes a prompt, and applied to all of it rather
  * than to the block a classifier called `contact`. Filing is a judgement and
@@ -78,7 +115,7 @@ export const PHONE = /\+?\d(?:[\s()-]{0,2}\d){7,}/;
 export function withoutContactDetails(text: string): string {
   return text
     .replace(new RegExp(EMAIL.source, 'g'), '[email]')
-    .replace(new RegExp(PHONE.source, 'g'), '[phone]');
+    .replace(PHONE_CANDIDATE, (match) => (isPhoneNumber(match) ? '[phone]' : match));
 }
 
 export function isBulletLine(text: string): boolean {

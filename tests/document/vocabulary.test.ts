@@ -6,6 +6,7 @@ import {
   PHONE,
   isBulletLine,
   stripBulletMarker,
+  withoutContactDetails,
 } from '../../src/document/vocabulary.js';
 
 /**
@@ -89,4 +90,54 @@ describe('recognising a way to reach someone', () => {
     'reads no address in %s',
     (text) => expect(EMAIL.test(text)).toBe(false),
   );
+});
+
+describe('taking a way to reach someone out of a sentence', () => {
+  // Detecting a number and cutting one out are different jobs, and they had
+  // been sharing a pattern. Eight digits with something between them is a low
+  // enough bar to ask whether a resume gives a number, and far too low to cut.
+  it.each([
+    ['+1 (555) 010-2468', '[phone]'],
+    ['+86 138 0000 0000', '[phone]'],
+    ['(563) 772 9355', '[phone]'],
+    ['555-010-2468', '[phone]'],
+    ['13800000000', '[phone]'],
+  ])('takes %s out', (text, expected) => {
+    expect(withoutContactDetails(text)).toBe(expected);
+  });
+
+  it.each([
+    // The dates of a job, in the header of the entry that holds it. A reader
+    // asked whether a career reads in order lost them without being told.
+    'Mobility Systems Company | ML Engineer | 2025-2026',
+    'Scaled to 10000000 users across three regions',
+    'Employee ID 12345678',
+    'M.S. in Engineering Sep 2021 - Jun 2025',
+    'Reduced peak VRAM by 68% (8,400 to 2,700 MB)',
+    'on COCO-2017 (100K images) through target-layer distillation',
+  ])('leaves %s alone', (text) => {
+    expect(withoutContactDetails(text)).toBe(text);
+  });
+
+  it.each(['2021-06-2022', '2021-06-2022-09'])(
+    'leaves %s alone because it is a date range, whatever shape it is',
+    (text) => {
+      // Ten digits in three groups, which is what a dialled number looks like.
+      // Nothing about the shape saves these; being a range does.
+      expect(DATE_RANGE.exec(text)?.[0]).toBe(text);
+      expect(withoutContactDetails(text)).toBe(text);
+    },
+  );
+
+  it('takes an address out wherever it sits in a line', () => {
+    expect(withoutContactDetails('Questions to jordan.lee@example.com, any time')).toBe(
+      'Questions to [email], any time',
+    );
+  });
+
+  it('leaves the rest of the line exactly as it was', () => {
+    expect(withoutContactDetails('Jordan Lee | +1 (555) 010-2468 | Metro City')).toBe(
+      'Jordan Lee | [phone] | Metro City',
+    );
+  });
 });
