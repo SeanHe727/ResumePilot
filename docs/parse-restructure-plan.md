@@ -609,7 +609,20 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 **输入只有组装好的 section。** 拿不到行、字号、缩进,所以改不了结构 —— 这是类型层面的保证,不是注释里的承诺。
 
-三类证据,权重 3 / 2 / 1:标题(候选人写的一个词)、形状(整段的样子)、内容(词长什么样)。**形状压过标题**:一次词表命中比任何单条形状证据重,但比两条轻。
+**词表认得的标题说了算(与计划正文相反,是 review 后的决定)。** 人对"这段叫什么"的写法,比对"这段怎么排"统一得多。而且只有一个 kind 真的控制行为。
+
+**判错的影响,实测只有一种要紧**(全项目仅 5 处读 `kind`,其中 4 处关于 contact):
+
+| 判错方向 | 后果 |
+|---|---|
+| 正常段落被判成 `contact` | **整段对 agent 隐身** —— 渲染、报告、协调器三处都过滤 contact |
+| 真的 contact 被判成别的 | 手机号邮箱泄露给模型;"缺少联系方式"误报 |
+| `skills` ↔ 其它 | 只影响一条自评检查,不计分 |
+| experience ↔ project ↔ education ↔ summary | **不控制任何行为** |
+
+而 **`contact` 根本不由词表决定** —— 它是"这块没有自己的标题",是关于切分的事实。所以唯一要紧的那一类,完全不在"信标题还是信形状"这个争论里。
+
+词表认不出标题时(`Leadership` / `Awards`),形状独自判定 —— 这才是形状证据真正要干的活。三类证据仍然计分,权重 3 / 2 / 1,并且**分歧照样记录**:形状想判别的,`confidence` 落到 0、`runnerUp` 写下它想判什么。
 
 | 形状 | 判给 |
 |---|---|
@@ -619,23 +632,17 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 | 无条目 + 散文 | summary |
 | 没有自己的标题 | contact |
 
-**平局判给形状。** 实测可达:叫 `Summary` 却装着一条带 bullet 的职位,总分 3:3,靠形状判成 experience,`confidence` 记 0 —— 如实说明它是平局。
-
 **`other` 拆成了两件事。** `kind` 落在形状最像的那个;"标题不在词表内"变成 `classification.headingUnknown`。原本 `analyze-format.ts` 的 ATS blocker 挂在 `kind === 'other'` 上,B4 不再产出它之后那条检查会静默失效 —— 和 `scoreConsistency` 同一种病。现已改挂 `headingUnknown`,`messy-resume.pdf` 仍能报出 `unrecognised section heading "What I Have Done"`。
 
 `other` 只在"什么都没有可称量"时出现(有标题、没条目、没行),那是 B5 的空 section。
 
 **`Expected Jun 2027`**(两份简历都有):限定词正好坐在收尾日期该在的位置,原来整个范围匹配不上,那个条目就不算 education 了。
 
-变异验证六条,逐条转红:标题权重压过形状、形状权重归零、内容权重归零、去掉平局判据、`headingUnknown` 恒假、去掉日期限定词。
+变异验证六条,逐条转红:标题不再决定、形状权重归零、内容权重归零、`confidence` 允许为负、`headingUnknown` 恒假、去掉日期限定词。
 
-测试:`tests/document/section-kind.test.ts`(新,18 条)。14 条用手写 section(拿不到页面,正是重点),4 条走真实 PDF。
+测试:`tests/document/section-kind.test.ts`(新,17 条)。13 条用手写 section(拿不到页面,正是重点),4 条走真实 PDF。
 
 **实测分类**(两份简历一致):contact / education / experience / project / skills 全对,每一段的 `confidence` 都大于 0。
-
-### 遗留(不阻塞 B5)
-
-**一条没有标签的技能行压不过错的标题。** 叫 `EXPERIENCE` 而内容是 `TypeScript, Python, Go`(逗号成列但没有 `语言:` 前缀)→ 只有一条形状证据(2),压不过词表命中(3),判成 experience,`confidence` 记 1、`runnerUp` 记 skills。计划正文举的就是这个例子,但计划定的 3:2:1 权重说"推翻词表要两条以上形状证据" —— 例子与权重本身不自洽。**两份真实简历的技能行都带 `Programming:` 这类前缀,能凑满两条,判对。** 按"最小改动、不扩展"保持现状,低置信度已记录。
 
 ## 验证方式(全部本地,不调模型)
 

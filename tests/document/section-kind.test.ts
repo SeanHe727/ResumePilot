@@ -110,8 +110,24 @@ describe('reading a section by its shape', () => {
 });
 
 describe('when the shape and the heading disagree', () => {
-  it('reads dated bulleted entries as work, whatever the heading calls them', () => {
-    // A heading is one word somebody chose; the shape is the whole section.
+  it('files a section as the candidate named it, and records the disagreement', () => {
+    // Called EXPERIENCE, and holding a labelled line of languages. People are
+    // more consistent about what they call a section than about how they set
+    // one, and only `contact` decides anything downstream — which is settled
+    // by a block having no heading at all, not by the vocabulary. So the
+    // heading is followed, and what the shape wanted is written down.
+    const { kind, classification } = classifySection(
+      section({ heading: 'EXPERIENCE', infoLines: ['Languages: TypeScript, Python, Go'] }),
+    );
+
+    expect(kind).toBe('experience');
+    expect(classification.confidence).toBe(0);
+    expect(classification.runnerUp).toEqual({ kind: 'skills', score: 4 });
+  });
+
+  it('leaves the shape to decide where the vocabulary knows nothing', () => {
+    // `Leadership` is not a word the vocabulary has, so nothing overrules the
+    // three dated entries with bullets under them.
     const { kind, classification } = classifySection(
       section({
         heading: 'Leadership',
@@ -122,34 +138,7 @@ describe('when the shape and the heading disagree', () => {
     );
 
     expect(kind).toBe('experience');
-    expect(classification.evidence).toContainEqual(expect.stringContaining('with bullets'));
-  });
-
-  it('refuses a recognised heading two shape signals contradict', () => {
-    // Called EXPERIENCE, and holding one comma-separated line of languages.
-    // A heading match outranks any single shape signal and loses to two.
-    const { kind, classification } = classifySection(
-      section({ heading: 'EXPERIENCE', infoLines: ['Languages: TypeScript, Python, Go'] }),
-    );
-
-    expect(kind).toBe('skills');
-    expect(classification.runnerUp).toEqual({ kind: 'experience', score: 3 });
-  });
-
-  it('gives a dead heat to the shape, which is the whole section', () => {
-    // Called `Summary` and holding a position with bullets under it. The
-    // heading is worth exactly what one shape signal plus one content signal
-    // is worth, so the totals tie and only the conflict rule separates them.
-    const { kind, classification } = classifySection(
-      section({
-        heading: 'Summary',
-        entries: [entry(['Mobility Systems'], ['Built an inspection system'])],
-      }),
-    );
-
-    expect(kind).toBe('experience');
-    expect(classification.confidence).toBe(0);
-    expect(classification.runnerUp).toEqual({ kind: 'summary', score: 3 });
+    expect(classification.headingUnknown).toBe(true);
   });
 
   it('keeps a recognised heading that only one shape signal argues with', () => {

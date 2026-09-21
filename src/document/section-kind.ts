@@ -16,12 +16,24 @@
  *   the shape       what the section is made of
  *   the content     what the words in it look like
  *
- * **Shape outranks the heading.** A heading is one word somebody chose; the
- * shape is the whole section. A section called `Leadership` holding three
- * dated entries with bullets under them is experience whatever it says at the
- * top, and a section called `EXPERIENCE` holding one comma-separated line of
- * languages is not. The weights are what make that true: a heading match is
- * worth more than any single shape signal, and less than two of them.
+ * **A heading the vocabulary knows settles it.** People are more consistent
+ * about what they call a section than about how they set one, and only one
+ * kind decides anything downstream: `contact` is dropped before a resume
+ * reaches a model, so a section wrongly called that disappears. Everything
+ * else — experience against project, education against summary — gates no
+ * behaviour at all, and picking between them from a shape rather than from
+ * the word above it buys nothing to be wrong about.
+ *
+ * `contact` is not settled by the vocabulary anyway. It is the block with no
+ * heading of its own, which is a fact about the cut rather than a word, so the
+ * one kind that matters is out of this argument entirely.
+ *
+ * The evidence is still weighed, and still recorded. Where the shape disagrees
+ * with the heading the confidence falls to zero and the runner-up names what
+ * the shape wanted — a section called `EXPERIENCE` holding one labelled line
+ * of languages is filed as the candidate asked and reported as a disagreement.
+ * Where the vocabulary knows nothing, the shape decides alone: `Leadership`
+ * with three dated bulleted entries is experience.
  */
 import type { ResumeSection, SectionClassification, SectionKind } from '../domain.js';
 import { DATE_RANGE, SECTION_PATTERNS } from './vocabulary.js';
@@ -64,7 +76,7 @@ export function classifySection(section: ResumeSection): {
     ...contentSignals(section),
   ];
 
-  const { kind, confidence, runnerUp } = tally(signals);
+  const { kind, confidence, runnerUp } = tally(signals, named?.kind);
 
   return {
     kind,
@@ -174,37 +186,45 @@ function contentSignals(section: ResumeSection): Signal[] {
 }
 
 /**
- * The highest total, and how far ahead of the next it finished.
+ * Which kind the evidence lands on, and how far ahead it finished.
  *
- * Ties go to the kind with more of its score from the shape, which is the
- * conflict rule written out: the heading is one word somebody chose and the
- * shape is the whole section. With nothing to weigh at all the answer is
- * `other` — a section with no heading, no entries and no lines, which the
- * integrity pass has its own name for.
+ * A heading the vocabulary knows takes it regardless of the totals; what the
+ * totals then say is how much the rest of the section agreed. A shape that
+ * wanted something else leaves the confidence at zero and its choice in the
+ * runner-up, which is the whole disagreement, recorded rather than resolved.
+ *
+ * With nothing to weigh at all the answer is `other` — a heading with no
+ * entries and no lines under it, which the integrity pass has a name for.
  */
-function tally(signals: Signal[]): {
+function tally(
+  signals: Signal[],
+  named: SectionKind | undefined,
+): {
   kind: SectionKind;
   confidence: number;
   runnerUp?: { kind: SectionKind; score: number };
 } {
-  const scores = new Map<SectionKind, { total: number; shape: number }>();
+  const scores = new Map<SectionKind, number>();
   for (const signal of signals) {
-    const at = scores.get(signal.kind) ?? { total: 0, shape: 0 };
-    at.total += signal.weight;
-    if (signal.weight === SHAPE) at.shape += signal.weight;
-    scores.set(signal.kind, at);
+    scores.set(signal.kind, (scores.get(signal.kind) ?? 0) + signal.weight);
   }
 
-  const ranked = [...scores.entries()].sort(
-    ([, a], [, b]) => b.total - a.total || b.shape - a.shape,
-  );
-  const [first, second] = ranked;
-  if (!first) return { kind: 'other', confidence: 0 };
+  // Stable, so a dead heat between two kinds the evidence cannot separate
+  // falls to the order the signals were gathered in — the heading, then the
+  // shape, then the content. Which of experience and project wins such a tie
+  // is arbitrary and harmless: neither gates anything a reader would notice.
+  const ranked = [...scores.entries()].sort(([, a], [, b]) => b - a);
+  const chosen = named !== undefined ? ranked.find(([kind]) => kind === named) : ranked[0];
+  if (!chosen) return { kind: named ?? 'other', confidence: 0 };
+
+  const next = ranked.find(([kind]) => kind !== chosen[0]);
 
   return {
-    kind: first[0],
-    confidence: first[1].total - (second?.[1].total ?? 0),
-    ...(second ? { runnerUp: { kind: second[0], score: second[1].total } } : {}),
+    kind: chosen[0],
+    // Never below zero: a heading that overruled the shape did not finish
+    // ahead of it, and saying by how much it lost would read as a margin.
+    confidence: Math.max(0, chosen[1] - (next?.[1] ?? 0)),
+    ...(next ? { runnerUp: { kind: next[0], score: next[1] } } : {}),
   };
 }
 
