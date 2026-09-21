@@ -1,11 +1,11 @@
 import { extname } from 'node:path';
 
-import type { ResumeDocument, SectionKind } from '../domain.js';
+import type { ResumeDocument } from '../domain.js';
 import { assemble } from './assemble.js';
 import { PdfExtractor } from './extractors/pdf.js';
 import { labelRows } from './row-labels.js';
 import { findSectionBoundaries } from './section-boundaries.js';
-import { SECTION_PATTERNS } from './vocabulary.js';
+import { classifySection } from './section-kind.js';
 import type { DocumentExtractor, ExtractionResult, ResumeParser } from './types.js';
 
 export class UnsupportedFormatError extends Error {
@@ -75,19 +75,18 @@ export class DefaultResumeParser implements ResumeParser {
  * The document, assembled from the rows the extractor rebuilt.
  *
  * Every judgement was taken before this: where the sections start, what each
- * row is, which level it belongs to. What is left is naming the sections, and
- * that is done here only until B4 does it properly — from the heading's own
- * words, which is the weakest of the three kinds of evidence a section offers.
+ * row is, which level it belongs to, and — from the assembled shape alone —
+ * what each section is.
  */
 function fromRows(extracted: ExtractionResult, sourcePath: string): ResumeDocument {
   const rows = extracted.rows ?? [];
   const boundaries = findSectionBoundaries(rows);
   const labels = labelRows(rows, boundaries);
 
-  const sections = assemble(rows, boundaries, labels).map((section) => ({
-    ...section,
-    kind: provisionalKind(section.heading),
-  }));
+  const sections = assemble(rows, boundaries, labels).map((section) => {
+    const { kind, classification } = classifySection(section);
+    return { ...section, kind, classification };
+  });
 
   return {
     sourcePath,
@@ -101,21 +100,6 @@ function fromRows(extracted: ExtractionResult, sourcePath: string): ResumeDocume
       layoutWarnings: extracted.layoutWarnings,
     },
   };
-}
-
-/**
- * What a section is called, read from its heading alone.
- *
- * A placeholder for B4, which weighs the shape of the section above the word
- * at the top of it — a section called `Leadership` holding three dated entries
- * with bullets is experience whatever its heading says. Until then the heading
- * is all that is read, and a block with no heading of its own is the contact
- * block, which is the one case the heading cannot speak for.
- */
-function provisionalKind(heading: string): SectionKind {
-  if (!heading) return 'contact';
-  const cleaned = heading.trim().replace(/[:：]\s*$/, '');
-  return SECTION_PATTERNS.find(({ pattern }) => pattern.test(cleaned))?.kind ?? 'other';
 }
 
 /** Words, counting CJK characters one apiece. */

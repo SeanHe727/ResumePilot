@@ -34,6 +34,16 @@ describe('recognising a date range', () => {
     '2024年6月至今',
   ])('reads %s as a range', (text) => expect(DATE_RANGE.test(text)).toBe(true));
 
+  it('reads an end date the resume has not reached yet', () => {
+    // `Sep 2025 - Expected Jun 2027` is how a degree in progress is written,
+    // and both resumes to hand have one. The qualifier sits exactly where the
+    // closing date was expected, so without it the range matched nothing at
+    // all — and the entry it dates stopped counting as education.
+    expect(DATE_RANGE.exec('M.S. in Computer Engineering Sep 2025 - Expected Jun 2027')?.[0]).toBe(
+      'Sep 2025 - Expected Jun 2027',
+    );
+  });
+
   it('matches both ends of a range rather than stopping at the year', () => {
     // Written asymmetrically — a month allowed on the start and not the end —
     // the pattern still matches, just short, silently dropping the closing

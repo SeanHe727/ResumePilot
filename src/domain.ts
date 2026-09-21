@@ -98,6 +98,32 @@ export interface ResumeEntry {
   span: SourceSpan;
 }
 
+/**
+ * Why a section was given the kind it has, and how nearly it was given
+ * another.
+ *
+ * Recorded rather than acted on. A section the evidence barely settled is the
+ * one worth a second look, and a number that says so is how it gets asked for
+ * — by a reader, or by the integrity pass, rather than by a rule here that
+ * would be guessing twice.
+ */
+export interface SectionClassification {
+  /** How far ahead the winner finished. Zero means two kinds fit equally. */
+  confidence: number;
+  evidence: string[];
+  runnerUp?: { kind: SectionKind; score: number };
+  /**
+   * The heading is not one the vocabulary knows.
+   *
+   * Kept apart from `kind`, which used to carry both facts at once: a section
+   * whose heading nobody recognises still has a shape, and reading it as prose
+   * because of its name dropped its bullets where nothing looks. What the name
+   * does say is that a commercial parser will not place it either, which is a
+   * finding in its own right.
+   */
+  headingUnknown: boolean;
+}
+
 export interface ResumeSection {
   id: string;
   kind: SectionKind;
@@ -112,6 +138,7 @@ export interface ResumeSection {
    */
   looseLines: string[];
   infoLines?: string[];
+  classification?: SectionClassification;
   /** Bullets the section carries itself, under no entry. */
   bullets?: SectionBullet[];
   span: SourceSpan;

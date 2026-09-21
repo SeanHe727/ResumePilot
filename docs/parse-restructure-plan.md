@@ -597,6 +597,46 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 `resume_example.pdf` 的 PROJECTS 是 fixture 的问题,不是解析器的:项目标题行的字号与正文相同、粗体只是前缀(`dominant` 判为常规),唯一能救它的是行尾日期 `Aug 20XX - Present` —— 而 `20XX` 不是年份。真实简历同位置是 `Aug 2026 - Present`,走日期规则正确开条目。**该 fixture 的文本是十六进制字形索引,无法就地改年份,需要用源文件重新导出。**
 
+### B4 判断 section.kind ✅
+
+| 文件 | 改动 |
+|---|---|
+| `src/domain.ts` | 新增 `SectionClassification`;`ResumeSection` 新增 `classification?` |
+| `src/document/section-kind.ts` | 新增。`classifySection(section)` |
+| `src/document/parser.ts` | 删除 `provisionalKind()`,改调 `classifySection` |
+| `src/document/vocabulary.ts` | `DATE_RANGE` 支持 `Sep 2025 - Expected Jun 2027` |
+| `src/tools/analyze-format.ts` | ATS blocker 改读 `classification.headingUnknown` |
+
+**输入只有组装好的 section。** 拿不到行、字号、缩进,所以改不了结构 —— 这是类型层面的保证,不是注释里的承诺。
+
+三类证据,权重 3 / 2 / 1:标题(候选人写的一个词)、形状(整段的样子)、内容(词长什么样)。**形状压过标题**:一次词表命中比任何单条形状证据重,但比两条轻。
+
+| 形状 | 判给 |
+|---|---|
+| 有条目且带 bullet | experience + project(内容打破平手) |
+| 有条目、无 bullet、带日期 | education |
+| 无条目 + 行像列表 / 带 `标签:` 前缀 | skills(两条各算一条) |
+| 无条目 + 散文 | summary |
+| 没有自己的标题 | contact |
+
+**平局判给形状。** 实测可达:叫 `Summary` 却装着一条带 bullet 的职位,总分 3:3,靠形状判成 experience,`confidence` 记 0 —— 如实说明它是平局。
+
+**`other` 拆成了两件事。** `kind` 落在形状最像的那个;"标题不在词表内"变成 `classification.headingUnknown`。原本 `analyze-format.ts` 的 ATS blocker 挂在 `kind === 'other'` 上,B4 不再产出它之后那条检查会静默失效 —— 和 `scoreConsistency` 同一种病。现已改挂 `headingUnknown`,`messy-resume.pdf` 仍能报出 `unrecognised section heading "What I Have Done"`。
+
+`other` 只在"什么都没有可称量"时出现(有标题、没条目、没行),那是 B5 的空 section。
+
+**`Expected Jun 2027`**(两份简历都有):限定词正好坐在收尾日期该在的位置,原来整个范围匹配不上,那个条目就不算 education 了。
+
+变异验证六条,逐条转红:标题权重压过形状、形状权重归零、内容权重归零、去掉平局判据、`headingUnknown` 恒假、去掉日期限定词。
+
+测试:`tests/document/section-kind.test.ts`(新,18 条)。14 条用手写 section(拿不到页面,正是重点),4 条走真实 PDF。
+
+**实测分类**(两份简历一致):contact / education / experience / project / skills 全对,每一段的 `confidence` 都大于 0。
+
+### 遗留(不阻塞 B5)
+
+**一条没有标签的技能行压不过错的标题。** 叫 `EXPERIENCE` 而内容是 `TypeScript, Python, Go`(逗号成列但没有 `语言:` 前缀)→ 只有一条形状证据(2),压不过词表命中(3),判成 experience,`confidence` 记 1、`runnerUp` 记 skills。计划正文举的就是这个例子,但计划定的 3:2:1 权重说"推翻词表要两条以上形状证据" —— 例子与权重本身不自洽。**两份真实简历的技能行都带 `Programming:` 这类前缀,能凑满两条,判对。** 按"最小改动、不扩展"保持现状,低置信度已记录。
+
 ## 验证方式(全部本地,不调模型)
 
 ```bash

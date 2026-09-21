@@ -72,7 +72,17 @@ const OPEN_ENDED = 'present|now|current|ongoing|至今|现在';
  * of `至今`. Required, it would consume the `至` of `至今` and then fail on the
  * dangling `今`; optional, the engine backtracks and matches `至今` whole.
  */
+/**
+ * Words a resume puts in front of an end date it has not reached yet.
+ *
+ * `Sep 2025 - Expected Jun 2027` is how a degree in progress is written, and
+ * without this the range matched nothing at all: the qualifier sits exactly
+ * where the closing date was expected, so the engine gave up rather than
+ * matching short. Measured on two resumes, both of which have one.
+ */
+const QUALIFIER = '(?:expected|anticipated|estimated|预计)\\s+';
+
 export const DATE_RANGE = new RegExp(
-  `(${DATE_POINT})\\s*(?:[-–—~至到]+\\s*)?(${DATE_POINT}|${OPEN_ENDED})`,
+  `(${DATE_POINT})\\s*(?:[-–—~至到]+\\s*)?(?:${QUALIFIER})?(${DATE_POINT}|${OPEN_ENDED})`,
   'i',
 );

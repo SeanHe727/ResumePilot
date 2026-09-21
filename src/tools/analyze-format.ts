@@ -259,8 +259,14 @@ function scoreAtsParsability(
 
   // A heading our own vocabulary could not place is a heading a commercial
   // parser will not place either — the same table-lookup failure.
+  //
+  // Read from the classification rather than from `kind`, which used to carry
+  // both facts at once. A section nobody could name still has a shape, and it
+  // is now given the kind that shape fits; asking `kind === 'other'` after
+  // that would report no unrecognised heading on any resume, which is what a
+  // check looks like once it has quietly stopped working.
   for (const section of resume.sections) {
-    if (section.kind === 'other' && section.heading) {
+    if (section.classification?.headingUnknown ?? (section.kind === 'other' && section.heading)) {
       blockers.push(`unrecognised section heading "${section.heading}"`);
       issues.push(describe('ats.unknown-heading', section.heading));
     }
