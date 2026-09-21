@@ -90,7 +90,13 @@ export const SUB_AGENT_CONTEXT = {
  * invocations.
  */
 export class SubAgentRuntime {
-  private readonly trace: Trace;
+  /**
+   * Read by the orchestrator, which records what it made of an agent that
+   * threw. Public so the two cannot end up holding different traces: sharing
+   * one object is the property, and a second constructor argument is a second
+   * chance to mis-wire it.
+   */
+  readonly trace: Trace;
 
   constructor(private readonly deps: SubAgentDeps) {
     this.trace = deps.trace ?? new NoTrace();
@@ -115,6 +121,13 @@ export class SubAgentRuntime {
         phase: 'dispatch',
         purpose: task.agentConfig.name,
         input: {
+          // The task and the context that actually crossed the boundary — the
+          // second copy of what the first model call will also carry, and
+          // worth it: building the context or resolving the tool list can
+          // throw, and then there is no first model call and no record of what
+          // this agent was ever asked to do.
+          task: task.input,
+          briefing: buildTaskBlock(task.agentConfig, task.context),
           role: task.agentConfig.id,
           tools: task.agentConfig.tools,
           optionalTools: task.agentConfig.optionalTools ?? [],

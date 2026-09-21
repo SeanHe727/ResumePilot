@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { CONTENT_AGENT, DEEP_RESEARCH_AGENT, SubAgentRuntime } from '../../src/agent/index.js';
+import {
+  CONTENT_AGENT,
+  DEEP_RESEARCH_AGENT,
+  DefaultOrchestrator,
+  SemaphorePool,
+  SubAgentRuntime,
+} from '../../src/agent/index.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
 import type { Tool, ToolRegistry } from '../../src/tools/types.js';
@@ -133,6 +139,49 @@ describe('a specialist on the record', () => {
       allowedContextKeys: ['briefing', 'entry', 'previousFindings'],
       maxTurns: 6,
     });
+  });
+
+  it('records what it was asked, not only which keys were allowed through', async () => {
+    // A second copy of what the first model call also carries, and worth it:
+    // the copy in the prompt only exists if there was a prompt.
+    const { trace, events } = recorder();
+    const runtime = runtimeWith(scriptedEngine(text(DIAGNOSIS)), registryOf(), trace);
+
+    await runtime.run({
+      agentConfig: CONTENT_AGENT,
+      input: 'diagnose entry 0',
+      context: { entry: 'Reduced p99 latency', secrets: 'not in the boundary' },
+    });
+
+    const sent = of(events, 'dispatch')[0]?.input as { task: string; briefing: string };
+    expect(sent.task).toBe('diagnose entry 0');
+    expect(sent.briefing).toContain('Reduced p99 latency');
+    // The boundary is what crossed, so the record shows what crossed.
+    expect(sent.briefing).not.toContain('not in the boundary');
+  });
+
+  it('still says what it was asked when it fails before asking anything', async () => {
+    // Building the context or resolving the tool list can throw, and then
+    // there is no first model call to hold the briefing.
+    const { trace, events } = recorder();
+    const broken: ToolRegistry = {
+      ...registryOf(),
+      getSchemasFor: () => {
+        throw new Error('the registry is in a bad state');
+      },
+    };
+    const runtime = runtimeWith(scriptedEngine(text(DIAGNOSIS)), broken, trace);
+
+    await expect(
+      runtime.run({
+        agentConfig: CONTENT_AGENT,
+        input: 'diagnose entry 0',
+        context: { entry: 'Reduced p99 latency' },
+      }),
+    ).rejects.toThrow(/bad state/);
+
+    expect((of(events, 'dispatch')[0]?.input as { task: string }).task).toBe('diagnose entry 0');
+    expect(of(events, 'span-end')[0]).toMatchObject({ status: 'error' });
   });
 
   it('records the structured result, which is not the answer the model wrote', async () => {
@@ -285,6 +334,43 @@ describe('an agent started by another agent', () => {
       expect(ids.has(event.parentEventId), `${event.phase} has an unresolvable parent`).toBe(true);
     }
     expect(of(events, 'span')).toHaveLength(of(events, 'span-end').length);
+  });
+});
+
+describe('what the orchestrator made of it', () => {
+  it('records the failed result it hands on when an agent throws', async () => {
+    // The agent's own span closed when it threw. Without this the file ends at
+    // `span-end error`, and the object a report gets built around — zeroes
+    // where the usage and the turns would be — appears nowhere.
+    const { trace, events } = recorder();
+    const engine: QueryEngine = {
+      async query() {
+        throw new Error('the provider fell over');
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+    const runtime = runtimeWith(engine, registryOf(), trace);
+    const orchestrator = new DefaultOrchestrator(runtime, {}, new SemaphorePool(1));
+
+    await orchestrator.diagnoseEntry(
+      {
+        id: 'experience:0',
+        headerLines: ['A Company — Engineer'],
+        bullets: [{ id: 'experience:0:0', text: 'Reduced p99 latency' }],
+      } as never,
+      { roles: ['content'] } as never,
+    );
+
+    const handed = events.find((e) => e.purpose?.includes('orchestrator'));
+    expect(handed).toMatchObject({ phase: 'failure', status: 'error' });
+    expect(handed?.output).toMatchObject({
+      agentId: 'content',
+      success: false,
+      turns: 0,
+      usage: { inputTokens: 0, outputTokens: 0 },
+    });
+    expect(handed?.actor).toEqual({ kind: 'specialist', id: 'content' });
   });
 });
 

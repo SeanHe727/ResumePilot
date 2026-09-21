@@ -277,7 +277,7 @@ export class DefaultOrchestrator {
     try {
       return await this.runtime.run(task);
     } catch (err) {
-      return {
+      const result: SubAgentResult = {
         agentId: task.agentConfig.id,
         agentName: task.agentConfig.name,
         success: false,
@@ -287,6 +287,21 @@ export class DefaultOrchestrator {
         durationMs: 0,
         error: err instanceof Error ? err.message : String(err),
       };
+
+      // What the aggregation will actually read. The agent's own span closed
+      // when it threw, so the file otherwise ends at `span-end error` and this
+      // object — the one a report gets built around, with zeroes where the
+      // usage and the turns would be — appears nowhere.
+      this.runtime.trace.event(() => ({
+        phase: 'failure',
+        status: 'error',
+        actor: { kind: 'specialist', id: task.agentConfig.id },
+        purpose: 'what the orchestrator made of an agent that threw',
+        output: result,
+        error: { message: result.error ?? 'unknown' },
+      }));
+
+      return result;
     }
   }
 }
