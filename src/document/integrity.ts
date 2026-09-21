@@ -33,11 +33,18 @@ export function checkIntegrity(
   const claims = coverage(rows, boundaries);
   const labelled = new Set(labels.map((label) => label.rowIndex));
 
+  // A row reaches the document only if one section claimed it *and* something
+  // said what it was: the fold skips a row it has no label for rather than
+  // guess, so an unlabelled row is as lost as an unclaimed one. Heading rows
+  // are the exception — the cut settled those, and nothing labels them.
+  const reached = (row: number): boolean =>
+    claims[row]?.count === 1 && (claims[row]?.asHeading === true || labelled.has(row));
+
   return {
     totalRows: rows.length,
-    placedRows: claims.filter((count) => count === 1).length,
-    droppedRows: claims.flatMap((count, row) => (count === 0 ? [row] : [])),
-    duplicatedRows: claims.flatMap((count, row) => (count > 1 ? [row] : [])),
+    placedRows: rows.filter((_, row) => reached(row)).length,
+    droppedRows: claims.flatMap((claim, row) => (claim.count === 0 ? [row] : [])),
+    duplicatedRows: claims.flatMap((claim, row) => (claim.count > 1 ? [row] : [])),
     unlabelledRows: boundaries.flatMap((boundary) =>
       range(boundary.fromRow, boundary.toRow).filter((row) => !labelled.has(row)),
     ),
@@ -55,17 +62,26 @@ export function checkIntegrity(
  * ranges that overlap, or a gap between them, is a cut that does not add up —
  * and either way some of the resume is read twice or not at all.
  */
-function coverage(rows: LabelledRow[], boundaries: SectionBoundary[]): number[] {
-  const claims = new Array<number>(rows.length).fill(0);
-  const claim = (row: number): void => {
-    if (row >= 0 && row < claims.length) claims[row] = (claims[row] ?? 0) + 1;
+function coverage(rows: LabelledRow[], boundaries: SectionBoundary[]): Claim[] {
+  const claims: Claim[] = rows.map(() => ({ count: 0, asHeading: false }));
+  const claim = (row: number, asHeading: boolean): void => {
+    const at = claims[row];
+    if (!at) return;
+    at.count += 1;
+    at.asHeading ||= asHeading;
   };
 
   for (const boundary of boundaries) {
-    if (boundary.headingRow !== undefined) claim(boundary.headingRow);
-    for (const row of range(boundary.fromRow, boundary.toRow)) claim(row);
+    if (boundary.headingRow !== undefined) claim(boundary.headingRow, true);
+    for (const row of range(boundary.fromRow, boundary.toRow)) claim(row, false);
   }
   return claims;
+}
+
+/** How many sections claimed a row, and whether one of them named it. */
+interface Claim {
+  count: number;
+  asHeading: boolean;
 }
 
 /** Things that came out of the fold holding nothing. */
@@ -125,23 +141,24 @@ function references(sections: ResumeSection[]): Pick<ParseIntegrity, 'duplicateI
     seen.add(id);
   };
 
-  const sectionIds = new Set(sections.map((s) => s.id));
-
+  // Checked against the parent a thing is actually inside, not against the
+  // set of parents that exist. A bullet naming a sibling entry resolves to
+  // something real and to the wrong thing, and a review then lands on a line
+  // the reader was not talking about.
   for (const section of sections) {
     once(section.id);
 
     for (const bullet of section.bullets ?? []) {
       once(bullet.id);
-      if (!sectionIds.has(bullet.sectionId)) danglingRefs.push(bullet.id);
+      if (bullet.sectionId !== section.id) danglingRefs.push(bullet.id);
     }
 
-    const entryIds = new Set(section.entries.map((e) => e.id));
     for (const entry of section.entries) {
       once(entry.id);
-      if (!sectionIds.has(entry.sectionId)) danglingRefs.push(entry.id);
+      if (entry.sectionId !== section.id) danglingRefs.push(entry.id);
       for (const bullet of entry.bullets) {
         once(bullet.id);
-        if (!entryIds.has(bullet.entryId)) danglingRefs.push(bullet.id);
+        if (bullet.entryId !== entry.id) danglingRefs.push(bullet.id);
       }
     }
   }

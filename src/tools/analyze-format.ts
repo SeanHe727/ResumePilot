@@ -276,11 +276,21 @@ function scoreAtsParsability(
 
   // Where our own parser lost the thread, which is the free signal this has
   // asserted in a comment for as long as it has existed without measuring.
+  //
   // Not every note the reconciliation makes — a section filed by its heading
-  // is a judgement, not a fault — but a line that reached no section, or one
-  // that reached two, is text a reader will not see the way it was written.
+  // is a judgement, not a fault. What counts is a line that did not come out
+  // the way it went in: one no section claimed, one two sections claimed, and
+  // one nothing gave a role to, which the fold skips rather than guess at. The
+  // union, because a row can be two of those at once and is one line either
+  // way.
   const integrity = resume.meta.integrity;
-  const lost = integrity ? integrity.droppedRows.length + integrity.duplicatedRows.length : 0;
+  const lost = integrity
+    ? new Set([
+        ...integrity.droppedRows,
+        ...integrity.duplicatedRows,
+        ...integrity.unlabelledRows,
+      ]).size
+    : 0;
   if (lost > 0) {
     const detail = `${lost} line(s) this parser could not place cleanly`;
     blockers.push(detail);

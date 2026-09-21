@@ -1,6 +1,6 @@
 import { DefaultResumeParser, UnsupportedLayoutError } from '../document/index.js';
 import type { ResumeParser } from '../document/types.js';
-import type { ResumeSessionState } from '../domain.js';
+import type { ParseIntegrity, ResumeSessionState } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 
@@ -113,10 +113,50 @@ export const parseResumeTool: Tool<ParseResumeInput, unknown> = {
           })),
         })),
         entryCount: entries.length,
+        integrity: summarise(resume.meta.integrity),
       },
     };
   },
 };
+
+/**
+ * How well the parse reconciled, in three numbers.
+ *
+ * Three, not the whole reconciliation: a model told which rows and which ids
+ * cannot do anything about either, and the lists are long enough to crowd out
+ * the resume itself. What a model can do with this is decide whether to trust
+ * the structure it is about to read, and ask. The detail stays on the session,
+ * where a person or a later tool can go and look.
+ */
+function summarise(integrity: ParseIntegrity | undefined): {
+  clean: boolean;
+  errorCount: number;
+  anomalyCount: number;
+} | undefined {
+  if (!integrity) return undefined;
+
+  const errorCount =
+    new Set([
+      ...integrity.droppedRows,
+      ...integrity.duplicatedRows,
+      ...integrity.unlabelledRows,
+    ]).size +
+    integrity.emptySections.length +
+    integrity.emptyEntries.length +
+    integrity.emptyBullets.length +
+    integrity.invalidHeadings.length +
+    integrity.duplicateIds.length +
+    integrity.danglingRefs.length +
+    integrity.unmappedSpans.length;
+
+  return {
+    clean: errorCount === 0 && integrity.anomalies.length === 0,
+    errorCount,
+    // Not errors. Shapes the pipeline chose between, where it might have been
+    // wrong and said so.
+    anomalyCount: integrity.anomalies.length,
+  };
+}
 
 /**
  * Injected for tests; a real session gets the default.

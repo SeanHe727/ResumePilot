@@ -186,7 +186,7 @@ Entry {
 - `owner=section + info/bullet` —— 追加到当前 section
 - `continuation` —— 接到它继承的 owner 中上一项
 
-**约束** — 不读 `kind`、不读字号、不用正则、不重新判断 owner。小型纯函数,同一份实现同时服务启发式和模型两条路。今天的 `isEntryBearing(kind, blocks)` 在这里删除:哪个数组被填由标签决定,不由类型决定。
+**约束** — 不读 `kind`、不读字号、不用正则、不重新判断 owner。小型纯函数,同一份实现服务任何产出这两个数组的一方。今天的 `isEntryBearing(kind, blocks)` 在这里删除:哪个数组被填由标签决定,不由类型决定。
 
 ```ts
 function assemble(
@@ -212,18 +212,28 @@ function assemble(
 | 结构证据 | 有 entry 且 entry 有 bullet → experience/project;有 entry 无 bullet 有日期 → education;无 entry + info/section bullet → summary/skills | 2 |
 | 内容证据 | 学位词 / 公司后缀 / 职位词 / 代码托管 URL | 1 |
 
-**冲突规则:结构 > 标题。** 标题是候选人写的一个词,结构是整段的形状。叫 `Leadership` 但有三个带日期带 bullet 的条目,按 experience 处理;叫 `EXPERIENCE` 但只有一行逗号分隔的技能,它不是 experience。3:2:1 的效果是词表命中不是否决权,但推翻它需要两条以上结构证据 —— 比例应由 fixture 回归得出。
+**冲突规则:结构 > 标题。**
+
+> **实现时改为:词表认得的标题说了算。** 依据是判错的实际影响 —— 全项目只有 5 处读 `kind`,其中 4 处关于 `contact`,而 `contact` 由"这块没有自己的标题"决定、不由词表决定;experience / project / education / summary 互判不控制任何行为。详见进度里的 B4。形状仍然计分,分歧记入 `margin` 与 `runnerUp`;词表认不出标题时,形状独自判定。
+
+标题是候选人写的一个词,结构是整段的形状。叫 `Leadership` 但有三个带日期带 bullet 的条目,按 experience 处理 —— 这条仍然成立,因为 `Leadership` 不在词表里。
 
 **`other` 拆成两件事** — kind 落在结构最像的那个(不再有兜底的 `other`);"标题不在词表内"记成一条 evidence,ATS blocker 由这条证据触发。今天这两件事挤在同一个值里。
 
+实现时的形状(`SectionClassification`,在 `src/domain.ts`):
+
 ```ts
-interface Classification {
-  kind: SectionKind;
-  confidence: number;                   // 第一名与第二名的分差
-  evidence: Evidence[];
+interface SectionClassification {
+  confidence: number;                   // 非负:领先多少
+  margin: number;                       // 有符号:负数表示标题压过了形状
+  decisionSource: 'heading' | 'evidence';
+  evidence: string[];
   runnerUp?: { kind: SectionKind; score: number };
+  headingUnknown: boolean;              // 与 kind 分开;ATS blocker 读这个
 }
 ```
+
+`kind` 不在里面 —— 它在 `ResumeSection` 上。`confidence` 与 `margin` 分开,是因为一个 0 原本同时表示"真平局"和"标题覆盖了更强证据"。
 
 低置信度不做自动处理,只记录,派发时可见。
 
@@ -250,7 +260,7 @@ interface Classification {
 
 - 每个 `VisualRow` 恰好落进一个 section
 - 丢失的行、重复计入的行
-- 两套标注(启发式 / 模型)标签不一致的行
+- ~~两套标注(启发式 / 模型)标签不一致的行~~ —— **未实现**:模型标注器在 B3 删除,没有第二套可比。实现时改记 `unlabelledRows`(在区间内却没有角色的行 —— 组装器会跳过它,所以它和丢行一样)
 
 **② 非空与合法**
 
@@ -269,7 +279,7 @@ interface Classification {
 **④ 结构异常(记录,不判错)**
 
 - date-only entry —— 只有日期没有名字的条目,A1 修好后仍出现说明还有别的路径
-- orphan bullet —— 声明 `owner=entry` 却没有当前 entry 的 bullet;`owner=section` 的 bullet 合法
+- ~~orphan bullet~~ —— **实现时改名为 `entry-without-header`**:声明 `owner=entry` 却没有当前 entry 时,B3 为了不丢行会开一个无名条目,记的是那个条目
 - 无目标的 continuation —— 前面没有可接续的行
 
 ```ts
@@ -278,7 +288,8 @@ interface ParseIntegrity {
   placedRows: number;
   droppedRows: number[];
   duplicatedRows: number[];
-  labelDisagreements: number[];
+  // labelDisagreements 未实现:没有第二套标注器可比
+  unlabelledRows: number[];             // 实现时新增
   emptySections: string[];
   emptyEntries: string[];
   emptyBullets: string[];
@@ -286,7 +297,12 @@ interface ParseIntegrity {
   duplicateIds: string[];
   danglingRefs: string[];
   unmappedSpans: string[];
-  anomalies: Array<{ kind: 'date-only-entry' | 'orphan-bullet' | 'dangling-continuation'; at: string }>;
+  // 实现时的五种:前三种如下,另加 'guessed-boundary'(整页没有词表命中)
+  // 与 'heading-overruled-evidence'(B4 的 margin < 0)
+  anomalies: Array<{
+    kind: 'date-only-entry' | 'entry-without-header' | 'dangling-continuation';
+    at: string;
+  }>;
 }
 ```
 
@@ -296,9 +312,9 @@ interface ParseIntegrity {
 
 ## 跨步约束
 
-**标注与组装分离** — 启发式和模型只负责标注,产出同一种 `SectionBoundary[]` / `RowLabel[]`,共用同一个 B3。模型换掉、词表换掉,组装不动。
+**标注与组装分离** — 产出 `SectionBoundary[]` / `RowLabel[]` 的一方只负责标注,共用同一个 B3。词表换掉、规则换掉,组装不动。`assemble` 的入参窄化成 `LabelledRow`(只有 `text` 与 `span`),所以"不读字号、不读缩进"是编译期保证。
 
-**模型不得生成或改写原文** — 模型的输出只能是行号 + 标签 + 置信度,不含任何文本。B5 校验这一点:标签引用的行号必须存在,且 `VisualRow.text` 与 A1 的产物逐字相同。模型改过的一个字,就是一段候选人没写过的简历。
+**模型标注路径当前不存在** —— `ModelDocumentSegmenter` 在 B3 删除:它说的是旧协议,产不出这两个数组。重新加回来时约束不变:**模型不得生成或改写原文**,输出只能是行号 + 标签 + 置信度;B5 要校验标签引用的行号存在、且 `VisualRow.text` 与 A1 的产物逐字相同。模型改过的一个字,就是一段候选人没写过的简历。
 
 **每步可独立测试** — 各步输入输出都是纯数据,测试可以从任意一步的产物开始构造,不必跑完整条链。错误也因此能定位到具体一步。
 
@@ -342,7 +358,9 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 # 进度
 
-**当前状态:B2 初版完成;review 后确定新的嵌套所有权协议。先修订 B2,再进入 B3。**
+**当前状态:A0–B5 全部完成并接线。解析层重构结束。**
+
+下面的 A0–B5 各节是**当初的设计稿**;被实测推翻的地方在原处标了「实现时改为」,完整理由在「进度」一节。
 
 写这一段是为了让一次全新的会话只读这份文档就能接着做,不需要之前的对话。
 
@@ -666,6 +684,10 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 **`span` 按前缀校验而非全等。** 换行的 bullet 被用空格拼起来,而原文那里是换行,所以永远不会逐字相等;要成立的是"偏移落在正确的行上"。
 
+**`placedRows` 要求"被一个 section 认领**且**有标签"。** 组装器遇到没有标签的行会跳过 —— 那一行不会进文档。只看 boundary 覆盖的话会出现 `placedRows === totalRows` 而文档里少一行。标题行是例外:切分已经定了它是什么,没有东西会去标注它。ATS blocker 取三个数组的**并集**,一行可能同时是两种丢法,但它只是一行。
+
+**引用检查验的是"包含关系"而不是"父节点存在"。** `entry.sectionId === section.id`,不是"某个 section 有这个 id"。一个指向兄弟节点的引用能解析到真实的东西、也是错的东西,而诊断随后会落在读者没在说的那一行上。
+
 **计划里有两个字段在 B3 之后没有数据源,已替换:**
 
 - `labelDisagreements` 需要两套标注器比对,模型标注器在 B3 删除了 —— **去掉**。重新加模型兜底时一并恢复。
@@ -679,7 +701,11 @@ A0 → A1 → B1 → B2 → B3 → B4 → B5,每步单独可测,全程不调用�
 
 变异验证七条,逐条转红:标题行不计入覆盖、重复不累加、不查未标注行、不查失效引用、不查 span、不查纯日期条目、不查标题覆盖。
 
-测试:`tests/document/integrity.test.ts`(新,27 条)。21 条用构造的"对不上"的输入(能跑通的解析什么都不报,对账测试必须被喂点东西),6 条走真实 PDF。
+**`parse_resume` 返回三个数字**:`{ clean, errorCount, anomalyCount }`。模型拿到"哪几行、哪几个 id"也做不了什么,而那些列表长到会挤掉简历本身;它能做的是判断要不要信任即将读到的结构。完整的对账留在 session。
+
+变异验证十二条,逐条转红:标题行不计入覆盖、重复不累加、不查未标注行、不查失效引用、不查 span、不查纯日期条目、不查标题覆盖、`placedRows` 忽略标签、标题行也要求标签、按"父节点存在"验引用、ATS 不取并集、`parse_resume` 不返回摘要。
+
+测试:`tests/document/integrity.test.ts`(新,34 条)。27 条用构造的"对不上"的输入(能跑通的解析什么都不报,对账测试必须被喂点东西),7 条走真实 PDF;`parse-resume.test.ts` 增 2 条。
 
 ## 验证方式(全部本地,不调模型)
 

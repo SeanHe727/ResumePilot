@@ -62,6 +62,37 @@ describe('parse_resume', () => {
     expect(JSON.stringify(result.data)).not.toContain('Responsible for');
   });
 
+  it('says how well the parse reconciled, in numbers rather than in lists', async () => {
+    // A model told which rows and which ids cannot do anything about either,
+    // and the lists are long enough to crowd out the resume. What it can do is
+    // decide whether to trust the structure it is about to read.
+    const { ctx: c } = ctx();
+
+    const result = await parseResumeTool.execute(
+      { path: 'tests/fixtures/resume_example.pdf' },
+      c,
+    );
+
+    expect((result.data as { integrity: unknown }).integrity).toEqual({
+      clean: true,
+      errorCount: 0,
+      anomalyCount: 0,
+    });
+  });
+
+  it('keeps the reconciliation itself on the session, not in the transcript', async () => {
+    const { ctx: c, session } = ctx();
+
+    const result = await parseResumeTool.execute(
+      { path: 'tests/fixtures/resume_example.pdf' },
+      c,
+    );
+
+    expect(JSON.stringify(result.data)).not.toContain('droppedRows');
+    const state = session.state as ResumeSessionState;
+    expect(state.resume?.meta.integrity?.totalRows).toBeGreaterThan(0);
+  });
+
   it('keeps an address out of the headers it does hand back', async () => {
     // The summary is a tool result, which reaches the model like any prompt.
     // The headers go in it, and a header is somewhere an address ends up when
