@@ -99,14 +99,16 @@ export function buildWordingMessage(entry: ResumeEntry): string {
 ${renderEntry(entry)}
 </resume_content>
 
+Every score is a whole number from 0 to 100; the zeros below are placeholders.
+
 Return JSON of exactly this shape:
 
 {
   "perBullet": [
     {
       "bulletId": "<the id given above, verbatim>",
-      "verbStrength": { "score": 0-100, "detail": "one sentence" },
-      "concision":    { "score": 0-100, "detail": "one sentence" },
+      "verbStrength": { "score": 0, "detail": "one sentence" },
+      "concision":    { "score": 0, "detail": "one sentence" },
       "issues": ["what is wrong with the wording, one sentence each"]
     }
   ]

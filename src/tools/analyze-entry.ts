@@ -92,17 +92,19 @@ export function buildEntryMessage(input: AnalyzeEntryInput): string {
 ${renderEntry(entry)}
 </resume_content>
 ${referenceBlock}
+Every score is a whole number from 0 to 100; the zeros below are placeholders.
+
 Return JSON of exactly this shape:
 
 {
   "bullets": [
     {
       "bulletId": "<the id given above, verbatim>",
-      "overallScore": 0-100,
+      "overallScore": 0,
       "dimensions": {
-        "impact":      { "score": 0-100, "detail": "one sentence" },
-        "measurement": { "score": 0-100, "detail": "one sentence" },
-        "method":      { "score": 0-100, "detail": "one sentence" }
+        "impact":      { "score": 0, "detail": "one sentence" },
+        "measurement": { "score": 0, "detail": "one sentence" },
+        "method":      { "score": 0, "detail": "one sentence" }
       },
       "issues": [
         {
@@ -120,7 +122,7 @@ Return JSON of exactly this shape:
         }
       ]
     }
-  ],
+  ]
 }`;
 }
 
