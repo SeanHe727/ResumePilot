@@ -575,8 +575,17 @@ export interface ReportCoverage {
  */
 export interface FullReport {
   sections: Array<{
-    /** An entry, or a heading for what runs across the whole resume. */
+    /**
+     * An entry's own header, or the fixed title for what spans the document.
+     *
+     * Built here rather than written by the report model. A heading it writes
+     * is an employer, a title and a date re-derived from text it was shown,
+     * and the parse already knows all three: one of them coming back subtly
+     * wrong reads as a report about a résumé nobody sent.
+     */
     heading: string;
+    /** What it is about, as resolved — absent on reports written before this. */
+    target?: { type: 'entry'; entryId: string } | { type: 'resume' };
     points: FullReportPoint[];
   }>;
 }
@@ -605,7 +614,13 @@ export interface SourceFinding {
 }
 
 export interface FullReportPoint {
-  /** This point, addressable — `r3` in the order they were accepted. */
+  /**
+   * This point, addressable and unique — `report_point_<uuid>`.
+   *
+   * Unique outright rather than numbered by position: a number only means
+   * anything beside the list that produced it, and the lists are exactly what
+   * this is meant to be read across.
+   */
   id: string;
   /**
    * The findings it rests on, checked against the ones actually offered.

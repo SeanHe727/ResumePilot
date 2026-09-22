@@ -1,4 +1,6 @@
 import { IMPROVEMENT_PLAN_PROMPT } from '../prompts/index.js';
+import { randomUUID } from 'node:crypto';
+
 import type {
   DiagnosisReport,
   EntryDiagnosis,
@@ -81,7 +83,27 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
 
     const allEntries = input.resume.sections.flatMap((s) => s.entries);
     const summary = summarise(input, allEntries);
-    const improvementPlan = await buildImprovementPlan(input, ctx);
+    // Minted once for the whole report. Two calls would hand the plan and the
+    // write-up different ids for the same reading, and every link between them
+    // would be a coincidence.
+    const findings = everyFinding(input);
+    // Everything the readers raised, before anything chose among it. The
+    // other end of the chain: without it, "nobody picked this up" can only be
+    // read against a list the same call produced, which proves nothing.
+    ctx.trace?.event(() => ({
+      phase: 'decision',
+      purpose: 'findings collected',
+      output: {
+        findings: findings.map((f) => ({
+          id: f.id,
+          role: f.role,
+          target: f.target,
+          ...(f.costWords === undefined ? {} : { costWords: f.costWords }),
+        })),
+      },
+    }));
+
+    const improvementPlan = await buildImprovementPlan(input, findings, ctx);
 
     const report: DiagnosisReport = {
       summary,
@@ -96,10 +118,8 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
     // Written after the choosing, in a call of its own. One model weighing
     // forty findings against a page budget and then writing them all up gives
     // the writing whatever attention the weighing left over.
-    // The same findings the plan was chosen from, so an id means the same
-    // thing in both calls. Recomputed independently they would drift the
-    // moment either side of the session changed.
-    const full = await writeFullReport(report, state, everyFinding(input), ctx);
+    // The same objects the plan was chosen from.
+    const full = await writeFullReport(report, state, findings, ctx);
     if (full) report.full = full;
 
     // Left where `/report` and `/export` read it: the coordinator is not asked
@@ -220,10 +240,9 @@ function asLine(finding: SourceFinding): string {
  */
 async function buildImprovementPlan(
   input: GenerateReportInput,
+  findings: readonly SourceFinding[],
   ctx: ToolContext,
 ): Promise<ImprovementPlan> {
-  const findings = everyFinding(input);
-
   if (findings.length === 0) {
     return { immediate: [], shortTerm: [], longTerm: [] };
   }
@@ -267,12 +286,25 @@ Return JSON of exactly this shape:
   }
 
   const parsed = parseJsonObject(response.content ?? '');
-  return {
+  const plan: ImprovementPlan = {
     immediate: stringArray(parsed?.immediate),
     shortTerm: stringArray(parsed?.shortTerm),
     longTerm: stringArray(parsed?.longTerm),
     ...(setAside(parsed?.setAside).length > 0 ? { setAside: setAside(parsed?.setAside) } : {}),
   };
+
+  // Which findings this weighed. The plan model is shown the lines without
+  // ids, deliberately, so this is the only place the set it chose from is
+  // written down — and the only way to tell that it and the report writer were
+  // given the same one.
+  ctx.trace?.event(() => ({
+    phase: 'decision',
+    purpose: 'plan chosen',
+    input: { fromFindingIds: findings.map((f) => f.id) },
+    output: plan,
+  }));
+
+  return plan;
 }
 
 
@@ -366,22 +398,18 @@ function coverage(
  * both halves.
  */
 export function everyFinding(input: GenerateReportInput): SourceFinding[] {
-  // Numbered per role as they are collected, so an id says where it came from
-  // and survives another role finding more or fewer than last time. A global
-  // counter would renumber every content finding the moment the wording reader
-  // raised one more, and an id that moves cannot be checked against anything.
-  const seen = new Map<string, number>();
-  const at = (role: SourceFinding['role'], target: string, cost: number | undefined, what: string): SourceFinding => {
-    const n = (seen.get(role) ?? 0) + 1;
-    seen.set(role, n);
-    return {
-      id: `${role[0]}${n}`,
-      role,
-      target,
-      what,
-      ...(cost === undefined ? {} : { costWords: cost }),
-    };
-  };
+  const at = (role: SourceFinding['role'], target: string, cost: number | undefined, what: string): SourceFinding => ({
+    // Unique outright, rather than numbered by where it landed in a list. A
+    // positional id is only meaningful next to the list that produced it: the
+    // same reading gets a different number the moment another reader finds one
+    // more, and two ids from different runs collide while meaning nothing to
+    // each other. These are minted once, here, and carried by the object.
+    id: `${role}_finding_${randomUUID()}`,
+    role,
+    target,
+    what,
+    ...(cost === undefined ? {} : { costWords: cost }),
+  });
 
   return [
     ...input.format.issues.map((what) => at('file', 'format', undefined, what)),

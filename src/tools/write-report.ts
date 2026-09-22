@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import type {
   DiagnosisReport,
   FullReport,
@@ -9,6 +11,9 @@ import { FULL_REPORT_PROMPT } from '../prompts/index.js';
 import type { ToolContext } from './types.js';
 import { parseJsonObject } from './verify.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
+
+/** The program's own title for what is not about one entry. */
+const ACROSS_THE_RESUME = 'Across the whole résumé';
 
 /**
  * The diagnosis written out at length, from findings something else has chosen.
@@ -72,6 +77,18 @@ export async function writeFullReport(
     .map((f) => `- ${f.id} [${f.role}, ${f.target}] ${f.what}`)
     .join('\n');
 
+  // The entries this résumé actually has. The model chooses among them rather
+  // than writing a heading of its own: a heading it writes is a company name,
+  // a title and a date it has re-derived from text it was shown, and the parse
+  // already knows all three. One of them coming back subtly wrong — a year, a
+  // team, an employer — reads as a report about a résumé nobody sent.
+  const entries = new Map(
+    (state.resume?.sections ?? []).flatMap((section) => section.entries).map((e) => [e.id, e] as const),
+  );
+  const targets = [...entries.values()]
+    .map((entry) => `- ${entry.id}: ${withoutContactDetails(entry.headerLines.join(' | '))}`)
+    .join('\n');
+
   const response = await ctx.queryEngine.query({
     task: 'generate_report',
     systemPrompt: FULL_REPORT_PROMPT,
@@ -83,12 +100,13 @@ export async function writeFullReport(
           `What was chosen:\n${chosen.join('\n')}\n\n` +
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
           `The findings, by id:\n${offered}\n\n` +
+          `The entries a point can be filed under:\n${targets}\n\n` +
           `Return JSON of exactly this shape:
 
 {
   "sections": [
     {
-      "heading": "the entry, or what runs across the whole résumé",
+      "about": { "type": "entry", "entryId": "one of the entry ids listed above" } or { "type": "resume" } for anything spanning the whole document,
       "points": [
         {
           "what": "the finding in one sentence — this sentence is the short version",
@@ -107,80 +125,134 @@ export async function writeFullReport(
   });
 
   const parsed = parseJsonObject(response.content ?? '');
-  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
-  if (sections.length === 0) return null;
+  const rawSections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  if (rawSections.length === 0) return null;
 
   const byId = new Map(findings.map((finding) => [finding.id, finding]));
-  const invented: string[] = [];
-  let numbered = 0;
+  const unknownTargets: string[] = [];
 
-  const built: FullReport['sections'] = sections.flatMap((raw): FullReport['sections'] => {
+  // What survives, decided before anything is minted. Numbering a point and
+  // counting its citations, and only then finding out its section was empty,
+  // leaves ids that belong to nothing in the statistics the whole record is
+  // read through.
+  const drafts = rawSections.flatMap((raw): Draft[] => {
     const section = raw as Record<string, unknown> | null;
-    const heading = typeof section?.heading === 'string' ? section.heading.trim() : '';
+    const about = (section?.about ?? null) as Record<string, unknown> | null;
+    const entryId = typeof about?.entryId === 'string' ? about.entryId.trim() : '';
+    const wantsEntry = about?.type === 'entry' && entryId !== '';
+    const known = wantsEntry && entries.has(entryId);
+    if (wantsEntry && !known) unknownTargets.push(entryId);
+
     const points = Array.isArray(section?.points) ? section.points : [];
-    const kept = points.flatMap((item): FullReportPoint[] => {
+    return points.flatMap((item): Draft[] => {
       const point = item as Record<string, unknown> | null;
       const what = typeof point?.what === 'string' ? point.what.trim() : '';
       if (!what) return [];
 
-      const claimed = Array.isArray(point?.from)
-        ? point.from.filter((f): f is string => typeof f === 'string').map((f) => f.trim())
-        : [];
-      // Checked, not taken. A source that was never offered is dropped and
-      // said out loud: a provenance chain nobody verifies is a chain of
-      // whatever the model found convenient to write.
-      const sourceFindingIds = claimed.filter((id) => byId.has(id));
-      invented.push(...claimed.filter((id) => !byId.has(id)));
-
-      numbered += 1;
       return [
         {
-          // `r` for report: the roles number themselves by their own initial,
-          // and a posting finding is already `p1`. Two different things under
-          // one id in one file is a chain that cannot be followed.
-          id: `r${numbered}`,
-          sourceFindingIds,
+          // An entry nobody can find is not a reason to lose the writing. The
+          // point is kept, filed with what spans the document, and the bad id
+          // is on the record rather than swallowed.
+          about: known ? entryId : 'resume',
           what,
           why: typeof point?.why === 'string' ? point.why : '',
           ...(typeof point?.evidence === 'string' && point.evidence.trim()
             ? { evidence: point.evidence.trim() }
             : {}),
-          // Derived from the sources rather than claimed separately. Asked for
-          // twice, the two answers disagree — and the one that can be checked
-          // should be the one that decides.
-          from: [...new Set(sourceFindingIds.map((id) => byId.get(id)!.role))],
           ...(typeof point?.cost === 'string' && point.cost.trim()
             ? { cost: point.cost.trim() }
             : {}),
+          claimed: Array.isArray(point?.from)
+            ? point.from.filter((f): f is string => typeof f === 'string').map((f) => f.trim())
+            : [],
         },
       ];
     });
-    return heading && kept.length > 0 ? [{ heading, points: kept }] : [];
   });
 
+  if (drafts.length === 0) return null;
+
+  const invented: string[] = [];
+  const links: Array<{ reportPointId: string; sourceFindingIds: string[] }> = [];
+
+  const placed = drafts.map((draft) => {
+    // Checked, not taken. A source that was never offered is dropped and said
+    // out loud: a provenance chain nobody verifies is a chain of whatever the
+    // model found convenient to write. Checked for existence only — that a
+    // point genuinely follows from the finding it cites is a judgement, and
+    // nothing here is in a position to make it.
+    const sourceFindingIds = draft.claimed.filter((id) => byId.has(id));
+    invented.push(...draft.claimed.filter((id) => !byId.has(id)));
+
+    const { about, claimed: _claimed, ...rest } = draft;
+    const point: FullReportPoint = {
+      id: `report_point_${randomUUID()}`,
+      sourceFindingIds,
+      ...rest,
+      // Derived from the sources that checked out rather than claimed
+      // separately. Asked for twice, the two answers disagree — and the one
+      // that can be verified should be the one that decides.
+      from: [...new Set(sourceFindingIds.map((id) => byId.get(id)!.role))],
+    };
+    links.push({ reportPointId: point.id, sourceFindingIds });
+    return { about, point };
+  });
+
+  // Grouped in the document's own order, not the order the model wrote them
+  // in. Two runs of the same review then produce reports that can be read side
+  // by side.
+  const built: FullReport['sections'] = [];
+  for (const entry of entries.values()) {
+    const points = placed.filter((p) => p.about === entry.id).map((p) => p.point);
+    if (points.length === 0) continue;
+    built.push({
+      // The parse's own header, redacted like anything else that leaves: an
+      // address under a heading that says `Profile` is filed as a summary and
+      // would otherwise read out here with everything else.
+      heading: withoutContactDetails(entry.headerLines.join(' | ')) || entry.id,
+      target: { type: 'entry', entryId: entry.id },
+      points,
+    });
+  }
+  const wide = placed.filter((p) => p.about === 'resume').map((p) => p.point);
+  if (wide.length > 0) {
+    built.push({ heading: ACROSS_THE_RESUME, target: { type: 'resume' }, points: wide });
+  }
+
   const accepted = built.flatMap((section) => section.points);
-  // Where a finding ended up, in one line. This is the only place the chain
-  // from a specialist's reading to a sentence in the report is written down:
-  // both models restate everything in their own words, so nothing downstream
-  // can be matched back by text.
+  // Which finding reached which sentence. Point-by-point rather than two lists
+  // side by side: a list of what was used and a list of what was written
+  // cannot answer the question either of them exists for, which is whether
+  // this particular reading is why that particular paragraph is there.
   ctx.trace?.event(() => ({
     phase: 'decision',
     purpose: 'report points accepted',
     output: {
       offered: findings.map((f) => f.id),
-      reportPointIds: accepted.map((point) => point.id),
-      sourceFindingIds: [...new Set(accepted.flatMap((point) => point.sourceFindingIds))],
-      // Named on their own because they are the two ways this goes wrong: a
-      // reading nothing picked up, and a citation to something never said.
+      links,
+      // The three ways this goes wrong, each of which reads as an ordinary
+      // report until somebody counts: a reading nobody picked up, a citation
+      // to something never said, and a paragraph resting on nothing.
       unused: findings
         .map((f) => f.id)
         .filter((id) => !accepted.some((point) => point.sourceFindingIds.includes(id))),
       invented: [...new Set(invented)],
       unsourced: accepted.filter((p) => p.sourceFindingIds.length === 0).map((p) => p.id),
+      // A section filed under an entry this résumé does not have. The writing
+      // is kept; the mis-filing is not hidden.
+      unknownTargets: [...new Set(unknownTargets)],
     },
   }));
 
   return { sections: built };
+}
+
+/** What a point is about, before it has an identity of its own. */
+interface Draft extends Omit<FullReportPoint, 'id' | 'sourceFindingIds' | 'from'> {
+  /** An entry id, or `resume` for what spans the document. */
+  about: string;
+  claimed: string[];
 }
 
 /**
