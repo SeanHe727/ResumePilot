@@ -4,6 +4,7 @@ import type { JsonSchema, ToolSchema } from '../types.js';
 import type { QueryEngine } from '../query-engine/types.js';
 import type { KnowledgeSearch } from '../knowledge/types.js';
 import type { Session } from '../session/types.js';
+import type { Trace } from '../trace/index.js';
 
 /**
  * The trust boundary.
@@ -50,6 +51,15 @@ export interface ToolContext {
   queryEngine: QueryEngine;
   knowledge: KnowledgeSearch;
   abortSignal: AbortSignal;
+  /**
+   * Where a debug run records what a tool decided, as opposed to what it was
+   * called with — which the layer above already records.
+   *
+   * Absent in production and absent in most tools: it is for the few places
+   * that choose what reaches the user, where the choosing is the thing a
+   * reviewer needs to see.
+   */
+  trace?: Trace;
   /**
    * Absent when no search key is configured. The tool is not registered in
    * that case either, so a model never sees an option it cannot take — this

@@ -581,7 +581,40 @@ export interface FullReport {
   }>;
 }
 
+/**
+ * One thing a reader found, with an identity that survives being rewritten.
+ *
+ * The findings reach the report through two models that both restate them in
+ * their own words, so nothing downstream can be matched back by text. Without
+ * an id, "did the researcher's finding make it into the report" is a question
+ * the record cannot answer — which is most of what the record is for.
+ *
+ * The id is scoped to one report: `c3` is the third thing the content readers
+ * raised, in the order they were collected. Numbered per role rather than
+ * globally so that one reader finding more than last time does not renumber
+ * everybody else's.
+ */
+export interface SourceFinding {
+  id: string;
+  role: 'content' | 'wording' | 'narrative' | 'posting' | 'file';
+  /** Which line, entry or part of the document it is about. */
+  target: string;
+  what: string;
+  /** Roughly what answering it costs the page, where that is known. */
+  costWords?: number;
+}
+
 export interface FullReportPoint {
+  /** This point, addressable — `r3` in the order they were accepted. */
+  id: string;
+  /**
+   * The findings it rests on, checked against the ones actually offered.
+   *
+   * A report writer may merge several into one point, and may not invent a
+   * source: an id that was not on the list is dropped before the point is
+   * accepted, and the drop is recorded rather than passed on.
+   */
+  sourceFindingIds: string[];
   /** The finding in one sentence. This, alone, is the brief. */
   what: string;
   /** What a reader would do differently knowing it. */

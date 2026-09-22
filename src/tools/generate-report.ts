@@ -11,6 +11,7 @@ import type {
   ReportCoverage,
   ResumeSessionState,
   ReviewStatus,
+  SourceFinding,
   WordingDiagnosis,
 } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
@@ -95,7 +96,10 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
     // Written after the choosing, in a call of its own. One model weighing
     // forty findings against a page budget and then writing them all up gives
     // the writing whatever attention the weighing left over.
-    const full = await writeFullReport(report, state, ctx);
+    // The same findings the plan was chosen from, so an id means the same
+    // thing in both calls. Recomputed independently they would drift the
+    // moment either side of the session changed.
+    const full = await writeFullReport(report, state, everyFinding(input), ctx);
     if (full) report.full = full;
 
     // Left where `/report` and `/export` read it: the coordinator is not asked
@@ -196,6 +200,18 @@ function perEntry(
 }
 
 /**
+ * A finding as the plan model has always seen it.
+ *
+ * Byte for byte what this sent before findings had ids: the plan model's
+ * contract is not what changed here, and changing its input while changing
+ * what depends on it would make any difference in the output unattributable.
+ */
+function asLine(finding: SourceFinding): string {
+  const cost = finding.costWords === undefined ? '' : `, ~${finding.costWords} words`;
+  return `- [${finding.target}${cost}] ${finding.what}`;
+}
+
+/**
  * The one part that needs judgement rather than arithmetic.
  *
  * Split by what it costs the candidate to act, not by severity: a mechanical
@@ -224,7 +240,7 @@ async function buildImprovementPlan(
     messages: [
       {
         role: 'user',
-        content: `${room}\n\nEverything the review found:\n${findings.join('\n')}
+        content: `${room}\n\nEverything the review found:\n${findings.map(asLine).join('\n')}
 
 Return JSON of exactly this shape:
 
@@ -349,16 +365,30 @@ function coverage(
  * doubt beats a sentence that adds a detail, and nothing can weigh that without
  * both halves.
  */
-function everyFinding(input: GenerateReportInput): string[] {
-  const at = (target: string, cost: number | undefined, what: string): string =>
-    `- [${target}${cost === undefined ? '' : `, ~${cost} words`}] ${what}`;
+export function everyFinding(input: GenerateReportInput): SourceFinding[] {
+  // Numbered per role as they are collected, so an id says where it came from
+  // and survives another role finding more or fewer than last time. A global
+  // counter would renumber every content finding the moment the wording reader
+  // raised one more, and an id that moves cannot be checked against anything.
+  const seen = new Map<string, number>();
+  const at = (role: SourceFinding['role'], target: string, cost: number | undefined, what: string): SourceFinding => {
+    const n = (seen.get(role) ?? 0) + 1;
+    seen.set(role, n);
+    return {
+      id: `${role[0]}${n}`,
+      role,
+      target,
+      what,
+      ...(cost === undefined ? {} : { costWords: cost }),
+    };
+  };
 
   return [
-    ...input.format.issues.map((what) => at('format', undefined, what)),
+    ...input.format.issues.map((what) => at('file', 'format', undefined, what)),
 
     ...input.entries.flatMap((entry) =>
       entry.bullets.flatMap((bullet) =>
-        bullet.issues.map((issue) => at(bullet.bulletId, issue.costWords, issue.what)),
+        bullet.issues.map((issue) => at('content', bullet.bulletId, issue.costWords, issue.what)),
       ),
     ),
 
@@ -367,25 +397,37 @@ function everyFinding(input: GenerateReportInput): string[] {
     // belong at the top of a page that has no room left.
     ...(input.wording ?? []).flatMap((diagnosis) =>
       diagnosis.perBullet.flatMap((bullet) =>
-        bullet.issues.map((what) => at(`${bullet.bulletId}, wording`, undefined, what)),
+        bullet.issues.map((what) => at('wording', `${bullet.bulletId}, wording`, undefined, what)),
       ),
     ),
 
     ...(input.narrative
       ? [
-          ...input.narrative.gaps.map((what) => at('whole resume, dates', undefined, what)),
+          ...input.narrative.gaps.map((what) => at('narrative', 'whole resume, dates', undefined, what)),
           ...input.narrative.orderingNotes.map((what) =>
-            at('whole resume, order', undefined, what),
+            at('narrative', 'whole resume, order', undefined, what),
           ),
           ...(input.narrative.withinEntries ?? []).flatMap((entry) => [
             ...entry.redundantPairs.map((pair) =>
-              at(entry.entryId, undefined, `${pair.bulletA} and ${pair.bulletB} repeat: ${pair.note}`),
+              at(
+                'narrative',
+                entry.entryId,
+                undefined,
+                `${pair.bulletA} and ${pair.bulletB} repeat: ${pair.note}`,
+              ),
             ),
             ...(entry.coherence.score < 70 && entry.coherence.detail
-              ? [at(entry.entryId, undefined, entry.coherence.detail)]
+              ? [at('narrative', entry.entryId, undefined, entry.coherence.detail)]
               : []),
             ...(entry.weakLead
-              ? [at(entry.entryId, undefined, 'the strongest line is not the opening one')]
+              ? [
+                  at(
+                    'narrative',
+                    entry.entryId,
+                    undefined,
+                    'the strongest line is not the opening one',
+                  ),
+                ]
               : []),
           ]),
         ]
@@ -395,12 +437,13 @@ function everyFinding(input: GenerateReportInput): string[] {
       ? [
           ...input.jdMatch.missing.map((keyword) =>
             at(
+              'posting',
               `posting${keyword.required ? ', required' : ''}`,
               undefined,
               `the posting asks for "${keyword.keyword}" and the resume does not evidence it`,
             ),
           ),
-          ...input.jdMatch.gaps.map((what) => at('posting', undefined, what)),
+          ...input.jdMatch.gaps.map((what) => at('posting', 'posting', undefined, what)),
         ]
       : []),
   ];

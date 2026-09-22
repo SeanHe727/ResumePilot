@@ -385,6 +385,30 @@ describe('a tool call in the main loop', () => {
     expect(of(events, 'tool')[0]?.parentEventId).toBe(toolSpan?.eventId);
   });
 
+  it('hands the tool the trace, so a tool that chooses can say what it chose', async () => {
+    // The report writer records which findings reached the page. It can only
+    // do that if the context it runs in carries the trace.
+    let seen: unknown;
+    const spy: Tool = {
+      name: 'review_content',
+      description: 'Dispatch a reader at one entry',
+      parameters: { type: 'object', properties: {} },
+      async execute(_input, ctx) {
+        seen = (ctx as { trace?: unknown }).trace;
+        return { success: true, data: 'ok' };
+      },
+    };
+    const { deps, session } = loopWith(
+      [toolUse('review_content', { entryId: 'experience:0' }), text('Done.')],
+      { tool: spy },
+    );
+
+    await handleInput('review the first entry', session, deps);
+
+    expect(seen).toBe((deps as { trace?: unknown }).trace);
+    expect(seen).toBeDefined();
+  });
+
   it('leaves every parent resolvable', async () => {
     const { deps, session, events } = loopWith(
       [toolUse('review_content', { entryId: 'experience:0' }), text('Done.')],

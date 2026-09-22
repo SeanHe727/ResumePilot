@@ -436,6 +436,7 @@ async function invoke(call: ToolCall, session: Session, deps: LoopDeps): Promise
       knowledge: deps.knowledge,
       ...(deps.search ? { search: deps.search } : {}),
       ...(deps.orchestratorFor ? { orchestrator: deps.orchestratorFor(session) } : {}),
+      ...(deps.trace ? { trace: deps.trace } : {}),
       abortSignal: session.abortController.signal,
     });
   } catch (err) {

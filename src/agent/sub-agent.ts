@@ -413,6 +413,7 @@ export class SubAgentRuntime {
         // that one question. Safe because `run` takes no pool slot — see the
         // note on ToolContext.
         subAgents: this,
+        trace: this.trace,
         abortSignal,
       });
       return { text: JSON.stringify(result), ok: result.success !== false };
