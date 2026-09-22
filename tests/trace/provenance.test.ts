@@ -276,6 +276,33 @@ describe('through the tool that actually runs it', () => {
     expect(full?.sections[0]?.points[0]?.sourceFindingIds).toEqual([shown[1], shown[3]]);
   });
 
+  it('shows an example that is itself valid JSON', async () => {
+    // "Return JSON of exactly this shape" followed by something that is not
+    // JSON: the example had two alternatives for `about` written inline with
+    // an `or` between them, so a model copying the shape it was given would
+    // produce a reply that cannot be parsed and a report that never appears.
+    // The mocks in these tests hand back valid JSON, so nothing else here
+    // would ever notice.
+    const { asked } = await runReport();
+    const example = (prompt: string): unknown => {
+      const tail = prompt.slice(prompt.lastIndexOf('Return JSON of exactly this shape:'));
+      return JSON.parse(tail.slice(tail.indexOf('{'), tail.lastIndexOf('}') + 1));
+    };
+
+    // Both prompts, because they are the same mistake waiting in two places.
+    expect(() => example(asked[0]!)).not.toThrow();
+    expect(() => example(asked[1]!)).not.toThrow();
+
+    const shape = example(asked[1]!) as {
+      sections: Array<{ about: { type: string; entryId?: string }; points: unknown[] }>;
+    };
+    expect(shape.sections[0]?.about.type).toBe('entry');
+    expect(shape.sections[0]?.about.entryId).toBeTruthy();
+    expect(shape.sections[0]?.points).toHaveLength(1);
+    // The other form is described in prose, where it cannot break the example.
+    expect(asked[1]).toContain('{ "type": "resume" }');
+  });
+
   it('titles the section from the parse, not from the model', async () => {
     const { full } = await runReport();
 

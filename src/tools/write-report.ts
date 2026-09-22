@@ -101,19 +101,23 @@ export async function writeFullReport(
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
           `The findings, by id:\n${offered}\n\n` +
           `The entries a point can be filed under:\n${targets}\n\n` +
+          `Each section says what it is about. Use { "type": "entry", "entryId": "<one of the ids above>" } ` +
+          `for a section about one entry, and { "type": "resume" } for anything that spans the whole ` +
+          `document — dates, ordering, what the file itself does. Nothing else goes in "about", and no ` +
+          `heading of your own: the entry's own title is added afterwards.\n\n` +
           `Return JSON of exactly this shape:
 
 {
   "sections": [
     {
-      "about": { "type": "entry", "entryId": "one of the entry ids listed above" } or { "type": "resume" } for anything spanning the whole document,
+      "about": { "type": "entry", "entryId": "one of the entry ids listed above" },
       "points": [
         {
           "what": "the finding in one sentence — this sentence is the short version",
           "why": "what a reader would do differently knowing it",
           "evidence": "the shortest phrase from the résumé that shows the problem — a few words, not the line",
           "from": ["the ids of the findings this point rests on — several where they agree, and only ids from the list above"],
-          "cost": "a number of words, like \"about 6 words\" — or \"no words\" where the fix removes or moves text rather than adding it. Not a description of the work."
+          "cost": "a number of words, like 'about 6 words' — or 'no words' where the fix removes or moves text rather than adding it. Not a description of the work."
         }
       ]
     }
