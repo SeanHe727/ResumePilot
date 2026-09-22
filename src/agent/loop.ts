@@ -138,7 +138,7 @@ async function runMainAgent(input: string, session: Session, deps: LoopDeps): Pr
     {
       actor: { kind: 'main', id: 'main-agent' },
       sessionId: session.id,
-      turn: exchangesSoFar(session) + 1,
+      turn: nextTurn(session),
     },
     async () => {
       // What the user actually typed. It reaches the model inside the window
@@ -231,6 +231,26 @@ async function runTurn(
 }
 
 /** Reads back what the last exchange recorded, so a resumed session keeps counting. */
+/**
+ * Turns counted for this process, so two of them never share a number.
+ *
+ * The session's own progress is the durable count and it only moves after an
+ * answer: a turn whose model call threw, or that spent its whole allowance
+ * calling tools, leaves it where it was, and the next thing the user says
+ * would be filed under the number the failed turn already used. Which is the
+ * pair of turns a reader most wants to tell apart.
+ *
+ * Seeded from the durable count, so a resumed session carries on numbering
+ * rather than starting again at one.
+ */
+const turnsTaken = new WeakMap<Session, number>();
+
+function nextTurn(session: Session): number {
+  const turn = Math.max(exchangesSoFar(session) + 1, (turnsTaken.get(session) ?? 0) + 1);
+  turnsTaken.set(session, turn);
+  return turn;
+}
+
 function exchangesSoFar(session: Session): number {
   const match = /in conversation \((\d+) exchange/.exec(session.progress.phase);
   return match ? Number(match[1]) : 0;
@@ -319,6 +339,10 @@ async function runTool(
       // A refusal is a decision about the run, not an absence. Without it the
       // file shows a model that asked for something and a turn that carried on
       // as though it never had.
+      const refusal: ToolResult = {
+        success: false,
+        error: { code: 'permission_denied', message: pre.reason },
+      };
       trace.event(() => ({
         phase: 'failure',
         tool: call.name,
@@ -326,9 +350,13 @@ async function runTool(
         purpose: 'blocked before it ran',
         status: 'error',
         error: { message: pre.reason },
+        // What the model is actually handed. It reads this and plans its next
+        // turn from it, so a record of the refusal without it explains the
+        // decision and not the conversation that follows.
+        output: refusal,
         durationMs: Date.now() - started,
       }));
-      return { success: false, error: { code: 'permission_denied', message: pre.reason } };
+      return refusal;
     }
 
     // A pre-tool hook may rewrite the name or the arguments, and what runs is
@@ -349,23 +377,46 @@ async function runTool(
     // name or the arguments and the tool that runs must be the one they approved.
     ctx.result = await invoke(ctx.toolCall, session, deps);
 
-    const post = await deps.hooks.runPost(ctx);
-    const result = post.action === 'modify_result' ? post.result : ctx.result;
+    // Frozen before the post hooks run. A compression hook edits the result as
+    // readily as it substitutes one, and what the tool itself produced must
+    // not change in the record afterwards.
+    const produced = trace.enabled ? JSON.stringify(ctx.result) : '';
+    const succeeded = ctx.result.success;
 
     // Whole. This is the other half of the exchange the model then reasons
     // from, and a result cut at 200 characters cannot be checked against what
     // the model did with it.
     trace.event(() => ({
-      phase: result.success ? 'result' : 'failure',
+      phase: succeeded ? 'result' : 'failure',
       tool: ctx.toolCall.name,
       toolCallId: call.id,
-      ...(post.action === 'modify_result'
-        ? { purpose: 'rewritten by a hook after it ran' }
-        : {}),
-      output: result,
-      status: result.success ? 'success' : 'error',
+      output: JSON.parse(produced) as ToolResult,
+      status: succeeded ? 'success' : 'error',
       durationMs: Date.now() - started,
     }));
+
+    const post = await deps.hooks.runPost(ctx);
+    const result = post.action === 'modify_result' ? post.result : ctx.result;
+
+    // Compared, not asked. The pipeline answers `modify_result` whenever a
+    // result exists at all — every call, whether or not a hook touched it — so
+    // taking that as the signal would mark every tool call in every real run
+    // as rewritten, and a governance label that is always on says nothing.
+    //
+    // Only when it differs: a second copy of every unchanged result would
+    // double the largest thing in the file to record that nothing happened.
+    if (trace.enabled && JSON.stringify(result) !== produced) {
+      trace.event(() => ({
+        phase: 'decision',
+        tool: ctx.toolCall.name,
+        toolCallId: call.id,
+        purpose: 'rewritten by a hook after it ran',
+        // What the model was given instead. Both halves are here, so which
+        // part a hook removed can be read off rather than guessed at.
+        output: result,
+        status: result.success ? 'success' : 'error',
+      }));
+    }
 
     return result;
   });

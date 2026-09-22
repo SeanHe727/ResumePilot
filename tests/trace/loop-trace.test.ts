@@ -4,6 +4,7 @@ import { handleInput, type LoopDeps } from '../../src/agent/loop.js';
 import type { ParsedResponse, QueryEngine } from '../../src/query-engine/types.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
 import type { Session } from '../../src/session/types.js';
+import { DefaultHookPipeline } from '../../src/hooks/index.js';
 import type { HookContext, HookOutcome, HookPipeline } from '../../src/hooks/types.js';
 import type { Tool, ToolRegistry } from '../../src/tools/types.js';
 import { RecordingTrace } from '../../src/trace/index.js';
@@ -131,6 +132,43 @@ describe('the turn', () => {
     expect([...new Set(events.map((e) => e.turn))]).toEqual([1, 2]);
   });
 
+  it('gives a turn that fell over its own number, not the next one\u2019s', async () => {
+    // The session's progress only moves after an answer, so a turn whose model
+    // call threw leaves it where it was — and the next thing the user says
+    // lands under the number the failed turn already used. That is exactly the
+    // pair of turns a reader wants to tell apart.
+    let asked = 0;
+    const engine: QueryEngine = {
+      async query() {
+        asked += 1;
+        if (asked === 1) throw new Error('the provider fell over');
+        return text('Looks reasonable.');
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+    const { deps, session, events } = loopWith([text('unused')]);
+    (deps as { queryEngine: QueryEngine }).queryEngine = engine;
+
+    await expect(handleInput('first question', session, deps)).rejects.toThrow(/fell over/);
+    await handleInput('second question', session, deps);
+
+    const asked1 = events.find((e) => (e.input as { message?: string })?.message === 'first question');
+    const asked2 = events.find((e) => (e.input as { message?: string })?.message === 'second question');
+    expect(asked1?.turn).toBe(1);
+    expect(asked2?.turn).toBe(2);
+  });
+
+  it('carries on numbering where a resumed session left off', async () => {
+    const { deps, session, events } = loopWith([text('Looks reasonable.')]);
+    // What a session loaded from disk looks like: three exchanges already had.
+    session.progress.phase = 'in conversation (3 exchanges)';
+
+    await handleInput('the fourth thing they said', session, deps);
+
+    expect(of(events, 'input')[0]?.turn).toBe(4);
+  });
+
   it('records what the user actually typed', async () => {
     // It reaches the model inside the window, but only if there is a window.
     // This is the record that survives a turn that fell over being assembled.
@@ -237,7 +275,10 @@ describe('a tool call in the main loop', () => {
     expect(of(events, 'decision')[0]?.input).toEqual({ entryId: 'experience:9' });
   });
 
-  it('records the result a post hook substituted, which is what the model reads', async () => {
+  it('keeps both the result the tool produced and the one the model was given', async () => {
+    // A compression hook rewrites what the model reads. With only the
+    // delivered copy, which part it removed cannot be read off — and checking
+    // a finding against the evidence is the whole point of having the file.
     const hooks = {
       async runPre(): Promise<HookOutcome> {
         return { action: 'continue' };
@@ -253,9 +294,80 @@ describe('a tool call in the main loop', () => {
 
     await handleInput('review the first entry', session, deps);
 
-    expect(of(events, 'result')[0]).toMatchObject({
+    expect(of(events, 'result')[0]?.output).toMatchObject({
+      success: true,
+      data: 'the long original',
+    });
+    expect(of(events, 'decision')[0]).toMatchObject({
       purpose: 'rewritten by a hook after it ran',
       output: { success: true, data: 'compressed' },
+    });
+  });
+
+  it('freezes what the tool produced before any hook can edit it', async () => {
+    // A hook that reaches into the result it was handed, rather than
+    // substituting one, would otherwise rewrite the record of what the tool
+    // returned — and the comparison that decides whether to say so.
+    const hooks = {
+      async runPre(): Promise<HookOutcome> {
+        return { action: 'continue' };
+      },
+      async runPost(ctx: HookContext): Promise<HookOutcome> {
+        (ctx.result as { data: unknown }).data = 'edited in place';
+        return { action: 'continue' };
+      },
+    } as unknown as HookPipeline;
+    const { deps, session, events } = loopWith(
+      [toolUse('review_content', { entryId: 'experience:0' }), text('Done.')],
+      { tool: echo('what the tool actually returned'), hooks },
+    );
+
+    await handleInput('review the first entry', session, deps);
+
+    expect(of(events, 'result')[0]?.output).toMatchObject({
+      data: 'what the tool actually returned',
+    });
+    expect(of(events, 'decision')[0]?.output).toMatchObject({ data: 'edited in place' });
+  });
+
+  it('does not call an untouched result rewritten, against the real pipeline', async () => {
+    // `runPost` answers `modify_result` whenever a result exists at all — every
+    // call, touched or not. Taking that as the signal marks every tool call in
+    // every real run as rewritten, and a governance label that is always on
+    // says nothing. The fake pipelines above cannot catch it; this one can.
+    const { deps, session, events } = loopWith(
+      [toolUse('review_content', { entryId: 'experience:0' }), text('Done.')],
+      { tool: echo('untouched'), hooks: new DefaultHookPipeline() },
+    );
+
+    await handleInput('review the first entry', session, deps);
+
+    expect(of(events, 'decision')).toHaveLength(0);
+    expect(of(events, 'result')[0]?.output).toMatchObject({ data: 'untouched' });
+  });
+
+  it('records the refusal the model is actually handed', async () => {
+    // The model reads this and plans its next turn from it. A record of the
+    // decision without it explains the decision and not the conversation that
+    // follows from it.
+    const hooks = {
+      async runPre(): Promise<HookOutcome> {
+        return { action: 'block', reason: 'the candidate declined that path' };
+      },
+      async runPost(): Promise<HookOutcome> {
+        return { action: 'continue' };
+      },
+    } as unknown as HookPipeline;
+    const { deps, session, events } = loopWith(
+      [toolUse('review_content', { entryId: 'experience:0' }), text('Done.')],
+      { tool: echo('never runs'), hooks },
+    );
+
+    await handleInput('review the first entry', session, deps);
+
+    expect(of(events, 'failure')[0]?.output).toEqual({
+      success: false,
+      error: { code: 'permission_denied', message: 'the candidate declined that path' },
     });
   });
 
