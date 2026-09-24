@@ -236,6 +236,31 @@ function anomalies(
         detail: `filed as ${section.kind}; its shape argued for ${classification.runnerUp?.kind ?? 'something else'}`,
       });
     }
+
+    // Bullets the section itself owns, where an entry was expected to.
+    //
+    // Measured across every fixture before the rule was written: `bullets and
+    // no entries` alone also fires on a contact block written as bullets and on
+    // a one-line summary, both of which are legal flat shapes. The kinds below
+    // are the ones whose content is supposed to belong to something dated and
+    // named, so the shape is only suspicious there.
+    //
+    // It reports and stops. Guessing which bullet belongs to which title would
+    // make this a second parser, disagreeing with the first.
+    //
+    // Not conditional on the section having no entries at all: a section that
+    // opened two entries and left one bullet at its own level has left that
+    // bullet just as unreviewable, and that is the harder case to notice by eye.
+    if (OWNED_BY_ENTRIES.has(section.kind)) {
+      const orphans = section.bullets ?? [];
+      if (orphans.length > 0) {
+        out.push({
+          kind: 'bullets-without-entry',
+          at: section.id,
+          detail: `${orphans.length} bullet(s) and ${(section.infoLines ?? section.looseLines).length} loose line(s) under "${section.heading || section.kind}", with no entry to own them`,
+        });
+      }
+    }
   }
 
   // A cut made with nothing in the vocabulary to anchor it. Every boundary on
@@ -260,6 +285,19 @@ function anomalies(
 
   return out;
 }
+
+/**
+ * Kinds whose content is supposed to belong to a named, dated entry.
+ *
+ * `contact`, `summary` and `skills` are legitimately flat — a contact block
+ * written as bullets is a shape this parser reads on purpose — so an unowned
+ * bullet there says nothing.
+ */
+const OWNED_BY_ENTRIES: ReadonlySet<ResumeSection['kind']> = new Set([
+  'experience',
+  'project',
+  'education',
+]);
 
 /** Nothing a reader would take for a name once the dates are gone. */
 function dateOnly(text: string): boolean {

@@ -73,10 +73,15 @@ describe('parse_resume', () => {
       c,
     );
 
+    // This fixture files six project bullets under the section instead of under
+    // entries, so the parse is error-free and not clean: `anomalyCount` is how
+    // the coordinator learns to look before dispatching a review at a target
+    // that may not exist. It used to read `clean: true`, which is how a paid run
+    // came to discover the same shape by failing four dispatches.
     expect((result.data as { integrity: unknown }).integrity).toEqual({
-      clean: true,
+      clean: false,
       errorCount: 0,
-      anomalyCount: 0,
+      anomalyCount: 1,
     });
   });
 

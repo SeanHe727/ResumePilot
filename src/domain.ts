@@ -198,7 +198,17 @@ export interface ParseAnomaly {
     /** A section cut where no heading was recognised anywhere on the page. */
     | 'guessed-boundary'
     /** A section filed by its heading against what its shape argued for. */
-    | 'heading-overruled-evidence';
+    | 'heading-overruled-evidence'
+    /**
+     * Bullets in a section that expects entries, with no entry to own them.
+     *
+     * The text is not lost and nothing is miscounted, which is why every other
+     * check passes: the rows were claimed and labelled, just by the section
+     * rather than by an entry. What is lost is the relationship — and a review
+     * addresses an entry, so bullets nothing owns are bullets nothing can
+     * review.
+     */
+    | 'bullets-without-entry';
   /** The id or row this is about. */
   at: string;
   detail?: string;

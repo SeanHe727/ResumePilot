@@ -341,6 +341,19 @@ describe('offsets that do not lead back', () => {
 });
 
 describe('shapes that are legal and worth a second look', () => {
+  it('finds the unowned project bullets in the fixture that has them', async () => {
+    // The shape a paid run found the hard way. Now the parse says it, before
+    // anybody dispatches a specialist at a target that does not exist.
+    const doc = await new DefaultResumeParser().parse('tests/fixtures/resume_example.pdf');
+
+    expect(doc.meta.integrity?.anomalies).toContainEqual(
+      expect.objectContaining({ kind: 'bullets-without-entry', at: 's3' }),
+    );
+    // And it is an anomaly, not an error: nothing was dropped or double-counted.
+    expect(doc.meta.integrity?.droppedRows).toEqual([]);
+    expect(doc.meta.integrity?.placedRows).toBe(doc.meta.integrity?.totalRows);
+  });
+
   it('names an entry whose header is a date and nothing else', () => {
     const result = checkIntegrity(
       [],
@@ -368,6 +381,96 @@ describe('shapes that are legal and worth a second look', () => {
 
     expect(result.anomalies).toContainEqual(
       expect.objectContaining({ kind: 'entry-without-header', at: 's0:e0' }),
+    );
+  });
+
+  it('names bullets in an entry-bearing section that no entry owns', () => {
+    // Every other check passes on this shape: the rows were claimed once and
+    // labelled, just by the section instead of by an entry. What is lost is the
+    // relationship — and a review addresses an entry, so a bullet nothing owns
+    // is a bullet nothing can review. Measured on a real run: six project
+    // bullets went unscored while coverage reported itself complete.
+    const result = checkIntegrity(
+      [],
+      [],
+      [],
+      [
+        section({
+          kind: 'project',
+          heading: 'PROJECTS',
+          entries: [],
+          infoLines: ['Agent Runtime Suite | Owner', 'github.com/example/agents'],
+          bullets: [bullet({ id: 's0:b0' }), bullet({ id: 's0:b1' })],
+        }),
+      ],
+      '',
+    );
+
+    expect(result.anomalies).toContainEqual(
+      expect.objectContaining({ kind: 'bullets-without-entry', at: 's0' }),
+    );
+    expect(
+      result.anomalies.find((a) => a.kind === 'bullets-without-entry')?.detail,
+    ).toContain('2 bullet(s) and 2 loose line(s)');
+  });
+
+  it('says nothing about a section that is legitimately flat', () => {
+    // Measured across every fixture before the rule was written: "bullets and
+    // no entries" on its own also fires on a contact block written as bullets
+    // and on a one-line summary, and both of those are shapes this parser reads
+    // on purpose.
+    for (const kind of ['contact', 'summary', 'skills'] as const) {
+      const result = checkIntegrity(
+        [],
+        [],
+        [],
+        [section({ kind, entries: [], infoLines: ['a line'], bullets: [bullet()] })],
+        '',
+      );
+
+      expect(
+        result.anomalies.filter((a) => a.kind === 'bullets-without-entry'),
+        `${kind} should be allowed to be flat`,
+      ).toEqual([]);
+    }
+  });
+
+  it('says nothing when every bullet belongs to an entry', () => {
+    const result = checkIntegrity(
+      [],
+      [],
+      [],
+      [
+        section({
+          kind: 'project',
+          entries: [entry({ headerLines: ['A Project | Owner | 2025'], bullets: [bullet()] })],
+        }),
+      ],
+      '',
+    );
+
+    expect(result.anomalies.filter((a) => a.kind === 'bullets-without-entry')).toEqual([]);
+  });
+
+  it('still names a stray bullet in a section whose entries did open', () => {
+    // The harder case to notice by eye: two entries look right, and one bullet
+    // left at the section's own level is as unreviewable as six.
+    const result = checkIntegrity(
+      [],
+      [],
+      [],
+      [
+        section({
+          kind: 'project',
+          entries: [entry({ headerLines: ['A Project | Owner | 2025'], bullets: [bullet()] })],
+          bullets: [bullet({ id: 's0:b0' })],
+        }),
+      ],
+      '',
+    );
+
+    expect(result.anomalies).toContainEqual(
+      expect.objectContaining({ kind: 'bullets-without-entry', at: 's0' }),
     );
   });
 
