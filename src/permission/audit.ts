@@ -1,5 +1,10 @@
+import { createHash } from 'node:crypto';
+
 import Database from 'better-sqlite3';
 
+// One implementation of what a phone number and an email look like. Two would
+// be two things to keep in step, and this project has already had that fight.
+import { withoutContactDetails } from '../document/vocabulary.js';
 import type { ToolCall } from '../types.js';
 import type { ToolResult } from '../tools/types.js';
 import type {
@@ -44,6 +49,62 @@ const SUMMARY_CHARS = 200;
 /** Turns a tool call's arguments into the text stored in the log. */
 export type ArgumentSanitiser = (input: Record<string, unknown>) => string;
 
+/** How much of any one field survives. A field is recognisable, not readable. */
+const FIELD_CHARS = 80;
+
+/**
+ * What a filesystem path is reduced to.
+ *
+ * The one place a résumé's own filename is a piece of personal data: they are
+ * routinely the candidate's name, and the directory above them is the account
+ * name. The digest keeps rows about the same file correlatable — which is most
+ * of what a reader wants from this log — without keeping the name.
+ */
+function withoutPaths(text: string): string {
+  // Two narrow rules rather than one loose one. "contains a slash" would redact
+  // `CI/CD`, `TensorRT/INT8` and `24%/27%` out of the prose fields, which are
+  // the fields a reader uses to tell two rows apart.
+  const digest = (path: string): string => {
+    const hash = createHash('sha256').update(path).digest('hex').slice(0, 8);
+    const ext = /\.([A-Za-z0-9]{1,5})$/.exec(path)?.[1];
+    return `[path ${hash}${ext ? `.${ext}` : ''}]`;
+  };
+
+  // A value that is entirely a path to a file. This is how a path actually
+  // arrives — `{ path: "…" }` — rather than embedded in a sentence.
+  const whole = text.trim();
+  if (/^[^\s"']*[/\\][^\s"']*\.[A-Za-z0-9]{1,5}$/.test(whole)) return digest(whole);
+
+  // A home or system path quoted inside text. Anchored on the segments that
+  // actually carry a person's account name.
+  return text.replace(
+    /(?:~|\.{1,2})?[/\\](?:Users|home|root|var|tmp|mnt|Documents|Desktop|Downloads)[/\\][^\s"']+|[A-Za-z]:\\[^\s"']+|~[/\\][^\s"']+/g,
+    (path) => digest(path),
+  );
+}
+
+/**
+ * The default, and deliberately the safe one.
+ *
+ * This used to be `JSON.stringify`, on the reasoning that a caller who cared
+ * would pass something stricter. Nobody did: `App` constructed the logger with
+ * one argument for months and `permission_audit.tool_args` filled with whole
+ * résumé bullets, supplied facts and file paths. An optional dependency with a
+ * permissive default makes safety the thing you have to remember, and the
+ * comment above this class had been describing a sanitiser that was never
+ * there. A caller can still pass its own; it can no longer get raw arguments by
+ * saying nothing.
+ */
+export function recogniseOnly(input: Record<string, unknown>): string {
+  const shortened = JSON.stringify(input, (_key, value: unknown) => {
+    if (typeof value !== 'string') return value;
+    const cleaned = withoutPaths(withoutContactDetails(value));
+    return cleaned.length > FIELD_CHARS ? `${cleaned.slice(0, FIELD_CHARS)}…` : cleaned;
+  });
+
+  return (shortened ?? '').slice(0, SUMMARY_CHARS);
+}
+
 /**
  * Every decision, allowed or refused.
  *
@@ -58,11 +119,11 @@ export class SqliteAuditLogger implements AuditLogger {
   readonly db: Database.Database;
   private readonly sanitise: ArgumentSanitiser;
 
-  constructor(dbPath = ':memory:', sanitise?: ArgumentSanitiser) {
+  constructor(dbPath = ':memory:', sanitise: ArgumentSanitiser = recogniseOnly) {
     this.db = new Database(dbPath);
     this.db.pragma('journal_mode = WAL');
     this.db.exec(SCHEMA);
-    this.sanitise = sanitise ?? ((input) => JSON.stringify(input));
+    this.sanitise = sanitise;
   }
 
   log(sessionId: string, toolCall: ToolCall, decision: PermissionDecision): void {

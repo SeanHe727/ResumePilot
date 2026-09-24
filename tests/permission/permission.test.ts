@@ -187,12 +187,92 @@ describe('SqliteAuditLogger', () => {
   });
 
   it('puts arguments through the sanitiser before they reach disk', async () => {
+    // This passed for months while the default sanitiser was `JSON.stringify`,
+    // which is the whole lesson: it proved the seam worked and said nothing
+    // about what a caller who omitted the argument would get. The cases below
+    // are about the default, because that is what production used.
     const audit = new SqliteAuditLogger(':memory:', () => '[redacted]');
     const gate = new DefaultPermissionGate({ audit });
 
     await gate.checkTool(call('analyze_format', { text: 'sean@example.com' }), 's1');
 
     expect(audit.getSessionLog('s1')[0]?.toolArgs).toBe('[redacted]');
+  });
+
+  describe('what the default keeps', () => {
+    /** Constructed the way the App constructs it: one argument. */
+    const logged = async (input: Record<string, unknown>): Promise<string> => {
+      const audit = new SqliteAuditLogger();
+      await new DefaultPermissionGate({ audit }).checkTool(call('analyze_format', input), 's1');
+      return audit.getSessionLog('s1')[0]?.toolArgs ?? '';
+    };
+
+    it('keeps a contact detail out, without being asked to', async () => {
+      // `App` built this logger with one argument, so every permission row from
+      // every real run held whole arguments. Safety was the thing a caller had
+      // to remember, and the class comment had been describing a sanitiser that
+      // was not there.
+      const stored = await logged({ bullet: 'Reach me at sean@example.com or +1 555 010 0100' });
+
+      expect(stored).not.toContain('sean@example.com');
+      expect(stored).not.toContain('555 010 0100');
+      expect(stored).toContain('[email]');
+    });
+
+    it('replaces a résumé\u2019s own filename with a digest', async () => {
+      // The one place a filename is personal data: it is routinely the
+      // candidate's name, and the directory above it is their account.
+      const stored = await logged({ path: '/Users/someone/Downloads/jane_doe_cv.pdf' });
+
+      expect(stored).not.toContain('jane_doe');
+      expect(stored).not.toContain('someone');
+      expect(stored).toMatch(/\[path [0-9a-f]{8}\.pdf\]/);
+    });
+
+    it('gives the same file the same digest, so rows can still be compared', async () => {
+      // Recognising that two rows are about one document is most of what this
+      // log is for; a random placeholder would take that away.
+      const one = await logged({ path: 'tests/fixtures/resume_example.pdf' });
+      const two = await logged({ path: 'tests/fixtures/resume_example.pdf' });
+
+      expect(one).toBe(two);
+    });
+
+    it('redacts a home path quoted inside prose', async () => {
+      const stored = await logged({ note: 'I read /Users/someone/cv.pdf and ~/notes/draft.md' });
+
+      expect(stored).not.toContain('someone');
+      expect(stored).not.toContain('draft.md');
+    });
+
+    it('leaves a slash that is not a path alone', async () => {
+      // `CI/CD`, `TensorRT/INT8`, `24%/27%`. The prose fields are what a reader
+      // uses to tell two rows apart, so a loose path rule would cost more than
+      // it protects.
+      const stored = await logged({ goal: 'Review the CI/CD and TensorRT/INT8 claims, 24%/27%' });
+
+      expect(stored).toContain('CI/CD');
+      expect(stored).toContain('TensorRT/INT8');
+      expect(stored).toContain('24%/27%');
+    });
+
+    it('keeps enough of a long field to recognise it and not enough to read it', async () => {
+      const bullet = 'Reduced planted-defect localization error from 82% to 94% across four '
+        + 'diagnostic agents by rebuilding the routing layer and the evaluation harness';
+      const stored = await logged({ bullet });
+
+      expect(stored).toContain('Reduced planted-defect localization');
+      expect(stored).not.toContain('evaluation harness');
+      expect(stored.length).toBeLessThanOrEqual(200);
+    });
+
+    it('caps the whole row, however many fields there are', async () => {
+      const stored = await logged(
+        Object.fromEntries(Array.from({ length: 20 }, (_, i) => [`f${i}`, 'x'.repeat(60)])),
+      );
+
+      expect(stored.length).toBeLessThanOrEqual(200);
+    });
   });
 
   it('keeps sessions apart', async () => {
