@@ -1,135 +1,105 @@
 # Review Workflow TODO（缩略版）
 
-> PDF 解析重构 A0-B5 与报告链路已完成（`84d7421`）。下一阶段的核心不是先制定 full/partial 规则，而是补齐整套 Agent 可观测性。
->
 > 英文版 [`review-workflow-todo.md`](./review-workflow-todo.md) 是完整版，含对照代码的核查结果与实现方案；本文是缩略版。
+>
+> 基线：PDF 解析重构 A0–B5 完成（`84d7421`）；可拆卸 trace 完成，并已用一次真实对话实测（`a003950` … `4d084d9`）。
+>
+> **第二部分的每一条都是读 trace 读出来的，不是读代码读出来的**——这正是 trace 要干的事。证据：
+> [`trace-long-conversation-review.md`](./trace-long-conversation-review.md)（行为）、
+> [`架构分析报告.md`](./架构分析报告.md)（结构）、[`记录框架.md`](./记录框架.md)（trace 形状）。
 
-## 核心目标
+## 收尾条件
 
-建立一条完整的层级 trace，覆盖：
+**第三部分做完，这个项目就收。** 收尾的判据是一次预先登记、机械评分的对照实验：同样的简历，我们的系统对通用 agent。
 
-```text
-用户
-  → Main Agent
-    → Specialist
-      → Deep Research
-        → 内部工具
-    → 汇总
-    → Report Writer
-      → 对话 / /report / 导出报告
-```
+不比「谁的建议更好」——那是口味，而且好的通用 agent 建议确实不差。能被证明的是更窄也更硬的三条：
 
-不要求 Main Agent 先声明请求是 `focused`、`full` 或 `ambiguous`。这些是我们看完实际 trace 后用于 review 的标签。
+1. 每一句话都能落到简历里真实存在的某一行；
+2. 任何改写建议里都没有候选人从未提供过的数字；
+3. 没看的部分会被说出来。
 
-每一步需要看到：
+三条都**不需要人重读简历就能核验**。通用 agent 的输出连核验都无从下手——这本身就是差别。
 
-- 当时收到的有效上下文；
-- 选择了什么 role、目标或工具；
-- 简短的选择目的，不记录隐藏思维链；
-- 输入、结果、失败、耗时和 token；
-- 结果是否进入下一层诊断和最终报告。
+## 第一部分：可观测性（已完成）
 
-Trace 是显式开启的开发工具，不是产品日志。它会形成一份新的高敏感数据副本，因此首版必须使用 session 独立目录、仅文件所有者可读写、有限保留期和显式删除，并始终排除凭证。
+| 条目 | 状态 |
+|---|---|
+| 1. 报告链路 | 完成（`84d7421`） |
+| 2. 可拆卸 trace | 完成（`a003950`…`dcc8594`）。三方法接口、默认 no-op、一个目录开关、`AsyncLocalStorage` 传播 span |
+| 3. Main Agent 可观测 | 完成（`835b7ae`）。turn span 是最外层，也是 session id 和轮次唯一的来源 |
+| 4. Specialist / 嵌套 agent | 完成（`446028c`）。一个 agent 一个 span，Deep Research 自动嵌套在派它的那次工具调用下 |
+| 5. finding 身份与来源链 | 完成（`ad8a66e`、`0ec58b6`）。逐点链接 + 引用校验 |
 
-**首版不保存 reasoning。** 运行时仍可正常传递 provider 需要的 reasoning 状态，但 trace writer 排除 `ParsedResponse.reasoning`、历史 `Message.reasoning` 和 provider 的 `encrypted_content`。先用完整的可见 prompt、message、tool call、模型正文和结果做人工 review；不足时再单独评估 reasoning summary。
+实现中补上的、原设计没有的几点：`event` 收工厂函数（关掉时不构造快照）；记录失败**不能**波及被记录的工作（磁盘满曾被当成模型失败重试三次）；每次 retry 独立成事件；`stage` 区分预算/路由/provider 初始化/请求；span 自己写起止记录，所以树能从文件重建（实测 107 个 span 全闭合、0 孤儿）；上限按字节算并为终止说明预留空间；清理需要两个证据才删目录。
 
-## 对照代码核查过的三件事
+## 第二部分：实测暴露的问题
 
-- **审计库要原样保留**，不扩展。它自己的注释写着「够认出来，不够重建」——参数脱敏、两边各截 200 字，因为逐字存简历就等于存第二份拷贝。而 trace 要的正是「重建」。两者放一个库，必有一个失去意义。
-- **参考项目里没有 trace 实现**。它的 hook 清单和本项目一模一样，可借鉴的是 hook 这个**可插拔模式**本身。
-- **`pageRoom` 还没有真正传给专家**。`review.ts:66` 只有计算函数，但当前无人调用；`briefingFrom()` 不填它，`briefingContext()` 也不渲染。对话样例中写“缺失”是准确的。
+一次对话、4 回合、462 条事件、$0.10。层级是通的，角色选择合理，**8 次失败全是工具目标错误**——而它们每一个到用户那里都变成了沉默。
 
-## 当前可见性
+**6. 让每一行可寻址，否则就说它不可寻址**
+fixture 的 PROJECTS 段：`entries 0 / infoLines 4 / section bullets 6`。文字没丢，六条 bullet 挂在 section 下、**而且有 id**（`s3:b0`…`s3:b5`）——但 `render.ts:81` 把 section bullet 渲染成 `- 文本`，entry 的 bullet 渲染成 `- [id] 文本`。**id 在数据里，被渲染层扣掉了。** 于是 Main 看得见六条内容、没有任何合法目标，只能把项目标题填进 `entryId`，四次被拒，六条 bullet 没人评分。
+`render.ts` 自己的注释就是反对它自己行为的论据：「id 是文档的一部分，不是某个 prompt 的一部分……拿不到 id 的 agent 说不出『这两条重复了』」。
+**这不是 prompt 问题**：只要求 Main「别编 id」而不给它可命名的东西，只会把四次可见的失败变成沉默。要做的是渲染出 id、并决定那六条由谁审（section 级入口，还是解析重新组装成 entry）。真实简历在同一份代码下能解析出两个项目 entry，所以这是脆弱形状而非普遍失败——但**所有解析测试用的那份 fixture 正是脆弱的那份**，要重做，并补「项目 entry 带 bullet」这个用例。
 
-```text
-用户消息                          没记
-  主 agent 模型调用               没记
-    工具调用                      有，截到 200 字
-      review_content
-        Content 专家
-          收到的 briefing         没记
-          它的模型调用            没记
-          examine_technical_depth 没记
-            Deep Research
-              模型调用 / 内层工具  没记
-          返回的结构化结果         有，截到 200 字
-```
+**7. integrity 要看归属，不只看安置**
+`placedRows 55/55`、所有检查项为空，而解析刚把六条项目 bullet 归到 section 下、两个项目标题当成散文。`placedRows` 问的是「有没有被认领一次且有标签」，**不问被谁认领**。格式给同一份文档 100 分是对的（归属不是格式的职责），也正因如此 integrity 必须承担它。
 
-派发专家**本身是工具调用**，所以那道边界是被 hook 住的；看不见的是它对面的一切。
+**8. 收紧目标契约**
+Content 连续四次把 bullet id（`s2:e0:b0`…`b3`）填进 `examine_technical_depth` 的 `entryId`，于是**那条有 4 个 bullet、所有百分比数字的 entry 完全没做 deep research**；换到下一条 entry 时它自己改了策略才成功三次。工具描述写 `entryId: The entry being reviewed`，Content prompt 写「每行都有可寻址 id」——两句都对，合起来是陷阱。优先改接口（按 bullet 提问就收 `bulletId`，代码反查父 entry），而不是只改 prompt；并排查其它 schema 里需要模型猜的字段。
 
-## 当前优先级
+**9. 让完成与失败可见**
+报告的 coverage 是 `eligibleEntries 2 / contentReviewed 2 / wordingReviewed 2`——按它自己的账目是完整的，而这一轮有四次派发失败、六条 bullet 没评分。Main 的自然语言**说了**，只读结构化 coverage 的消费者读不到。
+原计划的三数组（reviewed / failed / notRun）**装不下这次的情况**：三个都是 entry id 列表，而失败的那些材料压根不是 entry。要加两类：`unaddressable`（解析出来、有内容、当前形态不可审）和 `rejectedTargets`（派发时命名了不存在的目标）。
 
-1. **完成报告链路** —— 已完成（`84d7421`）。剩下“对话展示的是节选还是全文”要在 coverage/完成状态中说清楚。
+**10. briefing 确定化**
+`pageRoom` **仍是死代码**（再次核对：`review.ts:66` 有定义、无人调用）。另外**记下的事实会静默丢失**：回合 2 的 `800ms → 90ms` 由 `record_fact` 写进 `suppliedFacts`，但读它的只有 `rewrite-bullet.ts:40` 和 Main 自己的上下文层；`generate_report` 不读，派发也不读——专家能不能拿到，取决于 Main 记不记得抄进 `supplied`。要在派发时自动挑选相关事实，并标明它是**用户补充**而不是简历已写。
 
-2. **建立可拆卸的 trace**
-   - 一个 `Trace` 接口，生产注入 no-op；显式 debug run 才写入。
-   - 先同时建立最小 `TraceContext`、安全 writer 和 `QueryEngine.query()` 插桩。当前 `QueryEngine` 参数没有 session、actor、turn、target、parent，不能先记一堆无法归属的 prompt。
-   - 用显式 context 传递或 Node `AsyncLocalStorage` 维护父子 span；不能假定异步调用栈会自然形成关联，并发后尤其如此。
-   - **四个边界**：`QueryEngine.query()`（所有模型调用）、`SubAgent.callTool()`（内层工具）、现有 hook 管线（主循环工具）、诊断汇总与报告接纳（finding 是否进入产品输出）。
-   - actor 使用可扩展的 `{ kind, id }`，不要只写死现有专家；报告 writer、历史压缩、改写等也会调用模型。
-   - 完整保存模型**可见**输入输出，不截断；但明确排除 reasoning、opaque/encrypted reasoning、凭证和不可序列化运行时对象。
+**11. 把剩下两个入口纳入 trace**
+整轮实测最重要的那个发现（项目为什么没有 entry）**没法从 trace 里得出**——两个 reviewer 都是跳出 trace 手工重跑 parser 才看清的。下次付费实测前必须补上，否则同类问题仍然只能靠碰巧发现。启动解析（`app.ts` 的 ToolContext 没传 trace，且在任何 turn span 之外）要单独开 span，记录分阶段的行/边界/标签、最终 section–entry–bullet 形状和 integrity；斜杠命令在 `runMainAgent` 之前返回、完全没有 span，要决定它算不算对话记录的一部分。
 
-3. **补齐 Main Agent 可观测性**
-   - 能看到它在什么上下文下选择了哪些 role 和目标。
-   - 能看到它何时澄清、复用旧结果、重新诊断或生成报告。
-   - 是否属于 full/partial、是否过早或过度，由人事后判断。
+**12. 减少模型要抄的东西**
+16 个报告点里 2 个引用了不存在的 finding id，其中一个是被写坏的 uuid（37 字符）。内部保留 uuid，**给模型看短别名**（`c3`、`w7`）再映射回去——唯一性和可抄性就不再互相为敌。校验照旧保留：别名降低出错率，不取代校验。
 
-4. **补齐 Specialist 可观测性**
-   - 记录最终 briefing、工具调用、重试、验证失败和结构化结果。
-   - 完整记录 Content → Deep Research → 内部工具的调用链。
-   - **不要为此扩展 hook 边界**：现有设计是有意的，子 agent 已在批准过的调用内部，逐次重跑权限/审计/记忆会把三者都乘一遍。trace 只记录，不治理。
-   - 记录研究结果是否真正影响 Content diagnosis 和最终报告。
+## 第三部分：证明，然后停下
 
-5. **给 finding 和报告点稳定身份与来源链**
-   - 仅有调用 trace 仍无法证明专家输出是否被汇总采用；当前 finding 多为字符串，`FullReportPoint` 也没有稳定 id，不能靠改写后的文本匹配。
-   - 每个被接纳的 source finding 带 `findingId`、来源 role、简历目标和产出它的 trace event。
-   - 每个报告点带自己的 id 与 `sourceFindingIds`；报告 writer 可以合并多个 finding，但只能返回 allowlist 内的来源 id，并在接纳前校验。
-   - 汇总和报告构建发出 acceptance event，用 `sourceFindingIds` / `reportPointIds` 串起“执行 → finding → 报告”。
+**13. 花钱前的机械测试 —— 已完成。** 102 条 trace 测试（全量 938），每个 guard 都有一条拿掉它就变红的变异测试。它还抓出三个 prompt 的 JSON 示例本身不合法（范围写在值的位置、示例里塞 `or`、多一个逗号），而且是每条 bullet 都要过的那两个诊断 prompt——模型照抄就会产出没人能解析的回答，而 `typeof !== 'number'` 会填 0，在报告里读起来是「这条写得极差」而不是「解析失败」。机械测试不验证 agent 判断是否合理，那是第 14 条的事。
 
-6. **确定性生成 briefing**
-   - 从 `resume.meta` 在派发时计算 `pageRoom`，加入最终 briefing 并由 `briefingContext()` 渲染；不要依赖 `review_format` 是否先运行。
-   - 自动选择相关 `suppliedFacts`，不要依赖 Main Agent 每次手工复制。
-   - 保留 Main Agent 提供的 `understanding` 和 `goal`。
+**14. 补完第一次实测没走到的对话场景。** 第一次只走到第 6 步：脚本说「我改好了」却没给文本，Main 要求先看原文（这是对的），所以**局部重评和报告更新一次都没被测到**；简历也是脚本预加载的，不是用户在对话里给的路径。补两次便宜的运行：①只补事实、文档不动，看新事实是否改变判断，并且答复必须说明这是用户补充；②贴出真实改写后的 bullet，要求局部重评并更新报告，看 Main 自己选择复用什么、重跑什么（不要写死路由分支），然后前后两份报告对比，确认没有把旧结果当新的。另外走一次真实上传路径，让解析和上传进 trace。
 
-7. **让 completion / failure / coverage 可见**
-   - 区分 `reviewed / failed / not-run / not-applicable`。
-   - 不允许 specialist 失败被伪装成成功或主动跳过。
-   - 对话、`/report` 和导出报告使用同一 coverage，并说明对话显示的是节选还是全文。
+**15. 对照通用 agent 证明。这是收尾。**
 
-## 先做机械测试，再花钱
+三个 arm，输入完全相同（用我们解析器抽出的文本，让 PDF 阅读不成为变量）：
 
-用 stub agent 验证 trace 的父子链完整、失败可见、**trace 能自我对账**：派发数 vs 完成数 vs 失败数；每个 `sourceFindingId` 和 `reportPointId` 都必须双向解析；完整可见输入输出被保留，但 reasoning、opaque state 和凭证必须缺席；普通运行不产生 trace，debug trace 满足目录、权限、保留和删除策略。这和解析层 B5 是同一类问题：每层都做了被要求的事，失败活在层与层之间的缝里。
+| Arm | 是什么 |
+|---|---|
+| A | ResumePilot 完整运行，trace 打开 |
+| B | 同一个模型，一次调用：简历文本 + 「审阅这份简历，告诉我该改什么」。这是候选人今天真实的做法 |
+| C | 同一个模型，一次调用，用我们最好的手写 prompt，开网页搜索。把「脚手架的贡献」和「prompt 的贡献」分开 |
 
-## 真实长对话测试
+八项指标全部机械可算：**落点率**（有多少 finding 能落到真实行）、**编造数字**（改写里出现的、简历和用户补充事实里都没有的数字——决定性的一项，它是把谎话写进用人文件的那种失败）、**抹掉数字**、**覆盖率**（多少可评分行拿到了锚定到行的判断，以及有没有**说出**自己漏了什么）、**版面预算**（「立即改」的建议净增多少字 vs 实测剩余空间）、**外部核查**（需要外部知识的断言有没有查过并指明出处）、**稳定性**（同一输入两次运行，锚定行 id 的重合度）、**PII 外泄**（联系方式有没有离开机器）。
 
-**这一步真花钱，先定预算。** 四 agent 诊断实测约 $0.13–0.17、10 分钟；这个场景是多专家 + Deep Research + 二次 review，按几倍估，而且要跑不止一次才能调出可读的 trace。
+**评分的诚实约束**：B 和 C 答的是散文，需要一个抽取器把散文变成 `(断言, 引用的行, 改写建议)` 三元组——那本身是一次模型调用，是偏差来源。规则：一个抽取器、一套固定 prompt、对 arm 盲、每份输出只跑一次、抽样人工核对并报告分歧率。**指标和通过线在第一次运行前先登记**，事后不能补。
 
-完整模拟一次真实使用：
+**通过线（预先登记）**：A 在每份简历上编造数字为 0；A 的落点率 ≥ 95%；A 每次都说明覆盖范围。如果 B 或 C 的编造数字也是 0，就如实说，主张收窄到落点、覆盖和**可核验性**——那仍然是通用 agent 给不出的主张，因为它的输出在没人重读简历的前提下根本无法核验。
 
-1. 用户上传 PDF。
-2. Main Agent 解析并自行决定诊断范围和 role。
-3. Specialist 执行诊断，Content 自行决定是否调用 Deep Research。
-4. 汇总结果并生成报告。
-5. 用户阅读报告、质疑结论、补充事实和约束。
-6. 用户修改局部内容并再次要求 review。
-7. Main Agent 判断哪些结果可以复用、哪些需要局部或整体重跑。
-8. 更新报告，并保留整条 trace。
+**输入**：四到五份不同形态的简历（真实那份、项目写成描述行的那份、双栏、内容稀疏的应届），每份每 arm 跑两次。A 每次约 $0.10，B/C 每次几分钱，整个矩阵几美元。B 和 C 赢的地方也要写进去：快、便宜、零配置、一次对话而不是一条流水线。
 
-测试产物包括：完整对话、最终报告、coverage 和层级 trace。我们据此人工 review：
+**16. 收尾。** 第 15 条拿到数字后：把数字和方法一起写进 README，删掉死命令和死配置，停。固定简历的质量 eval（旧第 11 条）只有在项目还要继续时才值得建。
 
-- Main Agent 的选择时机、范围和 role 是否合理；
-- Specialist 是否拿到了正确上下文；
-- Deep Research 是否在正确的时候被调用；
-- 是否隐藏失败、过早生成报告或重复执行无关工作；
-- 用户修改后是否正确复用与局部重跑。
+## 后续再做（项目继续的话）
 
-先看真实 trace，再决定是否需要费用确认、强制 full/partial 规则或 prompt 调整。
+角色/条目/内层工具并发；受约束的改写流程；搜索缓存与预算持久化；session 状态迁移；README、旧命令、旧配置清理；上下文压缩只在实测需要时再加强。
 
-## 后续再做
+## 当前质量风险
 
-- Trace 稳定后补纵向机械测试和固定简历质量 eval。
-- Role、entry 和内部工具并发。
-- 受约束的改写流程。
-- 搜索缓存、预算持久化、session 迁移。
-- README、旧命令、旧配置和历史文件清理。
-- 仅在长对话实测需要时加强上下文压缩。
+「意图、实际调用、覆盖、最终 finding 无法串成一条因果链」这个根问题**已解决**，原来的风险 1–4 都是它的症状，现在都没了。trace 打开之后剩下的风险不再关于可见性，而是关于**寻址与记账**：
+
+1. ~~缺统一 trace~~ 已解决
+2. ~~Deep Research 三层不可见~~ 已解决
+3. ~~prompt / 回答无处记录~~ 已解决
+4. ~~finding 无稳定身份~~ 已解决
+5. **有内容、读得到、但无法寻址**：六条带 id 的项目 bullet，id 没渲染，无人审阅（第 6 条）
+6. **账目读起来是完整的，实际不是**：四次被拒派发、六条未评分，coverage 写 2/2（第 7、9 条）
+7. `pageRoom` 是死代码；记下的事实要靠 Main 手抄才能到专家（第 10 条）
+8. 两个入口在 trace 之外，其中一个是决定下游一切的解析（第 11 条）
+9. 部分完成、失败、复用、完整这四种状态仍可能被呈现得太像，而且复用路径至今没被跑过（第 9、14 条）
