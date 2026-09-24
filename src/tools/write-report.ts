@@ -70,11 +70,28 @@ export async function writeFullReport(
       report.format.issues.map((i) => `- ${i}`).join('\n'),
   ];
 
-  // Every finding, with the id the report must cite to claim it. The readings
-  // above are the same material in the readers' own arrangement; this is the
-  // list a point's sources are checked against.
-  const offered = findings
-    .map((f) => `- ${f.id} [${f.role}, ${f.target}] ${f.what}`)
+  // Every finding, under a short alias the model has to copy.
+  //
+  // The ids are uuids, which is right for storing and expensive to echo: of
+  // sixteen points in the first real run, two cited ids that did not exist and
+  // one of those was a uuid copied wrong — 37 characters where 36 were shown.
+  // A two- or three-character alias removes the copying problem without giving
+  // up uniqueness anywhere it matters, because the alias never leaves this
+  // function: it is mapped back before anything is accepted.
+  // Numbered within each reader, so the list reads the way a person would read
+  // it — `c1 c2 w1` — rather than carrying a global position that means nothing
+  // to anyone. Unique regardless, because the prefix differs.
+  const alias = new Map<string, SourceFinding>();
+  const seen = new Map<string, number>();
+  const named = findings.map((finding) => {
+    const n = (seen.get(finding.role) ?? 0) + 1;
+    seen.set(finding.role, n);
+    const short = `${finding.role[0]}${n}`;
+    alias.set(short, finding);
+    return { short, finding };
+  });
+  const offered = named
+    .map(({ short, finding }) => `- ${short} [${finding.role}, ${finding.target}] ${finding.what}`)
     .join('\n');
 
   // The entries this résumé actually has. The model chooses among them rather
@@ -116,7 +133,7 @@ export async function writeFullReport(
           "what": "the finding in one sentence — this sentence is the short version",
           "why": "what a reader would do differently knowing it",
           "evidence": "the shortest phrase from the résumé that shows the problem — a few words, not the line",
-          "from": ["the ids of the findings this point rests on — several where they agree, and only ids from the list above"],
+          "from": ["the short ids of the findings this point rests on, exactly as listed above — several where they agree, and none that is not on that list"],
           "cost": "a number of words, like 'about 6 words' — or 'no words' where the fix removes or moves text rather than adding it. Not a description of the work."
         }
       ]
@@ -132,7 +149,13 @@ export async function writeFullReport(
   const rawSections = Array.isArray(parsed?.sections) ? parsed.sections : [];
   if (rawSections.length === 0) return null;
 
-  const byId = new Map(findings.map((finding) => [finding.id, finding]));
+  // Aliases first, then the real ids: a model that echoes a uuid it saw
+  // elsewhere in the conversation should still be understood rather than
+  // recorded as having invented it.
+  const byId = new Map<string, SourceFinding>([
+    ...alias,
+    ...findings.map((finding) => [finding.id, finding] as const),
+  ]);
   const unknownTargets: string[] = [];
 
   // What survives, decided before anything is minted. Numbering a point and
@@ -186,7 +209,11 @@ export async function writeFullReport(
     // model found convenient to write. Checked for existence only — that a
     // point genuinely follows from the finding it cites is a judgement, and
     // nothing here is in a position to make it.
-    const sourceFindingIds = draft.claimed.filter((id) => byId.has(id));
+    // Mapped back to the real ids on the way in, so nothing downstream ever
+    // sees an alias — it belongs to one prompt and means nothing outside it.
+    const sourceFindingIds = [
+      ...new Set(draft.claimed.filter((id) => byId.has(id)).map((id) => byId.get(id)!.id)),
+    ];
     invented.push(...draft.claimed.filter((id) => !byId.has(id)));
 
     const { about, claimed: _claimed, ...rest } = draft;

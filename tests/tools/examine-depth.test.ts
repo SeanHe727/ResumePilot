@@ -117,3 +117,53 @@ describe('examine_technical_depth', () => {
     expect(result.error?.message).toContain('timed out');
   });
 });
+
+describe('what the caller is allowed to name', () => {
+  const ask = async (input: Record<string, unknown>) => {
+    let ran: SubAgentTask | null = null;
+    const result = await examineDepthTool.execute(input as never, ctxWith(async (task) => {
+      ran = task;
+      return answered([FINDING]);
+    }));
+    return { result, ran: ran as SubAgentTask | null };
+  };
+
+  it('takes a bullet id and finds the entry that holds it', async () => {
+    // What the caller actually wants to ask about is usually one line. Making
+    // it name the entry instead was a conversion it had to do in its head.
+    const { result, ran } = await ask({ about: 'experience:0:1', question: 'does this hold?' });
+
+    expect(result.success).toBe(true);
+    expect(ran?.agentConfig.id).toBe('deep-research');
+    // Named on its own, not merely present inside the rendered entry: the
+    // researcher's findings come back keyed by bullet, and a question about one
+    // line reads differently from a question about the entry holding it.
+    expect(ran?.input).toContain('It is about this line:\n[experience:0:1] Shipped it');
+  });
+
+  it('accepts a bullet id in the old entry field rather than refusing it', async () => {
+    // The exact failure from the first traced run, four times in a row: the id
+    // was always enough to find the entry, and the refusal bought nothing but a
+    // gap where the research should have been.
+    const { result } = await ask({ entryId: 'experience:0:0', question: 'what does 71% mean?' });
+
+    expect(result.success).toBe(true);
+  });
+
+  it('still takes an entry id, for a question about the whole entry', async () => {
+    const { result, ran } = await ask({ about: 'experience:0', question: 'does the chain cohere?' });
+
+    expect(result.success).toBe(true);
+    // No single line is named, because none was meant.
+    expect(ran?.input).not.toContain('It is about this line');
+  });
+
+  it('says what would have been legal when the id is neither', async () => {
+    // A refusal that only says no is one the caller can answer only by guessing
+    // again, which is what it did.
+    const { result } = await ask({ about: 'Agent Runtime Suite', question: 'anything?' });
+
+    expect(result.success).toBe(false);
+    expect(result.error?.message).toContain('experience:0');
+  });
+});

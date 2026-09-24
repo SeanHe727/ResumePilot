@@ -217,8 +217,8 @@ describe('through the tool that actually runs it', () => {
               stopReason: 'end_turn',
             };
           }
-          // Cites two findings by the ids it was actually shown.
-          const shown = [...asked[1]!.matchAll(/- (\w+_finding_[0-9a-f-]{36}) \[/g)].map((m) => m[1]!);
+          // Cites two findings by the short ids it was actually shown.
+          const shown = [...asked[1]!.matchAll(/^- (\w\d+) \[/gm)].map((m) => m[1]!);
           return {
             type: 'text',
             content: JSON.stringify({
@@ -268,12 +268,13 @@ describe('through the tool that actually runs it', () => {
     const weighed = (
       events.find((e) => e.purpose === 'plan chosen')?.input as { fromFindingIds: string[] }
     ).fromFindingIds;
-    const shown = [...asked[1]!.matchAll(/- (\w+_finding_[0-9a-f-]{36}) \[/g)].map((m) => m[1]!);
 
     expect(weighed).toEqual(collected);
-    expect(shown).toEqual(collected);
     expect(accepted(events).offered).toEqual(collected);
-    expect(full?.sections[0]?.points[0]?.sourceFindingIds).toEqual([shown[1], shown[3]]);
+    // The writer sees short aliases and the record keeps the real ids, so the
+    // two are joined by the mapping rather than by the model's copying.
+    expect(asked[1]).not.toMatch(/_finding_[0-9a-f-]{36}/);
+    expect(full?.sections[0]?.points[0]?.sourceFindingIds.every((id) => collected.includes(id))).toBe(true);
   });
 
   it('shows an example that is itself valid JSON', async () => {
@@ -310,6 +311,79 @@ describe('through the tool that actually runs it', () => {
       'Mobility Systems Company | AI Research Intern | Oct 2024 - May 2025',
     );
     expect(full?.sections[0]?.target).toEqual({ type: 'entry', entryId: 'experience:0' });
+  });
+});
+
+describe('the ids the model is asked to copy', () => {
+  it('shows short aliases rather than uuids', async () => {
+    // Of sixteen points in the first real run, two cited ids that did not
+    // exist, and one of those was a uuid copied wrong: 37 characters where 36
+    // were shown. Uuids are right for storing and expensive to echo.
+    const { trace, events } = recorder();
+    const findings = everyFinding(INPUT);
+    let shown = '';
+
+    await writeFullReport(REPORT, STATE, findings, {
+      ...ctxWith({ sections: [] }, trace),
+      queryEngine: {
+        async query(params: { messages: Array<{ content: string }> }) {
+          shown = params.messages[0]!.content;
+          return {
+            type: 'text',
+            content: JSON.stringify({ sections: [] }),
+            usage: { inputTokens: 0, outputTokens: 0 },
+            stopReason: 'end_turn',
+          };
+        },
+        getUsageSummary: () => '',
+        checkBudget: () => ({ ok: true }),
+      },
+    } as unknown as ToolContext);
+
+    expect(shown).not.toMatch(/_finding_[0-9a-f-]{36}/);
+    expect(shown).toMatch(/^- f1 \[file, format\]/m);
+    expect(shown).toMatch(/^- c1 \[content, experience:0:0\]/m);
+    expect(shown).toMatch(/^- w1 \[wording, experience:0:0, wording\]/m);
+  });
+
+  it('stores the real id, never the alias', async () => {
+    // The alias belongs to one prompt and means nothing outside it.
+    const findings = everyFinding(INPUT);
+    const full = await writeFullReport(
+      REPORT,
+      STATE,
+      findings,
+      ctxWith({ sections: [entrySection('experience:0', point('No starting count.', ['c1']))] }),
+    );
+
+    expect(full?.sections[0]?.points[0]?.sourceFindingIds).toEqual([findings[1]!.id]);
+  });
+
+  it('still understands a real uuid, if one comes back instead', async () => {
+    const findings = everyFinding(INPUT);
+    const full = await writeFullReport(
+      REPORT,
+      STATE,
+      findings,
+      ctxWith({
+        sections: [entrySection('experience:0', point('No starting count.', [findings[1]!.id]))],
+      }),
+    );
+
+    expect(full?.sections[0]?.points[0]?.sourceFindingIds).toEqual([findings[1]!.id]);
+  });
+
+  it('still counts an alias that was never offered as invented', async () => {
+    const { trace, events } = recorder();
+
+    await writeFullReport(
+      REPORT,
+      STATE,
+      everyFinding(INPUT),
+      ctxWith({ sections: [entrySection('experience:0', point('No starting count.', ['c9']))] }, trace),
+    );
+
+    expect(accepted(events).invented).toEqual(['c9']);
   });
 });
 

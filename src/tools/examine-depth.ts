@@ -5,7 +5,18 @@ import type { Tool, ToolContext, ToolResult } from './types.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 
 interface ExamineDepthInput {
-  entryId: string;
+  /**
+   * The line the question is about, or the entry when it is about the whole
+   * entry. One field, because two — `entryId` and `bulletId` — is a choice the
+   * caller can get wrong, and did: a content reader asked about four bullets in
+   * a row by putting each bullet's id into `entryId`, was rejected four times,
+   * and the entry carrying every figure in the résumé went unresearched. The
+   * ids are all it takes to tell which kind was meant.
+   */
+  about?: string;
+  /** Accepted as `about`. A caller working from older wording still lands. */
+  entryId?: string;
+  bulletId?: string;
   /** What to put to the specialist. One question; call again for another. */
   question: string;
 }
@@ -40,23 +51,29 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
   parameters: {
     type: 'object',
     properties: {
-      entryId: { type: 'string', description: 'The entry being reviewed' },
+      about: {
+        type: 'string',
+        description:
+          'What the question is about, by id: a bullet id like experience:0:1 when the question ' +
+          'is about one line, or an entry id like experience:0 when it is about the whole entry. ' +
+          'Either kind is accepted here — do not convert one into the other.',
+      },
       question: {
         type: 'string',
         description: 'The one thing you want a practitioner in this field to tell you',
       },
     },
-    required: ['entryId', 'question'],
+    required: ['about', 'question'],
     additionalProperties: false,
   },
 
   async execute(input, ctx): Promise<ToolResult<unknown>> {
-    const entryId = input?.entryId?.trim();
+    const about = (input?.about ?? input?.bulletId ?? input?.entryId)?.trim();
     const question = input?.question?.trim();
-    if (!entryId || !question) {
+    if (!about || !question) {
       return {
         success: false,
-        error: { code: 'input_error', message: 'entryId and question are both required' },
+        error: { code: 'input_error', message: 'about and question are both required' },
       };
     }
     if (!ctx.subAgents) {
@@ -67,17 +84,38 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
     }
 
     const resume = (ctx.session?.state as ResumeSessionState | undefined)?.resume;
-    const entry = resume?.sections.flatMap((s) => s.entries).find((e) => e.id === entryId);
+    const entries = resume?.sections.flatMap((s) => s.entries) ?? [];
+
+    // An entry id, or a bullet id resolved to the entry that holds it. Being
+    // permissive here is the whole fix: the id the caller sent was always
+    // enough to find the entry, and refusing it bought four wasted calls and a
+    // gap in the review.
+    const entry =
+      entries.find((e) => e.id === about) ??
+      entries.find((e) => e.bullets.some((b) => b.id === about));
     if (!entry) {
+      // Say what would have been legal. A refusal that only says no is a
+      // refusal the caller can only answer by guessing again.
+      const known = entries.map((e) => e.id).join(', ');
       return {
         success: false,
-        error: { code: 'input_error', message: `no entry ${entryId} in this session` },
+        error: {
+          code: 'input_error',
+          message: `no entry or bullet ${about} in this session. Entries: ${known || 'none'}`,
+        },
       };
     }
 
+    const bullet = entry.bullets.find((b) => b.id === about);
     const result = await ctx.subAgents.run({
       agentConfig: DEEP_RESEARCH_AGENT,
-      input: `The question:\n${question}\n\nThe entry:\n<resume_content>\n${renderEntry(entry)}\n</resume_content>`,
+      input:
+        `The question:\n${question}\n\n` +
+        // Named when there is one. The researcher's findings come back keyed by
+        // bullet id, and a question about one line reads differently from a
+        // question about the entry it sits in.
+        (bullet ? `It is about this line:\n[${bullet.id}] ${bullet.text}\n\n` : '') +
+        `The entry:\n<resume_content>\n${renderEntry(entry)}\n</resume_content>`,
       context: { entry: withoutContactDetails(entry.headerLines.join(' | ')) },
     });
 
