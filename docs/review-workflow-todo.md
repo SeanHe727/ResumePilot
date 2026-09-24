@@ -1,28 +1,27 @@
 # Review Workflow TODO
 
-> Baseline: PDF parsing restructure A0-B5 is complete (`84d7421`), and the
-> detachable trace is complete and measured against one real conversation
-> (`a003950` … `4d084d9`).
+> Baseline: PDF parsing restructure A0-B5 is complete (`84d7421`). The
+> detachable trace was implemented across `66f2a51` … `0ec58b6`, then measured
+> in one real conversation after the prompt fixes in `9803ff1` … `4d084d9`.
 > Parser follow-ups live in `parse-restructure-plan.md`; this document contains
 > only the remaining review, agent, report, and observability work.
 >
-> Everything in Part 2 was found by reading that run rather than by reading the
-> code, which is what the trace was built for. Evidence:
+> The behavioural symptoms in Part 2 surfaced in that trace. Session state,
+> parser re-runs and code inspection were then used to confirm their structural
+> causes. Evidence:
 > [`trace-long-conversation-review.md`](./trace-long-conversation-review.md) (behaviour),
 > [`架构分析报告.md`](./架构分析报告.md) (structure),
 > [`记录框架.md`](./记录框架.md) (how the trace is shaped).
 >
 > Human walkthrough: [`review-conversation-sample.md`](./review-conversation-sample.md)
 >
-> **The finish line.** Part 3 is what closes this project: one pre-registered,
-> mechanically scored comparison against a general-purpose agent on the same
-> résumés. Not "does it give better advice" — that is taste, and a good
-> universal agent gives good advice. The claim that can be proved is narrower
-> and stronger: *every statement it makes is anchored to a real line, carries
-> no invented figure, and is accounted for — and all three can be checked
-> without a human re-reading the résumé.*
+> **Current sequence, not a finish line.** First fix the defects exposed by the
+> trace, then run ResumePilot end to end on several complete résumés. Only after
+> those runs are stable should the pre-registered comparison in Part 3 be run.
+> Its results inform whether to keep optimising or wrap up; the decision is not
+> made in advance.
 
-## Primary objective: complete observability
+## Primary objective: reviewable agent execution
 
 Do not require the Main Agent to classify a request as `focused`, `full`, or
 `ambiguous`. Those are useful labels for a human reviewer after the fact, not
@@ -50,6 +49,19 @@ audit log. Gitignore is not its security boundary: owner-only files, a
 session-scoped directory, explicit retention/deletion, and credential removal
 are part of the first implementation.
 
+**Hard product boundary.** Runtime decisions, coverage, reports and subsequent
+turns read product state from the Session only; they never read the trace. A
+rejected, failed or unaddressable review must therefore be written into
+structured Session state when it happens. The trace may mirror that event for
+development review, but disabling trace must not change product behaviour or
+make product facts disappear.
+
+This Session record is a **product execution ledger, not a smaller trace**. It
+keeps only facts the product must act on or disclose: intended targets,
+reviewed/failed/rejected/not-run outcomes, unaddressable material, reused
+results and report coverage. It does not keep full prompts, retry events, tool
+payloads, span trees or an agent's hidden analysis.
+
 **The first version does not record reasoning.** Runtime behaviour is unchanged
 and providers may still carry reasoning state between turns, but the trace
 writer omits `ParsedResponse.reasoning`, every historical `Message.reasoning`,
@@ -71,13 +83,15 @@ assumptions that turned out to be partly stale.
 
 Two further findings shape the work:
 
-**The audit store is designed for the opposite purpose.** Its own comment says
-so: *"How much of an argument or a result is kept. Enough to recognise, not to
-reconstruct."* Arguments are sanitised and both sides truncated to 200
-characters, because a log that stores résumé text verbatim becomes a second
-copy of everything the user gave us. Reconstruction is exactly what a trace is
-for. The two cannot share a store without one of them losing its point, so the
-audit layer stays as it is and the trace is separate.
+**The audit store is designed for the opposite purpose, but its current wiring
+does not fully enforce that design.** Its own comment says: *"Enough to
+recognise, not to reconstruct."* Execution input/output summaries are truncated
+to 200 characters. However, the App constructs `SqliteAuditLogger` without an
+argument sanitiser, so `permission_audit.tool_args` currently receives the full
+JSON arguments. Do not describe the audit store as sanitised. Before the next
+real debug run, either inject a PII-safe sanitiser or stop persisting full
+permission arguments. Reconstruction still belongs in the separate trace, not
+in the audit tables.
 
 **The reference project has no prior art for this.** Its hook set is
 `permission-check`, `input-sanitize`, `budget-check`, `audit-log`,
@@ -136,7 +150,7 @@ user turn                                     recorded, with session id and turn
 Still outside: the startup parse, and slash commands. Both are item 11.
 Reasoning is excluded by design, not by omission.
 
-## Part 1 — Observability, done
+## Part 1 — Agent-chain observability, done
 
 ### 1. Finish and commit the report path — done
 
@@ -144,14 +158,16 @@ Committed as `84d7421`. One canonical finding set written at full length, with
 the brief derived from it; the quoting pass that hands the résumé to the report
 writer is redacted like every other prompt. What remains open is making it
 explicit in conversation when a selection is being shown rather than the whole
-report, which belongs with item 7.
+report, which belongs with item 9.
 
 ### 2. Add one detachable trace — done
 
-Built as designed, across `a003950`…`dcc8594`. `Trace` has three methods, the
+Built across `66f2a51`…`dcc8594`; report provenance is covered separately by
+item 5 through `0ec58b6`. `Trace` has three methods, the
 no-op is the default, and the switch is one directory
 (`RESUMEPILOT_TRACE_DIR`). Spans propagate through `AsyncLocalStorage`. The
-four boundaries below are all instrumented; a fifth is missing and is item 10.
+agent-chain boundaries below are instrumented. Startup parsing and slash
+commands remain outside the trace and are item 11.
 
 What the design below did not anticipate, and what the implementation added:
 
@@ -185,8 +201,10 @@ persists events when an explicit debug run enables it:
 
 ```ts
 interface Trace {
-  event(e: TraceEvent): void;
+  readonly enabled: boolean;
+  event(make: () => TraceEventInput): void;
   span<T>(context: TraceSpan, run: () => Promise<T>): Promise<T>;
+  current(): TraceSpan | undefined;
 }
 ```
 
@@ -201,7 +219,7 @@ whether execution affected the product:
 |---|---|
 | `QueryEngine.query()` | **Every** model call — Main Agent, every specialist, Deep Research, the report writer. Nothing reaches a model any other way |
 | `SubAgent.callTool()` | Every inner tool call made by a specialist or by Deep Research |
-| The existing hook pipeline | Main-loop tool calls, which are already hooked — forward them whole rather than truncated |
+| `agent/loop.ts` beside the existing hook pipeline | Main-loop tool calls, their full pre-hook input, governance decisions and final result; hooks continue to govern rather than store the trace |
 | Diagnosis aggregation and report acceptance | Stable finding provenance: which specialist result became which accepted finding and which report point |
 
 Order matters: build the minimal `TraceContext` and secure writer together with
@@ -362,10 +380,39 @@ rewrite or merge the text, so text matching cannot provide that link.
 This is provenance, not a requirement that wording remain unchanged from
 specialist output to report prose.
 
+### 5.5 Stop storing unredacted arguments in the audit log — first
+
+`App` constructs `SqliteAuditLogger` with no sanitiser, and the default is
+`JSON.stringify(input)`, so `permission_audit.tool_args` receives whole
+arguments. The store from the real run shows it:
+
+```
+record_fact      {"fact":"p99 latency on the diagnostics service went from 800 ms to 90 ms.","bulletId":"s2:e0:b0"}
+review_content   {"entryId":"Research-Agent Evaluation Framework","understanding":"A contributor project building…
+```
+
+To be exact about a claim this document and several commit messages have
+repeated: the "200 characters of each side" in the audit store's own comment
+applies to the result summaries in `execution_records`.
+`permission_audit.tool_args` is a different column and passes through no
+sanitiser at all. "The audit store is sanitised" has only ever been half true.
+
+This goes first because it is the only item about personal data **already on
+disk**: `rewrite_bullet` carries résumé text and `parse_resume` carries a
+filename, which is routinely the candidate's own name. Wire a PII-safe
+sanitiser, or stop storing full permission arguments.
+
 ## Part 2 — What the first traced run exposed
 
 One conversation, four turns, 462 events, $0.10, all of it in
-`tmp/trace/421eb049-…/trace.jsonl`. Nothing here came from reading the code.
+`tmp/trace/421eb049-…/trace.jsonl`. The behavioural failures below were visible
+in the trace; their causes were confirmed against Session state, a parser
+re-run, and the relevant code.
+
+These are primarily implementation defects inside the architecture already
+chosen, not a reason to redesign the agent system. The only open product-level
+choice is how section-owned material should be reviewed: expose a section-level
+target, or require parsing to reconstruct entries first.
 
 The run's own summary: the hierarchy worked (main → tool → specialist → nested
 researcher → web search, every prompt and result whole), the roles chosen were
@@ -403,19 +450,21 @@ leaving it nothing to name converts four visible failures into silence.
   Rebuild it to keep the structure it was anonymised out of, and add the missing
   case: a projects section whose entries carry bullets.
 
-### 7. Make integrity see ownership, not just placement
+### 7. Flag suspicious ownership without making integrity a second parser
 
 `placedRows: 55/55`, every check empty, and the parse had just filed six
 project bullets under a section and two project titles as prose. `placedRows`
 asks whether a row was claimed once and labelled; it does not ask **who**
 claimed it. Format scored the same document 100 with no blockers, which is
-correct — ownership is not the format check's job — and that is precisely why
-integrity has to carry it.
+correct — ownership is not the format check's job. Integrity should expose a
+structural contradiction, but it must not try to infer the correct owner again
+with less evidence than the parser had.
 
 - Treat a section holding bullets, no entries, and heading-shaped prose lines as
-  an anomaly with a name, not as a clean parse.
-- A row placed under an owner that cannot be reviewed is not the same as a row
-  placed correctly; the reconciliation should be able to say so.
+  a named anomaly, not as a clean parse. Keep the rule narrow and mechanical.
+- Whether that material is reviewable is a product concern. Record it as
+  `unaddressable` in Session coverage (item 9), rather than asking B5 to
+  reinterpret the résumé.
 
 ### 8. Tighten target contracts so a model cannot miss them
 
@@ -468,7 +517,9 @@ interface ReviewCoverage {
   what failed, what did not run, and what could not be addressed.
 - Show the same coverage in conversation, `/report` and exports, and say when
   conversation is showing a selection.
-- Link coverage entries to the trace events that produced them.
+- Write this ledger into Session state at dispatch time. Trace records the same
+  transition for reviewers, but product code must not query trace to reconstruct
+  coverage later.
 
 ### 10. Make the specialist briefing deterministic
 
@@ -503,6 +554,9 @@ accident.
   `commands.execute()` before `runMainAgent`, so they produce no span at all.
   Decide whether a command is part of the conversation's record; if it is,
   give it one.
+- This instrumentation is diagnostic only. Parsing output still enters product
+  state through the existing Session path; no product decision may depend on a
+  trace file being present.
 
 ### 12. Reduce what a model has to copy
 
@@ -515,7 +569,7 @@ echo.
 - Keep validating every citation regardless: the alias reduces the error rate,
   it does not remove the need to check.
 
-## Part 3 — Proving it, then stopping
+## Part 3 — Validate after repairs, then decide
 
 ### 13. Verification before spending — done
 
@@ -535,7 +589,7 @@ the line rather than as a parse that gave up.
 What these tests do not verify is whether any agent's judgement was sensible.
 That is what item 14 is for, and item 15 is how it is proved to anyone else.
 
-### 14. Finish the conversation scenarios the first run missed
+### 14. Run the scenarios the first test set missed
 
 The first run covered steps 1–6 of the scenario below and stopped: the script
 said "I rewrote that bullet" without supplying the text, the Main Agent
@@ -543,7 +597,8 @@ correctly asked for it rather than reviewing an imagined edit, and so **no
 partial re-review and no report update were exercised at all.** The résumé was
 also pre-loaded by the harness rather than named in chat.
 
-Two runs, cheap, with a budget agreed first (the first cost $0.10):
+After items 6–12 and the audit-storage fix, run two focused conversations with
+a budget agreed first (the first run cost $0.10):
 
 - **A fact only.** Supply a figure, change nothing in the document, ask whether
   it changes the verdict. A new fact can change a judgement about a line whose
@@ -558,13 +613,22 @@ Two runs, cheap, with a budget agreed first (the first cost $0.10):
 Also exercise the path a user actually takes: name the file in chat rather than
 pre-loading it, so the parse and the upload are inside the trace.
 
-### 15. Prove it against a general-purpose agent
+Then run ResumePilot by itself on several complete résumés of different shapes.
+Check the full path — upload, parse, role choice, specialist dispatch, optional
+Deep Research, report generation, follow-up facts, a real text edit and partial
+or full re-review — before using those résumés for a competitive comparison.
+The Main Agent keeps freedom to choose the scope; the test checks what it chose,
+what it reused and what coverage it disclosed rather than enforcing a routing
+if/else tree.
 
-**This is the finish line.** A capable universal agent given a résumé writes
-sensible advice, and arguing about whose advice reads better is unfalsifiable.
-So the comparison is not about advice. It is about the three properties a
-document used in hiring actually needs, each of which can be measured without
-anyone re-reading the résumé:
+### 15. Compare with a general-purpose agent after the repairs are stable
+
+A capable universal agent given a résumé writes sensible advice, and arguing
+about whose advice reads better is unfalsifiable. The comparison is therefore
+not about taste. It measures three properties a hiring document needs.
+ResumePilot emits them in a natively checkable shape; prose-only arms require
+the blind extraction step below before the same mechanical measurements can be
+applied:
 
 1. every statement resolves to a real line;
 2. no proposed rewrite contains a figure the candidate never gave;
@@ -603,9 +667,18 @@ retrofitted.
 **Pass bar**, pre-registered: zero fabricated figures for A on every résumé;
 anchoring at or above 95% for A; coverage stated by A every time. If B or C also
 score zero fabrications, say so plainly and the claim narrows to anchoring,
-coverage and checkability — which is still a claim a universal agent cannot
-make, because its output cannot be verified at all without a human reading the
-document.
+coverage and checkability. The defensible distinction is that a universal
+agent's prose is not natively checkable: it first needs an additional
+inference/extraction step whose disagreement rate must be reported.
+
+**Exploration and confirmation are separate runs.** Designing the test after
+seeing the results is retrofitting the pass bar, and the sequence the owner
+wants — compare first, then decide what to claim — only holds if the two use
+different documents. So: an **exploration set** of two résumés, run across all
+three arms, used to find where the difference actually lies and never cited as
+evidence; then the measures and the pass bar are registered; then a
+**confirmation set** of three further résumés, disjoint from the first, whose
+numbers are the only ones that reach the README.
 
 **Inputs**: four or five résumés of different shapes — the real one, one whose
 projects are description lines (the shape item 6 is about), one two-column, one
@@ -613,14 +686,27 @@ sparse entry-level — each run twice per arm. Roughly $0.10 per A run and a few
 cents per B/C run, so the whole matrix is a few dollars. Report where B and C
 win too: latency, cost, no setup, and one conversation instead of a pipeline.
 
-### 16. Wrap up
+### 16. Decide the next phase from the evidence
 
-Once item 15 has numbers: write them into the README with the method beside
-them, remove dead commands and configuration, and stop. A fixed-résumé quality
-eval with expected findings (the old item 11) is only worth building if the
-project continues past this point.
+Once items 14 and 15 have results, write the method and numbers down and review
+the remaining failures.
 
-## Later work
+**The stopping rule, decided by the owner: stop when no vital problem remains.**
+Small problems are explicitly skippable. Every traced run grows a new batch of
+findings — this one grew seven — so "fix everything found" is not a finish line,
+it is a treadmill. Vital means the user would draw a wrong conclusion: a report
+that overstates its coverage, a failure presented as a success, a figure the
+candidate never gave written into a résumé, or personal data leaving the
+machine. Anything outside those four is recorded in an explicit "known and
+skipped" list rather than carried as unfinished work.
+
+This is also why the goals are set *after* item 15 rather than before it: the
+first comparison is what tells us where the difference actually is, and only
+then is it worth writing down what this system claims. Do not pre-commit to
+stopping before seeing that evidence, and do not pre-commit to continuing
+either.
+
+## Later work candidates
 
 - Add role, entry, and independent inner-tool concurrency after trace and
   completion semantics are stable.
