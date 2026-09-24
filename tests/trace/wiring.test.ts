@@ -1,4 +1,4 @@
-import { mkdtempSync, existsSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -89,6 +89,26 @@ describe('attaching the trace to a run', () => {
 
     expect(deps.trace).toBe(a.trace);
     a.close();
+  });
+
+  it('puts the startup parse inside a span of its own', async () => {
+    // It happens before any turn exists, and the shape it produces is what
+    // every later turn reads. The first paid run began with a document the
+    // trace could not account for.
+    const dir = mkdtempSync(join(tmpdir(), 'trace-wiring-'));
+    const a = app(dir);
+
+    await a.start('tests/fixtures/resume_example.pdf');
+    a.close();
+
+    const events = readFileSync(a.tracePath!, 'utf8')
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line) as { phase: string; tool?: string; actor: { id: string } });
+
+    const span = events.find((e) => e.phase === 'span' && e.actor.id === 'parse');
+    expect(span, 'the startup parse opened no span').toBeDefined();
+    expect(events.find((e) => e.tool === 'parse_resume' && e.phase === 'result')).toBeDefined();
   });
 
   it('opens the run directory when the trace is on, before anything is asked', () => {

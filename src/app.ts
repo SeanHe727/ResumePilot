@@ -257,15 +257,26 @@ export class App {
     // Named on the command line or at the prompt, which is the candidate
     // naming it. The guard exists for paths a model produces.
     grantPath(path, session);
-    const result = await this.loopDeps.tools.resolve('parse_resume').execute({ path } as never, {
-      session,
-      queryEngine: this.queryEngine,
-      knowledge: this.knowledge,
-      abortSignal: session.abortController.signal,
-    });
-    return result.success
-      ? { success: true }
-      : { success: false, error: result.error?.message ?? 'could not read the file' };
+
+    // A span of its own, because this happens before any turn exists: the file
+    // is read at startup or from a command, and the shape it produces is what
+    // every later turn is reading. Without it the trace began with a document
+    // it could not account for.
+    return this.trace.span(
+      { actor: { kind: 'system', id: 'parse' }, sessionId: session.id, turn: 0 },
+      async () => {
+        const result = await this.loopDeps.tools.resolve('parse_resume').execute({ path } as never, {
+          session,
+          queryEngine: this.queryEngine,
+          knowledge: this.knowledge,
+          trace: this.trace,
+          abortSignal: session.abortController.signal,
+        });
+        return result.success
+          ? { success: true }
+          : { success: false, error: result.error?.message ?? 'could not read the file' };
+      },
+    );
   }
 
   async handle(input: string, session: Session): Promise<Session> {

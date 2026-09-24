@@ -52,8 +52,20 @@ export const parseResumeTool: Tool<ParseResumeInput, unknown> = {
       // generic message it would read as a broken file, and the one thing the
       // candidate can act on — re-export in a single column — would be buried.
       if (err instanceof UnsupportedLayoutError) {
+        ctx.trace?.event(() => ({
+          phase: 'failure',
+          tool: 'parse_resume',
+          status: 'error',
+          error: { message: err.reason },
+        }));
         return { success: false, error: { code: 'input_error', message: err.reason } };
       }
+      ctx.trace?.event(() => ({
+        phase: 'failure',
+        tool: 'parse_resume',
+        status: 'error',
+        error: { message: err instanceof Error ? err.message : String(err) },
+      }));
       return {
         success: false,
         error: {
@@ -64,6 +76,15 @@ export const parseResumeTool: Tool<ParseResumeInput, unknown> = {
     }
 
     if (resume.meta.quality === 'unreadable') {
+      // A shape of its own: the file opened and gave nothing back. Without this
+      // the record shows a session that simply never had a document.
+      ctx.trace?.event(() => ({
+        phase: 'failure',
+        tool: 'parse_resume',
+        status: 'error',
+        error: { message: resume.meta.layoutWarnings[0] ?? 'no readable text' },
+        output: { quality: resume.meta.quality, wordCount: resume.meta.wordCount },
+      }));
       return {
         success: false,
         error: {
@@ -92,6 +113,45 @@ export const parseResumeTool: Tool<ParseResumeInput, unknown> = {
         latestReport: undefined,
       };
     }
+
+    // The shape the whole run then proceeds on.
+    //
+    // Recorded here rather than inside the parser, because the parser is
+    // deterministic and the file is still on disk: anyone can re-run it to get
+    // row-level detail. What cannot be recovered afterwards is which shape a
+    // particular run was reading when it chose what to dispatch — and a paid
+    // run once spent four dispatches on a section that had no entries, with
+    // nothing in the record to explain why.
+    ctx.trace?.event(() => ({
+      phase: 'result',
+      tool: 'parse_resume',
+      status: 'success',
+      target: {},
+      output: {
+        quality: resume.meta.quality,
+        wordCount: resume.meta.wordCount,
+        pageCount: resume.meta.pageCount,
+        layoutWarnings: resume.meta.layoutWarnings,
+        sections: resume.sections.map((section) => ({
+          id: section.id,
+          kind: section.kind,
+          heading: section.heading,
+          entries: section.entries.map((entry) => ({
+            id: entry.id,
+            headerLines: entry.headerLines.length,
+            infoLines: (entry.infoLines ?? []).length,
+            bullets: entry.bullets.length,
+            dated: entry.dateRange !== undefined,
+          })),
+          // The counts that told the last run's story: bullets and prose the
+          // section kept for itself, with no entry to own them.
+          sectionBullets: (section.bullets ?? []).length,
+          infoLines: (section.infoLines ?? section.looseLines).length,
+          classification: section.classification,
+        })),
+        integrity: resume.meta.integrity,
+      },
+    }));
 
     const entries = resume.sections.flatMap((section) => section.entries);
     return {
