@@ -111,6 +111,9 @@ export const parseResumeTool: Tool<ParseResumeInput, unknown> = {
         narrative: undefined,
         jdMatch: undefined,
         latestReport: undefined,
+        reports: undefined,
+        documentVersion: 1,
+        revisions: undefined,
         // A refusal is about the document it was asked against.
         reviewAttempts: undefined,
       };

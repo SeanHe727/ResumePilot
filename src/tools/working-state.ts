@@ -127,7 +127,14 @@ export const applyRevisionTool: Tool<ApplyRevisionInput, ApplyRevisionOutput> = 
       };
     }
 
-    ctx.session.state = { ...state, resume: withRevision(resume, bulletId, text) };
+    // A new version, so a report written before this can say it was.
+    const version = (state.documentVersion ?? 1) + 1;
+    ctx.session.state = {
+      ...state,
+      resume: withRevision(resume, bulletId, text),
+      documentVersion: version,
+      revisions: [...(state.revisions ?? []), { version, bulletId, at: new Date().toISOString() }],
+    };
     return { success: true, data: { bulletId, before, after: text } };
   },
 };

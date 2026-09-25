@@ -18,6 +18,7 @@ import type {
 } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
+import { currentReadings } from './versions.js';
 import { writeFullReport } from './write-report.js';
 
 /**
@@ -56,11 +57,15 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
 
   async execute(_args, ctx): Promise<ToolResult<DiagnosisReport>> {
     const state = (ctx.session?.state ?? {}) as ResumeSessionState;
+    // Only readings of the text each entry has now. A reading of an older
+    // version, or of a draft that was never kept, is about a line that is not
+    // on the page; coverage says which entries that leaves unread.
+    const readings = currentReadings(state);
     const input: GenerateReportInput = {
       resume: state.resume as ResumeDocument,
       format: state.formatDiagnosis as FormatDiagnosis,
-      entries: state.entryDiagnoses ?? [],
-      ...(state.wordingDiagnoses ? { wording: state.wordingDiagnoses } : {}),
+      entries: readings.content.current,
+      ...(state.wordingDiagnoses ? { wording: readings.wording.current } : {}),
       ...(state.narrative ? { narrative: state.narrative } : {}),
       ...(state.jdMatch ? { jdMatch: state.jdMatch } : {}),
     };
@@ -106,6 +111,10 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
     const improvementPlan = await buildImprovementPlan(input, findings, state, ctx);
 
     const report: DiagnosisReport = {
+      id: randomUUID(),
+      createdAt: new Date().toISOString(),
+      documentVersion: state.documentVersion ?? 1,
+      factsKnown: (state.suppliedFacts ?? []).length,
       summary,
       perEntry: perEntry(allEntries, input.entries),
       coverage: coverage(allEntries, input, state),
@@ -124,7 +133,10 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
 
     // Left where `/report` and `/export` read it: the coordinator is not asked
     // to carry a whole report back through a tool result and put it somewhere.
-    if (ctx.session) ctx.session.state = { ...state, latestReport: report };
+    // Appended, so every report this document has had stays readable in order.
+    if (ctx.session) {
+      ctx.session.state = { ...state, latestReport: report, reports: [...(state.reports ?? []), report] };
+    }
 
     // The long form stays on the session. Handing it back would put it in the
     // coordinator's window, which is not big enough to hold it and does not
@@ -406,6 +418,15 @@ function coverage(
       bullets: (section.bullets ?? []).length,
     }));
 
+  // Read for this report, or reused from an earlier one. Only meaningful when
+  // there was an earlier one; on the first, everything was read for it.
+  const previous = state.latestReport?.createdAt;
+  const since = (readings: Array<{ readAt?: string }>): number | undefined =>
+    previous === undefined ? undefined : readings.filter((r) => (r.readAt ?? '') > previous).length;
+  const { content, wording } = currentReadings(state);
+  const contentSince = since(input.entries);
+  const wordingSince = since(input.wording ?? []);
+
   const attempts = state.reviewAttempts ?? [];
   const rejected = attempts.filter((a) => a.outcome === 'rejected');
   const failed = attempts.filter((a) => a.outcome === 'failed');
@@ -415,6 +436,10 @@ function coverage(
     notApplicableEntries: allEntries.length - eligible.length,
     contentReviewed: eligible.filter((entry) => scored.has(entry.id)).length,
     wordingReviewed: eligible.filter((entry) => worded.has(entry.id)).length,
+    ...(contentSince !== undefined ? { contentReadSincePrevious: contentSince } : {}),
+    ...(wordingSince !== undefined ? { wordingReadSincePrevious: wordingSince } : {}),
+    ...(content.stale.length > 0 ? { contentStale: content.stale } : {}),
+    ...(wording.stale.length > 0 ? { wordingStale: wording.stale } : {}),
     narrative: input.narrative ? 'done' : 'not-run',
     // No posting is not a gap. Nothing was asked for, so nothing is missing.
     jdMatch: input.jdMatch ? 'done' : state.jd ? 'not-run' : 'no-posting',

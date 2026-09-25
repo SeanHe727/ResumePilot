@@ -442,6 +442,9 @@ export interface EntryNarrative {
 /** Output of the Entry Substance agent: one entry, judged whole. */
 export interface EntryDiagnosis {
   entryId: string;
+  /** Hash of the bullets this read, set when it is filed. See `tools/versions.ts`. */
+  readHash?: string;
+  readAt?: string;
   overallScore: number;
   bullets: BulletDiagnosis[];
 }
@@ -449,6 +452,9 @@ export interface EntryDiagnosis {
 /** Output of the Entry Wording agent — no knowledge base, cheap model. */
 export interface WordingDiagnosis {
   entryId: string;
+  /** Hash of the bullets this read, set when it is filed. See `tools/versions.ts`. */
+  readHash?: string;
+  readAt?: string;
   overallScore: number;
   perBullet: Array<{
     bulletId: string;
@@ -574,8 +580,22 @@ export interface ReportCoverage {
   eligibleEntries: number;
   /** Entries with nothing to score. A degree is a header and dates. */
   notApplicableEntries: number;
+  /** Entries with a reading of the text they have now. */
   contentReviewed: number;
   wordingReviewed: number;
+  /**
+   * Of those, how many were read since the previous report. The rest are
+   * readings of unchanged text, reused. Absent on the first report, where
+   * everything was read for it.
+   */
+  contentReadSincePrevious?: number;
+  wordingReadSincePrevious?: number;
+  /**
+   * Entries whose only reading is of text they no longer have. Their findings
+   * are left out of the report rather than presented as about the page.
+   */
+  contentStale?: string[];
+  wordingStale?: string[];
   narrative: 'done' | 'not-run';
   /** `no-posting` is not a gap: there was nothing to compare against. */
   jdMatch: 'done' | 'not-run' | 'no-posting';
@@ -707,6 +727,13 @@ export interface VersionComparison {
 }
 
 export interface DiagnosisReport {
+  /** Minted when the report is written. Absent on reports written before. */
+  id?: string;
+  createdAt?: string;
+  /** The document version it was written against. */
+  documentVersion?: number;
+  /** How many supplied facts existed when it was written. */
+  factsKnown?: number;
   summary: ReportSummary;
   perEntry: Array<{
     entryId: string;
@@ -764,6 +791,16 @@ export interface ResumeSessionState {
   narrative?: NarrativeAssessment;
   jdMatch?: JdMatch;
   latestReport?: DiagnosisReport;
+  /** Every report written for this document, oldest first. The last is `latestReport`. */
+  reports?: DiagnosisReport[];
+  /**
+   * Starts at 1 when a document is parsed and goes up by one with each kept
+   * revision. Readings are matched to text by hash, not by this; it is what a
+   * report records so `/report` can say what changed after it was written.
+   */
+  documentVersion?: number;
+  /** Each kept revision, in order, with the version it produced. */
+  revisions?: Array<{ version: number; bulletId: string; at: string }>;
   /** Entry or bullet ids the user chose to exclude. */
   skipped?: string[];
   /**

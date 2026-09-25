@@ -11,6 +11,7 @@ import { FULL_REPORT_PROMPT } from '../prompts/index.js';
 import type { ToolContext } from './types.js';
 import { parseJsonObject } from './verify.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
+import { currentReadings } from './versions.js';
 
 /** The program's own title for what is not about one entry. */
 const ACROSS_THE_RESUME = 'Across the whole résumé';
@@ -39,8 +40,10 @@ export async function writeFullReport(
 
   // The readings themselves, so the write-up can quote what they said rather
   // than reconstruct it from a one-line summary of what was chosen.
+  // The same readings the plan was chosen from: current text only.
+  const current = currentReadings(state);
   const readings = [
-    ...(state.entryDiagnoses ?? []).map(
+    ...current.content.current.map(
       (entry) =>
         `## content, ${entry.entryId} (${entry.overallScore})\n` +
         entry.bullets
@@ -51,7 +54,7 @@ export async function writeFullReport(
           )
           .join('\n'),
     ),
-    ...(state.wordingDiagnoses ?? []).map(
+    ...current.wording.current.map(
       (entry) =>
         `## wording, ${entry.entryId} (${entry.overallScore})\n` +
         entry.perBullet

@@ -8,6 +8,7 @@ import type {
 } from '../domain.js';
 import { analyzeFormat } from './analyze-format.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
+import { entryTextHash, fileReading } from './versions.js';
 
 /**
  * One tool per specialist, and that is the dispatch mechanism.
@@ -174,12 +175,6 @@ function remember(ctx: ToolContext, change: (state: ResumeSessionState) => void)
   ctx.session.state = state;
 }
 
-/** One per entry, replacing any earlier reading of the same one. */
-function upsert<T extends { entryId: string }>(existing: T[] | undefined, next: T): T[] {
-  const kept = (existing ?? []).filter((d) => d.entryId !== next.entryId);
-  return [...kept, next];
-}
-
 type EntryRole = 'content' | 'wording';
 
 /**
@@ -200,13 +195,13 @@ const VERDICT_FOR: Record<
   'content': {
     read: (verdict) => verdict.substance,
     store: (state, found: EntryDiagnosis) => {
-      state.entryDiagnoses = upsert(state.entryDiagnoses, found);
+      state.entryDiagnoses = fileReading(state.entryDiagnoses, found);
     },
   },
   'wording': {
     read: (verdict) => verdict.wording,
     store: (state, found: WordingDiagnosis) => {
-      state.wordingDiagnoses = upsert(state.wordingDiagnoses, found);
+      state.wordingDiagnoses = fileReading(state.wordingDiagnoses, found);
     },
   },
 };
@@ -323,7 +318,11 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
           attempted(ctx, role, entryId, 'failed', reason);
           return { success: false, error: { code: 'service_error', message: `${role} produced no reading of ${entryId}: ${reason}` } };
         }
-        remember(ctx, (state) => store(state, found as never));
+        // Stamped with the text it read — the draft's, when one was given — so
+        // a reading of a line the candidate never kept cannot pass for a
+        // reading of the one on the page.
+        const stamped = { ...found, readHash: entryTextHash(target), readAt: new Date().toISOString() };
+        remember(ctx, (state) => store(state, stamped as never));
 
         return { success: true, data: found };
       } catch (err) {

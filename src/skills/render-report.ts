@@ -35,6 +35,12 @@ export function render(report: DiagnosisReport): string {
           ? `  (${coverage.notApplicableEntries} entries have no bullets to score)`
           : ''),
       `  narrative ${coverage.narrative}  job description ${coverage.jdMatch}`,
+      ...(coverage.contentReadSincePrevious !== undefined
+        ? [`  ${coverage.contentReadSincePrevious} read for this report, the rest reused unchanged`]
+        : []),
+      ...[...new Set([...(coverage.contentStale ?? []), ...(coverage.wordingStale ?? [])])].map(
+        (id) => `  ${id} changed after it was read; its earlier findings are left out`,
+      ),
       '',
     );
   }
