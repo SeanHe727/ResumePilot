@@ -1,0 +1,15 @@
+# Item 14, run 2: a real edit. The rewritten bullet is pasted, not described.
+#
+# The rewrite reorders the fixture's s2:e0:b0 and adds no figure, so any new
+# number in a later suggestion is one nobody supplied.
+#
+# What to read the trace for:
+#   - the edit is applied to the document (apply_revision), not just discussed
+#   - what the coordinator chose to re-run and what it reused; the route is not
+#     scripted, only recorded
+#   - the updated report does not present stale findings on the old text as fresh
+#   - coverage in the second report says what was and was not re-read
+Here is my resume: {resume}. Please review it carefully and tell me what to change.
+I rewrote the first bullet under my first job. It now reads: "Cut the pending-case backlog 68% after launch by building an industrial-diagnostics triage branch that screens 800+ sensor signals per case through ML-extracted feature schemas, evidence-grounded review and abstention on low-confidence findings." Please re-review that line.
+Now update the report.
+/report

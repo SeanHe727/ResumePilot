@@ -10,6 +10,8 @@
     "start": "tsx src/index.ts start",
     "diagnose": "tsx src/index.ts diagnose",
     "build-kb": "tsx src/index.ts build-kb",
+    "scenario": "tsx src/index.ts scenario",
+    "trace-summary": "tsx src/index.ts trace-summary",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

@@ -182,6 +182,43 @@ program
     );
   });
 
+program
+  .command('scenario <file>')
+  .description('Play a scripted conversation, one message per line, with the trace on')
+  .option('--resume <path>', 'file substituted for {resume} in the script', 'tests/fixtures/resume_example.pdf')
+  .option('--trace-dir <dir>', 'where the trace goes', process.env.RESUMEPILOT_TRACE_DIR ?? 'tmp/trace')
+  .action(async (file: string, opts: { resume: string; traceDir: string }) => {
+    const { App } = await import('./app.js');
+    const { playScenario, readScenario } = await import('./scenario.js');
+    const messages = readScenario(file, opts.resume);
+
+    // Non-interactive: nobody is there to answer a confirmation, so it refuses.
+    const app = new App({ config: loadConfig(), interactive: false, traceDir: opts.traceDir });
+    try {
+      const session = await app.start('');
+      await playScenario(app, session, messages, (text) =>
+        console.log(text.startsWith('\n> ') ? chalk.cyan(text) : text),
+      );
+      console.log(chalk.dim(`\n${app.queryEngine.getUsageSummary()}`));
+      if (app.tracePath) console.log(chalk.dim(`trace: ${app.tracePath}`));
+    } finally {
+      app.close();
+    }
+  });
+
+program
+  .command('trace-summary [path]')
+  .description('Summarise a trace: a trace.jsonl, its run folder, or the trace root (newest run)')
+  .option('--json', 'print the summary as JSON')
+  .action(async (path: string | undefined, opts: { json?: boolean }) => {
+    const { readTrace, resolveTracePath } = await import('./trace/read.js');
+    const { renderTraceSummary, summariseTrace } = await import('./trace/summary.js');
+    const file = resolveTracePath(path ?? process.env.RESUMEPILOT_TRACE_DIR ?? 'tmp/trace');
+    const summary = summariseTrace(readTrace(file));
+    console.log(chalk.dim(file));
+    console.log(opts.json ? JSON.stringify(summary, null, 2) : renderTraceSummary(summary));
+  });
+
 function describe(err: unknown): string {
   return err instanceof Error ? err.message : String(err);
 }

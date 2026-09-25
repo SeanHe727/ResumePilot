@@ -1,0 +1,13 @@
+# Item 14, run 1: a fact only. The document never changes.
+#
+# One message per line; `#` lines are notes. {resume} is replaced with --resume.
+# The résumé is named in chat, so the upload and the parse are in the trace.
+#
+# What to read the trace for:
+#   - the fact is recorded against the line it is about (s2:e0:b0 on the fixture)
+#   - the verdict on that line is revisited or explicitly kept, not ignored
+#   - the answer says the figure is candidate-supplied, not something the page says
+#   - any specialist re-run on that entry is briefed with the fact ([supplied facts])
+Here is my resume: {resume}. Please review it carefully and tell me what to change.
+About the first bullet under my first job: the 68% backlog figure is all I can make public about the backlog, but p99 latency on the diagnostics service also went from 800 ms to 90 ms after launch. Does that change your verdict on that line?
+/report

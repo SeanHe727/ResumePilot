@@ -380,7 +380,7 @@ rewrite or merge the text, so text matching cannot provide that link.
 This is provenance, not a requirement that wording remain unchanged from
 specialist output to report prose.
 
-### 5.5 Stop storing unredacted arguments in the audit log — first
+### 5.5 Stop storing unredacted arguments in the audit log — done (`9408a57`)
 
 `App` constructs `SqliteAuditLogger` with no sanitiser, and the default is
 `JSON.stringify(input)`, so `permission_audit.tool_args` receives whole
@@ -402,7 +402,7 @@ disk**: `rewrite_bullet` carries résumé text and `parse_resume` carries a
 filename, which is routinely the candidate's own name. Wire a PII-safe
 sanitiser, or stop storing full permission arguments.
 
-## Part 2 — What the first traced run exposed
+## Part 2 — What the first traced run exposed (all done by `a6e4ba9`)
 
 One conversation, four turns, 462 events, $0.10, all of it in
 `tmp/trace/421eb049-…/trace.jsonl`. The behavioural failures below were visible
@@ -420,7 +420,7 @@ reasonable, and eight failures were all wrong tool *targets* rather than model
 or API failures. Those eight are what the rest of this part is about, because
 each of them reached the user as silence.
 
-### 6. Make every line addressable, or say it is not
+### 6. Make every line addressable, or say it is not — done (`a681b8f`, `bb8e173`, `daad48b`, `4653169`)
 
 **The finding.** The fixture's `PROJECTS` section parsed as `entries: 0,
 infoLines: 4, section bullets: 6`. The text was not lost — six bullets sit
@@ -450,7 +450,7 @@ leaving it nothing to name converts four visible failures into silence.
   Rebuild it to keep the structure it was anonymised out of, and add the missing
   case: a projects section whose entries carry bullets.
 
-### 7. Flag suspicious ownership without making integrity a second parser
+### 7. Flag suspicious ownership without making integrity a second parser — done (`1fcd62a`)
 
 `placedRows: 55/55`, every check empty, and the parse had just filed six
 project bullets under a section and two project titles as prose. `placedRows`
@@ -466,7 +466,7 @@ with less evidence than the parser had.
   `unaddressable` in Session coverage (item 9), rather than asking B5 to
   reinterpret the résumé.
 
-### 8. Tighten target contracts so a model cannot miss them
+### 8. Tighten target contracts so a model cannot miss them — done (`7992cef`)
 
 Content passed `s2:e0:b0`…`b3` — bullet ids — into
 `examine_technical_depth`'s `entryId`, four times, and Deep Research never ran
@@ -485,7 +485,7 @@ combination is a trap.
 - A rejected target should come back with what *would* have been legal, when
   that is knowable.
 
-### 9. Make completion and failure observable
+### 9. Make completion and failure observable — done (`4214f57`)
 
 The report said `eligibleEntries: 2, contentReviewed: 2, wordingReviewed: 2` —
 complete, by its own accounting — on a run where four dispatches failed and six
@@ -521,7 +521,7 @@ interface ReviewCoverage {
   transition for reviewers, but product code must not query trace to reconstruct
   coverage later.
 
-### 10. Make the specialist briefing deterministic
+### 10. Make the specialist briefing deterministic — done (`cc21322`, `8533e9f`)
 
 - `pageRoom` is **still dead code**, verified again: `review.ts:66` defines the
   calculation and nothing calls it; `briefingFrom()` does not add it and
@@ -539,7 +539,7 @@ interface ReviewCoverage {
 - Trace the final briefing actually sent, not the fields requested.
 - A repeated review after corrections must use the updated facts.
 
-### 11. Record the two entry points still outside the trace
+### 11. Record the two entry points still outside the trace — done (`1f5d7ae`, `ebc6eaa`)
 
 The most consequential finding of the whole run — why the projects section had
 no entries — **could not be produced from the trace**. Both reviewers had to
@@ -558,7 +558,7 @@ accident.
   state through the existing Session path; no product decision may depend on a
   trace file being present.
 
-### 12. Reduce what a model has to copy
+### 12. Reduce what a model has to copy — done (`7992cef`)
 
 Two of sixteen report points cited finding ids that did not exist, one of them a
 mangled uuid (37 characters). Long unique ids are safe to store and expensive to
@@ -590,6 +590,12 @@ What these tests do not verify is whether any agent's judgement was sensible.
 That is what item 14 is for, and item 15 is how it is proved to anyone else.
 
 ### 14. Run the scenarios the first test set missed
+
+Scripts are ready: `pnpm scenario scenarios/fact-only.txt` and
+`pnpm scenario scenarios/real-edit.txt` (`--resume <file>` to change the
+résumé; the trace goes to `tmp/trace/` by default), then `pnpm trace-summary`
+for the counts. Both scripts are played against a scripted model in
+`tests/e2e/scenarios.test.ts` first, so a paid run cannot die on the script.
 
 The first run covered steps 1–6 of the scenario below and stopped: the script
 said "I rewrote that bullet" without supplying the text, the Main Agent
