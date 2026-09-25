@@ -106,20 +106,65 @@ export async function handleInput(
   const trimmed = input.trim();
   if (!trimmed) return session;
 
-  if (deps.commands.isCommand(trimmed)) {
-    const result = await deps.commands.execute(trimmed, session);
-    deps.print(result.output);
-    // A command that starts a new session hands it back, and whoever called
-    // has to keep it. `/new` clears the memory store and opens a fresh
-    // session; carrying on with the old one afterwards means talking to a
-    // session whose memory has just been emptied out from under it.
-    return result.action === 'new_session' && result.data
-      ? (result.data as Session)
-      : session;
-  }
+  const trace = deps.trace ?? new NoTrace();
+  const command = deps.commands.isCommand(trimmed);
 
-  await runMainAgent(trimmed, session, deps);
-  return session;
+  // One entrance for the record, two for the work.
+  //
+  // A command is the user operating the machine directly: no model is asked
+  // anything, nothing is judged, and that is the point of typing `/report`
+  // rather than asking for one. Routing commands through the coordinator would
+  // buy a model call and a chance of it changing its mind, for something that
+  // is currently free and immediate.
+  //
+  // What they did lack is any record at all. They returned before the turn
+  // began, so a session where the user read a report, objected to it and asked
+  // for an export showed three answers and one of the three inputs. Both paths
+  // now open a span here; only the work below differs.
+  return trace.span(
+    {
+      actor: command ? { kind: 'system', id: 'command' } : { kind: 'main', id: 'main-agent' },
+      sessionId: session.id,
+      turn: nextTurn(session),
+    },
+    async () => {
+      // What the user actually typed. It reaches the model inside the window
+      // below when there is one, but a command has no window and a turn that
+      // fell over while being assembled has none either.
+      trace.event(() => ({ phase: 'input', input: { message: trimmed } }));
+
+      if (command) {
+        const result = await deps.commands.execute(trimmed, session);
+        deps.print(result.output);
+
+        // The output whole, because the question this answers is what the user
+        // saw — which version of a report, at which length, with which
+        // coverage. A summary of it answers something else.
+        const [name, ...args] = trimmed.split(/\s+/);
+        trace.event(() => ({
+          phase: 'result',
+          tool: name ?? trimmed,
+          status: result.output ? 'success' : 'error',
+          input: { args },
+          output: {
+            text: result.output,
+            ...(result.action ? { action: result.action } : {}),
+          },
+        }));
+
+        // A command that starts a new session hands it back, and whoever called
+        // has to keep it. `/new` clears the memory store and opens a fresh
+        // session; carrying on with the old one afterwards means talking to a
+        // session whose memory has just been emptied out from under it.
+        return result.action === 'new_session' && result.data
+          ? (result.data as Session)
+          : session;
+      }
+
+      await runTurn(trimmed, session, deps, trace);
+      return session;
+    },
+  );
 }
 
 /**
@@ -128,28 +173,13 @@ export async function handleInput(
  * Every turn goes through the Context manager rather than an accumulating
  * array, so the window stays inside its budget however long the exchange runs.
  */
-async function runMainAgent(input: string, session: Session, deps: LoopDeps): Promise<void> {
-  const trace = deps.trace ?? new NoTrace();
-
-  // The turn is the outermost span, and the only place a session id and a turn
-  // number exist at all: the query engine knows neither, and a specialist knows
-  // only what it was sent. Everything below inherits both from here.
-  return trace.span(
-    {
-      actor: { kind: 'main', id: 'main-agent' },
-      sessionId: session.id,
-      turn: nextTurn(session),
-    },
-    async () => {
-      // What the user actually typed. It reaches the model inside the window
-      // below, but only if there is a window: this is the one record that
-      // survives a turn that fell over while being assembled.
-      trace.event(() => ({ phase: 'input', input: { message: input } }));
-      await runTurn(input, session, deps, trace);
-    },
-  );
-}
-
+/**
+ * The model plans, the tools run, the results come back.
+ *
+ * Opened inside the span `handleInput` holds, which is the only place a session
+ * id and a turn number exist at all: the query engine knows neither, and a
+ * specialist knows only what it was sent. Everything below inherits both.
+ */
 async function runTurn(
   input: string,
   session: Session,

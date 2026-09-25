@@ -180,6 +180,107 @@ describe('the turn', () => {
   });
 });
 
+describe('a command, which never reaches the coordinator', () => {
+  /** A command path: the commands parser claims the input and answers it. */
+  function withCommand(output: string, action?: string) {
+    const { deps, session, events } = loopWith([text('unused')]);
+    (deps as { commands: unknown }).commands = {
+      isCommand: (input: string) => input.startsWith('/'),
+      execute: async () => ({ output, ...(action ? { action } : {}) }),
+    };
+    return { deps, session, events };
+  }
+
+  it('records what the user typed and what they were shown', async () => {
+    // Commands returned before the turn began, so a session where the user read
+    // a report, objected to it and asked for an export showed three answers and
+    // one of the three inputs.
+    // Long on purpose: the question is which version they saw, and a truncated
+    // record cannot tell the brief from the full one.
+    const report =
+      '# Full review: r.pdf\n\n**83/100** — format 100 · content 72 · wording 81\n\n' +
+      'Read 2 of 2 entries for content, 2 for wording.\n\n' +
+      '## Mobility Systems Company\n\n### The 68% reduction has no starting count.\n';
+    const { deps, session, events } = withCommand(report);
+
+    await handleInput('/report --full', session, deps);
+
+    expect(of(events, 'input')[0]?.input).toEqual({ message: '/report --full' });
+    const shown = of(events, 'result')[0];
+    expect(shown?.tool).toBe('/report');
+    expect(shown?.input).toEqual({ args: ['--full'] });
+    // Whole, because the question this answers is which version of a report the
+    // user saw, at which length.
+    expect((shown?.output as { text: string }).text).toBe(report);
+    expect((shown?.output as { text: string }).text).toContain('no starting count');
+  });
+
+  it('files it under the user operating the machine, not under the agent', async () => {
+    // No model was asked anything. Calling it a main-agent turn would put an
+    // actor on a decision nobody made.
+    const { deps, session, events } = withCommand('ok');
+
+    await handleInput('/export', session, deps);
+
+    for (const event of events) {
+      expect(event.actor).toEqual({ kind: 'system', id: 'command' });
+    }
+  });
+
+  it('takes a turn number, so two inputs never share one', async () => {
+    const { deps, session, events } = withCommand('ok');
+
+    await handleInput('/report', session, deps);
+    await handleInput('/export', session, deps);
+
+    expect(of(events, 'input').map((e) => e.turn)).toEqual([1, 2]);
+  });
+
+  it('records the session swap a command can cause', async () => {
+    // `/new` empties the memory store and hands back a different session.
+    // Reading a trace across it without this looks like one conversation.
+    const { deps, session, events } = withCommand('started a new session', 'new_session');
+
+    await handleInput('/new', session, deps);
+
+    expect((of(events, 'result')[0]?.output as { action?: string }).action).toBe('new_session');
+  });
+
+  it('closes its span, like any other', async () => {
+    const { deps, session, events } = withCommand('ok');
+
+    await handleInput('/report', session, deps);
+
+    expect(of(events, 'span')).toHaveLength(1);
+    expect(of(events, 'span-end')).toHaveLength(1);
+    const ids = new Set(events.map((e) => e.eventId));
+    for (const event of events) {
+      if (event.parentEventId === undefined) continue;
+      expect(ids.has(event.parentEventId)).toBe(true);
+    }
+  });
+
+  it('calls no model to do it', async () => {
+    // The point of typing `/report` rather than asking for one. Routing commands
+    // through the coordinator would buy a model call and a chance of it changing
+    // its mind, for something that is free and immediate.
+    let asked = 0;
+    const { deps, session } = withCommand('ok');
+    (deps as { queryEngine: unknown }).queryEngine = {
+      async query() {
+        asked += 1;
+        return text('should not happen');
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+
+    await handleInput('/report', session, deps);
+
+    expect(asked).toBe(0);
+  });
+});
+
 describe('a tool call in the main loop', () => {
   it('keeps both halves whole, where the audit log keeps 200 characters', async () => {
     const long = 'a finding about one bullet. '.repeat(200);
