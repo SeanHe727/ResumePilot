@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { createToolRegistry } from '../../src/tools/index.js';
+import { CachedSearchProvider, ttlFor } from '../../src/tools/search-cache.js';
 import {
   SearchError,
   TavilyProvider,
@@ -265,5 +266,92 @@ describe('degrading without a search provider', () => {
     expect(wanted.filter((n) => with_.has(n))).toEqual(['web_search']);
     // The promise lives in `optionalPrompt`, appended only when one resolved.
     expect(ROLES['entry-substance'].systemPrompt).not.toMatch(/web_results/);
+  });
+});
+
+describe('CachedSearchProvider', () => {
+  function cached(now = { t: 1_000_000 }) {
+    const inner = fakeProvider([HIT]);
+    const cache = new CachedSearchProvider(inner.provider, ':memory:', { now: () => now.t });
+    return { cache, seen: inner.seen, now };
+  }
+
+  it('answers a repeated search from disk instead of the provider', async () => {
+    // The orchestrator's retry re-runs a whole agent, so every search the first
+    // attempt made arrives again, and so does every search of a re-run.
+    const { cache, seen } = cached();
+
+    const first = await cache.search('int8 vram', { limit: 3 });
+    const second = await cache.search('  INT8   vram ', { limit: 3 });
+
+    expect(seen).toHaveLength(1);
+    expect(second).toEqual(first);
+    expect(cache.getStats()).toMatchObject({ entries: 1, hits: 1, misses: 1 });
+  });
+
+  it('asks again when anything that changes the answer changes', async () => {
+    const { cache, seen } = cached();
+
+    await cache.search('q', { limit: 3 });
+    await cache.search('q', { limit: 5 });
+    await cache.search('q', { limit: 3, recencyDays: 30 });
+    await cache.search('q', { limit: 3, domains: ['example.com'] });
+
+    expect(seen).toHaveLength(4);
+  });
+
+  it('lets a posting search go stale in hours and a norm search in days', async () => {
+    const { cache, seen, now } = cached();
+
+    await cache.search('mle new grad', { limit: 3, recencyDays: 30 });
+    await cache.search('int8 vram', { limit: 3 });
+
+    now.t += ttlFor({ recencyDays: 30 }) + 1;
+    await cache.search('mle new grad', { limit: 3, recencyDays: 30 });
+    await cache.search('int8 vram', { limit: 3 });
+    expect(seen.map((s) => s.query)).toEqual(['mle new grad', 'int8 vram', 'mle new grad']);
+
+    now.t += ttlFor({});
+    await cache.search('int8 vram', { limit: 3 });
+    expect(seen).toHaveLength(4);
+  });
+
+  it('does not remember a failure', async () => {
+    // A timeout or a 429 is about that moment; serving it back for a week
+    // would turn a blip into an outage.
+    let fail = true;
+    const inner: SearchProvider = {
+      name: 'flaky',
+      async search() {
+        if (fail) throw new SearchError('tavily returned 429', 'service_error');
+        return [HIT];
+      },
+    };
+    const cache = new CachedSearchProvider(inner, ':memory:');
+
+    await expect(cache.search('q', { limit: 3 })).rejects.toMatchObject({ kind: 'service_error' });
+    fail = false;
+    await expect(cache.search('q', { limit: 3 })).resolves.toEqual([HIT]);
+    expect(cache.getStats().entries).toBe(1);
+  });
+
+  it('sits behind web_search without changing what the tool returns', async () => {
+    const { cache, seen } = cached();
+
+    const a = await webSearchTool.execute({ query: 'q', purpose: 'metric_norm' }, ctxWith(cache));
+    const b = await webSearchTool.execute({ query: 'q', purpose: 'metric_norm' }, ctxWith(cache));
+
+    expect(b).toEqual(a);
+    expect(seen).toHaveLength(1);
+  });
+});
+
+describe('the test suite itself', () => {
+  it('cannot reach the real search API', async () => {
+    // Guarded in tests/setup/no-live-search.ts, so a test that forgets its
+    // stub fails instead of spending the monthly quota.
+    await expect(new TavilyProvider('k').search('q', { limit: 1 })).rejects.toThrow(
+      /live search call in a test/,
+    );
   });
 });
