@@ -44,7 +44,7 @@ Session 保存的是**产品执行账目，不是缩小版 trace**：只保存�
 
 **Audit 现状要单独修正（已提为第 5.5 条）：**执行记录的输入/输出摘要会截到 200 字符，但 App 创建 `SqliteAuditLogger` 时没有传脱敏器，因此 `permission_audit.tool_args` 当前会保存完整 JSON 参数。下次真实调试前，要么接入 PII 安全的脱敏器，要么停止保存完整权限参数；不能再把现状描述成「Audit 已脱敏」。
 
-## 第 5.5 条：审计库当前存的是未脱敏参数（先做）
+## 第 5.5 条：审计库当前存的是未脱敏参数 —— 已完成（`9408a57`）
 
 `App` 构造 `SqliteAuditLogger` 时没有传脱敏器，默认实现就是 `JSON.stringify(input)`，所以 `permission_audit.tool_args` 存的是完整参数。实测后的库里可以直接看到：
 
@@ -57,43 +57,43 @@ review_content   {"entryId":"Research-Agent Evaluation Framework","understanding
 
 这一条排在最前面，因为它是唯一一条涉及**已经落盘的个人数据**的：`rewrite_bullet` 会带简历原文，`parse_resume` 会带文件名（真实简历的文件名通常就是候选人的名字）。接一个 PII 安全的脱敏器，或者不再保存完整权限参数。
 
-## 第二部分：实测暴露的问题
+## 第二部分：实测暴露的问题（到 `a6e4ba9` 已全部完成）
 
 一次对话、4 回合、462 条事件、$0.10。层级是通的，角色选择合理，**8 次失败全是工具目标错误**——而它们每一个到用户那里都变成了沉默。
 
 这些主要是既定架构没有完整落实的功能缺陷，不需要因此重做 Agent 架构。唯一仍需产品选择的是 section 自有内容如何审阅：提供 section 级审阅入口，还是要求 parser 先还原成 entry。
 
-**6. 让每一行可寻址，否则就说它不可寻址**
+**6. 让每一行可寻址，否则就说它不可寻址** —— 已完成（`a681b8f`, `bb8e173`, `daad48b`, `4653169`）
 fixture 的 PROJECTS 段：`entries 0 / infoLines 4 / section bullets 6`。文字没丢，六条 bullet 挂在 section 下、**而且有 id**（`s3:b0`…`s3:b5`）——但 `render.ts:81` 把 section bullet 渲染成 `- 文本`，entry 的 bullet 渲染成 `- [id] 文本`。**id 在数据里，被渲染层扣掉了。** 于是 Main 看得见六条内容、没有任何合法目标，只能把项目标题填进 `entryId`，四次被拒，六条 bullet 没人评分。
 `render.ts` 自己的注释就是反对它自己行为的论据：「id 是文档的一部分，不是某个 prompt 的一部分……拿不到 id 的 agent 说不出『这两条重复了』」。
 **这不是 prompt 问题**：只要求 Main「别编 id」而不给它可命名的东西，只会把四次可见的失败变成沉默。要做的是渲染出 id、并决定那六条由谁审（section 级入口，还是解析重新组装成 entry）。真实简历在同一份代码下能解析出两个项目 entry，所以这是脆弱形状而非普遍失败——但**所有解析测试用的那份 fixture 正是脆弱的那份**，要重做，并补「项目 entry 带 bullet」这个用例。
 
-**7. 标记可疑归属，但不要让 integrity 变成第二个 parser**
+**7. 标记可疑归属，但不要让 integrity 变成第二个 parser** —— 已完成（`1fcd62a`）
 `placedRows 55/55`、所有检查项为空，而解析刚把六条项目 bullet 归到 section 下、两个项目标题当成散文。`placedRows` 只问「有没有被认领一次且有标签」。B5 可以机械地报告一个窄异常，例如「有 bullet、无 entry、同时存在疑似标题的 info 行」；它不应重新猜正确归属。材料是否可审应由第 9 条的 Session coverage 记为 `unaddressable`，而不是让 integrity 再解析一次。
 
-**8. 收紧目标契约**
+**8. 收紧目标契约** —— 已完成（`7992cef`）
 Content 连续四次把 bullet id（`s2:e0:b0`…`b3`）填进 `examine_technical_depth` 的 `entryId`，于是**那条有 4 个 bullet、所有百分比数字的 entry 完全没做 deep research**；换到下一条 entry 时它自己改了策略才成功三次。工具描述写 `entryId: The entry being reviewed`，Content prompt 写「每行都有可寻址 id」——两句都对，合起来是陷阱。优先改接口（按 bullet 提问就收 `bulletId`，代码反查父 entry），而不是只改 prompt；并排查其它 schema 里需要模型猜的字段。
 
-**9. 让完成与失败可见**
+**9. 让完成与失败可见** —— 已完成（`4214f57`）
 报告的 coverage 是 `eligibleEntries 2 / contentReviewed 2 / wordingReviewed 2`——按它自己的账目是完整的，而这一轮有四次派发失败、六条 bullet 没评分。Main 的自然语言**说了**，只读结构化 coverage 的消费者读不到。
 原计划的三数组（reviewed / failed / notRun）**装不下这次的情况**：三个都是 entry id 列表，而失败的那些材料压根不是 entry。要加两类：`unaddressable`（解析出来、有内容、当前形态不可审）和 `rejectedTargets`（派发时命名了不存在的目标）。
 这份账必须在派发发生时写进 Session state；trace 同步记录供开发核查，但产品不能事后读取 trace 来补 coverage。
 
-**10. briefing 确定化**
+**10. briefing 确定化** —— 已完成（`cc21322`, `8533e9f`）
 `pageRoom` **仍是死代码**（再次核对：`review.ts:66` 有定义、无人调用）。另外**记下的事实会静默丢失**：回合 2 的 `800ms → 90ms` 由 `record_fact` 写进 `suppliedFacts`，但读它的只有 `rewrite-bullet.ts:40` 和 Main 自己的上下文层；`generate_report` 不读，派发也不读——专家能不能拿到，取决于 Main 记不记得抄进 `supplied`。要在派发时自动挑选相关事实，并标明它是**用户补充**而不是简历已写。
 
-**11. 把剩下两个入口纳入 trace**
+**11. 把剩下两个入口纳入 trace** —— 已完成（`1f5d7ae`, `ebc6eaa`）
 整轮实测最重要的那个发现（项目为什么没有 entry）**没法从 trace 里得出**——两个 reviewer 都是跳出 trace 手工重跑 parser 才看清的。下次付费实测前必须补上，否则同类问题仍然只能靠碰巧发现。启动解析（`app.ts` 的 ToolContext 没传 trace，且在任何 turn span 之外）要单独开 span，记录分阶段的行/边界/标签、最终 section–entry–bullet 形状和 integrity；斜杠命令在 `runMainAgent` 之前返回、完全没有 span，要决定它算不算对话记录的一部分。
 这里只补开发可观测性：解析结果仍通过现有 Session 路径进入产品，任何产品决策都不能依赖 trace 文件存在。
 
-**12. 减少模型要抄的东西**
+**12. 减少模型要抄的东西** —— 已完成（`7992cef`）
 16 个报告点里 2 个引用了不存在的 finding id，其中一个是被写坏的 uuid（37 字符）。内部保留 uuid，**给模型看短别名**（`c3`、`w7`）再映射回去——唯一性和可抄性就不再互相为敌。校验照旧保留：别名降低出错率，不取代校验。
 
 ## 第三部分：修复后验证，再决定下一阶段
 
 **13. 花钱前的机械测试 —— 已完成。** 102 条 trace 测试（全量 938），每个 guard 都有一条拿掉它就变红的变异测试。它还抓出三个 prompt 的 JSON 示例本身不合法（范围写在值的位置、示例里塞 `or`、多一个逗号），而且是每条 bullet 都要过的那两个诊断 prompt——模型照抄就会产出没人能解析的回答，而 `typeof !== 'number'` 会填 0，在报告里读起来是「这条写得极差」而不是「解析失败」。机械测试不验证 agent 判断是否合理，那是第 14 条的事。
 
-**14. 补完原测试集没走到的场景。** 第一次只走到第 6 步：脚本说「我改好了」却没给文本，Main 要求先看原文（这是对的），所以**局部重评和报告更新一次都没被测到**；简历也是脚本预加载的，不是用户在对话里给的路径。第 6–12 条和 Audit 存储问题修好后，先补两次便宜运行：①只补事实、文档不动，看新事实是否改变判断、是否确定性进入相关专家和报告，并注明是用户补充；②贴出真实改写后的 bullet，要求更新判断与报告，检查旧 finding 是否正确复用或失效。不要给 Main 写死路由分支；让它自行选择局部或完整重评，测试只核对它实际选择了什么、复用了什么、覆盖范围是否如实说明。
+**14. 补完原测试集没走到的场景。** 脚本已就绪：`pnpm scenario scenarios/fact-only.txt`、`pnpm scenario scenarios/real-edit.txt`（`--resume <file>` 换简历，trace 默认写到 `tmp/trace/`），跑完用 `pnpm trace-summary` 看摘要；两份脚本都先在 `tests/e2e/scenarios.test.ts` 里用假模型空跑过。 第一次只走到第 6 步：脚本说「我改好了」却没给文本，Main 要求先看原文（这是对的），所以**局部重评和报告更新一次都没被测到**；简历也是脚本预加载的，不是用户在对话里给的路径。第 6–12 条和 Audit 存储问题修好后，先补两次便宜运行：①只补事实、文档不动，看新事实是否改变判断、是否确定性进入相关专家和报告，并注明是用户补充；②贴出真实改写后的 bullet，要求更新判断与报告，检查旧 finding 是否正确复用或失效。不要给 Main 写死路由分支；让它自行选择局部或完整重评，测试只核对它实际选择了什么、复用了什么、覆盖范围是否如实说明。
 
 随后用多份不同形态的完整简历单独跑 ResumePilot 全链路：真实上传 → 解析 → 角色选择 → 专家派发 → 可选 Deep Research → 报告 → 补充事实 → 真实文字修改 → 局部或完整重评。确认稳定后，才进入下一条对照实验。
 
@@ -129,8 +129,8 @@ Content 连续四次把 bullet id（`s2:e0:b0`…`b3`）填进 `examine_technica
 2. ~~Deep Research 三层不可见~~ 已解决
 3. ~~prompt / 回答无处记录~~ 已解决
 4. ~~finding 无稳定身份~~ 已解决
-5. **有内容、读得到、但无法寻址**：六条带 id 的项目 bullet，id 没渲染，无人审阅（第 6 条）
-6. **账目读起来是完整的，实际不是**：四次被拒派发、六条未评分，coverage 写 2/2（第 7、9 条）
-7. `pageRoom` 是死代码；记下的事实要靠 Main 手抄才能到专家（第 10 条）
-8. 两个入口在 trace 之外，其中一个是决定下游一切的解析（第 11 条）
+5. ~~**有内容、读得到、但无法寻址**：六条带 id 的项目 bullet，id 没渲染，无人审阅（第 6 条）~~ 已解决
+6. ~~**账目读起来是完整的，实际不是**：四次被拒派发、六条未评分，coverage 写 2/2（第 7、9 条）~~ 已解决
+7. ~~`pageRoom` 是死代码；记下的事实要靠 Main 手抄才能到专家（第 10 条）~~ 已解决
+8. ~~两个入口在 trace 之外，其中一个是决定下游一切的解析（第 11 条）~~ 已解决
 9. 部分完成、失败、复用、完整这四种状态仍可能被呈现得太像，而且复用路径至今没被跑过（第 9、14 条）
