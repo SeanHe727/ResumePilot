@@ -19,6 +19,7 @@ export { generateReportTool } from './generate-report.js';
 export { queryKnowledgeBaseTool } from './query-knowledge-base.js';
 export { webSearchTool } from './web-search.js';
 export * from './search-provider.js';
+export * from './search-cache.js';
 export * from './prompts.js';
 export * from './verify.js';
 export * from './text-signals.js';

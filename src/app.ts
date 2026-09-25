@@ -30,6 +30,7 @@ import type { Session } from './session/types.js';
 import { createSkillRegistry } from './skills/index.js';
 import type { SkillContext, SkillOutput } from './skills/types.js';
 import { createToolRegistry } from './tools/index.js';
+import { CachedSearchProvider } from './tools/search-cache.js';
 import { TavilyProvider } from './tools/search-provider.js';
 
 export interface AppOptions {
@@ -44,8 +45,8 @@ export interface AppOptions {
  *
  * Nothing below this file constructs its own collaborators, which is what
  * makes every layer testable with a fake in place of the one beneath it. It is
- * also the only file that decides where data lives on disk — five databases,
- * kept apart because a rebuildable knowledge base and a disposable cache must
+ * also the only file that decides where data lives on disk — six databases,
+ * kept apart because a rebuildable knowledge base and disposable caches must
  * not be able to take a user's sessions or memory with them.
  */
 export class App {
@@ -55,7 +56,7 @@ export class App {
   readonly metrics = new MetricCollector();
   readonly knowledge: DualChannelSearch;
   /** Undefined without a search key; both tool paths check before using it. */
-  readonly search: TavilyProvider | undefined;
+  readonly search: CachedSearchProvider | undefined;
   readonly hooks: DefaultHookPipeline;
   private readonly loopDeps: LoopDeps;
   private readonly retriever: DefaultMemoryRetriever;
@@ -111,10 +112,16 @@ export class App {
 
     // No key, no provider, no tool. Web search is the one capability that is
     // optional rather than degraded: everything else runs identically without it.
+    // Cached on disk because the free tier is a monthly quota, and retries and
+    // re-runs of the same resume ask the same questions again.
     const search = config.apiKeys.tavily
-      ? new TavilyProvider(config.apiKeys.tavily)
+      ? new CachedSearchProvider(
+          new TavilyProvider(config.apiKeys.tavily),
+          join(dir, 'search-cache.db'),
+        )
       : undefined;
     this.search = search;
+    if (search) this.closers.push(() => search.close());
 
     const tools = createToolRegistry(search ? { search } : {});
     const skills = createSkillRegistry();

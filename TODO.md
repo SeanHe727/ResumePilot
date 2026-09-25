@@ -132,3 +132,9 @@ Tavily 免费额度 1,000 次/月。一次诊断 4 个 entry × substance + narr
 做法:一张自己的表(搜索结果几小时内稳定,而 `QueryCache` 的 key 是
 `StreamParams`,复用不了),key = query + purpose + limit,TTL 按 purpose 分
 (`job_posting` 短,`metric_norm` 长)。
+
+**已实现(待合并)**:`src/tools/search-cache.ts` 的 `CachedSearchProvider` 包在
+`TavilyProvider` 外层,存 `data/search-cache.db`。key = provider + query(大小写、
+空白归一)+ limit + recencyDays + domains;`recencyDays ≤ 30`(即 `job_posting`)
+TTL 6 小时,其余 7 天;失败不缓存。清缓存直接删这个文件。测试侧
+`tests/setup/no-live-search.ts` 拦截所有打到 `api.tavily.com` 的请求。
