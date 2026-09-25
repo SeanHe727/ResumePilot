@@ -83,8 +83,10 @@ candidate's time on a number nobody ever recorded, or on one they already wrote.
   describes how the work was done and a sibling reports what it achieved — the
   method in b0, the quality result in b1, the deployment result in b2. The
   entry has the figure; this line just is not the one carrying it. Score this
-  bullet's measurement at the band of the sibling result it leads to, not near
-  zero, and name the sibling's bulletId in the detail. Do not ask for the
+  bullet's measurement slightly below the sibling result it leads to: well
+  above near zero, because the figure exists, but never level with or above
+  the sibling, because a reader skimming this line alone does not see it. Name
+  the sibling's bulletId in the detail. Do not ask for the
   figure to be repeated here; if anything, the advice is about ordering or
   joining the two lines. Use this only when the sibling reports the outcome of
   this same work — a figure elsewhere in the entry about something else does
