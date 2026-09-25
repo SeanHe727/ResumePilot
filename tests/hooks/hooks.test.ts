@@ -323,6 +323,37 @@ describe('path-source', () => {
     expect(outcome.action).toBe('continue');
   });
 
+  it('opens one that ends the sentence it was named in', async () => {
+    // "Here is my résumé: ~/Documents/cv.pdf." — the character after `.pdf` was
+    // a full stop rather than a space, so nothing was granted and the run got a
+    // permission denial on the file the user had just handed over.
+    for (const said of [
+      'Here is my résumé: /Users/someone/Downloads/cv.pdf.',
+      'It is at /Users/someone/cv.pdf, have a look',
+      'the file (/Users/someone/cv.pdf) is the latest',
+      '简历在 /Users/someone/cv.pdf。请看一下',
+    ]) {
+      const outcome = await asked(said, said.match(/\S*cv\.pdf/)![0]);
+      expect(outcome.action, said).toBe('continue');
+    }
+  });
+
+  it('grants nothing for a suffix that only looks like the end', async () => {
+    // The property the lookahead exists for: `cv.pdf.docx` is not a PDF, and a
+    // grant is a standing permission to open a file.
+    const outcome = await asked('try ~/Documents/cv.pdf.docx', '~/Documents/cv.pdf.docx');
+
+    expect(outcome.action).toBe('block');
+  });
+
+  it('does not let one name unlock a shorter one inside it', async () => {
+    // Mentioning `cv.pdf.docx` must not quietly grant `cv.pdf` — the sentence
+    // never offered that file, and a grant is standing permission to open it.
+    const outcome = await asked('try ~/Documents/cv.pdf.docx', '~/Documents/cv.pdf');
+
+    expect(outcome.action).toBe('block');
+  });
+
   it('opens one named with directories in front of it', async () => {
     const outcome = await asked('it is at ~/Documents/cv.pdf', '~/Documents/cv.pdf');
 

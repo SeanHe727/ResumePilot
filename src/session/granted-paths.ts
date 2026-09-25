@@ -27,8 +27,21 @@ import type { Session } from './types.js';
  * refuse buys nothing and widens what a sentence can unlock. The suffix used
  * to be checked only on a bare filename, so `~/Documents/cv.docx` was granted
  * and `cv.docx` was not.
+ *
+ * A path can also end a sentence. "Here is my résumé: ~/Documents/cv.pdf." was
+ * not granted, because the character after `.pdf` was a full stop rather than a
+ * space — and the run that found this got a permission denial on the file the
+ * user had just handed over. Clause-ending punctuation is allowed after the
+ * suffix, and only where the punctuation itself ends the word: `cv.pdf.docx`
+ * still matches nothing, which is the property this lookahead exists for.
+ *
+ * Western punctuation has to be followed by a space or the end of the text;
+ * CJK punctuation does not, because a language that does not space its words
+ * uses the mark itself as the boundary — `简历在 /Users/x/cv.pdf。请看` has no
+ * space anywhere after the path.
  */
-const PATH_LIKE = /(?:^|\s)((?:(?:~|\.{1,2})?\/|[\w.-]+\/)?[^\s"'`]*\.pdf)(?=$|[\s"'`])/gi;
+const PATH_LIKE =
+  /(?:^|\s)((?:(?:~|\.{1,2})?\/|[\w.-]+\/)?[^\s"'`]*\.pdf)(?=$|[\s"'`]|[.,;:!?)\]}]($|\s)|[）。，、；：！？」』])/gi;
 
 export function grantPathsIn(text: string, session: Session): void {
   const found = [...text.matchAll(PATH_LIKE)].map((m) => normalise(m[1]!));
