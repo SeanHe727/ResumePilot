@@ -223,14 +223,20 @@ function summarise(integrity: ParseIntegrity | undefined): {
 /**
  * Injected for tests; a real session gets the default.
  *
- * There used to be a model-backed line labeller here, for the case where the
- * rules could not read a PDF's structure. It spoke the old protocol — a role
- * per block, and a section kind with it — and could not produce the
- * boundaries and labels the assembler now reads. Putting a model back is a
- * piece of work on its own: it would have to answer in the same two arrays the
- * rules produce, so that both drive the same assembler and can be checked
- * against each other row by row.
+ * A model-backed labeller used to live here, was removed, and is back — this
+ * time answering in row numbers that are converted into the same two arrays the
+ * rules produce, so both drive one assembler and can be checked against each
+ * other row by row. That was the condition this comment set for its return.
  */
 function parserFor(ctx: ToolContext): ResumeParser {
-  return (ctx.session?.state?.parser as ResumeParser | undefined) ?? new DefaultResumeParser();
+  return (
+    (ctx.session?.state?.parser as ResumeParser | undefined) ??
+    new DefaultResumeParser(undefined, {
+      // Given the engine, the grouping is asked of a model; without one the
+      // rules do it. Both are supported, and which happened is in the
+      // reconciliation.
+      ...(ctx.queryEngine ? { queryEngine: ctx.queryEngine } : {}),
+      ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
+    })
+  );
 }

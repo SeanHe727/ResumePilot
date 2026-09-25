@@ -5,20 +5,39 @@ import { SqliteSessionManager } from '../../src/session/index.js';
 import { parseResumeTool } from '../../src/tools/index.js';
 import type { ToolContext } from '../../src/tools/types.js';
 
-/** No model: the fixtures are Markdown, which the structural parser reads alone. */
-function ctx() {
+/**
+ * No engine, which is the offline mode rather than a degraded one.
+ *
+ * With one, a model groups the rows; without, the rules do. These cases are
+ * about what the tool makes of the result either way, so they take the path that
+ * needs nothing. The cases that are about the grouping give it an engine.
+ */
+function ctx(queryEngine?: unknown) {
   const session = new SqliteSessionManager().create({ sourcePath: '' });
   return {
     ctx: {
       session,
-      queryEngine: {
-        query: async () => {
-          throw new Error('parsing reads the page; it asks no model anything');
-        },
-      },
+      ...(queryEngine ? { queryEngine } : {}),
       abortSignal: new AbortController().signal,
     } as unknown as ToolContext,
     session,
+  };
+}
+
+/** Answers the grouping request with whatever the case wants it to claim. */
+function grouping(reply: unknown, seen: string[] = []) {
+  return {
+    async query(params: { messages: Array<{ content: string }> }) {
+      seen.push(params.messages[0]!.content);
+      return {
+        type: 'text',
+        content: typeof reply === 'string' ? reply : JSON.stringify(reply),
+        usage: { inputTokens: 0, outputTokens: 0 },
+        stopReason: 'end_turn',
+      };
+    },
+    getUsageSummary: () => '',
+    checkBudget: () => ({ ok: true }),
   };
 }
 
@@ -163,5 +182,52 @@ describe('parse_resume', () => {
     const result = await parseResumeTool.execute({ path: '   ' }, c);
 
     expect(result.success).toBe(false);
+  });
+});
+
+describe('parse_resume, when a model does the grouping', () => {
+  it('asks the model, showing it every row with what the page says about it', async () => {
+    const seen: string[] = [];
+    const { ctx: c } = ctx(grouping({ sections: [] }, seen));
+
+    await parseResumeTool.execute({ path: 'tests/fixtures/resume_example.pdf' }, c);
+
+    expect(seen).toHaveLength(2); // one call, one retry after the empty answer
+    expect(seen[0]).toContain('size=1.00');
+    expect(seen[0]).toMatch(/\[0\] /);
+    expect(seen[0]).toContain('Return numbers only');
+  });
+
+  it('falls back to the rules when the answer does not account for every row', async () => {
+    // A document still comes out — the résumé is on disk and the rules can read
+    // it. What must not happen is a document nobody can tell was assembled the
+    // other way.
+    const { ctx: c } = ctx(grouping({ sections: [{ entries: [{ headerRowIds: [0] }] }] }));
+
+    const result = await parseResumeTool.execute(
+      { path: 'tests/fixtures/resume_example.pdf' },
+      c,
+    );
+
+    expect(result.success).toBe(true);
+    expect((result.data as { integrity: { anomalyCount: number } }).integrity.anomalyCount).toBe(1);
+  });
+
+  it('falls back when the call itself fails, rather than refusing the file', async () => {
+    const { ctx: c } = ctx({
+      async query() {
+        throw new Error('no key configured');
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    });
+
+    const result = await parseResumeTool.execute(
+      { path: 'tests/fixtures/resume_example.pdf' },
+      c,
+    );
+
+    expect(result.success).toBe(true);
+    expect((result.data as { entryCount: number }).entryCount).toBeGreaterThan(0);
   });
 });

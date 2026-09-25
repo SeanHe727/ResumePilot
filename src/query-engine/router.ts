@@ -97,6 +97,11 @@ function defaultRules(config: AppConfig): RouteRule[] {
       reason: 'long structured output synthesising every other result',
     },
     {
+      task: 'label_rows',
+      model: cheap,
+      reason: 'reads the whole page to group its rows; needs attention, not domain knowledge',
+    },
+    {
       task: 'summarize',
       model: cheap,
       reason: 'context compaction, where fidelity matters more than insight',
@@ -117,5 +122,8 @@ const DEFAULT_EFFORTS: ReadonlyArray<[TaskKind, Effort]> = [
   ['match_jd', 'high'],
   ['assess_narrative', 'high'],
   ['generate_report', 'high'],
+  // Grouping is bookkeeping over a page in front of it: every judgement it
+  // makes is checked against the rows before anything is built.
+  ['label_rows', 'low'],
   ['summarize', 'low'],
 ];

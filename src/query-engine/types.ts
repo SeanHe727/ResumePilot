@@ -126,6 +126,15 @@ export type TaskKind =
   /** The career arc across entries — one pass over the whole document. */
   | 'assess_narrative'
   | 'generate_report'
+  /**
+   * Grouping a résumé's rows into sections and entries.
+   *
+   * Reading rather than judging: the words are given and the answer is row
+   * numbers. A cheap model is the right one — what it needs is to notice that
+   * `Selected Projects` is a heading inside a job, not to know anything about
+   * the field.
+   */
+  | 'label_rows'
   | 'summarize';
 
 export interface RouteRule {

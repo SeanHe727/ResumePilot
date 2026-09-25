@@ -1,13 +1,21 @@
 import { extname } from 'node:path';
 
-import type { ResumeDocument } from '../domain.js';
+import type { ParseIntegrity, ResumeDocument } from '../domain.js';
+import type { QueryEngine } from '../query-engine/types.js';
 import { assemble } from './assemble.js';
 import { PdfExtractor } from './extractors/pdf.js';
 import { checkIntegrity } from './integrity.js';
+import { groupWithModel } from './model-grouping.js';
 import { labelRows } from './row-labels.js';
 import { findSectionBoundaries } from './section-boundaries.js';
 import { classifySection } from './section-kind.js';
-import type { DocumentExtractor, ExtractionResult, ResumeParser } from './types.js';
+import type {
+  DocumentExtractor,
+  ExtractionResult,
+  ResumeParser,
+  RowLabel,
+  SectionBoundary,
+} from './types.js';
 
 export class UnsupportedFormatError extends Error {
   constructor(filePath: string, supported: string[]) {
@@ -50,7 +58,21 @@ export class UnsupportedLayoutError extends Error {
  * no file-reading tool.
  */
 export class DefaultResumeParser implements ResumeParser {
-  constructor(private readonly extractors: DocumentExtractor[] = [new PdfExtractor()]) {}
+  /**
+   * The engine is optional, and its absence is a supported mode rather than a
+   * degraded one.
+   *
+   * With it, a model groups the rows — the one judgement the rules cannot make,
+   * because a project title set in body type is indistinguishable from a wrapped
+   * bullet no matter how the geometry is read. Without it the rules do the
+   * grouping, which is also what happens when the model's answer does not
+   * account for every row. Both paths are converted into the same two arrays
+   * and assembled by the same code.
+   */
+  constructor(
+    private readonly extractors: DocumentExtractor[] = [new PdfExtractor()],
+    private readonly deps: { queryEngine?: QueryEngine; abortSignal?: AbortSignal } = {},
+  ) {}
 
   async parse(filePath: string): Promise<ResumeDocument> {
     const extractor = this.extractors.find((e) => e.supports(filePath));
@@ -68,8 +90,32 @@ export class DefaultResumeParser implements ResumeParser {
       );
     }
 
-    return fromRows(extracted, filePath);
+    const rows = extracted.rows ?? [];
+    const grouped = this.deps.queryEngine && rows.length > 0
+      ? await groupWithModel(
+          rows,
+          median(rows.map((r) => r.dominant.fontSize)) || 1,
+          this.deps.queryEngine,
+          this.deps.abortSignal,
+        ).catch((err: unknown) => ({
+          boundaries: [],
+          labels: [],
+          // A failed call is a fallback, not a failed parse. The résumé is on
+          // disk and the rules can read it; refusing to open a file because a
+          // model was unreachable would be the worse answer.
+          because: err instanceof Error ? err.message : String(err),
+        }))
+      : undefined;
+
+    return fromRows(extracted, filePath, grouped);
   }
+}
+
+/** The body size the features are measured against, as the labeller does it. */
+function median(values: number[]): number {
+  if (values.length === 0) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.floor(sorted.length / 2)]!;
 }
 
 /**
@@ -80,10 +126,19 @@ export class DefaultResumeParser implements ResumeParser {
  * what each section is. What is left is to check that the answers add up, and
  * to say where they do not.
  */
-function fromRows(extracted: ExtractionResult, sourcePath: string): ResumeDocument {
+function fromRows(
+  extracted: ExtractionResult,
+  sourcePath: string,
+  grouped?: { boundaries: SectionBoundary[]; labels: RowLabel[]; because?: string },
+): ResumeDocument {
   const rows = extracted.rows ?? [];
-  const boundaries = findSectionBoundaries(rows);
-  const labels = labelRows(rows, boundaries);
+  // The model's grouping where there is one, the rules where there is not. The
+  // rules also run when the model was asked and could not account for every
+  // row, and the anomaly below is what says which of the two happened.
+  const declined = grouped !== undefined && grouped.boundaries.length === 0;
+  const useModel = grouped !== undefined && !declined;
+  const boundaries = useModel ? grouped.boundaries : findSectionBoundaries(rows);
+  const labels = useModel ? grouped.labels : labelRows(rows, boundaries);
 
   const sections = assemble(rows, boundaries, labels).map((section) => {
     const { kind, classification } = classifySection(section);
@@ -102,8 +157,30 @@ function fromRows(extracted: ExtractionResult, sourcePath: string): ResumeDocume
       layoutWarnings: extracted.layoutWarnings,
       // The parse checked against itself, kept rather than logged: where this
       // loses the thread is where a commercial parser will too.
-      integrity: checkIntegrity(rows, boundaries, labels, sections, extracted.rawText),
+      integrity: withFallbackNoted(
+        checkIntegrity(rows, boundaries, labels, sections, extracted.rawText),
+        declined ? grouped?.because : undefined,
+      ),
     },
+  };
+}
+
+/**
+ * Said in the reconciliation, because it is a fact about how this document was
+ * read.
+ *
+ * A run that fell back is not a run that failed: the rules produce a document.
+ * But which of the two grouped it changes what a reader should trust about the
+ * entry boundaries, and that cannot be inferred from the result.
+ */
+function withFallbackNoted(integrity: ParseIntegrity, because?: string): ParseIntegrity {
+  if (!because) return integrity;
+  return {
+    ...integrity,
+    anomalies: [
+      ...integrity.anomalies,
+      { kind: 'model-grouping-declined', at: 'document', detail: because },
+    ],
   };
 }
 

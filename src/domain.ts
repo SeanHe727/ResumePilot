@@ -208,7 +208,15 @@ export interface ParseAnomaly {
      * addresses an entry, so bullets nothing owns are bullets nothing can
      * review.
      */
-    | 'bullets-without-entry';
+    | 'bullets-without-entry'
+    /**
+     * A model was asked to group the rows and its answer was not usable.
+     *
+     * Not a failed parse — the rules grouped it instead and a document came
+     * out. But which of the two read it changes what a reader should trust
+     * about the entry boundaries, and nothing in the result says so.
+     */
+    | 'model-grouping-declined';
   /** The id or row this is about. */
   at: string;
   detail?: string;
