@@ -314,3 +314,86 @@ describe('what leaves the machine', () => {
     expect(text).toContain('ByteDance');
   });
 });
+
+describe('entry narrative in the report', () => {
+  const base: DiagnosisReport = {
+    summary: {
+      totalEntries: 1,
+      totalBullets: 3,
+      overallScore: 50,
+      substanceAvg: 50,
+      wordingAvg: 50,
+      formatScore: 50,
+      topStrengths: [],
+      topWeaknesses: [],
+    },
+    perEntry: [
+      {
+        entryId: 'e1',
+        label: 'Acme — Engineer',
+        score: 50,
+        topIssue: '',
+        bullets: [
+          { bulletId: 'b0', text: 'Built the thing', score: 40, topIssue: '' },
+          { bulletId: 'b1', text: 'Shipped the thing', score: 50, topIssue: '' },
+          { bulletId: 'b2', text: 'Cut latency 40%', score: 80, topIssue: '' },
+        ],
+      },
+    ],
+    format: { overallScore: 50 } as DiagnosisReport['format'],
+    improvementPlan: { immediate: [], shortTerm: [], longTerm: [] },
+  };
+
+  it('prints coherence, weak lead, overlaps and a reorder by bullet position', () => {
+    const report: DiagnosisReport = {
+      ...base,
+      perEntry: [
+        {
+          ...base.perEntry[0]!,
+          narrative: {
+            redundantPairs: [{ bulletA: 'b0', bulletB: 'b1', note: 'same project twice' }],
+            weakLead: true,
+            coherence: { score: 45, detail: 'reads as a task list' },
+            suggestedOrder: ['b2', 'b0', 'b1'],
+          },
+        },
+      ],
+    };
+    const text = render(report);
+
+    expect(text).toContain('story 45/100  reads as a task list');
+    expect(text).toContain('strongest bullet is not the first one');
+    expect(text).toContain('#1 and #2 overlap: same project twice');
+    expect(text).toContain('reorder: #3, #1, #2');
+  });
+
+  it('omits the reorder line when the suggested order is the current one', () => {
+    const report: DiagnosisReport = {
+      ...base,
+      perEntry: [
+        {
+          ...base.perEntry[0]!,
+          narrative: {
+            redundantPairs: [],
+            weakLead: false,
+            coherence: { score: 80, detail: '' },
+            suggestedOrder: ['b0', 'b1', 'b2'],
+          },
+        },
+      ],
+    };
+    const text = render(report);
+
+    expect(text).toContain('story 80/100');
+    expect(text).not.toContain('reorder');
+    expect(text).not.toContain('strongest bullet');
+  });
+
+  it('carries the substance agent narrative through generate_report', async () => {
+    const { out } = await runOn('sample-resume.md');
+    const report = out.result as DiagnosisReport;
+
+    expect(report.perEntry.some((e) => e.narrative?.weakLead === true)).toBe(true);
+    expect(render(report)).toContain('strongest bullet is not the first one');
+  });
+});
