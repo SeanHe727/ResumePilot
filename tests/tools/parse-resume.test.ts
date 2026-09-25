@@ -73,15 +73,16 @@ describe('parse_resume', () => {
       c,
     );
 
-    // This fixture files six project bullets under the section instead of under
-    // entries, so the parse is error-free and not clean: `anomalyCount` is how
-    // the coordinator learns to look before dispatching a review at a target
-    // that may not exist. It used to read `clean: true`, which is how a paid run
-    // came to discover the same shape by failing four dispatches.
+    // Clean again, and it was not for one commit: this fixture's project titles
+    // are body text with a masked date, which left six bullets owned by the
+    // section. `anomalyCount` reported that, and the labeller now reads the
+    // titles instead — a row with bullets beneath it titles them. The count is
+    // what a coordinator reads before it dispatches, so it has to mean
+    // something: clean here is a claim, not a default.
     expect((result.data as { integrity: unknown }).integrity).toEqual({
-      clean: false,
+      clean: true,
       errorCount: 0,
-      anomalyCount: 1,
+      anomalyCount: 0,
     });
   });
 

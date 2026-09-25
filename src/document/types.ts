@@ -139,6 +139,15 @@ export interface RowFeatures {
   endsSentence: boolean;
   /** Commas and their CJK equivalents: how much this row reads as a list. */
   listSeparators: number;
+  /**
+   * Vertical bars, which résumés use to pack a header's fields onto one line.
+   *
+   * `Name | Role | Technologies, dates` is how a project or a position is
+   * titled when the template has one line to spend on it — and it is how this
+   * project renders a header back to a model, which is not a coincidence: it is
+   * the convention both ends already share.
+   */
+  fieldSeparators: number;
   charCount: number;
   wordCount: number;
 }

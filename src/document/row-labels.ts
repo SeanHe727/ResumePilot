@@ -146,6 +146,33 @@ function labelSection(
   // candidate's own email filed under it as an achievement.
   const headed = boundary.headingRow !== undefined;
 
+  // Whether this section has bodies for entries to own.
+  //
+  // Settled for the section like `headed`, and for the same kind of reason. A
+  // section with no bullet anywhere in it holds prose — a summary, a list of
+  // skills — and its lines are the section speaking. Without this, the rule
+  // below reads the first line of a skills list as a position and the section
+  // stops being a skills section at all.
+  //
+  // Asked of the shape rather than of the heading, because the labeller runs
+  // before anything classifies a section, and a heading it cannot read is
+  // exactly the case a classifier is there for.
+  // Whether anything below this row is a bullet.
+  //
+  // A row that names something has something under it. `Internal tooling
+  // refresh` at the end of a position is a project the role mentions; the same
+  // row with three bullets beneath it is the next project. Measured on both:
+  // nothing in the type, the words or the air tells them apart.
+  //
+  // It also settles for free the thing that would otherwise need settling for
+  // the section: a prose section — a summary, a list of skills — has no bullet
+  // anywhere, so no row in it has one below, and none of its lines is read as
+  // a position. A separate "does this section have bullets" gate was written
+  // first and then found redundant, because a bullet below is a bullet.
+  const bulletsBelow = features.map((_, i) =>
+    features.slice(i + 1).some((later) => later.startsWithBullet),
+  );
+
   const open: Open = {
     indent: null,
     owner: 'section',
@@ -214,7 +241,7 @@ function labelSection(
       continue;
     }
 
-    const label = place(f, open, headed, rowIndex);
+    const label = place(f, open, headed, bulletsBelow[i]!, rowIndex);
     open.indent = f.indent;
     open.owner = label.owner;
     labels.push({ ...label, ...(contentFrom !== undefined ? { contentFrom } : {}) });
@@ -250,6 +277,8 @@ function place(
   f: RowFeatures,
   open: Open,
   headed: boolean,
+  /** At least one bullet sits below this row, so a name here would name it. */
+  titles: boolean,
   rowIndex: number,
 ): RowLabel {
   if (isDateOnly(f)) {
@@ -323,6 +352,29 @@ function place(
       open.entry
         ? 'carries a date range, after the previous entry closed with bullets'
         : 'carries a date range, with no entry open to belong to',
+    );
+  }
+
+  // A row that is not a bullet, where a block is not under way: it names what
+  // follows.
+  //
+  // Nothing about its setting or its words is consulted, because on a real
+  // résumé neither is reliable — a project title measured at 1.00x body size,
+  // not bold, with a masked date, is typographically identical to the line
+  // wrapping a bullet above it. What does separate two entries is mechanical:
+  // bullets carry a marker, and a line without one, arriving after bullets,
+  // begins the next thing.
+  //
+  // A bullet never reaches here — `labelSection` settles those before asking —
+  // and `within()` decides whether such a row is a bullet's own wrapped
+  // remainder. A row with no bullet beneath it names nothing, which is what
+  // keeps a project mentioned at the end of a position from becoming a
+  // position of its own.
+  if (headed && titles && (!open.entry || open.bulletSinceEntry)) {
+    return opens(
+      open.entry
+        ? "not a bullet, after the previous entry's bullets closed it"
+        : 'not a bullet, with no entry open to belong to',
     );
   }
 
@@ -489,6 +541,7 @@ function continues(
 function notes(f: RowFeatures): string[] {
   const out: string[] = [];
   if (f.hasDateRange) out.push('carries a date range');
+  if (f.fieldSeparators >= 2) out.push('fields separated by bars');
   if (f.hasContact) out.push('carries contact details');
   if (f.capsRatio >= 0.9) out.push('set in capitals');
   if (f.gapAbove >= 1.25) out.push(`${f.gapAbove.toFixed(2)}x the body line spacing above it`);
@@ -532,6 +585,7 @@ function measure(
     hasContact: hasContactDetail(row.text),
     endsSentence: TERMINAL.test(row.text.trim()),
     listSeparators: (row.text.match(LIST_SEPARATOR) ?? []).length,
+    fieldSeparators: (row.text.match(/[|｜]/g) ?? []).length,
     // What is left once the date range and the punctuation around it are gone.
     // Counted rather than kept, because the rules only ever ask whether there
     // is anything there.

@@ -341,16 +341,18 @@ describe('offsets that do not lead back', () => {
 });
 
 describe('shapes that are legal and worth a second look', () => {
-  it('finds the unowned project bullets in the fixture that has them', async () => {
-    // The shape a paid run found the hard way. Now the parse says it, before
-    // anybody dispatches a specialist at a target that does not exist.
+  it('has nothing to say about the fixture whose projects now own their bullets', async () => {
+    // This fixture is why the check exists: its project titles are body text
+    // with a masked date, so nothing typographic named them and six bullets
+    // belonged to the section. The labeller reads them now — a row with bullets
+    // beneath it titles them — so the anomaly falls silent here and stays as
+    // the guard for documents that still cannot be read.
     const doc = await new DefaultResumeParser().parse('tests/fixtures/resume_example.pdf');
+    const projects = doc.sections.find((s) => s.kind === 'project')!;
 
-    expect(doc.meta.integrity?.anomalies).toContainEqual(
-      expect.objectContaining({ kind: 'bullets-without-entry', at: 's3' }),
-    );
-    // And it is an anomaly, not an error: nothing was dropped or double-counted.
-    expect(doc.meta.integrity?.droppedRows).toEqual([]);
+    expect(projects.entries.map((e) => e.bullets.length)).toEqual([3, 3]);
+    expect(projects.bullets ?? []).toEqual([]);
+    expect(doc.meta.integrity?.anomalies.filter((a) => a.kind === 'bullets-without-entry')).toEqual([]);
     expect(doc.meta.integrity?.placedRows).toBe(doc.meta.integrity?.totalRows);
   });
 

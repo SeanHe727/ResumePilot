@@ -563,6 +563,50 @@ describe('inside an entry, what names it and what it says', () => {
     expect(labels.at(-1)!.evidence[0]).toMatch(/header closed when its bullets began/);
   });
 
+  it('opens an entry on a title that has bullets under it, with nothing else to go on', () => {
+    // A real résumé's project titles, measured: 1.00x body size, not bold, and
+    // a masked date the date pattern cannot read. Nothing typographic names
+    // them. What does is mechanical — bullets carry a marker, so a row without
+    // one that has bullets beneath it is titling them.
+    const document = rows([
+      { text: 'PROJECTS' },
+      { text: 'Agent Runtime Suite | Owner | TypeScript Aug 20XX - Present' },
+      { text: 'example.com/code/agent-runtime' },
+      { text: '- Improved localization from 82% to 94%', indent: 1.7 },
+      { text: 'Research-Agent Evaluation Framework | Contributor Feb 20XX' },
+      { text: '- Built an evaluation infrastructure', indent: 1.7 },
+    ]);
+
+    const labels = labelRows(document, wholeBody(document));
+
+    expect(labelled(document)).toEqual([
+      'entry/header*',
+      // The link is the entry talking about itself, not part of what it is
+      // called — `within()` settles that before any of this.
+      'entry/info',
+      'entry/bullet',
+      'entry/header*',
+      'entry/bullet',
+    ]);
+    expect(labels[0]!.evidence[0]).toMatch(/not a bullet, with no entry open/);
+    expect(labels[3]!.evidence[0]).toMatch(/after the previous entry's bullets closed it/);
+  });
+
+  it('leaves a prose section alone, having no bullets to own anything', () => {
+    // A skills list read this way becomes a position, and the section stops
+    // being a skills section at all. Settled for the section, like whether a
+    // heading introduced it.
+    const document = rows([
+      { text: 'SKILLS' },
+      { text: 'Languages: TypeScript, Python, Go' },
+      { text: 'Systems: Postgres, Redis' },
+    ]);
+
+    labelRows(document, wholeBody(document));
+
+    expect(labelled(document)).toEqual(['section/info', 'section/info']);
+  });
+
   it('opens a new entry after the bullets on dates', () => {
     expect(labelled(afterBullets({ text: 'Amazon x UW  Dec 2025 - Jun 2026' })).at(-1)).toBe(
       'entry/header*',

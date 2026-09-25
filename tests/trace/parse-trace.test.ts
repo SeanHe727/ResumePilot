@@ -71,17 +71,18 @@ describe('what the parse leaves on the record', () => {
     expect(experience.entries.map((e) => e.bullets)).toEqual([4, 3]);
   });
 
-  it('records the counts that explain a rejected dispatch', async () => {
-    // `entries: 0, sectionBullets: 6` is the whole story of the last run's four
-    // failures, and it took a hand-run parser to find it.
+  it('records the counts that would explain a rejected dispatch', async () => {
+    // `entries: 0, sectionBullets: 6` was the whole story of the first run's
+    // four failures, and it took a hand-run parser to find it. The labeller
+    // reads those titles now, so the numbers here are the answer rather than
+    // the symptom — and they are the numbers that would show the symptom again.
     const { trace, events } = recorder();
 
     await parseResumeTool.execute({ path: 'tests/fixtures/resume_example.pdf' }, ctxWith(trace));
 
     const projects = parsed(events).sections.find((s) => s.kind === 'project')!;
-    expect(projects.entries).toEqual([]);
-    expect(projects.sectionBullets).toBe(6);
-    expect(projects.infoLines).toBe(4);
+    expect(projects.entries.map((e) => e.bullets)).toEqual([3, 3]);
+    expect(projects.sectionBullets).toBe(0);
   });
 
   it('carries the reconciliation, anomalies included', async () => {
@@ -91,9 +92,10 @@ describe('what the parse leaves on the record', () => {
 
     const { integrity } = parsed(events);
     expect(integrity.placedRows).toBeGreaterThan(0);
-    expect(integrity.anomalies).toContainEqual(
-      expect.objectContaining({ kind: 'bullets-without-entry', at: 's3' }),
-    );
+    // The list is there whether or not it has anything in it: a reader asking
+    // "was this parse clean" needs the answer recorded, not inferred from a
+    // missing field.
+    expect(Array.isArray(integrity.anomalies)).toBe(true);
   });
 
   it('records a file that opened and gave nothing back', async () => {
