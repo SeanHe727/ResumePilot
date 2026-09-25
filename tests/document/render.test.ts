@@ -191,3 +191,62 @@ describe('what stops at the boundary', () => {
     expect(rendered).toContain('Built an inspection system');
   });
 });
+
+describe("a section's own lines, when the parse built no entries", () => {
+  /** Titles and bullets alternating, as a projects section does. */
+  const raw = [
+    'PROJECTS',
+    'Agent Runtime Suite | Owner',
+    'example.com/code/agents',
+    'Improved localization 82% to 94%',
+    'Research-Agent Evaluation | Contributor',
+    'Built an evaluation infrastructure',
+  ].join('\n');
+  const at = (text: string) => ({ start: raw.indexOf(text), end: raw.indexOf(text) + text.length });
+
+  const doc = {
+    sourcePath: 'r.pdf',
+    format: 'pdf',
+    rawText: raw,
+    meta: { wordCount: 30, quality: 'clean', layoutWarnings: [] },
+    sections: [
+      {
+        id: 's3',
+        kind: 'project',
+        heading: 'PROJECTS',
+        span: { start: 0, end: raw.length },
+        entries: [],
+        looseLines: [],
+        infoLines: ['Agent Runtime Suite | Owner', 'example.com/code/agents', 'Research-Agent Evaluation | Contributor'],
+        bullets: [
+          { id: 's3:b0', text: 'Improved localization 82% to 94%', span: at('Improved localization 82% to 94%') },
+          { id: 's3:b1', text: 'Built an evaluation infrastructure', span: at('Built an evaluation infrastructure') },
+        ],
+      },
+    ],
+  } as unknown as ResumeDocument;
+
+  it('keeps the order the page had, so which bullet belongs to which title is readable', () => {
+    // They were rendered as two blocks — every prose line, then every bullet —
+    // so two titles came out followed by every bullet, and nothing could say
+    // which belonged to which. That is the relationship a reader needs most,
+    // because these lines only exist when the parse failed to build entries.
+    const lines = renderResume(doc)
+      .split('\n')
+      .filter((line) => line.trim() && !line.startsWith('<') && !line.startsWith('#'));
+
+    expect(lines).toEqual([
+      'Agent Runtime Suite | Owner',
+      'example.com/code/agents',
+      '- [s3:b0] Improved localization 82% to 94%',
+      'Research-Agent Evaluation | Contributor',
+      '- [s3:b1] Built an evaluation infrastructure',
+    ]);
+  });
+
+  it('gives those bullets their ids, like every other line', () => {
+    // A reader that cannot name a line cannot say two of them repeat each other
+    // — which is what `render.ts` says about ids, and what these lines lacked.
+    expect(renderResume(doc)).toContain('[s3:b0]');
+  });
+});

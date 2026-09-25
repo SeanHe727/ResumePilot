@@ -141,10 +141,13 @@ export async function handleInput(
         // saw — which version of a report, at which length, with which
         // coverage. A summary of it answers something else.
         const [name, ...args] = trimmed.split(/\s+/);
+        // No status. `CommandResult` carries no success flag, and "did it print
+        // anything" is not one: `/history` on a new session prints nothing and
+        // has not failed. Claiming a status here would put a judgement in the
+        // record that nothing in the result supports.
         trace.event(() => ({
           phase: 'result',
           tool: name ?? trimmed,
-          status: result.output ? 'success' : 'error',
           input: { args },
           output: {
             text: result.output,

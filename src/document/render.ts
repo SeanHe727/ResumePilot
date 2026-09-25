@@ -77,14 +77,46 @@ export function renderResume(resume: ResumeDocument): string {
       // a posting could not see the skills list it was matching against.
       const body = [
         ...section.entries.map(entryBody),
-        ...(lines(section).length > 0 ? [lines(section).join('\n')] : []),
-        ...(section.bullets ?? []).map((bullet) => `- ${bullet.text}`),
+        ...(sectionBody(section, resume.rawText).length > 0
+          ? [sectionBody(section, resume.rawText).join('\n')]
+          : []),
       ].join('\n\n');
       return `# ${heading}\n\n${body}`;
     })
     .join('\n\n');
 
   return `<resume_content>\n${withoutContactDetails(body)}\n</resume_content>`;
+}
+
+/**
+ * A section's own lines, in the order the page had them, each addressable.
+ *
+ * They were rendered as two blocks — every prose line, then every bullet — so a
+ * projects section whose titles and bullets alternate came out as two titles
+ * followed by six bullets, and nothing could say which bullets belonged to
+ * which project. That is the relationship a reader needs most when the parse
+ * failed to build entries, which is the only time these lines exist at all.
+ *
+ * The order is recoverable because the bullets carry spans, which came from the
+ * visual rows: `indexOf` places the prose lines among them. A duplicate line
+ * resolves to its first occurrence, which changes nothing about the ordering.
+ *
+ * Ids go on the bullets for the same reason they go on an entry's: a reader
+ * that cannot name a line cannot say two of them repeat each other.
+ */
+function sectionBody(section: ResumeSection, rawText: string): string[] {
+  const placed = [
+    ...(section.bullets ?? []).map((bullet) => ({
+      at: bullet.span.start,
+      text: `- [${bullet.id}] ${bullet.text}`,
+    })),
+    ...lines(section).map((line) => ({
+      at: rawText.indexOf(line, section.span.start),
+      text: line,
+    })),
+  ];
+
+  return placed.sort((a, b) => a.at - b.at).map((line) => line.text);
 }
 
 /**

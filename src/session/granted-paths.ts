@@ -35,13 +35,22 @@ import type { Session } from './types.js';
  * suffix, and only where the punctuation itself ends the word: `cv.pdf.docx`
  * still matches nothing, which is the property this lookahead exists for.
  *
+ * Brackets are excluded from the path itself, not only allowed in front of it.
+ * The body pattern is greedy, so with only a leading alternative the engine
+ * matched the space before `(` and swallowed the bracket into the path.
+ *
+ * A bracket or a quote may sit against the front of it too. `(/Users/x/cv.pdf)`
+ * used to capture the bracket into the path and grant a resolved nonsense
+ * string, leaving the file the user had actually offered still blocked — worse
+ * than not matching, because it looks like it worked.
+ *
  * Western punctuation has to be followed by a space or the end of the text;
  * CJK punctuation does not, because a language that does not space its words
  * uses the mark itself as the boundary — `简历在 /Users/x/cv.pdf。请看` has no
  * space anywhere after the path.
  */
 const PATH_LIKE =
-  /(?:^|\s)((?:(?:~|\.{1,2})?\/|[\w.-]+\/)?[^\s"'`]*\.pdf)(?=$|[\s"'`]|[.,;:!?)\]}]($|\s)|[）。，、；：！？」』])/gi;
+  /(?:^|[\s"'`([{（「『])((?:(?:~|\.{1,2})?\/|[\w.-]+\/)?[^\s"'`()[\]{}（）「」『』]*\.pdf)(?=$|[\s"'`]|[.,;:!?)\]}]($|\s)|[）。，、；：！？」』])/gi;
 
 export function grantPathsIn(text: string, session: Session): void {
   const found = [...text.matchAll(PATH_LIKE)].map((m) => normalise(m[1]!));

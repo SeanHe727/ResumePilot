@@ -394,8 +394,12 @@ function coverage(
   // never became an entry. Every other number here counts entries, so this
   // material is invisible to all of them: a run reported two of two entries
   // read while six bullets under a projects heading had been scored by nobody.
+  // Not conditional on the section having no entries. A section that opened two
+  // entries and left one bullet at its own level has left that bullet just as
+  // unreviewable — the same correction mutation testing forced on the integrity
+  // check, which this had drifted from.
   const unaddressable = (input.resume.sections ?? [])
-    .filter((section) => (section.bullets ?? []).length > 0 && section.entries.length === 0)
+    .filter((section) => (section.bullets ?? []).length > 0)
     .map((section) => ({
       sectionId: section.id,
       heading: section.heading || section.kind,

@@ -327,13 +327,22 @@ describe('path-source', () => {
     // "Here is my résumé: ~/Documents/cv.pdf." — the character after `.pdf` was
     // a full stop rather than a space, so nothing was granted and the run got a
     // permission denial on the file the user had just handed over.
+    // The path asked about is the clean one, because that is what a tool
+    // submits. An earlier version of this test took it out of the sentence with
+    // `\S*cv\.pdf`, which for `(/Users/x/cv.pdf)` is the bracket and the path
+    // together — so it asserted that a nonsense grant worked, and passed while
+    // the real file stayed blocked.
     for (const said of [
       'Here is my résumé: /Users/someone/Downloads/cv.pdf.',
       'It is at /Users/someone/cv.pdf, have a look',
       'the file (/Users/someone/cv.pdf) is the latest',
+      'the file [/Users/someone/cv.pdf] is the latest',
+      'the file "/Users/someone/cv.pdf" is the latest',
+      "the file '/Users/someone/cv.pdf' is the latest",
       '简历在 /Users/someone/cv.pdf。请看一下',
     ]) {
-      const outcome = await asked(said, said.match(/\S*cv\.pdf/)![0]);
+      const path = said.includes('Downloads') ? '/Users/someone/Downloads/cv.pdf' : '/Users/someone/cv.pdf';
+      const outcome = await asked(said, path);
       expect(outcome.action, said).toBe('continue');
     }
   });

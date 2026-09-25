@@ -101,6 +101,32 @@ describe('coverage says what it could not address', () => {
     expect(report.coverage?.contentReviewed).toBe(report.coverage?.eligibleEntries);
   });
 
+  it('counts a stray bullet even where the section did open entries', async () => {
+    // The same correction mutation testing forced on the integrity check: two
+    // entries that look right, and one bullet left at the section's own level,
+    // is the harder case to notice by eye and just as unreviewable.
+    const report = await reportFor({
+      resume: resume({
+        sections: [
+          {
+            id: 's3',
+            kind: 'project',
+            heading: 'PROJECTS',
+            looseLines: [],
+            span: { start: 1, end: 2 },
+            entries: [{ ...ENTRY, id: 's3:e0', sectionId: 's3' }],
+            bullets: [{ id: 's3:b0', text: 'a bullet nobody owns', span: { start: 1, end: 2 } }],
+          },
+        ],
+      }),
+      entryDiagnoses: [{ entryId: 's3:e0', overallScore: 60, bullets: [] }],
+    } as never);
+
+    expect(report.coverage?.unaddressable).toEqual([
+      { sectionId: 's3', heading: 'PROJECTS', bullets: 1 },
+    ]);
+  });
+
   it('says so in the report a person reads', async () => {
     const report = await reportFor({});
 

@@ -85,7 +85,8 @@ export const applyRevisionTool: Tool<ApplyRevisionInput, ApplyRevisionOutput> = 
   description:
     'Replace a bullet in the working copy with the version the candidate has settled on. ' +
     'Use it once they have said which wording they are keeping, never to try one out — ' +
-    '`review_entry` judges a draft without committing to it. Later turns see the new text.',
+    '`review_content` takes a `revisedBullets` draft and judges it without committing to it. ' +
+    'Later turns see the new text.',
   parameters: {
     type: 'object',
     properties: {

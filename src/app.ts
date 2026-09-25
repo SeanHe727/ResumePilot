@@ -263,7 +263,10 @@ export class App {
     // every later turn is reading. Without it the trace began with a document
     // it could not account for.
     return this.trace.span(
-      { actor: { kind: 'system', id: 'parse' }, sessionId: session.id, turn: 0 },
+      // No turn of its own: at startup there is none, and from `/upload` it
+      // belongs to the turn the user typed. Left unset, the span inherits
+      // whichever it is.
+      { actor: { kind: 'system', id: 'parse' }, sessionId: session.id },
       async () => {
         const result = await this.loopDeps.tools.resolve('parse_resume').execute({ path } as never, {
           session,
