@@ -91,12 +91,18 @@ export class DefaultResumeParser implements ResumeParser {
     }
 
     const rows = extracted.rows ?? [];
+    // The headings the vocabulary names, handed to the model as a signal rather
+    // than re-decided by it. It is the one part of this the rules do better.
+    const named = findSectionBoundaries(rows)
+      .map((b) => b.headingRow)
+      .filter((row): row is number => row !== undefined);
     const grouped = this.deps.queryEngine && rows.length > 0
       ? await groupWithModel(
           rows,
           median(rows.map((r) => r.dominant.fontSize)) || 1,
           this.deps.queryEngine,
           this.deps.abortSignal,
+          named,
         ).catch((err: unknown) => ({
           boundaries: [],
           labels: [],

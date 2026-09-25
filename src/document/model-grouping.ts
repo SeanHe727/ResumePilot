@@ -70,7 +70,11 @@ export type Checked = { ok: true; grouped: Grouped } | { ok: false; because: str
  * paragraph resequenced under a heading it does not belong to. None of them
  * would raise an error anywhere downstream.
  */
-export function checkGrouping(raw: unknown, rows: readonly VisualRow[]): Checked {
+export function checkGrouping(
+  raw: unknown,
+  rows: readonly VisualRow[],
+  headingRows: readonly number[] = [],
+): Checked {
   if (!raw || typeof raw !== 'object' || !Array.isArray((raw as Grouped).sections)) {
     return { ok: false, because: 'no sections array' };
   }
@@ -122,6 +126,20 @@ export function checkGrouping(raw: unknown, rows: readonly VisualRow[]): Checked
   const firsts = grouped.sections.map((s) => claimed(s).sort((a, b) => a - b)[0] ?? -1);
   if (!ascending(firsts.filter((f) => f >= 0))) {
     return { ok: false, because: 'the sections are out of order' };
+  }
+
+  // A heading the vocabulary named has to open a section.
+  //
+  // This is the one judgement not being asked of the model — the named rows are
+  // given to it — so an answer that folds one into the block above is not an
+  // answer to the question. It has to be a check rather than a hope: measured
+  // twice on the same document, the same prompt kept a `SUMMARY` heading once
+  // and swallowed it the next time, and losing a section satisfies every other
+  // rule here.
+  const opened = new Set(grouped.sections.flatMap((section) => section.headingRowIds ?? []));
+  const folded = headingRows.find((row) => !opened.has(row));
+  if (folded !== undefined) {
+    return { ok: false, because: `row ${folded} names a section and did not open one` };
   }
 
   return { ok: true, grouped };
@@ -215,12 +233,24 @@ const MARKER = /^\s*([-*+•‧◦·▪▫●○–—]|\d{1,2}[.)])\s+/;
  * and a model shown "row 31 is body size, not bold, two line spacings below the
  * row above" can weigh that against what the words say.
  */
-export function groupingPrompt(rows: readonly VisualRow[], bodySize: number): string {
+export function groupingPrompt(
+  rows: readonly VisualRow[],
+  bodySize: number,
+  headingRows: readonly number[] = [],
+): string {
+  const named = new Set(headingRows);
   const lines = rows.map((row, i) => {
     const size = (row.dominant.fontSize / bodySize).toFixed(2);
     const above = rows[i - 1];
     const gap = above && above.page === row.page ? ((above.y - row.y) / bodySize).toFixed(1) : 'top';
-    return `[${i}] size=${size} ${row.dominant.bold ? 'bold' : 'plain'} gap=${gap} :: ${row.text}`;
+    // Marked where the vocabulary recognises the word. Measured: without this
+    // the model folded a `SUMMARY` heading and its bullet into the block above
+    // the first heading and lost the section — an answer that satisfied every
+    // check, because losing a section is a judgement rather than an accounting
+    // error. Finding a heading by its word is the one part of this the rules do
+    // better, so they are given rather than re-decided.
+    const heading = named.has(i) ? ' heading=named' : '';
+    return `[${i}] size=${size} ${row.dominant.bold ? 'bold' : 'plain'} gap=${gap}${heading} :: ${row.text}`;
   });
 
   return `Here is every line of a résumé, in the order it appears, with what the page can say about it.
@@ -248,6 +278,9 @@ Rules, all of them mechanical:
 - A section's rows are one unbroken run.
 - "headingRowIds" is the row that names the section — EXPERIENCE, PROJECTS. The
   block above the first heading has none: leave it out for that one.
+- A row marked \`heading=named\` is a section heading by its word. It opens a
+  section; it never belongs to the one above it. Rows the mark misses can still
+  be headings — judge those yourself.
 - An entry is one position, one degree, one project. "headerRowIds" is what it is
   called, which can run to two rows: employer on one, title and dates on the next.
 - "infoRowIds" is what the entry says about itself rather than what it achieved —
@@ -255,7 +288,10 @@ Rules, all of them mechanical:
 - "bulletRowIds" is its achievements. Include the rows that are only the rest of
   a bullet that wrapped; they belong to the same entry.
 - "looseRowIds" is for a section that holds lines of its own rather than entries:
-  a skills list, a summary paragraph.
+  a skills list, a summary paragraph, a list of awards or publications. An entry
+  is a position, a degree or a project — something with work under it. A line
+  that names an award and its year is a line the section holds, not an entry with
+  nothing in it.
 
 What to weigh:
 - A heading inside a position — "Selected Projects" under a job — is part of that
@@ -279,8 +315,9 @@ export async function groupWithModel(
   bodySize: number,
   engine: QueryEngine,
   abortSignal?: AbortSignal,
+  headingRows: readonly number[] = [],
 ): Promise<{ boundaries: SectionBoundary[]; labels: RowLabel[]; because?: string }> {
-  const prompt = groupingPrompt(rows, bodySize);
+  const prompt = groupingPrompt(rows, bodySize, headingRows);
   let because = 'the model returned nothing';
 
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -299,7 +336,7 @@ export async function groupWithModel(
       continue;
     }
 
-    const checked = checkGrouping(parsed, rows);
+    const checked = checkGrouping(parsed, rows, headingRows);
     if (checked.ok) return toArrays(checked.grouped, rows);
     because = checked.because;
   }

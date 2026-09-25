@@ -15,3 +15,6 @@ data/*.db-shm
 tmp/
 *.log
 .DS_Store
+
+# Reports the export command writes where it was run from.
+resume-review-*.md

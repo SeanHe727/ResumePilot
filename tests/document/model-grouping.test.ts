@@ -118,6 +118,27 @@ describe('refusing an answer that would lose part of the résumé', () => {
     expect(why(checkGrouping(interleaved, DOCUMENT))).toMatch(/contiguous/);
   });
 
+  it('refuses an answer that folds a named heading into the block above it', () => {
+    // The one judgement not asked of the model: the named rows are given to it,
+    // so an answer that swallows one is not an answer to the question. Measured
+    // twice on one document with the same prompt — a `SUMMARY` heading kept once
+    // and folded the next time — and losing a section satisfies every other rule
+    // here, because it is a judgement rather than an accounting error.
+    const folded: Grouped = {
+      sections: [{ entries: [{ headerRowIds: [0, 1], infoRowIds: [2], bulletRowIds: [3, 4, 5] }] }],
+    };
+
+    expect(why(checkGrouping(folded, DOCUMENT, [0]))).toMatch(/row 0 names a section/);
+  });
+
+  it('takes the same answer when no heading was named', () => {
+    const folded: Grouped = {
+      sections: [{ entries: [{ headerRowIds: [0, 1], infoRowIds: [2], bulletRowIds: [3, 4, 5] }] }],
+    };
+
+    expect(checkGrouping(folded, DOCUMENT)).toMatchObject({ ok: true });
+  });
+
   it('refuses an entry with no header, which would have nothing to be called', () => {
     const headerless: Grouped = {
       sections: [{ headingRowIds: [0], entries: [{ headerRowIds: [], bulletRowIds: [1, 2, 3, 4, 5] }] }],
