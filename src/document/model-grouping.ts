@@ -1,5 +1,5 @@
 import type { QueryEngine } from '../query-engine/types.js';
-import { isBulletLine } from './vocabulary.js';
+import { isBulletLine, withoutContactDetails } from './vocabulary.js';
 import type { RowLabel, SectionBoundary, VisualRow } from './types.js';
 
 /**
@@ -239,6 +239,14 @@ export function groupingPrompt(
   headingRows: readonly number[] = [],
 ): string {
   const named = new Set(headingRows);
+  // Everything above the first named heading is the name and the ways to reach
+  // the candidate, and grouping needs none of it: the answer is row numbers, and
+  // the block above the first heading has one place it can go. Every other
+  // prompt leaves this block behind by skipping the contact section, which does
+  // not exist yet here, so the rows are withheld by position instead. Measured:
+  // without this, the name, phone, email and profile links of every résumé
+  // reached the provider on the first call of every session.
+  const firstNamed = headingRows.length > 0 ? Math.min(...headingRows) : 0;
   const lines = rows.map((row, i) => {
     const size = (row.dominant.fontSize / bodySize).toFixed(2);
     const above = rows[i - 1];
@@ -250,7 +258,8 @@ export function groupingPrompt(
     // error. Finding a heading by its word is the one part of this the rules do
     // better, so they are given rather than re-decided.
     const heading = named.has(i) ? ' heading=named' : '';
-    return `[${i}] size=${size} ${row.dominant.bold ? 'bold' : 'plain'} gap=${gap}${heading} :: ${row.text}`;
+    const text = i < firstNamed ? '[withheld]' : withoutContactDetails(row.text);
+    return `[${i}] size=${size} ${row.dominant.bold ? 'bold' : 'plain'} gap=${gap}${heading} :: ${text}`;
   });
 
   return `Here is every line of a résumé, in the order it appears, with what the page can say about it.
@@ -278,6 +287,8 @@ Rules, all of them mechanical:
 - A section's rows are one unbroken run.
 - "headingRowIds" is the row that names the section — EXPERIENCE, PROJECTS. The
   block above the first heading has none: leave it out for that one.
+- A row shown as [withheld] is the top of the page, kept private. It belongs to
+  the block above the first heading, as a loose row.
 - A row marked \`heading=named\` is a section heading by its word. It opens a
   section; it never belongs to the one above it. Rows the mark misses can still
   be headings — judge those yourself.
