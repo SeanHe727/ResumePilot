@@ -64,8 +64,16 @@ const BRIEFING_PROPS = {
  * demands is the only one that cannot see the page it is spending.
  */
 function pageRoom(ctx: ToolContext): string | undefined {
-  const format = (ctx.session?.state as ResumeSessionState | undefined)?.formatDiagnosis;
-  const length = format?.metrics.length;
+  const state = ctx.session?.state as ResumeSessionState | undefined;
+  // From the document, not from the format reading. Taken off
+  // `formatDiagnosis`, this was silently absent whenever `review_format` had
+  // not run first — which is most of the time, since the coordinator decides
+  // the order. The parse already counted the words and the pages.
+  const meta = state?.resume?.meta;
+  const length =
+    meta?.pageCount !== undefined
+      ? { wordCount: meta.wordCount, pageCount: meta.pageCount }
+      : state?.formatDiagnosis?.metrics.length;
   if (!length) return undefined;
 
   const room = length.pageCount <= 1 ? Math.max(0, 650 - length.wordCount) : 0;
@@ -77,7 +85,11 @@ function pageRoom(ctx: ToolContext): string | undefined {
   );
 }
 
-function briefingFrom(input: WithBriefing | undefined, recorded: string[] = []): Briefing | undefined {
+function briefingFrom(
+  input: WithBriefing | undefined,
+  recorded: string[] = [],
+  room?: string,
+): Briefing | undefined {
   // The coordinator's own words first, then the facts on the session. Both,
   // because they are different things: what it says here is what it took from
   // the conversation, and `record_fact` is what the candidate actually said.
@@ -89,6 +101,7 @@ function briefingFrom(input: WithBriefing | undefined, recorded: string[] = []):
     ...(input?.understanding?.trim() ? { understanding: input.understanding.trim() } : {}),
     ...(supplied.length > 0 ? { supplied: supplied.join('\n') } : {}),
     ...(input?.goal?.trim() ? { goal: input.goal.trim() } : {}),
+    ...(room ? { pageRoom: room } : {}),
   };
   return Object.keys(briefing).length > 0 ? briefing : undefined;
 }
@@ -296,7 +309,7 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
         const verdict = await ctx.orchestrator.diagnoseEntry(
           target,
           { roles: [role], reasons: { [role]: 'dispatched from the conversation' } },
-          briefingFrom(input, factsFor(ctx, entryId)),
+          briefingFrom(input, factsFor(ctx, entryId), pageRoom(ctx)),
         );
 
         const { read, store } = VERDICT_FOR[role];

@@ -387,6 +387,10 @@ function briefingContext(briefing?: Briefing): { briefing?: string } {
     briefing.understanding && `What this appears to be: ${briefing.understanding}`,
     briefing.supplied && `What the candidate has said, which the page does not: ${briefing.supplied}`,
     briefing.goal && `What they asked for: ${briefing.goal}`,
+    // Last, and phrased as a budget rather than as a fact about the file: the
+    // reader that names what is missing is the only one that cannot see the
+    // page its demands are spent on.
+    briefing.pageRoom && `What the page can afford: ${briefing.pageRoom}`,
   ].filter((line): line is string => Boolean(line && line.trim()));
 
   return parts.length > 0 ? { briefing: parts.join('\n') } : {};

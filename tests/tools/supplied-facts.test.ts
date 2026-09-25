@@ -42,7 +42,7 @@ const RESUME = {
       entries: [ENTRY, { ...ENTRY, id: 'experience:1', index: 1, bullets: [{ ...ENTRY.bullets[0]!, id: 'experience:1:0', entryId: 'experience:1' }] }],
     },
   ],
-  meta: { wordCount: 200, quality: 'clean', layoutWarnings: [] },
+  meta: { wordCount: 200, pageCount: 1, quality: 'clean', layoutWarnings: [] },
 };
 
 function dispatched(facts: ResumeSessionState['suppliedFacts'], input: Record<string, unknown> = {}) {
@@ -103,7 +103,7 @@ describe('facts reaching the reader that needs them', () => {
       { fact: 'this one is about the other role', bulletId: 'experience:1:0' },
       { fact: 'this one is about the other role', entryId: 'experience:1' },
     ]) {
-      expect(await dispatched([other])).toBeUndefined();
+      expect((await dispatched([other]))?.supplied).toBeUndefined();
     }
   });
 
@@ -119,8 +119,83 @@ describe('facts reaching the reader that needs them', () => {
     expect(briefing?.supplied).toContain('800ms to 90ms');
   });
 
-  it('sends nothing when nothing was recorded', async () => {
-    expect(await dispatched(undefined)).toBeUndefined();
+  it('sends no facts when none were recorded', async () => {
+    // The briefing itself is not empty — it always carries what the page can
+    // afford, which is a measurement rather than something the candidate said.
+    const briefing = await dispatched(undefined);
+
+    expect(briefing?.supplied).toBeUndefined();
+    expect(briefing?.pageRoom).toBeTruthy();
+  });
+});
+
+describe('what the page can afford', () => {
+  it('reaches the reader that makes the demands, without the format check having run', async () => {
+    // It used to be read off `formatDiagnosis`, so it was silently absent
+    // whenever the coordinator had not run `review_format` first — and the
+    // calculation sat in this file called by nobody. The parse already counted
+    // the words and the pages.
+    const briefing = await dispatched(undefined);
+
+    expect(briefing?.pageRoom).toContain('200 words over 1 page');
+    expect(briefing?.pageRoom).toContain('450 words of room');
+  });
+
+  it('says a full page has to displace something rather than reporting no room', async () => {
+    const session = new SqliteSessionManager().create({ sourcePath: 'r.pdf' });
+    session.state = {
+      // Sparse and still two pages, which is the case that distinguishes "no
+      // room left" from "this is already over its length": 650 minus 300 is
+      // room on a one-page résumé and means nothing on a two-page one.
+      resume: { ...RESUME, meta: { wordCount: 300, pageCount: 2, quality: 'clean', layoutWarnings: [] } },
+    } as never;
+    let seen: Briefing | undefined;
+
+    await reviewContentTool.execute({ entryId: 'experience:0' } as never, {
+      session,
+      orchestrator: {
+        failures: new Map<string, string>(),
+        async diagnoseEntry(_e: unknown, _r: unknown, briefing?: Briefing) {
+          seen = briefing;
+          return { entryId: 'experience:0', substance: { entryId: 'experience:0', overallScore: 60, bullets: [] }, wording: null, overallScore: 60, agentStats: [] };
+        },
+      },
+      abortSignal: new AbortController().signal,
+    } as unknown as ToolContext);
+
+    expect(seen?.pageRoom).toContain('has to displace something');
+    expect(seen?.pageRoom).not.toContain('words of room');
+  });
+
+  it('is rendered into what the specialist actually reads', async () => {
+    // Reaching the briefing and not being rendered is the bug that was here:
+    // the field existed, the calculation existed, and the two were never joined.
+    const { DefaultOrchestrator, SemaphorePool } = await import('../../src/agent/index.js');
+    let sent: Record<string, unknown> | undefined;
+    const runtime = {
+      trace: { enabled: false, event: () => {}, span: async (_: unknown, body: () => Promise<unknown>) => body(), current: () => undefined },
+      async run(task: { context?: Record<string, unknown> }) {
+        sent = task.context;
+        return {
+          agentId: 'content',
+          agentName: 'Entry Substance',
+          success: true,
+          output: { bullets: [] },
+          usage: { inputTokens: 0, outputTokens: 0 },
+          turns: 1,
+          compactions: 0,
+          durationMs: 1,
+        } as SubAgentResult;
+      },
+    };
+    const orchestrator = new DefaultOrchestrator(runtime as never, {}, new SemaphorePool(1));
+
+    await orchestrator.diagnoseEntry(ENTRY as never, { roles: ['content'] } as never, {
+      pageRoom: 'The resume runs 604 words over 1 page(s). Roughly 46 words of room are left.',
+    });
+
+    expect(String(sent?.briefing)).toContain('What the page can afford');
+    expect(String(sent?.briefing)).toContain('46 words of room');
   });
 });
 
