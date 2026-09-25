@@ -331,6 +331,8 @@ export interface DiagnosisReport {
     score: number;
     topIssue: string;
     bullets: Array<{ bulletId: string; text: string; score: number; topIssue: string }>;
+    /** Cross-bullet judgement from the substance agent; absent when the entry was not diagnosed. */
+    narrative?: EntryNarrative;
   }>;
   format: FormatDiagnosis;
   narrative?: NarrativeAssessment;

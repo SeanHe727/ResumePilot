@@ -137,6 +137,7 @@ function perEntry(
           topIssue: scored?.issues[0] ?? '',
         };
       }),
+      ...(diagnosis ? { narrative: diagnosis.narrative } : {}),
     };
   });
 }

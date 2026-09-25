@@ -1,6 +1,7 @@
 import type {
   DiagnosisReport,
   EntryDiagnosis,
+  EntryNarrative,
   FormatDiagnosis,
   ResumeDocument,
   ResumeEntry,
@@ -221,6 +222,7 @@ export function render(report: DiagnosisReport): string {
       lines.push(`     ${String(bullet.score).padStart(3)}  ${truncate(bullet.text, 64)}`);
       if (bullet.topIssue) lines.push(`          ${truncate(bullet.topIssue, 70)}`);
     }
+    if (entry.narrative) lines.push(...renderEntryNarrative(entry.narrative, entry.bullets));
     lines.push('');
   }
 
@@ -283,6 +285,42 @@ export function render(report: DiagnosisReport): string {
   }
 
   return lines.join('\n').trimEnd();
+}
+
+/**
+ * The judgements that only exist across one entry's bullets.
+ *
+ * Bullet ids mean nothing to the reader, so they are shown as 1-based
+ * positions in the list printed just above.
+ */
+function renderEntryNarrative(
+  narrative: EntryNarrative,
+  bullets: Array<{ bulletId: string }>,
+): string[] {
+  const position = new Map(bullets.map((b, i) => [b.bulletId, `#${i + 1}`]));
+  const label = (id: string) => position.get(id) ?? id;
+  const lines: string[] = [];
+
+  // The normaliser fills a missing narrative with a zero score and no detail;
+  // printing that as "story 0/100" reads as a verdict nobody gave.
+  const { coherence } = narrative;
+  if (coherence.score > 0 || coherence.detail) {
+    lines.push(
+      `     story ${coherence.score}/100${coherence.detail ? `  ${truncate(coherence.detail, 60)}` : ''}`,
+    );
+  }
+  if (narrative.weakLead) lines.push('          strongest bullet is not the first one');
+  for (const pair of narrative.redundantPairs) {
+    if (!pair.bulletA || !pair.bulletB) continue;
+    const note = pair.note ? `: ${truncate(pair.note, 56)}` : '';
+    lines.push(`          ${label(pair.bulletA)} and ${label(pair.bulletB)} overlap${note}`);
+  }
+  // Only worth a line when the order actually changes.
+  const order = narrative.suggestedOrder;
+  if (order && order.join() !== bullets.map((b) => b.bulletId).join()) {
+    lines.push(`          reorder: ${order.map(label).join(', ')}`);
+  }
+  return lines;
 }
 
 function truncate(text: string, max: number): string {
