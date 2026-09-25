@@ -13,6 +13,7 @@ import type { HookContext, HookPipeline } from '../hooks/types.js';
 import { TOOL_START_TIME } from '../hooks/index.js';
 import { NoTrace, type Trace } from '../trace/index.js';
 import type { ToolCall } from '../types.js';
+import { SemaphorePool } from './pool.js';
 import type { Orchestrator } from './types.js';
 
 export interface LoopDeps {
@@ -217,12 +218,17 @@ async function runTurn(
         ...(response.reasoning ? { reasoning: response.reasoning } : {}),
       });
 
-      // Serially, not in parallel: a tool call the model issued alongside
-      // another may depend on it, and it has no way to say so.
-      for (const call of response.toolCalls) {
-        const result = await runTool(call, session, deps, trace);
-        context.addToolResult(call.id, JSON.stringify(result));
-      }
+      // Reviews side by side, everything else in order. A tool call the model
+      // issued alongside another may depend on it and has no way to say so, so
+      // the default is serial. The reviews are the exception: each reads the
+      // document and files its own reading, none reads what another files, and
+      // they are nearly all of the time. Measured: the first review of a
+      // four-entry résumé issued ten of them in one response and waited 15.5
+      // minutes for them one at a time.
+      const results = await runInBatches(response.toolCalls, (call) => runTool(call, session, deps, trace));
+      response.toolCalls.forEach((call, i) => {
+        context.addToolResult(call.id, JSON.stringify(results[i]));
+      });
 
       await context.autoCompact(deps.queryEngine);
       continue;
@@ -335,6 +341,60 @@ function setResumeContext(context: ContextManager, session: Session): void {
  * call this gate approved, and re-running permission, audit and memory writes
  * per inner call would multiply all three.
  */
+/**
+ * Tools that only read the document and file a reading of their own.
+ *
+ * Safe together because each writes one field of the session through
+ * `remember`, which applies its change to the state as it is when the review
+ * finishes rather than as it was when it started. A tool that copies the state
+ * before it awaits and writes the copy back afterwards — `parse_resume`,
+ * `apply_revision`, `generate_report` — would erase whatever finished in
+ * between, and stays out.
+ */
+const RUN_TOGETHER: ReadonlySet<string> = new Set([
+  'review_content',
+  'review_wording',
+  'review_narrative',
+  'review_jd_match',
+  'review_format',
+]);
+
+/**
+ * How many reviews are in flight at once.
+ *
+ * Each builds its own orchestrator, so the pools inside it bound the roles of
+ * one review and not the reviews themselves. This is the ceiling across them.
+ */
+const REVIEWS_AT_ONCE = 4;
+
+/**
+ * Runs the calls in the order issued, except that a run of consecutive reviews
+ * goes at once. Results come back in the order the calls were issued, which is
+ * the order the model will read them in.
+ */
+export async function runInBatches<T>(
+  calls: readonly ToolCall[],
+  run: (call: ToolCall) => Promise<T>,
+): Promise<T[]> {
+  const results: T[] = new Array(calls.length);
+  const pool = new SemaphorePool(REVIEWS_AT_ONCE);
+  let i = 0;
+  while (i < calls.length) {
+    if (!RUN_TOGETHER.has(calls[i]!.name)) {
+      results[i] = await run(calls[i]!);
+      i += 1;
+      continue;
+    }
+    let end = i;
+    while (end < calls.length && RUN_TOGETHER.has(calls[end]!.name)) end += 1;
+    const start = i;
+    const batch = await pool.runAll(calls.slice(start, end).map((call) => () => run(call)));
+    batch.forEach((result, k) => { results[start + k] = result; });
+    i = end;
+  }
+  return results;
+}
+
 async function runTool(
   call: ToolCall,
   session: Session,
