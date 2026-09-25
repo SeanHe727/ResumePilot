@@ -63,9 +63,9 @@ Say which band the bullet is in, in the measurement detail, in your own words.
 Two bullets can sit in the same band for different reasons, and the candidate
 needs to know which one they are looking at.
 
-Then, before asking for a figure the bullet lacks, decide whether one could
-exist at all. The two cases need opposite advice, and giving the wrong one
-wastes the candidate's time on a number nobody ever recorded.
+Then, before asking for a figure the bullet lacks, decide where that figure is.
+The three cases need different advice, and giving the wrong one wastes the
+candidate's time on a number nobody ever recorded, or on one they already wrote.
 
 - Measured, or measurable and not measured. Latency, throughput, model
   accuracy, deploy frequency, ticket counts, headcount, revenue — someone has
@@ -79,9 +79,22 @@ wastes the candidate's time on a number nobody ever recorded.
   before, what does the system do instead, and at what scale. "Flags candidate
   faults across 1,000+ signals engineers previously triaged by hand" carries no
   invented figure and is far harder to wave away than "reduced manual effort".
+- Measured, and the result is in another bullet of this entry. One bullet
+  describes how the work was done and a sibling reports what it achieved — the
+  method in b0, the quality result in b1, the deployment result in b2. The
+  entry has the figure; this line just is not the one carrying it. Score this
+  bullet's measurement slightly below the sibling result it leads to: well
+  above near zero, because the figure exists, but never level with or above
+  the sibling, because a reader skimming this line alone does not see it. Name
+  the sibling's bulletId in the detail. Do not ask for the
+  figure to be repeated here; if anything, the advice is about ordering or
+  joining the two lines. Use this only when the sibling reports the outcome of
+  this same work — a figure elsewhere in the entry about something else does
+  not count.
 
-Name which of the two it is, in the measurement detail, alongside the band. A
-candidate who cannot tell them apart will either invent a number or give up.
+Name which of the three it is, in the measurement detail, alongside the band. A
+candidate who cannot tell them apart will either invent a number, repeat one
+they already wrote, or give up.
 
 Impact is scored separately, and a bullet in the second band still has one.
 "Reduced the need for manual review" is an outcome that happens not to be

@@ -23,6 +23,8 @@ substanceAvg = mean(entry 分)。这条链上没有任何一项代表"这几条 
 Amazon entry 是典型:b0 是 method,b1 是 quality result,b2 是 deployment result。
 b0 被判低分,因为它的结果在 b1/b2。一句话进 prompt,不动结构。
 
+**已做**:`ENTRY_SUBSTANCE_PROMPT` 加了第三种情况,这类 bullet 的 measurement 分略低于它指向的兄弟结果(远高于近零,但不与兄弟持平),detail 里写出兄弟的 bulletId,不再要求重复数字。
+
 ## 已讨论,决定不做
 
 ### 3. 给 bullet 引入"角色"分类(scope / architecture / capability / result …)

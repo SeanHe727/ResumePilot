@@ -470,6 +470,17 @@ describe('prompts', () => {
     expect(prompt).toMatch(/Never state a figure the source does not contain/);
   });
 
+  it('credits a bullet whose result is reported by a sibling bullet', () => {
+    // A method bullet whose outcome sits in the next line is measured; scoring
+    // it near zero asks the candidate to repeat a figure they already wrote.
+    expect(ENTRY_SUBSTANCE_PROMPT).toMatch(/result is in another bullet of this entry/);
+    // Slightly below the sibling, not level with it: the figure exists, but
+    // this line alone does not show it.
+    expect(ENTRY_SUBSTANCE_PROMPT).toMatch(/slightly below the sibling result/);
+    expect(ENTRY_SUBSTANCE_PROMPT).toMatch(/never level with or above/);
+    expect(ENTRY_SUBSTANCE_PROMPT).toMatch(/Name which of the three it is/);
+  });
+
   it('treats the XYZ shape as a target rather than a requirement', () => {
     // Forcing it onto a bullet with no missing metric produces padding.
     expect(REWRITE_PROMPT).toMatch(/target, not a cage/);
