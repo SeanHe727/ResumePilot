@@ -114,9 +114,16 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
     level: 'low',
     action: 'allow',
     reason:
-      'Replaces a line in the session working copy, never the file on disk, and only ' +
-      'after the candidate has said which wording they are keeping. A conversation that ' +
-      'went wrong is undone by not saving it.',
+      'Replaces a line in the session working copy, never the file on disk, with wording ' +
+      'the candidate gave. Every change is a version that revert_revision takes back.',
+  },
+  {
+    id: 'allow-revert-revision',
+    name: 'Take back a change to a bullet',
+    match: { type: 'tool_name', pattern: 'revert_revision' },
+    level: 'low',
+    action: 'allow',
+    reason: 'Puts an earlier wording back in the session working copy, as a new version.',
   },
   {
     id: 'allow-generate-report',

@@ -9,7 +9,12 @@
 #     scripted, only recorded
 #   - the updated report does not present stale findings on the old text as fresh
 #   - coverage in the second report says what was and was not re-read
+#   - the rewrite is kept without being asked "are you sure", and the version said
+#   - taking it back (revert_revision) restores the old line, and /report then
+#     says the report is older than the page
 Here is my resume: {resume}. Please review it carefully and tell me what to change.
 I rewrote the first bullet under my first job. It now reads: "Cut the pending-case backlog 68% after launch by building an industrial-diagnostics triage branch that screens 800+ sensor signals per case through ML-extracted feature schemas, evidence-grounded review and abstention on low-confidence findings." Please re-review that line.
 Now update the report.
+/report
+Actually, put the old version of that line back.
 /report

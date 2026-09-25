@@ -170,6 +170,7 @@ describe('what the coordinator can and cannot reach', () => {
       'generate_report',
       'parse_resume',
       'record_fact',
+      'revert_revision',
       'review_content',
       'review_format',
       'review_jd_match',

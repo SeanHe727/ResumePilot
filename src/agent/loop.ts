@@ -85,6 +85,7 @@ const MAIN_AGENT_TOOLS = [
   'generate_report',
   'record_fact',
   'apply_revision',
+  'revert_revision',
 ] as const;
 
 /**

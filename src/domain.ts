@@ -800,7 +800,7 @@ export interface ResumeSessionState {
    */
   documentVersion?: number;
   /** Each kept revision, in order, with the version it produced. */
-  revisions?: Array<{ version: number; bulletId: string; at: string }>;
+  revisions?: Revision[];
   /** Entry or bullet ids the user chose to exclude. */
   skipped?: string[];
   /**
@@ -831,6 +831,23 @@ export interface ResumeSessionState {
  * Passed to `MemoryStore<CandidateProfile>` — the store itself is generic and
  * has no idea a candidate exists.
  */
+/**
+ * One change to the working copy.
+ *
+ * Append-only: undoing a revision is itself a revision, carrying the text back,
+ * so the version number only ever moves forward and a report's version always
+ * names one state of the page.
+ */
+export interface Revision {
+  version: number;
+  bulletId: string;
+  before: string;
+  after: string;
+  at: string;
+  /** Set when this revision undid an earlier one: that one's version. */
+  reverts?: number;
+}
+
 export interface SuppliedFact {
   /** Their words, not a claim distilled out of them. */
   fact: string;

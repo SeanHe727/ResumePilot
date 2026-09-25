@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest';
 import type { DiagnosisReport, ResumeDocument, ResumeSessionState } from '../../src/domain.js';
 import { createReportCommand } from '../../src/command/handlers/report.js';
 import { renderBrief } from '../../src/skills/render-full.js';
-import { applyRevisionTool, generateReportTool } from '../../src/tools/index.js';
+import { applyRevisionTool, generateReportTool, revertRevisionTool } from '../../src/tools/index.js';
+import { createRevertCommand } from '../../src/command/handlers/revert.js';
 import type { ToolContext } from '../../src/tools/types.js';
 import {
   changesSince,
@@ -165,7 +166,7 @@ describe('what changed after a report', () => {
     await applyRevisionTool.execute({ bulletId: 's2:e0:b0', text: NEW }, c);
 
     expect(state(c).documentVersion).toBe(2);
-    expect(state(c).revisions).toEqual([expect.objectContaining({ version: 2, bulletId: 's2:e0:b0' })]);
+    expect(state(c).revisions).toEqual([expect.objectContaining({ version: 2, bulletId: 's2:e0:b0', before: OLD, after: NEW })]);
     expect(changesSince({ documentVersion: 1, factsKnown: 0 }, state(c)).revised).toEqual(['s2:e0:b0']);
   });
 
@@ -185,5 +186,58 @@ describe('what changed after a report', () => {
 
     const out = await createReportCommand().execute({ positional: [], flags: {} } as never, c.session as never);
     expect(out.output).not.toContain('older than the conversation');
+  });
+});
+
+describe('every change is a version that can be taken back', () => {
+  it('undoes the latest change as a new version, and the earlier readings are current again', async () => {
+    const c = ctx({ resume: doc(OLD), entryDiagnoses: [reading('s2:e0', OLD, 60)] });
+    await applyRevisionTool.execute({ bulletId: 's2:e0:b0', text: NEW }, c);
+    expect(sortReadings(state(c).entryDiagnoses!, state(c).resume!).stale).toEqual(['s2:e0']);
+
+    const undone = await revertRevisionTool.execute({}, c);
+
+    expect(undone.success).toBe(true);
+    expect(state(c).documentVersion).toBe(3);
+    expect(entryOf(state(c).resume!, 's2:e0').bullets[0]!.text).toBe(OLD);
+    expect(state(c).revisions!.at(-1)).toMatchObject({ version: 3, before: NEW, after: OLD, reverts: 2 });
+    // Nothing re-read: the reading of the old text is the current one again.
+    expect(sortReadings(state(c).entryDiagnoses!, state(c).resume!).current).toHaveLength(1);
+  });
+
+  it('goes back one change further each time rather than redoing the last undo', async () => {
+    const c = ctx({ resume: doc(OLD) });
+    await applyRevisionTool.execute({ bulletId: 's2:e0:b0', text: 'second' }, c);
+    await applyRevisionTool.execute({ bulletId: 's2:e0:b0', text: 'third' }, c);
+
+    await revertRevisionTool.execute({}, c);
+    expect(entryOf(state(c).resume!, 's2:e0').bullets[0]!.text).toBe('second');
+    await revertRevisionTool.execute({}, c);
+    expect(entryOf(state(c).resume!, 's2:e0').bullets[0]!.text).toBe(OLD);
+
+    const nothing = await revertRevisionTool.execute({}, c);
+    expect(nothing.success).toBe(false);
+  });
+
+  it('undoes only the bullet named', async () => {
+    const c = ctx({ resume: doc(OLD) });
+    await applyRevisionTool.execute({ bulletId: 's2:e0:b0', text: NEW }, c);
+    await applyRevisionTool.execute({ bulletId: 's2:e1:b0', text: 'Shipped two things' }, c);
+
+    await revertRevisionTool.execute({ bulletId: 's2:e0:b0' }, c);
+
+    expect(entryOf(state(c).resume!, 's2:e0').bullets[0]!.text).toBe(OLD);
+    expect(entryOf(state(c).resume!, 's2:e1').bullets[0]!.text).toBe('Shipped two things');
+  });
+
+  it('/revert does the same without the model', async () => {
+    const c = ctx({ resume: doc(OLD) });
+    await applyRevisionTool.execute({ bulletId: 's2:e0:b0', text: NEW }, c);
+    const sessions = { save: () => {} } as never;
+
+    const out = await createRevertCommand(sessions).execute({ positional: [], flags: {} } as never, c.session as never);
+
+    expect(out.output).toContain('Reverted s2:e0:b0');
+    expect(entryOf(state(c).resume!, 's2:e0').bullets[0]!.text).toBe(OLD);
   });
 });
