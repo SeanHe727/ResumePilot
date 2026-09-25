@@ -43,7 +43,9 @@ const BRIEFING_PROPS = {
   },
   supplied: {
     type: 'string',
-    description: 'What the candidate has told you that the resume itself does not say.',
+    description:
+      'What the candidate has told you in this conversation that the resume itself does not say. ' +
+      'Not notes from earlier sessions.',
   },
   goal: {
     type: 'string',

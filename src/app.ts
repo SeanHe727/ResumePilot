@@ -47,6 +47,15 @@ export interface AppOptions {
   /** False in a non-interactive run: confirmations refuse rather than block on stdin. */
   interactive?: boolean;
   print?: (text: string) => void;
+  /**
+   * Where the candidate memory lives, when not the data directory's own.
+   *
+   * A scripted run points this at an empty file. Sharing the real one, every
+   * run read what all the runs before it had written — measured: "Diagnosed
+   * 17x" and a finding from an earlier run reached the coordinator on turn one —
+   * and wrote its own back into the memory of whoever uses the app for real.
+   */
+  memoryPath?: string;
 }
 
 /**
@@ -124,7 +133,7 @@ export class App {
     const restorer = new DefaultSessionRestorer(this.sessions, checkpoints);
     this.closers.push(() => this.sessions.close());
 
-    this.memory = new SqliteMemoryStore<CandidateProfile>(join(dir, 'memory.db'));
+    this.memory = new SqliteMemoryStore<CandidateProfile>(options.memoryPath ?? join(dir, 'memory.db'));
     // Offered by the store since it was written and never called, so every
     // memory the retriever ever wrote outlived its own expiry.
     this.memory.evictExpired();
