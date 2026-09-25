@@ -77,13 +77,49 @@ function pageRoom(ctx: ToolContext): string | undefined {
   );
 }
 
-function briefingFrom(input: WithBriefing | undefined): Briefing | undefined {
+function briefingFrom(input: WithBriefing | undefined, recorded: string[] = []): Briefing | undefined {
+  // The coordinator's own words first, then the facts on the session. Both,
+  // because they are different things: what it says here is what it took from
+  // the conversation, and `record_fact` is what the candidate actually said.
+  const supplied = [input?.supplied?.trim(), ...recorded].filter(
+    (line): line is string => Boolean(line && line.length > 0),
+  );
+
   const briefing: Briefing = {
     ...(input?.understanding?.trim() ? { understanding: input.understanding.trim() } : {}),
-    ...(input?.supplied?.trim() ? { supplied: input.supplied.trim() } : {}),
+    ...(supplied.length > 0 ? { supplied: supplied.join('\n') } : {}),
     ...(input?.goal?.trim() ? { goal: input.goal.trim() } : {}),
   };
   return Object.keys(briefing).length > 0 ? briefing : undefined;
+}
+
+/**
+ * What the candidate has said that bears on this entry.
+ *
+ * Selected here rather than left to the coordinator to copy. `record_fact`
+ * writes to the session and the readers of that field were a rewrite tool and
+ * the coordinator's own context layer — so a figure the candidate supplied
+ * reached a specialist only if the coordinator remembered to retype it into
+ * `supplied`, and a review it forgot scored the line as though the figure had
+ * never been given.
+ *
+ * Quoted, because the field is their words rather than a claim distilled out of
+ * them, and a specialist has to be able to tell the two apart: this is
+ * something to judge the line against, not something the line says.
+ */
+function factsFor(ctx: ToolContext, entryId: string): string[] {
+  const facts = (ctx.session?.state as ResumeSessionState | undefined)?.suppliedFacts ?? [];
+
+  return facts
+    .filter((fact) => {
+      // A fact about a bullet is a fact about the entry holding it. One about
+      // neither is general — a constraint, something they cannot share — and
+      // bears on every entry.
+      if (fact.bulletId) return fact.bulletId.startsWith(`${entryId}:`);
+      if (fact.entryId) return fact.entryId === entryId;
+      return true;
+    })
+    .map((fact) => `"${fact.fact}"`);
 }
 
 /**
@@ -260,7 +296,7 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
         const verdict = await ctx.orchestrator.diagnoseEntry(
           target,
           { roles: [role], reasons: { [role]: 'dispatched from the conversation' } },
-          briefingFrom(input),
+          briefingFrom(input, factsFor(ctx, entryId)),
         );
 
         const { read, store } = VERDICT_FOR[role];

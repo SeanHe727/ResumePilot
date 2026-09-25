@@ -103,7 +103,7 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
       },
     }));
 
-    const improvementPlan = await buildImprovementPlan(input, findings, ctx);
+    const improvementPlan = await buildImprovementPlan(input, findings, state, ctx);
 
     const report: DiagnosisReport = {
       summary,
@@ -220,6 +220,26 @@ function perEntry(
 }
 
 /**
+ * Figures and constraints the candidate has given, for the plan to weigh.
+ *
+ * Without them a finding that needs a number is filed under "go and find one"
+ * while the number is already on the session — the candidate is told to look for
+ * something they have already handed over. What it costs to act is the whole
+ * basis of this split, and a figure in hand costs differently from a figure that
+ * has to be dug up.
+ */
+function supplied(state: ResumeSessionState): string {
+  const facts = state.suppliedFacts ?? [];
+  if (facts.length === 0) return '';
+
+  return (
+    `\n\nWhat the candidate has since told us, in their words — the résumé does not say these, ` +
+    `and a fix that only needs one of them is a fix they can make now:\n` +
+    facts.map((fact) => `- "${fact.fact}"${fact.bulletId ? ` (about ${fact.bulletId})` : ''}`).join('\n')
+  );
+}
+
+/**
  * A finding as the plan model has always seen it.
  *
  * Byte for byte what this sent before findings had ids: the plan model's
@@ -241,6 +261,7 @@ function asLine(finding: SourceFinding): string {
 async function buildImprovementPlan(
   input: GenerateReportInput,
   findings: readonly SourceFinding[],
+  state: ResumeSessionState,
   ctx: ToolContext,
 ): Promise<ImprovementPlan> {
   if (findings.length === 0) {
@@ -259,7 +280,7 @@ async function buildImprovementPlan(
     messages: [
       {
         role: 'user',
-        content: `${room}\n\nEverything the review found:\n${findings.map(asLine).join('\n')}
+        content: `${room}${supplied(state)}\n\nEverything the review found:\n${findings.map(asLine).join('\n')}
 
 Return JSON of exactly this shape:
 
