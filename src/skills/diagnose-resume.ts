@@ -301,12 +301,17 @@ function renderEntryNarrative(
   const label = (id: string) => position.get(id) ?? id;
   const lines: string[] = [];
 
+  // The normaliser fills a missing narrative with a zero score and no detail;
+  // printing that as "story 0/100" reads as a verdict nobody gave.
   const { coherence } = narrative;
-  lines.push(
-    `     story ${coherence.score}/100${coherence.detail ? `  ${truncate(coherence.detail, 60)}` : ''}`,
-  );
+  if (coherence.score > 0 || coherence.detail) {
+    lines.push(
+      `     story ${coherence.score}/100${coherence.detail ? `  ${truncate(coherence.detail, 60)}` : ''}`,
+    );
+  }
   if (narrative.weakLead) lines.push('          strongest bullet is not the first one');
   for (const pair of narrative.redundantPairs) {
+    if (!pair.bulletA || !pair.bulletB) continue;
     const note = pair.note ? `: ${truncate(pair.note, 56)}` : '';
     lines.push(`          ${label(pair.bulletA)} and ${label(pair.bulletB)} overlap${note}`);
   }

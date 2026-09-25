@@ -389,6 +389,28 @@ describe('entry narrative in the report', () => {
     expect(text).not.toContain('strongest bullet');
   });
 
+  it('prints nothing for a narrative the agent never returned', () => {
+    // The normaliser turns a missing narrative into a zero score with no
+    // detail; "story 0/100" would read as a verdict nobody gave.
+    const report: DiagnosisReport = {
+      ...base,
+      perEntry: [
+        {
+          ...base.perEntry[0]!,
+          narrative: {
+            redundantPairs: [{ bulletA: '', bulletB: '', note: '' }],
+            weakLead: false,
+            coherence: { score: 0, detail: '' },
+          },
+        },
+      ],
+    };
+    const text = render(report);
+
+    expect(text).not.toContain('story');
+    expect(text).not.toContain('overlap');
+  });
+
   it('carries the substance agent narrative through generate_report', async () => {
     const { out } = await runOn('sample-resume.md');
     const report = out.result as DiagnosisReport;
