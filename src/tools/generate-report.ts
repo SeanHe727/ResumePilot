@@ -369,6 +369,22 @@ function coverage(
   const scored = new Set(input.entries.map((d) => d.entryId));
   const worded = new Set((input.wording ?? []).map((d) => d.entryId));
 
+  // Text the parse kept that no review can be dispatched against, because it
+  // never became an entry. Every other number here counts entries, so this
+  // material is invisible to all of them: a run reported two of two entries
+  // read while six bullets under a projects heading had been scored by nobody.
+  const unaddressable = (input.resume.sections ?? [])
+    .filter((section) => (section.bullets ?? []).length > 0 && section.entries.length === 0)
+    .map((section) => ({
+      sectionId: section.id,
+      heading: section.heading || section.kind,
+      bullets: (section.bullets ?? []).length,
+    }));
+
+  const attempts = state.reviewAttempts ?? [];
+  const rejected = attempts.filter((a) => a.outcome === 'rejected');
+  const failed = attempts.filter((a) => a.outcome === 'failed');
+
   return {
     eligibleEntries: eligible.length,
     notApplicableEntries: allEntries.length - eligible.length,
@@ -378,6 +394,13 @@ function coverage(
     // No posting is not a gap. Nothing was asked for, so nothing is missing.
     jdMatch: input.jdMatch ? 'done' : state.jd ? 'not-run' : 'no-posting',
     format: 'done',
+    ...(unaddressable.length > 0 ? { unaddressable } : {}),
+    ...(rejected.length > 0
+      ? { rejectedTargets: rejected.map(({ role, target }) => ({ role, target })) }
+      : {}),
+    ...(failed.length > 0
+      ? { failedTargets: failed.map(({ role, target, reason }) => ({ role, target, reason })) }
+      : {}),
   };
 }
 

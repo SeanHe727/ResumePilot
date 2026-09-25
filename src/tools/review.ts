@@ -86,6 +86,25 @@ function briefingFrom(input: WithBriefing | undefined): Briefing | undefined {
   return Object.keys(briefing).length > 0 ? briefing : undefined;
 }
 
+/**
+ * One line in the product's own ledger of what it tried.
+ *
+ * Deliberately not the trace: the trace is a development instrument and is
+ * absent in production, so anything a report has to disclose is written here,
+ * when it happens.
+ */
+function attempted(
+  ctx: ToolContext,
+  role: string,
+  target: string,
+  outcome: 'rejected' | 'failed',
+  reason: string,
+): void {
+  remember(ctx, (state) => {
+    state.reviewAttempts = [...(state.reviewAttempts ?? []), { role, target, outcome, reason }];
+  });
+}
+
 function resumeFrom(ctx: ToolContext) {
   return (ctx.session?.state as ResumeSessionState | undefined)?.resume;
 }
@@ -216,6 +235,10 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
       const entry = resume.sections.flatMap((s) => s.entries).find((e) => e.id === entryId);
       if (!entry) {
         const known = resume.sections.flatMap((s) => s.entries).map((e) => e.id);
+        // Written down, not only returned. The refusal reaches the model and
+        // stops there; a report that cannot see it cannot tell "nothing was
+        // wrong with that entry" from "the review never ran".
+        attempted(ctx, role, entryId, 'rejected', `no entry ${entryId}`);
         return {
           success: false,
           error: { code: 'input_error', message: `no entry ${entryId}. This resume has: ${known.join(', ')}` },
@@ -242,10 +265,20 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
 
         const { read, store } = VERDICT_FOR[role];
         const found = read(verdict);
-        if (found) remember(ctx, (state) => store(state, found as never));
+        if (!found) {
+          // A specialist that produced nothing is not a review that succeeded.
+          // Reported as success with `data: undefined`, this left the
+          // coordinator believing the entry had been read, the count saying it
+          // had not, and nobody able to say which was true.
+          const reason = ctx.orchestrator.failures?.get(role) ?? 'the reader returned nothing';
+          attempted(ctx, role, entryId, 'failed', reason);
+          return { success: false, error: { code: 'service_error', message: `${role} produced no reading of ${entryId}: ${reason}` } };
+        }
+        remember(ctx, (state) => store(state, found as never));
 
         return { success: true, data: found };
       } catch (err) {
+        attempted(ctx, role, entryId, 'failed', err instanceof Error ? err.message : String(err));
         return {
           success: false,
           error: {

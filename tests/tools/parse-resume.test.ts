@@ -122,12 +122,18 @@ describe('parse_resume', () => {
     session.state = {
       entryDiagnoses: [{ entryId: 'old:0' }],
       latestReport: { summary: {} },
+      reviewAttempts: [
+        { role: 'content', target: 'old:0', outcome: 'rejected', reason: 'no entry old:0' },
+      ],
     } as unknown as ResumeSessionState;
 
     await parseResumeTool.execute({ path: 'tests/fixtures/resume_example.pdf' }, c);
 
     expect(state(session).entryDiagnoses).toBeUndefined();
     expect(state(session).latestReport).toBeUndefined();
+    // A refusal is about the document it was asked against. Carried over, it
+    // would appear in the next report as a gap in a résumé that never had it.
+    expect(state(session).reviewAttempts).toBeUndefined();
   });
 
   it('says a scanned file has nothing to read rather than scoring it at zero', async () => {

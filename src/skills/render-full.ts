@@ -60,6 +60,34 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
   return `${lines.join('\n').trimEnd()}\n`;
 }
 
+/**
+ * Said out loud, because nothing else in the report can say it.
+ *
+ * Every count in the line above is of entries. Text that never became an entry
+ * is missing from all of them, and a refused dispatch leaves no mark at all —
+ * so a run that scored two of two entries and left six bullets unread read as
+ * complete.
+ */
+function notRead(coverage: NonNullable<DiagnosisReport['coverage']>): string[] {
+  const lines: string[] = [];
+
+  for (const section of coverage.unaddressable ?? []) {
+    lines.push(
+      `> **${section.bullets} lines under "${section.heading}" were not scored.** They are not ` +
+        `attached to any entry, so no per-line review could be asked for them. Giving each one a ` +
+        `title line — a name, and dates — makes them reviewable.`,
+    );
+  }
+  for (const { role, target } of coverage.rejectedTargets ?? []) {
+    lines.push(`> **A ${role} review was asked for \`${target}\`, which is not in this résumé.** It did not run.`);
+  }
+  for (const { role, target, reason } of coverage.failedTargets ?? []) {
+    lines.push(`> **The ${role} review of \`${target}\` produced nothing.** ${reason}`);
+  }
+
+  return lines.length > 0 ? [...lines.flatMap((line) => [line, '']), ''] : [];
+}
+
 function head(report: DiagnosisReport, sourcePath: string, title: string): string[] {
   const { summary, coverage } = report;
   const dimensions = [
@@ -81,5 +109,9 @@ function head(report: DiagnosisReport, sourcePath: string, title: string): strin
         `Career reading ${coverage.narrative}, posting comparison ${coverage.jdMatch}.`
       : '',
     '',
+    // What the counts above cannot say. A report that reads as complete while
+    // material went unread, or while a review was asked for and refused, is the
+    // one failure of this document that the reader cannot detect for themselves.
+    ...(coverage ? notRead(coverage) : []),
   ].filter((line, i, all) => line !== '' || all[i - 1] !== '');
 }

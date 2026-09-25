@@ -572,6 +572,26 @@ export interface ReportCoverage {
   /** `no-posting` is not a gap: there was nothing to compare against. */
   jdMatch: 'done' | 'not-run' | 'no-posting';
   format: 'done' | 'not-run';
+  /**
+   * Text the parse kept and no review can address.
+   *
+   * Every count above is of entries, so material that never became an entry is
+   * invisible to all of them — and a run once reported two of two entries read
+   * while six bullets under a projects heading had been scored by nobody. A
+   * reader of these numbers has to be able to see that.
+   */
+  unaddressable?: Array<{ sectionId: string; heading: string; bullets: number }>;
+  /**
+   * Reviews asked for against something that does not exist.
+   *
+   * The refusal reaches the model and stops there. Without this the report
+   * cannot tell "nothing was wrong with that entry" from "the review never
+   * ran", and the first traced run made four of these and reported complete
+   * coverage.
+   */
+  rejectedTargets?: Array<{ role: string; target: string }>;
+  /** Reviews that ran and came back with nothing. */
+  failedTargets?: Array<{ role: string; target: string; reason: string }>;
 }
 
 /**
@@ -747,6 +767,16 @@ export interface ResumeSessionState {
    * talking to. Rendered into the task layer, where compaction cannot reach it.
    */
   suppliedFacts?: SuppliedFact[];
+  /**
+   * What was attempted and did not produce a reading.
+   *
+   * On the session because the product reads the session and never the trace:
+   * the trace is a development instrument that is absent in production, so a
+   * failure that has to reach a report has to be written down here when it
+   * happens. Cleared with the diagnoses when a new document replaces the old
+   * one — a refusal is about the document it was asked against.
+   */
+  reviewAttempts?: Array<{ role: string; target: string; outcome: 'rejected' | 'failed'; reason: string }>;
   [key: string]: unknown;
 }
 
