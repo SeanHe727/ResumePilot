@@ -18,3 +18,8 @@ tmp/
 
 # Reports the export command writes where it was run from.
 resume-review-*.md
+
+# A literal `:memory:` directory: `join(':memory:', 'audit.db')` treats sqlite's
+# in-memory name as a path, so a test that asked for no file on disk gets seven.
+# Twenty-five megabytes of generated databases that change on every test run.
+:memory:/

@@ -208,10 +208,14 @@ describe('what is allowed out', () => {
     // provider, and search engines log what they are asked.
     const { provider, seen } = fakeProvider([HIT]);
 
+    // Invented details. A real address and a real number were here, in a test
+    // bound for a public repository, and the assertion wanted only the shape of
+    // them: the guard refuses a query because it contains a contact detail, not
+    // because it contains anybody in particular.
     for (const q of [
-      'is chenh727@uw.edu a credible contact',
-      'who is +1 (563) 772 9355',
-      'github.com/SeanHe727 project credibility',
+      'is first.last@school.edu a credible contact',
+      'who is +1 (555) 010 0100',
+      'github.com/someone project credibility',
     ]) {
       const result = await webSearchTool.execute({ query: q }, ctxWith(provider));
       expect(result.success, q).toBe(false);

@@ -65,7 +65,7 @@ describe('recognising a date range', () => {
 });
 
 describe('recognising a way to reach someone', () => {
-  it.each(['+1 (555) 010-2468', '+86 138 0000 0000', '(563) 772 9355', '555-010-2468', '13800000000'])(
+  it.each(['+1 (555) 010-2468', '+86 138 0000 0000', '(555) 013-0100', '555-010-2468', '13800000000'])(
     'reads %s as a phone number',
     (text) => expect(PHONE.test(text)).toBe(true),
   );
@@ -81,7 +81,10 @@ describe('recognising a way to reach someone', () => {
     'Kendall rank correlation of 0.89',
   ])('reads no phone number in %s', (text) => expect(PHONE.test(text)).toBe(false));
 
-  it.each(['jordan.lee@example.com', 'chenh727@uw.edu', 'a.b+tag@sub.domain.co.uk'])(
+  // Shapes, not addresses. A real one was here — a university address that would
+  // have gone into a public repository and been scraped out of it — and the test
+  // wanted nothing from it that `first.last@school.edu` does not give.
+  it.each(['jordan.lee@example.com', 'first.last@school.edu', 'a.b+tag@sub.domain.co.uk'])(
     'reads %s as an address',
     (text) => expect(EMAIL.test(text)).toBe(true),
   );
@@ -99,7 +102,7 @@ describe('taking a way to reach someone out of a sentence', () => {
   it.each([
     ['+1 (555) 010-2468', '[phone]'],
     ['+86 138 0000 0000', '[phone]'],
-    ['(563) 772 9355', '[phone]'],
+    ['(555) 013-0100', '[phone]'],
     ['555-010-2468', '[phone]'],
     ['13800000000', '[phone]'],
   ])('takes %s out', (text, expected) => {

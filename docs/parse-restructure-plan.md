@@ -725,7 +725,7 @@ npx tsx tmp/role-probe.mts <同上>                # 段内每行的 x/缩进/�
 npx tsx tmp/label-probe.mts <同上>               # B2 的标注,带置信度与剥好的正文
 ```
 
-真实简历的路径记录在 `data/sessions.db` 的 `source_path` 列;`/tmp` 下那几份已被系统清掉,还在的是 `~/Downloads/sean_0908.pdf`。`tmp/` 已被 gitignore。
+真实简历的路径记录在 `data/sessions.db` 的 `source_path` 列;`/tmp` 下那几份已被系统清掉,还在的是下载目录里那份真实简历。`tmp/` 已被 gitignore。
 
 ## A1 要移动的基线(实测)
 

@@ -232,7 +232,7 @@ no substance      2 — Request aborted
 
 ## 解析:项目条目被日期行切开(2026-09-18,实测)
 
-`/Users/sean/Downloads/sean_0908.pdf` 的 PROJECTS 段,每个项目解析成了两条:
+真实简历(未脱敏,不在仓库里)的 PROJECTS 段,每个项目解析成了两条:
 
 ```
 [s3:e0] 0 条  ResumePilot | Owner | TypeScript, Agent Runtime, Multi-Agent Systems

@@ -55,7 +55,7 @@ review_content   {"entryId":"Research-Agent Evaluation Framework","understanding
 
 要说准确一点：审计库注释里那句「两边各截 200 字」讲的是 `execution_records` 的结果摘要，`permission_audit.tool_args` **是另一列，根本没走脱敏**。所以「审计已脱敏」这个说法一直只对了一半，包括此前提交信息里的表述。
 
-这一条排在最前面，因为它是唯一一条涉及**已经落盘的个人数据**的：`rewrite_bullet` 会带简历原文，`parse_resume` 会带文件名（真实那份就叫 `sean_0908.pdf`）。接一个 PII 安全的脱敏器，或者不再保存完整权限参数。
+这一条排在最前面，因为它是唯一一条涉及**已经落盘的个人数据**的：`rewrite_bullet` 会带简历原文，`parse_resume` 会带文件名（真实简历的文件名通常就是候选人的名字）。接一个 PII 安全的脱敏器，或者不再保存完整权限参数。
 
 ## 第二部分：实测暴露的问题
 
