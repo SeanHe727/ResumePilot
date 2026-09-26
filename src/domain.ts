@@ -700,7 +700,28 @@ export interface FullReportPoint {
   cost?: string;
 }
 
+/**
+ * Findings the selection put together, by id.
+ *
+ * The selection marks findings; it does not write advice of its own. It used to
+ * return one sentence per item, and a sentence can name a range: "Tighten
+ * s2:e0:b0-b3 by leading with the action and result" folded a line the wording
+ * reader had called outcome-first into advice meant for two others, and the
+ * writer then turned it into advice about that line alone. The lines a group is
+ * about are now worked out here from its findings.
+ */
+export interface PlanGroup {
+  kind: 'immediate' | 'shortTerm' | 'longTerm';
+  findingIds: string[];
+  /** The lines its findings are about, derived from them rather than written. */
+  targets: string[];
+  /** What the findings ask for together, in one line, naming no lines. */
+  note: string;
+}
+
 export interface ImprovementPlan {
+  /** What was chosen, as the selection marked it. Absent on reports written before. */
+  groups?: PlanGroup[];
   /** Mechanical fixes the user can apply right now. */
   immediate: string[];
   /** Rewrites that need the user to dig up real numbers. */

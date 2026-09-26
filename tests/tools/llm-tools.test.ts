@@ -612,7 +612,7 @@ describe('generate_report: the improvement plan', () => {
     }],
   }];
 
-  const PLAN = JSON.stringify({ immediate: ['drop "Responsible for"'], shortTerm: [], longTerm: [] });
+  const PLAN = JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], note: 'drop "Responsible for"' }] });
 
   /** Replies in the order given, so a test can script a retry. */
   function scriptedCtx(replies: ParsedResponse[]) {
@@ -850,10 +850,8 @@ describe('generate_report: the improvement plan', () => {
     const withSetAside: ParsedResponse = {
       ...answered,
       content: JSON.stringify({
-        immediate: ['reorder'],
-        shortTerm: [],
-        longTerm: [],
-        setAside: [{ what: 'the batch size', because: 'the page has no room left' }],
+        chosen: [],
+        setAside: [{ findings: ['c1'], because: 'the page has no room left' }],
       }),
     };
     const { ctx } = scriptedCtx([withSetAside]);
@@ -861,7 +859,10 @@ describe('generate_report: the improvement plan', () => {
     const result = await generateReportTool.execute({} as never, ctx);
 
     expect(result.data?.improvementPlan.setAside).toEqual([
-      { what: 'the batch size', because: 'the page has no room left' },
+      // In the reader's own words, about the line it named.
+      { what: 's1:e0:b0: "Responsible for" states a duty, not an outcome', because: 'the page has no room left' },
+      // Not marked at all, and said so rather than dropped.
+      { what: expect.stringContaining('opens with a duty'), because: 'not weighed by the selection' },
     ]);
   });
 
@@ -876,7 +877,7 @@ describe('generate_report: the improvement plan', () => {
     // Two for the plan — the truncated answer and its retry — then one more
     // for the write-up, which is a separate call on purpose.
     expect(calls()).toBe(3);
-    expect(result.data?.improvementPlan.immediate).toEqual(['drop "Responsible for"']);
+    expect(result.data?.improvementPlan.immediate).toEqual(['s1:e0:b0: drop "Responsible for"']);
   });
 
   it('does not retry an answer that merely ran long', async () => {

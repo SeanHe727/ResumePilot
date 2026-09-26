@@ -7,6 +7,7 @@ import type {
   FormatDiagnosis,
   ImprovementPlan,
   JdMatch,
+  PlanGroup,
   NarrativeAssessment,
   ResumeDocument,
   ResumeEntry,
@@ -19,7 +20,7 @@ import type {
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
 import { currentReadings } from './versions.js';
-import { writeFullReport } from './write-report.js';
+import { aliasFindings, writeFullReport } from './write-report.js';
 
 /**
  * What the reviews left behind, gathered off the session.
@@ -252,15 +253,86 @@ function supplied(state: ResumeSessionState): string {
 }
 
 /**
- * A finding as the plan model has always seen it.
- *
- * Byte for byte what this sent before findings had ids: the plan model's
- * contract is not what changed here, and changing its input while changing
- * what depends on it would make any difference in the output unattributable.
+ * A finding as the selection sees it: its short name first, because the name is
+ * what the selection answers with.
  */
-function asLine(finding: SourceFinding): string {
+function asLine(short: string, finding: SourceFinding): string {
   const cost = finding.costWords === undefined ? '' : `, ~${finding.costWords} words`;
-  return `- [${finding.target}${cost}] ${finding.what}`;
+  return `- ${short} [${finding.target}${cost}] ${finding.what}`;
+}
+
+/** The line a finding is about, without the reader's suffix. */
+function lineOf(finding: SourceFinding): string {
+  return finding.target.replace(/, wording$/, '');
+}
+
+const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
+
+/**
+ * The selection's marks, checked and turned into a plan.
+ *
+ * Each finding is placed once — the first mark wins — and a name that was not
+ * offered is dropped. A finding the selection did not mark at all is set aside
+ * with that said, because nothing is meant to disappear. The lines a group is
+ * about come from its findings; the selection never writes them.
+ */
+export function planFromMarks(
+  parsed: Record<string, unknown> | null,
+  findings: readonly SourceFinding[],
+): { plan: ImprovementPlan; unknown: string[] } {
+  const { alias } = aliasFindings(findings);
+  const placed = new Set<string>();
+  const unknown: string[] = [];
+  const take = (raw: unknown): SourceFinding[] =>
+    (Array.isArray(raw) ? raw : []).flatMap((name) => {
+      const finding = typeof name === 'string' ? alias.get(name.trim()) : undefined;
+      if (!finding) {
+        unknown.push(String(name));
+        return [];
+      }
+      if (placed.has(finding.id)) return [];
+      placed.add(finding.id);
+      return [finding];
+    });
+  const targetsOf = (group: SourceFinding[]): string[] => [...new Set(group.map(lineOf))];
+
+  const groups: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
+    const mark = raw as Record<string, unknown> | null;
+    const kind = KINDS.find((k) => k === mark?.kind);
+    const note = typeof mark?.note === 'string' ? mark.note.trim() : '';
+    const members = take(mark?.findings);
+    if (!kind || !note || members.length === 0) return [];
+    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members), note }];
+  });
+
+  const setAsideMarks = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
+    const mark = raw as Record<string, unknown> | null;
+    const members = take(mark?.findings);
+    if (members.length === 0) return [];
+    return [{ members, because: typeof mark?.because === 'string' ? mark.because.trim() : '' }];
+  });
+  const unmarked = findings.filter((f) => !placed.has(f.id));
+  const setAside = [
+    ...setAsideMarks,
+    ...(unmarked.length > 0 ? unmarked.map((f) => ({ members: [f], because: 'not weighed by the selection' })) : []),
+  ].map(({ members, because }) => ({
+    what:
+      `${targetsOf(members).join(', ')}: ${members[0]!.what}` +
+      (members.length > 1 ? ` (and ${members.length - 1} more like it)` : ''),
+    because,
+  }));
+
+  const line = (group: PlanGroup): string => `${group.targets.join(', ')}: ${group.note}`;
+  return {
+    plan: {
+      groups,
+      immediate: groups.filter((g) => g.kind === 'immediate').map(line),
+      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map(line),
+      longTerm: groups.filter((g) => g.kind === 'longTerm').map(line),
+      ...(setAside.length > 0 ? { setAside } : {}),
+    },
+    unknown,
+  };
 }
 
 /**
@@ -292,15 +364,17 @@ async function buildImprovementPlan(
     messages: [
       {
         role: 'user',
-        content: `${room}${supplied(state)}\n\nEverything the review found:\n${findings.map(asLine).join('\n')}
+        content: `${room}${supplied(state)}\n\nEverything the review found:\n${aliasFindings(findings)
+          .named.map(({ short, finding }) => asLine(short, finding))
+          .join('\n')}
 
-Return JSON of exactly this shape:
+Name findings only by the short names above. Return JSON of exactly this shape:
 
 {
-  "immediate": ["fixes the candidate can apply right now, without looking anything up"],
-  "shortTerm": ["rewrites that need the candidate to dig up real figures"],
-  "longTerm": ["gaps only new experience can close"],
-  "setAside": [{ "what": "the finding you left out", "because": "one line on why" }]
+  "chosen": [
+    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "note": "what these findings ask for together, in one line, naming no lines" }
+  ],
+  "setAside": [{ "findings": ["c7"], "because": "one line on why" }]
 }`,
       },
     ],
@@ -319,12 +393,7 @@ Return JSON of exactly this shape:
   }
 
   const parsed = parseJsonObject(response.content ?? '');
-  const plan: ImprovementPlan = {
-    immediate: stringArray(parsed?.immediate),
-    shortTerm: stringArray(parsed?.shortTerm),
-    longTerm: stringArray(parsed?.longTerm),
-    ...(setAside(parsed?.setAside).length > 0 ? { setAside: setAside(parsed?.setAside) } : {}),
-  };
+  const { plan, unknown } = planFromMarks(parsed, findings);
 
   // Which findings this weighed. The plan model is shown the lines without
   // ids, deliberately, so this is the only place the set it chose from is
@@ -334,7 +403,7 @@ Return JSON of exactly this shape:
     phase: 'decision',
     purpose: 'plan chosen',
     input: { fromFindingIds: findings.map((f) => f.id) },
-    output: plan,
+    output: { ...plan, ...(unknown.length > 0 ? { unknownNames: unknown } : {}) },
   }));
 
   return plan;
@@ -368,21 +437,6 @@ function topRecurring(items: string[], limit: number): string[] {
     .sort((a, b) => b.count - a.count)
     .slice(0, limit)
     .map((c) => c.text);
-}
-
-function stringArray(raw: unknown): string[] {
-  return Array.isArray(raw) ? raw.filter((s): s is string => typeof s === 'string') : [];
-}
-
-/** What the plan chose not to spend the page on, and why. */
-function setAside(raw: unknown): NonNullable<ImprovementPlan['setAside']> {
-  if (!Array.isArray(raw)) return [];
-
-  return raw.flatMap((item) => {
-    const record = item as Record<string, unknown> | null;
-    const what = typeof record?.what === 'string' ? record.what.trim() : '';
-    return what ? [{ what, because: String(record?.because ?? '') }] : [];
-  });
 }
 
 /**
