@@ -1,0 +1,46 @@
+Morgan Patel
++1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel
+EDUCATION
+Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026
+Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020
+EXPERIENCE
+Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
+- Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4
+Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
+- Cut the signal’s daily turnover from 34% to 21% with a cost-aware position smoother, keeping
+90% of gross returns and lowering estimated slippage by a third.
+- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo
+period, so no look-ahead information leaked into training.
+- Wrote a feature store for 120 microstructure features with point-in-time joins, which the
+research team reused in two later signal projects.
+- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who
+approved a small live allocation for the next quarter.
+- Documented the backtest assumptions, transaction-cost model and known failure regimes in the
+desk’s research wiki for future interns.
+Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
+- Built the lab’s simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo
+study from 3 days to 5 hours and making runs reproducible by seed.
+- Derived a variance bound for a sparse regression estimator that tightens the previous bound
+by a log factor; it is now Section 3 of a paper under review at JASA.
+- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets
+and earning a 4.8/5 teaching rating.
+- Released an open-source R package for high-dimensional covariance estimation with shrinkage
+and factor models, downloaded 3,000 times in its first year.
+PROJECTS
+Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
+- Beat a HAR-RV baseline’s out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal
+convolutional model trained on realized-volatility features.
+- Tested significance with Diebold-Mariano tests across the 30 indices; the forecast gain held
+at the 5% level on 24 of them and in both crisis periods.
+- Wrote up the method, robustness checks and results as a 12-page working paper, which was
+presented at the department’s financial econometrics seminar.
+Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
+- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features,
+finishing in the top 2% of the private leaderboard.
+- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between
+local validation and leaderboard scores.
+- Wrote the team’s feature-selection script using permutation importance, trimming 900
+candidate features to 300 without losing validation score.
+SKILLS
+Programming: Python, R, SQL, C++
+Methods: time-series econometrics, Bayesian inference, gradient boosting, PyTorch

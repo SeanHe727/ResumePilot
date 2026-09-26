@@ -1,0 +1,120 @@
+{
+  "file": "tmp/bench/tests/b1-pm/out/D.md",
+  "recall": 9,
+  "found": [
+    "D4",
+    "D9",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D17",
+    "D20"
+  ],
+  "coverage": false,
+  "suggestions": 18,
+  "words": 1300,
+  "quotes": 4,
+  "grounded": 4,
+  "rewrites": 22,
+  "inventedNumbers": [
+    "50"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3608,
+    "completion_tokens": 9787,
+    "total_tokens": 13395,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8804
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3608
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "The dispute self-service work appears twice"
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Coordinated quarterly S&OP reviews across sales, finance, and operations, preparing forecast materials and aligning stakeholders on supply and capacity plans."
+      },
+      {
+        "id": "D11",
+        "found": true,
+        "evidence": "Grew weekly active users from 1,000 to 900, a 90% increase is mathematically incorrect."
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "The merchant onboarding bullet appears to be copied from Harbor Payments and should be removed."
+      },
+      {
+        "id": "D13",
+        "found": true,
+        "evidence": "unusually broad for an APM intern"
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "May 2024 - Jan 2024 is an invalid date range"
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "This says nothing specific."
+      },
+      {
+        "id": "D17",
+        "found": true,
+        "evidence": "It contains too many responsibilities and no credible metrics. Split it into one or two focused bullets"
+      },
+      {
+        "id": "D20",
+        "found": true,
+        "evidence": "Fix the spelling errors and organize the skills around product roles."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 18,
+    "rewrites": [
+      "Coordinated work across product, engineering, risk, and support teams to improve merchant onboarding and dispute resolution.",
+      "Supported product initiatives across a 40-person product and engineering organization, tracking delivery milestones and success metrics.",
+      "Analyzed payments-business performance and prepared recommendations for product and operational improvements.",
+      "Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 days across 2,300 new merchants in the pilot region.",
+      "Increased checkout conversion from 61% to 66% by testing a one-page flow against the existing three-step experience across 40,000 sessions, then scaling the winning experience to all merchants.",
+      "Defined requirements, user flows, and success metrics for dispute self-service, aligning engineering, risk, and support and enabling delivery two weeks ahead of schedule.",
+      "Led weekly product triage with engineering and support, resolving 140 onboarding tickets and reducing the open-ticket queue by 50% over the summer.",
+      "Rebuilt weekly carrier scorecards used by six regional managers to renegotiate contracts, reducing late deliveries from 11% to 7% over two quarters.",
+      "Reduced warehouse picking errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations, preparing forecast materials and aligning stakeholders on supply and capacity plans.",
+      "Led rollout of a route-planning tool across three depots, coordinating vendor implementation, user training, and SOP updates. Add the actual result—for example, hours saved, cost reduction, utilization improvement, or planning-time reduction.",
+      "Led rollout of a route-planning tool across three depots, coordinating vendor negotiations, training, and SOP updates; reduced route-planning time by [X%] and saved [X driver hours/month].",
+      "Mentored two new analysts and supported finance audits by preparing operational reports and validating site-level data.",
+      "Launched a surplus-food pickup app for 3,100 students across two dining halls, redistributing 9 tonnes of food in its first year.",
+      "Increased weekly active users from 1,000 to [correct number] through targeted reminders and a redesigned home screen.",
+      "Designed a volunteer shift-management system that filled 95% of weekly pickup slots, eliminating the need for dining-hall staff to cover volunteer gaps.",
+      "Campus Food Rescue App | Product Lead | Figma, SQL, [technology] | Oct 2023–Present",
+      "Mapped patient intake workflows at four clinics with front-desk staff and recommended reducing the intake form from five pages to two while preserving required fields.",
+      "Presented process-improvement recommendations to hospital stakeholders, incorporating feedback from front-desk, clinical, and administrative teams.",
+      "Product: Product discovery, roadmap planning, user interviews, PRDs, requirements gathering, user stories, A/B testing, experiment design, stakeholder management, SQL\nTools: Jira, Figma, Amplitude, Excel\nTechnical: Python, machine learning, Kubernetes",
+      "RILEY CHEN\n+1 (555) 010-7731 | riley.chen@example.com\nlinkedin.com/in/riley-chen | example.com",
+      "MBA candidate and product professional with experience improving onboarding, checkout conversion, and self-service workflows. Delivered measurable results across payments, logistics, and consumer applications through experimentation, process design, and cross-functional execution."
+    ],
+    "falsePositives": []
+  }
+}

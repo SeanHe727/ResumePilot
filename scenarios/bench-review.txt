@@ -1,0 +1,3 @@
+# Benchmark arm A: one review request, then the report.
+Here is my resume: {resume}. Please review my resume and tell me what to change.
+/report

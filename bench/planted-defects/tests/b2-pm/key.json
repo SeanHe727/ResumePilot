@@ -1,0 +1,62 @@
+[
+  {
+    "id": "D2",
+    "type": "D2",
+    "line": "Improved conversion by 35% by testing a new checkout flow and shipping it to all merchants.",
+    "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
+  },
+  {
+    "id": "D3",
+    "type": "D3",
+    "line": "Single-handedly defined the product vision for the entire company and set the direction every product team followed.",
+    "defect": "Implausible overclaim for the role's level: sole credit for something company-wide."
+  },
+  {
+    "id": "D7",
+    "type": "D7",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role (Crestline Logistics) is listed before the newer one (Harbor Payments)."
+  },
+  {
+    "id": "D9",
+    "type": "D9",
+    "line": "Coordinates the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "defect": "Present tense in a role that has already ended."
+  },
+  {
+    "id": "D10",
+    "type": "D10",
+    "line": "Jun 2018 graduation to Nov 2019",
+    "defect": "An unexplained gap between graduating (Jun 2018) and the first role (starting Nov 2019)."
+  },
+  {
+    "id": "D12",
+    "type": "D12",
+    "line": "Redesigned merchant onboarding around a single verification step and cut median time to first payment from 9 days to 4 across 2,300 new merchants.",
+    "defect": "The same achievement is claimed in two different entries; it also appears under Harbor Payments."
+  },
+  {
+    "id": "D13",
+    "type": "D13",
+    "line": "Managed a team of 40 people across product and engineering and owned the company's P&L for the payments business.",
+    "defect": "Responsibilities far beyond the job title (Associate Product Manager Intern)."
+  },
+  {
+    "id": "D14",
+    "type": "D14",
+    "line": "MBA Consulting Practicum | May 2024 - Jan 2024",
+    "defect": "Impossible dates: the end date is before the start date (May 2024 - Jan 2024)."
+  },
+  {
+    "id": "D19",
+    "type": "D19",
+    "line": "Age: 29 | Marital status: Married | Hobbies: watching TV, shopping",
+    "defect": "Irrelevant personal information (age, marital status, hobbies)."
+  },
+  {
+    "id": "D20",
+    "type": "D20",
+    "line": "Product: roadmaping, A/B testing, user interveiws, PRDs, SQL / Tools: Jira, Figma, Amplitude, Excel",
+    "defect": "Spelling mistakes in the skills section."
+  }
+]

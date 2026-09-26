@@ -1,0 +1,130 @@
+{
+  "id": "ce",
+  "job": "machine learning / computer engineering",
+  "name": "Jordan Lee",
+  "contact": "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+  "personal": "Age: 26 | Marital status: Single | Hobbies: watching TV, sleeping in",
+  "education": [
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022"
+  ],
+  "graduated": "Jun 2022",
+  "exp": [
+    {
+      "head": "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA",
+      "dates": "Oct 2024 - May 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch."
+        },
+        {
+          "slot": "D2",
+          "clean": "Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+          "defect": "Improved model performance by 35% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, keeping every finding traceable to its source data."
+        },
+        {
+          "slot": "D4",
+          "clean": "Applied GRPO with grouped tool-use rollouts and a composite reward, cutting end-to-end latency 5% versus the SFT baseline with no loss in diagnostic accuracy.",
+          "defect": "Created a routing component that restricts the specialist agents and the reviewer to the signals relevant to them, so that every finding can be traced back to its source data."
+        },
+        {
+          "slot": "D3",
+          "clean": "Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency before each release.",
+          "defect": "Single-handedly built the company's entire ML platform, which is now used by every team across engineering, operations and research."
+        },
+        {
+          "slot": "D13",
+          "clean": "Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.",
+          "defect": "Managed a team of 12 engineers across two offices and set the company's AI strategy for the next fiscal year."
+        }
+      ]
+    },
+    {
+      "head": "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country",
+      "dates": "Aug 2022 - Jul 2024",
+      "datesD10": "Oct 2023 - Jul 2024",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Rebuilt the diagnostics service's monitoring dashboards around per-sensor error budgets, cutting mean time to detect incidents from 40 to 12 minutes.",
+          "defect": "Responsible for the monitoring dashboards of the diagnostics service and for supporting the on-call team with weekly reports."
+        },
+        {
+          "slot": "D6",
+          "clean": "Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.",
+          "defect": "I worked on improving the latency of our API and I also wrote tests for it, which I think made the service a lot faster for users."
+        },
+        {
+          "slot": "D9",
+          "clean": "Maintained the CI pipeline for the perception team's model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.",
+          "defect": "Builds and maintains the CI pipeline for the perception team's model releases and adds automated regression checks to every build."
+        },
+        {
+          "slot": "D17",
+          "clean": "Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+          "defect": "Migrated 30 robot-fleet services from cron jobs to an event queue while also rewriting the logging library, onboarding two new hires, maintaining the internal wiki, reviewing pull requests for three other teams, supporting on-call rotations on weekends, presenting quarterly updates to leadership, and evaluating three vendor monitoring tools, which together removed nightly backlogs, improved developer satisfaction scores, and made the platform noticeably more stable for everyone involved in operations across the whole organization."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems",
+      "dates": "Aug 2025 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Raised planted-defect localization from 82% to 94% by dispatching tasks to role-specialized sub-agents with isolated prompts, toolsets and contexts.",
+          "defect": "Leveraged cutting-edge AI synergies and next-generation agentic paradigms to drive innovation and unlock value across the organization."
+        },
+        {
+          "slot": "D11",
+          "clean": "Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+          "defect": "Cut average response time from 800 ms to 900 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers."
+        },
+        {
+          "slot": "D18",
+          "clean": "Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under fan-out load.",
+          "defect": "Led the Project Falcon migration to NGX on the KRT stack, coordinating the cutover of the Orion and Vega pipelines."
+        }
+      ]
+    },
+    {
+      "head": "Research-Agent Evaluation Framework | Contributor | LLM Evaluation",
+      "dates": "Feb 2025 - Jul 2025",
+      "datesD14": "Jul 2025 - Feb 2025",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
+          "defect": "Worked with various stakeholders across multiple projects to support a range of initiatives and help drive them forward."
+        },
+        {
+          "slot": "D16",
+          "clean": "Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+          "defect": "Was involved in the process of helping to support the evaluation of the reports that were being produced by the pipeline at the time."
+        },
+        {
+          "slot": "D12",
+          "clean": "Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+          "defect": "Built a diagnostics triage branch that screens 800+ sensor signals per case with ML-extracted features and cut the pending-case backlog by 68% after launch."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Programming: Python, TypeScript, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation"
+  ],
+  "skillsD20": [
+    "Programming: Pyhton, TypeScirpt, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation"
+  ],
+  "skillsD8": "Infrastructure: Rust, Kubernetes, Apache Spark",
+  "unevidenced": "Rust, Kubernetes, Apache Spark"
+}

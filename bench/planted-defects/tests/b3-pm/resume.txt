@@ -1,0 +1,51 @@
+Riley Chen
++1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen
+EDUCATION
+Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025
+Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018
+EXPERIENCE
+Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
+- Redesigned merchant onboarding around a single verification step, cutting median time to
+first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
+- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step
+flow across 40,000 sessions, then shipping it to all merchants.
+- Wrote the requirements and success metrics for dispute self-service, aligning engineering,
+risk and support; the team shipped it two weeks ahead of plan.
+- Drafted the specification and target metrics for the self-service dispute feature with
+engineering, risk and support, and it was delivered earlier than scheduled.
+- Single-handedly defined the product vision for the entire company and set the direction
+every product team followed.
+- Presented the onboarding results and a follow-up roadmap to the payments leadership team,
+who funded the rollout to two more regions.
+Crestline Logistics | Operations Analyst | Lake City, USA | Nov 2019 - Aug 2023
+- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts,
+cutting late deliveries from 11% to 7% in two quarters.
+- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor
+supervisors and retraining 45 pickers on the new layout.
+- Coordinated the quarterly S&OP review across sales, finance and operations for 12
+consecutive quarters, cutting forecast error from 18% to 11%.
+- Led the rollout of a route-planning tool to 3 depots while also organizing training
+sessions, rewriting the standard operating procedures, handling vendor negotiations,
+preparing monthly reports for the regional director, mentoring two new analysts, supporting
+the finance team during audits, and representing operations in several cross-functional
+committees, which together saved driver hours, improved morale, and made daily operations
+smoother for everyone across the company.
+PROJECTS
+Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
+- Leveraged synergistic stakeholder alignment and best-in-class frameworks to drive
+transformational value creation across the ecosystem.
+- Grew weekly active users from 1,000 to 900, a 90% increase, through targeted reminders and a
+redesigned home screen.
+- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week
+and removing the need for staff to cover gaps.
+MBA Consulting Practicum | Team Lead | Regional Hospital Network | May 2024 - Jan 2024
+- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the
+client funded a pilot based on the model.
+- Was involved in the process of helping to support the review of the intake procedures that
+were being used by the clinics.
+- Redesigned merchant onboarding around a single verification step and cut median time to
+first payment from 9 days to 4 across 2,300 new merchants.
+SKILLS
+Product: roadmapping, A/B testing, user interviews, PRDs, SQL
+Tools: Jira, Figma, Amplitude, Excel
+Technical: Python, Kubernetes, machine learning

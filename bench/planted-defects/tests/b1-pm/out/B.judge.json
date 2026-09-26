@@ -1,0 +1,119 @@
+{
+  "file": "tmp/bench/tests/b1-pm/out/B.md",
+  "recall": 9,
+  "found": [
+    "D4",
+    "D9",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D17",
+    "D20"
+  ],
+  "coverage": false,
+  "suggestions": 26,
+  "words": 1150,
+  "quotes": 6,
+  "grounded": 6,
+  "rewrites": 21,
+  "inventedNumbers": [
+    "50"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3404,
+    "completion_tokens": 14763,
+    "total_tokens": 18167,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13703
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3404
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "The dispute self-service accomplishment appears twice: “Wrote the requirements and success metrics…” “Drafted the specification and target metrics…” Keep only one."
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "“Coordinates,” “prepares” — present tense. Use: Past tense for completed roles."
+      },
+      {
+        "id": "D11",
+        "found": true,
+        "evidence": "“Grew weekly active users from 1,000 to 900, a 90% increase” is mathematically incorrect."
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "The merchant onboarding accomplishment under the hospital consulting practicum clearly belongs under Harbor Payments. Remove it from the project section."
+      },
+      {
+        "id": "D13",
+        "found": true,
+        "evidence": "It is unusually broad for an Associate Product Manager Intern and conflicts with the rest of the role."
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "“May 2024 - Jan 2024” is impossible. It may be May 2024 - Jan 2025."
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "Replace the vague first bullet: “Collaborated with various stakeholders on multiple initiatives to deliver value and support the team’s broader goals.”"
+      },
+      {
+        "id": "D17",
+        "found": true,
+        "evidence": "This sentence contains too many responsibilities and no clear outcome."
+      },
+      {
+        "id": "D20",
+        "found": true,
+        "evidence": "Fix the spelling errors: roadmaping → roadmapping, interveiws → interviews"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 26,
+    "rewrites": [
+      "May 2024 - Jan 2025",
+      "Expected Jun 2025.",
+      "Coordinated work across a 40-person product and engineering organization and contributed to payments-business planning.",
+      "Led rollout of a route-planning tool across 3 depots; trained operations teams and rewrote SOPs to support adoption.",
+      "- Negotiated with the vendor and tracked implementation metrics, reducing driver hours by **X%** and improving route adherence by **Y%**.",
+      "Coordinate the quarterly S&OP review across sales, finance, and operations; prepare the forecast pack for each meeting.",
+      "Coordinated the quarterly S&OP review across sales, finance, and operations and prepared the forecast pack for each meeting.",
+      "- Redesigned merchant onboarding around a single verification step, reducing median time to first payment from **9 days to 4 days** across **2,300 pilot merchants**.",
+      "- Increased checkout conversion from **61% to 66%** by testing and launching a one-page flow across **40,000 sessions**.",
+      "- Defined requirements and success metrics for a dispute self-service feature, aligning engineering, risk, and support; delivered the feature **two weeks ahead of schedule**.",
+      "- Led weekly engineering-support triage, closing **140 onboarding tickets** and reducing the open-ticket queue by **50%**.",
+      "- Rebuilt carrier scorecards used by **6 regional managers** in contract negotiations, reducing late deliveries from **11% to 7%** in two quarters.",
+      "- Reduced warehouse picking errors by **30%** across two sites by redesigning slotting rules and retraining **45 pickers**.",
+      "- Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared executive forecast materials.",
+      "- Led rollout of a route-planning tool across **3 depots**, including vendor coordination, training, and SOP redesign.",
+      "- Mentored **2 analysts** and supported finance during audit activities.",
+      "- Launched a surplus-food pickup app for **3,100 students** across two dining halls, redistributing **9 tonnes of food** in its first year.",
+      "- Increased weekly active users from **[correct starting number] to [correct ending number]** through targeted reminders and a redesigned home screen.",
+      "- Created a volunteer shift system with two dining halls, filling **95% of pickup slots weekly** and eliminating staff coverage gaps.",
+      "- Led process-mapping workshops with front-desk staff across **4 clinics**, identifying intake bottlenecks and reducing the recommended patient intake form from **5 pages to 2** while preserving required fields.",
+      "**Product:** Product strategy, roadmapping, A/B testing, user interviews, PRDs, SQL  \n**Tools:** Jira, Figma, Amplitude, Excel  \n**Technical:** Python, machine learning, Kubernetes"
+    ],
+    "falsePositives": []
+  }
+}

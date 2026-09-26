@@ -1,0 +1,109 @@
+{
+  "file": "tmp/bench/out/B-2.md",
+  "recall": 8,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D9"
+  ],
+  "coverage": false,
+  "suggestions": 15,
+  "words": 1199,
+  "quotes": 12,
+  "grounded": 6,
+  "rewrites": 17,
+  "inventedNumbers": [],
+  "judgeUsage": {
+    "prompt_tokens": 3391,
+    "completion_tokens": 14559,
+    "total_tokens": 17950,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13476
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3391
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "Avoid phrases such as: ... 'Responsible for...' ... They either sound passive, generic, exaggerated, or lack enough context."
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "What does 'model performance' mean—accuracy, F1, precision, recall, latency? What was the baseline and evaluation set?"
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Unless that is literally accurate, revise it to describe your actual ownership and scope."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "These two Mobility bullets describe the same work: ... Keep the quantified version and delete the second one."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Delete this bullet entirely: > Leveraged cutting-edge AI synergies... It is generic, contains no evidence"
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Avoid phrases such as: ... 'I worked on...' ... Lead with an action and explain the technical work and measurable result."
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Your roles should be reverse chronological... Currently, the older role appears first."
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "main issues are ordering, duplicated claims, inconsistent tense, vague wording"
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 15,
+    "rewrites": [
+      "Improved diagnostic claim correctness by 7 percentage points and tool-use accuracy by 8 percentage points on a 400-case held-out evaluation set...",
+      "Built an industrial-diagnostics branch of an inspection system that automated triage of 800+ sensor signals per case using ML-extracted feature schemas, evidence-grounded review, and explicit abstention on low-confidence findings; reduced the pending-case backlog by 68% after launch.",
+      "Designed a role-aware multi-agent routing layer for 3 specialist agents and 1 independent reviewer, restricting each agent to in-scope signals and preserving traceability to source data.",
+      "Fine-tuned a domain-specialist adapter on validated tool-use trajectories with assistant-only loss masking, improving claim correctness by 7%, evidence-citation quality by 9%, and tool-use accuracy by 8% versus the base model on held-out diagnostic cases.",
+      "Built the core ML platform used by [X teams / Y engineers], including [training, evaluation, deployment, monitoring, or data pipeline components].",
+      "Built and maintained CI pipelines for the perception team’s model releases, automating [tests, validation, packaging, or deployment].",
+      "Improved diagnostics API latency by [X% / X ms] through [profiling, query optimization, caching, or architectural changes] and added regression tests covering [scope].",
+      "Developed monitoring dashboards for the diagnostics service, exposing [latency, error rates, throughput, or model-quality metrics].",
+      "Improved [specific metric] by 35% through [technical approach].",
+      "Improved planted-defect localization from 82% to 94% by replacing fixed-perspective analysis with an agent-as-tool architecture that dynamically dispatched tasks to role-specialized sub-agents with isolated prompts, tools, and contexts.",
+      "Hardened a multi-agent fan-out/fan-in runtime against nested-pool deadlocks, incomplete streamed-response reuse, and tool-result loss during context compaction by separating concurrency pools, containing branch-level faults, and gating cache writes on explicit stream completion.",
+      "Kept model-bound context below 10K tokens during a 100-turn stress test while raw conversation history grew 100×, using independently budgeted context layers, staged compaction, SQLite checkpoints, and hybrid FTS5/vector retrieval.",
+      "Validated evaluator fidelity with a Kendall rank correlation of 0.89 and an 8.5-percentage-point mean absolute deviation between injected and measured degradation across 400+ report-level trials.",
+      "Evaluated robustness by progressively removing citations, sources, sections, and factual claims in 10-percentage-point increments.",
+      "Identified 3 structural defects in a multi-agent research pipeline across stability, sourcing, and parameter handling using layered instrumentation and systematic error attribution; mapped each failure to the responsible module to guide targeted fixes.",
+      "Machine learning engineer and computer engineering graduate student building reliable LLM agents, evaluation systems, and ML infrastructure. Experienced in multi-agent orchestration, tool-use fine-tuning, retrieval, model evaluation, and production diagnostics systems.",
+      "Built the core ML platform foundation adopted by X teams, including..."
+    ]
+  }
+}

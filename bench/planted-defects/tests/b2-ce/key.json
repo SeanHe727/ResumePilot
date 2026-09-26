@@ -1,0 +1,62 @@
+[
+  {
+    "id": "D1",
+    "type": "D1",
+    "line": "Responsible for the monitoring dashboards of the diagnostics service and for supporting the on-call team with weekly reports.",
+    "defect": "Duty-style opener ('Responsible for') naming an assigned duty, with no action taken and no outcome."
+  },
+  {
+    "id": "D2",
+    "type": "D2",
+    "line": "Improved model performance by 35% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
+  },
+  {
+    "id": "D6",
+    "type": "D6",
+    "line": "I worked on improving the latency of our API and I also wrote tests for it, which I think made the service a lot faster for users.",
+    "defect": "First-person pronoun and a conversational full sentence, with a weak verb and no result."
+  },
+  {
+    "id": "D7",
+    "type": "D7",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role (Eastern Robotics Co.) is listed before the newer one (Mobility Systems Company)."
+  },
+  {
+    "id": "D9",
+    "type": "D9",
+    "line": "Builds and maintains the CI pipeline for the perception team's model releases and adds automated regression checks to every build.",
+    "defect": "Present tense in a role that has already ended."
+  },
+  {
+    "id": "D11",
+    "type": "D11",
+    "line": "Cut average response time from 800 ms to 900 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
+    "defect": "The numbers contradict each other: the stated change does not match the before and after values."
+  },
+  {
+    "id": "D13",
+    "type": "D13",
+    "line": "Managed a team of 12 engineers across two offices and set the company's AI strategy for the next fiscal year.",
+    "defect": "Responsibilities far beyond the job title (Machine Learning Engineering Intern)."
+  },
+  {
+    "id": "D16",
+    "type": "D16",
+    "line": "Was involved in the process of helping to support the evaluation of the reports that were being produced by the pipeline at the time.",
+    "defect": "Passive, filler-heavy wording ('was involved in the process of helping to ...')."
+  },
+  {
+    "id": "D17",
+    "type": "D17",
+    "line": "Migrated 30 robot-fleet services from cron jobs to an event queue while also rewriting the logging library, onboarding two new hires, maintaining the internal wiki, reviewing pull requests for three other teams, supporting on-call rotations on weekends, presenting quarterly updates to leadership, and evaluating three vendor monitoring tools, which together removed nightly backlogs, improved developer satisfaction scores, and made the platform noticeably more stable for everyone involved in operations across the whole organization.",
+    "defect": "An overlong bullet (70+ words) packing many unrelated activities into one line."
+  },
+  {
+    "id": "D20",
+    "type": "D20",
+    "line": "Programming: Pyhton, TypeScirpt, SQL, Bash, Git / ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation",
+    "defect": "Spelling mistakes in the skills section."
+  }
+]

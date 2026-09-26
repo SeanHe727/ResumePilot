@@ -1,0 +1,117 @@
+{
+  "file": "tmp/bench/out/D-2.md",
+  "recall": 8,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D8",
+    "D9"
+  ],
+  "coverage": false,
+  "suggestions": 20,
+  "words": 1494,
+  "quotes": 16,
+  "grounded": 11,
+  "rewrites": 23,
+  "inventedNumbers": [
+    "95"
+  ],
+  "judgeUsage": {
+    "prompt_tokens": 3878,
+    "completion_tokens": 9065,
+    "total_tokens": 12943,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7554
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3878
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "Delete or rewrite these: ... “Responsible for the monitoring dashboards of the diagnostics service.” ... These either sound generic, use first person, lack measurable impact"
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "“Improved model performance by 35%” is not sufficiently clear. State what improved"
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Avoid “single-handedly”; it sounds exaggerated and minimizes collaboration."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "There is a duplicate accomplishment. Combine the two fine-tuning bullets into one."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "This project is much stronger after deleting the “cutting-edge AI synergies” bullet."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "These either sound generic, use first person, lack measurable impact"
+      },
+      {
+        "id": "D7",
+        "found": false,
+        "evidence": "Your experience is already in reverse chronological order"
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "Several technologies appear only in the Skills section. Move the technologies used in important accomplishments into the bullets themselves."
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Built and maintained the CI pipeline for the perception team’s model releases, automating [testing, packaging, validation, or deployment] through [GitHub Actions/Jenkins/etc.]."
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": "No mention of the Jun 2022 to Sep 2023 gap."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 20,
+    "rewrites": [
+      "Jordan Lee\nMetro City, USA | +1 (555) 010-2468 | jordan.lee@example.com\nGitHub: github.com/jordan-lee | LinkedIn: linkedin.com/in/jordan-lee | Portfolio: example.com",
+      "Built an industrial-diagnostics workflow that automated triage of **800+ sensor signals per case** using ML-extracted feature schemas, evidence-grounded review, and explicit abstention for low-confidence findings; reduced the pending-case backlog by **68%** after launch.",
+      "Designed a role-aware multi-agent routing and assembly layer that constrained **3 specialist agents and 1 independent reviewer** to in-scope signals, preserving source traceability and preventing cross-agent hypothesis contamination.",
+      "Fine-tuned a domain-specialist adapter on validated tool-use trajectories with assistant-only loss masking, improving **claim correctness by 7%**, citation quality by **9%**, and tool-use accuracy by **8%** versus the base model on held-out diagnostic cases.",
+      "Partnered with [engineering/research/product] to integrate the diagnostic workflow into the broader inspection system and establish [evaluation, deployment, or monitoring process].",
+      "Architected and deployed the company-wide ML platform used by [N] teams to [train/evaluate/deploy] models, reducing [deployment or experimentation time] by [X%].",
+      "Developed monitoring dashboards for the diagnostics service, improving visibility into [latency, failures, model quality, or service health] across [number] production components.",
+      "Optimized API request handling and added automated unit and integration tests, reducing p95 latency by **[X% / X ms]** and increasing test coverage from **[A%] to [B%]**.",
+      "Built and maintained the CI pipeline for the perception team’s model releases, automating [testing, packaging, validation, or deployment] through [GitHub Actions/Jenkins/etc.].",
+      "Improved [specific model metric] by **35%** through [method], measured on [dataset/evaluation set].",
+      "## Agent Runtime Suite — Independent Project\nTypeScript, Python, SQLite, FTS5, Vector Search, Multi-Agent Systems | Aug 2025 – Present\nGitHub: [link] | Demo: [link]",
+      "Improved planted-defect localization from **82% to 94%** by replacing fixed-perspective analysis with an agent-as-tool architecture that dynamically dispatched tasks to role-specialized sub-agents with isolated prompts, toolsets, and contexts.",
+      "Hardened a multi-agent fan-out/fan-in runtime against nested-pool deadlocks, incomplete streamed-response reuse, and tool-result loss during context compaction by separating concurrency pools, isolating branch-level failures, and gating cache writes on explicit stream completion.",
+      "Maintained model-bound working context below **10K tokens** during a 100-turn stress test while raw conversation history grew **100×**, using independently budgeted context layers, staged compaction, SQLite checkpoints, and hybrid FTS5/vector retrieval.",
+      "## Research-Agent Evaluation Framework — Contributor\nLLM Evaluation, Agent Benchmarking | Feb 2025 – Jul 2025\nGitHub: [link]",
+      "Validated evaluator fidelity with a **Kendall rank correlation of 0.89** and an **8.5-percentage-point mean absolute deviation** between injected and measured degradation across **400+ report-level trials**.",
+      "Designed controlled degradation experiments by progressively removing citations, sources, sections, and factual claims in **10-percentage-point increments**.",
+      "Identified **3 structural defects** in a multi-agent research pipeline across stability, sourcing, and parameter handling by combining layered instrumentation with systematic error attribution; mapped each failure to the responsible module to guide targeted fixes.",
+      "TECHNICAL SKILLS\n\nLanguages: Python, TypeScript, SQL, Bash, Rust\n\nMachine Learning: PyTorch, model fine-tuning, evaluation design, tool-use evaluation, supervised fine-tuning\n\nLLM & Agent Systems: RAG, LangGraph, MCP, multi-agent orchestration, agent-as-tool architectures, context management\n\nBackend & Data: FastAPI, SQLite, Apache Spark, FTS5, vector search\n\nInfrastructure & Developer Tools: Docker, Kubernetes, Git, CI/CD",
+      "Western State University — M.S. Computer Engineering\nMetro City, USA | Expected Jun 2026\n\nEastern Institute of Technology — B.S. Electrical Engineering\nMetro City, Country | Jun 2022",
+      "Relevant Coursework: Machine Learning, Distributed Systems, Computer Architecture",
+      "ML engineering graduate student with experience building multi-agent diagnostic systems, LLM evaluation frameworks, and production-oriented agent runtimes. Improved diagnostic backlog, model correctness, citation quality, and defect localization through fine-tuning, agent orchestration, and evaluation-driven development.",
+      "Built an industrial-diagnostics workflow in Python using [framework/tools], automating triage of 800+ sensor signals per case..."
+    ]
+  }
+}

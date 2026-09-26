@@ -1,0 +1,62 @@
+[
+  {
+    "id": "D2",
+    "type": "D2",
+    "line": "Improved returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
+  },
+  {
+    "id": "D7",
+    "type": "D7",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role (Ridgeway University) is listed before the newer one (Northpeak Capital)."
+  },
+  {
+    "id": "D8",
+    "type": "D8",
+    "line": "Infrastructure: Kubernetes, Haskell, Kafka",
+    "defect": "Skills listed with no supporting evidence anywhere in the experience or projects: Kubernetes, Haskell, Kafka."
+  },
+  {
+    "id": "D9",
+    "type": "D9",
+    "line": "Teaches weekly recitations for graduate probability and writes the problem sets for each week of the course.",
+    "defect": "Present tense in a role that has already ended."
+  },
+  {
+    "id": "D11",
+    "type": "D11",
+    "line": "Reduced forecast error from 0.20 to 0.25, a 40% improvement, with a new asymmetric loss function for volatility spikes.",
+    "defect": "The numbers contradict each other: the stated change does not match the before and after values."
+  },
+  {
+    "id": "D12",
+    "type": "D12",
+    "line": "Built a short-horizon order-book imbalance signal for index futures that added 0.4 Sharpe to a futures book over 18 months of out-of-sample backtest.",
+    "defect": "The same achievement is claimed in two different entries; it also appears under Northpeak Capital."
+  },
+  {
+    "id": "D14",
+    "type": "D14",
+    "line": "Kaggle Market Prediction Competition | Jun 2023 - Mar 2023",
+    "defect": "Impossible dates: the end date is before the start date (Jun 2023 - Mar 2023)."
+  },
+  {
+    "id": "D17",
+    "type": "D17",
+    "line": "Released an open-source R package for high-dimensional covariance estimation while also maintaining the lab website, organizing the weekly reading group, grading for two courses, reviewing papers for my advisor, helping new students set up the cluster, attending several conferences, and writing documentation for other lab tools, which together increased downloads, improved lab productivity, and made the group's research more visible to the broader statistics community.",
+    "defect": "An overlong bullet (70+ words) packing many unrelated activities into one line."
+  },
+  {
+    "id": "D18",
+    "type": "D18",
+    "line": "Ported the VX-9 stack onto QRT under the Helix program, coordinating with the Atlas and Borealis teams.",
+    "defect": "Unexplained internal code names or acronyms that an outside reader cannot interpret."
+  },
+  {
+    "id": "D19",
+    "type": "D19",
+    "line": "Age: 25 | Marital status: Single | Hobbies: watching TV, video games",
+    "defect": "Irrelevant personal information (age, marital status, hobbies)."
+  }
+]

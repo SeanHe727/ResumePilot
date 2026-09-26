@@ -1,0 +1,130 @@
+{
+  "id": "pm",
+  "job": "product / program management",
+  "name": "Riley Chen",
+  "contact": "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+  "personal": "Age: 29 | Marital status: Married | Hobbies: watching TV, shopping",
+  "education": [
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018"
+  ],
+  "graduated": "Jun 2018",
+  "exp": [
+    {
+      "head": "Harbor Payments | Associate Product Manager Intern | Metro City, USA",
+      "dates": "Jun 2024 - Aug 2024",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region."
+        },
+        {
+          "slot": "D2",
+          "clean": "Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+          "defect": "Improved conversion by 35% by testing a new checkout flow and shipping it to all merchants."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan."
+        },
+        {
+          "slot": "D4",
+          "clean": "Interviewed 25 merchants to size the chargeback problem and turned the findings into the business case that set the next quarter's roadmap priority.",
+          "defect": "Drafted the specification and target metrics for the self-service dispute feature with engineering, risk and support, and it was delivered earlier than scheduled."
+        },
+        {
+          "slot": "D3",
+          "clean": "Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+          "defect": "Single-handedly defined the product vision for the entire company and set the direction every product team followed."
+        },
+        {
+          "slot": "D13",
+          "clean": "Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+          "defect": "Managed a team of 40 people across product and engineering and owned the company's P&L for the payments business."
+        }
+      ]
+    },
+    {
+      "head": "Crestline Logistics | Operations Analyst | Lake City, USA",
+      "dates": "Jul 2018 - Aug 2023",
+      "datesD10": "Nov 2019 - Aug 2023",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+          "defect": "Responsible for weekly carrier scorecards for the regional managers and for answering their questions about carrier performance."
+        },
+        {
+          "slot": "D6",
+          "clean": "Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+          "defect": "I helped the warehouse team with their picking process and I made some spreadsheets for them, which I think they found useful."
+        },
+        {
+          "slot": "D9",
+          "clean": "Coordinated the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, cutting forecast error from 18% to 11%.",
+          "defect": "Coordinates the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting."
+        },
+        {
+          "slot": "D17",
+          "clean": "Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+          "defect": "Led the rollout of a route-planning tool to 3 depots while also organizing training sessions, rewriting the standard operating procedures, handling vendor negotiations, preparing monthly reports for the regional director, mentoring two new analysts, supporting the finance team during audits, and representing operations in several cross-functional committees, which together saved driver hours, improved morale, and made daily operations smoother for everyone across the company."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Campus Food Rescue App | Product Lead | Student Venture",
+      "dates": "Oct 2023 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+          "defect": "Leveraged synergistic stakeholder alignment and best-in-class frameworks to drive transformational value creation across the ecosystem."
+        },
+        {
+          "slot": "D11",
+          "clean": "Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60 user interviews showed students missed pickup windows.",
+          "defect": "Grew weekly active users from 1,000 to 900, a 90% increase, through targeted reminders and a redesigned home screen."
+        },
+        {
+          "slot": "D18",
+          "clean": "Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and removing the need for staff to cover gaps.",
+          "defect": "Drove the Q-Lite rollout to all PODs under the OKR-7 framework, aligning the Delta and Mesa workstreams."
+        }
+      ]
+    },
+    {
+      "head": "MBA Consulting Practicum | Team Lead | Regional Hospital Network",
+      "dates": "Jan 2024 - May 2024",
+      "datesD14": "May 2024 - Jan 2024",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+          "defect": "Collaborated with various stakeholders on multiple initiatives to deliver value and support the team's broader goals."
+        },
+        {
+          "slot": "D16",
+          "clean": "Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form from 5 pages to 2 without losing required fields.",
+          "defect": "Was involved in the process of helping to support the review of the intake procedures that were being used by the clinics."
+        },
+        {
+          "slot": "D12",
+          "clean": "Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+          "defect": "Redesigned merchant onboarding around a single verification step and cut median time to first payment from 9 days to 4 across 2,300 new merchants."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Product: roadmapping, A/B testing, user interviews, PRDs, SQL",
+    "Tools: Jira, Figma, Amplitude, Excel"
+  ],
+  "skillsD20": [
+    "Product: roadmaping, A/B testing, user interveiws, PRDs, SQL",
+    "Tools: Jira, Figma, Amplitude, Excel"
+  ],
+  "skillsD8": "Technical: Python, Kubernetes, machine learning",
+  "unevidenced": "Python, Kubernetes, machine learning"
+}

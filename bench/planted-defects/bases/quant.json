@@ -1,0 +1,130 @@
+{
+  "id": "quant",
+  "job": "quantitative research / trading",
+  "name": "Morgan Patel",
+  "contact": "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+  "personal": "Age: 25 | Marital status: Single | Hobbies: watching TV, video games",
+  "education": [
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020"
+  ],
+  "graduated": "May 2020",
+  "exp": [
+    {
+      "head": "Northpeak Capital | Quantitative Research Intern | Metro City, USA",
+      "dates": "Jun 2025 - Aug 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk's book over 18 months of out-of-sample backtest after costs."
+        },
+        {
+          "slot": "D2",
+          "clean": "Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+          "defect": "Improved returns by 35% with a cost-aware position smoother on the desk's futures signal."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so no look-ahead information leaked into training."
+        },
+        {
+          "slot": "D4",
+          "clean": "Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+          "defect": "Tested the signal on six years of tick-level data using purged walk-forward splits with an embargo, so that no future information leaked into training."
+        },
+        {
+          "slot": "D3",
+          "clean": "Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+          "defect": "Single-handedly built the firm's entire trading infrastructure, which is now used by every desk across equities, rates and commodities."
+        },
+        {
+          "slot": "D13",
+          "clean": "Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki for future interns.",
+          "defect": "Managed the firm's $2B flagship fund and supervised 15 portfolio managers across three trading floors."
+        }
+      ]
+    },
+    {
+      "head": "Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA",
+      "dates": "Jun 2020 - Aug 2021",
+      "datesD10": "Oct 2021 - Aug 2022",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours and making runs reproducible by seed.",
+          "defect": "Responsible for the lab's simulation pipeline and for helping other students run their experiments on the shared cluster."
+        },
+        {
+          "slot": "D6",
+          "clean": "Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+          "defect": "I worked on some statistics for a paper and I also helped my advisor with the math, which I think made the paper better."
+        },
+        {
+          "slot": "D9",
+          "clean": "Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+          "defect": "Teaches weekly recitations for graduate probability and writes the problem sets for each week of the course."
+        },
+        {
+          "slot": "D17",
+          "clean": "Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+          "defect": "Released an open-source R package for high-dimensional covariance estimation while also maintaining the lab website, organizing the weekly reading group, grading for two courses, reviewing papers for my advisor, helping new students set up the cluster, attending several conferences, and writing documentation for other lab tools, which together increased downloads, improved lab productivity, and made the group's research more visible to the broader statistics community."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Volatility Forecasting Study | Independent Research | Python, PyTorch",
+      "dates": "Jan 2024 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+          "defect": "Leveraged cutting-edge quantitative synergies and next-generation modeling paradigms to unlock alpha-driven innovation."
+        },
+        {
+          "slot": "D11",
+          "clean": "Tested significance with Diebold-Mariano tests across the 30 indices; the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+          "defect": "Reduced forecast error from 0.20 to 0.25, a 40% improvement, with a new asymmetric loss function for volatility spikes."
+        },
+        {
+          "slot": "D18",
+          "clean": "Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+          "defect": "Ported the VX-9 stack onto QRT under the Helix program, coordinating with the Atlas and Borealis teams."
+        }
+      ]
+    },
+    {
+      "head": "Kaggle Market Prediction Competition | Team of 3 | Python",
+      "dates": "Mar 2023 - Jun 2023",
+      "datesD14": "Jun 2023 - Mar 2023",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+          "defect": "Worked with various people on multiple aspects of the competition to help the team make progress."
+        },
+        {
+          "slot": "D16",
+          "clean": "Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+          "defect": "Was involved in the process of helping to support the validation work that was being done by the team during the competition."
+        },
+        {
+          "slot": "D12",
+          "clean": "Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+          "defect": "Built a short-horizon order-book imbalance signal for index futures that added 0.4 Sharpe to a futures book over 18 months of out-of-sample backtest."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Programming: Python, R, SQL, C++",
+    "Methods: time-series econometrics, Bayesian inference, gradient boosting, PyTorch"
+  ],
+  "skillsD20": [
+    "Programming: Pyhton, R, SQL, C++",
+    "Methods: time-series econometrics, Bayesian infrence, gradient boosting, PyTorch"
+  ],
+  "skillsD8": "Infrastructure: Kubernetes, Haskell, Kafka",
+  "unevidenced": "Kubernetes, Haskell, Kafka"
+}

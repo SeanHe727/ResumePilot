@@ -1,0 +1,51 @@
+Morgan Patel
++1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel
+EDUCATION
+Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026
+Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020
+EXPERIENCE
+Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
+- Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4
+Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
+- Cut the signal’s daily turnover from 34% to 21% with a cost-aware position smoother, keeping
+90% of gross returns and lowering estimated slippage by a third.
+- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo
+period, so no look-ahead information leaked into training.
+- Tested the signal on six years of tick-level data using purged walk-forward splits with an
+embargo, so that no future information leaked into training.
+- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who
+approved a small live allocation for the next quarter.
+- Documented the backtest assumptions, transaction-cost model and known failure regimes in the
+desk’s research wiki for future interns.
+Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
+- Responsible for the lab’s simulation pipeline and for helping other students run their
+experiments on the shared cluster.
+- I worked on some statistics for a paper and I also helped my advisor with the math, which I
+think made the paper better.
+- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets
+and earning a 4.8/5 teaching rating.
+- Released an open-source R package for high-dimensional covariance estimation while also
+maintaining the lab website, organizing the weekly reading group, grading for two courses,
+reviewing papers for my advisor, helping new students set up the cluster, attending several
+conferences, and writing documentation for other lab tools, which together increased
+downloads, improved lab productivity, and made the group’s research more visible to the
+broader statistics community.
+PROJECTS
+Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
+- Leveraged cutting-edge quantitative synergies and next-generation modeling paradigms to
+unlock alpha-driven innovation.
+- Reduced forecast error from 0.20 to 0.25, a 40% improvement, with a new asymmetric loss
+function for volatility spikes.
+- Ported the VX-9 stack onto QRT under the Helix program, coordinating with the Atlas and
+Borealis teams.
+Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
+- Worked with various people on multiple aspects of the competition to help the team make
+progress.
+- Was involved in the process of helping to support the validation work that was being done by
+the team during the competition.
+- Wrote the team’s feature-selection script using permutation importance, trimming 900
+candidate features to 300 without losing validation score.
+SKILLS
+Programming: Python, R, SQL, C++
+Methods: time-series econometrics, Bayesian inference, gradient boosting, PyTorch
+Infrastructure: Kubernetes, Haskell, Kafka

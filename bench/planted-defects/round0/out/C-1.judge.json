@@ -1,0 +1,118 @@
+{
+  "file": "tmp/bench/out/C-1.md",
+  "recall": 7,
+  "found": [
+    "D1",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D9"
+  ],
+  "coverage": false,
+  "suggestions": 27,
+  "words": 1338,
+  "quotes": 18,
+  "grounded": 6,
+  "rewrites": 25,
+  "inventedNumbers": [
+    "95"
+  ],
+  "judgeUsage": {
+    "prompt_tokens": 3519,
+    "completion_tokens": 15294,
+    "total_tokens": 18813,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14191
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3519
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "“Responsible for” does not show what you accomplished."
+      },
+      {
+        "id": "D2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Avoid “single-handedly,” “entire,” and “every team” unless you can prove and explain them in an interview."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "These two bullets communicate essentially the same accomplishment"
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "It communicates no action, scope, or result and weakens the otherwise technical project."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "“I worked on” is conversational and indirect."
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Put experience in reverse chronological order"
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "“Builds” is present tense for a past role."
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 27,
+    "rewrites": [
+      "Built and deployed a shared ML platform adopted by X teams for [training/deployment/evaluation], reducing [manual work or deployment time] by X%.",
+      "Contributed to a 68% reduction in the system’s pending-case backlog after launch.",
+      "Built and maintained diagnostics dashboards using **[tools]**, enabling **[users/team]** to monitor **[services/metrics]**.",
+      "Reduced API **p95 latency by X%** by **[caching, query optimization, batching, etc.]** and added **[unit/integration/load] tests**, increasing coverage from **X% to Y%**.",
+      "Built and maintained a CI pipeline for perception-model releases using **[tools]**, reducing deployment time from **X to Y** and/or release failures by **X%**.",
+      "Improved **[precision, recall, F1, inference latency, or another named metric]** by 35% through **[specific technique]**.",
+      "Built an ML diagnostics workflow that triaged 800+ sensor signals per case using structured feature extraction, evidence-grounded review, and abstention for low-confidence findings.",
+      "Contributed to a 68% reduction in the inspection system’s pending-case backlog after launch.",
+      "Designed role-aware routing for 3 specialist agents and an independent reviewer, isolating prompts and source data to prevent cross-agent contamination and keep findings traceable.",
+      "Built an ML diagnostics workflow that triaged 800+ sensor signals per case using structured feature extraction, evidence-grounded review, and abstention for low-confidence findings; contributed to a 68% reduction in the system’s pending-case backlog.",
+      "Fine-tuned a domain adapter on validated tool-use trajectories with assistant-only loss masking, improving claim correctness by 7%, citation quality by 9%, and tool-use accuracy by 8% on held-out cases.",
+      "Built **[specific components]** of a shared ML platform adopted by **[number] teams**, enabling **[training, evaluation, deployment, or monitoring outcome]**.",
+      "Improved planted-defect localization from 82% to 94% by replacing fixed-perspective analysis with dynamic delegation to role-specialized agents with isolated prompts, tools, and contexts.",
+      "Prevented nested-pool deadlocks, incomplete-response caching, and tool-result loss by separating concurrency pools, isolating branch failures, and caching only completed streams.",
+      "Kept active model context below 10K tokens during a 100-turn stress test despite 100× growth in raw conversation data, using layered context budgets, staged compaction, SQLite checkpoints, and hybrid full-text/vector retrieval.",
+      "Validated evaluator fidelity across 400+ report-level trials, achieving 0.89 Kendall rank correlation and 8.5 percentage points of mean absolute deviation between injected and measured degradation.",
+      "Simulated quality degradation by progressively removing citations, sources, sections, and factual claims in 10-percentage-point increments.",
+      "Identified 3 defects affecting stability, sourcing, and parameter handling through layered instrumentation and systematic error attribution; traced each failure to its responsible module.",
+      "**Languages:** Python, TypeScript, SQL, Bash, Rust",
+      "**ML & LLM:** PyTorch, LangGraph, RAG, multi-agent orchestration, agent evaluation, MCP",
+      "**Backend & Data:** FastAPI, SQLite, FTS5, Apache Spark",
+      "**Infrastructure & Tools:** Docker, Kubernetes, Git, CI/CD",
+      "Expected June 2026",
+      "**Jordan Lee**",
+      "Phone | Email | GitHub | LinkedIn"
+    ]
+  }
+}

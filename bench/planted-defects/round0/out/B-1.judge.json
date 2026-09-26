@@ -1,0 +1,112 @@
+{
+  "file": "tmp/bench/out/B-1.md",
+  "recall": 9,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9"
+  ],
+  "coverage": false,
+  "suggestions": 12,
+  "words": 1270,
+  "quotes": 14,
+  "grounded": 9,
+  "rewrites": 19,
+  "inventedNumbers": [],
+  "judgeUsage": {
+    "prompt_tokens": 3532,
+    "completion_tokens": 11548,
+    "total_tokens": 15080,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10576
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3532
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "Remove phrases such as: “Responsible for”"
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "“Improved model performance by 35%” ... Clarify: What metric was used? ... What was the baseline?"
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "“Single-handedly” can sound exaggerated, and “entire ML platform” is difficult to evaluate."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "These two Mobility bullets repeat each other: ... Delete the second one."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Remove phrases such as: ... “cutting-edge AI synergies”"
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Remove phrases such as: “I worked on”"
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "The entries should be in reverse chronological order across the entire resume if possible."
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "You can omit or de-emphasize skills that are not supported elsewhere in the resume. For example, if Rust is only a minor exposure..."
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Built and maintained CI pipelines for the perception team’s model-release workflow."
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 12,
+    "rewrites": [
+      "Built and productionized shared ML infrastructure for model training, evaluation, deployment, and monitoring, enabling adoption by [number] teams.",
+      "Improved [F1/accuracy/latency] by 35% on [dataset or workload] through [specific intervention].",
+      "Built an industrial-diagnostics branch of an inspection system that automated triage of 800+ sensor signals per case using ML-extracted feature schemas, evidence-grounded review, and abstention on low-confidence findings; reduced the pending-case backlog by 68% after launch.",
+      "Designed a role-aware routing and assembly layer for 3 specialist agents and 1 independent reviewer, restricting each component to in-scope signals and preserving traceability to source data.",
+      "Fine-tuned a domain-specialist adapter on validated tool-use trajectories with assistant-only loss masking, improving claim correctness by 7%, evidence-citation quality by 9%, and tool-use accuracy by 8% versus the base model on held-out diagnostic cases.",
+      "Built shared ML infrastructure for [training/evaluation/deployment/monitoring—specify the actual scope], supporting adoption across [number] teams.",
+      "Built and maintained CI pipelines for the perception team’s model-release workflow.",
+      "Developed monitoring dashboards for a diagnostics service, improving visibility into service health and model behavior.",
+      "Reduced API latency by [amount or percentage] through [specific optimization].",
+      "Added automated tests covering [scope], improving [coverage, reliability, or defect rate].",
+      "Improved model performance by 35% on [metric/dataset/workload].",
+      "Improved planted-defect localization from 82% to 94% by replacing fixed-perspective analysis with an agent-as-tool architecture that dynamically dispatched tasks to role-specialized sub-agents.",
+      "Hardened a multi-agent fan-out/fan-in runtime against nested-pool deadlocks, incomplete streamed-response reuse, and tool-result loss during context compaction by isolating concurrency pools, containing branch-level faults, and gating cache writes on explicit stream completion.",
+      "Maintained model-bound working context below 10K tokens during a 100-turn stress test despite 100× growth in raw conversation history, using independently budgeted context layers and staged compaction.",
+      "Implemented recoverable state and long-term memory with SQLite checkpoints and hybrid FTS5/vector retrieval.",
+      "Validated evaluator fidelity with a Kendall rank correlation of 0.89 and an 8.5-percentage-point mean absolute deviation between injected and measured degradation across 400+ report-level trials.",
+      "Evaluated degradation by progressively removing citations, sources, sections, and factual claims in 10-percentage-point increments.",
+      "Identified 3 structural defects in a multi-agent research pipeline involving stability, sourcing, and parameter handling through layered instrumentation and systematic error attribution.",
+      "Mapped each failure to its responsible module to guide targeted fixes."
+    ]
+  }
+}
