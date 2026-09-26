@@ -1,231 +1,161 @@
-Your resume has strong technical depth and unusually good quantified impact. The main issues are **credibility, metric accuracy, chronology, and density**. A few bullets currently create red flags for a technical reviewer.
+Your resume has strong technical depth and unusually good quantification, especially around latency, accuracy, throughput, and operational impact. The main issues are **ordering, clarity, a numerical inconsistency, and several bullets that are too dense or vague**.
 
 ## Highest-priority changes
 
-### 1. Fix the metric inconsistencies
+### 1. Fix the numerical inconsistency
 
-This bullet is mathematically incorrect:
+You wrote:
 
 > Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction
 
-That is a **33.3% reduction**. Use:
+That is a **33% reduction**, not 50%. Change it to:
 
-> Cut p95 tool-call latency from 900 ms to 600 ms, a 33% reduction, by caching tool results and reusing completed sub-agent answers.
+> Reduced p95 tool-call latency from 900 ms to 600 ms, a 33% reduction, by caching tool results and reusing completed sub-agent answers.
 
-This one also needs clarification:
+Or, if the actual reduction was 50%, the ending latency should be 450 ms.
 
-> Raised the runtime’s task-completion rate by 12% on the benchmark suite, from 71% to 83%
+### 2. Reorder experience chronologically
 
-Going from 71% to 83% is:
+Your Mobility Systems internship, ending May 2025, should appear **above** Eastern Robotics, which ended July 2024.
 
-- **+12 percentage points**, or
-- **16.9% relative improvement**
-
-Use:
-
-> Increased benchmark task-completion rate by 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with partial context.
-
-Similarly, distinguish “accuracy percentage points” from “relative improvement” throughout the resume.
-
----
-
-### 2. Remove or correct the test-set leakage bullet
-
-This is the most serious issue:
-
-> Trained the triage classifier with early stopping on the test set, then reported its 91% test accuracy as held-out performance.
-
-Early stopping on the test set means the test set is no longer a valid unbiased evaluation set. Calling it “held-out performance” is technically incorrect and will likely concern ML reviewers.
-
-Best option: **remove this bullet and rerun the evaluation properly** using:
-
-- training set for model fitting,
-- validation set for early stopping and hyperparameter selection,
-- untouched test set for final reporting.
-
-If you cannot rerun it, write it transparently:
-
-> Achieved 91% accuracy on a test split used during early-stopping decisions; identified the need for a new untouched evaluation set for unbiased reporting.
-
-That is honest, but it is still weaker than omitting the result.
-
----
-
-### 3. Reverse the experience order
-
-Your experience should be listed newest first:
+Recommended order:
 
 1. Mobility Systems Company — Oct 2024–May 2025  
-2. Eastern Robotics Co. — Aug 2022–Jul 2024  
+2. Eastern Robotics Co. — Aug 2022–Jul 2024
 
-The current order makes the resume look out of sequence.
+The overlap with your M.S. is acceptable, but clarify whether the internship was part-time, remote, or concurrent if relevant.
 
-You may also want to clarify the overlapping dates between your M.S. and internship if relevant, for example:
-
-> Machine Learning Engineering Intern, part-time / during M.S. program
-
-Only add this if it helps explain the overlap.
-
----
-
-### 4. Replace vague language with concrete technical impact
+### 3. Replace vague or low-value language
 
 This bullet is too generic:
 
 > Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.
 
-It contains no verifiable action or measurement. Replace it with something specific, such as:
+It does not say what you built, how many teams adopted it, or what improved. Replace it with a concrete contribution, such as:
 
-> Built reusable agent-runtime patterns for tool invocation, retries, caching, and evaluation, enabling downstream teams to prototype multi-agent workflows without duplicating infrastructure.
+> Built and maintained a TypeScript agent-runtime toolkit used by [X] engineers to standardize tool calling, retries, caching, and sub-agent execution.
 
-Or, if you have a measurable result:
+Only include the adoption metric if you can substantiate it.
 
-> Standardized agent-runtime patterns used by [X] downstream teams, reducing implementation time for new workflows by [Y]%.
+### 4. Reduce jargon or explain it through outcomes
 
-Avoid phrases such as:
+The internship section currently reads like a research log. Terms such as:
 
-- “improving outcomes”
-- “accelerating delivery”
-- “AI-first”
-- “drove adoption”
+- assistant-only loss masking
+- grouped tool-use rollouts
+- composite reward
+- GRPO
+- frozen SFT reference
+- sparse rewards
 
-unless they are supported by a specific result.
+can be valuable for an ML/research role, but several appear without enough context. Keep the strongest technical details, but connect them to the result.
 
----
-
-### 5. Simplify the ML bullets for readability
-
-Your Mobility Systems internship is technically impressive, but several bullets are very dense. Recruiters may not understand them quickly, while technical interviewers may question imprecise wording.
-
-This bullet is questionable:
-
-> Designed a routing layer that uses cross-entropy to rank the 3 specialist agents’ findings by statistical significance before the reviewer sees them.
-
-Cross-entropy is generally a loss function, not a measure of statistical significance. If you mean model confidence or likelihood, say that:
-
-> Designed a routing layer that ranks findings from three specialist agents by calibrated confidence before reviewer inspection.
-
-If you genuinely performed a statistical significance calculation, name the method, such as p-values, likelihood ratios, or confidence intervals.
-
-This bullet is also overly compressed:
+For example, instead of:
 
 > Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.
 
-Rewrite it as:
+Use:
 
-> Reduced end-to-end latency by 5% by training with grouped tool-use rollouts and a composite reward for diagnostic accuracy, citation validity, and tool-call efficiency, using GRPO with a frozen SFT reference model.
+> Improved agentic diagnostic latency by 5% through GRPO fine-tuning with rewards for accuracy, citation validity, and tool-call efficiency.
 
-The result should come first, followed by the method.
+This preserves the substance while making the accomplishment easier to scan.
 
----
+### 5. Make the accuracy improvement precise
 
-## Recommended revised experience section
+This is mostly good:
+
+> Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79%
+
+Consider adding “8 percentage points” to avoid ambiguity:
+
+> Improved diagnostic accuracy by 8 percentage points, from 71% to 79%, across 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories.
+
+## Suggested revised experience section
 
 ### Mobility Systems Company — Machine Learning Engineering Intern  
 Metro City, USA | Oct 2024–May 2025
 
-- Built an ML-assisted diagnostics triage branch for an industrial inspection system processing 800+ sensor signals per case; reduced the pending-case backlog by 68% in the first quarter after launch.
-- Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.
-- Designed a routing layer that ranks findings from three specialist agents by calibrated confidence before reviewer inspection.
-- Reduced end-to-end latency by 5% using grouped tool-use rollouts and a composite reward for accuracy, citation validity, and tool-call efficiency in a GRPO training loop.
-- Documented abstention rules and escalation paths for on-call reviewers; the resulting runbook was adopted by the team.
+- Built a machine-learning diagnostic triage branch for an industrial inspection system that analyzed 800+ sensor signals per case, reducing the pending-case backlog by 68% in its first quarter.
+- Improved diagnostic accuracy by 8 percentage points, from 71% to 79%, across 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories.
+- Reduced p95 latency for single-request edge inference by 40% by deploying an INT8 engine with dynamic batching.
+- Improved agentic diagnostic latency by 5% through GRPO fine-tuning with rewards for accuracy, citation validity, and tool-call efficiency.
+- Stabilized sparse-reward GRPO training by using one scored rollout per prompt, producing consistent single-trajectory updates.
+- Documented abstention rules and escalation paths for on-call reviewers; the documentation became the team’s diagnostic triage runbook.
 
 ### Eastern Robotics Co. — Junior Software Engineer  
 Metro City, Country | Aug 2022–Jul 2024
 
-- Owned monitoring dashboards for the diagnostics service across two major releases and supported the associated on-call rotation.
-- Reduced p95 API latency from 420 ms to 180 ms by adding request caching and batching sensor reads; added load tests to prevent regression.
-- Automated regression checks for perception-model releases, reducing release cycles from two weeks to three days.
+- Owned monitoring dashboards for the diagnostics service across two major releases and supported the on-call rotation that relied on them.
+- Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regression.
+- Automated model-release regression checks in the perception team’s CI pipeline, reducing release cycles from two weeks to three days.
 - Migrated 30 robot-fleet services from cron jobs to an event queue and rewrote the shared logging library, eliminating nightly backlogs that delayed morning dispatch.
 - Onboarded two new hires and assumed responsibility for the weekend on-call rotation.
 
-The last Eastern Robotics bullet in your original version combines too many accomplishments. Splitting it makes the scope clearer.
+The final bullet in your original version combines too many accomplishments. Splitting it improves readability and makes each contribution easier to evaluate.
 
----
+## Suggested revised projects section
 
-## Recommended revised projects section
-
-### Agent Runtime Suite — Developer  
+### Agent Runtime Suite — Owner  
 TypeScript, Multi-Agent Systems | Aug 2025–Present
 
-- Built reusable agent-runtime infrastructure for tool invocation, retries, caching, and sub-agent context reuse.
-- Cut p95 tool-call latency from 900 ms to 600 ms, a 33% reduction, by caching tool results and reusing completed sub-agent answers.
-- Increased benchmark task-completion rate by 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with partial context.
-
-“Owner” is acceptable, but **Developer**, **Project Lead**, or **Creator** may be clearer depending on what you actually did.
+- Built a TypeScript runtime for tool calling, caching, retries, and multi-agent task execution.
+- Reduced p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.
+- Improved benchmark task-completion rate from 71% to 83% by retrying failed sub-agent calls with preserved partial context.
 
 ### Research-Agent Evaluation Framework — Contributor  
 LLM Evaluation | Feb 2025–Jul 2025
 
-- Contributed eight citation and faithfulness metrics to an open-source research-agent framework; they now run in the default benchmark for every release.
-- Demonstrated that the evaluator detected injected degradation with Kendall’s τ = 0.89 across 400+ report-level trials involving removed citations, sources, and claims.
+- Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.
+- Demonstrated that the evaluator detected injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials.
 - Used layered instrumentation to identify three pipeline defects involving stability, sourcing, and parameter handling; all three were fixed upstream.
 
-“Upstreamed” is technically understood by engineers, but “contributed” or “merged upstream” is clearer for a general reader.
+## Formatting and structure changes
 
----
+### Use consistent date formatting
 
-## Formatting and organization
+Use en dashes and consistent month formatting:
 
-### Header
+- `Sep 2024 – Expected Jun 2026`
+- `Aug 2022 – Jul 2024`
 
-Your header is fine, but consider making the code link more descriptive:
+Avoid mixing hyphen styles.
 
-> Jordan Lee  
-> phone | email | GitHub | LinkedIn
+### Consider adding a short summary
 
-If `example.com/code/jordan-lee` is a portfolio rather than GitHub, label it:
+For ML engineering, applied AI, or agent-infrastructure roles, a two-line summary could help position you:
 
-> Portfolio: example.com/code/jordan-lee
+> Machine learning engineer and computer engineering graduate student focused on agentic systems, model evaluation, inference optimization, and production robotics software. Experience improving diagnostic accuracy, latency, CI/CD reliability, and fleet operations.
 
-### Education
+Skip the summary if you need the space for stronger accomplishments.
 
-Your education section is appropriately placed at the top because your M.S. is current. Consider adding a specialization or relevant coursework only if it supports the target role:
+### Improve the skills section
 
-> M.S. in Computer Engineering, expected Jun 2026  
-> Focus: Machine Learning Systems, Distributed Systems, Computer Architecture
+Your current skills are good but could be organized more precisely:
 
-Do not add coursework if it makes the resume longer without adding value.
+**Languages:** Python, TypeScript, SQL, Bash  
+**ML/Deep Learning:** PyTorch, LoRA, GRPO, model fine-tuning, INT8 inference  
+**Agents/LLM Systems:** RAG, LangGraph, tool-use agents, agent evaluation  
+**Infrastructure:** Kubernetes, Git, CI/CD, distributed systems
 
-### Skills
+Only add technologies you can discuss in an interview. If you used Docker, cloud platforms, message queues, or specific databases, include them—but avoid listing them unless they are supported by your experience bullets.
 
-Your current skills are good, but they could be grouped more precisely:
+### Make the portfolio URL clickable and complete
 
-> **Programming:** Python, TypeScript, SQL, Bash, Git  
-> **ML/Deep Learning:** PyTorch, LoRA, GRPO  
-> **Agents and Evaluation:** LangGraph, RAG, multi-agent systems, agent evaluation  
-> **Infrastructure:** Kubernetes, CI/CD, distributed systems
+Instead of:
 
-Only list Kubernetes if you can discuss how you used it in an interview. You may also want to add technologies demonstrated in the bullets, such as:
+> example.com/code/jordan-lee
 
-- request caching
-- event queues
-- load testing
-- CI/CD
-- observability
-- model evaluation
+Use the full URL, and add LinkedIn or GitHub if relevant:
 
-Avoid listing too many tools that do not appear elsewhere in the resume.
+> GitHub: github.com/jordan-lee  
+> LinkedIn: linkedin.com/in/jordan-lee
 
----
+## Potential concerns to address
 
-## Additional content improvements
+- **Current M.S. and internship overlap:** Not a problem, but be prepared to explain the arrangement.
+- **Project dates overlap with employment and school:** Also fine, especially for open-source or personal work, but label the project as open source if applicable.
+- **“Owner” may be ambiguous:** Use “Creator,” “Lead Developer,” or “Maintainer” if that more accurately describes your role.
+- **“Junior” title:** Keep your official title, but let the bullets demonstrate that you performed beyond entry-level scope.
+- **Highly technical ML claims:** Be ready to explain the training setup, evaluation methodology, baseline, and whether metrics were offline or production metrics.
 
-- Add links to relevant projects, repositories, papers, or demos where possible.
-- Include the specific event-queue technology, cache, CI system, and cloud/platform tools if they are relevant to the role.
-- Replace “800+ sensor signals per case” with “800+ signals per case” if “sensor” is redundant.
-- Use consistent punctuation: either end every bullet with a period or omit periods from all bullets.
-- Keep the resume to one page if you have less than roughly five years of experience.
-- For software/ML roles, lead with **Experience**, then **Projects**, then **Education**, unless the graduate degree is particularly central to the position.
-
-## Overall assessment
-
-The resume could be very strong for software engineering, ML engineering, or agent-infrastructure roles. The most important fixes are:
-
-1. Correct the 900 ms → 600 ms percentage.
-2. Change 71% → 83% to “12 percentage points.”
-3. Remove or transparently correct the test-set early-stopping bullet.
-4. Reorder experience chronologically.
-5. Replace vague “AI-first engineering” language with concrete technical work.
-6. Clarify the cross-entropy/statistical-significance claim.
-7. Reduce jargon density and put outcomes before implementation details.
+Overall, the resume is strong for **ML engineering, LLM/agent infrastructure, robotics software, and applied research engineering**. The biggest immediate win is to make it easier to scan: lead with impact, shorten the dense technical bullets, reorder the experience, and correct the 900-to-600 ms percentage.

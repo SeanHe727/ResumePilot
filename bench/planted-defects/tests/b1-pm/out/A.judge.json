@@ -1,6 +1,6 @@
 {
   "file": "bench/planted-defects/tests/b1-pm/out/A.md",
-  "recall": 8,
+  "recall": 9,
   "found": [
     "W3",
     "W4",
@@ -8,57 +8,58 @@
     "A4",
     "S2",
     "T2",
+    "T4",
     "N3",
     "N5"
   ],
   "coverage": true,
-  "suggestions": 33,
-  "words": 1615,
-  "quotes": 10,
+  "suggestions": 32,
+  "words": 1625,
+  "quotes": 8,
   "grounded": 7,
-  "rewrites": 5,
+  "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3894,
-    "completion_tokens": 14272,
-    "total_tokens": 18166,
+    "prompt_tokens": 3944,
+    "completion_tokens": 12266,
+    "total_tokens": 16210,
     "prompt_tokens_details": {
-      "cached_tokens": 384
+      "cached_tokens": 0
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 13901
+      "reasoning_tokens": 11790
     },
-    "prompt_cache_hit_tokens": 384,
-    "prompt_cache_miss_tokens": 3510
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3944
   },
   "verdict": {
     "defects": [
       {
         "id": "W3",
         "found": true,
-        "evidence": "Make the S&OP bullet use one tense and remove “for each meeting” after “quarterly S&OP review.”"
+        "evidence": "Make the Crestline S&OP bullet consistently past tense."
       },
       {
         "id": "W4",
         "found": true,
-        "evidence": "Rewrite the patient-intake bullet in active voice to show that you mapped the process and shortened the form across four clinics."
+        "evidence": "Rewrite the intake bullet in active voice to state that you mapped intake and shortened the form"
       },
       {
         "id": "A1",
         "found": true,
-        "evidence": "Specify whether the 35% checkout-conversion improvement was a relative lift or percentage-point gain and identify the comparison period, cohort, or baseline."
+        "evidence": "Clarify whether the 35% checkout-conversion improvement is relative or measured in percentage points, and include the baseline conversion rate."
       },
       {
         "id": "A4",
         "found": true,
-        "evidence": "because its merchant-onboarding bullet duplicates Harbor Payments and makes the project appear misattributed."
+        "evidence": "Remove or relocate the practicum bullet about merchant onboarding because it duplicates Harbor Payments and conflicts with the named hospital-network project."
       },
       {
         "id": "S2",
         "found": true,
-        "evidence": "Replace “Held weekly working sessions” with the specific scheduling analysis, decision, or process change that those sessions delivered."
+        "evidence": "Replace the generic meeting description with your team-lead action, the scheduling problem addressed, and the outcome produced across the network."
       },
       {
         "id": "S4",
@@ -68,33 +69,27 @@
       {
         "id": "T2",
         "found": true,
-        "evidence": "Replace the vague post-launch wording with the specific product decision that the discovery work produced, or remove that clause if it produced no distinct result."
+        "evidence": "'merchants who opted into the new flow' may create a self-selected comparison, so state whether the cohorts were matched or otherwise adjusted."
       },
       {
         "id": "T4",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "Replace the late-delivery result measured by excluding weather-delayed shipments because changing the denominator makes the improvement a reporting adjustment rather than an operational result."
       },
       {
         "id": "N3",
         "found": true,
-        "evidence": "Explain the eight-month gap between the B.A. ending in Jun 2018 and Crestline Logistics beginning in Mar 2019."
+        "evidence": "Add a dated activity for the eight-month gap between the B.A. and Crestline Logistics if one exists."
       },
       {
         "id": "N5",
         "found": true,
-        "evidence": "Remove the date of birth and nationality from the résumé."
+        "evidence": "Remove personal demographic details because age, gender, nationality, and photos are excluded by résumé convention."
       }
     ],
     "coverage": true,
-    "suggestions": 33,
-    "rewrites": [
-      "Rolled out a route-planning tool.",
-      "Built",
-      "Implemented",
-      "after 60 interviews revealed missed pickup windows.",
-      "eliminating staff coverage gaps."
-    ],
+    "suggestions": 32,
+    "rewrites": [],
     "falsePositives": []
   }
 }

@@ -7,75 +7,75 @@
     "A1",
     "A4",
     "S2",
-    "T2",
+    "S4",
     "T4",
     "N5"
   ],
   "coverage": false,
-  "suggestions": 27,
-  "words": 1103,
-  "quotes": 4,
-  "grounded": 3,
-  "rewrites": 38,
+  "suggestions": 32,
+  "words": 1529,
+  "quotes": 1,
+  "grounded": 0,
+  "rewrites": 21,
   "inventedNumbers": [
     "50"
   ],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3123,
-    "completion_tokens": 14366,
-    "total_tokens": 17489,
+    "prompt_tokens": 3647,
+    "completion_tokens": 12873,
+    "total_tokens": 16520,
     "prompt_tokens_details": {
-      "cached_tokens": 256
+      "cached_tokens": 0
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 13198
+      "reasoning_tokens": 12016
     },
-    "prompt_cache_hit_tokens": 256,
-    "prompt_cache_miss_tokens": 2867
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3647
   },
   "verdict": {
     "defects": [
       {
         "id": "W3",
         "found": true,
-        "evidence": "Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting. This bullet is inconsistent"
+        "evidence": "This bullet uses present tense while the role is in the past"
       },
       {
         "id": "W4",
         "found": true,
-        "evidence": "Mapped patient intake workflows at four clinics and redesigned the intake form; front-desk teams adopted the revised process."
+        "evidence": "Mapped patient intake at four clinics and redesigned the intake form; the revised process was adopted by front-desk staff across the participating clinics."
       },
       {
         "id": "A1",
         "found": true,
-        "evidence": "clarify whether this means a 35% relative increase or 35 percentage points. Ideally include the baseline and test period."
+        "evidence": "Clarify whether this means a 35% relative increase or 35 percentage points, and explain the measurement period."
       },
       {
         "id": "A4",
         "found": true,
-        "evidence": "You also repeat the onboarding achievement in the consulting practicum: Halved the time... should be removed from the hospital project."
+        "evidence": "It duplicates your Harbor Payments experience and refers to merchants, not patients or clinics."
       },
       {
         "id": "S2",
         "found": true,
-        "evidence": "The current bullets describe activities but not much impact: Held weekly working sessions..."
+        "evidence": "Current bullets such as: > Held weekly working sessions... are reasonable but not very differentiated. Try to emphasize what changed as a result."
       },
       {
         "id": "S4",
+        "found": true,
+        "evidence": "Put the most product-relevant bullets first: 1. Onboarding redesign and business outcome"
+      },
+      {
+        "id": "T2",
         "found": false,
         "evidence": ""
       },
       {
-        "id": "T2",
-        "found": true,
-        "evidence": "These conflict chronologically."
-      },
-      {
         "id": "T4",
         "found": true,
-        "evidence": "this sounds broad and potentially overstated."
+        "evidence": "This reads as if you improved the metric by changing the definition rather than improving delivery performance."
       },
       {
         "id": "N3",
@@ -89,46 +89,29 @@
       }
     ],
     "coverage": false,
-    "suggestions": 27,
+    "suggestions": 32,
     "rewrites": [
-      "Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support; the team launched two weeks ahead of plan.",
-      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for each meeting.",
-      "Coordinate quarterly S&OP reviews across sales, finance, and operations and prepare forecast packs for each meeting.",
-      "Led weekly working sessions with clinic managers to identify bottlenecks in outpatient scheduling across the hospital network.",
-      "Mapped patient intake workflows at four clinics and redesigned the intake form; front-desk teams adopted the revised process.",
-      "Reduced the number of intake fields by [X]% and/or cut average registration time by [X] minutes.",
-      "Riley Chen",
-      "Phone | Email | LinkedIn | City, State",
-      "Northfield School of Management, Metro City, USA",
-      "MBA, Expected Jun 2025 | Sep 2023–Jun 2025",
-      "Lakeview University, Lake City, USA",
-      "B.A. Economics | Sep 2014–Jun 2018",
-      "MBA | Jun 2025",
-      "Harbor Payments, Metro City, USA",
-      "Associate Product Manager Intern | Jun 2024–Aug 2024",
-      "Improved checkout conversion by 35% by replacing a three-step checkout flow with a one-page experience across [scope of merchants].",
-      "Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support; launched two weeks ahead of plan.",
-      "Interviewed 25 merchants to quantify chargeback pain points and developed the business case that secured the initiative a place on the following quarter’s roadmap.",
-      "Led weekly engineering/support triage, resolving 140 onboarding tickets and reducing the open-ticket queue by 50%.",
-      "Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 to 4 days across 2,300 merchants in a pilot region.",
-      "Crestline Logistics, Lake City, USA",
-      "Operations Analyst | Mar 2019–Aug 2023",
-      "Developed a logistics strategy adopted across [number] regions/business lines, resulting in [measurable outcome].",
+      "Mapped patient intake workflows across four clinics, identifying bottlenecks that informed a shorter intake form later adopted by front-desk staff.",
+      "Increased checkout conversion by 35% relative [or X percentage points] after replacing the three-step flow with a one-page checkout used by all merchants.",
+      "Checkout conversion increased by 35% following the launch of a one-page checkout flow across all merchants.",
+      "Reworked on-time-delivery reporting to separate controllable delays from weather disruptions, giving operations leaders a clearer view of carrier and warehouse performance.",
+      "Evaluated the onboarding redesign using an opt-in comparison of merchants on the new and legacy flows, tracking time to first payment and completion rate.",
+      "Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 across 2,300 merchants in a pilot region.",
+      "Evaluated the redesign using an opt-in comparison between merchants on the new and legacy flows, tracking completion rate and time to first payment.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared the forecast pack for each meeting.",
+      "MBA candidate with experience in payments, logistics, and product-led process improvement. Skilled in user research, roadmap prioritization, experimentation, SQL, and cross-functional delivery.",
+      "Interviewed 25 merchants to size the chargeback problem and developed the business case that led to a next-quarter roadmap priority.",
+      "Wrote requirements and success metrics for dispute self-service, aligning engineering, risk, and support; the team shipped two weeks ahead of plan.",
+      "Increased checkout conversion by 35% relative [clarify measurement] after replacing a three-step flow with a one-page flow.",
+      "Ran weekly engineering/support triage, closing 140 onboarding tickets and reducing the open-ticket queue by 50%.",
       "Reduced warehouse picking errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
-      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for senior leadership.",
-      "Led deployment of a route-planning tool across three depots, training 60 drivers and dispatchers and saving an estimated 1,800 driver hours annually.",
-      "Campus Food Rescue App, Student Venture",
-      "Product Lead | Oct 2023–Present",
-      "Launched a surplus-food pickup app for 3,100 students across two dining halls, redistributing 9 tonnes of food in its first year.",
-      "Increased weekly active users from 400 to 1,150 by introducing pickup reminders based on insights from 60 user interviews.",
-      "Designed a volunteer shift system that filled 95% of weekly pickup slots and eliminated the need for staff coverage.",
-      "MBA Consulting Practicum, Regional Hospital Network",
-      "Team Lead | Jan 2024–May 2024",
-      "Led weekly working sessions with clinic managers to identify outpatient scheduling and patient-intake bottlenecks.",
-      "Mapped intake workflows at four clinics and redesigned the patient intake form; the revised process was adopted by front-desk staff.",
-      "Add a quantified result here if available, such as reduced registration time, fewer fields, or improved completion rate.",
-      "Product: Product discovery, user interviews, roadmap prioritization, PRDs, experimentation/A-B testing, success metrics, SQL",
-      "Analytics/Tools: SQL, Excel, Amplitude, Jira, Figma"
+      "Led rollout of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.",
+      "Reworked on-time-delivery reporting to distinguish weather-related delays from controllable performance issues, improving visibility into operational drivers.",
+      "Led weekly working sessions with clinic managers across the network to identify outpatient scheduling and intake bottlenecks.",
+      "Mapped patient intake at four clinics and redesigned the intake form; the revised process was adopted by front-desk staff across the participating clinics.",
+      "Product: Roadmapping, user interviews, PRDs, experimentation, A/B testing, requirements definition, stakeholder alignment",
+      "Analytics: SQL, funnel analysis, cohort analysis, KPI definition",
+      "Tools: Jira, Figma, Amplitude, Excel"
     ],
     "falsePositives": []
   }

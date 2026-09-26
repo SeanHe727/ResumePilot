@@ -1,186 +1,174 @@
-You have strong product-oriented experience and good metrics, but the resume needs tighter chronology, clearer scope, and removal of a few inconsistencies.
+Your resume has strong, quantified experience for associate product manager/product operations roles. The main issues are credibility, one clearly misplaced bullet, weak practicum bullets, and a few wording/tense problems.
 
 ## Highest-priority changes
 
 ### 1. Remove date of birth and nationality
-For a U.S.-focused resume, these are unnecessary and may introduce bias.
+For U.S. applications, omit both:
 
+> Date of birth: 2 Nov 1996 | Nationality: American
+
+They are unnecessary and can create bias or compliance concerns.
+
+### 2. Fix the erroneous practicum bullet
+This bullet appears copied from Harbor Payments and does not belong under the hospital project:
+
+> Halved the time it takes a new merchant to receive a first payment...
+
+Delete it and replace it with an actual hospital-project outcome, ideally quantified: reduced intake time, fewer fields, lower wait time, number of clinics/staff/patients affected, or whether leadership implemented your recommendation.
+
+### 3. Remove or completely reframe the late-delivery bullet
+This is a major credibility problem:
+
+> Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
+
+This did not improve delivery performance; it changed the metric definition. A recruiter may interpret it as manipulating KPIs. If the work was legitimate, describe it as reporting or measurement improvement:
+
+> Standardized on-time delivery reporting by separating weather-related exceptions from operational delays, improving root-cause analysis and accountability.
+
+Do not claim that you “cut late deliveries” unless actual delivery performance improved.
+
+### 4. Correct the tense inconsistency
+Change:
+
+> Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack...
+
+To:
+
+> Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for senior leadership.
+
+### 5. Clarify potentially overstated claims
+A few bullets need more precise language:
+
+- Is the **35% conversion increase** relative or percentage points?
+- Was the checkout redesign launched to **all merchants**, or tested/piloted first?
+- Did the team ship dispute self-service, or did you personally ship it?
+- The onboarding comparison used merchants who opted in versus those who did not. That is not a randomized A/B test and may have selection bias.
+
+Use language such as:
+
+> Increased checkout conversion 35% relative to baseline...
+
+or:
+
+> Increased checkout conversion from X% to Y%...
+
+For the onboarding analysis:
+
+> Evaluated pilot performance by comparing time to first payment for participating merchants against the legacy-flow cohort.
+
+Avoid implying causality stronger than the analysis supports.
+
+## Section-by-section recommendations
+
+### Header
 Use:
-> Riley Chen | Metro City, USA  
-> +1… | email… | LinkedIn…
 
-### 2. Fix the dispute self-service chronology
-These bullets contradict each other:
+**Riley Chen**  
++1 (555) 010-7731 | riley.chen@example.com | linkedin.com/in/riley-chen
 
-- You say you defined requirements and success metrics before launch.
-- Later, you say you launched the feature and then wrote success metrics and decided what it should do.
+You do not need the URL protocol. If the link shown is a placeholder, replace it with the actual LinkedIn address. Add a portfolio only if it contains substantive product work.
 
-Present a logical sequence: discovery → prioritization → requirements and metrics → launch.
+### Education
+Because June 2025 has passed or is near depending on when you apply, ensure the status is accurate:
 
-For example:
+- If completed: **MBA, Jun 2025**
+- If not yet completed: **MBA Candidate, Expected Jun 2025**
 
-- Interviewed 25 merchants to quantify chargeback pain points, building the business case that made dispute self-service a next-quarter roadmap priority.
-- Defined product requirements and success metrics for dispute self-service, aligning engineering, risk, and support to launch two weeks ahead of schedule.
+You can shorten the date formatting and remove start dates to save space:
 
-Remove the later “Launched dispute self-service…” bullet unless you can replace it with a measurable post-launch result such as adoption, ticket reduction, or time saved.
+**Northfield School of Management**, Metro City, USA  
+Master of Business Administration, Jun 2025
 
-### 3. Remove the misplaced duplicate bullet
-This bullet under the hospital practicum is clearly copied from Harbor Payments:
+**Lakeview University**, Lake City, USA  
+B.A. Economics, Jun 2018
 
-> Halved the time it takes a new merchant to receive a first payment…
-
-Delete it. The same accomplishment is already covered under Harbor Payments.
-
-### 4. Correct tense and grammar
-At Crestline:
-
-> Coordinated … and **prepares** the forecast pack
-
-Change to:
-
-> Coordinated the quarterly S&OP review across sales, finance, and operations and **prepared** the forecast pack for each meeting.
-
-Because the role ended in 2023, all bullets should use past tense.
-
-### 5. Update dates that still say “Present”
-If the Campus Food Rescue App is no longer active, replace “Present” with the actual end date. Likewise, because June 2025 has passed, present your MBA as completed rather than expected.
-
----
-
-## Experience-specific recommendations
+Add concentrations, honors, leadership, or relevant coursework only if genuinely useful.
 
 ### Harbor Payments
+This is your strongest section, but six bullets are slightly repetitive. Lead with the most important product outcomes and reduce it to four or five bullets.
 
-This is your strongest section, but six bullets are slightly repetitive. Aim for four or five high-impact bullets.
+Suggested revision:
 
-#### Clarify the 35% figure
-Specify whether this was a relative increase or a percentage-point increase, and ideally mention how it was measured.
+**Harbor Payments — Associate Product Manager Intern**  
+Metro City, USA | Jun–Aug 2024
 
-Current:
-> Improved checkout conversion by 35%…
+- Increased checkout conversion by 35% by replacing a three-step checkout process with a one-page flow across [scope of launch].
+- Reduced median time to first payment from 9 to 4 days for 2,300 merchants by redesigning onboarding around a single verification step.
+- Interviewed 25 merchants to quantify chargeback pain points and developed the business case that established dispute self-service as a top roadmap priority.
+- Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support to launch two weeks ahead of schedule.
+- Led weekly engineering and support triage, resolving 140 onboarding tickets and reducing the open queue by 50%.
 
-Better:
-> Increased checkout conversion 35% relative to baseline by replacing a three-step flow with a one-page checkout across the merchant base.
-
-If it was an experiment:
-> Increased checkout conversion 35% in an A/B test by replacing a three-step flow with a one-page checkout.
-
-Do not say “across all merchants” unless it truly launched to the full base.
-
-#### Tighten the ticket-triage bullet
-“Closing 140 tickets” may sound as though you personally resolved every ticket.
-
-Better:
-> Led weekly engineering and support triage, helping resolve 140 onboarding issues and reduce the open-ticket backlog by 50% over the summer.
-
-#### Keep the onboarding bullet
-This is excellent because it has a clear action, outcome, timeframe, and population:
-
-> Redesigned merchant onboarding around a single verification step, reducing median time to first payment from nine days to four for 2,300 merchants in the pilot region.
-
-Spell out numbers below 10 for consistent editorial style, or use numerals consistently if you prefer a more technical style.
+Consider dropping the separate measurement bullet unless the analytical methodology is particularly important for the jobs you are targeting. The result is already covered by the onboarding bullet.
 
 ### Crestline Logistics
+Suggested revision:
 
-#### Reduce the scope of the strategy claim
-This sounds too broad and unsupported:
+**Crestline Logistics — Operations Analyst**  
+Lake City, USA | Mar 2019–Aug 2023
 
-> Set the company’s logistics strategy, adopted across every region and business line.
+- Reduced warehouse picking errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.
+- Led deployment of a route-planning tool across three depots, training 60 drivers and dispatchers and saving 1,800 driver hours annually.
+- Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials for [leadership group].
+- Standardized on-time delivery reporting by separating weather-related exceptions from operational delays, enabling more accurate root-cause analysis.
 
-Explain what the strategy addressed and quantify its scope or effect:
-
-> Developed a logistics strategy covering warehouse capacity, routing, and service levels; secured adoption across X regions and Y business lines.
-
-If you cannot provide scope or results, consider removing it.
-
-#### Strengthen the S&OP bullet
-The current version describes responsibility rather than impact. Add a result if possible:
-
-> Coordinated quarterly S&OP reviews across sales, finance, and operations, consolidating regional forecasts into executive planning materials and improving forecast accuracy by X%.
-
-Only include the accuracy result if you can support it.
-
-#### Keep the operational improvement bullets
-The pick-error and route-planning bullets are strong. Slightly tighten them:
-
-- Reduced warehouse picking errors 30% at two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.
-- Led rollout of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.
-
----
-
-## Projects
+If you can identify an actual decision or operational improvement resulting from the S&OP work, add that rather than merely stating that you prepared materials.
 
 ### Campus Food Rescue App
-This is a strong product project. It demonstrates launch experience, growth, discovery, and operations.
+This is strong and relevant to product roles. Suggested edits:
 
-Suggested edits:
-
-- Launched a surplus-food pickup app with two dining halls, reaching 3,100 students and redistributing nine metric tons of food in its first year.
-- Grew weekly active users from 400 to 1,150 by introducing pickup reminders after 60 user interviews identified missed pickup windows as a key barrier.
-- Designed a volunteer scheduling system that filled 95% of weekly pickup shifts and eliminated the need for dining staff to cover gaps.
+- Launched a surplus-food pickup app with two dining halls, reaching 3,100 students and redirecting 9 metric tons of food from waste in its first year.
+- Increased weekly active users from 400 to 1,150 by introducing pickup reminders based on insights from 60 user interviews.
+- Built a volunteer scheduling system that filled 95% of weekly pickup shifts and eliminated the need for dining staff to cover gaps.
 
 “Metric tons” is clearer for a U.S. audience than “tonnes.”
 
+Also update “Present” if you are no longer actively working on the project.
+
 ### MBA Consulting Practicum
-This section is currently weak because it focuses on meetings and deliverables rather than outcomes.
+The first two bullets describe activity but not much impact. Rewrite them around the problem, recommendation, and adoption.
 
-Current:
-> Held weekly working sessions…
+For example, without inventing results:
 
-Better:
-> Led weekly working sessions with clinic managers to identify outpatient scheduling and intake bottlenecks across four clinics.
+**MBA Consulting Practicum — Team Lead, Regional Hospital Network**  
+Jan–May 2024
 
-Current:
-> Patient intake at 4 clinics was mapped…
+- Led a consulting team assessing outpatient scheduling and patient intake across four clinics, facilitating weekly working sessions with clinic managers.
+- Mapped end-to-end intake workflows, identified redundant steps, and redesigned the intake form for adoption by front-desk teams across four clinics.
+- Presented implementation recommendations to [hospital leadership group], including [brief description of recommendation].
 
-Better:
-> Mapped patient intake workflows across four clinics and redesigned the intake form, with the new process adopted by front-desk teams.
+If possible, quantify:
+- Form fields removed
+- Intake time reduced
+- Patients affected
+- Staff hours saved
+- Clinics that implemented the recommendation
 
-Add an outcome if available—for example, reduced intake time, fewer form errors, shorter waits, or increased appointment capacity. Without a measurable result, this project will be noticeably weaker than the rest of the resume.
-
----
-
-## Education
-
-Use a cleaner format:
-
-**Northfield School of Management**, Metro City, USA  
-Master of Business Administration, June 2025
-
-**Lakeview University**, Lake City, USA  
-B.A. in Economics, June 2018
-
-You generally do not need the start dates. If applicable, add a concentration, scholarship, leadership role, or relevant distinction—but only if it strengthens your candidacy.
-
----
+Without an outcome, this project is much weaker than the rest of the resume.
 
 ## Skills
+Your skills section is appropriate, but organize it based on demonstrated proficiency:
 
-Reorganize the section so technical skills are easier to scan:
-
-**Product:** Product discovery, roadmapping, PRDs, A/B testing, user interviews  
+**Product:** Product strategy, roadmapping, requirements definition, user research, experimentation  
 **Analytics:** SQL, Amplitude, Excel  
 **Tools:** Jira, Figma
 
-Avoid listing skills you cannot discuss in detail during an interview. In particular, be ready to explain your SQL proficiency and the design and interpretation of an A/B test.
+A few cautions:
 
----
+- Keep **A/B testing** only if you have actually designed or analyzed randomized tests. Your opt-in cohort comparison is not an A/B test.
+- “PRDs” could become **requirements definition** or **product requirements documents**, which is clearer to all readers.
+- Be ready to complete a SQL assessment if SQL is listed. Ideally, include a bullet showing where you used it.
 
-## Recommended Harbor section
+## Formatting and style
 
-Here is a cleaner version:
+- Keep the resume to one page if possible.
+- Use consistent date formatting: `Jun 2024–Aug 2024`.
+- Use consistent serial commas: “engineering, risk, and support.”
+- Avoid line breaks in the middle of bullets.
+- Use numerals consistently: “three depots” or “3 depots,” not a mixture. Numerals are generally more scannable in resumes.
+- Start each bullet with a strong verb and focus on outcomes rather than responsibilities.
+- Put the highest-impact bullet first in each role.
+- Avoid periods only if all bullets omit them; either style is acceptable, but be consistent.
 
-**Harbor Payments — Associate Product Manager Intern**  
-Metro City, USA | Jun 2024–Aug 2024
+## Overall assessment
 
-- Increased checkout conversion 35% relative to baseline by replacing a three-step flow with a one-page checkout.
-- Redesigned merchant onboarding around a single verification step, reducing median time to first payment from nine days to four for 2,300 merchants in the pilot region.
-- Interviewed 25 merchants to quantify chargeback pain points, building the business case that made dispute self-service a next-quarter roadmap priority.
-- Defined product requirements and success metrics for dispute self-service, aligning engineering, risk, and support to launch two weeks ahead of schedule.
-- Led weekly engineering and support triage, helping resolve 140 onboarding issues and reduce the open-ticket backlog by 50%.
-
-## Overall positioning
-
-Your strongest narrative is: **MBA graduate with prior operations experience who has transitioned into product management and can combine customer discovery, cross-functional execution, and measurable operational improvement.**
-
-Keep the resume to one page, prioritize outcomes over responsibilities, and ensure every claim is precise enough to defend in an interview.
+The resume already has unusually strong metrics and a clear transition from operations to product. After fixing the misleading delivery metric, removing the copied practicum bullet, strengthening the hospital project, and tightening Harbor Payments, it should be competitive for APM, product operations, and early-career product manager roles. The most important principle is to ensure every metric is precise and defensible in an interview.

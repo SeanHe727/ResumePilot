@@ -5,122 +5,124 @@ hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'i
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
 I reviewed the full resume:
 
-- **Content and wording:** all 4 entries with bullets
-- **Narrative:** full resume
-- **Format/ATS:** full file
-- **Education:** no bullet-level review was applicable
-- **Job-description match:** not run because no posting was provided
+- **4 experience/project entries** were reviewed for content and wording.
+- **Narrative, ordering, and date continuity** were reviewed.
+- **Format and ATS extraction** were reviewed.
+- Education entries have no bullets, so they were not sent for content review.
+- No job description was loaded, so job-match analysis was not performed.
 
-The main changes to make are:
+### Changes to make first
 
-1. **Fix the MBA Consulting Practicum entry.**  
-   The third bullet refers to merchants and first payments, which conflicts with the hospital-network project. Correct, replace, or remove it before using the resume.
+1. **Fix the unrelated practicum bullet**
+   - In **MBA Consulting Practicum**, `s3:e1:b2` refers to merchant onboarding and 2,300 merchants. It appears to belong to Harbor Payments, not the hospital project.
+   - Remove it or replace it with a result from the hospital practicum.
 
-2. **Clarify the product-management story.**  
-   The Harbor Payments entry contains overlapping bullets about dispute self-service, discovery, and success metrics. Make the sequence and distinct outcomes clear. Consider placing the Campus Food Rescue project closer to the Harbor internship so the product narrative is easier to follow.
+2. **Make the product-management direction more prominent**
+   - Move **Education below Experience and Projects**.
+   - Consider placing Harbor Payments and the product-focused projects before Crestline Logistics, so the intended product-management direction appears earlier.
 
-3. **Make results more interpretable.**  
-   Clarify:
-   - Whether the 35% checkout-conversion change is a relative increase or percentage-point increase, and the comparison period.
-   - The baseline or timing behind the 50% ticket-queue reduction.
-   - The comparison period behind the 30% warehouse productivity improvement.
-   - The result of the S&OP work.
-   - The business or operational impact of the company-wide logistics strategy.
+3. **Address the date gap**
+   - The resume shows no activity between **Jun 2018 and Mar 2019**. Add the missing activity if there was work, education, travel, or another explanation.
 
-4. **Strengthen activity-only bullets.**  
-   The S&OP bullet, the logistics-strategy bullet, and the first hospital-practicum bullet describe responsibilities but not the decisions or outcomes that followed.
+4. **Clarify ambiguous metrics**
+   - Harbor Payments: specify what “improved checkout conversion by 35%” means—relative improvement or percentage-point increase.
+   - Harbor Payments: the onboarding comparison describes a method but gives no result. Add the measured outcome if available.
+   - Crestline: avoid presenting the weather-exclusion change as an operational improvement unless the KPI result was also measured without changing the denominator.
+   - Add baselines, ending values, time periods, or calculation methods where you can substantiate them.
 
-5. **Remove or substantiate unsupported skills.**  
-   The skills list includes tools and methods—such as SQL, Jira, Figma, Amplitude, A/B testing, PRDs, and Excel—that are not demonstrated elsewhere in the resume. Either connect them to specific experience or remove them.
+5. **Strengthen activity-only bullets**
+   - Crestline’s S&OP bullet describes recurring responsibilities but not the decision or business result enabled.
+   - The hospital practicum’s weekly working-session bullet does not yet show what changed because of your leadership.
+   - The hospital intake bullet should establish your role and the resulting operational benefit.
 
-6. **Address the timeline.**  
-   The resume shows an unexplained gap between June 2018 and March 2019. Add the relevant activity if there was work, study, travel, or another explanation.
+6. **Correct wording and consistency**
+   - Change “Cut warehouse pick errors 30%” to grammatically complete wording.
+   - Make the Crestline S&OP bullet consistently past tense.
+   - Reduce repeated or low-value phrases such as “flow,” “over the summer,” and “for each meeting.”
+   - Replace generic phrasing such as “set up” and “held weekly working sessions” with wording that identifies the actual work performed.
 
-7. **Remove personal details that are generally unnecessary.**  
-   The format review flagged the inclusion of date of birth and nationality.
+7. **Remove non-resume personal details**
+   - The format review identified “Date of birth” and “Nationality.” These are generally excluded from an English-language professional resume unless specifically required.
 
-8. **Tighten wording in several bullets.**  
-   The wording review identified generic or indirect openings such as “Held,” “Set up,” “Coordinated,” and “Set the company’s logistics strategy,” plus some passive and wordy constructions. Make the candidate’s ownership more direct without changing the underlying facts.
+8. **Make skills demonstrable**
+   - The resume lists or implies product skills such as A/B testing, PRDs, SQL, Jira, Figma, Amplitude, and Excel, but the experience bullets do not consistently show where they were used.
+   - Either connect each skill to a specific project or remove skills that cannot be supported by the resume.
 
-The file is one page, extracts cleanly, and has no layout or ATS parsing blockers. The full specialist report, including the entry-by-entry findings and bullet IDs, is available with `/report --full`.
+The file itself parses cleanly, fits on one page, and has no layout or ATS extraction blockers. The full specialist report, including the bullet-level findings, is available via `/report --full`.
 
 > /report
 # Review: resume.pdf
 
-**82/100** — format 100 · content 73 · wording 82 · narrative 55
+**81/100** — format 100 · content 71 · wording 82 · narrative 56
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. Repair or remove the MBA Consulting Practicum entry before using the résumé because its merchant-onboarding bullet duplicates Harbor Payments and makes the project appear misattributed.
-2. Move the Campus Food Rescue App ahead of Crestline Logistics so the product-management evidence follows Harbor Payments instead of being buried after four years of operations work.
-3. Combine the two dispute-self-service bullets only after separating their distinct work: keep the requirements and delivery result in one bullet, and use the other for the launch result if it has a measurable customer or business outcome.
+1. Move Education below Experience and Projects, and place Harbor Payments and the MBA product projects before Crestline Logistics so the résumé leads with your product direction.
+2. Remove or relocate the practicum bullet about merchant onboarding because it duplicates Harbor Payments and conflicts with the named hospital-network project.
+3. Identify your product-lead contribution to the app launch instead of presenting only the wider venture’s adoption and environmental result.
 
 ## Already working
 
-- s2:e0:b0: Leads with a strong product outcome.
-- s2:e0:b5: Provides a strong baseline-to-result comparison.
-- s2:e1:b3: Combines ownership, implementation scope, adoption, and a quantified annual benefit.
+- s2:e0:b0: Leads with a meaningful product and business outcome.
+- s2:e0:b5: Combines a specific product change with a strong quantified outcome.
+- s3:e0:b1: Shows a measurable product result with a clear baseline and endpoint.
 
 ## Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
 
-- Combine the two dispute-self-service bullets only after separating their distinct work: keep the requirements and delivery result in one bullet, and use the other for the launch result if it has a measurable customer or business outcome. *(saves about 12 words)*
-- Replace the vague post-launch wording with the specific product decision that the discovery work produced, or remove that clause if it produced no distinct result. *(saves about 5 words)*
-- Specify whether the 35% checkout-conversion improvement was a relative lift or percentage-point gain and identify the comparison period, cohort, or baseline. *(about 7 words to add)*
-- Add the post-launch outcome of dispute self-service, such as a change in self-service adoption, support contacts, resolution time, or dispute cost, rather than reporting only that it shipped ahead of plan. *(about 7 words to add)*
-- Add the customer or business result from launching dispute self-service to all merchants, rather than leaving its scope as the only launch evidence. *(about 7 words to add)*
-- State the size or consequence of the chargeback problem uncovered through the 25 merchant interviews. *(about 5 words to add)*
-- Add the starting open-ticket count or a defined time comparison to the claim that the queue was cut in half. *(about 5 words to add)*
-- Shorten the stakeholder clause in the requirements bullet while preserving the cross-functional ownership. *(saves about 4 words)*
+- Combine the onboarding comparison method with the 9-to-4-day outcome, and state whether the opt-in and old-flow cohorts were matched or otherwise adjusted. *(saves about 8 words and adds about 8 words)*
+- Clarify whether the 35% checkout-conversion improvement is relative or measured in percentage points, and include the baseline conversion rate. *(about 8 words to add)*
+- Add the customer or operational result of dispute self-service rather than presenting delivery two weeks early as the only result. *(about 12 words to add)*
+- Replace the interview count with the size or severity of the chargeback problem uncovered by the merchant research. *(about 8 words to add)*
+- Add the starting or ending queue size and a precise time boundary to the ticket reduction. *(about 9 words to add)*
+- Tighten the Harbor Payments wording by removing repeated “flow,” shortening the team coordination phrase, compressing the business-case clause, and dropping lower-value timing context. *(saves about 16 words)*
 
 ## Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
 
-- Reorder or group the Crestline bullets into a clearer progression from the work performed to the operational improvements delivered, because the strategy, warehouse, S&OP, and route-tool claims currently read as separate workstreams. *(no words)*
-- Replace “Set the company’s logistics strategy” with the specific strategic analysis, decision, or operating model you owned. *(about 8 words to add)*
-- Add the clearest operational or financial consequence of adopting that strategy across every region and business line. *(about 6 words to add)*
-- Add the comparison period or baseline against which the 30% warehouse-pick-error reduction was measured. *(about 4 words to add)*
-- Add the decision or operational change produced by the quarterly S&OP review and one supporting figure, such as forecast accuracy, planning-cycle time, inventory, service level, or forecast-portfolio size. *(about 9 words to add)*
-- Make the S&OP bullet use one tense and remove “for each meeting” after “quarterly S&OP review.” *(saves about 5 words)*
-- Name the key planning capability or process improvement behind the route-planning tool's 1,800 annual driver-hour saving. *(about 5 words to add)*
-- Change “Led the rollout of a route-planning tool” to the more direct “Rolled out a route-planning tool.” *(saves about 2 words)*
+- Replace the late-delivery result measured by excluding weather-delayed shipments because changing the denominator makes the improvement a reporting adjustment rather than an operational result. *(about 8 words to replace)*
+- Add the baseline warehouse error rate or comparison period, and correct the result to “Cut warehouse pick errors by 30%.” *(about 7 words to add)*
+- Add the decision, forecast improvement, service-level result, or planning outcome enabled by the S&OP work. *(about 12 words to add)*
+- Change “prepares” to past tense and remove “for each meeting” because the bullet describes completed work and the quarterly cadence already establishes the meeting frequency. *(saves about 4 words)*
+- Add the calculation basis or the specific routing change behind the claimed 1,800 annual driver-hour savings. *(about 10 words to add)*
 
 ## Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
 
-- Identify your product ownership in the app-launch bullet by naming the product decisions or launch responsibilities you personally led. *(about 7 words to add)*
-- Add the measurement window for the increase from 400 to 1,150 weekly active users and clarify whether pickup reminders were the only material change during that period. *(about 8 words to add)*
-- Quantify the staff coverage or staff time eliminated by the volunteer shift system. *(about 5 words to add)*
-- Replace “Set up” with a more specific implementation verb such as “Built” or “Implemented.” *(no words)*
-- Shorten “that would have been thrown away” to a more direct rescued-food outcome. *(saves about 4 words)*
-- Replace the passive pickup-window clause with “after 60 interviews revealed missed pickup windows.” *(saves about 3 words)*
-- Replace “removing the need for staff to cover gaps” with “eliminating staff coverage gaps.” *(saves about 5 words)*
+- Identify your product-lead contribution to the app launch instead of presenting only the wider venture’s adoption and environmental result. *(about 10 words to add)*
+- Add the period over which weekly active users rose from 400 to 1,150. *(about 5 words to add)*
+- Add the staff hours or shifts eliminated per week to substantiate the claim that the volunteer system removed coverage gaps. *(about 7 words to add)*
+- Replace the long first-year waste clause with a concise year-one result, state that interviews identified missed pickup windows, and replace “Set up” with a more specific operating verb. *(saves about 14 words)*
 
 ## MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
 
-- Repair or remove the MBA Consulting Practicum entry before using the résumé because its merchant-onboarding bullet duplicates Harbor Payments and makes the project appear misattributed. *(no words)*
-- Replace the merchant-onboarding bullet with a result from the Regional Hospital Network project, or move it to the correct engagement before using this entry. *(no words)*
-- Replace “Held weekly working sessions” with the specific scheduling analysis, decision, or process change that those sessions delivered. *(about 8 words to add)*
-- Name the specific outpatient-scheduling problem analyzed and quantify or state the result achieved across the network. *(about 7 words to add)*
-- Rewrite the patient-intake bullet in active voice to show that you mapped the process and shortened the form across four clinics. *(no words)*
-- Add the benefit of shortening the intake form, such as reduced completion time, fewer fields, or fewer intake errors. *(about 5 words to add)*
-- If the merchant-onboarding bullet is moved to its correct entry, define the baseline and timing boundary for the halved time-to-first-payment result and identify the onboarding decision that caused it. *(about 9 words to add)*
+- Remove or relocate the practicum bullet about merchant onboarding because it duplicates Harbor Payments and conflicts with the named hospital-network project. *(saves about 18 words if removed)*
+- Replace the generic meeting description with your team-lead action, the scheduling problem addressed, and the outcome produced across the network. *(about 14 words to add)*
+- Rewrite the intake bullet in active voice to state that you mapped intake and shortened the form, then add the amount of shortening or the measurable burden removed. *(about 14 words to add)*
+- Replace the adoption tail with a direct result that quantifies the operational benefit of front-desk use. *(about 10 words to add)*
+- Remove the merchant-onboarding result from this entry because it duplicates Harbor Payments and refers to a different project. *(saves about 18 words)*
+- Use “Led” instead of “Held,” make the intake actions active, and compress the adoption and first-payment wording where the bullet is retained or replaced. *(saves about 10 words)*
 
 ## Across the whole résumé
 
-- Move the Campus Food Rescue App ahead of Crestline Logistics so the product-management evidence follows Harbor Payments instead of being buried after four years of operations work. *(no words)*
-- Explain the eight-month gap between the B.A. ending in Jun 2018 and Crestline Logistics beginning in Mar 2019. *(about 4 words to add)*
-- Remove the date of birth and nationality from the résumé. *(saves about 9 words)*
+- Move Education below Experience and Projects, and place Harbor Payments and the MBA product projects before Crestline Logistics so the résumé leads with your product direction. *(no words)*
+- Add a dated activity for the eight-month gap between the B.A. and Crestline Logistics if one exists. *(about 5 words to add)*
+- Remove personal demographic details because age, gender, nationality, and photos are excluded by résumé convention. *(saves about 9 words)*
+- Clarify baselines, comparison periods, and measurement definitions wherever the résumé reports a percentage or before-and-after result. *(about 24 words to add)*
+- Replace activity-only bullets with the decision, customer benefit, operational improvement, or planning result they enabled wherever the current line reports responsibility without an outcome. *(about 24 words to add)*
+- Add the measurable staff or patient burden removed from the food-rescue and hospital-intake improvements. *(about 10 words to add)*
+- Demonstrate each listed product tool in a relevant bullet or remove it from Skills, because the résumé currently does not establish use of A/B testing, PRDs, SQL, Jira, Figma, Amplitude, or Excel. *(about 14 words to add per demonstrated tool)*
 
-## Set aside (4)
+## Set aside (5)
 
 Worth knowing, and not worth the space on this page:
 
-- format: age, gender and photos are excluded by convention — "Date of birth: 2 Nov 1996 | Nationality: American"
-- s2:e1:b3: The generic phrase "route-planning tool" does not show what planning change created the hours saved; name the key capability or process improvement if space permits.
-- s3:e1:b2: “by redesigning onboarding” is too broad to show which consulting or process-design decision created the improvement.
-- skills: A/B testing — no experience or project bullet describes running an experiment or comparing variants; a reader would expect this in the Harbor Payments or Campus Food Rescue App entries. (and 6 more like it)
+- s2:e1:b3: "saving 1,800 driver hours a year" would be more defensible with the calculation basis or the specific routing change that produced the savings.
+- s2:e0:b2: "Interviewed 25 merchants" measures research activity, not the size or severity of the chargeback problem uncovered.
+- s2:e0:b4: "merchants who opted into the new flow" may create a self-selected comparison, so state whether the cohorts were matched or otherwise adjusted.
+- s2:e1:b0: The wording "by excluding weather-delayed shipments from the on-time calculation" makes the improvement sound like a reporting adjustment rather than an operational action.
+- s2:e0:b4: "Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one" reports a method without an outcome and should be replaced by the measured result.
 
 
 > /report --full
-Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-879fc4dc.md.
+Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-09e51e14.md.
 

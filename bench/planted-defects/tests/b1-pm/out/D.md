@@ -1,153 +1,167 @@
-# RESUME REVIEW
+# Resume Review
 
-You have strong product and operations experience, with excellent metrics. The main issues are duplication, one clearly misplaced bullet, inconsistent grammar/tense, and unnecessary personal information.
+You have a strong foundation for Associate Product Manager and Product Analyst roles: your experience includes measurable outcomes, customer research, experimentation, roadmap input, and cross-functional execution. The main improvements are removing unnecessary personal information, fixing a duplicated/misplaced bullet, clarifying a few metrics, and making the skills section more specific.
 
-## Highest-Priority Changes
+## Highest-priority changes
 
-1. **Remove date of birth and nationality**
-   - These are not needed for U.S. applications and can introduce bias.
-   - Also remove “USA” after each location if space is limited.
+### 1. Remove date of birth and nationality
 
-2. **Fix the duplicate/misplaced bullets**
-   - The bullet about reducing first payment time appears twice:
-     - Correctly under Harbor Payments
-     - Incorrectly under the hospital consulting practicum
-   - Remove it from the practicum section.
-   - “Launched dispute self-service…” duplicates the earlier dispute self-service bullet and should be deleted or combined.
+Delete:
 
-3. **Use consistent tense**
-   - Completed roles: past tense.
-   - Current project: present tense.
-   - For example, change “prepares” to “prepared” in the Crestline role.
+> Date of birth: 2 Nov 1996 | Nationality: American
 
-4. **Clarify vague claims**
-   - “Set the company’s logistics strategy” is impressive but too broad without scope or outcome.
-   - Add the number of regions, business lines, cost savings, service-level improvement, or other measurable result if available.
+These details are unnecessary in the U.S. and can introduce bias or screening issues. Keep only:
 
-5. **Strengthen the skills section**
-   - Organize it by category and include product analytics terminology.
-   - Only list tools you can discuss confidently in an interview.
+> Phone | Email | LinkedIn | Portfolio
 
-6. **Improve the hospital project**
-   - Explain the problem, your analysis, and the operational result.
-   - Add metrics such as reduced intake time, fewer fields, or number of patients affected if available.
+Also replace `example.com/in/riley-chen` with a properly labeled LinkedIn URL if that is what it represents.
 
 ---
 
-# RECOMMENDED VERSION
+### 2. Fix the duplicated/misplaced project bullet
 
-```text
-RILEY CHEN
-+1 (555) 010-7731 | riley.chen@example.com | linkedin.com/in/riley-chen
+This bullet under **MBA Consulting Practicum** clearly belongs to Harbor Payments:
 
-EDUCATION
+> Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
 
-Northfield School of Management | MBA
-Metro City, USA | Expected Jun 2025
+It duplicates this Harbor bullet:
 
-Lakeview University | B.A. in Economics
-Lake City, USA | Jun 2018
+> Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
 
-EXPERIENCE
+Remove it from the consulting project. Replace it with a specific hospital-project outcome, such as the number of clinics affected, minutes saved, adoption rate, or patient-volume impact. If you do not have a metric, describe the deliverable and implementation more clearly.
 
-Harbor Payments | Associate Product Manager Intern
+---
+
+### 3. Clarify the checkout conversion metric
+
+This bullet is potentially excellent, but “improved conversion by 35%” is ambiguous:
+
+> Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.
+
+Clarify whether this means:
+
+- a 35% relative increase, such as 20% to 27%; or
+- a 35 percentage-point increase, such as 40% to 75%.
+
+Also, “for all merchants” may be too broad unless the change truly rolled out universally. A stronger version would be:
+
+> Increased checkout conversion by 35% relative by replacing the three-step flow with a one-page experience across the merchant base.
+
+If the result came from an A/B test, say so:
+
+> Increased checkout conversion by 35% relative in an A/B test by replacing the three-step flow with a one-page experience.
+
+---
+
+### 4. Reframe the late-delivery bullet
+
+This bullet currently sounds like the metric improved because you changed the definition:
+
+> Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
+
+That may raise concerns because it suggests the performance improvement was achieved by excluding unfavorable data rather than improving operations. Consider separating reporting from actual operational improvement:
+
+> Reworked on-time delivery reporting to distinguish controllable delays from weather-related disruptions, giving operations leaders a more accurate view of carrier and warehouse performance.
+
+If excluding weather delays genuinely led to operational decisions, explain the resulting action and outcome. Otherwise, do not present the reporting change as a reduction in late deliveries.
+
+---
+
+### 5. Use consistent tense
+
+This bullet uses present tense in an otherwise historical role:
+
+> Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.
+
+Change it to:
+
+> Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for each meeting.
+
+Use present tense only for the current project.
+
+---
+
+### 6. Make the skills section more targeted
+
+Your current skills section is good but could be more ATS-friendly and more specific:
+
+> Product: roadmapping, A/B testing, user interviews, PRDs, SQL  
+> Tools: Jira, Figma, Amplitude, Excel
+
+Recommended version:
+
+**Product:** Product discovery, user interviews, roadmap prioritization, PRDs, requirements definition, experimentation, KPI definition, stakeholder management  
+**Analytics:** SQL, A/B testing, funnel analysis, cohort analysis, product metrics  
+**Tools:** Jira, Figma, Amplitude, Excel
+
+Only include skills you can discuss confidently in an interview. If applicable, add specific SQL capabilities such as joins, aggregations, window functions, or dashboarding tools.
+
+---
+
+# Suggested revised resume
+
+## Riley Chen
+
++1 (555) 010-7731 | riley.chen@example.com | LinkedIn: linkedin.com/in/riley-chen | Portfolio: example.com
+
+### EDUCATION
+
+**Northfield School of Management** — MBA  
+Metro City, USA | Sep 2023 – Jun 2025
+
+**Lakeview University** — B.A. in Economics  
+Lake City, USA | Sep 2014 – Jun 2018
+
+### EXPERIENCE
+
+**Harbor Payments** — Associate Product Manager Intern  
 Metro City, USA | Jun 2024 – Aug 2024
 
-• Increased checkout conversion by 35% by replacing a three-step checkout flow with a one-page experience across the merchant base.
-• Defined requirements and success metrics for a dispute self-service product, aligning engineering, risk, and support teams; delivered the product two weeks ahead of schedule.
-• Interviewed 25 merchants to size the chargeback problem and developed the business case that drove the following quarter’s roadmap prioritization.
-• Led weekly engineering and support triage, closing 140 onboarding tickets and reducing the open-ticket queue by 50%.
-• Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 days across 2,300 merchants in the pilot region.
+- Increased checkout conversion by 35% [clarify relative vs. percentage-point increase] by replacing the three-step checkout flow with a one-page experience.
+- Defined requirements, success metrics, and launch criteria for a dispute self-service product, aligning engineering, risk, and support; the team shipped two weeks ahead of plan.
+- Conducted 25 merchant interviews to size the chargeback problem and translated findings into a business case that secured the initiative as a next-quarter roadmap priority.
+- Led weekly triage with engineering and support, resolving 140 onboarding tickets and reducing the open-ticket queue by 50%.
+- Designed an evaluation comparing merchants using the redesigned onboarding flow with merchants remaining on the legacy flow.
+- Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 days across 2,300 new merchants in the pilot region.
 
-Crestline Logistics | Operations Analyst
+**Crestline Logistics** — Operations Analyst  
 Lake City, USA | Mar 2019 – Aug 2023
 
-• Developed a logistics strategy adopted across [number] regions and [number] business lines, aligning operational priorities across the company.
-• Reduced warehouse picking errors by 30% at two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.
-• Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials used for cross-functional planning.
-• Led deployment of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.
+- Reworked on-time delivery reporting to distinguish weather-related disruptions from controllable delays, improving visibility into operational performance.
+- Reduced warehouse pick errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.
+- Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials for each meeting.
+- Led rollout of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.
 
-PROJECTS
+### PROJECTS
 
-Campus Food Rescue App | Product Lead, Student Venture
-Oct 2023 – Present
+**Campus Food Rescue App** — Product Lead  
+Student Venture | Oct 2023 – Present
 
-• Launched a surplus-food pickup app for 3,100 students across two dining halls, redistributing 9 tonnes of food in its first year.
-• Increased weekly active users from 400 to 1,150 by introducing pickup reminders based on insights from 60 user interviews.
-• Designed a volunteer scheduling system with two dining halls, filling 95% of pickup slots each week and eliminating the need for staff to cover volunteer gaps.
+- Launched a surplus-food pickup app for 3,100 students across two dining halls, redistributing 9 tonnes of food during its first year.
+- Increased weekly active users from 400 to 1,150 by adding pickup reminders based on findings from 60 student interviews.
+- Designed and implemented a volunteer shift system with two dining halls, filling 95% of pickup slots each week and eliminating the need for staff to cover volunteer gaps.
 
-MBA Consulting Practicum | Team Lead, Regional Hospital Network
-Jan 2024 – May 2024
+**MBA Consulting Practicum** — Team Lead  
+Regional Hospital Network | Jan 2024 – May 2024
 
-• Led weekly working sessions with clinic managers to analyze outpatient scheduling and patient-intake processes across a regional hospital network.
-• Mapped the intake process at four clinics and redesigned the patient intake form; the revised process was adopted by front-desk staff.
-• [Add measurable result, such as: Reduced average intake time by X%, removed X form fields, or affected approximately X patients per week.]
+- Led weekly working sessions with clinic managers to assess outpatient scheduling and patient intake across the network.
+- Mapped patient intake processes at four clinics and redesigned the intake form to reduce unnecessary steps; changes were adopted by front-desk staff.
+- Add a measurable result here, such as reduced intake time, fewer incomplete forms, increased patient throughput, or adoption across a certain number of clinics.
 
-SKILLS
+### SKILLS
 
-Product: Product discovery, user interviews, roadmap prioritization, PRDs, requirements definition, A/B testing, success metrics
+**Product:** Product discovery, user interviews, roadmap prioritization, PRDs, requirements definition, experimentation, KPI definition, stakeholder management  
+**Analytics:** SQL, A/B testing, funnel analysis, cohort analysis, product metrics  
+**Tools:** Jira, Figma, Amplitude, Excel
 
-Analytics: SQL, Amplitude, Excel
+## Additional recommendations
 
-Tools: Jira, Figma
-```
+- Keep the resume to one page if possible, especially for APM and early-career PM roles.
+- Put the strongest and most product-relevant bullets first in each role.
+- Add a LinkedIn URL and portfolio only if they are complete and professional.
+- If you have a GitHub, include it only if it contains relevant analytics, product, or technical projects.
+- Add MBA achievements if relevant: case competition, product club leadership, entrepreneurship, scholarships, or notable coursework.
+- For the hospital practicum, do not leave the section with only descriptive bullets. Add at least one measurable outcome.
+- Make sure every metric is defensible. Be prepared to explain the baseline, measurement period, population, and your specific contribution for each result.
 
-## Bullet-Level Notes
-
-### Harbor Payments
-
-The strongest bullets are:
-
-- Checkout conversion improvement
-- Dispute self-service requirements and delivery
-- Merchant research and roadmap prioritization
-- Onboarding improvement across 2,300 merchants
-
-The ticket-triage bullet is useful because it demonstrates execution and cross-functional collaboration, but consider removing it if you need to fit the resume on one page.
-
-The dispute self-service content currently appears twice:
-
-> Wrote the requirements and success metrics...
-
-and
-
-> Launched dispute self-service to all merchants...
-
-Keep the first version because it has a clearer outcome. If you have a launch metric—adoption, reduction in support contacts, resolution time, or dispute-processing cost—replace it with a stronger launch bullet.
-
-### Crestline Logistics
-
-The first bullet needs evidence. Replace it with something like this if accurate:
-
-> Developed a logistics strategy adopted across 5 regions and 3 business lines, improving [cost/service-level metric] by [X%].
-
-Avoid “set the company’s strategy” unless you personally owned the strategy end to end and can defend that claim in an interview.
-
-### MBA Consulting Practicum
-
-The current third bullet is unrelated:
-
-> Halved the time it takes a new merchant to receive a first payment...
-
-That belongs under Harbor Payments and should be removed from the hospital project.
-
-The practicum would be significantly stronger with one measurable outcome. For example:
-
-> Shortened the patient intake form from 18 to 11 fields and reduced average registration time by 20% across four clinics.
-
-Use actual numbers only.
-
-# Formatting and Positioning Recommendations
-
-- Keep the resume to **one page** if you have less than roughly 8–10 years of relevant experience.
-- Use a standard LinkedIn URL rather than `example.com/in/riley-chen`.
-- Add a GitHub, portfolio, or product case-study link only if it contains relevant work.
-- Do not use tables, icons, graphics, skill bars, or columns that may interfere with ATS parsing.
-- Use consistent date formatting: `Jun 2024 – Aug 2024`.
-- Consider putting **Experience before Education** if applying for product roles and the MBA is not the primary selling point. Keep Education first if you are actively recruiting through the MBA program.
-- If your GPA is strong, add it. Otherwise, omit it.
-- If targeting Product Manager or Associate Product Manager roles, consider a short summary such as:
-
-> MBA candidate and product/operations professional with experience improving conversion, onboarding, and operational workflows. Skilled in customer discovery, product requirements, experimentation, SQL, and cross-functional delivery.
-
-This summary is optional; use it only if it helps target a specific role.
+Overall, the resume is already competitive for APM, product operations, growth product, and product analyst roles. The biggest opportunity is to make the evidence more precise and eliminate anything that could create doubt about how the results were measured.

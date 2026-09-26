@@ -1,109 +1,115 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/C.md",
-  "recall": 8,
+  "recall": 6,
   "found": [
     "W2",
     "W6",
-    "A2",
     "A3",
     "S1",
     "S3",
-    "T1",
-    "T3"
+    "T1"
   ],
   "coverage": false,
-  "suggestions": 28,
-  "words": 1183,
-  "quotes": 5,
-  "grounded": 1,
-  "rewrites": 15,
-  "inventedNumbers": [],
+  "suggestions": 34,
+  "words": 1354,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 19,
+  "inventedNumbers": [
+    "25",
+    "24",
+    "25"
+  ],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3503,
-    "completion_tokens": 12244,
-    "total_tokens": 15747,
+    "prompt_tokens": 3823,
+    "completion_tokens": 16186,
+    "total_tokens": 20009,
     "prompt_tokens_details": {
-      "cached_tokens": 256
+      "cached_tokens": 0
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11198
+      "reasoning_tokens": 15331
     },
-    "prompt_cache_hit_tokens": 256,
-    "prompt_cache_miss_tokens": 3247
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3823
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Derived a variance bound for a sparse regression estimator, improving the previous rate by a logarithmic factor; incorporated as Section 3 of a manuscript under review at JASA."
+        "evidence": "Be careful with “my proof” if this is collaborative work. “Derived” communicates ownership without sounding informal."
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "Correct the typo: “econometircs” → “econometrics”"
+        "evidence": "Fix the typo > time-series **econometircs** should be: time-series **econometrics**"
       },
       {
         "id": "A2",
-        "found": true,
-        "evidence": "Increased directional accuracy from 52% to 58% and reduced forecast error from 0.20 to 0.15."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "A decline from 0.20 to 0.15 is a 25% reduction, not 33%"
+        "evidence": "Going from 0.20 to 0.15 is a **25% reduction**, not 33%"
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "Built a point-in-time feature store covering 120 microstructure features across six venues; deduplicated late prints and versioned schemas for reuse in two subsequent projects."
+        "evidence": "The opening modifier is awkward ... Rewrite: > Built a point-in-time feature store spanning 120 microstructure features across six venues"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The last bullet is overloaded. The package is the strongest part; remove unrelated administrative tasks or give them a separate bullet if important."
+        "evidence": "The final bullet is overloaded ... The 3,000 downloads are the valuable result. Give that its own bullet"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "If parameters were tuned on the full dataset, results from that period are not out-of-sample."
+        "evidence": "daily Sharpe is annualized by multiplying by **√252**, not 252"
       },
       {
         "id": "T3",
-        "found": true,
-        "evidence": "A test robust to heteroskedasticity can assess statistical significance; it cannot confirm the absence of look-ahead leakage."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "N1",
         "found": false,
-        "evidence": "This is useful evidence of leadership but is less relevant now. Compress it to one bullet if you need space."
+        "evidence": ""
       },
       {
         "id": "N4",
         "found": false,
-        "evidence": "Only include Kafka if you can discuss using it in practice."
+        "evidence": ""
       }
     ],
     "coverage": false,
-    "suggestions": 28,
+    "suggestions": 34,
     "rewrites": [
-      "Tuned parameters using rolling training and validation windows, then evaluated the locked specification on an untouched 18-month test set.",
-      "Audited timestamps and point-in-time joins across six venues to prevent look-ahead leakage and used HAC-robust inference to assess the signal’s Sharpe ratio.",
-      "Improved out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices using a temporal convolutional network with realized-volatility features.\nIncreased directional accuracy from 52% to 58% and reduced forecast error from 0.20 to 0.15.",
-      "Built a point-in-time feature store covering 120 microstructure features across six venues; deduplicated late prints and versioned schemas for reuse in two subsequent projects.",
-      "increased portfolio Sharpe by 0.4",
-      "after estimated transaction costs",
-      "Developed a short-horizon order-book imbalance signal for liquid index futures that increased portfolio Sharpe by 0.4 over an untouched 18-month test period after estimated transaction costs.\nReduced daily turnover from 34% to 21% using cost-aware position smoothing while retaining 90% of gross returns and lowering estimated slippage by 33%.\nEvaluated robustness across six years of tick data using rolling time-series validation and HAC-adjusted performance inference.\nBuilt a point-in-time feature store covering 120 microstructure features across six venues; deduplicated late prints and versioned schemas for reuse in two subsequent projects.",
-      "Released an open-source R package for high-dimensional covariance estimation, reaching 3,000 downloads in its first year.",
-      "Derived a variance bound for a sparse regression estimator, improving the previous rate by a logarithmic factor; incorporated as Section 3 of a manuscript under review at JASA.",
-      "Supervised six employees and managed inventory and supplier orders, reducing unsold bread from 12% to 7% while meeting weekly labor budgets.",
-      "Placed 41st among 2,900 teams—top 2% on the private leaderboard—using a gradient-boosting ensemble trained on 300 engineered features.",
-      "econometrics",
-      "Languages: Python, C++, SQL, R\nTools: PyTorch, Kafka, Git, Linux\nMethods: Time-series econometrics, Bayesian inference, gradient boosting, Monte Carlo methods",
-      "Ridgeway University, Metro City, USA\nPh.D. Candidate in Statistics, Expected May 2026\nB.S. in Mathematics, May 2020",
-      "Jun 2025–Aug 2025"
+      "Reduced forecast error from 0.20 to 0.15 (25%) by adding realized-volatility features and an asymmetric loss.",
+      "time-series **econometrics**",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures that increased simulated portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.",
+      "Reduced daily turnover from 34% to 21% using a cost-aware position smoother, retaining 90% of gross returns while lowering estimated slippage by 33%.",
+      "Evaluated forecast improvements against a HAR-RV baseline across 30 indices using Diebold–Mariano tests with HAC standard errors.",
+      "...finding statistically significant improvements on 24 of 30 indices at the 5% level.",
+      "Built a point-in-time feature store spanning 120 microstructure features across six venues; deduplicated late prints and versioned schemas, enabling reuse in two subsequent research projects.",
+      "Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki.",
+      "Developed a temporal convolutional model for realized-volatility forecasting across 30 equity indices, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline.",
+      "Increased directional accuracy from 52% to 58% by incorporating realized-volatility features and an asymmetric loss.",
+      "Reduced out-of-sample MAE from 0.20 to 0.15 (25%)...",
+      "Released an open-source R package for high-dimensional covariance estimation that received 3,000 downloads in its first year.",
+      "Derived a variance bound for a sparse regression estimator, improving the prior bound by a logarithmic factor; the result appears in Section 3 of a manuscript under review at *JASA*.",
+      "**Ridgeway University**, Metro City, USA\nPh.D. Candidate in Statistics, expected May 2026\nDissertation: *[Title or concise topic]* | Adviser: *[Name]*",
+      "Ph.D. in Statistics, expected May 2026",
+      "B.S. in Mathematics, May 2020",
+      "**Languages:** Python, R, SQL, C++\n**Machine Learning & Statistics:** Time-series econometrics, Bayesian inference, gradient boosting, deep learning\n**Tools:** PyTorch, Kafka",
+      "Supervised opening shifts and a six-person team while meeting weekly labor-budget targets.\nReduced unsold bread from 12% to 7% of production by improving inventory counts and supplier ordering.",
+      "GitHub: github.com/mpatel"
     ],
     "falsePositives": []
   }

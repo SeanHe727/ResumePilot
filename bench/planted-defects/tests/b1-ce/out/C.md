@@ -1,170 +1,161 @@
-Your resume has strong technical depth and unusually good metrics, but a few credibility, methodology, and clarity issues could hurt you. The highest-priority changes are below.
+Your resume is already strong: it is metric-heavy, technically credible in many places, and focused on outcomes. The biggest opportunities are correcting inconsistencies, simplifying jargon, and prioritizing your strongest bullets.
 
-## Critical fixes
+## Highest-priority changes
 
-### 1. Remove or correct the test-set leakage bullet
+### 1. Put experience in reverse chronological order
 
-This bullet is a major red flag:
+Your internship is more recent than Eastern Robotics, so it should appear first:
 
-> Trained the triage classifier with early stopping on the test set, then reported its 91% test accuracy as held-out performance.
+1. Mobility Systems Company — Oct 2024–May 2025  
+2. Eastern Robotics Co. — Aug 2022–Jul 2024
 
-Early stopping on the test set means it is no longer an untouched test set, so the 91% cannot be described as held-out performance.
+### 2. Correct two metric statements
 
-If you later corrected the methodology, write something like:
+These will be noticed immediately:
 
-> Identified and corrected test-set leakage by introducing a separate validation split for early stopping, then re-evaluated the final model on an untouched test set.
+- **900 ms to 600 ms is a 33% reduction, not 50%.**
+- **71% to 83% is an increase of 12 percentage points**, not simply “12%.” It is approximately a 17% relative increase.
 
-If it was not corrected, remove the bullet and do not claim the 91% result.
+Use:
 
-### 2. Correct the percentage calculations
+> Reduced p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.
 
-This is a **33% reduction**, not 50%:
+> Increased benchmark task-completion rate by 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with partial context.
 
-> Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction...
+### 3. Resolve the apparent GRPO contradiction
 
-Correct version:
+These bullets conflict:
 
-> Cut p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.
+- “Using grouped tool-use rollouts… and a GRPO loop…”
+- “sampling a single rollout per prompt…”
 
-This is **12 percentage points**, not necessarily 12%:
+GRPO typically relies on multiple outputs in a group to calculate relative advantages. A technical reviewer may challenge this. Clarify what “single rollout” means—for example, one trajectory per sampling call but multiple trajectories grouped for each update—or avoid calling the method GRPO if there was genuinely only one completion per prompt.
 
-> Raised the runtime’s task-completion rate by 12% ... from 71% to 83%...
+Also, the first GRPO bullet is too method-heavy for a 5% result. Consider removing it unless you are targeting research-heavy LLM roles.
 
-Correct version:
+### 4. Clarify the dynamic-batching claim
 
-> Raised benchmark task-completion rate 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with retained partial context.
+This wording may sound contradictory:
 
-These errors can make recruiters question your other metrics.
+> Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.
 
-### 3. Put experience in reverse chronological order
+Dynamic batching usually improves throughput or concurrent-request performance, not isolated single-request latency. If the reduction came from INT8 quantization, engine compilation, optimized serving, or micro-batching under production traffic, name the actual mechanism accurately.
 
-Move **Mobility Systems Company** above **Eastern Robotics Co.** because it is more recent.
+For example:
 
-### 4. Rewrite the technically confusing routing bullet
+> Reduced p95 edge-inference latency 40% by deploying an INT8-optimized engine and tuning the serving pipeline.
 
-This phrasing is questionable:
+### 5. Remove the vague “AI-first” bullet
 
-> uses cross-entropy to rank ... findings by statistical significance
-
-Cross-entropy is normally a training loss, while statistical significance has a different technical meaning. Unless you specifically calculated significance tests or p-values, rewrite it more precisely:
-
-> Trained a routing model with cross-entropy loss to rank findings from 3 specialist agents before reviewer evaluation.
-
-Better still, include a measurable result if available:
-
-> Trained a routing model to prioritize findings from 3 specialist agents, reducing reviewer triage time by X%.
-
-## Improve clarity and impact
-
-### 5. Remove the generic project bullet
-
-This says little about what you built:
+This is much weaker than the rest of the resume:
 
 > Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.
 
-Replace it with concrete adoption or scope:
+It contains no concrete action, scope, or result. Replace it with adoption metrics—users, teams, releases, GitHub stars, tasks completed—or delete it.
 
-> Built a TypeScript runtime for orchestrating multi-agent tool calls, retries, caching, and context handoffs across X workflows.
+## Improve readability and concision
 
-Or, if you have usage data:
+Several bullets are overloaded with multiple unrelated accomplishments. Keep each bullet to one primary accomplishment and ideally no more than two lines.
 
-> Built a TypeScript multi-agent runtime adopted by X projects and Y developers for tool execution, retries, and sub-agent orchestration.
+### Eastern Robotics migration bullet
 
-### 6. Shorten the overloaded migration bullet
+Current version combines:
 
-The current bullet combines migration, logging, onboarding, and on-call work. Split it:
+- 30-service migration
+- logging-library rewrite
+- onboarding two hires
+- weekend on-call
+- backlog elimination
 
-> Migrated 30 robot-fleet services from cron jobs to an event queue, eliminating nightly backlogs that delayed morning dispatch.  
-> Rewrote the shared logging library, onboarded 2 engineers, and supported the weekend on-call rotation.
+Split or prioritize the strongest result:
 
-If space is limited, keep only the migration bullet because it has the strongest result.
+> Eliminated nightly processing backlogs that delayed morning dispatch by migrating 30 robot-fleet services from cron jobs to an event-driven queue.
 
-### 7. Simplify dense ML jargon
+Then, if space permits:
 
-This bullet is difficult to scan:
+> Rewrote the shared logging library and onboarded two engineers to the new event-driven architecture.
 
-> Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.
+Taking over weekend on-call is less valuable unless you can connect it to reliability, incident response, or reduced downtime.
 
-A clearer version:
+### Mobility Systems
 
-> Fine-tuned agent behavior with GRPO using rewards for accuracy, citation validity, and tool-call efficiency, reducing end-to-end latency 5%.
+You currently have six bullets. Reduce this to four or five, prioritizing:
 
-If the model quality stayed constant or improved, say so:
+1. 68% backlog reduction  
+2. Accuracy increase from 71% to 79%  
+3. 40% latency reduction  
+4. Runbook adoption  
+5. One accurate GRPO accomplishment, only if important for the target role
 
-> Reduced end-to-end latency 5% without lowering diagnostic accuracy by optimizing agent tool use with GRPO.
+A cleaner version:
 
-### 8. Clarify the diagnostics ownership bullet
+- Reduced the diagnostic-case backlog 68% in the first quarter after launch by building an ML triage path that screened 800+ sensor signals per case.
+- Improved held-out diagnostic accuracy from 71% to 79% across 1,200 cases by fine-tuning a domain adapter on validated tool-use trajectories.
+- Reduced p95 edge-inference latency 40% by deploying an INT8-optimized engine and tuning the serving pipeline.
+- Authored abstention and escalation procedures adopted as the on-call review team’s runbook.
 
-Current wording makes it sound as if you “owned the on-call rotation”:
+“Assistant-only loss masking” is a valid technical detail, but it may be better saved for interviews unless it was central to the improvement.
 
-> Owned the diagnostics service’s monitoring dashboards across two major releases and the on-call rotation that used them.
+## Suggested bullet revisions
 
-Rewrite:
+### Eastern Robotics Co.
 
-> Owned monitoring dashboards for the diagnostics service across 2 major releases and supported the on-call rotation using them.
+- Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent performance regressions.
+- Shortened perception-model release cycles from two weeks to three days by adding automated regression checks to the CI pipeline.
+- Eliminated nightly backlogs that delayed morning dispatch by migrating 30 robot-fleet services from cron jobs to an event-driven queue.
+- Owned diagnostics monitoring and on-call operations across two major releases.
 
-Add an operational metric if possible—incident detection time, false alerts, MTTR, or uptime.
+The final bullet would be stronger with an outcome such as fewer incidents, faster detection, or reduced mean time to recovery.
 
-## Suggested revised structure
+### Agent Runtime Suite
 
-### EXPERIENCE
+Change “Owner” to **Creator** or **Creator and Maintainer** if accurate.
 
-**Mobility Systems Company — Machine Learning Engineering Intern**  
-Metro City, USA | Oct 2024–May 2025
+- Reduced p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.
+- Increased benchmark task-completion rate by 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with partial context.
 
-- Built an ML-based diagnostics triage pipeline that screened 800+ sensor signals per case, reducing the pending-case backlog 68% in its first quarter.
-- Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.
-- Trained a routing model to prioritize findings from 3 specialist agents before reviewer evaluation.
-- Fine-tuned agent behavior with GRPO using rewards for accuracy, citation validity, and tool-call efficiency, reducing end-to-end latency 5%.
-- Documented abstention criteria and escalation paths adopted as the on-call reviewers’ operating runbook.
-- If applicable: Identified and corrected test-set leakage by separating validation-based early stopping from final evaluation on an untouched test set.
+Add a scope or adoption bullet if possible:
 
-**Eastern Robotics Co. — Junior Software Engineer**  
-Metro City, Country | Aug 2022–Jul 2024
+- Number of users or teams
+- Number of agents/tools supported
+- Requests or tasks processed
+- Open-source stars, forks, or contributors
+- Production deployment or benchmark size
 
-- Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regressions.
-- Shortened perception-model release cycles from 2 weeks to 3 days by adding automated regression checks to the CI pipeline.
-- Migrated 30 robot-fleet services from cron jobs to an event queue, eliminating nightly backlogs that delayed morning dispatch.
-- Owned monitoring dashboards for the diagnostics service across 2 major releases and supported the on-call rotation.
-- Rewrote the shared logging library and onboarded 2 new engineers.
+### Research-Agent Evaluation Framework
 
-### PROJECTS
+This is one of your strongest sections. Tighten the wording slightly:
 
-**Agent Runtime Suite — Lead Developer**  
-TypeScript, Multi-Agent Systems | Aug 2025–Present
+- Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.
+- Validated evaluator sensitivity to injected degradation, achieving Kendall’s τ of 0.89 across 400+ report-level trials involving removed citations, sources, and claims.
+- Identified three pipeline defects in stability, source handling, and parameter propagation using layered instrumentation; all three were fixed upstream.
 
-- Built a TypeScript runtime for multi-agent tool execution, caching, retries, and context handoffs.
-- Cut p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.
-- Raised benchmark task-completion rate 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with retained partial context.
+## Reorganize the skills section
 
-“Lead Developer” or “Creator” is usually clearer than “Owner.”
-
-**Research-Agent Evaluation Framework — Contributor**  
-LLM Evaluation | Feb 2025–Jul 2025
-
-- Contributed 8 citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in its default release benchmark.
-- Demonstrated that the evaluator tracked injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials involving removed citations, sources, and claims.
-- Used layered instrumentation to trace 3 defects in stability, sourcing, and parameter handling; all were fixed upstream.
-
-## Skills section
-
-Reorganize this section because Kubernetes is not an “ML & Agents” skill, and Git is not a programming language.
+Git is not a programming language, and Kubernetes does not belong under “ML & Agents.” Use:
 
 **Languages:** Python, TypeScript, SQL, Bash  
-**ML/LLM:** PyTorch, LoRA, GRPO, RAG, LangGraph, agent evaluation  
-**Tools/Infrastructure:** Git, Kubernetes
+**ML/LLM:** PyTorch, LoRA, RAG, LangGraph, GRPO, agent evaluation  
+**Infrastructure & Tools:** Kubernetes, Git, CI/CD
 
-Only list technologies you would be comfortable discussing in an interview.
+Only retain GRPO if you can explain the implementation clearly in an interview. Add C/C++ only if you are genuinely comfortable using them; they may be valuable for computer engineering and robotics roles.
 
-## Formatting and presentation
+## Formatting and consistency
 
-- Keep bullets to roughly one or two lines where possible.
-- Prevent awkward word breaks such as `on- / call`.
-- Use consistent date punctuation: `Sep 2024–Expected Jun 2026`.
-- Replace the placeholder portfolio URL with a recognizable GitHub or personal-site link.
-- Make project names clickable in the PDF if public.
-- If the projects are public, include repository evidence such as stars, contributors, merged PRs, downloads, or users.
-- Keep the resume to one page at your experience level.
-- A summary is optional; your space is better spent on quantified experience unless you need to explain a specific specialization.
+- Use American spelling for U.S. applications: **“stabilized,” not “stabilised.”**
+- Use consistent date formatting, preferably `Sep 2024 – Jun 2026`.
+- Label your code link clearly as **GitHub**, **Portfolio**, or **Personal Site** rather than displaying an ambiguous URL.
+- Keep punctuation consistent: either end every bullet with a period or none.
+- Consider adding GPA only if it is strong.
+- Do not add a summary unless you need to clarify a specific target, such as “ML systems engineer specializing in agent evaluation and inference optimization.”
 
-Overall, the resume’s core material is strong. The biggest gains will come from fixing the evaluation-methodology issue, correcting the math, reducing jargon, and making each bullet communicate one clear accomplishment.
+## Recommended overall order
+
+1. Education  
+2. Experience  
+   - Mobility Systems Company  
+   - Eastern Robotics Co.  
+3. Projects  
+4. Skills  
+
+Your main positioning should be **ML systems / LLM infrastructure engineer with prior production software and robotics experience**. The resume already supports that story; it mainly needs tighter wording and removal of claims that could create technical credibility questions.

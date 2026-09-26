@@ -1,59 +1,56 @@
 {
   "file": "bench/planted-defects/tests/b1-ce/out/D.md",
-  "recall": 8,
+  "recall": 6,
   "found": [
-    "W1",
     "W5",
     "A2",
     "A3",
+    "S1",
     "S3",
-    "T1",
-    "T3",
     "N2"
   ],
   "coverage": false,
-  "suggestions": 25,
-  "words": 1899,
+  "suggestions": 36,
+  "words": 1628,
   "quotes": 0,
   "grounded": 0,
-  "rewrites": 26,
+  "rewrites": 24,
   "inventedNumbers": [
     "33",
-    "4"
+    "11",
+    "33"
   ],
-  "falsePositives": [
-    "If the internship occurred while you were enrolled in your M.S., make that clear through the dates."
-  ],
+  "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4483,
-    "completion_tokens": 12544,
-    "total_tokens": 17027,
+    "prompt_tokens": 4118,
+    "completion_tokens": 15782,
+    "total_tokens": 19900,
     "prompt_tokens_details": {
-      "cached_tokens": 256
+      "cached_tokens": 0
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11250
+      "reasoning_tokens": 14433
     },
-    "prompt_cache_hit_tokens": 256,
-    "prompt_cache_miss_tokens": 4227
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4118
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
-        "found": true,
-        "evidence": "Owned is acceptable, but the impact is unclear. Add the monitoring technology or operational outcome"
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "This bullet is too generic... lacks a concrete result and sounds like résumé marketing language"
+        "evidence": "This bullet is too generic: ... It does not explain what you built or how adoption was measured."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "12 percentage points, or 16.9% relative improvement... Avoid saying 'raised by 12%' because it is ambiguous and technically inaccurate"
+        "evidence": "Increased task-completion rate from 71% to 83% on the [benchmark name] benchmark by retrying failed sub-agent calls with preserved partial context."
       },
       {
         "id": "A3",
@@ -62,28 +59,28 @@
       },
       {
         "id": "S1",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "Reduced end-to-end triage latency by 5% by implementing grouped tool-use rollouts, a composite reward for accuracy, citation validity, and call count, and a GRPO loop with a frozen SFT reference."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "This contains too many accomplishments in one sentence. Split it:"
+        "evidence": "The last sentence from your original bullet was overloaded."
       },
       {
         "id": "T1",
-        "found": true,
-        "evidence": "Using the test set for early stopping means it is no longer a valid held-out evaluation set."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "T3",
-        "found": true,
-        "evidence": "Cross-entropy is generally a loss function, not something normally described as ranking findings by statistical significance."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "Your dates currently place the 2024–2025 internship after the 2022–2024 full-time role. Use reverse chronological order:"
+        "evidence": "The internship currently appears after the older full-time role."
       },
       {
         "id": "N4",
@@ -92,37 +89,33 @@
       }
     ],
     "coverage": false,
-    "suggestions": 25,
+    "suggestions": 36,
     "rewrites": [
-      "Trained the triage classifier with early stopping on a validation split and reported 91% accuracy on a separate held-out test set.",
-      "Reduced p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.",
-      "Increased benchmark task-completion rate from 71% to 83%—a 12-percentage-point improvement—by retrying failed sub-agent calls with partial context.",
-      "Built reusable TypeScript runtime components for tool invocation, sub-agent coordination, retries, and result caching, enabling downstream teams to integrate multi-agent workflows.",
-      "Integrated by 4 downstream teams to standardize tool invocation, retries, and sub-agent coordination.",
-      "Built an ML-assisted diagnostics triage pipeline that analyzed 800+ sensor signals per case, reducing the pending-case backlog by 68% during the first quarter after launch.",
-      "Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a parameter-efficient domain adapter on validated tool-use trajectories with assistant-only loss masking.",
-      "Designed a routing layer that scored and prioritized findings from three specialist agents before human review, reducing reviewer workload and surfacing the most relevant evidence first.",
-      "Designed a routing layer that used calibrated classifier probabilities to rank findings from three specialist agents before human review.",
-      "Applied grouped tool-use rollouts and GRPO with a frozen SFT reference, optimizing a composite reward for accuracy, citation validity, and tool-call efficiency; reduced end-to-end latency by 5%.",
-      "Authored abstention rules and escalation paths for on-call reviewers; the documentation was adopted as the team’s operating runbook.",
-      "Built and maintained monitoring dashboards for the diagnostics service across two major releases, supporting the on-call rotation and incident triage.",
-      "Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regression.",
-      "Maintained the perception team’s model-release CI pipeline and added automated regression checks, reducing release cycles from two weeks to three days.",
-      "Migrated 30 robot-fleet services from cron jobs to an event-driven queue, eliminating nightly backlogs that delayed morning dispatch.",
-      "Rewrote the shared logging library and onboarded two new hires while taking over the weekend on-call rotation.",
-      "Languages: Python, TypeScript, SQL, Bash\nML/AI: PyTorch, LoRA, GRPO, RAG, Multi-Agent Systems, Agent Evaluation\nFrameworks/Tools: LangGraph, Git, Kubernetes",
-      "Languages: Python, TypeScript, SQL, Bash\nML/AI: PyTorch, LoRA, GRPO, RAG, Multi-Agent Systems, Agent Evaluation\nBackend/Systems: Event-Driven Architecture, Caching, REST APIs, Load Testing\nInfrastructure: Kubernetes, CI/CD, Git",
-      "Designed a routing layer that scored and prioritized findings from three specialist agents before human review.",
-      "Trained the triage classifier with early stopping on a validation split and evaluated it on a separate held-out test set, achieving 91% accuracy.",
-      "Rewrote the shared logging library, onboarded two new hires, and took over the weekend on-call rotation.",
-      "Built reusable runtime components for tool invocation, sub-agent coordination, retries, and result caching.",
-      "Increased benchmark task-completion rate from 71% to 83%, a 12-percentage-point improvement, by retrying failed sub-agent calls with partial context.",
-      "Upstreamed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.",
-      "Demonstrated that the evaluator detected injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials.",
-      "Traced three structural defects in stability, sourcing, and parameter handling to their respective modules using layered instrumentation; all three were fixed upstream."
+      "Machine Learning Engineering Intern, part-time during M.S. program",
+      "Cut p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.",
+      "Raised diagnostic accuracy from 71% to 79%—an 8-percentage-point, or 11% relative, improvement.",
+      "Built reusable agent-runtime components for tool execution, result caching, and sub-agent context reuse, enabling downstream teams to integrate multi-agent workflows through a common TypeScript API.",
+      "Languages: Python, TypeScript, SQL, Bash\nML/AI: PyTorch, LoRA, GRPO, RAG, LLM fine-tuning, agent evaluation\nFrameworks: LangGraph\nInfrastructure/Tools: Kubernetes, Git, CI/CD",
+      "Jordan Lee\nMetro City, USA | +1 (555) 010-2468 | jordan.lee@example.com\ngithub.com/jordan-lee | linkedin.com/in/jordan-lee | jordanlee.dev",
+      "Machine learning engineer and software engineer with experience building production diagnostics systems, LLM agents, model-serving infrastructure, and evaluation frameworks. Improved inference latency, diagnostic accuracy, release cycles, and robot-fleet reliability across robotics and industrial inspection systems.",
+      "Built an ML-assisted diagnostics triage branch for an industrial inspection system processing 800+ sensor signals per case, reducing the pending-case backlog by 68% in the first quarter after launch.",
+      "Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+      "Reduced p95 edge-inference latency by 40% by serving an INT8 engine with dynamic batching.",
+      "Reduced end-to-end triage latency by 5% by implementing grouped tool-use rollouts, a composite reward for accuracy, citation validity, and call count, and a GRPO loop with a frozen SFT reference.",
+      "Stabilized sparse-reward GRPO training by sampling one rollout per prompt, ensuring each update used exactly one scored trajectory.",
+      "Documented abstention rules and escalation paths for the triage branch; the on-call review team adopted the documentation as its operational runbook.",
+      "Improved GRPO training stability and reduced end-to-end triage latency by 5% through single-rollout updates, grouped tool-use sampling, composite rewards, and a frozen SFT reference.",
+      "Owned monitoring dashboards for the diagnostics service across two major releases and maintained the on-call rotation supporting the service.",
+      "Reduced p95 API latency from 420 ms to 180 ms by adding request caching and batching sensor reads; added load tests to prevent regression.",
+      "Maintained the perception team’s CI pipeline and added automated model-regression checks, shortening release cycles from two weeks to three days.",
+      "Migrated 30 robot-fleet services from cron jobs to an event-driven queue and rewrote the shared logging library, eliminating nightly processing backlogs that delayed morning dispatch.",
+      "Onboarded two new hires and assumed responsibility for the weekend on-call rotation.",
+      "Migrated 30 robot-fleet services from cron jobs to Kafka-based event processing, eliminating nightly backlogs across X daily jobs and removing morning dispatch delays.",
+      "Agent Runtime Suite | TypeScript, LangGraph, Multi-Agent Systems | Aug 2025–Present\n- Built reusable runtime components for multi-agent tool execution, result caching, and sub-agent context reuse.\n- Cut p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.\n- Increased task-completion rate from 71% to 83% on the [benchmark name] benchmark by retrying failed sub-agent calls with preserved partial context.",
+      "Research-Agent Evaluation Framework | Python, LLM Evaluation | Feb 2025–Jul 2025\n- Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.\n- Validated evaluator sensitivity to injected degradation with Kendall’s τ = 0.89 across 400+ report-level trials involving removed citations, sources, and claims.\n- Used layered instrumentation to trace three structural defects in stability, sourcing, and parameter handling to their responsible modules; all three were fixed upstream.",
+      "Western State University — M.S. Computer Engineering\nMetro City, USA | Expected Jun 2026\n\nEastern Institute of Technology — B.S. Electrical Engineering\nMetro City, Country | Jun 2022",
+      "Relevant coursework: Machine Learning, Distributed Systems, Computer Architecture, Algorithms"
     ],
-    "falsePositives": [
-      "If the internship occurred while you were enrolled in your M.S., make that clear through the dates."
-    ]
+    "falsePositives": []
   }
 }

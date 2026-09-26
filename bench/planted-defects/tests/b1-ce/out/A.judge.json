@@ -1,94 +1,93 @@
 {
   "file": "bench/planted-defects/tests/b1-ce/out/A.md",
-  "recall": 9,
+  "recall": 8,
   "found": [
     "W1",
     "W5",
     "A2",
     "A3",
+    "S1",
     "S3",
     "T1",
-    "T3",
-    "N2",
-    "N4"
+    "N2"
   ],
   "coverage": true,
-  "suggestions": 30,
-  "words": 1550,
-  "quotes": 4,
-  "grounded": 4,
+  "suggestions": 32,
+  "words": 1707,
+  "quotes": 10,
+  "grounded": 10,
   "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4043,
-    "completion_tokens": 12265,
-    "total_tokens": 16308,
+    "prompt_tokens": 4311,
+    "completion_tokens": 13206,
+    "total_tokens": 17517,
     "prompt_tokens_details": {
       "cached_tokens": 0
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11855
+      "reasoning_tokens": 12771
     },
     "prompt_cache_hit_tokens": 0,
-    "prompt_cache_miss_tokens": 4043
+    "prompt_cache_miss_tokens": 4311
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "Several bullets establish ownership but do not state what changed as a result: - Monitoring dashboards and the on-call rotation"
+        "evidence": "Replace the dashboard-ownership statement with the concrete monitoring work performed and its strongest operational result."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "Replace the vague AI-first initiative statement with specific actions and a concrete delivery or downstream-team result"
+        "evidence": "Replace or substantiate the generic Agent Runtime bullet"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The change from 71% to 83% should be described as a 12-percentage-point increase"
+        "evidence": "State whether the task-completion improvement is 12 percentage points or 12% relative"
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The line reporting a change from 900 ms to 600 ms describes approximately a 33.3% reduction, not a 50% reduction."
+        "evidence": "The figures 900 ms to 600 ms represent a 33.3% reduction, not a 50% reduction"
       },
       {
         "id": "S1",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "Lead the GRPO bullet with the 5% latency result"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The migration bullet also combines migration work, logging-library work, onboarding, and weekend on-call responsibilities, which obscures its main accomplishment."
+        "evidence": "The migration bullet combines migration, logging-library work, onboarding, and weekend on-call responsibilities"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "The most important technical issue is the statement that the classifier was trained with early stopping on the test set and that the result was reported as held-out performance."
+        "evidence": "A single scored trajectory cannot support standard group-relative GRPO by itself because group-relative advantages require comparison across multiple sampled trajectories"
       },
       {
         "id": "T3",
-        "found": true,
-        "evidence": "cross-entropy was used to rank findings “by statistical significance.” The specialist flagged that these are not automatically equivalent concepts."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "Reverse the Experience entries so Mobility Systems Company (Oct 2024–May 2025) appears before Eastern Robotics Co. (Aug 2022–Jul 2024)."
+        "evidence": "Move Mobility Systems Company above Eastern Robotics Co. because the October 2024-May 2025 internship is more recent than the August 2022-July 2024 role"
       },
       {
         "id": "N4",
-        "found": true,
-        "evidence": "The skills section lists technologies that are not explicitly demonstrated in the bullets, including: Kubernetes"
+        "found": false,
+        "evidence": ""
       }
     ],
     "coverage": true,
-    "suggestions": 30,
+    "suggestions": 32,
     "rewrites": [],
     "falsePositives": []
   }

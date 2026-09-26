@@ -11,28 +11,28 @@
     "N2"
   ],
   "coverage": false,
-  "suggestions": 19,
-  "words": 1251,
-  "quotes": 1,
-  "grounded": 0,
-  "rewrites": 28,
+  "suggestions": 27,
+  "words": 1152,
+  "quotes": 3,
+  "grounded": 1,
+  "rewrites": 18,
   "inventedNumbers": [
     "33"
   ],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3517,
-    "completion_tokens": 12656,
-    "total_tokens": 16173,
+    "prompt_tokens": 3423,
+    "completion_tokens": 8082,
+    "total_tokens": 11505,
     "prompt_tokens_details": {
-      "cached_tokens": 256
+      "cached_tokens": 0
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11528
+      "reasoning_tokens": 7322
     },
-    "prompt_cache_hit_tokens": 256,
-    "prompt_cache_miss_tokens": 3261
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3423
   },
   "verdict": {
     "defects": [
@@ -44,17 +44,17 @@
       {
         "id": "W5",
         "found": true,
-        "evidence": "Remove the generic project bullet. This says little about what you built"
+        "evidence": "It contains no concrete action, scope, or result."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "This is **12 percentage points**, not necessarily 12%:"
+        "evidence": "71% to 83% is an increase of 12 percentage points, not simply “12%.”"
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "This is a **33% reduction**, not 50%:"
+        "evidence": "900 ms to 600 ms is a 33% reduction, not 50%."
       },
       {
         "id": "S1",
@@ -64,22 +64,22 @@
       {
         "id": "S3",
         "found": true,
-        "evidence": "The current bullet combines migration, logging, onboarding, and on-call work."
+        "evidence": "Current version combines: 30-service migration, logging-library rewrite, onboarding two hires, weekend on-call, backlog elimination. Split or prioritize..."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "Early stopping on the test set means it is no longer an untouched test set, so the 91% cannot be described as held-out performance."
+        "evidence": "GRPO typically relies on multiple outputs in a group to calculate relative advantages. A technical reviewer may challenge this. Clarify what “single rollout” means..."
       },
       {
         "id": "T3",
         "found": true,
-        "evidence": "Cross-entropy is normally a training loss, while statistical significance has a different technical meaning."
+        "evidence": "Dynamic batching usually improves throughput or concurrent-request performance, not isolated single-request latency."
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "Move **Mobility Systems Company** above **Eastern Robotics Co.** because it is more recent."
+        "evidence": "Put experience in reverse chronological order... Your internship is more recent than Eastern Robotics..."
       },
       {
         "id": "N4",
@@ -88,36 +88,26 @@
       }
     ],
     "coverage": false,
-    "suggestions": 19,
+    "suggestions": 27,
     "rewrites": [
-      "Identified and corrected test-set leakage by introducing a separate validation split for early stopping, then re-evaluated the final model on an untouched test set.",
-      "Cut p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.",
-      "Raised benchmark task-completion rate 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with retained partial context.",
-      "Trained a routing model with cross-entropy loss to rank findings from 3 specialist agents before reviewer evaluation.",
-      "Trained a routing model to prioritize findings from 3 specialist agents, reducing reviewer triage time by X%.",
-      "Built a TypeScript runtime for orchestrating multi-agent tool calls, retries, caching, and context handoffs across X workflows.",
-      "Built a TypeScript multi-agent runtime adopted by X projects and Y developers for tool execution, retries, and sub-agent orchestration.",
-      "Migrated 30 robot-fleet services from cron jobs to an event queue, eliminating nightly backlogs that delayed morning dispatch.",
-      "Rewrote the shared logging library, onboarded 2 engineers, and supported the weekend on-call rotation.",
-      "Fine-tuned agent behavior with GRPO using rewards for accuracy, citation validity, and tool-call efficiency, reducing end-to-end latency 5%.",
-      "Reduced end-to-end latency 5% without lowering diagnostic accuracy by optimizing agent tool use with GRPO.",
-      "Owned monitoring dashboards for the diagnostics service across 2 major releases and supported the on-call rotation using them.",
-      "Built an ML-based diagnostics triage pipeline that screened 800+ sensor signals per case, reducing the pending-case backlog 68% in its first quarter.",
-      "Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
-      "Documented abstention criteria and escalation paths adopted as the on-call reviewers’ operating runbook.",
-      "If applicable: Identified and corrected test-set leakage by separating validation-based early stopping from final evaluation on an untouched test set.",
-      "Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regressions.",
-      "Shortened perception-model release cycles from 2 weeks to 3 days by adding automated regression checks to the CI pipeline.",
-      "Owned monitoring dashboards for the diagnostics service across 2 major releases and supported the on-call rotation.",
-      "Rewrote the shared logging library and onboarded 2 new engineers.",
-      "Built a TypeScript runtime for multi-agent tool execution, caching, retries, and context handoffs.",
-      "Contributed 8 citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in its default release benchmark.",
-      "Demonstrated that the evaluator tracked injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials involving removed citations, sources, and claims.",
-      "Used layered instrumentation to trace 3 defects in stability, sourcing, and parameter handling; all were fixed upstream.",
+      "Reduced p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.",
+      "Increased benchmark task-completion rate by 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with partial context.",
+      "Reduced p95 edge-inference latency 40% by deploying an INT8-optimized engine and tuning the serving pipeline.",
+      "Eliminated nightly processing backlogs that delayed morning dispatch by migrating 30 robot-fleet services from cron jobs to an event-driven queue.",
+      "Rewrote the shared logging library and onboarded two engineers to the new event-driven architecture.",
+      "Reduced the diagnostic-case backlog 68% in the first quarter after launch by building an ML triage path that screened 800+ sensor signals per case.",
+      "Improved held-out diagnostic accuracy from 71% to 79% across 1,200 cases by fine-tuning a domain adapter on validated tool-use trajectories.",
+      "Authored abstention and escalation procedures adopted as the on-call review team’s runbook.",
+      "Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent performance regressions.",
+      "Shortened perception-model release cycles from two weeks to three days by adding automated regression checks to the CI pipeline.",
+      "Eliminated nightly backlogs that delayed morning dispatch by migrating 30 robot-fleet services from cron jobs to an event-driven queue.",
+      "Owned diagnostics monitoring and on-call operations across two major releases.",
+      "Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.",
+      "Validated evaluator sensitivity to injected degradation, achieving Kendall’s τ of 0.89 across 400+ report-level trials involving removed citations, sources, and claims.",
+      "Identified three pipeline defects in stability, source handling, and parameter propagation using layered instrumentation; all three were fixed upstream.",
       "**Languages:** Python, TypeScript, SQL, Bash",
-      "**ML/LLM:** PyTorch, LoRA, GRPO, RAG, LangGraph, agent evaluation",
-      "**Tools/Infrastructure:** Git, Kubernetes",
-      "Agent Runtime Suite — Lead Developer"
+      "**ML/LLM:** PyTorch, LoRA, RAG, LangGraph, GRPO, agent evaluation",
+      "**Infrastructure & Tools:** Kubernetes, Git, CI/CD"
     ],
     "falsePositives": []
   }

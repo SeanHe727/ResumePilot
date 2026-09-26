@@ -1,205 +1,281 @@
 # Full review: resume.pdf
 
-**81/100** — format 100 · content 70 · wording 81 · narrative 68
+**83/100** — format 100 · content 72 · wording 83 · narrative 78
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. Reverse the Experience entries so Mobility Systems Company (Oct 2024–May 2025) appears before Eastern Robotics Co. (Aug 2022–Jul 2024).
-2. Replace the incorrect 50% latency claim with the accurate approximately 33.3% reduction and identify the task-completion change as a 12-percentage-point increase.
-3. Combine the two on-call references and replace broad responsibility language with the concrete dashboard, CI, and operational work performed.
+1. Replace the dashboard-ownership statement with the concrete monitoring work performed and its strongest operational result.
 
 ## Already working
 
-- s2:e0:b1: Uses a strong baseline-to-result latency comparison.
-- s2:e1:b0: Shows ownership of a shipped diagnostics workflow.
-- s3:e0:b1: The bullet clearly states the performance outcome and uses a relevant p95 measure.
+- s2:e0:b1: Leads with a strong quantified outcome.
+- s3:e0:b1: It gives a strong baseline-to-result comparison.
+- s2:e1:b0: Shows a deployed system with a concrete operational outcome.
 
 ## Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024
 
-### Combine the two on-call references and replace broad responsibility language with the concrete dashboard, CI, and operational work performed.
+### Replace the dashboard-ownership statement with the concrete monitoring work performed and its strongest operational result.
 
-> "Owned the diagnostics service’s monitoring dashboards"; "taking over the weekend on-call rotation"
+> Owned the diagnostics service’s monitoring dashboards
 
-This removes duplicated ownership language while making the Eastern Robotics contribution sound more hands-on and outcome-focused.
-
-*raised by narrative, wording · costs saves about 8 words*
-
-### Add the operational result and scope of the diagnostics dashboards, including how many alerts, incidents, services, or engineers they covered and what they improved.
-
-> "across two major releases"
-
-The bullet currently establishes responsibility and duration but not whether the dashboards made incident response or alert resolution better.
-
-*raised by content · costs about 8 words to add*
-
-### Specify the compared endpoint or workload and explain what the load tests enforced or caught after reducing p95 API latency from 420 ms to 180 ms.
-
-> "added load tests to keep it there"
-
-The performance result will be more credible when the reader knows the comparison was like-for-like and the safeguard had a measurable role.
+“Owned” establishes responsibility but not achievement, and “two major releases” measures duration rather than whether monitoring detected incidents faster, reduced alert noise, or improved on-call response.
 
 *raised by content, wording · costs about 10 words to add*
 
-### Name what the automated regression checks tested and define the release-cycle boundary behind the change from 2 weeks to 3 days.
+### Remove the explanatory on-call clause from the dashboard bullet and describe the dashboard work directly.
 
-> "automated regression checks"; "from 2 weeks to 3 days"
+> and the on- call rotation that used them
 
-This connects the automation to the time saved and shows that the before-and-after figures measure the same release process.
+The clause is wordy, uses an awkward line-break hyphen in “on- call,” and makes the relationship between the dashboards and the rotation harder to scan.
 
-*raised by content · costs about 8 words to add*
+*raised by wording · costs saves about 8 words*
 
-### Separate the migration, logging rewrite, onboarding, and on-call work or identify which change removed the nightly backlog, then quantify the affected jobs, robots, or dispatches.
+### Add the request or traffic scope to the API-latency result.
 
-> "which removed the nightly backlogs"; "30 robot-fleet services"
+> from 420 ms to 180 ms
 
-The current sentence makes the causal result unclear and leaves the 30-service migration without an operational measure of scale.
+The before-and-after numbers are strong, but workload size tells the reader whether the improvement occurred on a small test service or meaningful production traffic.
 
-*raised by content, wording · costs about 10 words to add*
+*raised by content · costs about 4 words to add*
+
+### Replace “added load tests to keep it there” with the covered test scope and the validation action that prevented latency regression.
+
+> added load tests to keep it there
+
+The current phrase does not show whether the tests exercised representative traffic, sensor-read patterns, or a defined performance threshold.
+
+*raised by content, wording · costs about 8 words to add*
+
+### Replace “Maintained the CI pipeline” with the specific pipeline work performed, and state how many models, services, or test suites the regression checks covered.
+
+> Maintained the CI pipeline
+
+Broad maintenance language understates the engineering contribution, while coverage makes the reduction from two weeks to three days more credible.
+
+*raised by content, wording · costs about 8 words to add*
+
+### Keep the 30-service migration as the bullet’s main achievement and move the logging-library rewrite, onboarding, and weekend on-call transition into a separate bullet or remove them.
+
+> while rewriting the shared logging library
+
+Four different responsibilities currently compete for attention, so readers cannot tell which change removed the dispatch backlog.
+
+*raised by content, wording · costs saves about 12 words*
+
+### State the dispatch outcome directly and quantify the nightly backlog or morning-delay reduction instead of using a long relative clause.
+
+> removed the nightly backlogs that delayed morning dispatch
+
+A direct metric would connect the event-queue migration to an operational result and make the value stronger than the qualitative claim that backlogs were removed.
+
+*raised by content, wording · costs about 6 words to add*
 
 ## Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 
-### Correct the triage evaluation protocol by using a validation split for early stopping and reserving the test set for untouched final evaluation.
+### Explain what diagnostic triage decision the ML-extracted features enabled and identify whether the 68% backlog figure is a reduction from a baseline count, average backlog level, or relative trend.
 
-> "early stopping on the test set"
+> ML-extracted features
 
-The current method makes the reported 91% test accuracy invalid as held-out performance and could undermine confidence in the entire ML result.
+The current bullet names an implementation component without showing how it changed triage, and the percentage is difficult to interpret without its denominator or comparison.
 
-*raised by content, wording · costs about 6 words to add*
+*raised by content · costs about 12 words to add*
 
-### Clarify the evaluation measure and size of the diagnostic-accuracy result, including whether 71% to 79% means exact match, top-k, or another metric and how many cases were in each split.
+### Identify the domain adapter implementation and explain what was validated in the tool-use trajectories used for the diagnostic-accuracy training.
 
-> "diagnostic accuracy"
+> validated tool-use trajectories
 
-The result is promising, but a recruiter or technical reviewer cannot interpret it fully without knowing what accuracy means.
-
-*raised by content · costs about 8 words to add*
-
-### State the starting and ending pending-case backlog alongside the 68% reduction.
-
-> "cutting the pending-case backlog 68%"
-
-Absolute counts let the reader understand whether the percentage represents a small queue or a substantial operational improvement.
-
-*raised by content · costs about 5 words to add*
-
-### Replace the training-detail opening with a direct action and explain how the composite reward produced the 5% latency improvement, including its latency baseline, percentile, and measured boundary.
-
-> "Using grouped tool-use rollouts"; "reduced end-to-end latency 5%"
-
-The bullet should make the contribution and causal connection immediately clear rather than presenting several methods without tying them to the outcome.
-
-*raised by content, wording · costs about 12 words to add*
-
-### Replace the cross-entropy and statistical-significance wording with the actual confidence or ranking method, then add the routing result such as review-time or selection-accuracy improvement.
-
-> "rank ... by statistical significance"
-
-This avoids conflating a loss function with significance testing and shows why the routing layer mattered to reviewers.
+“Domain adapter” could describe several techniques, while “validated” does not show whether the trajectories were checked for correct tools, arguments, diagnostic conclusions, or complete workflows.
 
 *raised by content · costs about 10 words to add*
 
-### Quantify the reach of the adopted abstention rules and escalation paths by naming the number or roles of reviewers who used the runbook.
+### Add the original and final p95 latency for edge inference instead of reporting only the 40% reduction.
 
-> "the team’s runbook"
+> Cut p95 latency of single-request edge inference by 40%
 
-Adoption is a strong result, but its organizational importance is difficult to judge without knowing who and how many people relied on it.
+Absolute values let the reader distinguish a substantial serving improvement from a small change expressed as a large percentage.
+
+*raised by content · costs about 6 words to add*
+
+### State the request rate or batching conditions under which dynamic batching produced the edge-inference result.
+
+> single-request edge inference
+
+The current wording does not show whether the result came from production-like traffic, a controlled load, or an otherwise single-request condition where dynamic batching could not be evaluated meaningfully.
+
+*raised by content · costs about 6 words to add*
+
+### Lead the GRPO bullet with the 5% latency result and name the end-to-end boundary and comparison baseline.
+
+> reduced end-to-end latency 5%
+
+The result currently appears after process detail, and “end-to-end” is too broad to show whether the comparison covers tool selection, execution, response generation, or the complete agent workflow.
+
+*raised by content, wording · costs about 8 words to add*
+
+### Compress the grouped-rollout, composite-reward, and frozen-reference list to the specific training or reward-design contribution you made.
+
+> a composite reward over accuracy, citation validity and call count
+
+The method list delays the achievement and makes the bullet read like a catalog of mechanisms rather than evidence of your own technical decision.
+
+*raised by content, wording · costs saves about 10 words*
+
+### A single scored trajectory cannot support standard group-relative GRPO by itself because group-relative advantages require comparison across multiple sampled trajectories, so name the alternate baseline or advantage estimator or revise the method claim.
+
+> each update used exactly one scored trajectory
+
+An RL interviewer could identify the inconsistency immediately; the bullet needs to show how the update was mathematically defined rather than presenting one rollout as standard GRPO.
+
+*raised by content · costs about 8 words to add*
+
+### Replace “stabilised” with an observable training result such as lower reward variance, fewer failed runs, smoother reward curves, or faster convergence.
+
+> Stabilised GRPO training
+
+The intervention is concrete, but the current claim gives no evidence that training actually became more stable.
+
+*raised by content · costs about 6 words to add*
+
+### Add the number or scope of on-call reviewers who adopted the abstention and escalation rules.
+
+> adopted them as the team’s runbook
+
+Runbook adoption shows operational reach, but the current wording does not establish whether the rules were used by one reviewer or the whole review operation.
 
 *raised by content · costs about 5 words to add*
 
+### State what the abstention and escalation rules improved, such as inappropriate diagnoses, escalation speed, or reviewer consistency.
+
+> abstention rules and escalation paths
+
+The artifact is clearly safety- and reliability-related, but the bullet stops at adoption instead of showing its effect on the review process.
+
+*raised by content · costs about 7 words to add*
+
 ## Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
 
-### Replace the incorrect 50% latency claim with the accurate approximately 33.3% reduction and identify the task-completion change as a 12-percentage-point increase.
+### Replace “AI-first engineering practices” with the most consequential practice or system change you implemented.
 
-> "a 50% reduction"; "by 12%"
+> AI-first engineering practices
 
-Correcting both percentages protects credibility and makes the two performance claims mathematically precise.
+The phrase signals a broad philosophy rather than a concrete engineering contribution, so a recruiter cannot tell what you built or changed.
 
-*raised by content · costs saves about 2 words*
+*raised by content · costs about 5 words to add*
 
-### Replace the vague AI-first initiative statement with specific actions and a concrete delivery or downstream-team result, while adding the platform scope.
+### Replace “accelerating delivery and improving outcomes for downstream teams” with one concrete result such as adoption, release-time reduction, or hours saved.
 
-> "Drove adoption of AI-first engineering practices"; "across the platform"
+> accelerating delivery and improving outcomes
 
-The current bullet signals leadership but does not tell a recruiter what changed or how broadly the work was adopted.
+The current outcome language is broad enough to fit almost any platform project and does not establish the value of the practice or system change.
 
-*raised by content, wording · costs about 10 words to add*
+*raised by content, wording · costs about 7 words to add*
 
-### Change the tool-call result to a 33.3% reduction from 900 ms to 600 ms and remove the redundant percentage restatement.
+### The figures 900 ms to 600 ms represent a 33.3% reduction, not a 50% reduction, so correct the percentage or verify the underlying latency values.
 
-> "a 50% reduction"
+> a 50% reduction
 
-The revised claim is both mathematically correct and shorter without losing the useful before-and-after p95 measure.
+The arithmetic error is visible to a technical reader and can undermine confidence in the other performance metrics.
 
-*raised by content, wording · costs saves about 3 words*
+*raised by content · costs saves about 3 words*
 
-### Describe the task-completion result as a 12-percentage-point increase and identify the benchmark suite’s size or evaluation basis.
+### Replace “reusing completed sub-agent answers” with the condition that made reuse safe, such as matching inputs, compatible context, or cache-validity rules.
 
-> "by 12%"; "the benchmark suite"
+> reusing completed sub-agent answers
 
-This removes ambiguity about the improvement and gives the reader enough context to assess how robust the benchmark result is.
+Caching an answer is credible only when the runtime can establish that the previous result applies to the current tool call or task.
 
-*raised by content, wording · costs about 5 words to add*
+*raised by content · costs about 6 words to add*
 
-## Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
+### Remove “a 50% reduction” after correcting the percentage because “from 900 ms to 600 ms” already shows the change.
 
-### Show the implementation work behind the eight upstreamed metrics and quantify the releases, evaluations, or reports covered by the default benchmark.
+> from 900 ms to 600 ms, a 50% reduction
 
-> "8 citation and faithfulness metrics"; "for every release"
+The duplicated percentage consumes space and makes the bullet harder to scan; the before-and-after values are more precise evidence.
 
-The contribution is already specific and adopted; implementation detail and scale would show its technical depth and reach.
+*raised by wording · costs saves about 5 words*
 
-*raised by content, wording · costs about 10 words to add*
+### State whether the task-completion improvement is 12 percentage points or 12% relative, and add benchmark scope only if the number or type of tasks materially supports the claim.
 
-### Replace the awkward validation wording with a direct result that identifies what the Kendall correlation of 0.89 was measured against and how it validated the evaluator for regression or benchmark use.
+> Raised the runtime’s task-completion rate by 12%
 
-> "Showed the evaluator tracks injected degradation"; "a Kendall correlation of 0.89"
+“By 12%” is ambiguous despite the useful 71% and 83% endpoints, and benchmark size determines how much weight a recruiter should give the result.
 
-A correlation is meaningful only when its compared rankings or ground truth are named, and the practical consequence explains why the experiment mattered.
+*raised by content · costs about 6 words to add*
 
-*raised by content, wording · costs about 12 words to add*
+### Keep Agent Runtime Suite above Research-Agent Evaluation Framework because that order is already chronological and supports the progression toward current agent-runtime work.
 
-### Compress the defect description and instrumentation wording, then add the resulting test, failure-rate, or release outcome after the three defects were fixed upstream.
+> Aug 2025 - Present
 
-> "3 structural pipeline defects in stability, sourcing and parameter handling"; "with layered instrumentation"
-
-The bullet will scan more cleanly while showing not only that defects were found and fixed, but also what the fixes improved.
-
-*raised by content, wording · costs about 6 words to add*
-
-## Across the whole résumé
-
-### Reverse the Experience entries so Mobility Systems Company (Oct 2024–May 2025) appears before Eastern Robotics Co. (Aug 2022–Jul 2024).
-
-> Eastern Robotics Co. ... Aug 2022 - Jul 2024
-
-A recruiter scanning quickly will otherwise see the career progression out of chronological order and may miss the move toward ML and agent-oriented work.
+The existing project order gives the reader a clear movement from evaluation contribution to current runtime ownership and does not need revision.
 
 *raised by narrative · costs no words*
 
-### Tighten the repeated wording across the résumé by leading with direct action verbs, shortening dense clauses, and removing redundant restatements of results.
+## Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
 
-> "Using grouped tool-use rollouts"; "a 50% reduction"
+### Explain what evaluation capability or coverage the eight citation and faithfulness metrics added to the framework.
 
-The technical accomplishments will scan faster when the bullets emphasize the action and outcome instead of process-heavy or repetitive phrasing.
+> 8 citation and faithfulness metrics
 
-*raised by wording · costs saves about 35 words*
+The contribution count establishes scale, but capability coverage tells the reader why the metrics materially improved the framework.
 
-### Add the missing scope and comparison conditions behind the résumé’s metrics wherever available, including workload, cycle boundary, latency baseline, backlog size, benchmark basis, and adoption reach.
+*raised by content · costs about 8 words to add*
 
-> "from 420 ms to 180 ms"; "the benchmark suite"
+### Replace “Showed” with a more specific verb and compress the degradation description to the controlled perturbations used.
 
-A reader can judge the scale and reliability of a result only when the baseline, population, evaluation basis, or operational reach is clear.
+> Showed the evaluator tracks injected degradation
 
-*raised by content · costs about 25 words to add*
+The current opening is generic and the long trial clause makes the experimental setup harder to scan.
 
-## Set aside (7)
+*raised by wording · costs saves about 6 words*
+
+### Clarify that the Kendall correlation reflects sensitivity to genuine report-quality degradation rather than citation deletion, formatting artifacts, or another trivial signal.
+
+> tracks injected degradation with a Kendall correlation of 0.89
+
+A high correlation is persuasive only if the evaluator distinguishes meaningful quality loss from the surface changes used to inject the degradation.
+
+*raised by content · costs about 9 words to add*
+
+### State whether the 400+ trials used independent reports or repeated variants, and add an appropriate control or uncertainty estimate if available.
+
+> across 400+ report-level trials
+
+Repeated variants from the same reports may overstate the evidence, while controls or uncertainty help readers judge how robust the correlation is.
+
+*raised by content · costs about 9 words to add*
+
+### Replace the dense defect-category list with a concise description of the affected modules.
+
+> in stability, sourcing and parameter handling
+
+The current list is difficult to scan and hides the fact that layered instrumentation traced defects to specific implementation locations.
+
+*raised by wording · costs saves about 5 words*
+
+### Replace “each was fixed upstream” with the resulting reliability, correctness, or maintenance improvement.
+
+> each was fixed upstream
+
+Upstream resolution proves that the defects were addressed, but the operational or engineering effect shows why the debugging work mattered.
+
+*raised by content, wording · costs about 7 words to add*
+
+## Across the whole résumé
+
+### Move Mobility Systems Company above Eastern Robotics Co. because the October 2024-May 2025 internship is more recent than the August 2022-July 2024 role.
+
+> Aug 2022 - Jul 2024
+
+Experience should read in reverse chronology at a glance; the current order makes the timeline look incorrect and may cause a recruiter to misread your most recent work.
+
+*raised by narrative · costs no words*
+
+## Set aside (5)
 
 - format: Experience is not newest-first: "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024" is listed above the more recent "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025".
-- s2:e1:b3: The line lists several training details without explaining how optimizing accuracy, citation validity, and call count produced a latency reduction.
-- s3:e1:b2: "with layered instrumentation" identifies a valid debugging approach but is too broad to show what evidence localized the defects.
-- s2:e1:b1: "with assistant-only loss masking" adds specialized process detail after the main result and slightly reduces scanability.
-- s2:e0:b3: "while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation" stacks three additional activities onto the migration, obscuring the primary accomplishment.
-- whole resume, dates: The timeline shows a two-month interval between the B.S. ending in Jun 2022 and the first role beginning in Aug 2022. (and 2 more like it)
-- skills: SQL — no experience or project entry shows database querying or SQL development; a reader would expect it in a data, backend, or evaluation bullet. (and 8 more like it)
+- whole resume, order: Keep Agent Runtime Suite above Research-Agent Evaluation Framework within Projects; that order is already chronological and supports the progression toward current agent-runtime work.
+- s3:e0:b1, s2:e1:b2, s2:e1:b3, s2:e1:b4: "reusing completed sub-agent answers" would be more credible if the line briefly identified the condition that made reuse safe, such as matching inputs or cache validity rules. (and 3 more like it)
+- skills: Python — the ML internship implies likely use, but no entry explicitly identifies Python; name it in the relevant ML implementation bullet if used. (and 8 more like it)
+- s2:e1: s2:e1:b3 and s2:e1:b4 repeat: Both describe GRPO rollout and training mechanics; make b4 a concise implementation detail supporting b3, or combine them so they do not read as two separate versions of the same training work.
