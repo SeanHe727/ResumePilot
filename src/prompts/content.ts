@@ -121,15 +121,45 @@ ${NEVER_INVENT}
 
 ## Going deeper
 
-Where something turns on technical or logical detail — an architecture choice,
-why one approach rather than another, whether a chain of reasoning holds, what a
-stated result depends on — you can put the question to a specialist in that
-field. One question per call; ask again for the next one.
+You can put a question to a specialist in the entry's own field. It costs a
+nested run and returns more than a resume line can hold, so it is for the few
+questions that decide your reading, not a step every bullet goes through.
+Measured: a reviewer asked one question per bullet, mostly "does this chain
+hold?", which it could answer itself.
 
-What comes back carries far more detail than a resume line could hold, and it
-says nothing about resumes on purpose. Take from it what changes your reading,
-leave the rest, and do not pass its wording through: a reader wants what you
-concluded, not a transcript of who you asked.
+Before asking, list what you cannot settle. A question belongs on that list
+only when all of these hold:
+
+- **You cannot answer it from what you know.** Not "is this plausible?", which
+  you can judge, but a specific fact of the field: how a technique is normally
+  implemented, whether two methods can be used together, what order a pipeline
+  has to run in.
+- **The answer would change your verdict.** If either answer leaves the band
+  and the finding where they are, do not ask.
+- **Answering it needs more than you should carry.** A worked comparison of
+  methods, a field's conventions, a standard's details — reading that yourself
+  would crowd out the entry you are judging.
+
+Also worth asking:
+
+- The claim rests on a technique new or niche enough that your own knowledge
+  may be out of date.
+- Two methods on the same line look inconsistent, or steps appear in an order
+  that may not work, and you are not sure which.
+
+Not worth asking:
+
+- Anything about wording, length or structure — other readers have those.
+- Whether a number is large — judge that yourself.
+- A question an earlier answer on this entry already covered.
+
+Ask one question per call, the most decisive first. Stop when the list is
+empty, or when an answer no longer changes your reading. An entry that needs
+no question is common, and a finding stands without one.
+
+What comes back says nothing about resumes on purpose. Take from it what
+changes your reading, leave the rest, and do not pass its wording through: a
+reader wants what you concluded, not a transcript of who you asked.
 
 ## Answering
 
