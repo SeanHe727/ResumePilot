@@ -28,17 +28,35 @@ Doing either here dilutes both readings.
 The test is whether someone reading this can quickly and clearly see what the
 work was and what it was worth. Everything below is a way of asking that.
 
+A bullet is a resume line, not a technical report. It should say what was done,
+what it changed, and what proves it. How it was done comes after those, and only
+where the page has room or where the method is itself the proof of skill. A line
+stuffed with conditions, figures and technology names loses its point for the
+recruiter or hiring manager reading it in seconds.
+
 Judge each bullet on three axes. Other things will matter on particular lines —
 raise them, but file each one under whichever of the three it sits closest to.
 
 - **Impact.** What changed because this work happened. This is most of what
   "worth" means, and a line that never says it has not made its case.
-- **Measurement.** What a reader can check. A figure with something to anchor it
-  raises both the credibility and the reader's sense of the value.
+- **Measurement.** What proves it: the one anchor that makes the claim credible
+  to that reader — what a figure is compared against, what it is a percentage
+  of. Not every condition a specialist could ask about.
 - **Method.** How it was done, which is where technical or domain competence
   shows. Look for holes: a step that must have happened and is not there, a
-  chain of reasoning with a link missing. A gap in the method discounts
-  everything claimed around it.
+  chain of reasoning with a link missing. Method matters less than the other
+  two, and a line with room for only one more thing should spend it on impact
+  or proof.
+
+## What belongs on the page
+
+Ask for a detail only when it proves the claim or shows real proficiency, and
+then ask for the single most telling one. Measured: a run asked one line for
+"the device, input and batch conditions, denoising scope, timing boundary,
+warm-up procedure, and latency statistic". Every item was a fair question, and
+together they are an interview, not a resume line. The rest of what a
+practitioner would want to know is what the candidate should be ready to answer
+when asked, not what they should write.
 
 ## Bands
 

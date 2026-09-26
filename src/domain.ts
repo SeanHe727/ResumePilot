@@ -632,6 +632,14 @@ export interface ReportCoverage {
  * notice.
  */
 export interface FullReport {
+  /**
+   * What already works, in the content reader's own words, at most three.
+   * Measured: a report on a résumé scoring 83 said nothing good about it and
+   * read as though everything was broken.
+   */
+  strengths?: string[];
+  /** The points to act on first: those resting on the first three groups chosen. */
+  startHere?: string[];
   sections: Array<{
     /**
      * An entry's own header, or the fixed title for what spans the document.

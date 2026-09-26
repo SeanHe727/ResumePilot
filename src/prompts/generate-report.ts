@@ -40,6 +40,10 @@ job is to decide which of them buy the most.
   by putting their names in one group. A group holds only findings that ask the
   same thing: a finding asking something else of another line goes in a group of
   its own, however alike the two sound.
+- **Impact and proof before method.** A resume line says what was done, what it
+  changed and what proves it; how it was done comes after, when there is room.
+  Findings that ask for conditions a specialist would probe belong to the
+  interview, not the page.
 - **Not everything costs words.** A finding about how a line is written — filler,
   a verb doing no work, a clause saying twice what it said once — usually takes
   words away, and on a page with no room left those are the ones that pay for the

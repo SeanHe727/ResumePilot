@@ -261,6 +261,15 @@ function asLine(short: string, finding: SourceFinding): string {
   return `- ${short} [${finding.target}${cost}] ${finding.what}`;
 }
 
+/**
+ * Words the page has left: what a one-page résumé holds, less what it has. A
+ * longer one has none, and anything added has to displace something.
+ */
+function roomWords(input: GenerateReportInput): number {
+  const length = input.format.metrics.length;
+  return length.pageCount <= 1 ? Math.max(0, 650 - length.wordCount) : 0;
+}
+
 /** The line a finding is about, without the reader's suffix. */
 function lineOf(finding: SourceFinding): string {
   return finding.target.replace(/, wording$/, '');
@@ -286,6 +295,8 @@ const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
 export function planFromMarks(
   parsed: Record<string, unknown> | null,
   findings: readonly SourceFinding[],
+  /** Words the page has left. Chosen groups past it are set aside. */
+  room = Number.POSITIVE_INFINITY,
 ): {
   plan: ImprovementPlan;
   unknown: string[];
@@ -312,14 +323,34 @@ export function planFromMarks(
   const reasonOf = (mark: Record<string, unknown> | null, key: string): string =>
     typeof mark?.[key] === 'string' ? (mark[key] as string).trim() : '';
 
-  const groups: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
+  const marked: Array<PlanGroup & { members: SourceFinding[] }> = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
     const kind = KINDS.find((k) => k === mark?.kind);
     const members = take(mark?.findings);
     if (!kind || members.length === 0) return [];
     reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
-    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
+    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members), members }];
   });
+
+  // The page's room, held in code. The prompt asked the selection to fill the
+  // room and stop, and measured, it chose about 120 words of additions for a
+  // page with 46 left. In the order chosen, a group that adds words is kept
+  // while it fits; one that takes none — a cut, a move — is always kept. A
+  // group that asks the same thing of several lines costs what its dearest
+  // member does, because the lines are answered once each.
+  let spent = 0;
+  const groups: PlanGroup[] = [];
+  const overBudget: SourceFinding[][] = [];
+  for (const { members, ...group } of marked) {
+    const cost = Math.max(0, ...members.map((f) => f.costWords ?? 0));
+    if (cost > 0 && spent + cost > room) {
+      overBudget.push(members);
+      reasons.push({ findingIds: group.findingIds, chosen: false, reason: 'over the page budget' });
+      continue;
+    }
+    spent += cost;
+    groups.push(group);
+  }
 
   const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
@@ -337,7 +368,9 @@ export function planFromMarks(
     (members.length > 1 ? ` (and ${members.length - 1} more like it)` : '');
   const byId = new Map(findings.map((f) => [f.id, f] as const));
   const membersOf = (group: PlanGroup): SourceFinding[] => group.findingIds.map((id) => byId.get(id)!);
-  const setAside = [...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({ what: say(members) }));
+  const setAside = [...overBudget, ...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({
+    what: say(members),
+  }));
 
   return {
     plan: {
@@ -373,7 +406,7 @@ async function buildImprovementPlan(
   const length = input.format.metrics.length;
   const room =
     length.pageCount <= 1
-      ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${Math.max(0, 650 - length.wordCount)} words of room.`
+      ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${roomWords(input)} words of room.`
       : `The resume runs ${length.wordCount} words over ${length.pageCount} pages. It is already long, so anything added has to displace something.`;
 
   const ask = () => ctx.queryEngine.query({
@@ -411,7 +444,7 @@ Name findings only by the short names above. Return JSON of exactly this shape:
   }
 
   const parsed = parseJsonObject(response.content ?? '');
-  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings);
+  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings, roomWords(input));
 
   // Which findings this weighed. The plan model is shown the lines without
   // ids, deliberately, so this is the only place the set it chose from is

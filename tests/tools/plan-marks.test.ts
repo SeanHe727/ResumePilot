@@ -64,3 +64,59 @@ describe('planFromMarks', () => {
     expect(plan.groups).toEqual([]);
   });
 });
+
+describe('the page budget is held in code', () => {
+  const priced = [
+    { ...f('a', 'content', 's2:e0:b0', 'needs a baseline'), costWords: 30 },
+    { ...f('b', 'content', 's2:e0:b1', 'needs a count'), costWords: 20 },
+    f('c', 'wording', 's2:e0:b2, wording', 'cut the filler'),
+  ];
+
+  it('keeps chosen groups in order while they fit, and sets the rest aside', () => {
+    // Measured: about 120 words of additions chosen for a page with 46 left.
+    const { plan, reasons } = planFromMarks(
+      {
+        chosen: [
+          { kind: 'shortTerm', findings: ['c1'] },
+          { kind: 'shortTerm', findings: ['c2'] },
+          { kind: 'immediate', findings: ['w1'] },
+        ],
+      },
+      priced,
+      40,
+    );
+
+    expect(plan.groups!.map((g) => g.findingIds)).toEqual([['a'], ['c']]);
+    expect(plan.setAside).toEqual([{ what: 's2:e0:b1: needs a count' }]);
+    expect(reasons).toContainEqual({ findingIds: ['b'], chosen: false, reason: 'over the page budget' });
+  });
+
+  it('always keeps what costs no words, even with no room at all', () => {
+    const { plan } = planFromMarks({ chosen: [{ kind: 'immediate', findings: ['w1'] }] }, priced, 0);
+    expect(plan.groups!.map((g) => g.findingIds)).toEqual([['c']]);
+  });
+});
+
+describe('the report opens with where to start and what already works', () => {
+  it('lists the start-here points and the strengths before the entries', async () => {
+    const { renderBrief } = await import('../../src/skills/render-full.js');
+    const point = (id: string, what: string) => ({ id, what, why: '', from: [], sourceFindingIds: [] });
+    const report = {
+      summary: { overallScore: 83, formatScore: 100, substanceAvg: 71 },
+      perEntry: [],
+      format: { overallScore: 100, issues: [] },
+      improvementPlan: { immediate: [], shortTerm: [], longTerm: [] },
+      full: {
+        startHere: ['p2'],
+        strengths: ['s2:e0:b2: three held-out metrics, each against the base model'],
+        sections: [{ heading: 'A', points: [point('p1', 'second thing'), point('p2', 'first thing')] }],
+      },
+    } as never;
+
+    const text = renderBrief(report, 'r.pdf');
+
+    expect(text).toContain('## Start here\n\n1. first thing');
+    expect(text).toContain('## Already working\n\n- s2:e0:b2: three held-out metrics');
+    expect(text.indexOf('## Start here')).toBeLessThan(text.indexOf('## A'));
+  });
+});

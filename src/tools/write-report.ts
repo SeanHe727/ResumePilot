@@ -87,6 +87,15 @@ export async function writeFullReport(
       report.format.issues.map((i) => `- ${i}`).join('\n'),
   ];
 
+  // What the content reader found strong, verbatim and by short name. The
+  // writer picks up to three by name; the words stay the reader's.
+  const strengthsOffered = current.content.current.flatMap((entry) =>
+    entry.bullets.flatMap((bullet) => (bullet.strengths ?? []).map((text) => ({ bulletId: bullet.bulletId, text }))),
+  );
+  const strengthByName = new Map<string, { bulletId: string; text: string }>(
+    strengthsOffered.map((s, i) => [`s${i + 1}`, s]),
+  );
+
   // Every finding, under a short alias the model has to copy.
   //
   // The ids are uuids, which is right for storing and expensive to echo: of
@@ -130,6 +139,12 @@ export async function writeFullReport(
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
           `The findings, by id:\n${offered}\n\n` +
           `The entries a point can be filed under:\n${targets}\n\n` +
+          (strengthsOffered.length > 0
+            ? `What the content reader found strong, by name:\n` +
+              [...strengthByName].map(([name, s]) => `- ${name} [${s.bulletId}] ${s.text}`).join('\n') +
+              `\n\nPick up to three of these, by name, that a candidate should keep doing — the ` +
+              `ones a recruiter would notice first. Names only; their words are kept as written.\n\n`
+            : '') +
           `Each section says what it is about. Use { "type": "entry", "entryId": "<one of the ids above>" } ` +
           `for a section about one entry, and { "type": "resume" } for anything that spans the whole ` +
           `document — dates, ordering, what the file itself does. Nothing else goes in "about", and no ` +
@@ -137,6 +152,7 @@ export async function writeFullReport(
           `Return JSON of exactly this shape:
 
 {
+  "strengths": ["s1"],
   "sections": [
     {
       "about": { "type": "entry", "entryId": "one of the entry ids listed above" },
@@ -288,7 +304,26 @@ export async function writeFullReport(
     },
   }));
 
-  return { sections: built };
+  // The first three groups the selection chose, as the points that rest on
+  // them: where to start, worked out rather than written.
+  const startHere = (report.improvementPlan.groups ?? [])
+    .slice(0, 3)
+    .flatMap((group) => {
+      const point = accepted.find((p) => p.sourceFindingIds.some((id) => group.findingIds.includes(id)));
+      return point ? [point.id] : [];
+    });
+  const strengths = (Array.isArray(parsed?.strengths) ? parsed.strengths : [])
+    .flatMap((name) => {
+      const s = typeof name === 'string' ? strengthByName.get(name.trim()) : undefined;
+      return s ? [`${s.bulletId}: ${s.text}`] : [];
+    })
+    .slice(0, 3);
+
+  return {
+    ...(strengths.length > 0 ? { strengths } : {}),
+    ...(startHere.length > 0 ? { startHere: [...new Set(startHere)] } : {}),
+    sections: built,
+  };
 }
 
 /**

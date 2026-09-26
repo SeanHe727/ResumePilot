@@ -12,7 +12,7 @@ import type { DiagnosisReport, FullReport } from '../domain.js';
  * than scanned in a terminal.
  */
 export function renderFull(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Full review')];
+  const lines = [...head(report, sourcePath, 'Full review'), ...opening(report)];
 
   for (const section of report.full?.sections ?? []) {
     lines.push(`## ${section.heading}`, '');
@@ -35,7 +35,7 @@ export function renderFull(report: DiagnosisReport, sourcePath: string): string 
 
 /** The same points, each reduced to the sentence written to stand alone. */
 export function renderBrief(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Review')];
+  const lines = [...head(report, sourcePath, 'Review'), ...opening(report)];
 
   for (const section of report.full?.sections ?? []) {
     lines.push(`## ${section.heading}`, '');
@@ -58,6 +58,26 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
   }
 
   return `${lines.join('\n').trimEnd()}\n`;
+}
+
+/**
+ * Where to start, and what already works, before the list by entry.
+ *
+ * A review that is only a list of faults reads as though everything is broken,
+ * and one that lists thirty points gives no way in. Both come from the
+ * write-up: the first three chosen groups, and strengths in the reader's words.
+ */
+function opening(report: DiagnosisReport): string[] {
+  const full = report.full;
+  if (!full) return [];
+  const points = new Map(full.sections.flatMap((s) => s.points).map((p) => [p.id, p] as const));
+  const first = (full.startHere ?? []).flatMap((id) => (points.has(id) ? [points.get(id)!.what] : []));
+  const lines: string[] = [];
+  if (first.length > 0) lines.push('## Start here', '', ...first.map((what, i) => `${i + 1}. ${what}`), '');
+  if ((full.strengths ?? []).length > 0) {
+    lines.push('## Already working', '', ...full.strengths!.map((s) => `- ${s}`), '');
+  }
+  return lines;
 }
 
 /**
