@@ -54,9 +54,9 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
       about: {
         type: 'string',
         description:
-          'What the question is about, by id: a bullet id like experience:0:1 when the question ' +
-          'is about one line, or an entry id like experience:0 when it is about the whole entry. ' +
-          'Either kind is accepted here — do not convert one into the other.',
+          'What the question is about, by the id shown in brackets in the resume content: a ' +
+          "bullet's id when the question is about one line, or the entry's id when it is about " +
+          'the whole entry. Either kind is accepted — do not convert one into the other.',
       },
       question: {
         type: 'string',

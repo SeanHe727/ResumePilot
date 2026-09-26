@@ -10,7 +10,7 @@ import type { Tool, ToolResult } from './types.js';
  * more reliable than asking it to remember a `recencyDays` it does not.
  */
 export type SearchPurpose =
-  /** Is this figure ordinary, good, or implausible for this kind of work? */
+  /** How results of this kind are usually measured and reported. Never the figure itself. */
   | 'metric_norm'
   /** Does this employer, title or programme read the way the resume implies? */
   | 'company_title'
@@ -63,8 +63,8 @@ export const webSearchTool: Tool<WebSearchInput, WebSearchOutput> = {
   name: 'web_search',
   description:
     'Search the web for evidence about a claim you cannot settle from the corpus or ' +
-    'your own knowledge: whether a reported figure is ordinary for this kind of work, ' +
-    'whether an employer or title reads as it appears, what live postings for a role ' +
+    'your own knowledge: whether a term or method is standard, how results of this kind ' +
+    'are usually measured, whether an employer or title reads as it appears, what live postings for a role ' +
     'ask for, or what current resume and ATS conventions say. Pass `purpose` so the ' +
     'right recency window is applied. Results are evidence for your judgement, never ' +
     'material to put into the resume.',
@@ -104,6 +104,24 @@ export const webSearchTool: Tool<WebSearchInput, WebSearchOutput> = {
         error: {
           code: 'input_error',
           message: `refusing to send a ${leak} to the search provider — rephrase without it`,
+        },
+      };
+    }
+
+    // The candidate's own numbers are not on the web, so a query carrying one
+    // finds nothing and sends their figures to a stranger for it. Measured:
+    // `"8,400" "2,700" MB TensorRT VRAM latency`. Whether a figure is large is
+    // the model's own judgement to make. Names with digits in them — INT8,
+    // FP16, top-1, p99 — are words, and pass.
+    const figure = findBareNumber(query);
+    if (figure) {
+      return {
+        success: false,
+        error: {
+          code: 'input_error',
+          message:
+            `refusing to search for a figure (${figure}) — judge a number's size from what you know, ` +
+            'and search only for terms, methods and how such results are measured',
         },
       };
     }
@@ -154,6 +172,12 @@ export const webSearchTool: Tool<WebSearchInput, WebSearchOutput> = {
     }
   },
 };
+
+/** A number standing on its own: `68`, `8,400`, `82%`, `3.5`, `"2,700"`. */
+export function findBareNumber(query: string): string | null {
+  const match = /(?:^|[\s"'(])(\d[\d,.]*%?)(?=$|[\s"'),.;:])/.exec(query);
+  return match ? match[1]! : null;
+}
 
 /**
  * Contact details, and only those.

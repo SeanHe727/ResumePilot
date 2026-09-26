@@ -1002,7 +1002,8 @@ describe('what the roles are told to look outward for', () => {
     expect(prompt).toContain('technology named');
     expect(prompt).toContain('method named');
     expect(prompt).toContain("figure's size is ordinary");
-    expect(prompt).toContain('Reaching for figures alone is the easy habit');
+    // Figures are judged, not searched: nobody has written about these numbers.
+    expect(prompt).toContain("never for the candidate's own figures");
   });
 
   it('gives each role the axes its own judgement turns on', async () => {
