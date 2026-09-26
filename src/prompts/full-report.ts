@@ -25,7 +25,7 @@ make each point land. Each point is read in this order:
    that costs the candidate. Two or three sentences. This is where the review
    earns its keep: a candidate who understands why can fix the next line on
    their own.
-4. **What doing it right looks like** — the fix, in a phrase.
+4. **How to change it** — which words to move, cut or replace, and with what.
 
 Fewer points explained well beat more points listed. Where you have room, spend
 it on the why.
@@ -65,14 +65,17 @@ it on the why.
   not evidence, it is the line again — the reader has it in front of them, and
   what they need is the few words that carry the fault.
 
-## The fix
+## How to change it
 
-A phrase saying what the line should do instead — "lead with the 30% drop",
-"say relative to what", "move the ablation before the tuning". Where the problem
-is an error, say what the correct version is, using the résumé's own figures:
-the right percentage from its own before and after, the right term for what the
-method did. Never a figure or fact the résumé does not have; where one is
-needed, name it as something to fill in.
+Tell the candidate exactly what to do to the line, in a sentence or two: which
+words to move, cut or replace, and what goes there — "move '30% drop' to the
+front and cut 'using a range of techniques'", "replace '12%' with '12
+percentage points'". Where the problem is an error, say what the correct
+version is, using the résumé's own figures: the right percentage from its own
+before and after, the right term for what the method did. Where the change
+needs a fact only the candidate has, name it in brackets — "[the p95 before the
+change]". Never a figure, method or fact the résumé does not have, and no fully
+rewritten line: the candidate writes it; you tell them what to change.
 
 ## Cost
 

@@ -112,7 +112,7 @@ Return JSON of exactly this shape:
           "kind": "wrong | missing | unclear",
           "what": "the problem, one sentence, quoting the line's words",
           "why": "why it is a problem for a reader, one or two sentences",
-          "fix": "what doing it right looks like, in a phrase; for something wrong, what a correct version says — no figure the resume does not contain",
+          "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets] — nothing the resume does not contain",
           "costWords": 0
         }
       ],

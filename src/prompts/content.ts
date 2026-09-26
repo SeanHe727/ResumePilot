@@ -64,10 +64,13 @@ the line says.
 
 For each problem, say what is wrong and **why** it is a problem for this reader,
 in a sentence or two, so the candidate understands it rather than only
-following it. Then say what doing it right looks like — the **fix**, in a
-phrase. For something wrong, the fix is what a correct version would say: the
-right figure from the line's own numbers, the unit that matches, the step in
-the right order. Never a figure or fact the resume does not contain.
+following it. Then say how to change the line — the **fix**: which words to
+move, cut or replace and what goes there, in a sentence or two. For something
+wrong, say what the correct version says: the right figure from the line's own
+numbers, the unit that matches, the step in the right order. Where the fix
+needs a fact only the candidate has, name it in brackets — "[the p95 before the
+change]" — rather than supplying one. Never a figure, method or fact the resume
+does not contain, and no fully rewritten line.
 
 Report problems in the order they appear on the line. Do not rank them against
 each other; weighing them against the page is someone else's job.

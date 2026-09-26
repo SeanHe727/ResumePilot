@@ -21,7 +21,7 @@ export function renderFull(report: DiagnosisReport, sourcePath: string): string 
       lines.push(`### ${point.what}`, '');
       if (point.evidence) lines.push(`> ${point.evidence}`, '');
       if (point.why) lines.push(point.why, '');
-      if (point.fix) lines.push(`**Instead:** ${point.fix}`, '');
+      if (point.fix) lines.push(`**How to change it:** ${point.fix}`, '');
 
       const aside = [
         point.from.length > 0 ? `raised by ${point.from.join(', ')}` : '',
@@ -122,7 +122,7 @@ function told(point: FullReportPoint, lineText: Map<string, string>, indent: str
         ? [`${indent}> ${point.evidence}`]
         : []),
     ...(point.why ? [`${indent}${point.why}`] : []),
-    ...(point.fix ? [`${indent}**Instead:** ${point.fix}`] : []),
+    ...(point.fix ? [`${indent}**How to change it:** ${point.fix}`] : []),
   ];
 }
 

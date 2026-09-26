@@ -173,7 +173,7 @@ export async function writeFullReport(
           "what": "the problem, in one sentence",
           "why": "the reasoning, two or three sentences: what a reader would doubt, misread or ask, and what that costs the candidate",
           "evidence": "the shortest phrase from the résumé that shows the problem, copied exactly — a few words, not the line",
-          "fix": "what doing it right looks like, in a phrase — no figure the résumé does not have",
+          "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets]",
           "from": ["the short ids of the findings this point rests on, exactly as listed above — several where they agree, and none that is not on that list"],
           "cost": "a number of words, like 'about 6 words' to add, 'saves about 10 words' for a cut, or 'no words' where text only moves. Not a description of the work."
         }
