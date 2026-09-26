@@ -12,7 +12,7 @@ endobj
 <</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
 endobj
 5 0 obj
-<</Length 5328>>
+<</Length 5311>>
 stream
 BT /F1 16 Tf 72 752 Td (Jordan Lee) Tj ET
 BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee) Tj ET
@@ -30,14 +30,14 @@ BT /F1 10 Tf 80 585.3000000000002 Td (- Applied GRPO with grouped tool-use rollo
 BT /F1 10 Tf 86 573.5000000000002 Td (latency 5% versus the SFT baseline with no loss in diagnostic accuracy.) Tj ET
 BT /F1 10 Tf 80 561.7000000000003 Td (- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy,) Tj ET
 BT /F1 10 Tf 86 549.9000000000003 Td (citation quality and latency before each release.) Tj ET
-BT /F1 10 Tf 80 538.1000000000004 Td (- Quantized the domain adapter to INT8, then fine-tuned it in full precision with LoRA and) Tj ET
-BT /F1 10 Tf 86 526.3000000000004 Td (shipped the INT8 checkpoint to production.) Tj ET
+BT /F1 10 Tf 80 538.1000000000004 Td (- Fine-tuned the adapter with assistant-only loss masking so the model would learn to) Tj ET
+BT /F1 10 Tf 86 526.3000000000004 Td (reproduce the tool outputs more faithfully.) Tj ET
 BT /F1 10 Tf 80 514.5000000000005 Td (- Built a diagnostics triage branch for an industrial inspection system that screens 800+) Tj ET
 BT /F1 10 Tf 86 502.70000000000044 Td (sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in) Tj ET
 BT /F1 10 Tf 86 490.90000000000043 Td (the first quarter after launch.) Tj ET
 BT /F1 10 Tf 72 479.1000000000004 Td (Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024) Tj ET
-BT /F1 10 Tf 80 466.6000000000004 Td (- Architected the company's ML platform, now used across three business units for model) Tj ET
-BT /F1 10 Tf 86 454.8000000000004 Td (training, evaluation and release.) Tj ET
+BT /F1 10 Tf 80 466.6000000000004 Td (- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16) Tj ET
+BT /F1 10 Tf 86 454.8000000000004 Td (mixed precision.) Tj ET
 BT /F1 10 Tf 80 443.0000000000004 Td (- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor) Tj ET
 BT /F1 10 Tf 86 431.2000000000004 Td (reads, and added load tests to keep it there.) Tj ET
 BT /F1 10 Tf 80 419.4000000000004 Td (- Maintained the CI pipeline for the perception team's model releases and adds automated) Tj ET
@@ -75,5 +75,5 @@ xref
 trailer
 <</Size 6/Root 1 0 R>>
 startxref
-5658
+5641
 %%EOF

@@ -128,20 +128,28 @@ Measured: a reviewer asked one question per bullet, mostly "does this chain
 hold?", which it could answer itself.
 
 Before asking, list what you cannot settle. A question belongs on that list
-only when all of these hold:
+when both of these hold:
 
-- **You cannot answer it from what you know.** Not "is this plausible?", which
-  you can judge, but a specific fact of the field: how a technique is normally
-  implemented, whether two methods can be used together, what order a pipeline
-  has to run in.
+- **It turns on a fact of the field rather than on reading the line.** Not "is
+  this plausible?" in general, but whether this method can produce this result,
+  whether two methods can be used together, what order a pipeline has to run
+  in, what a technique's known limits are.
 - **The answer would change your verdict.** If either answer leaves the band
   and the finding where they are, do not ask.
-- **Answering it needs more than you should carry.** A worked comparison of
-  methods, a field's conventions, a standard's details — reading that yourself
-  would crowd out the entry you are judging.
 
-Also worth asking:
+It belongs there all the more when answering it yourself would take more than
+you should carry — a worked comparison of methods, a field's conventions, a
+standard's details.
 
+Worth asking in particular:
+
+- A line names a specific method and a specific result. Whether the method can
+  produce that result, under the conditions given, is where experienced readers
+  catch what others do not. Measured: a reviewer that asked almost no questions
+  reported technical errors less clearly than a single model reading the page.
+- You are about to report a technical error. Confirm it first unless you are
+  certain: calling a correct method wrong costs the candidate more than missing
+  a flaw.
 - The claim rests on a technique new or niche enough that your own knowledge
   may be out of date.
 - Two methods on the same line look inconsistent, or steps appear in an order

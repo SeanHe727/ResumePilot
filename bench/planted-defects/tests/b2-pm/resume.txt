@@ -19,12 +19,12 @@ Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 
 first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
 - Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step
 flow across 40,000 sessions, then shipping it to all merchants.
-- Wrote the requirements for dispute self-service and used NPS to measure how many merchants
-completed a dispute without contacting support.
+- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets
+each feature would close.
 - After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and
 drafting a business case with finance, set the next quarter’s roadmap priority.
-- Declared the one-page checkout the winner after stopping the A/B test on the first day it
-reached significance, and reported the lift at 95% confidence.
+- Ran the checkout A/B test with randomization by session and reported the 5-point conversion
+lift as the effect on merchants’ customers.
 - Presented the onboarding results and a follow-up roadmap to the payments leadership team,
 who funded the rollout to two more regions.
 Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2018 - Jun 2019

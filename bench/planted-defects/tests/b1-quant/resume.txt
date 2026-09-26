@@ -9,13 +9,13 @@ Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - 
 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
 - Cut the signal’s daily turnover from 34% to 21% with a cost-aware position smoother, keeping
 90% of gross returns and lowering estimated slippage by a third.
-- Validated the signal on 6 years of tick data, using a Sharpe-ratio test for
-heteroskedasticity to confirm there was no look-ahead leakage.
+- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano
+tests across the 30 indices.
 - Joining 120 microstructure features point-in-time across six venues, deduplicating late
 prints and versioning each schema, built a feature store the team reused in two later
 projects.
-- Tuned the signal’s parameters on the full 6-year sample, then reported the Sharpe of a walk-
-forward test over the same period as out-of-sample.
+- Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to
+the desk.
 - Documented the backtest assumptions, transaction-cost model and known failure regimes in the
 desk’s research wiki for future interns.
 Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2021 - Aug 2021

@@ -156,10 +156,10 @@
   "v2": {
     "S1": "After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
     "S2": "Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
-    "T1": "Declared the one-page checkout the winner after stopping the A/B test on the first day it reached significance, and reported the lift at 95% confidence.",
-    "T2": "Launched dispute self-service to all merchants, then wrote its success metrics and ran discovery interviews to decide what it should do.",
-    "T3": "Wrote the requirements for dispute self-service and used NPS to measure how many merchants completed a dispute without contacting support.",
-    "T4": "Set the company's logistics strategy, adopted across every region and business line.",
+    "T1": "Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "T2": "Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "T3": "Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "T4": "Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
     "N1": {
       "head": "Coastal Marine Services | Diesel Mechanic | Lake City, USA",
       "dates": "Jul 2018 - Jun 2019",
@@ -169,6 +169,12 @@
         "Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections."
       ]
     },
-    "A2": "Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system."
+    "A2": "Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "desc": {
+      "T1": "Randomizing by session lets returning customers see both variants, so sessions are not independent and the lift cannot be read as a per-customer effect.",
+      "T2": "Comparing opt-in merchants with the rest is confounded by self-selection; it does not measure the redesign's effect.",
+      "T3": "In RICE, Reach is how many users a feature affects in a period; tickets closed is an impact measure, so the score double-counts or misplaces it.",
+      "T4": "The improvement comes from changing the metric's definition, not from better delivery performance."
+    }
   }
 }

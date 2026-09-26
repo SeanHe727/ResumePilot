@@ -156,10 +156,10 @@
   "v2": {
     "S1": "Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
     "S2": "Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
-    "T1": "Trained the triage classifier with early stopping on the test set, then reported its 91% test accuracy as held-out performance.",
-    "T2": "Quantized the domain adapter to INT8, then fine-tuned it in full precision with LoRA and shipped the INT8 checkpoint to production.",
-    "T3": "Designed a routing layer that uses cross-entropy to rank the 3 specialist agents' findings by statistical significance before the reviewer sees them.",
-    "T4": "Architected the company's ML platform, now used across three business units for model training, evaluation and release.",
+    "T1": "Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.",
+    "T2": "Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "T3": "Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.",
+    "T4": "Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
     "N1": {
       "head": "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country",
       "dates": "Aug 2022 - Jun 2023",
@@ -169,6 +169,12 @@
         "Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier."
       ]
     },
-    "A2": "Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context."
+    "A2": "Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.",
+    "desc": {
+      "T1": "GRPO computes each rollout's advantage relative to the other rollouts in its group; with a single rollout per prompt the advantage is always zero and nothing is learned.",
+      "T2": "Assistant-only loss masking excludes tool outputs from the loss, so it cannot teach the model to reproduce them — the method contradicts the stated goal.",
+      "T3": "Dynamic batching raises throughput by waiting to group requests; for single requests it adds queueing delay and cannot lower latency.",
+      "T4": "Mixed precision keeps FP32 master weights and optimizer state, so switching to BF16 mixed precision saves far less than 4x memory."
+    }
   }
 }

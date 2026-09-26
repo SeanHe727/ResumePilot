@@ -14,12 +14,13 @@ risk and support; the team shipped it two weeks ahead of plan.
 business case that set the next quarter’s roadmap priority.
 - Ran weekly triage with engineering and support, closing 140 onboarding tickets over the
 summer and cutting the open-ticket queue by half.
-- Launched dispute self-service to all merchants, then wrote its success metrics and ran
-discovery interviews to decide what it should do.
+- Measured the onboarding redesign by comparing merchants who opted into the new flow with
+those who stayed on the old one.
 - Redesigned merchant onboarding around a single verification step, cutting median time to
 first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
 Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
-- Set the company’s logistics strategy, adopted across every region and business line.
+- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time
+calculation.
 - Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor
 supervisors and retraining 45 pickers on the new layout.
 - Coordinated the quarterly S&OP review across sales, finance and operations and prepares the

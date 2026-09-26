@@ -12,7 +12,7 @@ endobj
 <</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
 endobj
 5 0 obj
-<</Length 5451>>
+<</Length 5414>>
 stream
 BT /F1 16 Tf 72 752 Td (Jordan Lee) Tj ET
 BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee) Tj ET
@@ -36,12 +36,12 @@ BT /F1 10 Tf 86 514.5000000000005 Td (sensor signals per case with ML-extracted 
 BT /F1 10 Tf 86 502.70000000000044 Td (the first quarter after launch.) Tj ET
 BT /F1 10 Tf 80 490.90000000000043 Td (- Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain) Tj ET
 BT /F1 10 Tf 86 479.1000000000004 Td (adapter on validated tool-use trajectories with assistant-only loss masking.) Tj ET
-BT /F1 10 Tf 80 467.3000000000004 Td (- Designed a routing layer that uses cross-entropy to rank the 3 specialist agents' findings) Tj ET
-BT /F1 10 Tf 86 455.5000000000004 Td (by statistical significance before the reviewer sees them.) Tj ET
+BT /F1 10 Tf 80 467.3000000000004 Td (- Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with) Tj ET
+BT /F1 10 Tf 86 455.5000000000004 Td (dynamic batching.) Tj ET
 BT /F1 10 Tf 80 443.7000000000004 Td (- Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and) Tj ET
 BT /F1 10 Tf 86 431.9000000000004 Td (call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.) Tj ET
-BT /F1 10 Tf 80 420.10000000000036 Td (- Trained the triage classifier with early stopping on the test set, then reported its 91%) Tj ET
-BT /F1 10 Tf 86 408.30000000000035 Td (test accuracy as held-out performance.) Tj ET
+BT /F1 10 Tf 80 420.10000000000036 Td (- Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each) Tj ET
+BT /F1 10 Tf 86 408.30000000000035 Td (update used exactly one scored trajectory.) Tj ET
 BT /F1 10 Tf 80 396.50000000000034 Td (- Documented the triage branch's abstention rules and escalation paths for the on-call) Tj ET
 BT /F1 10 Tf 86 384.70000000000033 Td (reviewers, who adopted them as the team's runbook.) Tj ET
 BT /F1 12 Tf 72 367.9000000000003 Td (PROJECTS) Tj ET
@@ -75,5 +75,5 @@ xref
 trailer
 <</Size 6/Root 1 0 R>>
 startxref
-5781
+5744
 %%EOF

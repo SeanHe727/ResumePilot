@@ -9,10 +9,10 @@ Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - 
 - Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so no look-ahead information leaked into training.
 - Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.
 - Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.
-- Normalized every feature with the full-sample mean and variance, then split the data into walk-forward folds to validate the signal.
+- Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.
 - Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk's book over 18 months of out-of-sample backtest after costs.
 Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2021 - Aug 2021
-- Designed the department's entire statistical computing infrastructure, now used by every lab in the faculty.
+- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.
 - Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.
 - Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.
 - Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.

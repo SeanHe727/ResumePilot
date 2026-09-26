@@ -38,14 +38,14 @@
   {
     "id": "T2",
     "category": "technical",
-    "line": "Launched dispute self-service to all merchants, then wrote its success metrics and ran discovery interviews to decide what it should do.",
-    "defect": "Steps in an order that does not work: a later step undoes or invalidates an earlier one."
+    "line": "Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "defect": "Comparing opt-in merchants with the rest is confounded by self-selection; it does not measure the redesign's effect."
   },
   {
     "id": "T4",
     "category": "technical",
-    "line": "Set the company's logistics strategy, adopted across every region and business line.",
-    "defect": "An overclaim for the role's level: a junior role claiming to have designed or set something organisation-wide."
+    "line": "Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "defect": "The improvement comes from changing the metric's definition, not from better delivery performance."
   },
   {
     "id": "N3",

@@ -12,7 +12,7 @@ endobj
 <</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
 endobj
 5 0 obj
-<</Length 5677>>
+<</Length 5637>>
 stream
 BT /F1 16 Tf 72 752 Td (Riley Chen) Tj ET
 BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-7731 | riley.chen@example.com | example.com/in/riley-chen) Tj ET
@@ -35,12 +35,12 @@ BT /F1 10 Tf 80 526.3000000000004 Td (- Redesigned merchant onboarding around a 
 BT /F1 10 Tf 86 514.5000000000005 Td (first payment from 9 days to 4 across 2,300 new merchants in the pilot region.) Tj ET
 BT /F1 10 Tf 80 502.70000000000044 Td (- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step) Tj ET
 BT /F1 10 Tf 86 490.90000000000043 Td (flow across 40,000 sessions, then shipping it to all merchants.) Tj ET
-BT /F1 10 Tf 80 479.1000000000004 Td (- Wrote the requirements for dispute self-service and used NPS to measure how many merchants) Tj ET
-BT /F1 10 Tf 86 467.3000000000004 Td (completed a dispute without contacting support.) Tj ET
+BT /F1 10 Tf 80 479.1000000000004 Td (- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets) Tj ET
+BT /F1 10 Tf 86 467.3000000000004 Td (each feature would close.) Tj ET
 BT /F1 10 Tf 80 455.5000000000004 Td (- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and) Tj ET
 BT /F1 10 Tf 86 443.7000000000004 Td (drafting a business case with finance, set the next quarter's roadmap priority.) Tj ET
-BT /F1 10 Tf 80 431.9000000000004 Td (- Declared the one-page checkout the winner after stopping the A/B test on the first day it) Tj ET
-BT /F1 10 Tf 86 420.10000000000036 Td (reached significance, and reported the lift at 95% confidence.) Tj ET
+BT /F1 10 Tf 80 431.9000000000004 Td (- Ran the checkout A/B test with randomization by session and reported the 5-point conversion) Tj ET
+BT /F1 10 Tf 86 420.10000000000036 Td (lift as the effect on merchants' customers.) Tj ET
 BT /F1 10 Tf 80 408.30000000000035 Td (- Presented the onboarding results and a follow-up roadmap to the payments leadership team,) Tj ET
 BT /F1 10 Tf 86 396.50000000000034 Td (who funded the rollout to two more regions.) Tj ET
 BT /F1 10 Tf 72 384.70000000000033 Td (Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2018 - Jun 2019) Tj ET
@@ -79,5 +79,5 @@ xref
 trailer
 <</Size 6/Root 1 0 R>>
 startxref
-6007
+5967
 %%EOF

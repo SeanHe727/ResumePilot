@@ -38,14 +38,14 @@
   {
     "id": "T1",
     "category": "technical",
-    "line": "Trained the triage classifier with early stopping on the test set, then reported its 91% test accuracy as held-out performance.",
-    "defect": "A methodological contradiction: the evaluation described is not valid for the claim made from it."
+    "line": "Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.",
+    "defect": "GRPO computes each rollout's advantage relative to the other rollouts in its group; with a single rollout per prompt the advantage is always zero and nothing is learned."
   },
   {
     "id": "T3",
     "category": "technical",
-    "line": "Designed a routing layer that uses cross-entropy to rank the 3 specialist agents' findings by statistical significance before the reviewer sees them.",
-    "defect": "A technical term used wrongly: the named method cannot do what the bullet says it did."
+    "line": "Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.",
+    "defect": "Dynamic batching raises throughput by waiting to group requests; for single requests it adds queueing delay and cannot lower latency."
   },
   {
     "id": "N2",

@@ -1,0 +1,135 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/B.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 27,
+  "words": 1103,
+  "quotes": 4,
+  "grounded": 3,
+  "rewrites": 38,
+  "inventedNumbers": [
+    "50"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3123,
+    "completion_tokens": 14366,
+    "total_tokens": 17489,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13198
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 2867
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting. This bullet is inconsistent"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Mapped patient intake workflows at four clinics and redesigned the intake form; front-desk teams adopted the revised process."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "clarify whether this means a 35% relative increase or 35 percentage points. Ideally include the baseline and test period."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "You also repeat the onboarding achievement in the consulting practicum: Halved the time... should be removed from the hospital project."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "The current bullets describe activities but not much impact: Held weekly working sessions..."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "These conflict chronologically."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "this sounds broad and potentially overstated."
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove date of birth and nationality"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 27,
+    "rewrites": [
+      "Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support; the team launched two weeks ahead of plan.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for each meeting.",
+      "Coordinate quarterly S&OP reviews across sales, finance, and operations and prepare forecast packs for each meeting.",
+      "Led weekly working sessions with clinic managers to identify bottlenecks in outpatient scheduling across the hospital network.",
+      "Mapped patient intake workflows at four clinics and redesigned the intake form; front-desk teams adopted the revised process.",
+      "Reduced the number of intake fields by [X]% and/or cut average registration time by [X] minutes.",
+      "Riley Chen",
+      "Phone | Email | LinkedIn | City, State",
+      "Northfield School of Management, Metro City, USA",
+      "MBA, Expected Jun 2025 | Sep 2023–Jun 2025",
+      "Lakeview University, Lake City, USA",
+      "B.A. Economics | Sep 2014–Jun 2018",
+      "MBA | Jun 2025",
+      "Harbor Payments, Metro City, USA",
+      "Associate Product Manager Intern | Jun 2024–Aug 2024",
+      "Improved checkout conversion by 35% by replacing a three-step checkout flow with a one-page experience across [scope of merchants].",
+      "Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support; launched two weeks ahead of plan.",
+      "Interviewed 25 merchants to quantify chargeback pain points and developed the business case that secured the initiative a place on the following quarter’s roadmap.",
+      "Led weekly engineering/support triage, resolving 140 onboarding tickets and reducing the open-ticket queue by 50%.",
+      "Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 to 4 days across 2,300 merchants in a pilot region.",
+      "Crestline Logistics, Lake City, USA",
+      "Operations Analyst | Mar 2019–Aug 2023",
+      "Developed a logistics strategy adopted across [number] regions/business lines, resulting in [measurable outcome].",
+      "Reduced warehouse picking errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for senior leadership.",
+      "Led deployment of a route-planning tool across three depots, training 60 drivers and dispatchers and saving an estimated 1,800 driver hours annually.",
+      "Campus Food Rescue App, Student Venture",
+      "Product Lead | Oct 2023–Present",
+      "Launched a surplus-food pickup app for 3,100 students across two dining halls, redistributing 9 tonnes of food in its first year.",
+      "Increased weekly active users from 400 to 1,150 by introducing pickup reminders based on insights from 60 user interviews.",
+      "Designed a volunteer shift system that filled 95% of weekly pickup slots and eliminated the need for staff coverage.",
+      "MBA Consulting Practicum, Regional Hospital Network",
+      "Team Lead | Jan 2024–May 2024",
+      "Led weekly working sessions with clinic managers to identify outpatient scheduling and patient-intake bottlenecks.",
+      "Mapped intake workflows at four clinics and redesigned the patient intake form; the revised process was adopted by front-desk staff.",
+      "Add a quantified result here if available, such as reduced registration time, fewer fields, or improved completion rate.",
+      "Product: Product discovery, user interviews, roadmap prioritization, PRDs, experimentation/A-B testing, success metrics, SQL",
+      "Analytics/Tools: SQL, Excel, Amplitude, Jira, Figma"
+    ],
+    "falsePositives": []
+  }
+}

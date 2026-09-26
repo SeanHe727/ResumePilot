@@ -6,7 +6,8 @@ Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025
 Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018
 EXPERIENCE
 Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023
-- Set the company’s logistics strategy, adopted across every region and business line.
+- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time
+calculation.
 - Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out
 with the floor supervisors and 45 retrained pickers.
 - Coordinated the quarterly S&OP review across sales, finance and operations for 12
@@ -22,8 +23,8 @@ risk and support; the team shipped it two weeks ahead of plan.
 business case that set the next quarter’s roadmap priority.
 - Ran weekly triage with engineering and support, closing 140 onboarding tickets over the
 summer and cutting the open-ticket queue by half.
-- Launched dispute self-service to all merchants, then wrote its success metrics and ran
-discovery interviews to decide what it should do.
+- Measured the onboarding redesign by comparing merchants who opted into the new flow with
+those who stayed on the old one.
 - Redesigned merchant onboarding around a single verification step, cutting median time to
 first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
 PROJECTS

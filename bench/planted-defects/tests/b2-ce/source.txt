@@ -10,10 +10,10 @@ Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA
 - Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, keeping every finding traceable to its source data.
 - Applied GRPO with grouped tool-use rollouts and a composite reward, cutting end-to-end latency 5% versus the SFT baseline with no loss in diagnostic accuracy.
 - Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency before each release.
-- Quantized the domain adapter to INT8, then fine-tuned it in full precision with LoRA and shipped the INT8 checkpoint to production.
+- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.
 - Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.
 Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024
-- Architected the company's ML platform, now used across three business units for model training, evaluation and release.
+- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.
 - Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.
 - Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.
 - Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.

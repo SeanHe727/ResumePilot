@@ -86,8 +86,10 @@ def pick(n, rng):
 def build(base, defects):
     v2 = base['v2']
     key = []
+    # A technical defect is described in its own terms: what is wrong, and why,
+    # as someone in the field would put it.
     note = lambda t, line: key.append({'id': t, 'category': next(c for c, ts in CATEGORIES.items() if t in ts),
-                                       'line': line, 'defect': DESC[t]})
+                                       'line': line, 'defect': v2.get('desc', {}).get(t, DESC[t])})
     by_slot = {SLOT[t]: t for t in defects if t in SLOT}
 
     lines = [('name', base['name']), ('text', base['contact'])]

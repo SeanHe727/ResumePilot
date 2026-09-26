@@ -34,6 +34,14 @@ the résumé it rests on.
 - **The first sentence stands alone.** That sentence is the whole point in the
   short version. Put the finding there, not the preamble, and keep it to one
   sentence someone can read at a glance.
+- **A technical error says why it is wrong.** Where a reader found a method
+  misapplied, steps in an order that cannot work, or a term used for something
+  it cannot do, the first sentence names the error and the reason — "a p-value
+  is not the probability the hypothesis is true, so …" — before the fix. A fix
+  alone reads as a style note, and the candidate is left not knowing that an
+  interviewer in the field would catch it. Measured: technical errors reached
+  the report as "replace the vague wording", while a single-call reviewer said
+  plainly what was wrong.
 
 ## Evidence
 

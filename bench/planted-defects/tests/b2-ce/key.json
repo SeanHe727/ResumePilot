@@ -38,14 +38,14 @@
   {
     "id": "T2",
     "category": "technical",
-    "line": "Quantized the domain adapter to INT8, then fine-tuned it in full precision with LoRA and shipped the INT8 checkpoint to production.",
-    "defect": "Steps in an order that does not work: a later step undoes or invalidates an earlier one."
+    "line": "Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "defect": "Assistant-only loss masking excludes tool outputs from the loss, so it cannot teach the model to reproduce them — the method contradicts the stated goal."
   },
   {
     "id": "T4",
     "category": "technical",
-    "line": "Architected the company's ML platform, now used across three business units for model training, evaluation and release.",
-    "defect": "An overclaim for the role's level: a junior role claiming to have designed or set something organisation-wide."
+    "line": "Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "defect": "Mixed precision keeps FP32 master weights and optimizer state, so switching to BF16 mixed precision saves far less than 4x memory."
   },
   {
     "id": "N3",

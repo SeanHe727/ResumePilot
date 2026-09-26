@@ -12,7 +12,7 @@ endobj
 <</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
 endobj
 5 0 obj
-<</Length 5537>>
+<</Length 5561>>
 stream
 BT /F1 16 Tf 72 752 Td (Morgan Patel) Tj ET
 BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-4410 | morgan.patel@example.com | example.com/code/mpatel) Tj ET
@@ -29,13 +29,13 @@ BT /F1 10 Tf 80 597.8000000000002 Td (- Wrote a feature store for 120 microstruc
 BT /F1 10 Tf 86 586.0000000000002 Td (research team reused in two later signal projects.) Tj ET
 BT /F1 10 Tf 80 574.2000000000003 Td (- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who) Tj ET
 BT /F1 10 Tf 86 562.4000000000003 Td (approved a small live allocation for the next quarter.) Tj ET
-BT /F1 10 Tf 80 550.6000000000004 Td (- Normalized every feature with the full-sample mean and variance, then split the data into) Tj ET
-BT /F1 10 Tf 86 538.8000000000004 Td (walk-forward folds to validate the signal.) Tj ET
+BT /F1 10 Tf 80 550.6000000000004 Td (- Selected the smoother's parameters from 400 backtested configurations and reported the best) Tj ET
+BT /F1 10 Tf 86 538.8000000000004 Td (one's Sharpe as the expected live Sharpe.) Tj ET
 BT /F1 10 Tf 80 527.0000000000005 Td (- Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4) Tj ET
 BT /F1 10 Tf 86 515.2000000000005 Td (Sharpe to the desk's book over 18 months of out-of-sample backtest after costs.) Tj ET
 BT /F1 10 Tf 72 503.4000000000005 Td (Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2021 - Aug 2021) Tj ET
-BT /F1 10 Tf 80 490.9000000000005 Td (- Designed the department's entire statistical computing infrastructure, now used by every lab) Tj ET
-BT /F1 10 Tf 86 479.1000000000005 Td (in the faculty.) Tj ET
+BT /F1 10 Tf 80 490.9000000000005 Td (- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel) Tj ET
+BT /F1 10 Tf 86 479.1000000000005 Td (with the same random seed on every worker.) Tj ET
 BT /F1 10 Tf 80 467.30000000000047 Td (- Derived a variance bound for a sparse regression estimator; my proof tightens the previous) Tj ET
 BT /F1 10 Tf 86 455.50000000000045 Td (bound by a log factor and is now Section 3 of a paper under review at JASA.) Tj ET
 BT /F1 10 Tf 80 443.70000000000044 Td (- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets) Tj ET
@@ -78,5 +78,5 @@ xref
 trailer
 <</Size 6/Root 1 0 R>>
 startxref
-5867
+5891
 %%EOF

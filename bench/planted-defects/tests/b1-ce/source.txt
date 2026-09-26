@@ -12,9 +12,9 @@ Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022
 Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 - Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.
 - Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.
-- Designed a routing layer that uses cross-entropy to rank the 3 specialist agents' findings by statistical significance before the reviewer sees them.
+- Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.
 - Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.
-- Trained the triage classifier with early stopping on the test set, then reported its 91% test accuracy as held-out performance.
+- Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.
 - Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.
 PROJECTS
 Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
