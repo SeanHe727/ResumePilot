@@ -189,7 +189,7 @@ export class DefaultOrchestrator {
       overallScore: numeric(raw.overallScore),
       arc: typeof raw.arc === 'string' ? raw.arc : '',
       gaps: strings(raw.gaps),
-      orderingNotes: strings(raw.orderingNotes),
+      orderingNotes: strings(raw.orderingNotes).filter((note) => !confirmsOrder(note)),
       unsupportedSkills: strings(raw.unsupportedSkills),
       withinEntries: readEntryReads(resume, raw.withinEntries),
     };
@@ -454,6 +454,17 @@ function readSubstance(
   }
 
   return normalised.data ?? null;
+}
+
+/**
+ * A note that the order is already right, rather than a change to make.
+ *
+ * The prompt asks for changes only and the reader still sends these. Measured
+ * three times, the last as a report's second-most-important point: "Keep
+ * Education before Experience".
+ */
+export function confirmsOrder(note: string): boolean {
+  return /^\s*(keep|leave|retain|maintain)\b/i.test(note) || /\balready (?:in|correct|right|appropriate|chronological)\b/i.test(note);
 }
 
 /** Ids are shown bracketed, so they come back bracketed. */

@@ -227,3 +227,12 @@ describe('the write-up is fitted in points too', () => {
     expect(asked[1]!.at(-1)!.content).toContain('has 25 points. Bring it to about fifteen');
   });
 });
+
+describe('a note that the order is already right is not a finding', () => {
+  it('drops confirmations and keeps changes', async () => {
+    const { confirmsOrder } = await import('../../src/agent/orchestrator.js');
+    expect(confirmsOrder('Keep Education before Experience.')).toBe(true);
+    expect(confirmsOrder('The projects are already in chronological order.')).toBe(true);
+    expect(confirmsOrder('Move Mobility Systems above Eastern Robotics.')).toBe(false);
+  });
+});

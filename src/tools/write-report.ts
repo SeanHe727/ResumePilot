@@ -386,10 +386,15 @@ export async function writeFullReport(
       const point = accepted.find((p) => p.sourceFindingIds.some((id) => group.findingIds.includes(id)));
       return point ? [point.id] : [];
     });
+  // One strength per line. Measured: the same bullet praised twice in a list
+  // of three.
+  const praised = new Set<string>();
   const strengths = (Array.isArray(parsed?.strengths) ? parsed.strengths : [])
     .flatMap((name) => {
       const s = typeof name === 'string' ? strengthByName.get(name.trim()) : undefined;
-      return s ? [`${s.bulletId}: ${s.text}`] : [];
+      if (!s || praised.has(s.bulletId)) return [];
+      praised.add(s.bulletId);
+      return [`${s.bulletId}: ${s.text}`];
     })
     .slice(0, 3);
 

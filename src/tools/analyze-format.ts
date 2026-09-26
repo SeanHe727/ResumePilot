@@ -30,7 +30,10 @@ const MESSAGES: Readonly<Record<string, string>> = {
   'harvard.no-pronouns': 'uses a personal pronoun; resume lines are phrases, not sentences',
   'harvard.passive-voice': 'passive voice hides who did the work',
   'harvard.no-references': 'references are requested separately; the line spends space to say nothing',
-  'harvard.no-personal-details': 'age, gender and photos are excluded by convention',
+  // No list of what else might be there. Measured: the list was read as a
+  // finding, and a report told a candidate to remove a gender and a photo the
+  // page did not have.
+  'harvard.no-personal-details': 'personal details a reader is not meant to weigh are left off by convention',
   'harvard.date-first-line':
     'opens with a date, putting the reader on the timeline instead of the achievement',
   'harvard.missing-contact': 'no email or phone in the body — the application cannot be answered',
