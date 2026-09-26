@@ -54,7 +54,7 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
       about: {
         type: 'string',
         description:
-          'What the question is about, by the id shown in brackets in the resume content: a ' +
+          'What the question is about, by the id shown in brackets in the resume content (without the brackets): a ' +
           "bullet's id when the question is about one line, or the entry's id when it is about " +
           'the whole entry. Either kind is accepted — do not convert one into the other.',
       },
@@ -68,7 +68,10 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
   },
 
   async execute(input, ctx): Promise<ToolResult<unknown>> {
-    const about = (input?.about ?? input?.bulletId ?? input?.entryId)?.trim();
+    // The brackets are how the id is shown, not part of it. Measured: told to
+    // use "the id shown in brackets", the reader passed `[s2:e0:b0]` thirteen
+    // times in one run and was refused every time.
+    const about = (input?.about ?? input?.bulletId ?? input?.entryId)?.trim().replace(/^\[(.*)\]$/, '$1').trim();
     const question = input?.question?.trim();
     if (!about || !question) {
       return {
