@@ -231,6 +231,30 @@ export async function writeFullReport(
   const invented: string[] = [];
   const links: Array<{ reportPointId: string; sourceFindingIds: string[] }> = [];
 
+  // Where a point goes, worked out from what it rests on. Measured: a point
+  // about the agent runtime's hardening, citing only findings on that entry,
+  // was filed by the writer under the evaluation framework below it.
+  const findingById = new Map(findings.map((f) => [f.id, f] as const));
+  const entryOfLine = new Map<string, string>();
+  for (const entry of entries.values()) {
+    entryOfLine.set(entry.id, entry.id);
+    for (const bullet of entry.bullets) entryOfLine.set(bullet.id, entry.id);
+  }
+  const fileUnder = (sources: SourceFinding[], chosen: string): string => {
+    const owners = new Set(
+      sources.flatMap((f) => {
+        const owner = entryOfLine.get(f.target.replace(/, wording$/, ''));
+        return owner ? [owner] : [];
+      }),
+    );
+    // One entry: that one. None: the writer's choice, which is the résumé as a
+    // whole unless it named a real entry. Several: the writer's choice if it is
+    // one of them, otherwise the résumé as a whole.
+    if (owners.size === 1) return [...owners][0]!;
+    if (owners.size === 0) return chosen;
+    return owners.has(chosen) ? chosen : 'resume';
+  };
+
   const placed = drafts.map((draft) => {
     // Checked, not taken. A source that was never offered is dropped and said
     // out loud: a provenance chain nobody verifies is a chain of whatever the
@@ -244,7 +268,8 @@ export async function writeFullReport(
     ];
     invented.push(...draft.claimed.filter((id) => !byId.has(id)));
 
-    const { about, claimed: _claimed, ...rest } = draft;
+    const { about: chosen, claimed: _claimed, ...rest } = draft;
+    const about = fileUnder(sourceFindingIds.map((id) => findingById.get(id)!), chosen);
     const point: FullReportPoint = {
       id: `report_point_${randomUUID()}`,
       sourceFindingIds,

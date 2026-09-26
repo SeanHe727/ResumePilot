@@ -470,13 +470,15 @@ describe('filing a point under something real', () => {
     // and a silent one.
     const { trace, events } = recorder();
     const findings = everyFinding(INPUT);
+    // A finding about no one line, so the section it lands in is the writer's call.
+    const wide = findings.find((f) => !f.target.startsWith('experience:'))!;
 
     const full = await writeFullReport(
       REPORT,
       STATE,
       findings,
       ctxWith(
-        { sections: [entrySection('experience:99', point('Still worth saying.', [findings[1]!.id]))] },
+        { sections: [entrySection('experience:99', point('Still worth saying.', [wide.id]))] },
         trace,
       ),
     );
@@ -484,6 +486,21 @@ describe('filing a point under something real', () => {
     expect(full?.sections[0]?.heading).toBe('Across the whole résumé');
     expect(full?.sections[0]?.points[0]?.what).toBe('Still worth saying.');
     expect(accepted(events).unknownTargets).toEqual(['experience:99']);
+  });
+
+  it('files a point under the entry its findings are about, whatever the writer chose', async () => {
+    // Measured: a point on the agent runtime, citing only its findings, was
+    // filed under the evaluation framework below it.
+    const findings = everyFinding(INPUT);
+    const onLine = findings.find((f) => f.target.startsWith('experience:0:'))!;
+    const full = await writeFullReport(
+      REPORT,
+      STATE,
+      findings,
+      ctxWith({ sections: [{ about: { type: 'resume' }, points: [point('About that line.', [onLine.id])] }] }),
+    );
+
+    expect(full?.sections[0]?.target).toEqual({ type: 'entry', entryId: 'experience:0' });
   });
 
   it('shows the parsed header and keeps a phone number out of it', async () => {
