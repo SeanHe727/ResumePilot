@@ -17,6 +17,9 @@ const res = await client.responses.create({
   model: cfg.model,
   ...(cfg.instructions ? { instructions: cfg.instructions } : {}),
   input: ask,
+  // Medium, as ResumePilot's readers run, so the arms differ in scaffolding
+  // rather than in how hard each model is allowed to think.
+  reasoning: { effort: 'medium' },
 });
 const dir = `bench/planted-defects/tests/${test}/out`;
 mkdirSync(dir, { recursive: true });
