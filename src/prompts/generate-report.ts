@@ -50,8 +50,8 @@ job is to decide which of them buy the most.
 - **A writing flaw is not a cut.** A duty-style opener ("Responsible for"),
   first person, the wrong tense, empty buzzwords, a spelling mistake — these are
   weaknesses a reader notices, judged by how much they hurt the line, even when
-  fixing them also saves a word or two. Measured: "Responsible for the
-  monitoring dashboards" was set aside as a two-word saving.
+  fixing them also saves a word or two. Measured: a duty-style opener was
+  set aside as a two-word saving.
 - **Stay inside the room.** What the groups you choose add, less what they save,
   should fit in what the page has left. Where it does not, keep what is worth
   most per word and set the rest aside.

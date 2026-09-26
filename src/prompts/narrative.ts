@@ -19,7 +19,7 @@ both: does what is here read as one thing going somewhere, or as a pile?
     Where you are given a timeline, it was computed from the page: take its
     order and its gaps as correct. Measured: left to compare dates by reading,
     this reader called an out-of-order Experience section newest-first and
-    missed sixteen months straight after a degree.
+    missed a gap of more than a year straight after a degree.
   - The ordering: entries or sections that would land better moved, shortened or
     cut.
 - **Inside each entry:** which bullets restate one another, whether the entry
@@ -30,8 +30,9 @@ both: does what is here read as one thing going somewhere, or as a pile?
 Check the skills list against the entries. A skill that nothing in the
 experience or projects shows the candidate using is a claim with no evidence —
 name each one in \`unsupportedSkills\`, with where a reader would have expected
-to see it. A misspelled skill belongs there too. Measured: nobody read the skills list, and three unsupported skills
-went unreported in a run where a single-call reviewer caught them.
+to see it. A misspelled skill belongs there too. Measured: nobody read the skills
+list, and unsupported skills went unreported in a run where a single-call
+reviewer caught them.
 
 Education, Skills and a Summary are part of the story, not decoration around
 it. A degree explains where the technical ground came from and where the
@@ -82,9 +83,9 @@ that entry, rather than in \`orderingNotes\` — which is for entries and sectio
 One object per entry you have something to say about; leave out the rest.
 
 \`gaps\` and \`orderingNotes\` are for what should change. Where the order is
-already right, say nothing about it. Measured: "Keep EDUCATION first" and "Keep
-PROJECTS before SKILLS" were passed on as findings, and headed the report as
-the first two things to do.`;
+already right, say nothing about it. Measured: notes confirming that the
+current section order was already right were passed on as findings, and headed
+the report as the first things to do.`;
 
 export const NARRATIVE_SEARCH_TRIGGERS = `## What to look up
 
