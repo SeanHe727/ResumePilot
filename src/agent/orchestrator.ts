@@ -12,6 +12,7 @@ import { renderResume } from '../document/index.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
 import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
+import { buildTimeline, renderTimeline } from '../document/timeline.js';
 import { SemaphorePool } from './pool.js';
 import { ROLES } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
@@ -165,12 +166,19 @@ export class DefaultOrchestrator {
     briefing?: Briefing,
   ): Promise<NarrativeAssessment | null> {
     if (resume.sections.every((section) => section.entries.length === 0)) return null;
+    const timeline = renderTimeline(buildTimeline(resume));
 
     const [result] = await this.parallel([
       {
         agentConfig: ROLES['narrative']!,
         input: 'Read these entries in sequence and return the JSON described above.',
-        context: { entries: renderResume(resume), ...briefingContext(briefing) },
+        // The dates worked out in code, beside the text they came from: the
+        // reader judges what they mean, and no longer has to compute them.
+        context: {
+          entries: renderResume(resume),
+          ...(timeline ? { timeline } : {}),
+          ...briefingContext(briefing),
+        },
       },
     ]);
 

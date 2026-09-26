@@ -16,6 +16,10 @@ both: does what is here read as one thing going somewhere, or as a pile?
   - The arc: does the sequence read as one career or as unrelated jobs?
   - The gaps: unexplained time, unexplained pivots, seniority going backwards —
     reported as the dates and titles show them rather than as a guess at why.
+    Where you are given a timeline, it was computed from the page: take its
+    order and its gaps as correct. Measured: left to compare dates by reading,
+    this reader called an out-of-order Experience section newest-first and
+    missed sixteen months straight after a degree.
   - The ordering: entries or sections that would land better moved, shortened or
     cut.
 - **Inside each entry:** which bullets restate one another, whether the entry

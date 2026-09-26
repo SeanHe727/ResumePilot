@@ -1,3 +1,4 @@
+import { buildTimeline, timelineIssues } from '../document/timeline.js';
 import { sectionText } from '../document/render.js';
 import { DATE_RANGE, EMAIL, PHONE } from '../document/vocabulary.js';
 import type { Bullet, FormatDiagnosis, ResumeDocument, ScoredDimension } from '../domain.js';
@@ -106,6 +107,8 @@ export function analyzeFormat(resume: ResumeDocument): FormatDiagnosis {
   collectSkillsIssues(resume, issues);
   collectContactIssues(resume, issues);
   collectConventionIssues(resume, issues);
+  // Dates that are simply wrong, found by arithmetic rather than by a reader.
+  issues.push(...timelineIssues(buildTimeline(resume)));
 
   // Only what a machine reading the file can decide.
   //

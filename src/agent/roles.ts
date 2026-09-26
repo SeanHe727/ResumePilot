@@ -90,7 +90,7 @@ export const NARRATIVE_AGENT: SubAgentConfig = {
   // and 3 turns for the heaviest role, against 180s and 5. The margin is for
   // the resumes not in the sample, not for the one that was.
   timeoutMs: 180_000,
-  contextBoundary: ['briefing', 'entries'],
+  contextBoundary: ['briefing', 'entries', 'timeline'],
 };
 
 /**
