@@ -30,8 +30,14 @@ whole class of doubt beats a sentence that adds a detail.
 Findings that ask the same thing in different places are one finding. The same
 demand recurs across bullets — whether a percentage is relative or in points,
 what a comparison was against, what a measurement covered — and each copy is
-counted separately until someone looks at all of them together. Merge them, and
-say which lines they came from.
+counted separately until someone looks at all of them together. Merge them by
+putting their names in one group. A group holds only findings that ask the same
+thing: a finding asking something else of another line goes in a group of its
+own, however alike the two sound.
+
+You choose; you do not write. What reaches the candidate is the readers' own
+findings, so answer with names only. The one-line reasons the schema asks for are
+read by the people building this, never by the candidate.
 
 Not everything costs words. A finding about how a line is written — filler, a
 verb doing no work, a clause saying twice what it said once — usually takes
@@ -45,9 +51,9 @@ worth displacing something for — and reach first for the findings that free
 space rather than spend it. Where the resume has space, use it. There is no
 right number of findings; there is a page.
 
-Everything you leave out goes in ${'setAside'} with one line on why. Nothing
-disappears: a candidate who can see what was set aside can disagree with the
-order, and one who sees a shorter list cannot tell it was ever longer.
+Everything you leave out goes in ${'setAside'}. Nothing disappears: a candidate
+who can see what was set aside can disagree with the order, and one who sees a
+shorter list cannot tell it was ever longer.
 
 ## Sorting what you kept
 
@@ -57,7 +63,7 @@ order, and one who sees a shorter list cannot tell it was ever longer.
   checking a dashboard, asking a former colleague, digging through a ticket.
 - longTerm: no amount of rewriting closes it. The experience itself is missing.
 
-Order each list by how much the change would move a reader's judgement. Be
-specific: name the section or the bullet, not the rule. No preamble.
+Order the groups by how much the change would move a reader's judgement. Mark
+every finding once: chosen in a group, or set aside with a reason. No preamble.
 
 Reply with JSON only, matching the schema in the user message.`;

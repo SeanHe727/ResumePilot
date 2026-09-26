@@ -35,6 +35,12 @@ export function render(report: DiagnosisReport): string {
           ? `  (${coverage.notApplicableEntries} entries have no bullets to score)`
           : ''),
       `  narrative ${coverage.narrative}  job description ${coverage.jdMatch}`,
+      ...(coverage.contentReadSincePrevious !== undefined
+        ? [`  ${coverage.contentReadSincePrevious} read for this report, the rest reused unchanged`]
+        : []),
+      ...[...new Set([...(coverage.contentStale ?? []), ...(coverage.wordingStale ?? [])])].map(
+        (id) => `  ${id} changed after it was read; its earlier findings are left out`,
+      ),
       '',
     );
   }
@@ -124,7 +130,7 @@ export function render(report: DiagnosisReport): string {
     ['Needs a figure you have to find', report.improvementPlan.shortTerm],
     ['Needs new experience', report.improvementPlan.longTerm],
     // Shown, because a list nobody can see was trimmed reads as a short list.
-    ['Set aside for now', (report.improvementPlan.setAside ?? []).map((s) => `${s.what} — ${s.because}`)],
+    ['Set aside for now', (report.improvementPlan.setAside ?? []).map((s) => (s.because ? `${s.what} — ${s.because}` : s.what))],
   ];
   for (const [heading, items] of plan) {
     if (items.length === 0) continue;

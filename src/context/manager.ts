@@ -204,7 +204,15 @@ export class LayeredContextManager implements ContextManager {
 
   private buildSystemBlock(): string {
     const parts = [this.systemPrompt];
-    if (this.profileBlock) parts.push(`\n## What we know about this candidate\n${this.profileBlock}`);
+    // Said to be from before, because it was being passed on as what the
+    // candidate had said: measured, a note from an earlier session reached every
+    // specialist on turn one as a supplied fact.
+    if (this.profileBlock) {
+      parts.push(
+        `\n## From earlier sessions\nBackground only. The candidate has not said any of this in this ` +
+          `conversation, so never pass it on as what they told you.\n${this.profileBlock}`,
+      );
+    }
     if (this.historySummary) parts.push(`\n## Already diagnosed\n${this.historySummary}`);
     return parts.join('\n');
   }

@@ -212,7 +212,7 @@ describe('through the tool that actually runs it', () => {
           if (asked.length === 1) {
             return {
               type: 'text',
-              content: JSON.stringify({ immediate: ['name the figure'], shortTerm: [], longTerm: [] }),
+              content: JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], why: 'name the figure' }] }),
               usage: { inputTokens: 0, outputTokens: 0 },
               stopReason: 'end_turn',
             };
@@ -242,14 +242,22 @@ describe('through the tool that actually runs it', () => {
     return { asked, full: saved?.full };
   }
 
-  it('shows the plan model the lines it has always seen', async () => {
-    // Read off the prompt that actually goes out, not off a copy of the
-    // formatting rule: the point is that this model's input did not change.
+  it('shows the plan model each finding under the short name it answers with', async () => {
+    // Read off the prompt that actually goes out. The selection marks findings
+    // by these names; it writes no advice and no ranges of its own.
     const { asked } = await runReport();
 
-    expect(asked[0]).toContain('- [experience:0:0, ~6 words] no measurable outcome');
-    expect(asked[0]).toContain('- [experience:0:0, wording] opens with "Responsible for"');
+    expect(asked[0]).toMatch(/- c\d+ \[experience:0:0, ~6 words\] no measurable outcome/);
+    expect(asked[0]).toMatch(/- w\d+ \[experience:0:0, wording\] opens with "Responsible for"/);
     expect(asked[0]).not.toMatch(/_finding_/);
+  });
+
+  it('hands the writer each chosen group with its findings as the readers wrote them', async () => {
+    const { asked } = await runReport();
+
+    expect(asked[1]).toMatch(/- group 1 \(fix now\), about experience:0:0:\n {4}c1 \[experience:0:0\] no measurable outcome/);
+    // The selection's own words never reach the writer.
+    expect(asked[1]).not.toContain('name the figure');
   });
 
   it('carries one set of ids across both model calls', async () => {

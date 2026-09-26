@@ -13,6 +13,7 @@ import { createJdCommand } from './handlers/jd.js';
 
 import { createNewCommand } from './handlers/new.js';
 import { createReportCommand } from './handlers/report.js';
+import { createRevertCommand } from './handlers/revert.js';
 import { createUploadCommand, type ParseFile } from './handlers/upload.js';
 
 export interface CommandDeps {
@@ -56,6 +57,7 @@ export function createCommandParser(deps: CommandDeps): DefaultCommandParser {
     createHistoryCommand(deps.sessions),
     createNewCommand(deps.sessions, deps.memory),
     createReportCommand(),
+    createRevertCommand(deps.sessions),
     createHooksCommand(deps.hooks),
     ...(deps.audit && deps.gate ? [createAuditCommand(deps.audit, deps.gate)] : []),
     ...(deps.checkpoints

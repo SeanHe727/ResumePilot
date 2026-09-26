@@ -442,6 +442,9 @@ export interface EntryNarrative {
 /** Output of the Entry Substance agent: one entry, judged whole. */
 export interface EntryDiagnosis {
   entryId: string;
+  /** Hash of the bullets this read, set when it is filed. See `tools/versions.ts`. */
+  readHash?: string;
+  readAt?: string;
   overallScore: number;
   bullets: BulletDiagnosis[];
 }
@@ -449,6 +452,9 @@ export interface EntryDiagnosis {
 /** Output of the Entry Wording agent — no knowledge base, cheap model. */
 export interface WordingDiagnosis {
   entryId: string;
+  /** Hash of the bullets this read, set when it is filed. See `tools/versions.ts`. */
+  readHash?: string;
+  readAt?: string;
   overallScore: number;
   perBullet: Array<{
     bulletId: string;
@@ -574,8 +580,22 @@ export interface ReportCoverage {
   eligibleEntries: number;
   /** Entries with nothing to score. A degree is a header and dates. */
   notApplicableEntries: number;
+  /** Entries with a reading of the text they have now. */
   contentReviewed: number;
   wordingReviewed: number;
+  /**
+   * Of those, how many were read since the previous report. The rest are
+   * readings of unchanged text, reused. Absent on the first report, where
+   * everything was read for it.
+   */
+  contentReadSincePrevious?: number;
+  wordingReadSincePrevious?: number;
+  /**
+   * Entries whose only reading is of text they no longer have. Their findings
+   * are left out of the report rather than presented as about the page.
+   */
+  contentStale?: string[];
+  wordingStale?: string[];
   narrative: 'done' | 'not-run';
   /** `no-posting` is not a gap: there was nothing to compare against. */
   jdMatch: 'done' | 'not-run' | 'no-posting';
@@ -680,7 +700,26 @@ export interface FullReportPoint {
   cost?: string;
 }
 
+/**
+ * Findings the selection put together, by id.
+ *
+ * The selection marks findings; it does not write advice of its own. It used to
+ * return one sentence per item, and a sentence can name a range: "Tighten
+ * s2:e0:b0-b3 by leading with the action and result" folded a line the wording
+ * reader had called outcome-first into advice meant for two others, and the
+ * writer then turned it into advice about that line alone. The lines a group is
+ * about are now worked out here from its findings.
+ */
+export interface PlanGroup {
+  kind: 'immediate' | 'shortTerm' | 'longTerm';
+  findingIds: string[];
+  /** The lines its findings are about, derived from them rather than written. */
+  targets: string[];
+}
+
 export interface ImprovementPlan {
+  /** What was chosen, as the selection marked it. Absent on reports written before. */
+  groups?: PlanGroup[];
   /** Mechanical fixes the user can apply right now. */
   immediate: string[];
   /** Rewrites that need the user to dig up real numbers. */
@@ -696,7 +735,11 @@ export interface ImprovementPlan {
    * see what was set aside can disagree with the ordering, where one who sees a
    * shorter list cannot tell it was ever longer.
    */
-  setAside?: Array<{ what: string; because: string }>;
+  setAside?: Array<{
+    what: string;
+    /** Absent on reports written after the selection's reasons moved to the trace. */
+    because?: string;
+  }>;
 }
 
 export interface VersionComparison {
@@ -707,6 +750,13 @@ export interface VersionComparison {
 }
 
 export interface DiagnosisReport {
+  /** Minted when the report is written. Absent on reports written before. */
+  id?: string;
+  createdAt?: string;
+  /** The document version it was written against. */
+  documentVersion?: number;
+  /** How many supplied facts existed when it was written. */
+  factsKnown?: number;
   summary: ReportSummary;
   perEntry: Array<{
     entryId: string;
@@ -764,6 +814,16 @@ export interface ResumeSessionState {
   narrative?: NarrativeAssessment;
   jdMatch?: JdMatch;
   latestReport?: DiagnosisReport;
+  /** Every report written for this document, oldest first. The last is `latestReport`. */
+  reports?: DiagnosisReport[];
+  /**
+   * Starts at 1 when a document is parsed and goes up by one with each kept
+   * revision. Readings are matched to text by hash, not by this; it is what a
+   * report records so `/report` can say what changed after it was written.
+   */
+  documentVersion?: number;
+  /** Each kept revision, in order, with the version it produced. */
+  revisions?: Revision[];
   /** Entry or bullet ids the user chose to exclude. */
   skipped?: string[];
   /**
@@ -794,6 +854,23 @@ export interface ResumeSessionState {
  * Passed to `MemoryStore<CandidateProfile>` — the store itself is generic and
  * has no idea a candidate exists.
  */
+/**
+ * One change to the working copy.
+ *
+ * Append-only: undoing a revision is itself a revision, carrying the text back,
+ * so the version number only ever moves forward and a report's version always
+ * names one state of the page.
+ */
+export interface Revision {
+  version: number;
+  bulletId: string;
+  before: string;
+  after: string;
+  at: string;
+  /** Set when this revision undid an earlier one: that one's version. */
+  reverts?: number;
+}
+
 export interface SuppliedFact {
   /** Their words, not a claim distilled out of them. */
   fact: string;

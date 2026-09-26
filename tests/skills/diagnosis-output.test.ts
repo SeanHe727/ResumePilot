@@ -72,9 +72,10 @@ const REPLIES: Record<string, string> = {
     ],
   }),
   generate_report: JSON.stringify({
-    immediate: ['delete the pronoun'],
-    shortTerm: ['find the latency number'],
-    longTerm: [],
+    chosen: [
+      { kind: 'immediate', findings: ['w1'], why: 'delete the pronoun' },
+      { kind: 'shortTerm', findings: ['c1'], why: 'find the latency number' },
+    ],
   }),
 };
 

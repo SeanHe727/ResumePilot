@@ -52,7 +52,7 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
       '',
       'Worth knowing, and not worth the space on this page:',
       '',
-      ...setAside.map((s) => `- ${s.what} — *${s.because}*`),
+      ...setAside.map((s) => `- ${s.what}${s.because ? ` — *${s.because}*` : ''}`),
       '',
     );
   }
@@ -78,6 +78,16 @@ function notRead(coverage: NonNullable<DiagnosisReport['coverage']>): string[] {
         `title line — a name, and dates — makes them reviewable.`,
     );
   }
+  // A line revised after it was read. Its old findings are about text that is
+  // gone, and are left out rather than shown as about the page.
+  for (const [role, ids] of [['content', coverage.contentStale], ['wording', coverage.wordingStale]] as const) {
+    if (!ids || ids.length === 0) continue;
+    lines.push(
+      `> **${ids.map((id) => `\`${id}\``).join(', ')} changed after the ${role} review read ` +
+        `${ids.length === 1 ? 'it' : 'them'}.** The earlier findings are left out; ask for ` +
+        `${ids.length === 1 ? 'it' : 'them'} to be reviewed again.`,
+    );
+  }
   for (const { role, target } of coverage.rejectedTargets ?? []) {
     lines.push(`> **A ${role} review was asked for \`${target}\`, which is not in this résumé.** It did not run.`);
   }
@@ -86,6 +96,19 @@ function notRead(coverage: NonNullable<DiagnosisReport['coverage']>): string[] {
   }
 
   return lines.length > 0 ? [...lines.flatMap((line) => [line, '']), ''] : [];
+}
+
+/**
+ * How much of what was counted was read for this report and how much was
+ * carried over, when there was an earlier report to carry it from. Measured: a
+ * report after one revision said "4 of 4" when one entry had been re-read and
+ * three reused, and read as a fresh pass over the whole page.
+ */
+function reuse(coverage: NonNullable<DiagnosisReport['coverage']>): string {
+  const read = coverage.contentReadSincePrevious;
+  if (read === undefined) return '';
+  const reused = coverage.contentReviewed - read;
+  return ` (content: ${read} read for this report, ${reused} unchanged since the last one and reused)`;
 }
 
 function head(report: DiagnosisReport, sourcePath: string, title: string): string[] {
@@ -105,7 +128,7 @@ function head(report: DiagnosisReport, sourcePath: string, title: string): strin
     '',
     coverage
       ? `Read ${coverage.contentReviewed} of ${coverage.eligibleEntries} entries for content, ` +
-        `${coverage.wordingReviewed} for wording. ` +
+        `${coverage.wordingReviewed} for wording${reuse(coverage)}. ` +
         `Career reading ${coverage.narrative}, posting comparison ${coverage.jdMatch}.`
       : '',
     '',

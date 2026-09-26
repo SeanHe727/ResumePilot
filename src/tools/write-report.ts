@@ -11,6 +11,7 @@ import { FULL_REPORT_PROMPT } from '../prompts/index.js';
 import type { ToolContext } from './types.js';
 import { parseJsonObject } from './verify.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
+import { currentReadings } from './versions.js';
 
 /** The program's own title for what is not about one entry. */
 const ACROSS_THE_RESUME = 'Across the whole résumé';
@@ -30,17 +31,33 @@ export async function writeFullReport(
   ctx: ToolContext,
 ): Promise<FullReport | null> {
   const plan = report.improvementPlan;
-  const chosen = [
-    ...plan.immediate.map((what) => `- [fix now] ${what}`),
-    ...plan.shortTerm.map((what) => `- [needs a figure] ${what}`),
-    ...plan.longTerm.map((what) => `- [needs new work] ${what}`),
-  ];
+  const shortOf = new Map(aliasFindings(findings).named.map(({ short, finding }) => [finding.id, short]));
+  const label = { immediate: 'fix now', shortTerm: 'needs a figure', longTerm: 'needs new work' } as const;
+  // Each group with its findings as the readers wrote them, so the writing
+  // explains what they said about the lines they said it about, rather than
+  // expanding a summary of it.
+  const chosen = plan.groups
+    ? plan.groups.map((group, i) =>
+        `- group ${i + 1} (${label[group.kind]}), about ${group.targets.join(', ')}:\n` +
+        group.findingIds
+          .map((id) => findings.find((f) => f.id === id))
+          .filter((f): f is SourceFinding => f !== undefined)
+          .map((f) => `    ${shortOf.get(f.id)} [${f.target}] ${f.what}`)
+          .join('\n'),
+      )
+    : [
+        ...plan.immediate.map((what) => `- [fix now] ${what}`),
+        ...plan.shortTerm.map((what) => `- [needs a figure] ${what}`),
+        ...plan.longTerm.map((what) => `- [needs new work] ${what}`),
+      ];
   if (chosen.length === 0) return null;
 
   // The readings themselves, so the write-up can quote what they said rather
   // than reconstruct it from a one-line summary of what was chosen.
+  // The same readings the plan was chosen from: current text only.
+  const current = currentReadings(state);
   const readings = [
-    ...(state.entryDiagnoses ?? []).map(
+    ...current.content.current.map(
       (entry) =>
         `## content, ${entry.entryId} (${entry.overallScore})\n` +
         entry.bullets
@@ -51,7 +68,7 @@ export async function writeFullReport(
           )
           .join('\n'),
     ),
-    ...(state.wordingDiagnoses ?? []).map(
+    ...current.wording.current.map(
       (entry) =>
         `## wording, ${entry.entryId} (${entry.overallScore})\n` +
         entry.perBullet
@@ -81,15 +98,7 @@ export async function writeFullReport(
   // Numbered within each reader, so the list reads the way a person would read
   // it — `c1 c2 w1` — rather than carrying a global position that means nothing
   // to anyone. Unique regardless, because the prefix differs.
-  const alias = new Map<string, SourceFinding>();
-  const seen = new Map<string, number>();
-  const named = findings.map((finding) => {
-    const n = (seen.get(finding.role) ?? 0) + 1;
-    seen.set(finding.role, n);
-    const short = `${finding.role[0]}${n}`;
-    alias.set(short, finding);
-    return { short, finding };
-  });
+  const { alias, named } = aliasFindings(findings);
   const offered = named
     .map(({ short, finding }) => `- ${short} [${finding.role}, ${finding.target}] ${finding.what}`)
     .join('\n');
@@ -114,7 +123,10 @@ export async function writeFullReport(
         role: 'user',
         content:
           `The résumé:\n${state.resume ? renderForQuoting(state) : ''}\n\n` +
-          `What was chosen:\n${chosen.join('\n')}\n\n` +
+          `What was chosen, as groups of findings:\n${chosen.join('\n')}\n\n` +
+          `Write one point per group. Its "from" is the ids listed under that group, and it is about ` +
+          `the lines those findings are about and no others: check it against those lines' text and ` +
+          `against what the readers said, and leave out anything that is not true of a line.\n\n` +
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
           `The findings, by id:\n${offered}\n\n` +
           `The entries a point can be filed under:\n${targets}\n\n` +
@@ -277,6 +289,29 @@ export async function writeFullReport(
   }));
 
   return { sections: built };
+}
+
+/**
+ * Short names for the findings, the same in the selection and in the writing.
+ *
+ * Numbered within each reader — `c1 c2 w1` — so both calls see one finding
+ * under one name, and a group the selection made can be handed to the writer
+ * by the names it was made with.
+ */
+export function aliasFindings(findings: readonly SourceFinding[]): {
+  alias: Map<string, SourceFinding>;
+  named: Array<{ short: string; finding: SourceFinding }>;
+} {
+  const alias = new Map<string, SourceFinding>();
+  const seen = new Map<string, number>();
+  const named = findings.map((finding) => {
+    const n = (seen.get(finding.role) ?? 0) + 1;
+    seen.set(finding.role, n);
+    const short = `${finding.role[0]}${n}`;
+    alias.set(short, finding);
+    return { short, finding };
+  });
+  return { alias, named };
 }
 
 /** What a point is about, before it has an identity of its own. */

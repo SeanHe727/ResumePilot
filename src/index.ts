@@ -192,8 +192,15 @@ program
     const { playScenario, readScenario } = await import('./scenario.js');
     const messages = readScenario(file, opts.resume);
 
+    // A memory of its own, empty, so a run is not shaped by the runs before it
+    // and leaves nothing in the memory of the app as it is really used.
+    const { mkdtempSync } = await import('node:fs');
+    const { tmpdir } = await import('node:os');
+    const { join } = await import('node:path');
+    const memoryPath = join(mkdtempSync(join(tmpdir(), 'resumepilot-scenario-')), 'memory.db');
+
     // Non-interactive: nobody is there to answer a confirmation, so it refuses.
-    const app = new App({ config: loadConfig(), interactive: false, traceDir: opts.traceDir });
+    const app = new App({ config: loadConfig(), interactive: false, traceDir: opts.traceDir, memoryPath });
     try {
       const session = await app.start('');
       await playScenario(app, session, messages, (text) =>

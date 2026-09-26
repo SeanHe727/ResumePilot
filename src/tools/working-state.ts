@@ -1,4 +1,4 @@
-import type { ResumeDocument, ResumeSessionState, SuppliedFact } from '../domain.js';
+import type { ResumeDocument, ResumeSessionState, Revision, SuppliedFact } from '../domain.js';
 import type { Tool, ToolResult } from './types.js';
 
 /**
@@ -83,15 +83,17 @@ interface ApplyRevisionOutput {
 export const applyRevisionTool: Tool<ApplyRevisionInput, ApplyRevisionOutput> = {
   name: 'apply_revision',
   description:
-    'Replace a bullet in the working copy with the version the candidate has settled on. ' +
-    'Use it once they have said which wording they are keeping, never to try one out — ' +
-    '`review_content` takes a `revisedBullets` draft and judges it without committing to it. ' +
-    'Later turns see the new text.',
+    'Replace a bullet in the working copy with wording the candidate has given for it. ' +
+    'Use it whenever they give a line its new wording — "I rewrote it, it now reads …", ' +
+    '"change it to …" — without asking whether they are sure: every change is a new version ' +
+    'and `revert_revision` takes it back, so tell them the version and that they can undo it. ' +
+    'Only when they want several wordings compared, without choosing, pass them to ' +
+    '`review_content` as `revisedBullets` drafts instead. Later turns see the new text.',
   parameters: {
     type: 'object',
     properties: {
       bulletId: { type: 'string', description: 'The bullet to replace, as shown in the resume content' },
-      text: { type: 'string', description: 'The wording the candidate is keeping' },
+      text: { type: 'string', description: 'The wording the candidate gave' },
     },
     required: ['bulletId', 'text'],
     additionalProperties: false,
@@ -127,8 +129,113 @@ export const applyRevisionTool: Tool<ApplyRevisionInput, ApplyRevisionOutput> = 
       };
     }
 
-    ctx.session.state = { ...state, resume: withRevision(resume, bulletId, text) };
+    ctx.session.state = revise(state, resume, bulletId, before, text);
     return { success: true, data: { bulletId, before, after: text } };
+  },
+};
+
+/**
+ * The working copy with one line changed, as a new version.
+ *
+ * Shared by keeping a wording and by undoing one, so both leave the same trail.
+ */
+function revise(
+  state: ResumeSessionState,
+  resume: ResumeDocument,
+  bulletId: string,
+  before: string,
+  after: string,
+  reverts?: number,
+): ResumeSessionState {
+  const version = (state.documentVersion ?? 1) + 1;
+  const revision: Revision = {
+    version,
+    bulletId,
+    before,
+    after,
+    at: new Date().toISOString(),
+    ...(reverts === undefined ? {} : { reverts }),
+  };
+  return {
+    ...state,
+    resume: withRevision(resume, bulletId, after),
+    documentVersion: version,
+    revisions: [...(state.revisions ?? []), revision],
+  };
+}
+
+/**
+ * The newest revision still in effect: not itself an undo, and not undone.
+ *
+ * So undoing twice goes back two changes rather than redoing the first.
+ */
+export function lastUndoable(revisions: readonly Revision[], bulletId?: string): Revision | undefined {
+  const undone = new Set(revisions.flatMap((r) => (r.reverts === undefined ? [] : [r.reverts])));
+  return [...revisions]
+    .reverse()
+    .find((r) => r.reverts === undefined && !undone.has(r.version) && (!bulletId || r.bulletId === bulletId));
+}
+
+/**
+ * Takes back the newest change still in effect, as a new version.
+ *
+ * Readings are filed by the text they read, so the line's earlier readings
+ * become current again the moment its earlier text is back — nothing is
+ * reviewed a second time.
+ */
+export function revertLast(
+  state: ResumeSessionState,
+  bulletId?: string,
+): { state: ResumeSessionState; undone: Revision } | { error: string } {
+  const resume = state.resume;
+  if (!resume) return { error: 'no resume in this session' };
+  const target = lastUndoable(state.revisions ?? [], bulletId);
+  if (!target) return { error: bulletId ? `no change to ${bulletId} left to undo` : 'no change left to undo' };
+  const now = findBullet(resume, target.bulletId);
+  if (now === null) return { error: `no bullet ${target.bulletId} in the working copy` };
+  return { state: revise(state, resume, target.bulletId, now, target.before, target.version), undone: target };
+}
+
+interface RevertRevisionInput {
+  bulletId?: string;
+}
+
+interface RevertRevisionOutput {
+  bulletId: string;
+  restored: string;
+  version: number;
+}
+
+export const revertRevisionTool: Tool<RevertRevisionInput, RevertRevisionOutput> = {
+  name: 'revert_revision',
+  description:
+    'Undo the most recent change to the working copy that is still in effect — of one bullet, ' +
+    'if you name it — putting the earlier wording back as a new version. Use it when the ' +
+    'candidate wants a change taken back. Calling it again goes back one change further.',
+  parameters: {
+    type: 'object',
+    properties: {
+      bulletId: { type: 'string', description: 'Only undo changes to this bullet' },
+    },
+    additionalProperties: false,
+  },
+
+  async execute(input, ctx): Promise<ToolResult<RevertRevisionOutput>> {
+    const state = ctx.session?.state as ResumeSessionState | undefined;
+    if (!state || !ctx.session) {
+      return { success: false, error: { code: 'input_error', message: 'no resume in this session' } };
+    }
+    const result = revertLast(state, input?.bulletId?.trim() || undefined);
+    if ('error' in result) return { success: false, error: { code: 'input_error', message: result.error } };
+    ctx.session.state = result.state;
+    return {
+      success: true,
+      data: {
+        bulletId: result.undone.bulletId,
+        restored: result.undone.before,
+        version: result.state.documentVersion ?? 0,
+      },
+    };
   },
 };
 

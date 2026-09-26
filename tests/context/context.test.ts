@@ -128,6 +128,18 @@ describe('layer budgets', () => {
 
     expect(cm.build().systemPrompt).toContain('New grad, backend.');
   });
+
+  it('says the profile is from earlier sessions, not something said in this one', () => {
+    // Measured: a note from an earlier session reached every specialist on turn
+    // one as a fact the candidate had supplied.
+    const cm = new LayeredContextManager();
+    cm.setSystemPrompt('You diagnose resumes.');
+    cm.setProfile('Seen before: the 68% has no starting count');
+
+    const system = cm.build().systemPrompt;
+    expect(system).toContain('## From earlier sessions');
+    expect(system).toContain('never pass it on as what they told you');
+  });
 });
 
 describe('sliding window', () => {

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { Briefing, EntryVerdict, RoleSelection } from '../../src/agent/types.js';
-import type { ResumeDocument, ResumeEntry } from '../../src/domain.js';
+import type { ResumeDocument, ResumeEntry, ResumeSessionState } from '../../src/domain.js';
 import { createToolRegistry } from '../../src/tools/index.js';
 import {
   reviewContentTool,
@@ -11,6 +11,7 @@ import {
 } from '../../src/tools/review.js';
 import { applyRevisionTool, recordFactTool } from '../../src/tools/working-state.js';
 import type { ToolContext } from '../../src/tools/types.js';
+import { entryTextHash } from '../../src/tools/versions.js';
 
 const ENTRY: ResumeEntry = {
   id: 'experience:0',
@@ -156,6 +157,26 @@ describe('one tool per specialist', () => {
     expect(seen[0]?.entry.bullets[0]?.text).toBe('Cut cross-role leakage from 12% to 3%');
     // And the session's own copy is untouched: a review is not an edit.
     expect(ENTRY.bullets[0]?.text).toBe('Reduced context contamination');
+  });
+
+  it('files a draft review beside the review of the page, not over it', async () => {
+    // Measured on the second item-14 run: a draft reviewed and not yet kept
+    // replaced the reading of the line on the page.
+    const { ctx } = ctxWith();
+
+    await reviewContentTool.execute({ entryId: 'experience:0' }, ctx);
+    await reviewContentTool.execute(
+      {
+        entryId: 'experience:0',
+        revisedBullets: [{ bulletId: 'experience:0:0', text: 'Cut cross-role leakage from 12% to 3%' }],
+      },
+      ctx,
+    );
+
+    const filed = (ctx.session!.state as ResumeSessionState).entryDiagnoses!;
+    expect(filed).toHaveLength(2);
+    expect(filed[0]!.readHash).toBe(entryTextHash(ENTRY));
+    expect(filed[1]!.readHash).not.toBe(filed[0]!.readHash);
   });
 
   it('drops a revision naming a bullet that is not there', async () => {

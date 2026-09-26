@@ -7,6 +7,7 @@ import type {
   FormatDiagnosis,
   ImprovementPlan,
   JdMatch,
+  PlanGroup,
   NarrativeAssessment,
   ResumeDocument,
   ResumeEntry,
@@ -18,7 +19,8 @@ import type {
 } from '../domain.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { parseJsonObject } from './verify.js';
-import { writeFullReport } from './write-report.js';
+import { currentReadings } from './versions.js';
+import { aliasFindings, writeFullReport } from './write-report.js';
 
 /**
  * What the reviews left behind, gathered off the session.
@@ -56,11 +58,15 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
 
   async execute(_args, ctx): Promise<ToolResult<DiagnosisReport>> {
     const state = (ctx.session?.state ?? {}) as ResumeSessionState;
+    // Only readings of the text each entry has now. A reading of an older
+    // version, or of a draft that was never kept, is about a line that is not
+    // on the page; coverage says which entries that leaves unread.
+    const readings = currentReadings(state);
     const input: GenerateReportInput = {
       resume: state.resume as ResumeDocument,
       format: state.formatDiagnosis as FormatDiagnosis,
-      entries: state.entryDiagnoses ?? [],
-      ...(state.wordingDiagnoses ? { wording: state.wordingDiagnoses } : {}),
+      entries: readings.content.current,
+      ...(state.wordingDiagnoses ? { wording: readings.wording.current } : {}),
       ...(state.narrative ? { narrative: state.narrative } : {}),
       ...(state.jdMatch ? { jdMatch: state.jdMatch } : {}),
     };
@@ -106,6 +112,10 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
     const improvementPlan = await buildImprovementPlan(input, findings, state, ctx);
 
     const report: DiagnosisReport = {
+      id: randomUUID(),
+      createdAt: new Date().toISOString(),
+      documentVersion: state.documentVersion ?? 1,
+      factsKnown: (state.suppliedFacts ?? []).length,
       summary,
       perEntry: perEntry(allEntries, input.entries),
       coverage: coverage(allEntries, input, state),
@@ -124,7 +134,10 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
 
     // Left where `/report` and `/export` read it: the coordinator is not asked
     // to carry a whole report back through a tool result and put it somewhere.
-    if (ctx.session) ctx.session.state = { ...state, latestReport: report };
+    // Appended, so every report this document has had stays readable in order.
+    if (ctx.session) {
+      ctx.session.state = { ...state, latestReport: report, reports: [...(state.reports ?? []), report] };
+    }
 
     // The long form stays on the session. Handing it back would put it in the
     // coordinator's window, which is not big enough to hold it and does not
@@ -240,15 +253,104 @@ function supplied(state: ResumeSessionState): string {
 }
 
 /**
- * A finding as the plan model has always seen it.
- *
- * Byte for byte what this sent before findings had ids: the plan model's
- * contract is not what changed here, and changing its input while changing
- * what depends on it would make any difference in the output unattributable.
+ * A finding as the selection sees it: its short name first, because the name is
+ * what the selection answers with.
  */
-function asLine(finding: SourceFinding): string {
+function asLine(short: string, finding: SourceFinding): string {
   const cost = finding.costWords === undefined ? '' : `, ~${finding.costWords} words`;
-  return `- [${finding.target}${cost}] ${finding.what}`;
+  return `- ${short} [${finding.target}${cost}] ${finding.what}`;
+}
+
+/** The line a finding is about, without the reader's suffix. */
+function lineOf(finding: SourceFinding): string {
+  return finding.target.replace(/, wording$/, '');
+}
+
+const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
+
+/**
+ * The selection's marks, checked and turned into a plan.
+ *
+ * The selection chooses; it does not say anything the readers did not. Its
+ * answer is finding names in groups, and every word that reaches the writer or
+ * the candidate is a reader's own. The one-line reasons it gives go to the
+ * trace and nowhere else: a note written alongside a group was measured
+ * reaching the report as advice — "so the review outcome leads the bullet",
+ * about a line the wording reader had called outcome-first.
+ *
+ * Each finding is placed once — the first mark wins — and a name that was not
+ * offered is dropped. A finding the selection did not mark at all is set aside,
+ * because nothing is meant to disappear. The lines a group is about come from
+ * its findings.
+ */
+export function planFromMarks(
+  parsed: Record<string, unknown> | null,
+  findings: readonly SourceFinding[],
+): {
+  plan: ImprovementPlan;
+  unknown: string[];
+  /** For the trace only. */
+  reasons: Array<{ findingIds: string[]; chosen: boolean; reason: string }>;
+  unmarked: string[];
+} {
+  const { alias } = aliasFindings(findings);
+  const placed = new Set<string>();
+  const unknown: string[] = [];
+  const reasons: Array<{ findingIds: string[]; chosen: boolean; reason: string }> = [];
+  const take = (raw: unknown): SourceFinding[] =>
+    (Array.isArray(raw) ? raw : []).flatMap((name) => {
+      const finding = typeof name === 'string' ? alias.get(name.trim()) : undefined;
+      if (!finding) {
+        unknown.push(String(name));
+        return [];
+      }
+      if (placed.has(finding.id)) return [];
+      placed.add(finding.id);
+      return [finding];
+    });
+  const targetsOf = (group: SourceFinding[]): string[] => [...new Set(group.map(lineOf))];
+  const reasonOf = (mark: Record<string, unknown> | null, key: string): string =>
+    typeof mark?.[key] === 'string' ? (mark[key] as string).trim() : '';
+
+  const groups: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
+    const mark = raw as Record<string, unknown> | null;
+    const kind = KINDS.find((k) => k === mark?.kind);
+    const members = take(mark?.findings);
+    if (!kind || members.length === 0) return [];
+    reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
+    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
+  });
+
+  const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
+    const mark = raw as Record<string, unknown> | null;
+    const members = take(mark?.findings);
+    if (members.length === 0) return [];
+    reasons.push({ findingIds: members.map((f) => f.id), chosen: false, reason: reasonOf(mark, 'because') });
+    return [members];
+  });
+  const unmarked = findings.filter((f) => !placed.has(f.id));
+
+  // In the reader's words: the finding first in the group, and a count of the
+  // rest, which the full report carries in full.
+  const say = (members: SourceFinding[]): string =>
+    `${targetsOf(members).join(', ')}: ${members[0]!.what}` +
+    (members.length > 1 ? ` (and ${members.length - 1} more like it)` : '');
+  const byId = new Map(findings.map((f) => [f.id, f] as const));
+  const membersOf = (group: PlanGroup): SourceFinding[] => group.findingIds.map((id) => byId.get(id)!);
+  const setAside = [...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({ what: say(members) }));
+
+  return {
+    plan: {
+      groups,
+      immediate: groups.filter((g) => g.kind === 'immediate').map((g) => say(membersOf(g))),
+      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map((g) => say(membersOf(g))),
+      longTerm: groups.filter((g) => g.kind === 'longTerm').map((g) => say(membersOf(g))),
+      ...(setAside.length > 0 ? { setAside } : {}),
+    },
+    unknown,
+    reasons,
+    unmarked: unmarked.map((f) => f.id),
+  };
 }
 
 /**
@@ -280,15 +382,17 @@ async function buildImprovementPlan(
     messages: [
       {
         role: 'user',
-        content: `${room}${supplied(state)}\n\nEverything the review found:\n${findings.map(asLine).join('\n')}
+        content: `${room}${supplied(state)}\n\nEverything the review found:\n${aliasFindings(findings)
+          .named.map(({ short, finding }) => asLine(short, finding))
+          .join('\n')}
 
-Return JSON of exactly this shape:
+Name findings only by the short names above. Return JSON of exactly this shape:
 
 {
-  "immediate": ["fixes the candidate can apply right now, without looking anything up"],
-  "shortTerm": ["rewrites that need the candidate to dig up real figures"],
-  "longTerm": ["gaps only new experience can close"],
-  "setAside": [{ "what": "the finding you left out", "because": "one line on why" }]
+  "chosen": [
+    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "why": "one line on why these, for the developers only" }
+  ],
+  "setAside": [{ "findings": ["c7"], "because": "one line on why, for the developers only" }]
 }`,
       },
     ],
@@ -307,12 +411,7 @@ Return JSON of exactly this shape:
   }
 
   const parsed = parseJsonObject(response.content ?? '');
-  const plan: ImprovementPlan = {
-    immediate: stringArray(parsed?.immediate),
-    shortTerm: stringArray(parsed?.shortTerm),
-    longTerm: stringArray(parsed?.longTerm),
-    ...(setAside(parsed?.setAside).length > 0 ? { setAside: setAside(parsed?.setAside) } : {}),
-  };
+  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings);
 
   // Which findings this weighed. The plan model is shown the lines without
   // ids, deliberately, so this is the only place the set it chose from is
@@ -322,7 +421,13 @@ Return JSON of exactly this shape:
     phase: 'decision',
     purpose: 'plan chosen',
     input: { fromFindingIds: findings.map((f) => f.id) },
-    output: plan,
+    output: {
+      ...plan,
+      // The selection's own reasons, kept here and nowhere downstream.
+      reasons,
+      ...(unmarked.length > 0 ? { unmarked } : {}),
+      ...(unknown.length > 0 ? { unknownNames: unknown } : {}),
+    },
   }));
 
   return plan;
@@ -358,21 +463,6 @@ function topRecurring(items: string[], limit: number): string[] {
     .map((c) => c.text);
 }
 
-function stringArray(raw: unknown): string[] {
-  return Array.isArray(raw) ? raw.filter((s): s is string => typeof s === 'string') : [];
-}
-
-/** What the plan chose not to spend the page on, and why. */
-function setAside(raw: unknown): NonNullable<ImprovementPlan['setAside']> {
-  if (!Array.isArray(raw)) return [];
-
-  return raw.flatMap((item) => {
-    const record = item as Record<string, unknown> | null;
-    const what = typeof record?.what === 'string' ? record.what.trim() : '';
-    return what ? [{ what, because: String(record?.because ?? '') }] : [];
-  });
-}
-
 /**
  * What ran, counted rather than judged.
  *
@@ -406,6 +496,15 @@ function coverage(
       bullets: (section.bullets ?? []).length,
     }));
 
+  // Read for this report, or reused from an earlier one. Only meaningful when
+  // there was an earlier one; on the first, everything was read for it.
+  const previous = state.latestReport?.createdAt;
+  const since = (readings: Array<{ readAt?: string }>): number | undefined =>
+    previous === undefined ? undefined : readings.filter((r) => (r.readAt ?? '') > previous).length;
+  const { content, wording } = currentReadings(state);
+  const contentSince = since(input.entries);
+  const wordingSince = since(input.wording ?? []);
+
   const attempts = state.reviewAttempts ?? [];
   const rejected = attempts.filter((a) => a.outcome === 'rejected');
   const failed = attempts.filter((a) => a.outcome === 'failed');
@@ -415,6 +514,10 @@ function coverage(
     notApplicableEntries: allEntries.length - eligible.length,
     contentReviewed: eligible.filter((entry) => scored.has(entry.id)).length,
     wordingReviewed: eligible.filter((entry) => worded.has(entry.id)).length,
+    ...(contentSince !== undefined ? { contentReadSincePrevious: contentSince } : {}),
+    ...(wordingSince !== undefined ? { wordingReadSincePrevious: wordingSince } : {}),
+    ...(content.stale.length > 0 ? { contentStale: content.stale } : {}),
+    ...(wording.stale.length > 0 ? { wordingStale: wording.stale } : {}),
     narrative: input.narrative ? 'done' : 'not-run',
     // No posting is not a gap. Nothing was asked for, so nothing is missing.
     jdMatch: input.jdMatch ? 'done' : state.jd ? 'not-run' : 'no-posting',
