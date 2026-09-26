@@ -128,6 +128,8 @@ export type TaskKind =
   | 'judge_wording'
   /** One question about the field an entry comes from. */
   | 'research_domain'
+  /** Short questions about a field, answered without the résumé. */
+  | 'verify_claims'
   | 'rewrite_bullet'
   | 'match_jd'
   /** The career arc across entries — one pass over the whole document. */

@@ -98,6 +98,14 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
       'and writes nothing.',
   },
   {
+    id: 'allow-verify-claims',
+    name: 'Check claims without the resume',
+    match: { type: 'tool_name', pattern: 'verify_claims' },
+    level: 'low',
+    action: 'allow',
+    reason: 'One model call over short questions that carry no resume text. Writes nothing.',
+  },
+  {
     id: 'allow-record-fact',
     name: 'Record something the candidate said',
     match: { type: 'tool_name', pattern: 'record_fact' },

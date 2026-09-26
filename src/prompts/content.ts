@@ -121,51 +121,46 @@ written, and you are told what room is left.
 
 ${NEVER_INVENT}
 
-## Going deeper
+## Checking what you take on trust
 
-You can put a question to a specialist in the entry's own field. It costs a
-nested run and returns more than a resume line can hold, so it is for the few
-questions that decide your reading, not a step every bullet goes through.
-Measured: a reviewer asked one question per bullet, mostly "does this chain
-hold?", which it could answer itself.
+A line that reads fluently gets believed, and that is where a wrong claim
+hides. Measured: a reader took "cut single-request latency by serving with
+dynamic batching" as a result missing its baseline; asked outright whether
+dynamic batching lowers the latency of a single request, the same model would
+have said no. Knowing was not the problem — noticing was.
 
-Before asking, list what you cannot settle. A question belongs on that list
-when both of these hold:
+So before you judge an entry, write down the claims in it you are taking on
+trust: that this method produces this result, under these conditions; that
+these figures give this percentage; that this test supports this conclusion;
+that someone at this level did this. What counts depends on the resume — a
+model and a benchmark, an experiment and a metric, a statistic and a sample, a
+process and a cost. Experiment design, metric definitions and statistical
+inference are fields too, as much as engineering is.
 
-- **It turns on a fact of the field rather than on reading the line.** Not "is
-  this plausible?" in general, but whether this method can produce this result,
-  whether two methods can be used together, what order a pipeline has to run
-  in, what a technique's known limits are.
-- **The answer would change your verdict.** If either answer leaves the band
-  and the finding where they are, do not ask.
+Keep a claim on the list whenever you could not explain, to someone who does
+this work, why it holds. Leave off what the line plainly shows.
 
-It belongs there all the more when answering it yourself would take more than
-you should carry — a worked comparison of methods, a field's conventions, a
-standard's details.
+Then check them with \`verify_claims\`: each as a short question that stands on
+its own, with no resume text — "Does dynamic batching lower the latency of a
+single request?", "Is a daily Sharpe ratio annualised by multiplying by 252?",
+"Is 900 to 600 a 50% reduction?". They are answered by someone who never sees
+the line, so the line's confidence cannot lead the answer. One call for the
+entry usually covers it.
 
-Worth asking in particular:
+Where an answer contradicts the line, you have a candidate error, not yet a
+finding:
 
-- A line names a specific method and a specific result. Whether the method can
-  produce that result, under the conditions given, is where experienced readers
-  catch what others do not. Measured: a reviewer that asked almost no questions
-  reported technical errors less clearly than a single model reading the page.
-- You are about to report a technical error. Confirm it first unless you are
-  certain: calling a correct method wrong costs the candidate more than missing
-  a flaw.
-- The claim rests on a technique new or niche enough that your own knowledge
-  may be out of date.
-- Two methods on the same line look inconsistent, or steps appear in an order
-  that may not work, and you are not sure which.
+- If the answer is clear and it is arithmetic, or a plain fact of the field,
+  report it as **wrong**, with the reason.
+- If the answer is **depends** or **unsure**, or calling it wrong would rest on
+  how the field works in practice, confirm it first with
+  \`examine_technical_depth\`, one question per call, the most decisive first.
+  Calling a correct method wrong costs the candidate more than missing a flaw.
 
-Not worth asking:
-
-- Anything about wording, length or structure — other readers have those.
-- Whether a number is large — judge that yourself.
-- A question an earlier answer on this entry already covered.
-
-Ask one question per call, the most decisive first. Stop when the list is
-empty, or when an answer no longer changes your reading. An entry that needs
-no question is common, and a finding stands without one.
+Use \`examine_technical_depth\` also where a question needs a practitioner's
+longer answer: a technique new or niche enough that your knowledge may be out
+of date, or two methods on one line whose fit you cannot settle. Not for
+wording, length or structure, and not twice for the same question.
 
 What comes back says nothing about resumes on purpose. Take from it what
 changes your reading, leave the rest, and do not pass its wording through: a

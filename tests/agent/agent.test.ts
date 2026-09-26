@@ -12,7 +12,7 @@ import {
 } from '../../src/agent/index.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
-import { MapToolRegistry, createToolRegistry, examineDepthTool } from '../../src/tools/index.js';
+import { MapToolRegistry, createToolRegistry, examineDepthTool, verifyClaimsTool } from '../../src/tools/index.js';
 import type { SearchProvider } from '../../src/tools/search-provider.js';
 import type { ToolRegistry } from '../../src/tools/types.js';
 
@@ -261,6 +261,7 @@ describe('SubAgentRuntime', () => {
 
     expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
       'query_knowledge_base',
+      'verify_claims',
       'examine_technical_depth',
     ]);
   });
@@ -274,6 +275,7 @@ describe('SubAgentRuntime', () => {
 
     expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
       'query_knowledge_base',
+      'verify_claims',
       'examine_technical_depth',
       'web_search',
     ]);
@@ -367,6 +369,7 @@ describe('SubAgentRuntime', () => {
     // registry does not hold — a bare registry has to carry every tool the role
     // names, not only the one the test exercises.
     registry.register(examineDepthTool as never);
+    registry.register(verifyClaimsTool as never);
     registry.register({
       name: 'query_knowledge_base',
       description: 'stand-in that returns more than a window can hold',

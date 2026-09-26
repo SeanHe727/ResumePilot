@@ -17,3 +17,4 @@ export * from './rewrite.js';
 export * from './full-report.js';
 export * from './generate-report.js';
 export * from './internal.js';
+export * from './verify-claims.js';

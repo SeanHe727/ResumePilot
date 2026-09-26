@@ -42,10 +42,10 @@ interface Finding {
 export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
   name: 'examine_technical_depth',
   description:
-    'Put one question about this entry to a specialist in its own technical field. Only for ' +
-    'a question you have listed as one you cannot settle yourself and whose answer would ' +
-    'change your verdict — see Going deeper. Costs a nested agent run. What comes back is ' +
-    'more detail than a resume line can hold: take from it what changes your reading.',
+    'Put one question about this entry to a specialist in its own field. For confirming a ' +
+    'candidate error before you report it, or a question that needs a practitioner\'s longer ' +
+    'answer — see Checking what you take on trust. Costs a nested agent run. What comes back ' +
+    'is more detail than a resume line can hold: take from it what changes your reading.',
   parameters: {
     type: 'object',
     properties: {

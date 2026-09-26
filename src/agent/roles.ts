@@ -32,10 +32,11 @@ export const CONTENT_AGENT: SubAgentConfig = {
   // `examine_technical_depth` runs a second agent inside one of these turns.
   // It takes no pool slot, so it costs latency and a call rather than a place
   // in the fan-out.
-  tools: ['query_knowledge_base', 'examine_technical_depth'],
+  tools: ['query_knowledge_base', 'verify_claims', 'examine_technical_depth'],
   optionalTools: ['web_search'],
   optionalPrompt: `${WEB_SEARCH_CORE}\n\n${CONTENT_SEARCH_TRIGGERS}`,
-  maxTurns: 6,
+  // One more than before for the claim check, which is a turn of its own.
+  maxTurns: 7,
   // 180s was 2-3x a measured peak of 67s — measured before this role could
   // search. Checking a figure against the world costs a turn per claim, and on
   // the two entries with the densest technical figures the deadline stopped
