@@ -8,67 +8,67 @@
     "A3",
     "S1",
     "S3",
-    "T1",
-    "N2"
+    "N2",
+    "N4"
   ],
   "coverage": true,
-  "suggestions": 32,
-  "words": 1707,
-  "quotes": 10,
-  "grounded": 10,
-  "rewrites": 0,
+  "suggestions": 24,
+  "words": 1416,
+  "quotes": 9,
+  "grounded": 7,
+  "rewrites": 1,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4311,
-    "completion_tokens": 13206,
-    "total_tokens": 17517,
+    "prompt_tokens": 3833,
+    "completion_tokens": 13261,
+    "total_tokens": 17094,
     "prompt_tokens_details": {
-      "cached_tokens": 0
+      "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 12771
+      "reasoning_tokens": 12947
     },
-    "prompt_cache_hit_tokens": 0,
-    "prompt_cache_miss_tokens": 4311
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2041
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "Replace the dashboard-ownership statement with the concrete monitoring work performed and its strongest operational result."
+        "evidence": "Ownership of monitoring dashboards: add the operational result."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "Replace or substantiate the generic Agent Runtime bullet"
+        "evidence": "“AI-first engineering practices” and “improving outcomes for downstream teams” are broad."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "State whether the task-completion improvement is 12 percentage points or 12% relative"
+        "evidence": "71% to 83% is a 12-percentage-point increase, not a 12% increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The figures 900 ms to 600 ms represent a 33.3% reduction, not a 50% reduction"
+        "evidence": "900 ms to 600 ms is a 33.3% reduction, not 50%."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "Lead the GRPO bullet with the 5% latency result"
+        "evidence": "s2:e1:b3: The sequence \"grouped tool-use rollouts ... composite reward ... GRPO loop ... frozen SFT reference\" names many components without identifying the decisive training change or its measured effect."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The migration bullet combines migration, logging-library work, onboarding, and weekend on-call responsibilities"
+        "evidence": "Separate the migration from the logging, onboarding, and on-call details."
       },
       {
         "id": "T1",
-        "found": true,
-        "evidence": "A single scored trajectory cannot support standard group-relative GRPO by itself because group-relative advantages require comparison across multiple sampled trajectories"
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "T3",
@@ -78,17 +78,19 @@
       {
         "id": "N2",
         "found": true,
-        "evidence": "Move Mobility Systems Company above Eastern Robotics Co. because the October 2024-May 2025 internship is more recent than the August 2022-July 2024 role"
+        "evidence": "Reverse the Experience entries"
       },
       {
         "id": "N4",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "The skills section lists technologies that are not demonstrated elsewhere in the resume, including ... Kubernetes."
       }
     ],
     "coverage": true,
-    "suggestions": 32,
-    "rewrites": [],
+    "suggestions": 24,
+    "rewrites": [
+      "adopted as the team's runbook"
+    ],
     "falsePositives": []
   }
 }

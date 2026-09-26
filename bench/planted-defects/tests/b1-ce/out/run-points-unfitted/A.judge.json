@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 10,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 33,
+  "words": 2240,
+  "quotes": 8,
+  "grounded": 7,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4914,
+    "completion_tokens": 12958,
+    "total_tokens": 17872,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12519
+    },
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4146
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "Replace broad dashboard ownership language with the monitoring improvement and operational result"
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "Replace “AI-first engineering practices” with the specific practices, teams, and ownership you drove"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Call the 71% to 83% change a 12-percentage-point increase, or calculate and label it as a 16.9% relative increase"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "Correct the latency percentage: reducing p95 latency from 900 ms to 600 ms is a 33.3% reduction, not a 50% reduction"
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Lead with the 5% result... The current wording hides the result behind implementation detail"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The current line combines several substantial responsibilities"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Single-rollout GRPO removes the normal within-group comparison, so an interviewer will want to know how the update signal was computed"
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "A 40% p95 reduction is hard to interpret if “single-request” could mean an isolated request, while dynamic batching normally depends on concurrent traffic"
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Move Mobility Systems Company above Eastern Robotics Co. so Experience is reverse chronological"
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "SQL, Bash, Git, PyTorch, LoRA, LangGraph, RAG, Kubernetes, and Python are listed without explicit supporting mentions"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 33,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

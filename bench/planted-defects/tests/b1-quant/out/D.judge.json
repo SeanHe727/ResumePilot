@@ -6,71 +6,72 @@
     "W6",
     "A2",
     "A3",
-    "S1",
     "S3",
     "T1",
+    "N1",
     "N4"
   ],
   "coverage": false,
-  "suggestions": 30,
-  "words": 1536,
-  "quotes": 4,
-  "grounded": 3,
-  "rewrites": 36,
+  "suggestions": 28,
+  "words": 1755,
+  "quotes": 1,
+  "grounded": 0,
+  "rewrites": 29,
   "inventedNumbers": [
+    "24",
     "25"
   ],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4134,
-    "completion_tokens": 16352,
-    "total_tokens": 20486,
+    "prompt_tokens": 4430,
+    "completion_tokens": 14066,
+    "total_tokens": 18496,
     "prompt_tokens_details": {
-      "cached_tokens": 0
+      "cached_tokens": 512
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 15017
+      "reasoning_tokens": 12853
     },
-    "prompt_cache_hit_tokens": 0,
-    "prompt_cache_miss_tokens": 4134
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 3918
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Derived a variance bound for a sparse regression estimator, tightening the previous bound by a logarithmic factor; proof included as Section 3 of a JASA manuscript under review."
+        "evidence": "Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; proof incorporated"
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "`econometircs` → **econometrics**"
+        "evidence": "Correct the spelling and categorization in Skills"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "Improved directional hit rate from 52% to 58% using realized-volatility features and an asymmetric loss function."
+        "evidence": "Improved directional hit rate from 52% to 58% across 30 indices; evaluated robustness"
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "reduction from 0.20 to 0.15 is **25%**, not 33%"
+        "evidence": "reducing error from 0.20 to 0.15 is a 25% reduction, not a 33% improvement"
       },
       {
         "id": "S1",
-        "found": true,
-        "evidence": "Built a reusable feature store by joining 120 point-in-time microstructure features across six venues, deduplicating late prints, and versioning schemas; adopted by two subsequent projects."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The original fourth bullet combined too many unrelated responsibilities"
+        "evidence": "combines too many unrelated responsibilities"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "For a daily Sharpe ratio, annualization is typically: Annualized Sharpe = Daily Sharpe × sqrt(252)"
+        "evidence": "A daily Sharpe ratio is generally annualized by multiplying by √252, not 252"
       },
       {
         "id": "T3",
@@ -79,54 +80,47 @@
       },
       {
         "id": "N1",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "this role creates an apparent career-transition question"
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "Only include Kafka if you can discuss how you used it. If not, remove it."
+        "evidence": "only list Kafka if you can discuss how you used it. If not, remove it"
       }
     ],
     "coverage": false,
-    "suggestions": 30,
+    "suggestions": 28,
     "rewrites": [
-      "econometircs → econometrics",
-      "Joining 120 microstructure features → Joined 120 microstructure features",
-      "added 0.4 Sharpe → increased the book’s Sharpe ratio by 0.4",
-      "added 0.4 Sharpe → contributed 0.4 to the book’s Sharpe ratio",
-      "daily Sharpe ratio → annualized Sharpe ratio, daily Sharpe ratio, or simply Sharpe ratio",
-      "Improved simulated book Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.",
-      "Morgan Patel\n+1 (555) 010-4410 | morgan.patel@example.com\nGitHub: example.com/code/mpatel",
-      "Ridgeway University, Metro City, USA",
-      "Ph.D. Candidate in Statistics, expected May 2026 | Sep 2021–Present",
-      "B.S. in Mathematics, May 2020 | Sep 2016–May 2020",
-      "Research Areas: Statistical learning, time-series modeling, high-dimensional statistics",
-      "Programming: Python, R, SQL, C++",
-      "Machine Learning: PyTorch, gradient boosting, sparse regression",
-      "Statistics: Time-series econometrics, Bayesian inference, volatility modeling, high-dimensional statistics",
-      "Data/Infrastructure: Kafka, distributed computing, simulation pipelines",
-      "Developed a short-horizon order-book imbalance signal for liquid index futures that improved simulated book Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.",
-      "Reduced signal turnover from 34% to 21% using a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by one-third.",
-      "Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; include significance levels if available.",
+      "Programming: Python, R, SQL, C++, Kafka",
+      "Machine Learning: PyTorch, gradient boosting, temporal convolutional networks",
+      "Statistics/Methods: Time-series econometrics, Bayesian inference, Monte Carlo simulation, volatility modeling",
+      "Quantitative Finance: Order-book modeling, market microstructure, backtesting, transaction-cost modeling",
+      "Statistics Ph.D. candidate with experience in quantitative research, market microstructure, time-series modeling, and statistical learning. Built and evaluated trading signals across 30 futures/index markets, developed reproducible simulation and feature pipelines, and published open-source statistical software.",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures that improved portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.",
+      "Reduced daily turnover from 34% to 21% with a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by 33%.",
+      "Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report statistical significance and p-values if available.",
+      "Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices, with improvements statistically significant at the 5% level in 24 markets.",
       "Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.",
-      "Documented backtest assumptions, transaction-cost methodology, validation procedures, and known failure regimes in the desk’s research wiki.",
-      "Built a reusable feature store by joining 120 point-in-time microstructure features across six venues, deduplicating late prints, and versioning schemas; adopted by two subsequent projects.",
-      "Built a reproducible cluster-based simulation pipeline that reduced a 2,000-run Monte Carlo study from 3 days to 5 hours.",
-      "Derived a variance bound for a sparse regression estimator, tightening the previous bound by a logarithmic factor; proof included as Section 3 of a JASA manuscript under review.",
+      "Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki for future researchers.",
+      "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 – Aug 2025",
+      "Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices.",
+      "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 – Present",
+      "Trained a temporal convolutional network on realized-volatility features, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.",
+      "Reduced [specified error metric] from 0.20 to 0.15, a 25% improvement, using realized-volatility features and an asymmetric loss function.",
+      "Improved directional hit rate from 52% to 58% across 30 indices; evaluated robustness across rolling time-series splits.",
+      "Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 – Aug 2021",
+      "Built a reproducible simulation pipeline on a shared computing cluster, reducing a 2,000-run Monte Carlo study from 3 days to 5 hours.",
+      "Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; proof incorporated as Section 3 of a JASA manuscript under review.",
       "Developed and released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.",
-      "Taught weekly graduate probability recitations for 60 students, authored 12 problem sets, and earned a 4.8/5 teaching rating.",
-      "Managed opening operations and a team of six bakers and cashiers while maintaining weekly labor-budget targets.",
-      "Managed inventory counts and supplier orders, reducing unsold bread from 12% to 7% of daily production.",
-      "Developed a temporal convolutional model for realized-volatility forecasting that reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.",
-      "Improved directional hit rate from 52% to 58% using realized-volatility features and an asymmetric loss function.",
-      "Evaluated model performance using time-aware out-of-sample validation; report the test period and confidence intervals if available.",
-      "Reduced **[RMSE/MAE/etc.]** from 0.20 to 0.15, a 25% reduction.",
-      "Placed 41st out of 2,900 teams, ranking in the top 2% of the private leaderboard, using a gradient-boosting ensemble and 300 engineered features.",
-      "Reduced validation leakage by implementing time-grouped cross-validation, closing the gap between local validation and leaderboard scores from 0.02.",
-      "Built a permutation-importance feature-selection pipeline that reduced 900 candidate features to 300 without reducing validation performance.",
-      "PUBLICATIONS & PRESENTATIONS\n- Patel, M. “Title.” Manuscript under review at Journal of the American Statistical Association.\n- [Conference presentation or working paper]",
-      "Research Interests: Financial econometrics, volatility forecasting, market microstructure, statistical learning"
+      "Taught weekly graduate-probability recitations for 60 students, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+      "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 – Present",
+      "Supervise opening operations and a team of six bakers and cashiers while maintaining weekly labor-budget targets.",
+      "Managed daily inventory counts and supplier orders, reducing unsold bread from 12% to 7% of production.",
+      "Assistant Store Manager, Part-Time",
+      "Morgan Patel",
+      "Metro City, USA | +1 (555) 010-4410 | morgan.patel@example.com",
+      "github.com/mpatel | linkedin.com/in/morganpatel | morganpatel.github.io"
     ],
     "falsePositives": []
   }

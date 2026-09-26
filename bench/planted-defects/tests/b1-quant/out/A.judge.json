@@ -9,89 +9,91 @@
     "S1",
     "S3",
     "T1",
-    "T3",
+    "N1",
     "N4"
   ],
   "coverage": true,
-  "suggestions": 27,
-  "words": 1814,
-  "quotes": 12,
-  "grounded": 9,
-  "rewrites": 1,
+  "suggestions": 26,
+  "words": 1446,
+  "quotes": 5,
+  "grounded": 2,
+  "rewrites": 0,
   "inventedNumbers": [],
-  "falsePositives": [],
+  "falsePositives": [
+    "The feature-store and intern-wiki bullets describe substantial work, but should indicate adoption or practical effect—such as users, projects supported, time saved, or reduced rework—if you have those figures. (The feature-store bullet already states the team reused it in two later projects.)"
+  ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4561,
-    "completion_tokens": 14431,
-    "total_tokens": 18992,
+    "prompt_tokens": 3956,
+    "completion_tokens": 14862,
+    "total_tokens": 18818,
     "prompt_tokens_details": {
-      "cached_tokens": 0
+      "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 14044
+      "reasoning_tokens": 14401
     },
-    "prompt_cache_hit_tokens": 0,
-    "prompt_cache_miss_tokens": 4561
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2164
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove the personal pronoun and tighten the bullet to “Derived a variance bound for a sparse regression estimator, tightening the previous bound by a log factor.”"
+        "evidence": "Remove the personal pronoun from the proof bullet."
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "Correct the spelling of “time-series econometrics.”"
+        "evidence": "correct 'time-series econometircs' to 'time-series econometrics.'"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "report the change as 6 percentage points from 52% to 58%"
+        "evidence": "Changing directional hit rate from 52% to 58% should be described as a 6-percentage-point increase, not simply a 6% improvement."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "A change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+        "evidence": "reducing error from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "Lead with your ownership of the feature-store work and state the measurable benefit of its reuse rather than opening with the feature-joining process."
+        "evidence": "lead with the reusable feature-store outcome rather than dense implementation details"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "Separate the R-package release from cluster maintenance, reading-group organization, and grading, and attach the 3,000-download result directly to the package."
+        "evidence": "Separate these or remove lower-priority responsibilities so the research-software contribution is not buried."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "Correct the Sharpe annualization: multiplying a daily Sharpe by 252 is wrong because annualization uses the square root of the number of periods"
+        "evidence": "multiplying a daily Sharpe ratio by 252 is not the standard annualization method."
       },
       {
         "id": "T3",
-        "found": true,
-        "evidence": "Replace the generic Diebold-Mariano claim with the nested-model correction actually used"
-      },
-      {
-        "id": "N1",
         "found": false,
         "evidence": ""
       },
       {
+        "id": "N1",
+        "found": true,
+        "evidence": "Reduce the prominence of the bakery role. Move it to an Additional Experience section below the quantitative research and projects, or place it last."
+      },
+      {
         "id": "N4",
         "found": true,
-        "evidence": "The narrative review found skills such as SQL, C++, Kafka, and Bayesian inference unsupported by the entries. Remove them or add evidence elsewhere."
+        "evidence": "no supporting entries for SQL, C++, Kafka, Bayesian inference, or time-series econometrics."
       }
     ],
     "coverage": true,
-    "suggestions": 27,
-    "rewrites": [
-      "Derived a variance bound for a sparse regression estimator, tightening the previous bound by a log factor."
-    ],
-    "falsePositives": []
+    "suggestions": 26,
+    "rewrites": [],
+    "falsePositives": [
+      "The feature-store and intern-wiki bullets describe substantial work, but should indicate adoption or practical effect—such as users, projects supported, time saved, or reduced rework—if you have those figures. (The feature-store bullet already states the team reused it in two later projects.)"
+    ]
   }
 }

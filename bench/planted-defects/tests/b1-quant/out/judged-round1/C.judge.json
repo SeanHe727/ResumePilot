@@ -1,0 +1,116 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/C.md",
+  "recall": 6,
+  "found": [
+    "W2",
+    "W6",
+    "A3",
+    "S1",
+    "S3",
+    "T1"
+  ],
+  "coverage": false,
+  "suggestions": 34,
+  "words": 1354,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 19,
+  "inventedNumbers": [
+    "25",
+    "24",
+    "25"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3823,
+    "completion_tokens": 16186,
+    "total_tokens": 20009,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15331
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3823
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Be careful with “my proof” if this is collaborative work. “Derived” communicates ownership without sounding informal."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Fix the typo > time-series **econometircs** should be: time-series **econometrics**"
+      },
+      {
+        "id": "A2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "Going from 0.20 to 0.15 is a **25% reduction**, not 33%"
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The opening modifier is awkward ... Rewrite: > Built a point-in-time feature store spanning 120 microstructure features across six venues"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The final bullet is overloaded ... The 3,000 downloads are the valuable result. Give that its own bullet"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "daily Sharpe is annualized by multiplying by **√252**, not 252"
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 34,
+    "rewrites": [
+      "Reduced forecast error from 0.20 to 0.15 (25%) by adding realized-volatility features and an asymmetric loss.",
+      "time-series **econometrics**",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures that increased simulated portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.",
+      "Reduced daily turnover from 34% to 21% using a cost-aware position smoother, retaining 90% of gross returns while lowering estimated slippage by 33%.",
+      "Evaluated forecast improvements against a HAR-RV baseline across 30 indices using Diebold–Mariano tests with HAC standard errors.",
+      "...finding statistically significant improvements on 24 of 30 indices at the 5% level.",
+      "Built a point-in-time feature store spanning 120 microstructure features across six venues; deduplicated late prints and versioned schemas, enabling reuse in two subsequent research projects.",
+      "Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki.",
+      "Developed a temporal convolutional model for realized-volatility forecasting across 30 equity indices, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline.",
+      "Increased directional accuracy from 52% to 58% by incorporating realized-volatility features and an asymmetric loss.",
+      "Reduced out-of-sample MAE from 0.20 to 0.15 (25%)...",
+      "Released an open-source R package for high-dimensional covariance estimation that received 3,000 downloads in its first year.",
+      "Derived a variance bound for a sparse regression estimator, improving the prior bound by a logarithmic factor; the result appears in Section 3 of a manuscript under review at *JASA*.",
+      "**Ridgeway University**, Metro City, USA\nPh.D. Candidate in Statistics, expected May 2026\nDissertation: *[Title or concise topic]* | Adviser: *[Name]*",
+      "Ph.D. in Statistics, expected May 2026",
+      "B.S. in Mathematics, May 2020",
+      "**Languages:** Python, R, SQL, C++\n**Machine Learning & Statistics:** Time-series econometrics, Bayesian inference, gradient boosting, deep learning\n**Tools:** PyTorch, Kafka",
+      "Supervised opening shifts and a six-person team while meeting weekly labor-budget targets.\nReduced unsold bread from 12% to 7% of production by improving inventory counts and supplier ordering.",
+      "GitHub: github.com/mpatel"
+    ],
+    "falsePositives": []
+  }
+}

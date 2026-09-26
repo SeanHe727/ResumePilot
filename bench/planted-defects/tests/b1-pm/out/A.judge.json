@@ -1,9 +1,8 @@
 {
   "file": "bench/planted-defects/tests/b1-pm/out/A.md",
-  "recall": 9,
+  "recall": 8,
   "found": [
     "W3",
-    "W4",
     "A1",
     "A4",
     "S2",
@@ -13,53 +12,56 @@
     "N5"
   ],
   "coverage": true,
-  "suggestions": 32,
-  "words": 1625,
-  "quotes": 8,
-  "grounded": 7,
+  "suggestions": 18,
+  "words": 1247,
+  "quotes": 5,
+  "grounded": 4,
   "rewrites": 0,
   "inventedNumbers": [],
-  "falsePositives": [],
+  "falsePositives": [
+    "Remove age, gender, photographs, date of birth, and nationality.",
+    "Add the user or business outcomes behind the dispute work and chargeback research."
+  ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3944,
-    "completion_tokens": 12266,
-    "total_tokens": 16210,
+    "prompt_tokens": 3460,
+    "completion_tokens": 16386,
+    "total_tokens": 19846,
     "prompt_tokens_details": {
-      "cached_tokens": 0
+      "cached_tokens": 1664
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11790
+      "reasoning_tokens": 15964
     },
-    "prompt_cache_hit_tokens": 0,
-    "prompt_cache_miss_tokens": 3944
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 1796
   },
   "verdict": {
     "defects": [
       {
         "id": "W3",
         "found": true,
-        "evidence": "Make the Crestline S&OP bullet consistently past tense."
+        "evidence": "s2:e1:b2: 'Coordinated ... and prepares' mixes past and present tense"
       },
       {
         "id": "W4",
-        "found": true,
-        "evidence": "Rewrite the intake bullet in active voice to state that you mapped intake and shortened the form"
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "A1",
         "found": true,
-        "evidence": "Clarify whether the 35% checkout-conversion improvement is relative or measured in percentage points, and include the baseline conversion rate."
+        "evidence": "Clarify the 35% conversion baseline, unit, and merchant comparison."
       },
       {
         "id": "A4",
         "found": true,
-        "evidence": "Remove or relocate the practicum bullet about merchant onboarding because it duplicates Harbor Payments and conflicts with the named hospital-network project."
+        "evidence": "Replace the unrelated merchant-onboarding bullet with the hospital project’s actual outcome. The mismatch breaks the entry’s narrative and suggests copied content."
       },
       {
         "id": "S2",
         "found": true,
-        "evidence": "Replace the generic meeting description with your team-lead action, the scheduling problem addressed, and the outcome produced across the network."
+        "evidence": "the hospital weekly-sessions bullet describe recurring work but do not show what changed as a result"
       },
       {
         "id": "S4",
@@ -69,27 +71,30 @@
       {
         "id": "T2",
         "found": true,
-        "evidence": "'merchants who opted into the new flow' may create a self-selected comparison, so state whether the cohorts were matched or otherwise adjusted."
+        "evidence": "s2:e0:b4: 'merchants who opted into the new flow' introduces a self-selection problem"
       },
       {
         "id": "T4",
         "found": true,
-        "evidence": "Replace the late-delivery result measured by excluding weather-delayed shipments because changing the denominator makes the improvement a reporting adjustment rather than an operational result."
+        "evidence": "Replace the adjusted late-delivery claim with an unadjusted rate or shipment comparison. Changing the KPI definition does not prove faster deliveries."
       },
       {
         "id": "N3",
         "found": true,
-        "evidence": "Add a dated activity for the eight-month gap between the B.A. and Crestline Logistics if one exists."
+        "evidence": "Move Experience above Education and explain the eight-month post-graduation gap."
       },
       {
         "id": "N5",
         "found": true,
-        "evidence": "Remove personal demographic details because age, gender, nationality, and photos are excluded by résumé convention."
+        "evidence": "Remove personal demographic information. The format review identified “Date of birth” and “Nationality.”"
       }
     ],
     "coverage": true,
-    "suggestions": 32,
+    "suggestions": 18,
     "rewrites": [],
-    "falsePositives": []
+    "falsePositives": [
+      "Remove age, gender, photographs, date of birth, and nationality.",
+      "Add the user or business outcomes behind the dispute work and chargeback research."
+    ]
   }
 }

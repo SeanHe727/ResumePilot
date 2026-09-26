@@ -113,7 +113,9 @@ Reply with JSON for each case:
 
 
 def main(tests):
-    rng = random.Random(20260926)
+    rng = random.Random(int(sys.argv[1]) if sys.argv[1].isdigit() else 20260926)
+    if sys.argv[1].isdigit():
+        tests = tests[1:]
     BUNDLE.mkdir(parents=True, exist_ok=True)
     mapping = {}
     for t in tests:

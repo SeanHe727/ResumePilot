@@ -9,6 +9,11 @@ EDUCATION
 Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026
 Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020
 EXPERIENCE
+Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present
+- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its
+weekly labour budget.
+- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of
+production.
 Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
 - Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4
 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
@@ -23,7 +28,7 @@ projects.
 the desk.
 - Documented the backtest assumptions, transaction-cost model and known failure regimes in the
 desk’s research wiki for future interns.
-Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2021 - Aug 2021
+Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
 - Built the lab’s simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo
 study from 3 days to 5 hours and making runs reproducible by seed.
 - Derived a variance bound for a sparse regression estimator; my proof tightens the previous
@@ -33,11 +38,6 @@ and earning a 4.8/5 teaching rating.
 - Released an open-source R package for high-dimensional covariance estimation while
 maintaining the lab’s shared cluster, organizing the weekly reading group and grading for
 two courses, which was downloaded 3,000 times in its first year.
-Sunrise Bakery | Assistant Store Manager | Metro City, USA | Jun 2020 - May 2021
-- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its
-weekly labour budget.
-- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of
-production.
 PROJECTS
 Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
 - Beat a HAR-RV baseline’s out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal
@@ -60,686 +60,692 @@ Methods: time-series econometircs, Bayesian inference, gradient boosting, PyTorc
 
 ## Reviewer 1
 
-Your resume has strong quantitative content and unusually good use of metrics. The main issues are two mathematical errors, some credibility/consistency concerns, repetitive project bullets, and a few phrasing problems.
-
-## Fix these immediately
-
-### 1. Correct the Sharpe annualization error
-
-This bullet is mathematically incorrect:
-
-> Annualized the signal’s daily Sharpe ratio by multiplying it by 252...
-
-Under the standard assumption, daily Sharpe is annualized by multiplying by **√252**, not 252. Serial correlation may require further adjustment.
-
-Better yet, remove this bullet entirely—it highlights a routine calculation rather than an accomplishment. Also verify that every Sharpe figure elsewhere in the resume was calculated correctly.
-
-### 2. Correct the percentage improvement
-
-Going from 0.20 to 0.15 is a **25% reduction**, not 33%:
-
-\[
-(0.20 - 0.15) / 0.20 = 25\%
-\]
-
-Rewrite:
-
-> Reduced forecast error from 0.20 to 0.15 (25%) by adding realized-volatility features and an asymmetric loss.
-
-Also name the error metric. “Forecast error” alone is too vague.
-
-### 3. Fix the typo
-
-> time-series **econometircs**
-
-should be:
-
-> time-series **econometrics**
-
-## Strengthen the Northpeak internship
-
-This is your most relevant experience, so it should be polished and easy to trust.
-
-### Sharpe bullet
-
-Current:
-
-> Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
-
-“Added 0.4 Sharpe” is slightly ambiguous. Clarify whether this means the portfolio Sharpe increased by 0.4 or whether the signal had a Sharpe of 0.4.
-
-Possible rewrite:
-
-> Developed a short-horizon order-book imbalance signal for liquid index futures that increased simulated portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.
-
-If possible, also state whether the test was fully held out and whether the Sharpe increase was incremental to the existing book.
-
-### Turnover bullet
-
-This is strong. Tighten it:
-
-> Reduced daily turnover from 34% to 21% using a cost-aware position smoother, retaining 90% of gross returns while lowering estimated slippage by 33%.
-
-### Diebold–Mariano bullet
-
-Current:
-
-> Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.
-
-Potential issues:
-
-- “the 30 indices” should be “30 indices.”
-- A standard Diebold–Mariano test can be problematic for nested models depending on the setup.
-- “Confirmed” is too absolute without significance levels.
-
-If methodologically accurate, use:
-
-> Evaluated forecast improvements against a HAR-RV baseline across 30 indices using Diebold–Mariano tests with HAC standard errors.
-
-Include the result if possible:
-
-> ...finding statistically significant improvements on 24 of 30 indices at the 5% level.
-
-Only make that claim if supported. Also check whether multiple-testing adjustment is appropriate.
-
-### Feature-store bullet
-
-The opening modifier is awkward:
-
-> Joining 120 microstructure features point-in-time..., built a feature store...
-
-Rewrite:
-
-> Built a point-in-time feature store spanning 120 microstructure features across six venues; deduplicated late prints and versioned schemas, enabling reuse in two subsequent research projects.
-
-### Documentation bullet
-
-This is useful but lower priority than model or implementation results. Keep it only if space allows:
-
-> Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki.
-
-## Consolidate the volatility project
-
-The three bullets repeat the same model and dataset. They also present several metrics without explaining how they relate.
-
-Current claims:
-
-- 7% lower QLIKE loss
-- Error from 0.20 to 0.15
-- Hit rate from 52% to 58%
-
-Combine them into two bullets:
-
-> Developed a temporal convolutional model for realized-volatility forecasting across 30 equity indices, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline.  
-> Increased directional accuracy from 52% to 58% by incorporating realized-volatility features and an asymmetric loss.
-
-If the 0.20-to-0.15 result uses another important metric, identify it explicitly:
-
-> Reduced out-of-sample MAE from 0.20 to 0.15 (25%)...
-
-Also clarify what “directional accuracy” means—presumably predicting whether volatility rises or falls.
-
-Because this project appears closely related to the internship, make sure the resume does not imply that proprietary internship work was reused independently. Distinguish the datasets, dates, and methods if necessary.
-
-## Improve the research assistant section
-
-The final bullet is overloaded:
-
-> Released an open-source R package ... while maintaining ... organizing ... and grading...
-
-The 3,000 downloads are the valuable result. Give that its own bullet:
-
-> Released an open-source R package for high-dimensional covariance estimation that received 3,000 downloads in its first year.
-
-The cluster administration, reading group, and grading can be omitted or moved elsewhere. They dilute the research impact.
-
-The proof bullet is strong, but tighten it:
-
-> Derived a variance bound for a sparse regression estimator, improving the prior bound by a logarithmic factor; the result appears in Section 3 of a manuscript under review at *JASA*.
-
-Be careful with “my proof” if this is collaborative work. “Derived” communicates ownership without sounding informal.
-
-### Verify the dates
-
-The role is listed as only June–August 2021, yet it includes:
-
-- a paper under review,
-- 12 problem sets,
-- weekly recitations,
-- grading for two courses,
-- cluster maintenance,
-- a reading group,
-- an R package,
-- and a major simulation pipeline.
-
-That volume within three months may look implausible. If this work continued during your Ph.D., correct the date range or split it into separate research and teaching roles.
-
-Also, the role begins before the listed Ph.D. start date. That may be accurate, but verify it.
-
-## Education improvements
-
-If relevant, add:
-
-- Dissertation or research focus
-- Adviser
-- Expected graduation date
-- Selected coursework, only if early-career and directly relevant
-- GPA only if strong
-
-Example:
-
-**Ridgeway University**, Metro City, USA  
-Ph.D. Candidate in Statistics, expected May 2026  
-Dissertation: *[Title or concise topic]* | Adviser: *[Name]*
-
-Only use “Ph.D. Candidate” if you have formally advanced to candidacy; otherwise use “Ph.D. Student.”
-
-You can omit the start dates from education to reduce clutter:
-
-- Ph.D. in Statistics, expected May 2026
-- B.S. in Mathematics, May 2020
-
-## Skills section
-
-Kafka is not a programming language. Reorganize the section:
-
-**Languages:** Python, R, SQL, C++  
-**Machine Learning & Statistics:** Time-series econometrics, Bayesian inference, gradient boosting, deep learning  
-**Tools:** PyTorch, Kafka
-
-Consider adding relevant tools only if you can discuss them comfortably in an interview, such as Git, Linux, Docker, Spark, AWS, NumPy, pandas, scikit-learn, or PostgreSQL.
-
-“PyTorch” is a framework, not a method.
-
-## Other recommendations
-
-### Keep the bakery role, but compact it
-
-It shows leadership and work history between degrees. Two bullets are enough:
-
-> Supervised opening shifts and a six-person team while meeting weekly labor-budget targets.  
-> Reduced unsold bread from 12% to 7% of production by improving inventory counts and supplier ordering.
-
-For a one-page quant resume, this should be the first section cut if you need space for research, publications, or technical work.
-
-### Improve contact information
-
-Replace the raw code URL with a recognizable label:
-
-> GitHub: github.com/mpatel
-
-Add LinkedIn only if it is polished. Do not include a full street address.
-
-### Use consistent style
-
-- Use en dashes consistently for dates: `Jun 2025–Aug 2025`
-- Use U.S. spelling consistently: “labor,” not “labour,” given the U.S. location
-- Use “transaction costs” rather than “after costs” where appropriate
-- Keep bullets to one or two lines where possible
-- Avoid ending some bullets with periods and others without them
-
-## Suggested section order for quant roles
-
-1. Education  
-2. Quantitative Experience  
-3. Research / Projects  
-4. Publications, if applicable  
-5. Technical Skills  
-6. Additional Experience
-
-If the JASA manuscript is genuine and sufficiently advanced, add a **Publications & Manuscripts** section with the full citation and status. That will carry more weight than burying it in a bullet.
-
-## Highest-priority changes
-
-1. Delete or correct the `252` Sharpe annualization bullet.
-2. Change the 0.20-to-0.15 improvement from 33% to 25%.
-3. Fix “econometrics.”
-4. Verify the research assistant dates.
-5. Consolidate the repetitive volatility-project bullets.
-6. Clarify exactly what “added 0.4 Sharpe” means.
-7. Rewrite the feature-store bullet.
-8. Separate languages, methods, and tools in the skills section.
-
-The underlying experience is strong, but quantitative hiring managers will notice calculation errors immediately. Correctness and methodological precision are especially important for this type of resume.
-
-## Reviewer 2
-
-Your resume has strong quantitative research content, but it currently mixes excellent evidence with a few technical red flags, redundant bullets, and wording that may make a recruiter question the analysis. The biggest issue is the Sharpe-ratio bullet.
+Your resume has strong quantitative experience and several impressive measurable results. The main issues are **credibility, redundancy, prioritization, and a few technical inaccuracies**.
 
 ## Highest-priority changes
 
 ### 1. Remove the incorrect Sharpe-ratio bullet
 
-> “Annualized the signal’s daily Sharpe ratio by multiplying it by 252…”
+This bullet is wrong:
 
-This is incorrect under the usual assumptions. A daily Sharpe ratio is generally annualized by multiplying by **√252**, not 252. More importantly, this bullet describes a basic reporting step rather than an accomplishment and could undermine confidence in the rest of the analysis.
+> Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
 
-Delete it. If you need to mention annualization, incorporate it into the first bullet:
+A daily Sharpe ratio is generally annualized by multiplying by **√252**, not 252. More importantly, this bullet highlights a reporting error and could seriously damage your credibility. Delete it. If the desk actually received an incorrectly annualized number, correct the result elsewhere and do not present the mistake as an accomplishment.
 
-> Built a short-horizon order-book imbalance signal for liquid index futures that improved the desk’s out-of-sample Sharpe by 0.4 over an 18-month backtest after transaction costs.
+### 2. Fix the technical typo and wording
 
-If the 0.4 figure is an absolute Sharpe improvement, say so explicitly.
+- `time-series econometircs` → **time-series econometrics**
+- `Joining 120 microstructure features point-in-time...` → likely **Joined 120 microstructure features point-in-time...**
+- “added 0.4 Sharpe” should be clarified as **increased the strategy’s annualized Sharpe by 0.40** or **produced a 0.40 incremental Sharpe contribution**, depending on what you actually measured.
+- “over 18 months of out-of-sample backtest” → **over an 18-month out-of-sample backtest**
+- “keeping 90% of gross returns” is ambiguous. Say whether this means retaining 90% of the original signal’s gross P&L or return.
 
-### 2. Remove redundancy in the volatility forecasting project
+### 3. Resolve the duplicated and potentially inconsistent project claims
 
-These bullets overlap substantially:
+The volatility project has three bullets that overlap:
 
-- “Beat a HAR-RV baseline’s out-of-sample QLIKE loss by 7%…”
-- “Cut forecast error from 0.20 to 0.15…”
-- “Improved the model’s directional hit rate…”
+- Beat HAR-RV QLIKE loss by 7%
+- Cut forecast error from 0.20 to 0.15
+- Improved directional hit rate from 52% to 58%
 
-They appear to describe the same model and dataset. The “forecast error” metric is also unclear: Is it RMSE, MAE, or something else? QLIKE is already a meaningful volatility-forecasting metric.
+These may all be valid, but the relationship between them is unclear. Also, reducing error from 0.20 to 0.15 is a **25% reduction**, not a 33% improvement:
 
-Use two bullets with clearly defined metrics:
+\[
+(0.20 - 0.15)/0.20 = 25\%
+\]
 
-> - Reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices using a temporal convolutional model trained on realized-volatility features.  
-> - Improved directional accuracy from 52% to 58% using an asymmetric loss, with evaluation based on rolling time-series splits.
+Use one consistent metric and explain the experiment. For example:
 
-Only retain the 0.20-to-0.15 result if you name the metric and explain why it is not redundant with QLIKE.
+- **Reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices using a temporal convolutional network and realized-volatility features.**
+- **Improved directional accuracy from 52% to 58% after adding an asymmetric loss function; results were evaluated using rolling, time-ordered validation.**
 
-### 3. Clarify statistical significance
+Only include the error reduction if the metric is clearly defined and genuinely distinct from QLIKE.
 
-“Confirmed the forecast gain … with standard Diebold-Mariano tests” is weaker than reporting the result.
+### 4. Make the resume target-specific
 
-If accurate, use:
+For quantitative research, quant trading, or ML roles, your strongest material is:
 
-> - Demonstrated statistically significant forecast improvement versus a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report the test specification and adjusted p-values if relevant.
+1. Northpeak Capital
+2. Volatility Forecasting Study
+3. Graduate research
+4. Kaggle project
+5. Education
+6. Bakery experience, if space permits
 
-Avoid implying significance unless you can provide p-values or confidence intervals. Also clarify whether tests were adjusted for multiple comparisons.
+The bakery role is not bad, but it is currently taking space from more relevant technical work. You could either:
 
-### 4. Fix the overloaded research-assistant bullet
+- Move it to an **Additional Experience** section with one bullet, or
+- Keep it only if you are applying broadly or want to explain current employment.
 
-This bullet contains too many unrelated accomplishments:
+For a quant-focused resume, reduce it to:
 
-> “Released an open-source R package… while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses…”
+> **Assistant Store Manager, Sunrise Bakery** — Managed opening operations and a six-person team; reduced unsold production from 12% to 7% through improved inventory tracking and ordering.
 
-Split it into separate bullets. For example:
+### 5. Improve the education section
 
-> - Released an open-source R package for high-dimensional covariance estimation, downloaded more than 3,000 times in its first year.  
-> - Maintained the lab’s shared computing cluster and built reproducible workflows for simulation studies.  
-> - Organized the weekly reading group and graded for two graduate courses.
+Because you are a Ph.D. candidate, education should probably appear first for research and quant roles. Add relevant details if available:
 
-You may not need all three. For a quant or research role, prioritize the package and computing work.
+- Dissertation or research area
+- Advisor
+- Expected graduation date
+- Selected coursework, if useful
+- GPA only if strong
+- Publications, working papers, or conference presentations
 
-## Suggested revised experience section
+For example:
 
-### Northpeak Capital — Quantitative Research Intern
+> **Ph.D. Candidate, Statistics**, Ridgeway University — Expected May 2026  
+> Research: statistical learning, high-dimensional inference, time-series modeling  
+> Dissertation: “…”
 
-- Built a short-horizon order-book imbalance signal for liquid index futures that improved the desk’s out-of-sample Sharpe by 0.4 over an 18-month backtest after transaction costs.
-- Reduced daily turnover from 34% to 21% with a cost-aware position smoother, retaining 90% of gross returns while reducing estimated slippage by one-third.
-- Evaluated forecast performance against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report p-values or confidence intervals if available.
-- Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.
-- Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki.
+Your JASA paper should ideally be listed in a separate **Publications / Research** section rather than buried in a bullet. Do not imply acceptance. Use wording such as:
 
-“Joining 120 features” is awkward. “Integrated,” “aligned,” or “joined” the data sources is clearer. Also explain what “point-in-time” means only if the audience may not know it; for quant roles, it is appropriate terminology.
+> Patel, M. et al. “Paper Title.” Manuscript under review at *Journal of the American Statistical Association*.
 
-### Statistical Learning Lab — Graduate Research Assistant
+Only include the journal name if the submission is real and you are an author.
 
-- Built a reproducible cluster-based simulation pipeline, reducing a 2,000-run Monte Carlo study from three days to five hours.
-- Derived a variance bound for a sparse regression estimator, tightening the prior result by a logarithmic factor; the proof appears in Section 3 of a manuscript under review at JASA.
-- Released an open-source R package for high-dimensional covariance estimation, downloaded more than 3,000 times in its first year.
-- Taught weekly recitations for 60 graduate probability students, wrote 12 problem sets, and received a 4.8/5 teaching rating.
+## Experience section: suggested edits
 
-The JASA statement is fine if accurate, but “manuscript under review” is not the same as publication. Consider adding a separate **Publications / Research** section if you have a title, coauthors, or preprint link.
+### Northpeak Capital
 
-## Improve the project section
+This is the strongest section, but it should be more concise and precise. I would revise it to something like:
 
-The projects are strong but would benefit from more methodological precision.
+- **Developed a short-horizon order-book imbalance signal for liquid index futures that improved annualized out-of-sample Sharpe by 0.40 over an 18-month backtest after transaction costs.**
+- **Reduced daily turnover from 34% to 21% using a cost-aware position smoother, retaining 90% of gross returns and reducing estimated slippage by one-third.**
+- **Validated the signal against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices.**
+- **Built a point-in-time feature store from 120 microstructure features across six venues, handling late-print deduplication and schema versioning; reused in two subsequent projects.**
+- **Documented backtest assumptions, transaction-cost methodology, and known failure regimes for future researchers.**
+
+Potential concern: “added 0.4 Sharpe to the desk’s book” is a very strong claim. Be prepared to explain exactly how it was calculated, including whether it is an incremental portfolio Sharpe, standalone Sharpe, or marginal contribution. If it is not strictly defensible, use more cautious language:
+
+> Produced a 0.40 improvement in simulated annualized Sharpe relative to the desk’s existing signal specification.
+
+### Graduate Research Assistant
+
+This section contains excellent material but the final bullet combines too many unrelated responsibilities. Split it:
+
+- **Built a reproducible cluster-based simulation pipeline, reducing a 2,000-run Monte Carlo study from three days to five hours.**
+- **Derived a variance bound for a sparse regression estimator, tightening the prior result by a logarithmic factor; proof forms Section 3 of a manuscript under review at JASA.**
+- **Released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.**
+- **Taught weekly recitations for 60 graduate probability students, writing 12 problem sets and earning a 4.8/5 teaching rating.**
+
+Remove or separate this phrase unless it is important for the target role:
+
+> while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses
+
+It makes the bullet overcrowded and dilutes the stronger technical achievements.
+
+## Projects section
+
+The projects are relevant, but make the methodology more rigorous and avoid presenting every result as a separate “improvement.”
 
 ### Volatility Forecasting Study
 
-Use something like:
+Suggested version:
 
-> - Reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices using a temporal convolutional model and realized-volatility features.  
-> - Increased directional accuracy from 52% to 58% using an asymmetric loss and rolling time-series evaluation.
+> **Volatility Forecasting Study** | Python, PyTorch | Jan 2024–Present  
+> - Built a temporal convolutional model for realized-volatility forecasting across 30 equity indices; reduced out-of-sample QLIKE loss by 7% versus a HAR-RV benchmark.  
+> - Used rolling time-series validation and an asymmetric loss function to improve directional accuracy from 52% to 58%.  
+> - Evaluated robustness across forecast horizons, index groups, and alternative realized-volatility feature sets.
 
-Specify the train/test design, such as “rolling-origin evaluation” or “walk-forward validation,” if space permits. This is especially important for time-series work.
+Only include the last bullet if you actually performed those analyses. It would strengthen the project substantially.
 
 ### Kaggle project
 
-This is already effective. Slightly tighten it:
+This is good, but “300 engineered features” and “900 candidate features” should be made consistent. Explain that 900 candidates were reduced to 300 final features:
 
-> - Ranked 41st among 2,900 teams—top 2%—with a gradient-boosting ensemble using 300 engineered features.  
-> - Eliminated validation leakage by switching to time-grouped folds, reducing the local-validation/leaderboard gap by 0.02.  
-> - Automated permutation-importance-based feature selection, reducing 900 candidate features to 300 without degrading validation performance.
+- **Placed 41st of 2,900 teams, ranking in the top 2% of the private leaderboard, using a gradient-boosting ensemble.**
+- **Reduced validation leakage by replacing random folds with time-grouped cross-validation, closing the local-validation/leaderboard gap from 0.02 to near zero.**
+- **Reduced 900 candidate features to 300 using permutation importance without reducing validation performance.**
 
-Be careful with “eliminated” unless leakage was fully removed. “Reduced” or “addressed” is safer.
+Be careful with the phrase “closed the gap” unless you can document that it actually closed rather than merely reduced it.
 
-## Fix the skills section
+## Skills section
 
-There is a typo:
+Correct and reorganize it:
 
-> “time-series econometircs”
+> **Programming:** Python, R, SQL, C++, Kafka  
+> **Machine Learning:** PyTorch, gradient boosting, sparse regression, feature selection  
+> **Statistics / Econometrics:** Time-series econometrics, Bayesian inference, volatility modeling, high-dimensional inference  
+> **Systems / Data:** Distributed computing, feature stores, point-in-time data pipelines, schema versioning
 
-should be:
+Only list Kafka, C++, or distributed computing if you can discuss specific projects using them. Skills sections are often tested in interviews.
 
-> **time-series econometrics**
+## Formatting and presentation
 
-Consider organizing the skills as:
+- Use an actual GitHub or portfolio URL rather than `example.com/code/mpatel`.
+- Add LinkedIn if relevant.
+- Use en dashes consistently: `Jun 2025–Aug 2025`.
+- Keep bullet formatting consistent; avoid manually wrapped lines that create awkward breaks.
+- Use either periods on every bullet or no periods on any bullet.
+- Consider removing “USA” from every location if all positions are in the same country.
+- Put the most relevant section first. For quant or research applications, use:
+  1. Education
+  2. Research / Publications
+  3. Relevant Experience
+  4. Projects
+  5. Additional Experience
+  6. Skills
+- Aim for two pages if necessary; do not force a Ph.D.-level resume onto one page at the expense of important research.
 
-**Programming:** Python, C++, R, SQL, Kafka  
-**Machine Learning:** PyTorch, gradient boosting, time-series forecasting  
-**Statistics:** Bayesian inference, statistical learning, volatility modeling, hypothesis testing
+## Most important credibility checks
 
-Only list tools you can discuss in an interview. If you used specific Python libraries—such as pandas, NumPy, scikit-learn, statsmodels, or Polars—you could include the most relevant ones.
+Before sending this resume, verify that you can explain:
 
-## Formatting and content recommendations
+- Exactly how the `+0.40 Sharpe` result was computed
+- Whether all backtests were genuinely out-of-sample and point-in-time
+- How transaction costs and slippage were modeled
+- Why the QLIKE and error metrics tell different stories
+- Whether “directional hit rate” is meaningful for your volatility target
+- The precise meaning of “90% of gross returns”
+- Your contribution and authorship status for the JASA manuscript
 
-- Use consistent date formatting: `Jun 2025 – Aug 2025` throughout.
-- Put the location on the same line as the employer or omit it if space is tight.
-- Make sure `example.com/code/mpatel` is a real, polished portfolio or GitHub link.
-- Consider adding a one-line dissertation topic under the Ph.D. if it is relevant to the target role.
-- Add an expected graduation date prominently: `Ph.D. Candidate in Statistics, expected May 2026`.
-- If applying to quant research roles, consider adding a **Research / Publications** section with your JASA submission, preprints, or dissertation work.
-- The bakery role is fine, especially if it fills an employment gap, but it should probably have only one or two concise bullets.
-- Avoid unexplained claims such as “added 0.4 Sharpe” unless you define whether this is an absolute increase, annualized figure, net-of-costs result, or marginal contribution.
+Overall, the resume has strong content. The biggest improvement would be to **remove the incorrect Sharpe bullet, reduce redundancy, separate research from administrative duties, and make every quantitative claim technically precise and defensible**.
 
-## Overall assessment
+## Reviewer 2
 
-The strongest material is:
+## Top priorities
 
-1. The Northpeak signal research and turnover reduction.
-2. The sparse-regression theoretical result.
-3. The reproducible simulation pipeline.
-4. The Kaggle ranking.
+1. Delete the incorrect Sharpe-calculation bullet and replace it with a validated performance comparison.
+   Multiplying a daily Sharpe ratio by 252 is technically wrong and turns a procedural bullet into a credibility problem.
+2. Correct 33% to a 25% reduction and identify the error metric, evaluation split, and forecast horizon.
+   The percentage is mathematically wrong, and the missing conditions prevent independent judgment of the result.
+3. Move Sunrise Bakery below the quantitative research and project material or into Additional Experience.
+   Its current position gives an unrelated role more prominence than the experience relevant to quantitative research.
 
-The main improvements are to remove the incorrect Sharpe calculation, consolidate duplicate model results, define evaluation methodology, and make the technical claims more precise. With those changes, the resume would present as substantially more credible and polished for quantitative research or statistical machine-learning roles.
+## Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present
+
+- Add the labour-budget variance and explain the inventory decision and timeframe behind the reduction in unsold bread.
+  The reader cannot judge the scale of the labour result or how the listed activities caused the waste reduction.
+
+## Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
+
+- Define the Sharpe comparison and add the baseline and practical consequence for slippage and retained returns.
+  The reader cannot judge the economic significance without knowing what the figures are measured against.
+- State the measured forecast gain and lead with the reusable feature-store outcome rather than dense implementation details.
+  The test name does not show improvement, and the infrastructure result can be missed before the main verb appears.
+- Replace “for future interns” with evidence that the documentation enabled reproducible handoff or reduced onboarding and rework.
+  The current wording states an intended audience, not a result.
+
+## Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
+
+- Name the technical change behind the simulation speedup.
+  The runtime result is strong, but the reader cannot tell what produced it.
+- Specify the estimator, variance target, and exact meaning of the logarithmic tightening.
+  A technical reader cannot assess the scope or significance of the theoretical result from the current terms.
+- Separate the package contribution from unrelated duties and replace downloads with evidence of ownership and adoption.
+  The overloaded bullet hides the strongest software result, while downloads alone do not show use or maintenance.
+
+## Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
+
+- Change “by 6%” to “by 6 percentage points” and state how the 30-index rates were aggregated.
+  The current percentage is ambiguous and does not show whether the result is pooled or averaged.
+- Consolidate the repeated volatility-model bullets and distinguish QLIKE loss, forecast error, and hit rate.
+  The same model story currently occupies several bullets without clearly separated contributions.
+
+## Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
+
+- Explain the technical choice behind the 300 features and remove the redundant top-2% ranking phrase.
+  The rank is already clear, while the modeling choice would better demonstrate quantitative skill.
+- Replace the leakage claim with its specific temporal mechanism and document fold-wise preprocessing, feature engineering, and feature selection.
+  Without these details, the reader cannot verify that time-grouped folds actually prevented leakage.
+
+## Across the whole résumé
+
+- Remove unsupported skills and correct “time-series econometircs” to “time-series econometrics.”
+  Unsupported skills broaden the profile without evidence, and the misspelling is immediately visible.
+- Remove the personal pronoun from the proof bullet.
+  It makes one résumé line read like a sentence instead of a consistent phrase.
+
+## Lower priority (9)
+
+- “Confirmed the forecast gain over the…”: The phrase "standard Diebold-Mariano tests" does not say which forecast loss or comparison statistic was used, leaving the validation method only partly reconstructable. (and 1 more like it)
+- “Taught weekly recitations for 60 students…”: The bullet measures student reach and satisfaction but not whether the teaching improved student performance or course outcomes.
+- “Placed 41st of 2,900 teams with…”: The phrase "on 300 engineered features" gives scale but not the specific modeling or feature-engineering choice that connects the method to the placement.
+- “Wrote the team’s feature-selection script using…”: The line should clarify that permutation importance was calculated inside each training fold, if that is how leakage was prevented during feature selection.
+- The dates show no literal employment gap: the Ph.D. runs from September 2021 to the present period, including the interval without listed research employment. However, the resume shows no Ph.D.-period research activity between August 2021 and the Northpeak internship in June 2025, so the academic timeline reads thinner than the degree title suggests.
+- Sunrise Bakery: The two bullets form a coherent store-operations entry, but the role is disconnected from the quantitative-research story and should not lead the relevant experience.
+- “Derived a variance bound for a…”: "my proof" adds a possessive that is unnecessary because the bullet already establishes ownership through "Derived".
+- “Improved the model’s directional hit rate…”: "Improved" is a generic opening verb that describes the result without specifying the action taken.
+- “Wrote the team’s feature-selection script using…”: "without losing validation score" can be compressed to "with no validation-score loss" without changing the meaning.
 
 ## Reviewer 3
 
 # Resume Review
 
-You have a strong quantitative research profile: rigorous statistical work, relevant market modeling, meaningful backtesting results, and a top-2% competition result. The main problems are **one serious technical error, a few credibility/clarity issues, and some redundancy**.
+You have strong quantitative research experience and unusually good metrics. The main issues are **targeting, technical credibility, redundancy, and a few factual/wording errors**.
 
 ## Highest-priority changes
 
-### 1. Remove the Sharpe-ratio annualization bullet
+### 1. Remove the incorrect Sharpe-ratio bullet
 
-This bullet is incorrect:
+This bullet is mathematically wrong:
 
 > Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
 
-For a daily Sharpe ratio, annualization is typically:
+A daily Sharpe ratio is generally annualized by multiplying by **√252**, not 252. More importantly, this bullet makes the resume look less credible and may suggest poor research hygiene.
 
-\[
-\text{Annualized Sharpe} = \text{Daily Sharpe} \times \sqrt{252}
-\]
+**Delete it entirely.**
 
-More importantly, this bullet makes the resume look like it contains a deliberate trap or an uncorrected methodological mistake. Remove it entirely unless you actually corrected the calculation and can describe the correction.
+---
 
-### 2. Fix the numerical inconsistency in the volatility project
+### 2. Correct the spelling and categorization in Skills
 
-You wrote:
+Current:
 
-> Cut forecast error from 0.20 to 0.15, a 33% improvement
+> Methods: time-series econometircs, Bayesian inference, gradient boosting, PyTorch
 
-The reduction from 0.20 to 0.15 is **25%**, not 33%:
+Change to:
+
+> **Programming:** Python, R, SQL, C++, Kafka  
+> **Machine Learning:** PyTorch, gradient boosting, temporal convolutional networks  
+> **Statistics/Methods:** Time-series econometrics, Bayesian inference, Monte Carlo simulation, volatility modeling  
+> **Quantitative Finance:** Order-book modeling, market microstructure, backtesting, transaction-cost modeling
+
+Kafka should not be listed under Programming. Put it under **Data/Infrastructure** if you have meaningful experience with it.
+
+Also, only list Kafka if you can discuss how you used it. If not, remove it.
+
+---
+
+### 3. Add a target-oriented summary
+
+For quant research, quantitative developer, or ML research roles, a short summary would help connect the Ph.D., research, and trading experience.
+
+Example:
+
+> **Statistics Ph.D. candidate with experience in quantitative research, market microstructure, time-series modeling, and statistical learning. Built and evaluated trading signals across 30 futures/index markets, developed reproducible simulation and feature pipelines, and published open-source statistical software.**
+
+Use a summary only if it is tailored to the role. For a highly academic research position, you could omit it and use the space for publications or research interests.
+
+---
+
+### 4. Make the Northpeak role the centerpiece
+
+This is your strongest experience, but several bullets need correction or tightening.
+
+#### Current
+
+> Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
+
+#### Improved
+
+> Developed a short-horizon order-book imbalance signal for liquid index futures that improved portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.
+
+Be precise about whether it improved **portfolio Sharpe**, **strategy Sharpe**, or **incremental Sharpe**. “Added 0.4 Sharpe” can be ambiguous.
+
+#### Current
+
+> Cut the signal’s daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.
+
+#### Improved
+
+> Reduced daily turnover from 34% to 21% with a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by 33%.
+
+This is already strong; the revised version is simply more direct.
+
+#### Current
+
+> Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-M Mariano tests across the 30 indices.
+
+There is a typo in “Diebold-M Mariano.” It should be **Diebold–Mariano**.
+
+Also, “confirmed” is too strong unless the result was statistically significant.
+
+#### Improved
+
+> Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report statistical significance and p-values if available.
+
+For example:
+
+> Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices, with improvements statistically significant at the 5% level in 24 markets.
+
+Only include that version if accurate.
+
+#### Current
+
+> Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.
+
+“Joining” is incorrect here.
+
+#### Improved
+
+> Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.
+
+If possible, include the technologies used—for example, Python, SQL, Kafka, Parquet, Spark, or a database—but only if accurate.
+
+#### Current
+
+> Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk’s research wiki for future interns.
+
+#### Improved
+
+> Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki, improving reproducibility for future researchers.
+
+This is a good collaboration and research-rigor bullet. Keep it.
+
+---
+
+## Recommended Northpeak version
+
+```text
+Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 – Aug 2025
+• Developed a short-horizon order-book imbalance signal for liquid index futures that improved portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.
+• Reduced daily turnover from 34% to 21% with a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by 33%.
+• Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices.
+• Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.
+• Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki for future researchers.
+```
+
+Use four bullets if you need to keep the resume to one page; use five if applying to quant research roles and the resume can be two pages.
+
+---
+
+## 5. Fix the project redundancies and metric inconsistency
+
+The Volatility Forecasting Study currently says essentially the same thing three times:
+
+- Beat HAR-RV by 7% on QLIKE
+- Cut forecast error from 0.20 to 0.15
+- Improved directional hit rate using a temporal convolutional model
+
+The second and third bullets repeat the model description. Also, reducing error from 0.20 to 0.15 is a **25% reduction**, not a 33% improvement:
 
 \[
 (0.20 - 0.15) / 0.20 = 25\%
 \]
 
-Also specify what “forecast error” means: RMSE, MAE, QLIKE, or another metric. Since you already report QLIKE, avoid adding an ambiguous second metric unless it demonstrates something distinct.
+More importantly, QLIKE loss and “forecast error” may be different metrics. Name the metric explicitly.
 
-### 3. Reduce repetitive project bullets
+### Recommended version
 
-These two bullets overlap:
+```text
+Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 – Present
+• Trained a temporal convolutional network on realized-volatility features, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.
+• Reduced [specified error metric] from 0.20 to 0.15, a 25% improvement, using realized-volatility features and an asymmetric loss function.
+• Improved directional hit rate from 52% to 58% across 30 indices; evaluated robustness across rolling time-series splits.
+```
 
-> Beat a HAR-RV baseline’s out-of-sample QLIKE loss by 7%...
+Avoid saying “forecast error” unless you specify whether it is RMSE, MAE, MAPE, QLIKE, or another measure.
 
-> Improved the model’s directional hit rate by 6%... with a temporal convolutional model.
-
-Both describe the same model improvement. Combine them or use the second bullet to explain the technical contribution: architecture, validation design, loss function, or robustness testing.
-
-### 4. Correct terminology and typos
-
-- `econometircs` → **econometrics**
-- “Joining 120 microstructure features” → **Joined 120 microstructure features**
-- “added 0.4 Sharpe” → **increased the book’s Sharpe ratio by 0.4** or **contributed 0.4 to the book’s Sharpe ratio**
-- “daily Sharpe ratio” is awkward. Use **annualized Sharpe ratio**, **daily Sharpe ratio**, or simply **Sharpe ratio**, depending on what you actually calculated.
-
-### 5. Clarify whether the results are real, simulated, or hypothetical
-
-Your Northpeak bullet says:
-
-> added 0.4 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
-
-A backtest does not literally add to a live book. Use wording such as:
-
-> Improved simulated book Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.
-
-If the signal was deployed or paper-traded, say that explicitly. Also clarify whether the 0.4 figure is:
-- an absolute increase in Sharpe,
-- an incremental contribution,
-- or a standalone signal Sharpe.
-
-Quant recruiters will scrutinize this distinction.
+Also, “Jan 2024 – Present” should be accurate. If the project is complete, use an end date.
 
 ---
 
-# Suggested structure
+## 6. Improve the research assistant section
 
-For quant research, I would use:
+The current final bullet combines too many unrelated responsibilities:
 
-1. Contact information  
-2. Education  
-3. Technical skills  
-4. Experience  
-5. Research/projects  
+> Released an open-source R package... while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses...
 
-Your Ph.D. is highly relevant, so putting **Education first** is appropriate. Put skills above experience if you are targeting roles with strict technical screening.
+Split it into separate bullets or remove lower-value duties. The package and download count are valuable; routine grading and reading-group organization are less important for quantitative roles.
 
-Your contact line should also label the link:
+### Recommended version
+
+```text
+Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 – Aug 2021
+• Built a reproducible simulation pipeline on a shared computing cluster, reducing a 2,000-run Monte Carlo study from 3 days to 5 hours.
+• Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; proof incorporated as Section 3 of a JASA manuscript under review.
+• Developed and released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.
+• Taught weekly graduate-probability recitations for 60 students, writing 12 problem sets and earning a 4.8/5 teaching rating.
+```
+
+If the JASA paper has a title, coauthors, or a public preprint, add a **Publications** section. A paper under review is especially valuable for quant research, statistics, and ML research applications.
+
+---
+
+## 7. Reconsider how you present the bakery position
+
+For a quant or technical application, this role creates an apparent career-transition question because it is your current position after a quantitative research internship.
+
+Do not hide it, but make the context clear. Possible explanations include:
+
+- You are working temporarily while completing the Ph.D.
+- You are returning to school or between research roles.
+- The role is part-time.
+- You are seeking a transition into quantitative research.
+
+If true, label it:
+
+> **Assistant Store Manager, Part-Time**
+
+or add a short context line in the cover letter.
+
+The bullets are reasonable, but they are not very relevant to technical roles. Keep only two concise bullets:
+
+```text
+Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 – Present
+• Supervise opening operations and a team of six bakers and cashiers while maintaining weekly labor-budget targets.
+• Managed daily inventory counts and supplier orders, reducing unsold bread from 12% to 7% of production.
+```
+
+Use **labor** rather than **labour** if applying to U.S. employers.
+
+If space is limited, place this role under an **Additional Experience** section after your technical experience.
+
+---
+
+## 8. Add GitHub, LinkedIn, or research links
+
+Your contact line currently includes:
+
+> example.com/code/mpatel
+
+That looks like a generic code link rather than an identifiable GitHub or portfolio URL. Use direct links:
 
 ```text
 Morgan Patel
-+1 (555) 010-4410 | morgan.patel@example.com
-GitHub: example.com/code/mpatel
+Metro City, USA | +1 (555) 010-4410 | morgan.patel@example.com
+github.com/mpatel | linkedin.com/in/morganpatel | morganpatel.github.io
 ```
 
-If this is GitHub, use the actual GitHub URL and label it “GitHub.” Add LinkedIn if relevant.
+For your profile and projects, include links to:
+
+- The R package
+- The volatility forecasting repository
+- The Kaggle profile
+- A Google Scholar profile or publication/preprint
+- A technical portfolio, if available
+
+Do not include links to private or inaccessible repositories.
 
 ---
 
-# Suggested rewritten version
+# Suggested overall structure
 
-Below is a tightened version using your existing information. I have not added unsupported technologies or results.
-
-## EDUCATION
-
-**Ridgeway University**, Metro City, USA  
-**Ph.D. Candidate in Statistics**, expected May 2026 | Sep 2021–Present  
-**B.S. in Mathematics**, May 2020 | Sep 2016–May 2020
-
-If relevant, add a dissertation title, research focus, or selected coursework such as:
+For quant research, quantitative developer, or ML roles:
 
 ```text
-Research Areas: Statistical learning, time-series modeling, high-dimensional statistics
+NAME AND CONTACT
+SUMMARY
+TECHNICAL SKILLS
+EXPERIENCE
+PROJECTS / RESEARCH
+PUBLICATIONS
+EDUCATION
 ```
 
-Do not add coursework if you already have substantial research experience and need space.
-
-## TECHNICAL SKILLS
+For an academic or research-heavy role:
 
 ```text
-Programming: Python, R, SQL, C++
-Machine Learning: PyTorch, gradient boosting, sparse regression
-Statistics: Time-series econometrics, Bayesian inference, volatility modeling, high-dimensional statistics
-Data/Infrastructure: Kafka, distributed computing, simulation pipelines
+NAME AND CONTACT
+RESEARCH INTERESTS
+EDUCATION
+RESEARCH EXPERIENCE
+PUBLICATIONS
+PROJECTS
+TEACHING
+TECHNICAL SKILLS
 ```
 
-Only include Kafka if you can discuss how you used it. If not, remove it. You could also list relevant Python libraries if accurate, such as NumPy, pandas, scikit-learn, or statsmodels.
-
-## EXPERIENCE
-
-### Northpeak Capital — Quantitative Research Intern  
-Metro City, USA | Jun 2025–Aug 2025
-
-- Developed a short-horizon order-book imbalance signal for liquid index futures that improved simulated book Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.
-- Reduced signal turnover from 34% to 21% using a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by one-third.
-- Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; include significance levels if available.
-- Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.
-- Documented backtest assumptions, transaction-cost methodology, validation procedures, and known failure regimes in the desk’s research wiki.
-
-The fourth bullet is strong but dense. If space is tight, shorten it:
-
-> Built a reusable feature store by joining 120 point-in-time microstructure features across six venues, deduplicating late prints, and versioning schemas; adopted by two subsequent projects.
-
-### Ridgeway University — Graduate Research Assistant, Statistical Learning Lab  
-Metro City, USA | Jun 2021–Aug 2021
-
-- Built a reproducible cluster-based simulation pipeline that reduced a 2,000-run Monte Carlo study from 3 days to 5 hours.
-- Derived a variance bound for a sparse regression estimator, tightening the previous bound by a logarithmic factor; proof included as Section 3 of a JASA manuscript under review.
-- Developed and released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.
-- Taught weekly graduate probability recitations for 60 students, authored 12 problem sets, and earned a 4.8/5 teaching rating.
-
-The original fourth bullet combined too many unrelated responsibilities:
-
-> ...while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses...
-
-Unless these activities are important for the target role, omit them. The research, software, and teaching bullets are stronger.
-
-### Sunrise Bakery — Assistant Store Manager  
-Metro City, USA | Jun 2020–May 2021
-
-- Managed opening operations and a team of six bakers and cashiers while maintaining weekly labor-budget targets.
-- Managed inventory counts and supplier orders, reducing unsold bread from 12% to 7% of daily production.
-
-This is fine as a short section. For quant roles, keep it to one or two bullets.
-
-## PROJECTS
-
-### Volatility Forecasting Study — Python, PyTorch  
-Independent Research | Jan 2024–Present
-
-- Developed a temporal convolutional model for realized-volatility forecasting that reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.
-- Improved directional hit rate from 52% to 58% using realized-volatility features and an asymmetric loss function.
-- Evaluated model performance using time-aware out-of-sample validation; report the test period and confidence intervals if available.
-
-Only retain the third bullet if you actually performed this validation and it adds information beyond the first bullet. If “forecast error” is an important separate result, write it with the correct metric:
-
-> Reduced **[RMSE/MAE/etc.]** from 0.20 to 0.15, a 25% reduction.
-
-Do not describe the model as “trained on realized-volatility features” in one bullet and “improved by adding realized-volatility features” in another unless the distinction is clear.
-
-### Kaggle Market Prediction Competition — Python  
-Team of 3 | Mar 2023–Jun 2023
-
-- Placed 41st out of 2,900 teams, ranking in the top 2% of the private leaderboard, using a gradient-boosting ensemble and 300 engineered features.
-- Reduced validation leakage by implementing time-grouped cross-validation, closing the gap between local validation and leaderboard scores from 0.02.
-- Built a permutation-importance feature-selection pipeline that reduced 900 candidate features to 300 without reducing validation performance.
-
-This is already strong. If the competition has a name, include it. Also specify the competition platform instead of saying only “Kaggle Market Prediction Competition.”
+Your Ph.D. should likely be listed before work experience if applying to research-oriented positions.
 
 ---
 
-# Additional recommendations
+## Main issues to fix before submitting
 
-## Add research outputs if available
+- Delete the incorrect Sharpe annualization bullet.
+- Correct **econometrics** spelling.
+- Correct **Diebold–Mariano** spelling.
+- Change “Joining 120...” to “Joined 120...”
+- Correct 0.20 to 0.15 from **33%** to **25%** improvement.
+- Specify the exact error metric in the forecasting project.
+- Remove repetitive project bullets.
+- Clarify whether the Northpeak Sharpe improvement is portfolio, strategy, or incremental Sharpe.
+- Add statistical significance or p-values for Diebold–Mariano tests if available.
+- Add direct GitHub/LinkedIn/research links.
+- Explain or de-emphasize the current bakery role for technical applications.
+- Add a publications section if the JASA paper or other research is publicly available.
 
-For a Ph.D. candidate, consider adding a small section for:
-
-```text
-PUBLICATIONS & PRESENTATIONS
-- Patel, M. “Title.” Manuscript under review at Journal of the American Statistical Association.
-- [Conference presentation or working paper]
-```
-
-Do not overstate the JASA status. Use the exact status, such as:
-- “Manuscript under review”
-- “Submitted”
-- “Working paper”
-
-## Add a dissertation or research-interest line
-
-For quant research applications, a short line can help target the resume:
-
-```text
-Research Interests: Financial econometrics, volatility forecasting, market microstructure, statistical learning
-```
-
-Place it under your Ph.D. or in a short summary. A summary is optional; your background is strong enough that the resume can work without one.
-
-## Be prepared to explain every quantitative claim
-
-Be ready to discuss:
-
-- How the 0.4 Sharpe contribution was calculated
-- Whether transaction costs were fully incorporated
-- How you avoided look-ahead bias and survivorship bias
-- Why the HAR-RV baseline was appropriate
-- How the Diebold–Mariano tests were conducted
-- Whether you adjusted for multiple comparisons across 30 indices
-- How the feature store enforced point-in-time correctness
-- Why QLIKE was selected for volatility forecasting
-- How the temporal convolutional model compared with simpler alternatives
-
-## Overall assessment
-
-This is a strong resume for quantitative research, systematic trading, financial machine learning, or statistical modeling roles. The primary concern is not lack of experience; it is **technical precision**. Remove the incorrect Sharpe annualization bullet, correct the 25%/33% discrepancy, define ambiguous metrics, and consolidate repetitive project content. Those changes will make the resume substantially more credible to technical reviewers.
+Overall, the resume has a strong foundation for **quantitative research, quantitative development, statistical machine learning, and financial data science**. Its biggest weakness is not lack of achievement; it is that a few imprecise or incorrect statements could undermine an otherwise highly technical profile.
 
 ## Reviewer 4
 
-## Top priorities
+Your resume has strong quantitative content and unusually good use of metrics. The main problems are a serious Sharpe-ratio error, several numerical/wording inconsistencies, and prioritization that places the bakery role above your more relevant experience.
 
-1. Replace the generic Diebold-Mariano claim with the nested-model correction actually used, report the forecast gain, loss function, and statistical result, and explain whether the 30-index tests used multiplicity control or a joint evaluation.
-2. Correct the Sharpe annualization: multiplying a daily Sharpe by 252 is wrong because annualization uses the square root of the number of periods, so verify the calculation and whether the 0.4 figure was independently computed.
+## Highest-priority corrections
 
-## What already works
+### 1. Remove or correct the Sharpe annualization bullet
 
-- “Built a short-horizon order-book imbalance signal…”: Combines a trading-relevant result with a defined asset class and signal type.
-- “Built a short-horizon order-book imbalance signal…”: Uses out-of-sample and after-cost qualifiers rather than presenting an unqualified backtest result.
-- “Placed 41st of 2,900 teams with…”: The placement is a highly legible and credible impact signal.
+This is the most important issue:
 
-## Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
+> Annualized the signal’s daily Sharpe ratio by multiplying it by 252...
 
-- Correct the Sharpe annualization: multiplying a daily Sharpe by 252 is wrong because annualization uses the square root of the number of periods, so verify the calculation and whether the 0.4 figure was independently computed.
-- Clarify whether “0.4 Sharpe” is the signal’s standalone Sharpe or its incremental contribution relative to the pre-existing book, and state the attribution basis if needed.
-- Define the 90% return-retention comparison and identify the baseline or estimation method behind the one-third slippage reduction.
-- Replace the generic Diebold-Mariano claim with the nested-model correction actually used, report the forecast gain, loss function, and statistical result, and explain whether the 30-index tests used multiplicity control or a joint evaluation.
-- Lead with your ownership of the feature-store work and state the measurable benefit of its reuse rather than opening with the feature-joining process.
-- Replace “for future interns” with a checkable reuse or onboarding outcome and state whether the documentation became a review or handoff standard.
+Under the usual independence assumption, daily Sharpe is annualized by multiplying by **√252**, not 252. For autocorrelated returns, use an appropriately adjusted calculation.
 
-## Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2021 - Aug 2021
+This bullet would be a major red flag for a quant reviewer. Delete it entirely and recompute any Sharpe figures that depended on that calculation.
 
-- Replace “my proof tightens the previous bound by a log factor” with the old and new rates under the same assumptions, because “log factor” does not reveal whether the improvement removes log(p), changes the logarithm’s argument, or improves only a constant.
-- State the theorem’s practical or theoretical consequence rather than relying on its placement as Section 3 of a JASA-submitted paper.
-- Remove the personal pronoun and tighten the bullet to “Derived a variance bound for a sparse regression estimator, tightening the previous bound by a log factor.”
-- Add the number of respondents to the 4.8/5 teaching evaluation and compress the wording to “rated 4.8/5 by students.”
-- Separate the R-package release from cluster maintenance, reading-group organization, and grading, and attach the 3,000-download result directly to the package.
-- Add the capability or user problem enabled by the open-source R package instead of naming only high-dimensional covariance estimation.
+### 2. Correct the project percentages
 
-## Sunrise Bakery | Assistant Store Manager | Metro City, USA | Jun 2020 - May 2021
+> Cut forecast error from 0.20 to 0.15, a 33% improvement
 
-- Keep the Sunrise Bakery entry compact because its management work is internally consistent but less relevant to the quantitative arc.
-- Add the weekly labour-budget variance, savings, or budget amount and specify the staffing or scheduling action behind the result.
-- Add the period over which unsold bread fell from 12% to 7% and identify the ordering adjustment that connected stock counts and supplier orders to the reduction.
+That is a **25% reduction**:  
+\((0.20 - 0.15) / 0.20 = 25\%\)
 
-## Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
+> Improved directional hit rate by 6%, from 52% to 58%
 
-- Rewrite the HAR-RV result as a 7% reduction in average out-of-sample QLIKE loss and add the forecast horizon and evaluation design.
-- Define “forecast error,” correct the 0.20-to-0.15 reduction from 33% to 25%, and avoid presenting the absolute change and percentage as redundant versions of the same result.
-- Do not attribute the error reduction to both realized-volatility features and an asymmetric loss unless separate tests show each contribution.
-- Define whose direction the hit rate predicts, report the change as 6 percentage points from 52% to 58%, and identify the comparable baseline or evaluation that supports attributing the gain to the model.
-- Consolidate the three overlapping performance bullets into distinct results, because the QLIKE reduction, forecast-error reduction, and hit-rate increase all describe the same 30-index study and repeat the temporal-convolutional-model framing.
+That is an increase of **6 percentage points**, not 6%. The relative increase is approximately 11.5%.
 
-## Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
+### 3. Fix the typo
 
-- Identify your own contribution to the team’s gradient-boosting result instead of presenting the ensemble and 300 features as an undifferentiated team accomplishment.
-- Replace “cut validation leakage” with the supported observation about the local-validation-to-leaderboard gap, naming the metric and whether 0.02 is absolute or relative, and state the time key and fold-contained feature work if applicable.
-- State the validation score or comparison basis for the 900-to-300 feature reduction and clarify that permutation importance and selection were fit within each training fold if that is how leakage was prevented.
-- Keep one ranking expression rather than both “41st of 2,900 teams” and “top 2% of the private leaderboard.”
+Change:
 
-## Across the whole résumé
+> time-series econometircs
 
-- For an industry quant or ML application, move EXPERIENCE above EDUCATION so the Northpeak internship and statistical-learning research lead the document, with the Ph.D. immediately afterward as supporting credentials.
-- Explain the Jul-Dec 2023 gap between the Kaggle competition and the volatility study if there was relevant work, coursework, or research during that period.
-- Remove SQL, C++, Kafka, and Bayesian inference unless another résumé line can substantiate them, and correct “time-series econometircs” to “time-series econometrics.”
+to:
 
-## Lower priority (5)
+> time-series econometrics
 
-- “Released an open-source R package for…”: “while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses” bundles three additional jobs into the package bullet without showing what changed because of them.
-- “Released an open-source R package for…”: “which was downloaded 3,000 times in its first year” measures adoption but not whether the downloads represented active users, research use, or a meaningful technical outcome.
-- “Built a short-horizon order-book imbalance signal…”: "over 18 months of out-of-sample backtest after costs" still leaves the backtest frequency, number of observations, and attribution method unclear if the Sharpe figure is challenged.
-- “Managed opening shifts and a team…”, “Ran daily stock counts and supplier…”: The phrase "keeping the store within its weekly labour budget" gives no measurable scale; add the weekly variance, savings, or budget amount that proves the result. (and 3 more like it)
-- “Cut forecast error from 0.20 to…”, “Improved the model’s directional hit rate…”: "by adding realized-volatility features and an asymmetric loss" attributes the outcome to two interventions without showing whether either was tested separately. (and 1 more like it)
+### 4. Repair the malformed feature-store bullet
+
+Current:
+
+> Joining 120 microstructure features point-in-time across six venues... built a feature store...
+
+Rewrite:
+
+> Built a reusable point-in-time feature store by joining 120 microstructure features across six venues, deduplicating late prints, and versioning schemas; the team reused it in two subsequent projects.
+
+### 5. Use US spelling consistently
+
+Because the resume is set in the USA, change **“labour”** to **“labor.”**
+
+---
+
+## Reposition the experience
+
+For quant roles, the bakery position should not be the first experience recruiters see. Consider splitting the section:
+
+### QUANTITATIVE EXPERIENCE
+- Northpeak Capital
+- Ridgeway University
+
+### ADDITIONAL EXPERIENCE
+- Sunrise Bakery
+
+This preserves your current employment and leadership experience without letting it overshadow your quant background. Keep the bakery role to one or two bullets.
+
+---
+
+## Tighten the Northpeak bullets
+
+You have six bullets, but four strong bullets would be more effective. Also be precise about what “added 0.4 Sharpe to the desk’s book” means. If you only backtested a stand-alone signal, do not imply it was incorporated into the live portfolio.
+
+Suggested version:
+
+**Northpeak Capital | Quantitative Research Intern | Jun 2025–Aug 2025**
+- Developed a short-horizon order-book imbalance signal for liquid index futures, improving net out-of-sample Sharpe by 0.4 over an 18-month walk-forward backtest after modeled transaction costs.
+- Reduced daily turnover from 34% to 21% with a cost-aware position smoother while retaining 90% of gross returns and lowering estimated slippage by 33%.
+- Built a reusable point-in-time feature store by joining 120 microstructure features across six venues, deduplicating late prints, and versioning schemas; the team reused it in two subsequent projects.
+- Evaluated forecast performance against a HAR-RV baseline using Diebold–Mariano tests and documented backtest assumptions, transaction costs, and failure regimes.
+
+A few cautions:
+
+- Replace “walk-forward” with your actual validation design if different.
+- Say whether the 0.4 improvement refers to stand-alone Sharpe, incremental portfolio Sharpe, or another measure.
+- If you tested 30 instruments separately, be prepared to discuss multiple-testing corrections and cross-sectional dependence.
+- Avoid disclosing confidential data, methods, or results that Northpeak has not approved.
+
+---
+
+## Consolidate the volatility project
+
+The three bullets partly repeat the same result and create ambiguity about which model or feature set produced each improvement. One or two precise bullets would be stronger.
+
+Suggested version:
+
+**Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024–Present**
+- Developed a temporal convolutional model for realized-volatility forecasting across 30 equity indices, reducing out-of-sample QLIKE loss by 7% relative to a HAR-RV baseline.
+- Reduced forecast error from 0.20 to 0.15 and increased directional accuracy from 52% to 58% through realized-volatility features and an asymmetric loss function.
+
+Only retain both QLIKE and “forecast error” if they are distinct metrics; otherwise, this appears duplicative. Name the second error metric—for example, RMSE or MAE—instead of saying “forecast error.”
+
+Also, the project closely resembles the Northpeak work: both involve HAR-RV, 30 indices, and volatility forecasting. Make clear that the independent project uses public data and predates the internship, or reviewers may wonder about employer intellectual property.
+
+---
+
+## Improve the research-assistant entry
+
+The final bullet combines too many unrelated responsibilities:
+
+> Released an open-source R package... while maintaining the lab’s shared cluster, organizing the weekly reading group and grading...
+
+Focus on the strongest result—the package—and omit lower-value administrative details if space is limited.
+
+Suggested version:
+
+**Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Jun 2020–Aug 2021**
+- Built a reproducible cluster-based simulation pipeline, reducing runtime for a 2,000-run Monte Carlo study from three days to five hours.
+- Derived a variance bound for a sparse regression estimator that improves the previous result by a logarithmic factor; the proof appears in Section 3 of a manuscript under review at *JASA*.
+- Released an open-source R package for high-dimensional covariance estimation that received 3,000 downloads in its first year.
+- Led weekly probability recitations for 60 graduate students, developed 12 problem sets, and earned a 4.8/5 teaching rating.
+
+If the paper is public, add a **Selected Publications** or **Research** section with the title, coauthors, status, and link. Also be ready to explain why this position predates the start of your Ph.D.; the dates may prompt questions, though they are not inherently problematic.
+
+---
+
+## Refine the skills section
+
+Kafka is not a programming language. Reorganize the section:
+
+**Programming:** Python, R, SQL, C++  
+**Libraries/Tools:** PyTorch, Kafka, Git, Linux  
+**Methods:** Time-series econometrics, Bayesian inference, gradient boosting, statistical learning
+
+Only list tools you can discuss comfortably in an interview. Add relevant libraries such as pandas, NumPy, scikit-learn, statsmodels, or Polars only if they strengthen your candidacy and you have room.
+
+---
+
+## Additional presentation changes
+
+- Use en dashes consistently: `Sep 2021–Expected May 2026`.
+- Capitalize consistently: `Ph.D. Candidate in Statistics`.
+- Replace the generic code URL label with `GitHub: github.com/...` if that is what it is.
+- If applying to quant research roles, include your dissertation topic, advisor, or selected publications.
+- Keep bullets to roughly one or two lines where possible.
+- Use either periods on every bullet or no periods; you currently use periods consistently, so retain that style.
+- Aim for one page if possible, though two pages can be acceptable for a Ph.D. candidate with publications and substantive research.
+
+## Overall assessment
+
+The underlying profile is strong: Ph.D.-level statistics, a relevant quant internship, measurable research output, programming, and competition performance. Fixing the Sharpe calculation and percentage errors is essential. After that, the biggest improvement will come from putting quant experience first, reducing repetition, and making every metric statistically precise.
