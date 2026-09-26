@@ -68,7 +68,7 @@ export const analyzeWordingTool: Tool<AnalyzeWordingInput, WordingDiagnosis> = {
       bulletId: String(raw.bulletId ?? '').replace(/[[\]]/g, '').trim(),
       verbStrength: scored(raw.verbStrength),
       concision: scored(raw.concision),
-      issues: stringArray(raw.issues),
+      ...wordingIssues(raw.issues),
     }));
 
     if (perBullet.length === 0) {
@@ -100,6 +100,8 @@ ${renderEntry(entry)}
 </resume_content>
 
 Every score is a whole number from 0 to 100; the zeros below are placeholders.
+"savesWords" is roughly how many words fixing that issue would take off the line
+— 0 where the fix changes words without removing any.
 
 Return JSON of exactly this shape:
 
@@ -109,10 +111,31 @@ Return JSON of exactly this shape:
       "bulletId": "<the id given above, verbatim>",
       "verbStrength": { "score": 0, "detail": "one sentence" },
       "concision":    { "score": 0, "detail": "one sentence" },
-      "issues": ["what is wrong with the wording, one sentence each"]
+      "issues": [{ "what": "what is wrong with the wording, one sentence", "savesWords": 0 }]
     }
   ]
 }`;
+}
+
+/**
+ * Issues as text, with what each would save alongside. Accepts the older shape,
+ * a list of strings, so a reply in either form is read.
+ */
+export function wordingIssues(raw: unknown): { issues: string[]; issueSavings?: number[] } {
+  const items = Array.isArray(raw) ? raw : [];
+  const issues: string[] = [];
+  const savings: number[] = [];
+  for (const item of items) {
+    if (typeof item === 'string') {
+      issues.push(item);
+      savings.push(0);
+    } else if (item && typeof item === 'object' && typeof (item as { what?: unknown }).what === 'string') {
+      const saves = Number((item as { savesWords?: unknown }).savesWords);
+      issues.push((item as { what: string }).what);
+      savings.push(Number.isFinite(saves) && saves > 0 ? Math.round(saves) : 0);
+    }
+  }
+  return savings.some((n) => n > 0) ? { issues, issueSavings: savings } : { issues };
 }
 
 function scored(raw: unknown): ScoredDimension {

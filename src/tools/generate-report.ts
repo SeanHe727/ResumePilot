@@ -257,7 +257,8 @@ function supplied(state: ResumeSessionState): string {
  * what the selection answers with.
  */
 function asLine(short: string, finding: SourceFinding): string {
-  const cost = finding.costWords === undefined ? '' : `, ~${finding.costWords} words`;
+  const c = finding.costWords;
+  const cost = c === undefined || c === 0 ? '' : c > 0 ? `, adds ~${c} words` : `, saves ~${-c} words`;
   return `- ${short} [${finding.target}${cost}] ${finding.what}`;
 }
 
@@ -270,13 +271,35 @@ function roomWords(input: GenerateReportInput): number {
   return length.pageCount <= 1 ? Math.max(0, 650 - length.wordCount) : 0;
 }
 
-/** Words the chosen groups would add, each at its dearest member's cost. */
-export function wordsAdded(parsed: Record<string, unknown> | null, findings: readonly SourceFinding[]): number {
+/**
+ * What the chosen groups do to the page's length: words added, words taken off,
+ * and the net. Counted per line — a demand merged across three lines is
+ * answered on each of them — at the largest figure any finding gives that line.
+ */
+export function pageEffect(
+  parsed: Record<string, unknown> | null,
+  findings: readonly SourceFinding[],
+): { adds: number; saves: number; net: number } {
   const byId = new Map(findings.map((f) => [f.id, f] as const));
-  return (planFromMarks(parsed, findings).plan.groups ?? []).reduce(
-    (sum, group) => sum + Math.max(0, ...group.findingIds.map((id) => byId.get(id)?.costWords ?? 0)),
-    0,
-  );
+  let adds = 0;
+  let saves = 0;
+  for (const group of planFromMarks(parsed, findings).plan.groups ?? []) {
+    const perLine = new Map<string, { add: number; save: number }>();
+    for (const id of group.findingIds) {
+      const f = byId.get(id);
+      if (!f) continue;
+      const line = perLine.get(lineOf(f)) ?? { add: 0, save: 0 };
+      const c = f.costWords ?? 0;
+      if (c > 0) line.add = Math.max(line.add, c);
+      if (c < 0) line.save = Math.max(line.save, -c);
+      perLine.set(lineOf(f), line);
+    }
+    for (const { add, save } of perLine.values()) {
+      adds += add;
+      saves += save;
+    }
+  }
+  return { adds, saves, net: adds - saves };
 }
 
 /** The line a finding is about, without the reader's suffix. */
@@ -437,7 +460,7 @@ Name findings only by the short names above. Return JSON of exactly this shape:
   // What it chose is measured against the room and recorded, so a run that
   // overspends the page is visible in the trace rather than silently cut.
   const left = roomWords(input);
-  const adds = wordsAdded(parsed, findings);
+  const effect = pageEffect(parsed, findings);
   const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings);
 
   // Which findings this weighed. The plan model is shown the lines without
@@ -452,7 +475,7 @@ Name findings only by the short names above. Return JSON of exactly this shape:
       ...plan,
       // The selection's own reasons, kept here and nowhere downstream.
       reasons,
-      wordsAdded: adds,
+      pageEffect: effect,
       room: left,
       ...(unmarked.length > 0 ? { unmarked } : {}),
       ...(unknown.length > 0 ? { unknownNames: unknown } : {}),
@@ -600,12 +623,15 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
       ),
     ),
 
-    // Wording findings carry no cost of their own: cutting filler or replacing
-    // a verb takes words away rather than adding them, which is why they often
-    // belong at the top of a page that has no room left.
+    // Wording findings usually take words off. Sized as a negative cost, so a
+    // cut reads as room it makes rather than as free: unsized, every cut on
+    // every line was chosen — measured, 25 of 36 points in one report.
     ...(input.wording ?? []).flatMap((diagnosis) =>
       diagnosis.perBullet.flatMap((bullet) =>
-        bullet.issues.map((what) => at('wording', `${bullet.bulletId}, wording`, undefined, what)),
+        bullet.issues.map((what, i) => {
+          const saves = bullet.issueSavings?.[i] ?? 0;
+          return at('wording', `${bullet.bulletId}, wording`, saves > 0 ? -saves : undefined, what);
+        }),
       ),
     ),
 

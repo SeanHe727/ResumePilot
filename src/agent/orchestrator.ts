@@ -11,7 +11,7 @@ import type {
 import { renderResume } from '../document/index.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
-import { buildWordingMessage } from '../tools/analyze-wording.js';
+import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
 import { SemaphorePool } from './pool.js';
 import { ROLES } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
@@ -470,9 +470,10 @@ function readWording(
   // Left alone it matches no bullet in the document and every wording score is
   // keyed to nothing. The sibling reader was fixed for this — in the tool that
   // is no longer reachable, while this path, the one that runs, was not.
-  const rows = (perBullet as WordingDiagnosis['perBullet']).map((row) => ({
+  const rows = (perBullet as Array<WordingDiagnosis['perBullet'][number] & { issues: unknown }>).map((row) => ({
     ...row,
     bulletId: bareId(row.bulletId),
+    ...wordingIssues(row.issues),
   }));
   const scores = rows.flatMap((b) => [b.verbStrength?.score ?? 0, b.concision?.score ?? 0]);
 

@@ -12,8 +12,9 @@ export const IMPROVEMENT_PLAN_PROMPT = `# Role
 You are given every finding a resume review produced — from the readers that
 scored the lines, the one that judged how they are written, the one that read
 the career end to end, the file check, and the comparison against the posting
-where there was one. Each says where it came from, and the ones that would add
-words say roughly how many. You are told how much room the page has left.
+where there was one. Each says where it came from and, where known, what it does
+to the page: "adds ~8 words" or "saves ~12 words". You are told how much room
+the page has left.
 
 Choose what is worth doing, then sort what you chose by what it asks of the
 candidate.
@@ -37,9 +38,17 @@ job is to decide which of them buy the most.
   words that change it little — or make the line heavier to read — are a bad
   one, and not worth choosing at all. A four-word answer that settles a whole
   class of doubt beats a sentence that adds a detail.
-- **Stay inside the room.** The words the groups you choose would add should
-  fit in what the page has left. Where they do not, keep the ones worth most per
-  word and set the rest aside.
+- **Only what really matters.** Every point costs the candidate attention as
+  well as words, and a list of thirty is a list nobody acts on. Measured: a
+  report of 36 points, 25 of them small cuts. Choose about three per entry at
+  most, and about three for the résumé as a whole, and fewer where fewer matter.
+- **A cut is worth little on its own.** Tidying a line rarely changes what a
+  reader thinks of the candidate; choose one for itself only where a line is
+  clearly overloaded. Its real worth is the room it makes: the words it saves
+  can pay for an addition that does matter.
+- **Stay inside the room.** What the groups you choose add, less what they save,
+  should fit in what the page has left. Where it does not, keep what is worth
+  most per word and set the rest aside.
 - **Findings that ask the same thing in different places are one finding.** The
   same demand recurs across bullets — whether a percentage is relative or in
   points, what a comparison was against, what a measurement covered. Merge them

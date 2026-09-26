@@ -162,7 +162,7 @@ export async function writeFullReport(
           "why": "what a reader would do differently knowing it",
           "evidence": "the shortest phrase from the résumé that shows the problem — a few words, not the line",
           "from": ["the short ids of the findings this point rests on, exactly as listed above — several where they agree, and none that is not on that list"],
-          "cost": "a number of words, like 'about 6 words' — or 'no words' where the fix removes or moves text rather than adding it. Not a description of the work."
+          "cost": "a number of words, like 'about 6 words' to add, 'saves about 10 words' for a cut, or 'no words' where text only moves. Not a description of the work."
         }
       ]
     }

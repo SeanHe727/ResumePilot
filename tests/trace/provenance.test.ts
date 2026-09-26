@@ -247,7 +247,7 @@ describe('through the tool that actually runs it', () => {
     // by these names; it writes no advice and no ranges of its own.
     const { asked } = await runReport();
 
-    expect(asked[0]).toMatch(/- c\d+ \[experience:0:0, ~6 words\] no measurable outcome/);
+    expect(asked[0]).toMatch(/- c\d+ \[experience:0:0, adds ~6 words\] no measurable outcome/);
     expect(asked[0]).toMatch(/- w\d+ \[experience:0:0, wording\] opens with "Responsible for"/);
     expect(asked[0]).not.toMatch(/_finding_/);
   });

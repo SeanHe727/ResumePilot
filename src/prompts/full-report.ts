@@ -47,9 +47,9 @@ the résumé it rests on.
 
 A cost is a number of words. "About six words" is a cost; "requires recovering
 the benchmark metadata" is the work, which belongs in why. Where the change
-removes or moves text rather than adding it, that is no words, and saying so is
-worth more than a number — those are the ones that pay for everything else on a
-full page.
+takes text off, say what it saves — "saves about ten words" — because those are
+the ones that pay for everything else on a full page. Where it only moves text,
+that is no words.
 
 ## Answering
 

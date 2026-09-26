@@ -68,7 +68,12 @@ Reply with JSON only:
 
 Anything about the bullets inside one entry belongs in \`withinEntries\`, keyed by
 that entry, rather than in \`orderingNotes\` — which is for entries and sections.
-One object per entry you have something to say about; leave out the rest.`;
+One object per entry you have something to say about; leave out the rest.
+
+\`gaps\` and \`orderingNotes\` are for what should change. Where the order is
+already right, say nothing about it. Measured: "Keep EDUCATION first" and "Keep
+PROJECTS before SKILLS" were passed on as findings, and headed the report as
+the first two things to do.`;
 
 export const NARRATIVE_SEARCH_TRIGGERS = `## What to look up
 

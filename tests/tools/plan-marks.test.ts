@@ -89,18 +89,47 @@ describe('the report opens with where to start and what already works', () => {
   });
 });
 
-describe('what the selection adds is measured, not cut', () => {
-  it('counts each chosen group at its dearest member', async () => {
-    const { wordsAdded } = await import('../../src/tools/generate-report.js');
+describe('what the selection does to the page is measured, not cut', () => {
+  it('counts additions and savings per line, and the net', async () => {
+    const { pageEffect } = await import('../../src/tools/generate-report.js');
     const priced = [
       { ...f('a', 'content', 's2:e0:b0', 'needs a baseline'), costWords: 30 },
       { ...f('b', 'content', 's2:e0:b1', 'needs a baseline'), costWords: 20 },
-      f('c', 'wording', 's2:e0:b2, wording', 'cut the filler'),
+      { ...f('c', 'wording', 's2:e0:b2, wording', 'cut the filler'), costWords: -12 },
     ];
     const marks = { chosen: [{ kind: 'shortTerm', findings: ['c1', 'c2'] }, { kind: 'immediate', findings: ['w1'] }] };
 
-    expect(wordsAdded(marks, priced)).toBe(30);
+    // The same demand on two lines is answered on both.
+    expect(pageEffect(marks, priced)).toEqual({ adds: 50, saves: 12, net: 38 });
     // Nothing is set aside for the room: that is the selection's call.
     expect(planFromMarks(marks, priced).plan.groups).toHaveLength(2);
+  });
+});
+
+describe('a cut says what it saves', () => {
+  it('reads savings from the wording reply, in either shape', async () => {
+    const { wordingIssues } = await import('../../src/tools/analyze-wording.js');
+    expect(wordingIssues([{ what: 'three mechanisms in one clause', savesWords: 12 }, 'weak verb'])).toEqual({
+      issues: ['three mechanisms in one clause', 'weak verb'],
+      issueSavings: [12, 0],
+    });
+    expect(wordingIssues(['weak verb'])).toEqual({ issues: ['weak verb'] });
+  });
+});
+
+describe('a wording finding carries its saving as a negative cost', () => {
+  it('maps issueSavings onto the findings it belongs to', async () => {
+    const { everyFinding } = await import('../../src/tools/generate-report.js');
+    const found = everyFinding({
+      resume: { sections: [] },
+      format: { overallScore: 100, issues: [] },
+      entries: [],
+      wording: [{ entryId: 's2:e0', overallScore: 60, perBullet: [{
+        bulletId: 's2:e0:b0', verbStrength: { score: 60, detail: '' }, concision: { score: 40, detail: '' },
+        issues: ['three mechanisms in one clause', 'weak verb'], issueSavings: [12, 0],
+      }] }],
+    } as never);
+
+    expect(found.map((f) => f.costWords)).toEqual([-12, undefined]);
   });
 });
