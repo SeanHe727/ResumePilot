@@ -152,5 +152,23 @@
     1,
     "Kubernetes"
   ],
-  "unevidencedSubtle": "Kubernetes"
+  "unevidencedSubtle": "Kubernetes",
+  "v2": {
+    "S1": "Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
+    "S2": "Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "T1": "Trained the triage classifier with early stopping on the test set, then reported its 91% test accuracy as held-out performance.",
+    "T2": "Quantized the domain adapter to INT8, then fine-tuned it in full precision with LoRA and shipped the INT8 checkpoint to production.",
+    "T3": "Designed a routing layer that uses cross-entropy to rank the 3 specialist agents' findings by statistical significance before the reviewer sees them.",
+    "T4": "Architected the company's ML platform, now used across three business units for model training, evaluation and release.",
+    "N1": {
+      "head": "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country",
+      "dates": "Aug 2022 - Jun 2023",
+      "shift": "Jul 2023 - Jul 2024",
+      "bullets": [
+        "Designed stamping dies for automotive brackets in SolidWorks, cutting the scrap rate from 6% to 4% on two press lines.",
+        "Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier."
+      ]
+    },
+    "A2": "Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context."
+  }
 }

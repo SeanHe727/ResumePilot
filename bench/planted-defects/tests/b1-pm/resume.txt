@@ -1,51 +1,46 @@
 Riley Chen
 +1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen
+Date of birth: 2 Nov 1996 | Nationality: American
 EDUCATION
 Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025
 Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018
 EXPERIENCE
 Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
-- Redesigned merchant onboarding around a single verification step, cutting median time to
-first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
-- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step
-flow across 40,000 sessions, then shipping it to all merchants.
+- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow
+for all merchants.
 - Wrote the requirements and success metrics for dispute self-service, aligning engineering,
 risk and support; the team shipped it two weeks ahead of plan.
-- Drafted the specification and target metrics for the self-service dispute feature with
-engineering, risk and support, and it was delivered earlier than scheduled.
+- Interviewed 25 merchants to size the chargeback problem and turned the findings into the
+business case that set the next quarter’s roadmap priority.
 - Ran weekly triage with engineering and support, closing 140 onboarding tickets over the
 summer and cutting the open-ticket queue by half.
-- Managed a team of 40 people across product and engineering and owned the company’s P&L for
-the payments business.
-Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023
-- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts,
-cutting late deliveries from 11% to 7% in two quarters.
+- Launched dispute self-service to all merchants, then wrote its success metrics and ran
+discovery interviews to decide what it should do.
+- Redesigned merchant onboarding around a single verification step, cutting median time to
+first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
+Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
+- Set the company’s logistics strategy, adopted across every region and business line.
 - Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor
 supervisors and retraining 45 pickers on the new layout.
-- Coordinates the quarterly S&OP review across sales, finance and operations and prepares the
+- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the
 forecast pack for each meeting.
-- Led the rollout of a route-planning tool to 3 depots while also organizing training
-sessions, rewriting the standard operating procedures, handling vendor negotiations,
-preparing monthly reports for the regional director, mentoring two new analysts, supporting
-the finance team during audits, and representing operations in several cross-functional
-committees, which together saved driver hours, improved morale, and made daily operations
-smoother for everyone across the company.
+- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers
+and saving 1,800 driver hours a year.
 PROJECTS
 Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
 - Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9
 tonnes of food that would have been thrown away in its first year.
-- Grew weekly active users from 1,000 to 900, a 90% increase, through targeted reminders and a
-redesigned home screen.
+- Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60
+user interviews showed students missed pickup windows.
 - Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week
 and removing the need for staff to cover gaps.
-MBA Consulting Practicum | Team Lead | Regional Hospital Network | May 2024 - Jan 2024
-- Collaborated with various stakeholders on multiple initiatives to deliver value and support
-the team’s broader goals.
-- Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form
-from 5 pages to 2 without losing required fields.
-- Redesigned merchant onboarding around a single verification step and cut median time to
-first payment from 9 days to 4 across 2,300 new merchants.
+MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
+- Held weekly working sessions with clinic managers on outpatient scheduling across the
+network.
+- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes
+adopted by front-desk staff.
+- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants,
+by redesigning onboarding.
 SKILLS
-Product: roadmaping, A/B testing, user interveiws, PRDs, SQL
+Product: roadmapping, A/B testing, user interviews, PRDs, SQL
 Tools: Jira, Figma, Amplitude, Excel
-Technical: Python, Kubernetes, machine learning

@@ -1,62 +1,62 @@
 [
   {
-    "id": "D1",
-    "type": "D1",
-    "line": "Owned the diagnostics service's monitoring dashboards across two major releases and the on-call rotation that used them.",
-    "defect": "Duty-style framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
-  },
-  {
-    "id": "D2",
-    "type": "D2",
-    "line": "Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
-    "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
-  },
-  {
-    "id": "D6",
-    "type": "D6",
-    "line": "Reduced p95 API latency from 420 ms to 180 ms; my changes added a request cache and batched sensor reads, with load tests to keep it there.",
-    "defect": "A first-person pronoun ('my') inside a bullet."
-  },
-  {
-    "id": "D7",
-    "type": "D7",
-    "line": "EXPERIENCE section order",
-    "defect": "Experience is not in reverse-chronological order: the older role (Eastern Robotics Co.) is listed before the newer one (Mobility Systems Company)."
-  },
-  {
-    "id": "D9",
-    "type": "D9",
+    "id": "W3",
+    "category": "wording",
     "line": "Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
     "defect": "A present-tense verb in a role that has already ended."
   },
   {
-    "id": "D13",
-    "type": "D13",
-    "line": "Led a team of 4 engineers to design and ship the triage branch's escalation workflow for the on-call reviewers.",
-    "defect": "Responsibilities far beyond the job title (Machine Learning Engineering Intern)."
+    "id": "W5",
+    "category": "wording",
+    "line": "Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "defect": "Generic claims with no concrete action, subject or result."
   },
   {
-    "id": "D15",
-    "type": "D15",
-    "line": "Supported cross-functional teams on evaluation initiatives for the open-source framework, improving overall quality and consistency.",
-    "defect": "Vague scope: no concrete project, action or result."
+    "id": "A2",
+    "category": "data",
+    "line": "Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
   },
   {
-    "id": "D18",
-    "type": "D18",
-    "line": "Moved the runtime's evaluation jobs onto the KRT deployment stack, cutting the time to rerun a full benchmark from 40 to 12 minutes.",
-    "defect": "Unexplained internal code names or acronyms that an outside reader cannot interpret."
+    "id": "A3",
+    "category": "data",
+    "line": "Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
   },
   {
-    "id": "D19",
-    "type": "D19",
-    "line": "Date of birth: 14 Mar 1999 | Nationality: Canadian",
-    "defect": "Irrelevant personal information (date of birth, nationality)."
+    "id": "S1",
+    "category": "structure",
+    "line": "Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
   },
   {
-    "id": "D20",
-    "type": "D20",
-    "line": "ML & Agents: PyTorch, LoRA, GRPO, LangGrpah, RAG, agent evaluation",
-    "defect": "A spelling mistake in the skills section."
+    "id": "S3",
+    "category": "structure",
+    "line": "Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Trained the triage classifier with early stopping on the test set, then reported its 91% test accuracy as held-out performance.",
+    "defect": "A methodological contradiction: the evaluation described is not valid for the claim made from it."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Designed a routing layer that uses cross-entropy to rank the 3 specialist agents' findings by statistical significance before the reviewer sees them.",
+    "defect": "A technical term used wrongly: the named method cannot do what the bullet says it did."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "Jun 2022 graduation to May 2023",
+    "defect": "An unexplained gap between graduating and the first role."
   }
 ]

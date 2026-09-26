@@ -1,62 +1,62 @@
 [
   {
-    "id": "D1",
-    "type": "D1",
-    "line": "Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
-    "defect": "Duty-style framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
-  },
-  {
-    "id": "D4",
-    "type": "D4",
-    "line": "Ran the signal through purged walk-forward validation on six years of tick data, with an embargo so nothing from the future leaked in.",
-    "defect": "Duplicate of another bullet in the same entry, restated in other words: Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so no look-ahead information leaked into training."
-  },
-  {
-    "id": "D5",
-    "type": "D5",
-    "line": "Pioneered a data-driven, research-first approach to volatility modeling that delivered robust, actionable insights.",
-    "defect": "Generic claims with no concrete action, subject or result."
-  },
-  {
-    "id": "D6",
-    "type": "D6",
+    "id": "W2",
+    "category": "wording",
     "line": "Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
     "defect": "A first-person pronoun ('my') inside a bullet."
   },
   {
-    "id": "D8",
-    "type": "D8",
+    "id": "W6",
+    "category": "wording",
+    "line": "Methods: time-series econometircs, Bayesian inference, gradient boosting, PyTorch",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk's book over 18 months of out-of-sample backtest after costs.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Normalized every feature with the full-sample mean and variance, then split the data into walk-forward folds to validate the signal.",
+    "defect": "Steps in an order that does not work: a later step undoes or invalidates an earlier one."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Designed the department's entire statistical computing infrastructure, now used by every lab in the faculty.",
+    "defect": "An overclaim for the role's level: a junior role claiming to have designed or set something organisation-wide."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Jun 2020 - May 2021",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
     "line": "Programming: Python, R, SQL, C++, Kafka",
-    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects: Kafka."
-  },
-  {
-    "id": "D11",
-    "type": "D11",
-    "line": "Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
-    "defect": "The numbers contradict each other: the stated change does not match the before and after values."
-  },
-  {
-    "id": "D15",
-    "type": "D15",
-    "line": "Collaborated with teammates across multiple stages of the competition, contributing to the team's overall results.",
-    "defect": "Vague scope: no concrete project, action or result."
-  },
-  {
-    "id": "D16",
-    "type": "D16",
-    "line": "Validation leakage was identified and reduced through the use of time-grouped folds, and the score gap was closed.",
-    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
-  },
-  {
-    "id": "D17",
-    "type": "D17",
-    "line": "Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
-    "defect": "An overlong bullet packing several unrelated activities into one line."
-  },
-  {
-    "id": "D18",
-    "type": "D18",
-    "line": "Ran the robustness study on the VX9 backtest harness and wrote up the results as a 12-page working paper.",
-    "defect": "Unexplained internal code names or acronyms that an outside reader cannot interpret."
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Kafka)"
   }
 ]

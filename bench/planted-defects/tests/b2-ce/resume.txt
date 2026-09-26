@@ -1,23 +1,11 @@
 Jordan Lee
 +1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee
+Date of birth: 14 Mar 1999 | Nationality: Canadian
 EDUCATION
 Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026
 Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022
 EXPERIENCE
-Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024
-- Owned the diagnostics service’s monitoring dashboards across two major releases and the on-
-call rotation that used them.
-- Reduced p95 API latency from 420 ms to 180 ms; my changes added a request cache and batched
-sensor reads, with load tests to keep it there.
-- Maintained the CI pipeline for the perception team’s model releases and adds automated
-regression checks that shortened release cycles to 3 days.
-- Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared
-logging library, onboarding two new hires and taking over the weekend on-call rotation,
-which removed the nightly backlogs that delayed morning dispatch.
 Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
-- Built a diagnostics triage branch for an industrial inspection system that screens 800+
-sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in
-the first quarter after launch.
 - Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use
 trajectories with assistant-only loss masking.
 - Designed a routing layer that limits each of 3 specialist agents and an independent reviewer
@@ -26,23 +14,35 @@ to their in-scope signals, keeping every finding traceable to its source data.
 latency 5% versus the SFT baseline with no loss in diagnostic accuracy.
 - Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy,
 citation quality and latency before each release.
-- Led a team of 4 engineers to design and ship the triage branch’s escalation workflow for the
-on-call reviewers.
+- Quantized the domain adapter to INT8, then fine-tuned it in full precision with LoRA and
+shipped the INT8 checkpoint to production.
+- Built a diagnostics triage branch for an industrial inspection system that screens 800+
+sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in
+the first quarter after launch.
+Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024
+- Architected the company’s ML platform, now used across three business units for model
+training, evaluation and release.
+- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor
+reads, and added load tests to keep it there.
+- Maintained the CI pipeline for the perception team’s model releases and adds automated
+regression checks that shortened release cycles to 3 days.
+- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-
+letter handling, removing the nightly backlogs that delayed morning dispatch.
 PROJECTS
 Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
-- Raised planted-defect localization from 82% to 94% by dispatching tasks to role-specialized
-sub-agents with isolated prompts, toolsets and contexts.
-- Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results
-and reusing completed sub-agent answers.
+- Drove adoption of AI-first engineering practices across the platform, accelerating delivery
+and improving outcomes for downstream teams.
+- Kept working context under 10K tokens across a 100-turn stress test while the raw
+conversation grew 100x, using budgeted context layers and staged compaction.
 - Separated concurrency pools and gated cache writes on stream completion, removing nested-
 pool deadlocks and lost tool results under fan-out load.
 Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
-- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework,
-where they now run in the default benchmark for every release.
-- Evaluation reports produced by the pipeline were reviewed and improved, and the resulting
-fixes were adopted as part of the project.
-- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their
-modules with layered instrumentation; each was fixed upstream.
+- Integrated 8 citation and faithfulness metrics into an open-source research-agent
+framework’s evaluation module.
+- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across
+400+ report-level trials that removed citations, sources and claims.
+- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor
+signals per case using ML-extracted features.
 SKILLS
 Programming: Python, TypeScript, SQL, Bash, Git
-ML & Agents: PyTorch, LoRA, GRPO, LangGrpah, RAG, agent evaluation
+ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "D3",
+    "type": "D3",
+    "line": "Single-handedly built the firm's entire trading infrastructure, which is now used by every desk across equities, rates and commodities.",
+    "defect": "Implausible overclaim for the role's level: sole credit for something company-wide."
+  },
+  {
+    "id": "D4",
+    "type": "D4",
+    "line": "Tested the signal on six years of tick-level data using purged walk-forward splits with an embargo, so that no future information leaked into training.",
+    "defect": "Duplicate of another bullet in the same entry, restated in other words: Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so no look-ahead information leaked into training."
+  },
+  {
+    "id": "D5",
+    "type": "D5",
+    "line": "Leveraged cutting-edge quantitative synergies and next-generation modeling paradigms to unlock alpha-driven innovation.",
+    "defect": "Empty buzzwords with no concrete action, subject or result."
+  },
+  {
+    "id": "D8",
+    "type": "D8",
+    "line": "Infrastructure: Kubernetes, Haskell, Kafka",
+    "defect": "Skills listed with no supporting evidence anywhere in the experience or projects: Kubernetes, Haskell, Kafka."
+  },
+  {
+    "id": "D10",
+    "type": "D10",
+    "line": "May 2020 graduation to Oct 2021",
+    "defect": "An unexplained gap between graduating (May 2020) and the first role (starting Oct 2021)."
+  },
+  {
+    "id": "D12",
+    "type": "D12",
+    "line": "Built a short-horizon order-book imbalance signal for index futures that added 0.4 Sharpe to a futures book over 18 months of out-of-sample backtest.",
+    "defect": "The same achievement is claimed in two different entries; it also appears under Northpeak Capital."
+  },
+  {
+    "id": "D14",
+    "type": "D14",
+    "line": "Kaggle Market Prediction Competition | Jun 2023 - Mar 2023",
+    "defect": "Impossible dates: the end date is before the start date (Jun 2023 - Mar 2023)."
+  },
+  {
+    "id": "D15",
+    "type": "D15",
+    "line": "Worked with various people on multiple aspects of the competition to help the team make progress.",
+    "defect": "Vague scope: no concrete project, action or result."
+  },
+  {
+    "id": "D18",
+    "type": "D18",
+    "line": "Ported the VX-9 stack onto QRT under the Helix program, coordinating with the Atlas and Borealis teams.",
+    "defect": "Unexplained internal code names or acronyms that an outside reader cannot interpret."
+  },
+  {
+    "id": "D19",
+    "type": "D19",
+    "line": "Age: 25 | Marital status: Single | Hobbies: watching TV, video games",
+    "defect": "Irrelevant personal information (age, marital status, hobbies)."
+  }
+]

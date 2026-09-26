@@ -1,47 +1,46 @@
 Riley Chen
 +1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen
+Date of birth: 2 Nov 1996 | Nationality: American
 EDUCATION
 Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025
 Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018
 EXPERIENCE
-Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
-- Redesigned merchant onboarding around a single verification step, cutting median time to
-first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
-- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step
-flow across 40,000 sessions, then shipping it to all merchants.
-- Wrote the requirements and success metrics for dispute self-service, aligning engineering,
-risk and support; the team shipped it two weeks ahead of plan.
-- Defined success metrics and requirements for the dispute self-service launch with
-engineering, risk and support, which shipped ahead of schedule.
-- Set the product strategy for the payments platform, adopted across all merchant-facing
-teams.
-- Presented the onboarding results and a follow-up roadmap to the payments leadership team,
-who funded the rollout to two more regions.
-Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
-- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts,
-cutting late deliveries from 11% to 7% in two quarters.
-- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor
-supervisors and retraining 45 pickers on the new layout.
+Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023
+- Set the company’s logistics strategy, adopted across every region and business line.
+- Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out
+with the floor supervisors and 45 retrained pickers.
 - Coordinated the quarterly S&OP review across sales, finance and operations for 12
 consecutive quarters, cutting forecast error from 18% to 11%.
-- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating
-procedures, running driver training and taking over vendor negotiations for the telematics
-contract, which saved 1,800 driver hours a year across the region.
+- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers
+and saving 1,800 driver hours a year.
+Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
+- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow
+for all merchants.
+- Wrote the requirements and success metrics for dispute self-service, aligning engineering,
+risk and support; the team shipped it two weeks ahead of plan.
+- Interviewed 25 merchants to size the chargeback problem and turned the findings into the
+business case that set the next quarter’s roadmap priority.
+- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the
+summer and cutting the open-ticket queue by half.
+- Launched dispute self-service to all merchants, then wrote its success metrics and ran
+discovery interviews to decide what it should do.
+- Redesigned merchant onboarding around a single verification step, cutting median time to
+first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
 PROJECTS
 Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
-- Championed a customer-obsessed, data-driven culture across the venture, elevating the
-experience and unlocking growth.
-- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders
-chosen after 60 user interviews.
+- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9
+tonnes of food that would have been thrown away in its first year.
+- Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60
+user interviews showed students missed pickup windows.
 - Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week
 and removing the need for staff to cover gaps.
-MBA Consulting Practicum | Team Lead | Regional Hospital Network | May 2024 - Apr 2024
-- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the
-client funded a pilot based on the model.
+MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
+- Held weekly working sessions with clinic managers on outpatient scheduling across the
+network.
 - Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes
 adopted by front-desk staff.
 - Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants,
 by redesigning onboarding.
 SKILLS
-Product: roadmapping, A/B testing, user interviews, PRDs, SQL, Python
+Product: roadmapping, A/B testing, user interviews, PRDs, SQL
 Tools: Jira, Figma, Amplitude, Excel

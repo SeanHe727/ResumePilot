@@ -152,5 +152,23 @@
     0,
     "Python"
   ],
-  "unevidencedSubtle": "Python"
+  "unevidencedSubtle": "Python",
+  "v2": {
+    "S1": "After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "S2": "Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "T1": "Declared the one-page checkout the winner after stopping the A/B test on the first day it reached significance, and reported the lift at 95% confidence.",
+    "T2": "Launched dispute self-service to all merchants, then wrote its success metrics and ran discovery interviews to decide what it should do.",
+    "T3": "Wrote the requirements for dispute self-service and used NPS to measure how many merchants completed a dispute without contacting support.",
+    "T4": "Set the company's logistics strategy, adopted across every region and business line.",
+    "N1": {
+      "head": "Coastal Marine Services | Diesel Mechanic | Lake City, USA",
+      "dates": "Jul 2018 - Jun 2019",
+      "shift": "Jul 2019 - Aug 2023",
+      "bullets": [
+        "Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+        "Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections."
+      ]
+    },
+    "A2": "Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system."
+  }
 }

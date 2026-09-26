@@ -7,8 +7,7 @@ for (const t of readdirSync('bench/planted-defects/tests').filter((d) => !d.ends
   const tl = buildTimeline(doc, now);
   let key: string[] = [];
   try { key = JSON.parse(readFileSync(`bench/planted-defects/tests/${t}/key.json`, 'utf8')).map((k: { id: string }) => k.id); } catch {}
-  const want = ['D7', 'D10', 'D14'].filter((d) => key.includes(d));
-  const got = [tl.outOfOrder.length ? 'D7' : '', tl.gaps.length ? 'D10' : '', tl.impossible.length ? 'D14' : ''].filter(Boolean);
+  const want = ['N2', 'N3'].filter((d) => key.includes(d));
+  const got = [tl.outOfOrder.length ? 'N2' : '', tl.gaps.length ? 'N3' : '', tl.impossible.length ? 'impossible' : ''].filter(Boolean);
   console.log(t.padEnd(12), 'expected', want.join(',') || '-', '| computed', got.join(',') || '-', want.join() === got.join() ? 'OK' : 'MISMATCH');
-  if (t === 'b1-quant') console.log(renderTimeline(tl));
 }

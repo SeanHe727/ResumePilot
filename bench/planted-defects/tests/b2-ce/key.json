@@ -1,62 +1,62 @@
 [
   {
-    "id": "D1",
-    "type": "D1",
-    "line": "Owned the diagnostics service's monitoring dashboards across two major releases and the on-call rotation that used them.",
-    "defect": "Duty-style framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
-  },
-  {
-    "id": "D2",
-    "type": "D2",
-    "line": "Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
-    "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
-  },
-  {
-    "id": "D6",
-    "type": "D6",
-    "line": "Reduced p95 API latency from 420 ms to 180 ms; my changes added a request cache and batched sensor reads, with load tests to keep it there.",
-    "defect": "A first-person pronoun ('my') inside a bullet."
-  },
-  {
-    "id": "D7",
-    "type": "D7",
-    "line": "EXPERIENCE section order",
-    "defect": "Experience is not in reverse-chronological order: the older role (Eastern Robotics Co.) is listed before the newer one (Mobility Systems Company)."
-  },
-  {
-    "id": "D9",
-    "type": "D9",
+    "id": "W3",
+    "category": "wording",
     "line": "Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
     "defect": "A present-tense verb in a role that has already ended."
   },
   {
-    "id": "D11",
-    "type": "D11",
-    "line": "Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
-    "defect": "The numbers contradict each other: the stated change does not match the before and after values."
+    "id": "W5",
+    "category": "wording",
+    "line": "Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "defect": "Generic claims with no concrete action, subject or result."
   },
   {
-    "id": "D13",
-    "type": "D13",
-    "line": "Led a team of 4 engineers to design and ship the triage branch's escalation workflow for the on-call reviewers.",
-    "defect": "Responsibilities far beyond the job title (Machine Learning Engineering Intern)."
+    "id": "A1",
+    "category": "data",
+    "line": "Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
   },
   {
-    "id": "D16",
-    "type": "D16",
-    "line": "Evaluation reports produced by the pipeline were reviewed and improved, and the resulting fixes were adopted as part of the project.",
-    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
+    "id": "A4",
+    "category": "data",
+    "line": "Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
   },
   {
-    "id": "D17",
-    "type": "D17",
-    "line": "Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.",
-    "defect": "An overlong bullet packing several unrelated activities into one line."
+    "id": "S2",
+    "category": "structure",
+    "line": "Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "defect": "An activity with no result or impact at all."
   },
   {
-    "id": "D20",
-    "type": "D20",
-    "line": "ML & Agents: PyTorch, LoRA, GRPO, LangGrpah, RAG, agent evaluation",
-    "defect": "A spelling mistake in the skills section."
+    "id": "S4",
+    "category": "structure",
+    "line": "Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Quantized the domain adapter to INT8, then fine-tuned it in full precision with LoRA and shipped the INT8 checkpoint to production.",
+    "defect": "Steps in an order that does not work: a later step undoes or invalidates an earlier one."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Architected the company's ML platform, now used across three business units for model training, evaluation and release.",
+    "defect": "An overclaim for the role's level: a junior role claiming to have designed or set something organisation-wide."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "Jun 2022 graduation to May 2023",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
   }
 ]

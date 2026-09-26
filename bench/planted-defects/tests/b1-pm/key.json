@@ -1,62 +1,62 @@
 [
   {
-    "id": "D4",
-    "type": "D4",
-    "line": "Drafted the specification and target metrics for the self-service dispute feature with engineering, risk and support, and it was delivered earlier than scheduled.",
-    "defect": "Duplicate of another bullet in the same entry, restated in other words: Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan."
+    "id": "W3",
+    "category": "wording",
+    "line": "Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "defect": "A present-tense verb in a role that has already ended."
   },
   {
-    "id": "D8",
-    "type": "D8",
-    "line": "Technical: Python, Kubernetes, machine learning",
-    "defect": "Skills listed with no supporting evidence anywhere in the experience or projects: Python, Kubernetes, machine learning."
+    "id": "W4",
+    "category": "wording",
+    "line": "Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
   },
   {
-    "id": "D9",
-    "type": "D9",
-    "line": "Coordinates the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
-    "defect": "Present tense in a role that has already ended."
+    "id": "A1",
+    "category": "data",
+    "line": "Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
   },
   {
-    "id": "D11",
-    "type": "D11",
-    "line": "Grew weekly active users from 1,000 to 900, a 90% increase, through targeted reminders and a redesigned home screen.",
-    "defect": "The numbers contradict each other: the stated change does not match the before and after values."
+    "id": "A4",
+    "category": "data",
+    "line": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
   },
   {
-    "id": "D12",
-    "type": "D12",
-    "line": "Redesigned merchant onboarding around a single verification step and cut median time to first payment from 9 days to 4 across 2,300 new merchants.",
-    "defect": "The same achievement is claimed in two different entries; it also appears under Harbor Payments."
+    "id": "S2",
+    "category": "structure",
+    "line": "Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "defect": "An activity with no result or impact at all."
   },
   {
-    "id": "D13",
-    "type": "D13",
-    "line": "Managed a team of 40 people across product and engineering and owned the company's P&L for the payments business.",
-    "defect": "Responsibilities far beyond the job title (Associate Product Manager Intern)."
+    "id": "S4",
+    "category": "structure",
+    "line": "Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
   },
   {
-    "id": "D14",
-    "type": "D14",
-    "line": "MBA Consulting Practicum | May 2024 - Jan 2024",
-    "defect": "Impossible dates: the end date is before the start date (May 2024 - Jan 2024)."
+    "id": "T2",
+    "category": "technical",
+    "line": "Launched dispute self-service to all merchants, then wrote its success metrics and ran discovery interviews to decide what it should do.",
+    "defect": "Steps in an order that does not work: a later step undoes or invalidates an earlier one."
   },
   {
-    "id": "D15",
-    "type": "D15",
-    "line": "Collaborated with various stakeholders on multiple initiatives to deliver value and support the team's broader goals.",
-    "defect": "Vague scope: no concrete project, action or result."
+    "id": "T4",
+    "category": "technical",
+    "line": "Set the company's logistics strategy, adopted across every region and business line.",
+    "defect": "An overclaim for the role's level: a junior role claiming to have designed or set something organisation-wide."
   },
   {
-    "id": "D17",
-    "type": "D17",
-    "line": "Led the rollout of a route-planning tool to 3 depots while also organizing training sessions, rewriting the standard operating procedures, handling vendor negotiations, preparing monthly reports for the regional director, mentoring two new analysts, supporting the finance team during audits, and representing operations in several cross-functional committees, which together saved driver hours, improved morale, and made daily operations smoother for everyone across the company.",
-    "defect": "An overlong bullet (70+ words) packing many unrelated activities into one line."
+    "id": "N3",
+    "category": "narrative",
+    "line": "Jun 2018 graduation to Mar 2019",
+    "defect": "An unexplained gap between graduating and the first role."
   },
   {
-    "id": "D20",
-    "type": "D20",
-    "line": "Product: roadmaping, A/B testing, user interveiws, PRDs, SQL",
-    "defect": "Spelling mistakes in the skills section."
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 2 Nov 1996 | Nationality: American",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
   }
 ]

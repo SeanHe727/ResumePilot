@@ -12,55 +12,54 @@ endobj
 <</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
 endobj
 5 0 obj
-<</Length 5058>>
+<</Length 4890>>
 stream
 BT /F1 16 Tf 72 752 Td (Riley Chen) Tj ET
 BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-7731 | riley.chen@example.com | example.com/in/riley-chen) Tj ET
-BT /F1 12 Tf 72 715.5 Td (EDUCATION) Tj ET
-BT /F1 10 Tf 72 701.5 Td (Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025) Tj ET
-BT /F1 10 Tf 72 689.0 Td (Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018) Tj ET
-BT /F1 12 Tf 72 671.5 Td (EXPERIENCE) Tj ET
-BT /F1 10 Tf 72 657.5 Td (Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024) Tj ET
-BT /F1 10 Tf 80 645.0 Td (- Redesigned merchant onboarding around a single verification step, cutting median time to) Tj ET
-BT /F1 10 Tf 86 633.2 Td (first payment from 9 days to 4 across 2,300 new merchants in the pilot region.) Tj ET
-BT /F1 10 Tf 80 621.4000000000001 Td (- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step) Tj ET
-BT /F1 10 Tf 86 609.6000000000001 Td (flow across 40,000 sessions, then shipping it to all merchants.) Tj ET
-BT /F1 10 Tf 80 597.8000000000002 Td (- Wrote the requirements and success metrics for dispute self-service, aligning engineering,) Tj ET
-BT /F1 10 Tf 86 586.0000000000002 Td (risk and support; the team shipped it two weeks ahead of plan.) Tj ET
-BT /F1 10 Tf 80 574.2000000000003 Td (- Defined success metrics and requirements for the dispute self-service launch with) Tj ET
-BT /F1 10 Tf 86 562.4000000000003 Td (engineering, risk and support, which shipped ahead of schedule.) Tj ET
-BT /F1 10 Tf 80 550.6000000000004 Td (- Set the product strategy for the payments platform, adopted across all merchant-facing) Tj ET
-BT /F1 10 Tf 86 538.8000000000004 Td (teams.) Tj ET
-BT /F1 10 Tf 80 527.0000000000005 Td (- Presented the onboarding results and a follow-up roadmap to the payments leadership team,) Tj ET
-BT /F1 10 Tf 86 515.2000000000005 Td (who funded the rollout to two more regions.) Tj ET
-BT /F1 10 Tf 72 503.4000000000005 Td (Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023) Tj ET
-BT /F1 10 Tf 80 490.9000000000005 Td (- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts,) Tj ET
-BT /F1 10 Tf 86 479.1000000000005 Td (cutting late deliveries from 11% to 7% in two quarters.) Tj ET
-BT /F1 10 Tf 80 467.30000000000047 Td (- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor) Tj ET
-BT /F1 10 Tf 86 455.50000000000045 Td (supervisors and retraining 45 pickers on the new layout.) Tj ET
-BT /F1 10 Tf 80 443.70000000000044 Td (- Coordinated the quarterly S&OP review across sales, finance and operations for 12) Tj ET
-BT /F1 10 Tf 86 431.90000000000043 Td (consecutive quarters, cutting forecast error from 18% to 11%.) Tj ET
-BT /F1 10 Tf 80 420.1000000000004 Td (- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating) Tj ET
-BT /F1 10 Tf 86 408.3000000000004 Td (procedures, running driver training and taking over vendor negotiations for the telematics) Tj ET
-BT /F1 10 Tf 86 396.5000000000004 Td (contract, which saved 1,800 driver hours a year across the region.) Tj ET
-BT /F1 12 Tf 72 379.7000000000004 Td (PROJECTS) Tj ET
-BT /F1 10 Tf 72 365.7000000000004 Td (Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present) Tj ET
-BT /F1 10 Tf 80 353.2000000000004 Td (- Championed a customer-obsessed, data-driven culture across the venture, elevating the) Tj ET
-BT /F1 10 Tf 86 341.4000000000004 Td (experience and unlocking growth.) Tj ET
-BT /F1 10 Tf 80 329.60000000000036 Td (- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders) Tj ET
-BT /F1 10 Tf 86 317.80000000000035 Td (chosen after 60 user interviews.) Tj ET
-BT /F1 10 Tf 80 306.00000000000034 Td (- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week) Tj ET
-BT /F1 10 Tf 86 294.20000000000033 Td (and removing the need for staff to cover gaps.) Tj ET
-BT /F1 10 Tf 72 282.4000000000003 Td (MBA Consulting Practicum | Team Lead | Regional Hospital Network | May 2024 - Apr 2024) Tj ET
-BT /F1 10 Tf 80 269.9000000000003 Td (- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the) Tj ET
-BT /F1 10 Tf 86 258.1000000000003 Td (client funded a pilot based on the model.) Tj ET
-BT /F1 10 Tf 80 246.3000000000003 Td (- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes) Tj ET
-BT /F1 10 Tf 86 234.50000000000028 Td (adopted by front-desk staff.) Tj ET
-BT /F1 10 Tf 80 222.70000000000027 Td (- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants,) Tj ET
-BT /F1 10 Tf 86 210.90000000000026 Td (by redesigning onboarding.) Tj ET
-BT /F1 12 Tf 72 194.10000000000025 Td (SKILLS) Tj ET
-BT /F1 10 Tf 72 180.10000000000025 Td (Product: roadmapping, A/B testing, user interviews, PRDs, SQL, Python) Tj ET
-BT /F1 10 Tf 72 167.60000000000025 Td (Tools: Jira, Figma, Amplitude, Excel) Tj ET
+BT /F1 10 Tf 72 720.5 Td (Date of birth: 2 Nov 1996 | Nationality: American) Tj ET
+BT /F1 12 Tf 72 703.0 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 72 689.0 Td (Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025) Tj ET
+BT /F1 10 Tf 72 676.5 Td (Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018) Tj ET
+BT /F1 12 Tf 72 659.0 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 72 645.0 Td (Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023) Tj ET
+BT /F1 10 Tf 80 632.5 Td (- Set the company's logistics strategy, adopted across every region and business line.) Tj ET
+BT /F1 10 Tf 80 620.7 Td (- Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out) Tj ET
+BT /F1 10 Tf 86 608.9000000000001 Td (with the floor supervisors and 45 retrained pickers.) Tj ET
+BT /F1 10 Tf 80 597.1000000000001 Td (- Coordinated the quarterly S&OP review across sales, finance and operations for 12) Tj ET
+BT /F1 10 Tf 86 585.3000000000002 Td (consecutive quarters, cutting forecast error from 18% to 11%.) Tj ET
+BT /F1 10 Tf 80 573.5000000000002 Td (- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers) Tj ET
+BT /F1 10 Tf 86 561.7000000000003 Td (and saving 1,800 driver hours a year.) Tj ET
+BT /F1 10 Tf 72 549.9000000000003 Td (Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024) Tj ET
+BT /F1 10 Tf 80 537.4000000000003 Td (- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow) Tj ET
+BT /F1 10 Tf 86 525.6000000000004 Td (for all merchants.) Tj ET
+BT /F1 10 Tf 80 513.8000000000004 Td (- Wrote the requirements and success metrics for dispute self-service, aligning engineering,) Tj ET
+BT /F1 10 Tf 86 502.0000000000004 Td (risk and support; the team shipped it two weeks ahead of plan.) Tj ET
+BT /F1 10 Tf 80 490.2000000000004 Td (- Interviewed 25 merchants to size the chargeback problem and turned the findings into the) Tj ET
+BT /F1 10 Tf 86 478.4000000000004 Td (business case that set the next quarter's roadmap priority.) Tj ET
+BT /F1 10 Tf 80 466.60000000000036 Td (- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the) Tj ET
+BT /F1 10 Tf 86 454.80000000000035 Td (summer and cutting the open-ticket queue by half.) Tj ET
+BT /F1 10 Tf 80 443.00000000000034 Td (- Launched dispute self-service to all merchants, then wrote its success metrics and ran) Tj ET
+BT /F1 10 Tf 86 431.20000000000033 Td (discovery interviews to decide what it should do.) Tj ET
+BT /F1 10 Tf 80 419.4000000000003 Td (- Redesigned merchant onboarding around a single verification step, cutting median time to) Tj ET
+BT /F1 10 Tf 86 407.6000000000003 Td (first payment from 9 days to 4 across 2,300 new merchants in the pilot region.) Tj ET
+BT /F1 12 Tf 72 390.8000000000003 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 376.8000000000003 Td (Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present) Tj ET
+BT /F1 10 Tf 80 364.3000000000003 Td (- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9) Tj ET
+BT /F1 10 Tf 86 352.5000000000003 Td (tonnes of food that would have been thrown away in its first year.) Tj ET
+BT /F1 10 Tf 80 340.7000000000003 Td (- Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60) Tj ET
+BT /F1 10 Tf 86 328.90000000000026 Td (user interviews showed students missed pickup windows.) Tj ET
+BT /F1 10 Tf 80 317.10000000000025 Td (- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week) Tj ET
+BT /F1 10 Tf 86 305.30000000000024 Td (and removing the need for staff to cover gaps.) Tj ET
+BT /F1 10 Tf 72 293.5000000000002 Td (MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024) Tj ET
+BT /F1 10 Tf 80 281.0000000000002 Td (- Held weekly working sessions with clinic managers on outpatient scheduling across the) Tj ET
+BT /F1 10 Tf 86 269.2000000000002 Td (network.) Tj ET
+BT /F1 10 Tf 80 257.4000000000002 Td (- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes) Tj ET
+BT /F1 10 Tf 86 245.6000000000002 Td (adopted by front-desk staff.) Tj ET
+BT /F1 10 Tf 80 233.80000000000018 Td (- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants,) Tj ET
+BT /F1 10 Tf 86 222.00000000000017 Td (by redesigning onboarding.) Tj ET
+BT /F1 12 Tf 72 205.20000000000016 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 191.20000000000016 Td (Product: roadmapping, A/B testing, user interviews, PRDs, SQL) Tj ET
+BT /F1 10 Tf 72 178.70000000000016 Td (Tools: Jira, Figma, Amplitude, Excel) Tj ET
 endstream
 endobj
 xref
@@ -74,5 +73,5 @@ xref
 trailer
 <</Size 6/Root 1 0 R>>
 startxref
-5388
+5220
 %%EOF

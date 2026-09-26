@@ -1,62 +1,62 @@
 [
   {
-    "id": "D3",
-    "type": "D3",
-    "line": "Set the product strategy for the payments platform, adopted across all merchant-facing teams.",
-    "defect": "Overclaim for the role's level: an intern claiming to have designed or set something used company-wide."
+    "id": "W2",
+    "category": "wording",
+    "line": "Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
   },
   {
-    "id": "D4",
-    "type": "D4",
-    "line": "Defined success metrics and requirements for the dispute self-service launch with engineering, risk and support, which shipped ahead of schedule.",
-    "defect": "Duplicate of another bullet in the same entry, restated in other words: Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan."
-  },
-  {
-    "id": "D5",
-    "type": "D5",
-    "line": "Championed a customer-obsessed, data-driven culture across the venture, elevating the experience and unlocking growth.",
-    "defect": "Generic claims with no concrete action, subject or result."
-  },
-  {
-    "id": "D8",
-    "type": "D8",
-    "line": "Product: roadmapping, A/B testing, user interviews, PRDs, SQL, Python",
-    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects: Python."
-  },
-  {
-    "id": "D10",
-    "type": "D10",
-    "line": "Jun 2018 graduation to Mar 2019",
-    "defect": "An unexplained gap between graduating (Jun 2018) and the first role (starting Mar 2019)."
-  },
-  {
-    "id": "D11",
-    "type": "D11",
-    "line": "Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
-    "defect": "The numbers contradict each other: the stated change does not match the before and after values."
-  },
-  {
-    "id": "D12",
-    "type": "D12",
-    "line": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
-    "defect": "The same achievement is claimed in two different entries; it also appears under Harbor Payments."
-  },
-  {
-    "id": "D14",
-    "type": "D14",
-    "line": "MBA Consulting Practicum | May 2024 - Apr 2024",
-    "defect": "Impossible dates: the end date is before the start date (May 2024 - Apr 2024)."
-  },
-  {
-    "id": "D16",
-    "type": "D16",
+    "id": "W4",
+    "category": "wording",
     "line": "Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
     "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
   },
   {
-    "id": "D17",
-    "type": "D17",
-    "line": "Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
-    "defect": "An overlong bullet packing several unrelated activities into one line."
+    "id": "A1",
+    "category": "data",
+    "line": "Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Launched dispute self-service to all merchants, then wrote its success metrics and ran discovery interviews to decide what it should do.",
+    "defect": "Steps in an order that does not work: a later step undoes or invalidates an earlier one."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Set the company's logistics strategy, adopted across every region and business line.",
+    "defect": "An overclaim for the role's level: a junior role claiming to have designed or set something organisation-wide."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 2 Nov 1996 | Nationality: American",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
   }
 ]
