@@ -12,7 +12,7 @@ endobj
 <</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
 endobj
 5 0 obj
-<</Length 5819>>
+<</Length 5372>>
 stream
 BT /F1 16 Tf 72 752 Td (Jordan Lee) Tj ET
 BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee) Tj ET
@@ -21,51 +21,47 @@ BT /F1 10 Tf 72 701.5 Td (Western State University | M.S. in Computer Engineerin
 BT /F1 10 Tf 72 689.0 Td (Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022) Tj ET
 BT /F1 12 Tf 72 671.5 Td (EXPERIENCE) Tj ET
 BT /F1 10 Tf 72 657.5 Td (Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024) Tj ET
-BT /F1 10 Tf 80 645.0 Td (- Responsible for the monitoring dashboards of the diagnostics service and for supporting the) Tj ET
-BT /F1 10 Tf 86 633.2 Td (on-call team with weekly reports.) Tj ET
-BT /F1 10 Tf 80 621.4000000000001 Td (- I worked on improving the latency of our API and I also wrote tests for it, which I think) Tj ET
-BT /F1 10 Tf 86 609.6000000000001 Td (made the service a lot faster for users.) Tj ET
-BT /F1 10 Tf 80 597.8000000000002 Td (- Builds and maintains the CI pipeline for the perception team's model releases and adds) Tj ET
-BT /F1 10 Tf 86 586.0000000000002 Td (automated regression checks to every build.) Tj ET
-BT /F1 10 Tf 80 574.2000000000003 Td (- Migrated 30 robot-fleet services from cron jobs to an event queue while also rewriting the) Tj ET
-BT /F1 10 Tf 86 562.4000000000003 Td (logging library, onboarding two new hires, maintaining the internal wiki, reviewing pull) Tj ET
-BT /F1 10 Tf 86 550.6000000000004 Td (requests for three other teams, supporting on-call rotations on weekends, presenting) Tj ET
-BT /F1 10 Tf 86 538.8000000000004 Td (quarterly updates to leadership, and evaluating three vendor monitoring tools, which) Tj ET
-BT /F1 10 Tf 86 527.0000000000005 Td (together removed nightly backlogs, improved developer satisfaction scores, and made the) Tj ET
-BT /F1 10 Tf 86 515.2000000000005 Td (platform noticeably more stable for everyone involved in operations across the whole) Tj ET
-BT /F1 10 Tf 86 503.4000000000005 Td (organization.) Tj ET
-BT /F1 10 Tf 72 491.6000000000005 Td (Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025) Tj ET
-BT /F1 10 Tf 80 479.1000000000005 Td (- Built a diagnostics triage branch for an industrial inspection system that screens 800+) Tj ET
-BT /F1 10 Tf 86 467.30000000000047 Td (sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in) Tj ET
-BT /F1 10 Tf 86 455.50000000000045 Td (the first quarter after launch.) Tj ET
-BT /F1 10 Tf 80 443.70000000000044 Td (- Improved model performance by 35% by fine-tuning a domain adapter on validated tool-use) Tj ET
-BT /F1 10 Tf 86 431.90000000000043 Td (trajectories with assistant-only loss masking.) Tj ET
-BT /F1 10 Tf 80 420.1000000000004 Td (- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer) Tj ET
-BT /F1 10 Tf 86 408.3000000000004 Td (to their in-scope signals, keeping every finding traceable to its source data.) Tj ET
-BT /F1 10 Tf 80 396.5000000000004 Td (- Applied GRPO with grouped tool-use rollouts and a composite reward, cutting end-to-end) Tj ET
-BT /F1 10 Tf 86 384.7000000000004 Td (latency 5% versus the SFT baseline with no loss in diagnostic accuracy.) Tj ET
-BT /F1 10 Tf 80 372.9000000000004 Td (- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy,) Tj ET
-BT /F1 10 Tf 86 361.10000000000036 Td (citation quality and latency before each release.) Tj ET
-BT /F1 10 Tf 80 349.30000000000035 Td (- Managed a team of 12 engineers across two offices and set the company's AI strategy for the) Tj ET
-BT /F1 10 Tf 86 337.50000000000034 Td (next fiscal year.) Tj ET
-BT /F1 12 Tf 72 320.70000000000033 Td (PROJECTS) Tj ET
-BT /F1 10 Tf 72 306.70000000000033 Td (Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present) Tj ET
-BT /F1 10 Tf 80 294.20000000000033 Td (- Raised planted-defect localization from 82% to 94% by dispatching tasks to role-specialized) Tj ET
-BT /F1 10 Tf 86 282.4000000000003 Td (sub-agents with isolated prompts, toolsets and contexts.) Tj ET
-BT /F1 10 Tf 80 270.6000000000003 Td (- Cut average response time from 800 ms to 900 ms, a 50% reduction, by caching tool results) Tj ET
-BT /F1 10 Tf 86 258.8000000000003 Td (and reusing completed sub-agent answers.) Tj ET
-BT /F1 10 Tf 80 247.00000000000028 Td (- Separated concurrency pools and gated cache writes on stream completion, removing nested-) Tj ET
-BT /F1 10 Tf 86 235.20000000000027 Td (pool deadlocks and lost tool results under fan-out load.) Tj ET
-BT /F1 10 Tf 72 223.40000000000026 Td (Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025) Tj ET
-BT /F1 10 Tf 80 210.90000000000026 Td (- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework,) Tj ET
-BT /F1 10 Tf 86 199.10000000000025 Td (where they now run in the default benchmark for every release.) Tj ET
-BT /F1 10 Tf 80 187.30000000000024 Td (- Was involved in the process of helping to support the evaluation of the reports that were) Tj ET
-BT /F1 10 Tf 86 175.50000000000023 Td (being produced by the pipeline at the time.) Tj ET
-BT /F1 10 Tf 80 163.70000000000022 Td (- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their) Tj ET
-BT /F1 10 Tf 86 151.9000000000002 Td (modules with layered instrumentation; each was fixed upstream.) Tj ET
-BT /F1 12 Tf 72 135.1000000000002 Td (SKILLS) Tj ET
-BT /F1 10 Tf 72 121.1000000000002 Td (Programming: Pyhton, TypeScirpt, SQL, Bash, Git) Tj ET
-BT /F1 10 Tf 72 108.6000000000002 Td (ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation) Tj ET
+BT /F1 10 Tf 80 645.0 Td (- Owned the diagnostics service's monitoring dashboards across two major releases and the on-) Tj ET
+BT /F1 10 Tf 86 633.2 Td (call rotation that used them.) Tj ET
+BT /F1 10 Tf 80 621.4000000000001 Td (- Reduced p95 API latency from 420 ms to 180 ms; my changes added a request cache and batched) Tj ET
+BT /F1 10 Tf 86 609.6000000000001 Td (sensor reads, with load tests to keep it there.) Tj ET
+BT /F1 10 Tf 80 597.8000000000002 Td (- Maintained the CI pipeline for the perception team's model releases and adds automated) Tj ET
+BT /F1 10 Tf 86 586.0000000000002 Td (regression checks that shortened release cycles to 3 days.) Tj ET
+BT /F1 10 Tf 80 574.2000000000003 Td (- Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared) Tj ET
+BT /F1 10 Tf 86 562.4000000000003 Td (logging library, onboarding two new hires and taking over the weekend on-call rotation,) Tj ET
+BT /F1 10 Tf 86 550.6000000000004 Td (which removed the nightly backlogs that delayed morning dispatch.) Tj ET
+BT /F1 10 Tf 72 538.8000000000004 Td (Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025) Tj ET
+BT /F1 10 Tf 80 526.3000000000004 Td (- Built a diagnostics triage branch for an industrial inspection system that screens 800+) Tj ET
+BT /F1 10 Tf 86 514.5000000000005 Td (sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in) Tj ET
+BT /F1 10 Tf 86 502.70000000000044 Td (the first quarter after launch.) Tj ET
+BT /F1 10 Tf 80 490.90000000000043 Td (- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use) Tj ET
+BT /F1 10 Tf 86 479.1000000000004 Td (trajectories with assistant-only loss masking.) Tj ET
+BT /F1 10 Tf 80 467.3000000000004 Td (- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer) Tj ET
+BT /F1 10 Tf 86 455.5000000000004 Td (to their in-scope signals, keeping every finding traceable to its source data.) Tj ET
+BT /F1 10 Tf 80 443.7000000000004 Td (- Applied GRPO with grouped tool-use rollouts and a composite reward, cutting end-to-end) Tj ET
+BT /F1 10 Tf 86 431.9000000000004 Td (latency 5% versus the SFT baseline with no loss in diagnostic accuracy.) Tj ET
+BT /F1 10 Tf 80 420.10000000000036 Td (- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy,) Tj ET
+BT /F1 10 Tf 86 408.30000000000035 Td (citation quality and latency before each release.) Tj ET
+BT /F1 10 Tf 80 396.50000000000034 Td (- Led a team of 4 engineers to design and ship the triage branch's escalation workflow for the) Tj ET
+BT /F1 10 Tf 86 384.70000000000033 Td (on-call reviewers.) Tj ET
+BT /F1 12 Tf 72 367.9000000000003 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 353.9000000000003 Td (Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present) Tj ET
+BT /F1 10 Tf 80 341.4000000000003 Td (- Raised planted-defect localization from 82% to 94% by dispatching tasks to role-specialized) Tj ET
+BT /F1 10 Tf 86 329.6000000000003 Td (sub-agents with isolated prompts, toolsets and contexts.) Tj ET
+BT /F1 10 Tf 80 317.8000000000003 Td (- Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results) Tj ET
+BT /F1 10 Tf 86 306.0000000000003 Td (and reusing completed sub-agent answers.) Tj ET
+BT /F1 10 Tf 80 294.2000000000003 Td (- Separated concurrency pools and gated cache writes on stream completion, removing nested-) Tj ET
+BT /F1 10 Tf 86 282.40000000000026 Td (pool deadlocks and lost tool results under fan-out load.) Tj ET
+BT /F1 10 Tf 72 270.60000000000025 Td (Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025) Tj ET
+BT /F1 10 Tf 80 258.10000000000025 Td (- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework,) Tj ET
+BT /F1 10 Tf 86 246.30000000000024 Td (where they now run in the default benchmark for every release.) Tj ET
+BT /F1 10 Tf 80 234.50000000000023 Td (- Evaluation reports produced by the pipeline were reviewed and improved, and the resulting) Tj ET
+BT /F1 10 Tf 86 222.70000000000022 Td (fixes were adopted as part of the project.) Tj ET
+BT /F1 10 Tf 80 210.9000000000002 Td (- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their) Tj ET
+BT /F1 10 Tf 86 199.1000000000002 Td (modules with layered instrumentation; each was fixed upstream.) Tj ET
+BT /F1 12 Tf 72 182.30000000000018 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 168.30000000000018 Td (Programming: Python, TypeScript, SQL, Bash, Git) Tj ET
+BT /F1 10 Tf 72 155.80000000000018 Td (ML & Agents: PyTorch, LoRA, GRPO, LangGrpah, RAG, agent evaluation) Tj ET
 endstream
 endobj
 xref
@@ -79,5 +75,5 @@ xref
 trailer
 <</Size 6/Root 1 0 R>>
 startxref
-6149
+5702
 %%EOF

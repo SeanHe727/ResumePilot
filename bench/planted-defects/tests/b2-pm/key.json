@@ -2,14 +2,14 @@
   {
     "id": "D2",
     "type": "D2",
-    "line": "Improved conversion by 35% by testing a new checkout flow and shipping it to all merchants.",
+    "line": "Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
     "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
   },
   {
     "id": "D3",
     "type": "D3",
-    "line": "Single-handedly defined the product vision for the entire company and set the direction every product team followed.",
-    "defect": "Implausible overclaim for the role's level: sole credit for something company-wide."
+    "line": "Set the product strategy for the payments platform, adopted across all merchant-facing teams.",
+    "defect": "Overclaim for the role's level: an intern claiming to have designed or set something used company-wide."
   },
   {
     "id": "D7",
@@ -20,43 +20,43 @@
   {
     "id": "D9",
     "type": "D9",
-    "line": "Coordinates the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
-    "defect": "Present tense in a role that has already ended."
+    "line": "Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "defect": "A present-tense verb in a role that has already ended."
   },
   {
     "id": "D10",
     "type": "D10",
-    "line": "Jun 2018 graduation to Nov 2019",
-    "defect": "An unexplained gap between graduating (Jun 2018) and the first role (starting Nov 2019)."
+    "line": "Jun 2018 graduation to Mar 2019",
+    "defect": "An unexplained gap between graduating (Jun 2018) and the first role (starting Mar 2019)."
   },
   {
     "id": "D12",
     "type": "D12",
-    "line": "Redesigned merchant onboarding around a single verification step and cut median time to first payment from 9 days to 4 across 2,300 new merchants.",
+    "line": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
     "defect": "The same achievement is claimed in two different entries; it also appears under Harbor Payments."
   },
   {
     "id": "D13",
     "type": "D13",
-    "line": "Managed a team of 40 people across product and engineering and owned the company's P&L for the payments business.",
+    "line": "Led a team of 6 engineers and designers to deliver the dispute self-service launch end to end.",
     "defect": "Responsibilities far beyond the job title (Associate Product Manager Intern)."
   },
   {
     "id": "D14",
     "type": "D14",
-    "line": "MBA Consulting Practicum | May 2024 - Jan 2024",
-    "defect": "Impossible dates: the end date is before the start date (May 2024 - Jan 2024)."
+    "line": "MBA Consulting Practicum | May 2024 - Apr 2024",
+    "defect": "Impossible dates: the end date is before the start date (May 2024 - Apr 2024)."
   },
   {
     "id": "D19",
     "type": "D19",
-    "line": "Age: 29 | Marital status: Married | Hobbies: watching TV, shopping",
-    "defect": "Irrelevant personal information (age, marital status, hobbies)."
+    "line": "Date of birth: 2 Nov 1996 | Nationality: American",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
   },
   {
     "id": "D20",
     "type": "D20",
-    "line": "Product: roadmaping, A/B testing, user interveiws, PRDs, SQL / Tools: Jira, Figma, Amplitude, Excel",
-    "defect": "Spelling mistakes in the skills section."
+    "line": "Product: roadmaping, A/B testing, user interviews, PRDs, SQL",
+    "defect": "A spelling mistake in the skills section."
   }
 ]

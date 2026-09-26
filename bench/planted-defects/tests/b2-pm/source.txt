@@ -1,31 +1,31 @@
 Riley Chen
 +1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen
-Age: 29 | Marital status: Married | Hobbies: watching TV, shopping
+Date of birth: 2 Nov 1996 | Nationality: American
 EDUCATION
 Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025
 Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018
 EXPERIENCE
-Crestline Logistics | Operations Analyst | Lake City, USA | Nov 2019 - Aug 2023
+Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
 - Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.
 - Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.
-- Coordinates the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.
+- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.
 - Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.
 Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
 - Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
-- Improved conversion by 35% by testing a new checkout flow and shipping it to all merchants.
+- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.
 - Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.
 - Interviewed 25 merchants to size the chargeback problem and turned the findings into the business case that set the next quarter's roadmap priority.
-- Single-handedly defined the product vision for the entire company and set the direction every product team followed.
-- Managed a team of 40 people across product and engineering and owned the company's P&L for the payments business.
+- Set the product strategy for the payments platform, adopted across all merchant-facing teams.
+- Led a team of 6 engineers and designers to deliver the dispute self-service launch end to end.
 PROJECTS
 Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
 - Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.
 - Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60 user interviews showed students missed pickup windows.
 - Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and removing the need for staff to cover gaps.
-MBA Consulting Practicum | Team Lead | Regional Hospital Network | May 2024 - Jan 2024
+MBA Consulting Practicum | Team Lead | Regional Hospital Network | May 2024 - Apr 2024
 - Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.
 - Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form from 5 pages to 2 without losing required fields.
-- Redesigned merchant onboarding around a single verification step and cut median time to first payment from 9 days to 4 across 2,300 new merchants.
+- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
 SKILLS
-Product: roadmaping, A/B testing, user interveiws, PRDs, SQL
+Product: roadmaping, A/B testing, user interviews, PRDs, SQL
 Tools: Jira, Figma, Amplitude, Excel

@@ -2,20 +2,20 @@
   {
     "id": "D1",
     "type": "D1",
-    "line": "Responsible for the monitoring dashboards of the diagnostics service and for supporting the on-call team with weekly reports.",
-    "defect": "Duty-style opener ('Responsible for') naming an assigned duty, with no action taken and no outcome."
+    "line": "Owned the diagnostics service's monitoring dashboards across two major releases and the on-call rotation that used them.",
+    "defect": "Duty-style framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
   },
   {
     "id": "D2",
     "type": "D2",
-    "line": "Improved model performance by 35% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "line": "Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
     "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
   },
   {
     "id": "D6",
     "type": "D6",
-    "line": "I worked on improving the latency of our API and I also wrote tests for it, which I think made the service a lot faster for users.",
-    "defect": "First-person pronoun and a conversational full sentence, with a weak verb and no result."
+    "line": "Reduced p95 API latency from 420 ms to 180 ms; my changes added a request cache and batched sensor reads, with load tests to keep it there.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
   },
   {
     "id": "D7",
@@ -26,37 +26,37 @@
   {
     "id": "D9",
     "type": "D9",
-    "line": "Builds and maintains the CI pipeline for the perception team's model releases and adds automated regression checks to every build.",
-    "defect": "Present tense in a role that has already ended."
+    "line": "Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "defect": "A present-tense verb in a role that has already ended."
   },
   {
     "id": "D13",
     "type": "D13",
-    "line": "Managed a team of 12 engineers across two offices and set the company's AI strategy for the next fiscal year.",
+    "line": "Led a team of 4 engineers to design and ship the triage branch's escalation workflow for the on-call reviewers.",
     "defect": "Responsibilities far beyond the job title (Machine Learning Engineering Intern)."
   },
   {
     "id": "D15",
     "type": "D15",
-    "line": "Worked with various stakeholders across multiple projects to support a range of initiatives and help drive them forward.",
+    "line": "Supported cross-functional teams on evaluation initiatives for the open-source framework, improving overall quality and consistency.",
     "defect": "Vague scope: no concrete project, action or result."
   },
   {
     "id": "D18",
     "type": "D18",
-    "line": "Led the Project Falcon migration to NGX on the KRT stack, coordinating the cutover of the Orion and Vega pipelines.",
+    "line": "Moved the runtime's evaluation jobs onto the KRT deployment stack, cutting the time to rerun a full benchmark from 40 to 12 minutes.",
     "defect": "Unexplained internal code names or acronyms that an outside reader cannot interpret."
   },
   {
     "id": "D19",
     "type": "D19",
-    "line": "Age: 26 | Marital status: Single | Hobbies: watching TV, sleeping in",
-    "defect": "Irrelevant personal information (age, marital status, hobbies)."
+    "line": "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
   },
   {
     "id": "D20",
     "type": "D20",
-    "line": "Programming: Pyhton, TypeScirpt, SQL, Bash, Git / ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation",
-    "defect": "Spelling mistakes in the skills section."
+    "line": "ML & Agents: PyTorch, LoRA, GRPO, LangGrpah, RAG, agent evaluation",
+    "defect": "A spelling mistake in the skills section."
   }
 ]

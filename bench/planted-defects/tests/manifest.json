@@ -3,6 +3,7 @@
     "id": "b1-ce",
     "batch": 1,
     "base": "ce",
+    "variant": "obvious",
     "defects": [
       "D1",
       "D2",
@@ -21,6 +22,7 @@
     "id": "b1-pm",
     "batch": 1,
     "base": "pm",
+    "variant": "obvious",
     "defects": [
       "D4",
       "D8",
@@ -39,6 +41,7 @@
     "id": "b1-quant",
     "batch": 1,
     "base": "quant",
+    "variant": "obvious",
     "defects": [
       "D3",
       "D4",
@@ -57,6 +60,7 @@
     "id": "b2-ce",
     "batch": 2,
     "base": "ce",
+    "variant": "subtle",
     "defects": [
       "D1",
       "D2",
@@ -69,12 +73,13 @@
       "D17",
       "D20"
     ],
-    "bottom": 96
+    "bottom": 143
   },
   {
     "id": "b2-pm",
     "batch": 2,
     "base": "pm",
+    "variant": "subtle",
     "defects": [
       "D2",
       "D3",
@@ -87,12 +92,13 @@
       "D19",
       "D20"
     ],
-    "bottom": 166
+    "bottom": 154
   },
   {
     "id": "b2-quant",
     "batch": 2,
     "base": "quant",
+    "variant": "subtle",
     "defects": [
       "D1",
       "D4",
@@ -105,12 +111,13 @@
       "D17",
       "D18"
     ],
-    "bottom": 107
+    "bottom": 155
   },
   {
     "id": "b3-ce",
     "batch": 3,
     "base": "ce",
+    "variant": "subtle",
     "defects": [
       "D1",
       "D2",
@@ -129,6 +136,7 @@
     "id": "b3-pm",
     "batch": 3,
     "base": "pm",
+    "variant": "subtle",
     "defects": [
       "D3",
       "D4",
@@ -141,12 +149,13 @@
       "D16",
       "D17"
     ],
-    "bottom": 107
+    "bottom": 155
   },
   {
     "id": "b3-quant",
     "batch": 3,
     "base": "quant",
+    "variant": "subtle",
     "defects": [
       "D2",
       "D7",
@@ -159,6 +168,6 @@
       "D18",
       "D19"
     ],
-    "bottom": 107
+    "bottom": 143
   }
 ]

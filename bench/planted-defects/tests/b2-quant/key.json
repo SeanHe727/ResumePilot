@@ -2,61 +2,61 @@
   {
     "id": "D1",
     "type": "D1",
-    "line": "Responsible for the lab's simulation pipeline and for helping other students run their experiments on the shared cluster.",
-    "defect": "Duty-style opener ('Responsible for') naming an assigned duty, with no action taken and no outcome."
+    "line": "Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "defect": "Duty-style framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
   },
   {
     "id": "D4",
     "type": "D4",
-    "line": "Tested the signal on six years of tick-level data using purged walk-forward splits with an embargo, so that no future information leaked into training.",
+    "line": "Ran the signal through purged walk-forward validation on six years of tick data, with an embargo so nothing from the future leaked in.",
     "defect": "Duplicate of another bullet in the same entry, restated in other words: Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so no look-ahead information leaked into training."
   },
   {
     "id": "D5",
     "type": "D5",
-    "line": "Leveraged cutting-edge quantitative synergies and next-generation modeling paradigms to unlock alpha-driven innovation.",
-    "defect": "Empty buzzwords with no concrete action, subject or result."
+    "line": "Pioneered a data-driven, research-first approach to volatility modeling that delivered robust, actionable insights.",
+    "defect": "Generic claims with no concrete action, subject or result."
   },
   {
     "id": "D6",
     "type": "D6",
-    "line": "I worked on some statistics for a paper and I also helped my advisor with the math, which I think made the paper better.",
-    "defect": "First-person pronoun and a conversational full sentence, with a weak verb and no result."
+    "line": "Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
   },
   {
     "id": "D8",
     "type": "D8",
-    "line": "Infrastructure: Kubernetes, Haskell, Kafka",
-    "defect": "Skills listed with no supporting evidence anywhere in the experience or projects: Kubernetes, Haskell, Kafka."
+    "line": "Programming: Python, R, SQL, C++, Kafka",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects: Kafka."
   },
   {
     "id": "D11",
     "type": "D11",
-    "line": "Reduced forecast error from 0.20 to 0.25, a 40% improvement, with a new asymmetric loss function for volatility spikes.",
+    "line": "Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
     "defect": "The numbers contradict each other: the stated change does not match the before and after values."
   },
   {
     "id": "D15",
     "type": "D15",
-    "line": "Worked with various people on multiple aspects of the competition to help the team make progress.",
+    "line": "Collaborated with teammates across multiple stages of the competition, contributing to the team's overall results.",
     "defect": "Vague scope: no concrete project, action or result."
   },
   {
     "id": "D16",
     "type": "D16",
-    "line": "Was involved in the process of helping to support the validation work that was being done by the team during the competition.",
-    "defect": "Passive, filler-heavy wording ('was involved in the process of helping to ...')."
+    "line": "Validation leakage was identified and reduced through the use of time-grouped folds, and the score gap was closed.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
   },
   {
     "id": "D17",
     "type": "D17",
-    "line": "Released an open-source R package for high-dimensional covariance estimation while also maintaining the lab website, organizing the weekly reading group, grading for two courses, reviewing papers for my advisor, helping new students set up the cluster, attending several conferences, and writing documentation for other lab tools, which together increased downloads, improved lab productivity, and made the group's research more visible to the broader statistics community.",
-    "defect": "An overlong bullet (70+ words) packing many unrelated activities into one line."
+    "line": "Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
   },
   {
     "id": "D18",
     "type": "D18",
-    "line": "Ported the VX-9 stack onto QRT under the Helix program, coordinating with the Atlas and Borealis teams.",
+    "line": "Ran the robustness study on the VX9 backtest harness and wrote up the results as a 12-page working paper.",
     "defect": "Unexplained internal code names or acronyms that an outside reader cannot interpret."
   }
 ]

@@ -11,41 +11,37 @@ Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs
 90% of gross returns and lowering estimated slippage by a third.
 - Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo
 period, so no look-ahead information leaked into training.
-- Tested the signal on six years of tick-level data using purged walk-forward splits with an
-embargo, so that no future information leaked into training.
+- Ran the signal through purged walk-forward validation on six years of tick data, with an
+embargo so nothing from the future leaked in.
 - Presented the signal, its capacity estimate and failure cases to the portfolio managers, who
 approved a small live allocation for the next quarter.
 - Documented the backtest assumptions, transaction-cost model and known failure regimes in the
 desk’s research wiki for future interns.
 Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
-- Responsible for the lab’s simulation pipeline and for helping other students run their
-experiments on the shared cluster.
-- I worked on some statistics for a paper and I also helped my advisor with the math, which I
-think made the paper better.
+- Owned the lab’s simulation pipeline on the shared cluster and the reproducibility checks
+other students relied on.
+- Derived a variance bound for a sparse regression estimator; my proof tightens the previous
+bound by a log factor and is now Section 3 of a paper under review at JASA.
 - Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets
 and earning a 4.8/5 teaching rating.
-- Released an open-source R package for high-dimensional covariance estimation while also
-maintaining the lab website, organizing the weekly reading group, grading for two courses,
-reviewing papers for my advisor, helping new students set up the cluster, attending several
-conferences, and writing documentation for other lab tools, which together increased
-downloads, improved lab productivity, and made the group’s research more visible to the
-broader statistics community.
+- Released an open-source R package for high-dimensional covariance estimation while
+maintaining the lab’s shared cluster, organizing the weekly reading group and grading for
+two courses, which was downloaded 3,000 times in its first year.
 PROJECTS
 Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
-- Leveraged cutting-edge quantitative synergies and next-generation modeling paradigms to
-unlock alpha-driven innovation.
-- Reduced forecast error from 0.20 to 0.25, a 40% improvement, with a new asymmetric loss
-function for volatility spikes.
-- Ported the VX-9 stack onto QRT under the Helix program, coordinating with the Atlas and
-Borealis teams.
+- Pioneered a data-driven, research-first approach to volatility modeling that delivered
+robust, actionable insights.
+- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility
+features and an asymmetric loss.
+- Ran the robustness study on the VX9 backtest harness and wrote up the results as a 12-page
+working paper.
 Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
-- Worked with various people on multiple aspects of the competition to help the team make
-progress.
-- Was involved in the process of helping to support the validation work that was being done by
-the team during the competition.
+- Collaborated with teammates across multiple stages of the competition, contributing to the
+team’s overall results.
+- Validation leakage was identified and reduced through the use of time-grouped folds, and the
+score gap was closed.
 - Wrote the team’s feature-selection script using permutation importance, trimming 900
 candidate features to 300 without losing validation score.
 SKILLS
-Programming: Python, R, SQL, C++
+Programming: Python, R, SQL, C++, Kafka
 Methods: time-series econometrics, Bayesian inference, gradient boosting, PyTorch
-Infrastructure: Kubernetes, Haskell, Kafka
