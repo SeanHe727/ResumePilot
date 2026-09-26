@@ -1,77 +1,74 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/A.md",
-  "recall": 9,
+  "recall": 8,
   "found": [
     "W2",
     "W6",
     "A2",
     "A3",
-    "S1",
     "S3",
     "T1",
     "N1",
     "N4"
   ],
   "coverage": true,
-  "suggestions": 26,
-  "words": 1446,
-  "quotes": 5,
-  "grounded": 2,
+  "suggestions": 30,
+  "words": 2666,
+  "quotes": 14,
+  "grounded": 13,
   "rewrites": 0,
   "inventedNumbers": [],
-  "falsePositives": [
-    "The feature-store and intern-wiki bullets describe substantial work, but should indicate adoption or practical effect—such as users, projects supported, time saved, or reduced rework—if you have those figures. (The feature-store bullet already states the team reused it in two later projects.)"
-  ],
+  "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3956,
-    "completion_tokens": 14862,
-    "total_tokens": 18818,
+    "prompt_tokens": 5723,
+    "completion_tokens": 14879,
+    "total_tokens": 20602,
     "prompt_tokens_details": {
-      "cached_tokens": 1792
+      "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 14401
+      "reasoning_tokens": 14472
     },
-    "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 2164
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3803
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove the personal pronoun from the proof bullet."
+        "evidence": "Remove or revise the personal pronoun in my proof."
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "correct 'time-series econometircs' to 'time-series econometrics.'"
+        "evidence": "time-series econometircs — the skill is misspelled; it should be time-series econometrics."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "Changing directional hit rate from 52% to 58% should be described as a 6-percentage-point increase, not simply a 6% improvement."
+        "evidence": "52% to 58% is a six-percentage-point increase, not a 6% improvement."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "reducing error from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+        "evidence": "the change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
       },
       {
         "id": "S1",
-        "found": true,
-        "evidence": "lead with the reusable feature-store outcome rather than dense implementation details"
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "Separate these or remove lower-priority responsibilities so the research-software contribution is not buried."
+        "evidence": "separate or remove the unrelated duties"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "multiplying a daily Sharpe ratio by 252 is not the standard annualization method."
+        "evidence": "multiplying a daily Sharpe ratio by 252 is flagged as incorrect; use square root of 252."
       },
       {
         "id": "T3",
@@ -81,19 +78,17 @@
       {
         "id": "N1",
         "found": true,
-        "evidence": "Reduce the prominence of the bakery role. Move it to an Additional Experience section below the quantitative research and projects, or place it last."
+        "evidence": "Move Sunrise Bakery into an Additional Experience section and compress it."
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "no supporting entries for SQL, C++, Kafka, Bayesian inference, or time-series econometrics."
+        "evidence": "SQL, C++, and Kafka are listed without corresponding experience or project evidence."
       }
     ],
     "coverage": true,
-    "suggestions": 26,
+    "suggestions": 30,
     "rewrites": [],
-    "falsePositives": [
-      "The feature-store and intern-wiki bullets describe substantial work, but should indicate adoption or practical effect—such as users, projects supported, time saved, or reduced rework—if you have those figures. (The feature-store bullet already states the team reused it in two later projects.)"
-    ]
+    "falsePositives": []
   }
 }

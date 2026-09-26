@@ -1,6 +1,6 @@
 {
   "file": "bench/planted-defects/tests/b1-ce/out/A.md",
-  "recall": 8,
+  "recall": 9,
   "found": [
     "W1",
     "W5",
@@ -8,67 +8,68 @@
     "A3",
     "S1",
     "S3",
+    "T1",
     "N2",
     "N4"
   ],
   "coverage": true,
-  "suggestions": 24,
-  "words": 1416,
+  "suggestions": 20,
+  "words": 2365,
   "quotes": 9,
-  "grounded": 7,
+  "grounded": 8,
   "rewrites": 1,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3833,
-    "completion_tokens": 13261,
-    "total_tokens": 17094,
+    "prompt_tokens": 5177,
+    "completion_tokens": 8881,
+    "total_tokens": 14058,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 12947
+      "reasoning_tokens": 8385
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 2041
+    "prompt_cache_miss_tokens": 3385
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "Ownership of monitoring dashboards: add the operational result."
+        "evidence": "describes responsibility and scope but not the operational improvement it produced"
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "“AI-first engineering practices” and “improving outcomes for downstream teams” are broad."
+        "evidence": "The platform-ownership claim is too generic to show what you introduced or how it helped downstream teams."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "71% to 83% is a 12-percentage-point increase, not a 12% increase."
+        "evidence": "The task-completion result should be expressed in percentage points rather than as a percentage increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "900 ms to 600 ms is a 33.3% reduction, not 50%."
+        "evidence": "The latency percentage is arithmetically incorrect."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "s2:e1:b3: The sequence \"grouped tool-use rollouts ... composite reward ... GRPO loop ... frozen SFT reference\" names many components without identifying the decisive training change or its measured effect."
+        "evidence": "begin with an active subject and verb, such as 'Reduced end-to-end latency 5% by using grouped tool-use rollouts, a composite reward, and a GRPO loop with a frozen SFT reference.'"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "Separate the migration from the logging, onboarding, and on-call details."
+        "evidence": "The migration bullet stacks several unrelated actions together"
       },
       {
         "id": "T1",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "Standard GRPO compares multiple completions for the same prompt; with one rollout, the within-prompt relative advantage is zero or undefined"
       },
       {
         "id": "T3",
@@ -78,18 +79,18 @@
       {
         "id": "N2",
         "found": true,
-        "evidence": "Reverse the Experience entries"
+        "evidence": "The Experience entries are not in reverse chronological order."
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "The skills section lists technologies that are not demonstrated elsewhere in the resume, including ... Kubernetes."
+        "evidence": "the resume’s entries do not explicitly demonstrate several listed skills, including SQL, Bash, Git, Python, PyTorch, LoRA, LangGraph, RAG, and Kubernetes."
       }
     ],
     "coverage": true,
-    "suggestions": 24,
+    "suggestions": 20,
     "rewrites": [
-      "adopted as the team's runbook"
+      "Reduced end-to-end latency 5% by using grouped tool-use rollouts, a composite reward, and a GRPO loop with a frozen SFT reference."
     ],
     "falsePositives": []
   }

@@ -14,6 +14,10 @@ describe('quotes checked against the page', () => {
     expect(unquoted(draft('Cut p99 latency … a 25% drop'), page)).toEqual([]);
   });
 
+  it('accepts quotes joined by a semicolon, and dates written with another dash', () => {
+    expect(unquoted(draft('a 25% drop; Trained a GRPO policy', 'Jun 2018 – Mar 2019'), `${page}\nJun 2018 - Mar 2019`)).toEqual([]);
+  });
+
   it('names a quote the page does not have', () => {
     expect(unquoted(draft('a 33% drop', 'Trained a GRPO policy'), page)).toEqual(['a 33% drop']);
   });

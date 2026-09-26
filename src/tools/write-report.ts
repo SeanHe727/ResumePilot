@@ -96,8 +96,13 @@ export async function writeFullReport(
 
   // What the content reader found strong, verbatim and by short name. The
   // writer picks up to three by name; the words stay the reader's.
+  // Not from a line the reader found something wrong on. Measured: a line
+  // whose percentage did not match its own figures opened the report as the
+  // first thing to fix and was praised two lines further down.
   const strengthsOffered = current.content.current.flatMap((entry) =>
-    entry.bullets.flatMap((bullet) => (bullet.strengths ?? []).map((text) => ({ bulletId: bullet.bulletId, text }))),
+    entry.bullets
+      .filter((bullet) => !bullet.issues.some((issue) => issue.kind === 'wrong'))
+      .flatMap((bullet) => (bullet.strengths ?? []).map((text) => ({ bulletId: bullet.bulletId, text }))),
   );
   const strengthByName = new Map<string, { bulletId: string; text: string }>(
     strengthsOffered.map((s, i) => [`s${i + 1}`, s]),
@@ -199,7 +204,12 @@ export async function writeFullReport(
     // Every point is about words on the page, and says which. A quote that is
     // not there is a point about a résumé nobody sent: measured, blind judges
     // marked the report down for small misreadings of the line it named.
-    const page = [...entries.values()].flatMap((e) => [...e.headerLines, ...e.bullets.map((b) => b.text)]).join('\n');
+    // The file as read, and each line as it now stands: a revision changes a
+    // line, and a point can be about the top of the page no entry holds.
+    const page = [
+      state.resume?.rawText ?? '',
+      ...[...entries.values()].flatMap((e) => [...e.headerLines, ...e.bullets.map((b) => b.text)]),
+    ].join('\n');
     const missing = unquoted(firstParsed, page);
     const quoteNote =
       missing.length > 0
@@ -453,19 +463,20 @@ export function pageWords(parsed: Record<string, unknown> | null): number {
 
 /**
  * The evidence quotes a write-up gives that the page does not contain.
- * Compared loosely — case, spacing, quote marks and a trailing ellipsis — and
- * piece by piece where the quote elides with one.
+ * Compared loosely — case, spacing, quote marks and dashes — and piece by
+ * piece where the quote joins several with an ellipsis or a semicolon.
  */
 export function unquoted(parsed: Record<string, unknown> | null, page: string): string[] {
   const norm = (t: string) =>
-    t.toLowerCase().replace(/[“”"‘’']/g, '').replace(/\s+/g, ' ').trim();
+    t.toLowerCase().replace(/[“”"‘’']/g, '').replace(/[‐-―−]/g, '-').replace(/\s+/g, ' ').trim();
   const text = norm(page);
   const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
   const out: string[] = [];
   for (const section of sections as Array<{ points?: Array<{ evidence?: unknown }> }>) {
     for (const point of section.points ?? []) {
       if (typeof point.evidence !== 'string' || !point.evidence.trim()) continue;
-      const pieces = point.evidence.split(/…|\.\.\./).map(norm).filter(Boolean);
+      // Several quotes in one are joined with a semicolon or an ellipsis.
+      const pieces = point.evidence.split(/…|\.\.\.|;/).map(norm).filter(Boolean);
       if (pieces.some((piece) => !text.includes(piece))) out.push(point.evidence.trim());
     }
   }

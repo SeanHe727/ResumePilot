@@ -1,8 +1,9 @@
 {
   "file": "bench/planted-defects/tests/b1-pm/out/A.md",
-  "recall": 8,
+  "recall": 9,
   "found": [
     "W3",
+    "W4",
     "A1",
     "A4",
     "S2",
@@ -12,56 +13,55 @@
     "N5"
   ],
   "coverage": true,
-  "suggestions": 18,
-  "words": 1247,
-  "quotes": 5,
+  "suggestions": 24,
+  "words": 2418,
+  "quotes": 4,
   "grounded": 4,
   "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [
-    "Remove age, gender, photographs, date of birth, and nationality.",
-    "Add the user or business outcomes behind the dispute work and chargeback research."
+    "The current ordering makes the four-year logistics role the first substantial experience after education (false: Harbor Payments is listed first under Experience)."
   ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 3460,
-    "completion_tokens": 16386,
-    "total_tokens": 19846,
+    "prompt_tokens": 4910,
+    "completion_tokens": 17261,
+    "total_tokens": 22171,
     "prompt_tokens_details": {
       "cached_tokens": 1664
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 15964
+      "reasoning_tokens": 16925
     },
     "prompt_cache_hit_tokens": 1664,
-    "prompt_cache_miss_tokens": 1796
+    "prompt_cache_miss_tokens": 3246
   },
   "verdict": {
     "defects": [
       {
         "id": "W3",
         "found": true,
-        "evidence": "s2:e1:b2: 'Coordinated ... and prepares' mixes past and present tense"
+        "evidence": "prepares is inconsistent with the completed role"
       },
       {
         "id": "W4",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "the passive wording further obscures ownership"
       },
       {
         "id": "A1",
         "found": true,
-        "evidence": "Clarify the 35% conversion baseline, unit, and merchant comparison."
+        "evidence": "does not identify whether 35% is relative lift or percentage points"
       },
       {
         "id": "A4",
         "found": true,
-        "evidence": "Replace the unrelated merchant-onboarding bullet with the hospital project’s actual outcome. The mismatch breaks the entry’s narrative and suggests copied content."
+        "evidence": "The practicum contains a merchant-onboarding bullet that duplicates Harbor Payments and conflicts with the stated hospital-network client."
       },
       {
         "id": "S2",
         "found": true,
-        "evidence": "the hospital weekly-sessions bullet describe recurring work but do not show what changed as a result"
+        "evidence": "Weekly sessions establish stakeholder engagement, but they do not reveal whether the candidate analyzed demand, mapped bottlenecks, or facilitated a scheduling decision."
       },
       {
         "id": "S4",
@@ -71,30 +71,29 @@
       {
         "id": "T2",
         "found": true,
-        "evidence": "s2:e0:b4: 'merchants who opted into the new flow' introduces a self-selection problem"
+        "evidence": "does not establish that self-selection caused the result"
       },
       {
         "id": "T4",
         "found": true,
-        "evidence": "Replace the adjusted late-delivery claim with an unadjusted rate or shipment comparison. Changing the KPI definition does not prove faster deliveries."
+        "evidence": "Excluding weather-delayed shipments can lower the reported late-delivery rate without making deliveries faster or more reliable"
       },
       {
         "id": "N3",
         "found": true,
-        "evidence": "Move Experience above Education and explain the eight-month post-graduation gap."
+        "evidence": "apparent gap from June 2018 to March 2019"
       },
       {
         "id": "N5",
         "found": true,
-        "evidence": "Remove personal demographic information. The format review identified “Date of birth” and “Nationality.”"
+        "evidence": "personal details a reader is not meant to weigh are left off by convention — 'Date of birth: 2 Nov 1996 | Nationality: American'"
       }
     ],
     "coverage": true,
-    "suggestions": 18,
+    "suggestions": 24,
     "rewrites": [],
     "falsePositives": [
-      "Remove age, gender, photographs, date of birth, and nationality.",
-      "Add the user or business outcomes behind the dispute work and chargeback research."
+      "The current ordering makes the four-year logistics role the first substantial experience after education (false: Harbor Payments is listed first under Experience)."
     ]
   }
 }

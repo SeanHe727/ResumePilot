@@ -8,7 +8,7 @@ const ask = `Please review my resume and tell me what to change.\n\n${resume}`;
 const ARMS: Record<string, { model: string; instructions?: string }> = {
   B: { model: 'gpt-5.6-luna' },
   C: { model: 'gpt-5.6-sol' },
-  D: { model: 'gpt-5.6-luna', instructions: readFileSync('bench/planted-defects/skill-tech-resume-optimizer.md', 'utf8') },
+  D: { model: 'gpt-5.6-luna', instructions: readFileSync('bench/planted-defects/skill-critique-framework.md', 'utf8') },
 };
 const cfg = ARMS[arm!]!;
 const client = new OpenAI();

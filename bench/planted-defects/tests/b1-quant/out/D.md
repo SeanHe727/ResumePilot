@@ -1,287 +1,559 @@
 # Resume Review
 
-You have strong quantitative research experience and unusually good metrics. The main issues are **targeting, technical credibility, redundancy, and a few factual/wording errors**.
+## Overall assessment
 
-## Highest-priority changes
+You have strong raw material for **quantitative research, systematic trading, or quantitative developer roles**, especially:
 
-### 1. Remove the incorrect Sharpe-ratio bullet
+- A Ph.D. in Statistics in progress
+- Direct quant research internship experience
+- Strong, quantified backtest results
+- Time-series, volatility, machine learning, and market microstructure work
+- Research and reproducibility experience
+- A top-2% competition result
+- An open-source package and paper under review
 
-This bullet is mathematically wrong:
+The main problem is **positioning**. The resume currently makes your most recent role—Assistant Store Manager—the most prominent item. A recruiter scanning for quant talent may initially see a retail operations candidate rather than a statistics Ph.D. with trading research experience.
+
+Your biggest improvements should be:
+
+1. Put quant/research experience before the bakery role.
+2. Remove or fix the mathematically incorrect Sharpe-ratio bullet.
+3. Add a concise summary and a more complete technical-skills section.
+4. Clarify your Ph.D. research and current status.
+5. Tighten several bullets to sound more precise and research-oriented.
+
+---
+
+## Likely reviewer perspective
+
+### Recruiter glance
+
+**Current verdict: Maybe**
+
+The degree and Northpeak internship are credible, but the first role shown is Assistant Store Manager. That creates an immediate narrative problem:
+
+> “Is this person currently pursuing quant research, or did they move into retail management?”
+
+The answer may be obvious after reading the full resume, but recruiters often do not spend that long on the first pass.
+
+### Hiring manager
+
+**Likely verdict: Interview, if the resume is repositioned**
+
+A quant hiring manager will notice the strongest parts:
+
+- Order-book imbalance signal
+- Out-of-sample testing after costs
+- Turnover and slippage reduction
+- Point-in-time feature engineering
+- HAR-RV benchmark comparisons
+- Statistical testing
+- Cluster-based simulation infrastructure
+
+They will also ask about:
+
+- Whether the 0.4 Sharpe improvement was genuinely incremental and robust
+- How transaction costs and market impact were modeled
+- Whether the volatility models avoided look-ahead leakage
+- Why you are currently working as an assistant store manager
+- What your Ph.D. research is about and why it is not listed more prominently
+
+---
+
+# Highest-priority changes
+
+## 1. Reorder the experience section
+
+Do not lead with the bakery role. Use one of these structures:
+
+### Preferred structure
+
+```text
+EDUCATION
+RESEARCH AND QUANTITATIVE EXPERIENCE
+Northpeak Capital
+Ridgeway University, Statistical Learning Lab
+SELECTED PROJECTS
+ADDITIONAL EXPERIENCE
+Sunrise Bakery
+SKILLS
+```
+
+Alternatively, keep reverse chronology but create an **Additional Experience** section for Sunrise Bakery.
+
+The bakery role should not be hidden, especially if it explains your current employment, but it should not define the top of the resume.
+
+You could reduce it to one bullet:
+
+```text
+- Managed opening operations and a six-person team while maintaining weekly labor and inventory budgets; reduced unsold production from 12% to 7%.
+```
+
+The second bullet is more useful than the first because it contains a measurable operational result.
+
+---
+
+## 2. Delete the Sharpe-ratio bullet immediately
+
+This bullet is mathematically incorrect:
 
 > Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
 
-A daily Sharpe ratio is generally annualized by multiplying by **√252**, not 252. More importantly, this bullet makes the resume look less credible and may suggest poor research hygiene.
+Annualizing a Sharpe ratio normally uses:
 
-**Delete it entirely.**
+\[
+\text{Annualized Sharpe} = \text{Daily Sharpe} \times \sqrt{252}
+\]
 
----
+Multiplying by 252 is a serious credibility problem for a statistics/quantitative research candidate. It could cause a technical reviewer to question the rest of the backtest.
 
-### 2. Correct the spelling and categorization in Skills
+If this was an actual mistake in the analysis, do not try to preserve it. Remove the bullet. If the intended statement was different, replace it with an accurate version, such as:
 
-Current:
+```text
+- Standardized daily-to-annual performance reporting using a 252-trading-day convention and square-root-of-time Sharpe annualization.
+```
 
-> Methods: time-series econometircs, Bayesian inference, gradient boosting, PyTorch
-
-Change to:
-
-> **Programming:** Python, R, SQL, C++, Kafka  
-> **Machine Learning:** PyTorch, gradient boosting, temporal convolutional networks  
-> **Statistics/Methods:** Time-series econometrics, Bayesian inference, Monte Carlo simulation, volatility modeling  
-> **Quantitative Finance:** Order-book modeling, market microstructure, backtesting, transaction-cost modeling
-
-Kafka should not be listed under Programming. Put it under **Data/Infrastructure** if you have meaningful experience with it.
-
-Also, only list Kafka if you can discuss how you used it. If not, remove it.
+Only use that replacement if it is factually true.
 
 ---
 
-### 3. Add a target-oriented summary
+## 3. Add a summary
 
-For quant research, quantitative developer, or ML research roles, a short summary would help connect the Ph.D., research, and trading experience.
+Your first page needs to immediately identify you as a quant researcher. For example:
 
-Example:
+```text
+Statistics Ph.D. candidate with quantitative research experience in market microstructure, volatility forecasting, time-series modeling, and statistical learning. Built and evaluated transaction-cost-aware signals for liquid index futures, including point-in-time feature pipelines and out-of-sample validation across 30 indices. Proficient in Python, R, SQL, PyTorch, and statistical modeling.
+```
 
-> **Statistics Ph.D. candidate with experience in quantitative research, market microstructure, time-series modeling, and statistical learning. Built and evaluated trading signals across 30 futures/index markets, developed reproducible simulation and feature pipelines, and published open-source statistical software.**
-
-Use a summary only if it is tailored to the role. For a highly academic research position, you could omit it and use the space for publications or research interests.
+Avoid saying “expert” or making claims that are not supported by the rest of the resume.
 
 ---
 
-### 4. Make the Northpeak role the centerpiece
+## 4. Clarify the Ph.D. research story
 
-This is your strongest experience, but several bullets need correction or tightening.
+Your education says:
 
-#### Current
+> Ph.D. candidate in Statistics
+
+But the research experience ends in August 2021, immediately before the Ph.D. began. The reader may wonder what you have done during the Ph.D.
+
+Add a current research entry or a brief dissertation line if truthful:
+
+```text
+Ridgeway University | Ph.D. Candidate in Statistics
+Sep 2021 – Expected May 2026
+- Research focus: statistical learning, high-dimensional inference, volatility forecasting, and time-series methods.
+- Dissertation work examines [specific problem], using [methods] to [research objective].
+```
+
+Do not invent a dissertation topic. But some explanation of your current research is essential.
+
+If the Volatility Forecasting Study is part of your doctoral work, label it accordingly rather than making it appear disconnected:
+
+```text
+Volatility Forecasting Study | Doctoral Research Project
+```
+
+---
+
+# Bullet-level recommendations
+
+## Northpeak Capital
+
+This is the strongest section and should be near the top. Several bullets can be made more precise.
+
+### Current
 
 > Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
 
-#### Improved
+### Suggested
 
-> Developed a short-horizon order-book imbalance signal for liquid index futures that improved portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.
+```text
+- Developed a short-horizon order-book imbalance signal for liquid index futures that improved the desk portfolio’s out-of-sample Sharpe by 0.40 over an 18-month backtest after transaction costs.
+```
 
-Be precise about whether it improved **portfolio Sharpe**, **strategy Sharpe**, or **incremental Sharpe**. “Added 0.4 Sharpe” can be ambiguous.
+Be careful with “improved the desk portfolio’s Sharpe.” If you mean the standalone signal’s Sharpe, say that instead. The distinction matters.
 
-#### Current
+Possible alternatives:
+
+```text
+- Developed a short-horizon order-book imbalance signal for liquid index futures with a 0.40 out-of-sample Sharpe contribution over 18 months after transaction costs.
+```
+
+Use the version that accurately reflects the analysis.
+
+### Current
 
 > Cut the signal’s daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.
 
-#### Improved
+### Suggested
 
-> Reduced daily turnover from 34% to 21% with a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by 33%.
+```text
+- Reduced signal turnover from 34% to 21% using a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by one-third.
+```
 
-This is already strong; the revised version is simply more direct.
+This is already strong; it mainly needs tightening.
 
-#### Current
+### Current
 
-> Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-M Mariano tests across the 30 indices.
+> Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.
 
-There is a typo in “Diebold-M Mariano.” It should be **Diebold–Mariano**.
+### Suggested
 
-Also, “confirmed” is too strong unless the result was statistically significant.
+```text
+- Compared forecast errors against a nested HAR-RV benchmark across 30 indices using Diebold–Mariano tests; report statistical significance or confidence levels if available.
+```
 
-#### Improved
+The current version says you used the test but not what it showed. Add the result if you can:
 
-> Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report statistical significance and p-values if available.
+```text
+- Confirmed lower forecast loss than the nested HAR-RV baseline across 30 indices using Diebold–Mariano tests, with significance at [threshold] for [number] indices.
+```
 
-For example:
+Do not add a significance claim unless you have the underlying results.
 
-> Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices, with improvements statistically significant at the 5% level in 24 markets.
-
-Only include that version if accurate.
-
-#### Current
+### Current
 
 > Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.
 
-“Joining” is incorrect here.
+Problems:
 
-#### Improved
+- “Joining” is probably a typo or grammatical error.
+- The sentence is awkward.
+- “Point-in-time” should be connected clearly to avoiding look-ahead bias.
 
-> Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.
+### Suggested
 
-If possible, include the technologies used—for example, Python, SQL, Kafka, Parquet, Spark, or a database—but only if accurate.
+```text
+- Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted in two subsequent projects.
+```
 
-#### Current
+If the feature store explicitly prevented look-ahead bias, say so:
+
+```text
+- Built a point-in-time feature store for 120 microstructure features across six venues, deduplicating late prints and versioning schemas to prevent look-ahead leakage; reused in two subsequent projects.
+```
+
+### Current
 
 > Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk’s research wiki for future interns.
 
-#### Improved
-
-> Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki, improving reproducibility for future researchers.
-
-This is a good collaboration and research-rigor bullet. Keep it.
-
----
-
-## Recommended Northpeak version
+### Suggested
 
 ```text
-Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 – Aug 2025
-• Developed a short-horizon order-book imbalance signal for liquid index futures that improved portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.
-• Reduced daily turnover from 34% to 21% with a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by 33%.
-• Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices.
-• Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.
-• Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki for future researchers.
+- Documented backtest assumptions, transaction-cost modeling, validation procedures, and known failure regimes in the desk research wiki.
 ```
 
-Use four bullets if you need to keep the resume to one page; use five if applying to quant research roles and the resume can be two pages.
+This is useful, but it should come after the technical achievements.
 
 ---
 
-## 5. Fix the project redundancies and metric inconsistency
+## Ridgeway University research experience
 
-The Volatility Forecasting Study currently says essentially the same thing three times:
+These are good bullets, but the section currently looks like an old job rather than part of your ongoing academic profile.
 
-- Beat HAR-RV by 7% on QLIKE
+### Current
+
+> Built the lab’s simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours and making runs reproducible by seed.
+
+### Suggested
+
+```text
+- Built a reproducible cluster-based simulation pipeline that reduced a 2,000-run Monte Carlo study from 3 days to 5 hours through parallel execution and seed-controlled experiments.
+```
+
+Only mention parallel execution if that is what produced the speedup.
+
+### Current
+
+> Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.
+
+### Suggested
+
+```text
+- Derived a variance bound for a sparse regression estimator that improves the prior bound by a logarithmic factor; result appears in Section 3 of a manuscript under review at the Journal of the American Statistical Association.
+```
+
+This is a strong research bullet. “My proof” is less formal than “derived” or “established.”
+
+### Current
+
+> Released an open-source R package for high-dimensional covariance estimation while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.
+
+This combines too many unrelated achievements.
+
+Split it:
+
+```text
+- Released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.
+- Maintained the lab’s shared cluster and organized its weekly statistical learning reading group.
+```
+
+You can omit the grading responsibility unless teaching is important for the target role.
+
+---
+
+# Projects
+
+The projects are relevant, but the first project repeats itself.
+
+You currently say:
+
+- Beat HAR-RV QLIKE loss by 7%
 - Cut forecast error from 0.20 to 0.15
-- Improved directional hit rate using a temporal convolutional model
+- Improved directional hit rate by 6%
 
-The second and third bullets repeat the model description. Also, reducing error from 0.20 to 0.15 is a **25% reduction**, not a 33% improvement:
+All three bullets mention the same model and dataset. Keep two or three only if they demonstrate distinct skills.
 
-\[
-(0.20 - 0.15) / 0.20 = 25\%
-\]
-
-More importantly, QLIKE loss and “forecast error” may be different metrics. Name the metric explicitly.
-
-### Recommended version
+Suggested revision:
 
 ```text
 Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 – Present
-• Trained a temporal convolutional network on realized-volatility features, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.
-• Reduced [specified error metric] from 0.20 to 0.15, a 25% improvement, using realized-volatility features and an asymmetric loss function.
-• Improved directional hit rate from 52% to 58% across 30 indices; evaluated robustness across rolling time-series splits.
+- Developed a temporal convolutional model for realized-volatility forecasting, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.
+- Reduced forecast error from 0.20 to 0.15 and improved directional hit rate from 52% to 58% using realized-volatility features and an asymmetric loss.
+- Evaluated robustness across rolling time splits and documented feature availability to avoid look-ahead bias.
 ```
 
-Avoid saying “forecast error” unless you specify whether it is RMSE, MAE, MAPE, QLIKE, or another measure.
+Only include the third bullet if you actually performed those checks. For quant roles, validation methodology is often more valuable than another performance metric.
 
-Also, “Jan 2024 – Present” should be accurate. If the project is complete, use an end date.
-
----
-
-## 6. Improve the research assistant section
-
-The current final bullet combines too many unrelated responsibilities:
-
-> Released an open-source R package... while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses...
-
-Split it into separate bullets or remove lower-value duties. The package and download count are valuable; routine grading and reading-group organization are less important for quantitative roles.
-
-### Recommended version
+Also clarify what “forecast error” means. Is it RMSE, MAE, or another metric? Use the exact metric:
 
 ```text
-Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 – Aug 2021
-• Built a reproducible simulation pipeline on a shared computing cluster, reducing a 2,000-run Monte Carlo study from 3 days to 5 hours.
-• Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; proof incorporated as Section 3 of a JASA manuscript under review.
-• Developed and released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.
-• Taught weekly graduate-probability recitations for 60 students, writing 12 problem sets and earning a 4.8/5 teaching rating.
+- Reduced out-of-sample RMSE from 0.20 to 0.15...
 ```
 
-If the JASA paper has a title, coauthors, or a public preprint, add a **Publications** section. A paper under review is especially valuable for quant research, statistics, and ML research applications.
+Do not call two different metrics “forecast error” without naming them.
 
 ---
 
-## 7. Reconsider how you present the bakery position
+## Kaggle project
 
-For a quant or technical application, this role creates an apparent career-transition question because it is your current position after a quantitative research internship.
+This is strong and should probably remain.
 
-Do not hide it, but make the context clear. Possible explanations include:
-
-- You are working temporarily while completing the Ph.D.
-- You are returning to school or between research roles.
-- The role is part-time.
-- You are seeking a transition into quantitative research.
-
-If true, label it:
-
-> **Assistant Store Manager, Part-Time**
-
-or add a short context line in the cover letter.
-
-The bullets are reasonable, but they are not very relevant to technical roles. Keep only two concise bullets:
+Suggested revision:
 
 ```text
-Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 – Present
-• Supervise opening operations and a team of six bakers and cashiers while maintaining weekly labor-budget targets.
-• Managed daily inventory counts and supplier orders, reducing unsold bread from 12% to 7% of production.
+Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 – Jun 2023
+- Placed 41st of 2,900 teams—top 2%—using a gradient-boosting ensemble over 300 engineered features.
+- Eliminated a 0.02 local-validation/leaderboard gap by switching to time-grouped cross-validation, reducing validation leakage.
+- Built a permutation-importance feature-selection pipeline that reduced 900 candidate features to 300 without lowering validation performance.
 ```
 
-Use **labor** rather than **labour** if applying to U.S. employers.
-
-If space is limited, place this role under an **Additional Experience** section after your technical experience.
+“Closed the gap” can sound like optimizing to the leaderboard. “Reduced validation leakage” is clearer.
 
 ---
 
-## 8. Add GitHub, LinkedIn, or research links
+# Skills section
 
-Your contact line currently includes:
+There is a typo:
 
-> example.com/code/mpatel
+> time-series econometircs
 
-That looks like a generic code link rather than an identifiable GitHub or portfolio URL. Use direct links:
+Correct it to:
+
+> time-series econometrics
+
+Your skills section is too short for a quant resume and the categories could be stronger.
+
+Possible structure:
+
+```text
+Programming: Python, R, SQL, C++
+Machine Learning: PyTorch, gradient boosting, feature selection, temporal convolutional networks
+Statistics: Time-series econometrics, volatility modeling, Bayesian inference, statistical learning, high-dimensional inference
+Quantitative Finance: Market microstructure, order-book signals, transaction-cost modeling, backtesting, realized volatility
+Data/Infrastructure: Kafka, Linux, Git, distributed computing, reproducible simulation
+```
+
+Only include tools you can discuss technically in an interview. If you used NumPy, pandas, scikit-learn, Jupyter, Docker, Git, Linux, or a cloud platform, include them. For quant roles, omitting common implementation tools can make the technical profile look incomplete.
+
+Also consider replacing “Methods” with “Statistical Modeling” or “Quantitative Methods.” Category names themselves help communicate fit.
+
+---
+
+# Publications and research output
+
+The under-review JASA manuscript is a major credibility signal, but it is buried inside a bullet. Add a small publications section:
+
+```text
+PUBLICATIONS
+Patel, M. et al. “[Paper title].” Under review at the Journal of the American Statistical Association.
+```
+
+Use the actual author list and title. Do not imply acceptance or publication.
+
+If your role was not sole-author, avoid language that suggests you independently conducted every part of the paper. “Derived” is appropriate for your specific contribution if accurate.
+
+You could also include:
+
+```text
+Research Software
+- Open-source R package for high-dimensional covariance estimation; 3,000 downloads in first year.
+```
+
+That may be more valuable than placing the package only in an old experience bullet.
+
+---
+
+# ATS and keyword assessment
+
+There is no job description, so an exact ATS match rate cannot be calculated. For the quant-research roles implied by your resume, you already have strong coverage of:
+
+- Statistical learning
+- Time-series modeling
+- Volatility forecasting
+- Market microstructure
+- Order-book signals
+- Backtesting
+- Transaction costs
+- Python
+- R
+- SQL
+- PyTorch
+- Gradient boosting
+- Bayesian inference
+- Feature engineering
+- Out-of-sample validation
+
+Potentially missing terms, if truthful:
+
+- NumPy
+- pandas
+- scikit-learn
+- Git
+- Linux
+- C++ development
+- Portfolio construction
+- Risk modeling
+- Market impact
+- Execution modeling
+- Distributed computing
+- Data pipelines
+- Docker or cloud infrastructure
+
+Do not add keywords merely because they are common. Add only technologies and methods you have actually used.
+
+---
+
+# Narrative and credibility issues
+
+## Current narrative
+
+The current order tells this story:
+
+1. I manage a bakery.
+2. I previously interned in quant research.
+3. I did statistics research several years ago.
+4. I have independent quant projects.
+
+That is not the story you want.
+
+## Better narrative
+
+The revised resume should tell this story:
+
+1. I am a Statistics Ph.D. candidate.
+2. I conduct quantitative research in market microstructure, volatility, and statistical learning.
+3. I have direct experience building cost-aware trading signals.
+4. I validate models rigorously out of sample.
+5. I can build reproducible research infrastructure.
+6. I also have measurable operational and leadership experience.
+
+That narrative is much more compelling for quant research roles.
+
+---
+
+# Suggested section order
 
 ```text
 Morgan Patel
-Metro City, USA | +1 (555) 010-4410 | morgan.patel@example.com
-github.com/mpatel | linkedin.com/in/morganpatel | morganpatel.github.io
-```
+Contact information and GitHub/portfolio
 
-For your profile and projects, include links to:
-
-- The R package
-- The volatility forecasting repository
-- The Kaggle profile
-- A Google Scholar profile or publication/preprint
-- A technical portfolio, if available
-
-Do not include links to private or inaccessible repositories.
-
----
-
-# Suggested overall structure
-
-For quant research, quantitative developer, or ML roles:
-
-```text
-NAME AND CONTACT
 SUMMARY
-TECHNICAL SKILLS
-EXPERIENCE
-PROJECTS / RESEARCH
-PUBLICATIONS
+
 EDUCATION
+
+QUANTITATIVE RESEARCH EXPERIENCE
+Northpeak Capital
+Ridgeway University, Statistical Learning Lab
+
+SELECTED PROJECTS
+Volatility Forecasting Study
+Kaggle Market Prediction Competition
+
+PUBLICATIONS / RESEARCH SOFTWARE
+
+ADDITIONAL EXPERIENCE
+Sunrise Bakery
+
+TECHNICAL SKILLS
 ```
 
-For an academic or research-heavy role:
-
-```text
-NAME AND CONTACT
-RESEARCH INTERESTS
-EDUCATION
-RESEARCH EXPERIENCE
-PUBLICATIONS
-PROJECTS
-TEACHING
-TECHNICAL SKILLS
-```
-
-Your Ph.D. should likely be listed before work experience if applying to research-oriented positions.
+If the resume must fit on two pages, combine Publications and Research Software or keep them as one compact section.
 
 ---
 
-## Main issues to fix before submitting
+# Eight-dimension score
 
-- Delete the incorrect Sharpe annualization bullet.
-- Correct **econometrics** spelling.
-- Correct **Diebold–Mariano** spelling.
-- Change “Joining 120...” to “Joined 120...”
-- Correct 0.20 to 0.15 from **33%** to **25%** improvement.
-- Specify the exact error metric in the forecasting project.
-- Remove repetitive project bullets.
-- Clarify whether the Northpeak Sharpe improvement is portfolio, strategy, or incremental Sharpe.
-- Add statistical significance or p-values for Diebold–Mariano tests if available.
-- Add direct GitHub/LinkedIn/research links.
-- Explain or de-emphasize the current bakery role for technical applications.
-- Add a publications section if the JASA paper or other research is publicly available.
+These scores assume a quantitative research or systematic trading target, not a specific job description.
 
-Overall, the resume has a strong foundation for **quantitative research, quantitative development, statistical machine learning, and financial data science**. Its biggest weakness is not lack of achievement; it is that a few imprecise or incorrect statements could undermine an otherwise highly technical profile.
+| Dimension | Score | Comments |
+|---|---:|---|
+| Target-keyword coverage | 8/10 | Strong quant vocabulary, though exact JD coverage is unknown |
+| Summary | 3/10 | No summary or immediate target-role framing |
+| Skills section | 6/10 | Relevant but sparse; typo and weak category labels |
+| Bullet quality | 7/10 | Strong metrics, but one serious mathematical error and several awkward bullets |
+| Research credibility | 8/10 | Ph.D., JASA manuscript, open-source package, strong projects |
+| Narrative coherence | 5/10 | Bakery role dominates the first impression |
+| Page/visual structure | 6/10 | Text structure appears workable, but needs hierarchy and section reordering |
+| Credibility signals | 7/10 | Good results, but backtest claims need methodological detail |
+
+**Overall: approximately 6.5–7/10 currently.**
+
+With the ordering, summary, Sharpe correction, and research-positioning changes, this could become an **8/10 quant-research resume**.
+
+---
+
+# Priority action list
+
+## Tier 1 — Do these first
+
+1. Move Sunrise Bakery to Additional Experience.
+2. Remove the incorrect Sharpe annualization bullet.
+3. Add a three-line quant-focused summary.
+4. Explain your current Ph.D. research.
+5. Correct “econometircs” and “Joining.”
+6. Add a publications/research-software section.
+7. Name the exact metrics used for “forecast error.”
+8. Clarify whether the 0.4 Sharpe figure is signal Sharpe, portfolio contribution, or portfolio improvement.
+
+## Tier 2 — Strong improvements
+
+1. Add statistical significance or confidence results to the Diebold–Mariano bullet if available.
+2. Add point-in-time and leakage-prevention language where technically accurate.
+3. Expand skills with actual tools such as pandas, NumPy, scikit-learn, Git, and Linux.
+4. Split the overloaded open-source package/cluster/reading-group bullet.
+5. Reduce repeated descriptions of the temporal convolutional model.
+
+## Tier 3 — Lower priority
+
+1. Replace “cut” with “reduced” in formal research bullets.
+2. Use consistent en dashes in dates.
+3. Standardize metric formatting: `0.40`, `7%`, `52% to 58%`.
+4. Replace `example.com/code/mpatel` with a real GitHub or portfolio link if available.
+
+---
+
+# Interview bridges
+
+| Resume evidence | How to frame it in an interview |
+|---|---|
+| Order-book imbalance signal | “I worked on extracting short-horizon predictive information from order-book state while accounting for transaction costs and execution effects.” |
+| Position smoother | “The modeling problem was not only predictive accuracy; it was converting forecasts into positions without allowing turnover and slippage to erase the edge.” |
+| Point-in-time feature store | “I treated data timing and schema versioning as part of the research problem because otherwise a backtest can look strong while containing subtle look-ahead leakage.” |
+| HAR-RV comparison | “I used HAR-RV as a transparent, domain-relevant baseline rather than evaluating the neural model in isolation.” |
+| Monte Carlo pipeline | “The cluster pipeline let us run large simulation studies reproducibly, with controlled random seeds and substantially shorter iteration cycles.” |
+| Sparse-regression proof | “The theoretical work strengthened my understanding of estimator behavior and complements my empirical model-validation experience.” |
+| Bakery management | “Although outside the technical domain, the role gave me direct experience managing people, inventory, operating constraints, and budgets under time pressure.” |
+
+The most important change is not adding more content. It is making the existing technical content appear first, removing the credibility-damaging Sharpe bullet, and making the document unmistakably read as a **statistics Ph.D. candidate pursuing quantitative research**.
