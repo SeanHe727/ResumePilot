@@ -1,0 +1,131 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/B.md",
+  "recall": 6,
+  "found": [
+    "W6",
+    "A3",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": false,
+  "suggestions": 32,
+  "words": 1454,
+  "quotes": 4,
+  "grounded": 4,
+  "rewrites": 25,
+  "inventedNumbers": [
+    "0.40",
+    "0.40",
+    "0.40",
+    "0.40"
+  ],
+  "falsePositives": [
+    "Because you are a Ph.D. candidate, education should probably appear first for research and quant roles.",
+    "“300 engineered features” and “900 candidate features” should be made consistent. Explain that 900 candidates were reduced to 300 final features.",
+    "Expected graduation date"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3951,
+    "completion_tokens": 22887,
+    "total_tokens": 26838,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 21738
+    },
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 3439
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "`time-series econometircs` → **time-series econometrics**"
+      },
+      {
+        "id": "A2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "reducing error from 0.20 to 0.15 is a **25% reduction**, not a 33% improvement"
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "the final bullet combines too many unrelated responsibilities. Split it"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "A daily Sharpe ratio is generally annualized by multiplying by **√252**, not 252."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "The bakery role is not bad, but it is currently taking space from more relevant technical work."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "Only list Kafka, C++, or distributed computing if you can discuss specific projects using them."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 32,
+    "rewrites": [
+      "time-series econometrics",
+      "Joined 120 microstructure features point-in-time...",
+      "increased the strategy’s annualized Sharpe by 0.40",
+      "produced a 0.40 incremental Sharpe contribution",
+      "over an 18-month out-of-sample backtest",
+      "Reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices using a temporal convolutional network and realized-volatility features.",
+      "Improved directional accuracy from 52% to 58% after adding an asymmetric loss function; results were evaluated using rolling, time-ordered validation.",
+      "Assistant Store Manager, Sunrise Bakery — Managed opening operations and a six-person team; reduced unsold production from 12% to 7% through improved inventory tracking and ordering.",
+      "Ph.D. Candidate, Statistics, Ridgeway University — Expected May 2026\nResearch: statistical learning, high-dimensional inference, time-series modeling\nDissertation: “…”",
+      "Patel, M. et al. “Paper Title.” Manuscript under review at *Journal of the American Statistical Association*.",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures that improved annualized out-of-sample Sharpe by 0.40 over an 18-month backtest after transaction costs.",
+      "Reduced daily turnover from 34% to 21% using a cost-aware position smoother, retaining 90% of gross returns and reducing estimated slippage by one-third.",
+      "Validated the signal against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices.",
+      "Built a point-in-time feature store from 120 microstructure features across six venues, handling late-print deduplication and schema versioning; reused in two subsequent projects.",
+      "Documented backtest assumptions, transaction-cost methodology, and known failure regimes for future researchers.",
+      "Produced a 0.40 improvement in simulated annualized Sharpe relative to the desk’s existing signal specification.",
+      "Built a reproducible cluster-based simulation pipeline, reducing a 2,000-run Monte Carlo study from three days to five hours.",
+      "Derived a variance bound for a sparse regression estimator, tightening the prior result by a logarithmic factor; proof forms Section 3 of a manuscript under review at JASA.",
+      "Released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.",
+      "Taught weekly recitations for 60 graduate probability students, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+      "Volatility Forecasting Study | Python, PyTorch | Jan 2024–Present\n- Built a temporal convolutional model for realized-volatility forecasting across 30 equity indices; reduced out-of-sample QLIKE loss by 7% versus a HAR-RV benchmark.\n- Used rolling time-series validation and an asymmetric loss function to improve directional accuracy from 52% to 58%.\n- Evaluated robustness across forecast horizons, index groups, and alternative realized-volatility feature sets.",
+      "Placed 41st of 2,900 teams, ranking in the top 2% of the private leaderboard, using a gradient-boosting ensemble.",
+      "Reduced validation leakage by replacing random folds with time-grouped cross-validation, closing the local-validation/leaderboard gap from 0.02 to near zero.",
+      "Reduced 900 candidate features to 300 using permutation importance without reducing validation performance.",
+      "Programming: Python, R, SQL, C++, Kafka\nMachine Learning: PyTorch, gradient boosting, sparse regression, feature selection\nStatistics / Econometrics: Time-series econometrics, Bayesian inference, volatility modeling, high-dimensional inference\nSystems / Data: Distributed computing, feature stores, point-in-time data pipelines, schema versioning"
+    ],
+    "falsePositives": [
+      "Because you are a Ph.D. candidate, education should probably appear first for research and quant roles.",
+      "“300 engineered features” and “900 candidate features” should be made consistent. Explain that 900 candidates were reduced to 300 final features.",
+      "Expected graduation date"
+    ]
+  }
+}

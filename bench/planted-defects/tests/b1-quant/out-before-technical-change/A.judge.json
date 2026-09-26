@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 36,
+  "words": 1909,
+  "quotes": 10,
+  "grounded": 7,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Add a dated entry covering the unrepresented period from August 2021 through December 2023."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4759,
+    "completion_tokens": 15900,
+    "total_tokens": 20659,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15423
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4759
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove the personal pronoun from the proof bullet so it remains a résumé phrase rather than a first-person sentence."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct “time-series econometircs” to “time-series econometrics,” and either support it with a clearly identified method or remove it."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Change “improved ... by 6%” to “raised ... by 6 percentage points,” and state the forecast horizon and whether the rates are averaged across the 30 indices."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "“33% improvement” conflicts with a change from 0.20 to 0.15, which represents a 25% reduction unless a different denominator is intended."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Rewrite the feature-store bullet with a direct action and move the cleaning details after the main result."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Separate the open-source package achievement from the cluster, reading-group, and grading responsibilities."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Remove the claim that the same six-year period was out of sample after tuning parameters on the full sample, or replace it with results from a genuinely untouched chronological test."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Replace the heteroskedasticity test as evidence against look-ahead leakage with the actual point-in-time controls, timestamp ordering, and chronological holdout used."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Move the target-relevant projects ahead of Sunrise Bakery or place Sunrise Bakery in an Additional Experience subsection."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "Remove SQL, C++, Kafka, and Bayesian inference from the skills section unless you add evidence of using them elsewhere in the résumé."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 36,
+    "rewrites": [],
+    "falsePositives": [
+      "Add a dated entry covering the unrepresented period from August 2021 through December 2023."
+    ]
+  }
+}

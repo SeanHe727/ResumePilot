@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the diagnostics service's monitoring dashboards across two major releases and the on-call rotation that used them.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W5",
+    "category": "wording",
+    "line": "Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "defect": "Generic claims with no concrete action, subject or result."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.",
+    "defect": "GRPO computes each rollout's advantage relative to the other rollouts in its group; with a single rollout per prompt the advantage is always zero and nothing is learned."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.",
+    "defect": "Dynamic batching raises throughput by waiting to group requests; for single requests it adds queueing delay and cannot lower latency."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation, Kubernetes",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Kubernetes)"
+  }
+]

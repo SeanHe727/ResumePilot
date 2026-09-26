@@ -1,0 +1,47 @@
+Jordan Lee
++1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee
+EDUCATION
+Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026
+Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022
+EXPERIENCE
+Eastern Robotics Co. | Software Engineer Intern | Metro City, Country | Sep 2023 - Feb 2024
+- Responsible for the monitoring dashboards of the diagnostics service.
+- I worked on improving the latency of our API and I also wrote tests for it.
+- Builds and maintains the CI pipeline for the perception team’s model releases.
+- Improved model performance by 35%.
+Mobility Systems Company | Machine Learning Engineering Intern | Metro City, Country | Oct 2024 - May 2025
+- Built an industrial-diagnostics branch of a larger inspection system, automating triage of 800+ sensor
+signals per case through ML-extracted feature schemas, evidence-grounded review, and explicit abstention on
+low-confidence findings; after launch, the overall system reduced its pending-case backlog by 68%.
+- Designed a role-aware routing and assembly layer that restricted each of 3 specialist agents and 1
+independent reviewer to its in-scope signals, keeping findings traceable to source data and preventing
+cross-agent hypothesis contamination.
+- Improved claim correctness by 7%, evidence-citation quality by 9%, and tool-use accuracy by 8% over the base
+model on held-out diagnostic cases by fine-tuning a domain-specialist adapter on validated tool-use
+trajectories with assistant-only loss masking.
+- Fine-tuned a domain adapter that raised claim correctness, citation quality and tool-use accuracy on held-
+out diagnostic cases compared with the base model.
+- Single-handedly built the company’s entire ML platform used by every team.
+PROJECTS
+Agent Runtime Suite | Owner | TypeScript, Agent Runtime, Multi-Agent Systems | Aug 2025 - Present
+- Improved planted-defect localization from 82% to 94% by replacing fixed-perspective analysis with an agent-
+as-tool architecture that dynamically dispatched tasks to role-specialized sub-agents with isolated prompts,
+toolsets, and contexts.
+- Hardened a multi-agent fan-out/fan-in runtime against nested-pool deadlocks, reuse of incomplete streamed
+responses, and tool-result loss during context compaction by separating concurrency pools, containing faults
+at the branch level, and gating cache writes on explicit stream completion.
+- Kept model-bound working context below 10K tokens throughout a 100-turn stress test while cumulative raw
+conversation grew 100x, using independently budgeted context layers and staged compaction, with SQLite
+checkpoints and hybrid FTS5/vector retrieval for recoverable state and long-term memory.
+Research-Agent Evaluation Framework | Contributor | LLM Evaluation, Agent Benchmarking | Feb 2025 - Jul 2025
+- Leveraged cutting-edge AI synergies to drive innovation across the organization.
+- Validated evaluator fidelity with a Kendall rank correlation of 0.89 and an 8.5pp mean absolute deviation
+between injected and measured degradation across 400+ report-level trials by progressively removing
+citations, sources, sections, and factual claims in 10-percentage-point increments.
+- Identified 3 structural defects in a multi-agent research pipeline across stability, sourcing, and parameter
+handling by combining layered instrumentation with systematic error attribution; mapped each failure to the
+responsible module to guide targeted fixes.
+SKILLS
+Programming: Python, TypeScript, SQL, Bash, Git, Rust
+LLM & Agents: PyTorch, LangGraph, agent orchestration, RAG, MCP, FastAPI, agent evaluation
+Infrastructure: Kubernetes, Apache Spark, Docker

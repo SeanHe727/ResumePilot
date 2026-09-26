@@ -1,0 +1,93 @@
+{
+  "file": "tmp/bench/out/A-1.md",
+  "recall": 10,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10"
+  ],
+  "coverage": true,
+  "suggestions": 29,
+  "words": 1366,
+  "quotes": 17,
+  "grounded": 15,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "judgeUsage": {
+    "prompt_tokens": 3588,
+    "completion_tokens": 11043,
+    "total_tokens": 14631,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10563
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3588
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "“Responsible for” as assignment language rather than direct ownership."
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "Replace “Improved model performance by 35%” with the model change and a named metric reported from baseline to result, specifying whether the gain is relative or percentage-point."
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "The “single-handedly built the company’s entire ML platform” claim needs a precise ownership boundary or supporting scope."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "One bullet repeats the preceding fine-tuning result without its quantitative detail; remove or consolidate the duplicate."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Remove or replace the opening bullet’s generic language about “cutting-edge AI synergies” and “drive innovation”; it does not identify a contribution."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "The first-person wording in the API bullet; Add or clarify: The API latency before-and-after result"
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Reverse the two EXPERIENCE entries so the Mobility Systems role appears before Eastern Robotics."
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "The narrative review also flagged that Rust, Kubernetes, and Apache Spark appear only in SKILLS and are not supported elsewhere in the resume."
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Present tense in “Builds and maintains” despite the role being completed."
+      },
+      {
+        "id": "D10",
+        "found": true,
+        "evidence": "Explain or account for: - Jun 2022–Sep 2023"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 29,
+    "rewrites": []
+  }
+}

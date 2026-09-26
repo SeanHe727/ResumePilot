@@ -463,6 +463,12 @@ export interface WordingDiagnosis {
     /** Filler, hedging, repetition within the line. */
     concision: ScoredDimension;
     issues: string[];
+    /**
+     * Words fixing each issue would take off the line, in the order of
+     * `issues`. A cut makes room for something worth more; without a size it
+     * read as free, and every cut on every line was chosen.
+     */
+    issueSavings?: number[];
   }>;
 }
 
@@ -475,6 +481,8 @@ export interface NarrativeAssessment {
   gaps: string[];
   /** Entries that would land better reordered, shortened or cut. */
   orderingNotes: string[];
+  /** Listed skills that no entry shows being used. Absent on older readings. */
+  unsupportedSkills?: string[];
   /**
    * How each entry reads as a unit — the same judgement at a smaller scale.
    *
@@ -632,6 +640,14 @@ export interface ReportCoverage {
  * notice.
  */
 export interface FullReport {
+  /**
+   * What already works, in the content reader's own words, at most three.
+   * Measured: a report on a résumé scoring 83 said nothing good about it and
+   * read as though everything was broken.
+   */
+  strengths?: string[];
+  /** The points to act on first: those resting on the first three groups chosen. */
+  startHere?: string[];
   sections: Array<{
     /**
      * An entry's own header, or the fixed title for what spans the document.
@@ -667,7 +683,10 @@ export interface SourceFinding {
   /** Which line, entry or part of the document it is about. */
   target: string;
   what: string;
-  /** Roughly what answering it costs the page, where that is known. */
+  /**
+   * Roughly what answering it does to the page's length, where that is known:
+   * positive adds words, negative takes them off.
+   */
   costWords?: number;
 }
 

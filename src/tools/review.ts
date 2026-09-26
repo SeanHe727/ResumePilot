@@ -208,6 +208,37 @@ const VERDICT_FOR: Record<
   },
 };
 
+/** What the coordinator needs of a reading: each line's score and problems. */
+function briefly(found: unknown): unknown {
+  const reading = found as {
+    entryId?: string;
+    overallScore?: number;
+    bullets?: Array<{ bulletId: string; overallScore?: number; issues?: Array<{ what: string } | string>; strengths?: string[] }>;
+    perBullet?: Array<{ bulletId: string; issues?: string[] }>;
+  };
+  const what = (i: { what: string } | string) => (typeof i === 'string' ? i : i.what);
+  if (reading.bullets) {
+    return {
+      entryId: reading.entryId,
+      overallScore: reading.overallScore,
+      bullets: reading.bullets.map((b) => ({
+        bulletId: b.bulletId,
+        score: b.overallScore,
+        issues: (b.issues ?? []).map(what),
+        ...(b.strengths?.length ? { strengths: b.strengths } : {}),
+      })),
+    };
+  }
+  if (reading.perBullet) {
+    return {
+      entryId: reading.entryId,
+      overallScore: reading.overallScore,
+      perBullet: reading.perBullet.map((b) => ({ bulletId: b.bulletId, issues: b.issues ?? [] })),
+    };
+  }
+  return found;
+}
+
 function noResume(): ToolResult<never> {
   return {
     success: false,
@@ -326,7 +357,11 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
         const stamped = { ...found, readHash: entryTextHash(target), readAt: new Date().toISOString() };
         remember(ctx, (state) => store(state, stamped as never));
 
-        return { success: true, data: found };
+        // The coordinator gets the points, not the scoring behind them: it relays
+        // and decides what to dispatch next. The full reading is on the session,
+        // where the report reads it. Measured: one round of full readings came
+        // to about 31,000 characters in the coordinator's window.
+        return { success: true, data: briefly(found) };
       } catch (err) {
         attempted(ctx, role, entryId, 'failed', err instanceof Error ? err.message : String(err));
         return {

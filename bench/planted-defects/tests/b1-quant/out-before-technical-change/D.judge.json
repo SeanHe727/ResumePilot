@@ -1,0 +1,130 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/D.md",
+  "recall": 5,
+  "found": [
+    "W6",
+    "A3",
+    "S3",
+    "T1",
+    "T3"
+  ],
+  "coverage": false,
+  "suggestions": 35,
+  "words": 1971,
+  "quotes": 3,
+  "grounded": 2,
+  "rewrites": 34,
+  "inventedNumbers": [
+    "25",
+    "0.40",
+    "25"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4683,
+    "completion_tokens": 16017,
+    "total_tokens": 20700,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14768
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 4427
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "time-series econometircs` → `time-series econometrics`"
+      },
+      {
+        "id": "A2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The reduction from 0.20 to 0.15 is 25%, not 33%."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Your current fourth bullet combines too many unrelated responsibilities. Split it:"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "That is not genuinely out-of-sample if the parameters were tuned using the entire period."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "A Sharpe-ratio test does not establish that a backtest is free of look-ahead bias."
+      },
+      {
+        "id": "N1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 35,
+    "rewrites": [
+      "Evaluated signal performance using expanding-window walk-forward validation, tuning parameters only on prior data and measuring performance on subsequent unseen periods across six years of tick data.",
+      "Audited the six-year tick-data pipeline for timestamp alignment, feature availability, and execution timing to prevent look-ahead bias; incorporated transaction costs and slippage in evaluation.",
+      "Applied heteroskedasticity- and autocorrelation-robust inference when assessing risk-adjusted returns.",
+      "Reduced [RMSE/MAE] from 0.20 to 0.15, a 25% reduction, by adding realized-volatility features and an asymmetric loss.",
+      "Joined 120 point-in-time microstructure features",
+      "time-series econometrics",
+      "GitHub: github.com/mpatel",
+      "LinkedIn: linkedin.com/in/morganpatel",
+      "RIDGEWAY UNIVERSITY — Metro City, USA\nPh.D. Candidate in Statistics, Expected May 2026\nResearch: Statistical learning, time-series modeling, financial econometrics\n\nB.S. in Mathematics, May 2020",
+      "• Developed a short-horizon order-book imbalance signal for liquid index futures, adding 0.40 annualized Sharpe points to the desk portfolio in an after-cost backtest over 18 months of unseen data.",
+      "• Reduced signal turnover from 34% to 21% using a cost-aware position smoother, retaining 90% of gross returns and reducing estimated slippage by approximately one-third.",
+      "• Built a point-in-time feature pipeline for 120 microstructure features across six venues, resolving late-print duplication and versioning schemas; the resulting feature store supported two subsequent research projects.",
+      "• Evaluated signal performance on six years of tick data using [expanding/rolling]-window walk-forward validation, with transaction costs and execution timing incorporated into the backtest.",
+      "• Documented backtest assumptions, transaction-cost methodology, validation design, and observed failure regimes in the desk research wiki.",
+      "Python, pandas, NumPy, SQL, Kafka, [specific backtesting or data tools]",
+      "• Built and parallelized the lab’s simulation pipeline on a shared compute cluster, reducing a 2,000-run Monte Carlo study from three days to five hours and making experiments reproducible through seeded runs.",
+      "• Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; the result became Section 3 of a manuscript under review at JASA.",
+      "• Developed and released an open-source R package for high-dimensional covariance estimation, reaching 3,000 downloads in its first year.",
+      "• Taught weekly graduate-probability recitations for 60 students, authored 12 problem sets, and earned a 4.8/5 teaching rating.",
+      "• Managed opening operations and a six-person team while maintaining weekly labor-budget targets.",
+      "• Improved inventory planning and supplier ordering, reducing unsold bread from 12% to 7% of production.",
+      "• Built a temporal convolutional model for realized-volatility forecasting across 30 equity indices, improving out-of-sample QLIKE loss by 7% versus a HAR-RV baseline.",
+      "• Improved directional forecast accuracy from 52% to 58% by incorporating realized-volatility features and an asymmetric loss function.",
+      "• Reduced [RMSE/MAE] from 0.20 to 0.15, a 25% reduction, after [specific modeling improvement].",
+      "• Ranked 41st out of 2,900 teams—top 2%—using a gradient-boosting ensemble trained on 300 engineered features.",
+      "• Reduced validation leakage by replacing random folds with time-grouped cross-validation, closing the gap between local validation and leaderboard scores from 0.02 to [final value, if known].",
+      "• Built a permutation-importance feature-selection pipeline that reduced 900 candidate features to 300 without reducing validation performance.",
+      "Replaced random folds with time-grouped cross-validation to align local validation with leaderboard performance and reduce leakage risk.",
+      "TECHNICAL SKILLS\n\nLanguages: Python, R, SQL, C++\nMachine Learning: PyTorch, gradient boosting, time-series modeling\nStatistics: Statistical learning, Bayesian inference, high-dimensional statistics, time-series econometrics\nData/Infrastructure: Kafka, distributed computing, Monte Carlo simulation",
+      "Python: NumPy, pandas, scikit-learn, statsmodels",
+      "Quantitative Methods: Market microstructure, signal research, walk-forward validation, volatility modeling, Bayesian inference, Monte Carlo simulation, high-dimensional statistics",
+      "RESEARCH\n\nPatel, M. “[Paper Title].” Manuscript under review at the Journal of the American Statistical Association.\n\nOpen-source software: R package for high-dimensional covariance estimation, 3,000 downloads in first year.",
+      "Patel, M. “Title of Paper.” Manuscript under review at the *Journal of the American Statistical Association*, 2025.",
+      "Built a point-in-time feature pipeline in Python and Kafka..."
+    ],
+    "falsePositives": []
+  }
+}

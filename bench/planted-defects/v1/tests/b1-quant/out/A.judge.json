@@ -1,0 +1,99 @@
+{
+  "file": "tmp/bench/tests/b1-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "D3",
+    "D4",
+    "D5",
+    "D8",
+    "D10",
+    "D12",
+    "D14",
+    "D15",
+    "D19"
+  ],
+  "coverage": true,
+  "suggestions": 25,
+  "words": 1471,
+  "quotes": 8,
+  "grounded": 8,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Remove age, marital status, hobbies, gender, and photos from the file."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3887,
+    "completion_tokens": 14927,
+    "total_tokens": 18814,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14487
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 3631
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Remove emphatic scope language such as “single-handedly” and “entire” unless the scope is precisely defensible."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "Delete or merge the duplicate validation bullet; it repeats the six-year tick-data, purged walk-forward, and embargo claim."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Replace or remove the opening bullet containing phrases such as “cutting-edge quantitative synergies,” “next-generation modeling paradigms,” and “alpha-driven innovation.” It does not identify a concrete action or result."
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "Remove unsupported skills—SQL, C++, time-series econometrics, Bayesian inference, gradient boosting, Kubernetes, Haskell, and Kafka—or add résumé evidence for each."
+      },
+      {
+        "id": "D10",
+        "found": true,
+        "evidence": "Account for the gap between the B.S. ending in May 2020 and the Ph.D. beginning in September 2021, if there was relevant work, research, coursework, or another explanation."
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "Verify the bullet claiming a 0.4 Sharpe improvement to a futures book. The narrative review identified it as duplicating the Northpeak claim and potentially belonging to that internship rather than the Kaggle project."
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "Fix the impossible date range for Kaggle Market Prediction Competition: Jun 2023 - Mar 2023."
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "Replace the vague teamwork bullet about working with “various people on multiple aspects” with your specific owned component, deliverable, and result."
+      },
+      {
+        "id": "D18",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Remove age, marital status, hobbies, gender, and photos from the file."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 25,
+    "rewrites": [],
+    "falsePositives": [
+      "Remove age, marital status, hobbies, gender, and photos from the file."
+    ]
+  }
+}

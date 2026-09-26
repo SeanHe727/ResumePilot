@@ -12,7 +12,7 @@ import type { DiagnosisReport, FullReport } from '../domain.js';
  * than scanned in a terminal.
  */
 export function renderFull(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Full review')];
+  const lines = [...head(report, sourcePath, 'Full review'), ...opening(report)];
 
   for (const section of report.full?.sections ?? []) {
     lines.push(`## ${section.heading}`, '');
@@ -30,17 +30,34 @@ export function renderFull(report: DiagnosisReport, sourcePath: string): string 
     }
   }
 
+  // All of it here, where the brief shows ten.
+  const setAside = report.improvementPlan.setAside ?? [];
+  if (setAside.length > 0) {
+    lines.push(`## Set aside (${setAside.length})`, '', ...setAside.map((s) => `- ${s.what}`), '');
+  }
+
   return `${lines.join('\n').trimEnd()}\n`;
 }
 
 /** The same points, each reduced to the sentence written to stand alone. */
+const SET_ASIDE_SHOWN = 10;
+
 export function renderBrief(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Review')];
+  const lines = [...head(report, sourcePath, 'Review'), ...opening(report)];
+  // Each point once. Measured, by two blind judges: the same point in the
+  // opening, under its entry and again in the set-aside list read as a review
+  // repeating itself.
+  const first = new Set(report.full?.startHere ?? []);
 
   for (const section of report.full?.sections ?? []) {
+    const points = section.points.filter((p) => !first.has(p.id));
+    if (points.length === 0) continue;
     lines.push(`## ${section.heading}`, '');
-    for (const point of section.points) {
+    for (const point of points) {
       lines.push(`- ${point.what}${point.cost ? ` *(${point.cost})*` : ''}`);
+      // Why it matters, with what to do. Measured: a brief of instructions
+      // alone scored lowest on explanation with both blind judges.
+      if (point.why) lines.push(`  ${point.why}`);
     }
     lines.push('');
   }
@@ -52,12 +69,44 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
       '',
       'Worth knowing, and not worth the space on this page:',
       '',
-      ...setAside.map((s) => `- ${s.what}${s.because ? ` — *${s.because}*` : ''}`),
+      // The first ten, and a count. Measured: 38 set-aside lines under a
+      // report of 18 points, longer than the report it was set aside from.
+      ...setAside.slice(0, SET_ASIDE_SHOWN).map((s) => `- ${s.what}${s.because ? ` — *${s.because}*` : ''}`),
+      ...(setAside.length > SET_ASIDE_SHOWN
+        ? [`- …and ${setAside.length - SET_ASIDE_SHOWN} more, in \`/report --full\`.`]
+        : []),
       '',
     );
   }
 
   return `${lines.join('\n').trimEnd()}\n`;
+}
+
+/**
+ * Where to start, and what already works, before the list by entry.
+ *
+ * A review that is only a list of faults reads as though everything is broken,
+ * and one that lists thirty points gives no way in. Both come from the
+ * write-up: the first three chosen groups, and strengths in the reader's words.
+ */
+function opening(report: DiagnosisReport): string[] {
+  const full = report.full;
+  if (!full) return [];
+  const points = new Map(full.sections.flatMap((s) => s.points).map((p) => [p.id, p] as const));
+  const first = (full.startHere ?? []).flatMap((id) => (points.has(id) ? [points.get(id)!] : []));
+  const lines: string[] = [];
+  if (first.length > 0) {
+    lines.push(
+      '## Start here',
+      '',
+      ...first.flatMap((p, i) => [`${i + 1}. ${p.what}`, ...(p.why ? [`   ${p.why}`] : [])]),
+      '',
+    );
+  }
+  if ((full.strengths ?? []).length > 0) {
+    lines.push('## Already working', '', ...full.strengths!.map((s) => `- ${s}`), '');
+  }
+  return lines;
 }
 
 /**

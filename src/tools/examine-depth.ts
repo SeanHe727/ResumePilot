@@ -42,19 +42,17 @@ interface Finding {
 export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
   name: 'examine_technical_depth',
   description:
-    'Put one question about this entry to a specialist in its own technical field — an ' +
-    'architecture choice, why one approach rather than another, whether a chain of reasoning ' +
-    'holds, what a stated result depends on. Worth it where a judgement turns on knowing the ' +
-    'field rather than on reading the line. Costs a nested agent run, so ask about what you ' +
-    'cannot settle yourself. What comes back is more detail than a resume line can hold: take ' +
-    'from it what changes your reading.',
+    'Put one question about this entry to a specialist in its own technical field. Only for ' +
+    'a question you have listed as one you cannot settle yourself and whose answer would ' +
+    'change your verdict — see Going deeper. Costs a nested agent run. What comes back is ' +
+    'more detail than a resume line can hold: take from it what changes your reading.',
   parameters: {
     type: 'object',
     properties: {
       about: {
         type: 'string',
         description:
-          'What the question is about, by the id shown in brackets in the resume content: a ' +
+          'What the question is about, by the id shown in brackets in the resume content (without the brackets): a ' +
           "bullet's id when the question is about one line, or the entry's id when it is about " +
           'the whole entry. Either kind is accepted — do not convert one into the other.',
       },
@@ -68,7 +66,10 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
   },
 
   async execute(input, ctx): Promise<ToolResult<unknown>> {
-    const about = (input?.about ?? input?.bulletId ?? input?.entryId)?.trim();
+    // The brackets are how the id is shown, not part of it. Measured: told to
+    // use "the id shown in brackets", the reader passed `[s2:e0:b0]` thirteen
+    // times in one run and was refused every time.
+    const about = (input?.about ?? input?.bulletId ?? input?.entryId)?.trim().replace(/^\[(.*)\]$/, '$1').trim();
     const question = input?.question?.trim();
     if (!about || !question) {
       return {

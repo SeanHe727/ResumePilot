@@ -132,6 +132,9 @@ export class QueryEngine implements QueryEngineContract {
           ? { cacheSystemPrompt: params.cacheSystemPrompt }
           : {}),
         ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
+        // One key per kind of request: the same role sends the same system
+        // prompt and tools every time, which is the part worth caching.
+        promptCacheKey: `resumepilot:${params.task ?? 'main'}`,
       };
     } catch (err) {
       // An unroutable task or an unknown model. No request was made, and a

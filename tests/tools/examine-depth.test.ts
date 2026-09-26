@@ -65,6 +65,17 @@ describe('examine_technical_depth', () => {
     expect(ran?.input).toContain('[experience:0:0]');
   });
 
+  it('takes an id with the brackets it is shown in', async () => {
+    // Measured: told to use "the id shown in brackets", the reader passed
+    // `[s2:e0:b0]` thirteen times in one run and was refused every time.
+    const result = await examineDepthTool.execute(
+      { about: '[experience:0:1]', question: 'q' },
+      ctxWith(async () => answered([FINDING])),
+    );
+
+    expect(result.success).toBe(true);
+  });
+
   it('drops a finding about a line the candidate never wrote', async () => {
     // An invented id would attach a finding to a line that does not exist, and
     // the reader would score it as theirs.

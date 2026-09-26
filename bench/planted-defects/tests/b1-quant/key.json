@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Methods: time-series econometircs, Bayesian inference, gradient boosting, PyTorch",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "defect": "A daily Sharpe ratio is annualized by multiplying by the square root of 252, not by 252; the reported figure is overstated about 16-fold."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "defect": "The Diebold-Mariano test is not valid for comparing nested models; a test such as Clark-West is needed."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Programming: Python, R, SQL, C++, Kafka",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Kafka)"
+  }
+]

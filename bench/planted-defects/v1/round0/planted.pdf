@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 5161>>
+stream
+BT /F1 16 Tf 72 750 Td (Jordan Lee) Tj ET
+BT /F1 9.5 Tf 72 730 Td (+1 \(555\) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee) Tj ET
+BT /F1 12 Tf 72 712 Td (EDUCATION) Tj ET
+BT /F1 9.5 Tf 72 698 Td (Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026) Tj ET
+BT /F1 9.5 Tf 72 686 Td (Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022) Tj ET
+BT /F1 12 Tf 72 668 Td (EXPERIENCE) Tj ET
+BT /F1 9.5 Tf 72 654 Td (Eastern Robotics Co. | Software Engineer Intern | Metro City, Country | Sep 2023 - Feb 2024) Tj ET
+BT /F1 9 Tf 84 642 Td (- Responsible for the monitoring dashboards of the diagnostics service.) Tj ET
+BT /F1 9 Tf 84 631 Td (- I worked on improving the latency of our API and I also wrote tests for it.) Tj ET
+BT /F1 9 Tf 84 620 Td (- Builds and maintains the CI pipeline for the perception team's model releases.) Tj ET
+BT /F1 9 Tf 84 609 Td (- Improved model performance by 35%.) Tj ET
+BT /F1 9.5 Tf 72 598 Td (Mobility Systems Company | Machine Learning Engineering Intern | Metro City, Country | Oct 2024 - May 2025) Tj ET
+BT /F1 9 Tf 84 586 Td (- Built an industrial-diagnostics branch of a larger inspection system, automating triage of 800+ sensor) Tj ET
+BT /F1 9 Tf 90 575 Td (signals per case through ML-extracted feature schemas, evidence-grounded review, and explicit abstention on) Tj ET
+BT /F1 9 Tf 90 564 Td (low-confidence findings; after launch, the overall system reduced its pending-case backlog by 68%.) Tj ET
+BT /F1 9 Tf 84 553 Td (- Designed a role-aware routing and assembly layer that restricted each of 3 specialist agents and 1) Tj ET
+BT /F1 9 Tf 90 542 Td (independent reviewer to its in-scope signals, keeping findings traceable to source data and preventing) Tj ET
+BT /F1 9 Tf 90 531 Td (cross-agent hypothesis contamination.) Tj ET
+BT /F1 9 Tf 84 520 Td (- Improved claim correctness by 7%, evidence-citation quality by 9%, and tool-use accuracy by 8% over the base) Tj ET
+BT /F1 9 Tf 90 509 Td (model on held-out diagnostic cases by fine-tuning a domain-specialist adapter on validated tool-use) Tj ET
+BT /F1 9 Tf 90 498 Td (trajectories with assistant-only loss masking.) Tj ET
+BT /F1 9 Tf 84 487 Td (- Fine-tuned a domain adapter that raised claim correctness, citation quality and tool-use accuracy on held-) Tj ET
+BT /F1 9 Tf 90 476 Td (out diagnostic cases compared with the base model.) Tj ET
+BT /F1 9 Tf 84 465 Td (- Single-handedly built the company's entire ML platform used by every team.) Tj ET
+BT /F1 12 Tf 72 448 Td (PROJECTS) Tj ET
+BT /F1 9.5 Tf 72 434 Td (Agent Runtime Suite | Owner | TypeScript, Agent Runtime, Multi-Agent Systems | Aug 2025 - Present) Tj ET
+BT /F1 9 Tf 84 422 Td (- Improved planted-defect localization from 82% to 94% by replacing fixed-perspective analysis with an agent-) Tj ET
+BT /F1 9 Tf 90 411 Td (as-tool architecture that dynamically dispatched tasks to role-specialized sub-agents with isolated prompts,) Tj ET
+BT /F1 9 Tf 90 400 Td (toolsets, and contexts.) Tj ET
+BT /F1 9 Tf 84 389 Td (- Hardened a multi-agent fan-out/fan-in runtime against nested-pool deadlocks, reuse of incomplete streamed) Tj ET
+BT /F1 9 Tf 90 378 Td (responses, and tool-result loss during context compaction by separating concurrency pools, containing faults) Tj ET
+BT /F1 9 Tf 90 367 Td (at the branch level, and gating cache writes on explicit stream completion.) Tj ET
+BT /F1 9 Tf 84 356 Td (- Kept model-bound working context below 10K tokens throughout a 100-turn stress test while cumulative raw) Tj ET
+BT /F1 9 Tf 90 345 Td (conversation grew 100x, using independently budgeted context layers and staged compaction, with SQLite) Tj ET
+BT /F1 9 Tf 90 334 Td (checkpoints and hybrid FTS5/vector retrieval for recoverable state and long-term memory.) Tj ET
+BT /F1 9.5 Tf 72 323 Td (Research-Agent Evaluation Framework | Contributor | LLM Evaluation, Agent Benchmarking | Feb 2025 - Jul 2025) Tj ET
+BT /F1 9 Tf 84 311 Td (- Leveraged cutting-edge AI synergies to drive innovation across the organization.) Tj ET
+BT /F1 9 Tf 84 300 Td (- Validated evaluator fidelity with a Kendall rank correlation of 0.89 and an 8.5pp mean absolute deviation) Tj ET
+BT /F1 9 Tf 90 289 Td (between injected and measured degradation across 400+ report-level trials by progressively removing) Tj ET
+BT /F1 9 Tf 90 278 Td (citations, sources, sections, and factual claims in 10-percentage-point increments.) Tj ET
+BT /F1 9 Tf 84 267 Td (- Identified 3 structural defects in a multi-agent research pipeline across stability, sourcing, and parameter) Tj ET
+BT /F1 9 Tf 90 256 Td (handling by combining layered instrumentation with systematic error attribution; mapped each failure to the) Tj ET
+BT /F1 9 Tf 90 245 Td (responsible module to guide targeted fixes.) Tj ET
+BT /F1 12 Tf 72 228 Td (SKILLS) Tj ET
+BT /F1 9.5 Tf 72 214 Td (Programming: Python, TypeScript, SQL, Bash, Git, Rust) Tj ET
+BT /F1 9.5 Tf 72 202 Td (LLM & Agents: PyTorch, LangGraph, agent orchestration, RAG, MCP, FastAPI, agent evaluation) Tj ET
+BT /F1 9.5 Tf 72 190 Td (Infrastructure: Kubernetes, Apache Spark, Docker) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+5491
+%%EOF

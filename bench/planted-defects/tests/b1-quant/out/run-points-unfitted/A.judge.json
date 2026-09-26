@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 42,
+  "words": 2620,
+  "quotes": 21,
+  "grounded": 16,
+  "rewrites": 4,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5570,
+    "completion_tokens": 12351,
+    "total_tokens": 17921,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11692
+    },
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 5058
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove “my” from “my proof” so the line remains a résumé phrase rather than a first-person sentence."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "“Time-series econometrics” is currently misspelled."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Report the directional hit-rate change as 6 percentage points, retaining the endpoint values only if they add useful context. The stated movement from 52% to 58% is a six-percentage-point increase, not a 6% relative improvement."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The move from 0.20 to 0.15 is a **25% reduction**, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Replace the cumbersome feature-store modifier chain with a direct construction, such as “Built a feature store by joining 120 point-in-time microstructure features across six venues, deduplicating late prints, and versioning schemas.” The current opening delays the main verb and makes the technical scope harder to scan."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Split the cluster maintenance, reading-group organization, and grading into separate bullets only if each has a result; otherwise remove them from the research contribution bullet. Bundling unrelated duties obscures the package achievement."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Multiplying a daily Sharpe ratio by 252 is a material quantitative error."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Move Sunrise Bakery to an Additional Experience section below Northpeak Capital, Ridgeway research, the Volatility Forecasting Study, and the Kaggle project. Its current first position makes the résumé appear to move from quantitative research into retail management instead of presenting the quantitative research path as the main narrative."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review found that SQL, C++, Kafka, Bayesian inference, and time-series econometrics are not demonstrated in the experience or project bullets."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 42,
+    "rewrites": [
+      "Built a feature store by joining 120 point-in-time microstructure features across six venues, deduplicating late prints, and versioning schemas.",
+      "in a JASA paper under review.",
+      "reducing the local-validation-to-leaderboard gap by 0.02.",
+      "Wrote a feature-selection script."
+    ],
+    "falsePositives": []
+  }
+}

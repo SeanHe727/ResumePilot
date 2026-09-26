@@ -1,0 +1,29 @@
+{
+  "case-1": {
+    "test": "b1-ce",
+    "reviewers": {
+      "Reviewer 1": "D",
+      "Reviewer 2": "B",
+      "Reviewer 3": "A",
+      "Reviewer 4": "C"
+    }
+  },
+  "case-2": {
+    "test": "b1-pm",
+    "reviewers": {
+      "Reviewer 1": "B",
+      "Reviewer 2": "C",
+      "Reviewer 3": "D",
+      "Reviewer 4": "A"
+    }
+  },
+  "case-3": {
+    "test": "b1-quant",
+    "reviewers": {
+      "Reviewer 1": "B",
+      "Reviewer 2": "A",
+      "Reviewer 3": "D",
+      "Reviewer 4": "C"
+    }
+  }
+}

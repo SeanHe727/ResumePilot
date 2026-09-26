@@ -1,0 +1,79 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 5243>>
+stream
+BT /F1 16 Tf 72 752 Td (Morgan Patel) Tj ET
+BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-4410 | morgan.patel@example.com | example.com/code/mpatel) Tj ET
+BT /F1 10 Tf 72 720.5 Td (Date of birth: 21 Jul 1998 | Nationality: Indian) Tj ET
+BT /F1 12 Tf 72 703.0 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 72 689.0 Td (Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026) Tj ET
+BT /F1 10 Tf 72 676.5 Td (Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020) Tj ET
+BT /F1 12 Tf 72 659.0 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 72 645.0 Td (Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021) Tj ET
+BT /F1 10 Tf 80 632.5 Td (- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo) Tj ET
+BT /F1 10 Tf 86 620.7 Td (study from 3 days to 5 hours and making runs reproducible by seed.) Tj ET
+BT /F1 10 Tf 80 608.9000000000001 Td (- Derived a variance bound for a sparse regression estimator that tightens the previous bound) Tj ET
+BT /F1 10 Tf 86 597.1000000000001 Td (by a log factor; it is now Section 3 of a paper under review at JASA.) Tj ET
+BT /F1 10 Tf 80 585.3000000000002 Td (- Taught weekly recitations for 60 students in graduate probability and writes the problem) Tj ET
+BT /F1 10 Tf 86 573.5000000000002 Td (sets, earning a 4.8/5 teaching rating.) Tj ET
+BT /F1 10 Tf 80 561.7000000000003 Td (- Released an open-source R package for high-dimensional covariance estimation while) Tj ET
+BT /F1 10 Tf 86 549.9000000000003 Td (maintaining the lab's shared cluster, organizing the weekly reading group and grading for) Tj ET
+BT /F1 10 Tf 86 538.1000000000004 Td (two courses, which was downloaded 3,000 times in its first year.) Tj ET
+BT /F1 10 Tf 72 526.3000000000004 Td (Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025) Tj ET
+BT /F1 10 Tf 80 513.8000000000004 Td (- Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4) Tj ET
+BT /F1 10 Tf 86 502.0000000000004 Td (Sharpe to the desk's book over 18 months of out-of-sample backtest after costs.) Tj ET
+BT /F1 10 Tf 80 490.2000000000004 Td (- Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's) Tj ET
+BT /F1 10 Tf 86 478.4000000000004 Td (futures signal.) Tj ET
+BT /F1 10 Tf 80 466.60000000000036 Td (- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo) Tj ET
+BT /F1 10 Tf 86 454.80000000000035 Td (period, so no look-ahead information leaked into training.) Tj ET
+BT /F1 10 Tf 80 443.00000000000034 Td (- Wrote a feature store for 120 microstructure features with point-in-time joins, which the) Tj ET
+BT /F1 10 Tf 86 431.20000000000033 Td (research team reused in two later signal projects.) Tj ET
+BT /F1 10 Tf 80 419.4000000000003 Td (- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who) Tj ET
+BT /F1 10 Tf 86 407.6000000000003 Td (approved a small live allocation for the next quarter.) Tj ET
+BT /F1 10 Tf 80 395.8000000000003 Td (- Documented the backtest assumptions, transaction-cost model and known failure regimes in the) Tj ET
+BT /F1 10 Tf 86 384.0000000000003 Td (desk's research wiki for future interns.) Tj ET
+BT /F1 12 Tf 72 367.2000000000003 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 353.2000000000003 Td (Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present) Tj ET
+BT /F1 10 Tf 80 340.7000000000003 Td (- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal) Tj ET
+BT /F1 10 Tf 86 328.90000000000026 Td (convolutional model trained on realized-volatility features.) Tj ET
+BT /F1 10 Tf 80 317.10000000000025 Td (- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility) Tj ET
+BT /F1 10 Tf 86 305.30000000000024 Td (features and an asymmetric loss.) Tj ET
+BT /F1 10 Tf 80 293.5000000000002 Td (- Ran the robustness study on the VX9 backtest harness and wrote up the results as a 12-page) Tj ET
+BT /F1 10 Tf 86 281.7000000000002 Td (working paper.) Tj ET
+BT /F1 10 Tf 72 269.9000000000002 Td (Kaggle Market Prediction Competition | Team of 3 | Python | Jun 2023 - May 2023) Tj ET
+BT /F1 10 Tf 80 257.4000000000002 Td (- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features,) Tj ET
+BT /F1 10 Tf 86 245.6000000000002 Td (finishing in the top 2% of the private leaderboard.) Tj ET
+BT /F1 10 Tf 80 233.80000000000018 Td (- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between) Tj ET
+BT /F1 10 Tf 86 222.00000000000017 Td (local validation and leaderboard scores.) Tj ET
+BT /F1 10 Tf 80 210.20000000000016 Td (- Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested) Tj ET
+BT /F1 10 Tf 86 198.40000000000015 Td (over 18 months out of sample.) Tj ET
+BT /F1 12 Tf 72 181.60000000000014 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 167.60000000000014 Td (Programming: Python, R, SQL, C++, Kafka) Tj ET
+BT /F1 10 Tf 72 155.10000000000014 Td (Methods: time-series econometrics, Bayesian inference, gradient boosting, PyTorch) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+5573
+%%EOF

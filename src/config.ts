@@ -13,6 +13,11 @@ export interface ModelPricing {
   inputPerMTok: number;
   /** USD per 1M output tokens. */
   outputPerMTok: number;
+  /**
+   * USD per 1M input tokens read from the provider's prompt cache. Where it is
+   * left out, cached tokens are charged as ordinary input, which overstates.
+   */
+  cachedInputPerMTok?: number;
 }
 
 export interface ModelSpec {
@@ -103,8 +108,10 @@ export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
   'gpt-5.6-luna': {
     id: 'gpt-5.6-luna',
     provider: 'openai',
-    // Published rates, confirmed against the price list.
-    pricing: { inputPerMTok: 0.2, outputPerMTok: 1.2 },
+    // Published rates, confirmed against the price list. Cached input is a
+    // tenth of the input rate; cache writes cost 1.25x input, which is not
+    // separated out in the usage the API returns and so is not counted here.
+    pricing: { inputPerMTok: 0.2, outputPerMTok: 1.2, cachedInputPerMTok: 0.02 },
     contextWindow: 400_000,
     usesMaxCompletionTokens: true,
     reasoningEffort: true,
@@ -196,11 +203,16 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
 
 export function estimateCostUsd(
   modelId: string,
-  usage: { inputTokens: number; outputTokens: number },
+  usage: { inputTokens: number; outputTokens: number; cacheReadTokens?: number },
 ): number {
   const { pricing } = resolveModel(modelId);
+  // Cached tokens are part of `inputTokens`, billed at their own rate where
+  // the model has one. Measured: about a third of a review's input was cached
+  // and was being counted at the full price.
+  const cached = pricing.cachedInputPerMTok === undefined ? 0 : Math.min(usage.cacheReadTokens ?? 0, usage.inputTokens);
   return (
-    (usage.inputTokens * pricing.inputPerMTok) / 1_000_000 +
+    ((usage.inputTokens - cached) * pricing.inputPerMTok) / 1_000_000 +
+    (cached * (pricing.cachedInputPerMTok ?? pricing.inputPerMTok)) / 1_000_000 +
     (usage.outputTokens * pricing.outputPerMTok) / 1_000_000
   );
 }

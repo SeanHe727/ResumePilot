@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "W5",
+    "category": "wording",
+    "line": "Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "defect": "Generic claims with no concrete action, subject or result."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "defect": "Assistant-only loss masking excludes tool outputs from the loss, so it cannot teach the model to reproduce them — the method contradicts the stated goal."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "defect": "Mixed precision keeps FP32 master weights and optimizer state, so switching to BF16 mixed precision saves far less than 4x memory."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "Jun 2022 graduation to May 2023",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

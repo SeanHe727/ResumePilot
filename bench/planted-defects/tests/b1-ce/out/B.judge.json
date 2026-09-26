@@ -1,0 +1,124 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/B.md",
+  "recall": 6,
+  "found": [
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 13,
+  "words": 1213,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 28,
+  "inventedNumbers": [
+    "33",
+    "33"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3556,
+    "completion_tokens": 15045,
+    "total_tokens": 18601,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13974
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3556
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "This bullet is too generic"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Improved benchmark task-completion rate from 71% to 83% by retrying failed sub-agent calls with preserved partial context."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "That is a 33% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Improved agentic diagnostic latency by 5% through GRPO fine-tuning with rewards for accuracy, citation validity, and tool-call efficiency."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The final bullet in your original version combines too many accomplishments."
+      },
+      {
+        "id": "T1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Your Mobility Systems internship, ending May 2025, should appear above Eastern Robotics, which ended July 2024."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 13,
+    "rewrites": [
+      "Reduced p95 tool-call latency from 900 ms to 600 ms, a 33% reduction, by caching tool results and reusing completed sub-agent answers.",
+      "Built and maintained a TypeScript agent-runtime toolkit used by [X] engineers to standardize tool calling, retries, caching, and sub-agent execution.",
+      "Improved agentic diagnostic latency by 5% through GRPO fine-tuning with rewards for accuracy, citation validity, and tool-call efficiency.",
+      "Improved diagnostic accuracy by 8 percentage points, from 71% to 79%, across 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories.",
+      "Built a machine-learning diagnostic triage branch for an industrial inspection system that analyzed 800+ sensor signals per case, reducing the pending-case backlog by 68% in its first quarter.",
+      "Reduced p95 latency for single-request edge inference by 40% by deploying an INT8 engine with dynamic batching.",
+      "Stabilized sparse-reward GRPO training by using one scored rollout per prompt, producing consistent single-trajectory updates.",
+      "Documented abstention rules and escalation paths for on-call reviewers; the documentation became the team’s diagnostic triage runbook.",
+      "Owned monitoring dashboards for the diagnostics service across two major releases and supported the on-call rotation that relied on them.",
+      "Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regression.",
+      "Automated model-release regression checks in the perception team’s CI pipeline, reducing release cycles from two weeks to three days.",
+      "Migrated 30 robot-fleet services from cron jobs to an event queue and rewrote the shared logging library, eliminating nightly backlogs that delayed morning dispatch.",
+      "Onboarded two new hires and assumed responsibility for the weekend on-call rotation.",
+      "Built a TypeScript runtime for tool calling, caching, retries, and multi-agent task execution.",
+      "Reduced p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.",
+      "Improved benchmark task-completion rate from 71% to 83% by retrying failed sub-agent calls with preserved partial context.",
+      "Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.",
+      "Demonstrated that the evaluator detected injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials.",
+      "Used layered instrumentation to identify three pipeline defects involving stability, sourcing, and parameter handling; all three were fixed upstream.",
+      "Machine learning engineer and computer engineering graduate student focused on agentic systems, model evaluation, inference optimization, and production robotics software. Experience improving diagnostic accuracy, latency, CI/CD reliability, and fleet operations.",
+      "**Languages:** Python, TypeScript, SQL, Bash",
+      "**ML/Deep Learning:** PyTorch, LoRA, GRPO, model fine-tuning, INT8 inference",
+      "**Agents/LLM Systems:** RAG, LangGraph, tool-use agents, agent evaluation",
+      "**Infrastructure:** Kubernetes, Git, CI/CD, distributed systems",
+      "GitHub: github.com/jordan-lee",
+      "LinkedIn: linkedin.com/in/jordan-lee",
+      "Sep 2024 – Expected Jun 2026",
+      "Aug 2022 – Jul 2024"
+    ],
+    "falsePositives": []
+  }
+}

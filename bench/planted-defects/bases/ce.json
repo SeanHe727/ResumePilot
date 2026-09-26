@@ -1,0 +1,179 @@
+{
+  "id": "ce",
+  "job": "machine learning / computer engineering",
+  "name": "Jordan Lee",
+  "contact": "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+  "personal": "Age: 26 | Marital status: Single | Hobbies: watching TV, sleeping in",
+  "education": [
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022"
+  ],
+  "graduated": "Jun 2022",
+  "exp": [
+    {
+      "head": "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA",
+      "dates": "Oct 2024 - May 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch."
+        },
+        {
+          "slot": "D2",
+          "clean": "Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+          "defect": "Improved model performance by 35% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+          "subtle": "Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, keeping every finding traceable to its source data."
+        },
+        {
+          "slot": "D4",
+          "clean": "Applied GRPO with grouped tool-use rollouts and a composite reward, cutting end-to-end latency 5% versus the SFT baseline with no loss in diagnostic accuracy.",
+          "defect": "Created a routing component that restricts the specialist agents and the reviewer to the signals relevant to them, so that every finding can be traced back to its source data.",
+          "subtle": "Built the routing layer that keeps each specialist agent and the independent reviewer on its own signals, so findings stay traceable to source data."
+        },
+        {
+          "slot": "D3",
+          "clean": "Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency before each release.",
+          "defect": "Single-handedly built the company's entire ML platform, which is now used by every team across engineering, operations and research.",
+          "subtle": "Architected the company's ML platform, now used across three business units for model training, evaluation and release."
+        },
+        {
+          "slot": "D13",
+          "clean": "Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.",
+          "defect": "Managed a team of 12 engineers across two offices and set the company's AI strategy for the next fiscal year.",
+          "subtle": "Led a team of 4 engineers to design and ship the triage branch's escalation workflow for the on-call reviewers."
+        }
+      ]
+    },
+    {
+      "head": "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country",
+      "dates": "Aug 2022 - Jul 2024",
+      "datesD10": "Oct 2023 - Jul 2024",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Rebuilt the diagnostics service's monitoring dashboards around per-sensor error budgets, cutting mean time to detect incidents from 40 to 12 minutes.",
+          "defect": "Responsible for the monitoring dashboards of the diagnostics service and for supporting the on-call team with weekly reports.",
+          "subtle": "Owned the diagnostics service's monitoring dashboards across two major releases and the on-call rotation that used them."
+        },
+        {
+          "slot": "D6",
+          "clean": "Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.",
+          "defect": "I worked on improving the latency of our API and I also wrote tests for it, which I think made the service a lot faster for users.",
+          "subtle": "Reduced p95 API latency from 420 ms to 180 ms; my changes added a request cache and batched sensor reads, with load tests to keep it there."
+        },
+        {
+          "slot": "D9",
+          "clean": "Maintained the CI pipeline for the perception team's model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.",
+          "defect": "Builds and maintains the CI pipeline for the perception team's model releases and adds automated regression checks to every build.",
+          "subtle": "Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days."
+        },
+        {
+          "slot": "D17",
+          "clean": "Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+          "defect": "Migrated 30 robot-fleet services from cron jobs to an event queue while also rewriting the logging library, onboarding two new hires, maintaining the internal wiki, reviewing pull requests for three other teams, supporting on-call rotations on weekends, presenting quarterly updates to leadership, and evaluating three vendor monitoring tools, which together removed nightly backlogs, improved developer satisfaction scores, and made the platform noticeably more stable for everyone involved in operations across the whole organization.",
+          "subtle": "Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch."
+        }
+      ],
+      "datesD10Subtle": "May 2023 - Jul 2024"
+    }
+  ],
+  "projects": [
+    {
+      "head": "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems",
+      "dates": "Aug 2025 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Raised planted-defect localization from 82% to 94% by dispatching tasks to role-specialized sub-agents with isolated prompts, toolsets and contexts.",
+          "defect": "Leveraged cutting-edge AI synergies and next-generation agentic paradigms to drive innovation and unlock value across the organization.",
+          "subtle": "Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams."
+        },
+        {
+          "slot": "D11",
+          "clean": "Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+          "defect": "Cut average response time from 800 ms to 900 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
+          "subtle": "Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers."
+        },
+        {
+          "slot": "D18",
+          "clean": "Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under fan-out load.",
+          "defect": "Led the Project Falcon migration to NGX on the KRT stack, coordinating the cutover of the Orion and Vega pipelines.",
+          "subtle": "Moved the runtime's evaluation jobs onto the KRT deployment stack, cutting the time to rerun a full benchmark from 40 to 12 minutes."
+        }
+      ]
+    },
+    {
+      "head": "Research-Agent Evaluation Framework | Contributor | LLM Evaluation",
+      "dates": "Feb 2025 - Jul 2025",
+      "datesD14": "Jul 2025 - Feb 2025",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
+          "defect": "Worked with various stakeholders across multiple projects to support a range of initiatives and help drive them forward.",
+          "subtle": "Supported cross-functional teams on evaluation initiatives for the open-source framework, improving overall quality and consistency."
+        },
+        {
+          "slot": "D16",
+          "clean": "Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+          "defect": "Was involved in the process of helping to support the evaluation of the reports that were being produced by the pipeline at the time.",
+          "subtle": "Evaluation reports produced by the pipeline were reviewed and improved, and the resulting fixes were adopted as part of the project."
+        },
+        {
+          "slot": "D12",
+          "clean": "Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+          "defect": "Built a diagnostics triage branch that screens 800+ sensor signals per case with ML-extracted features and cut the pending-case backlog by 68% after launch.",
+          "subtle": "Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features."
+        }
+      ],
+      "datesD14Subtle": "Jul 2025 - Jun 2025"
+    }
+  ],
+  "skills": [
+    "Programming: Python, TypeScript, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation"
+  ],
+  "skillsD20": [
+    "Programming: Pyhton, TypeScirpt, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation"
+  ],
+  "skillsD8": "Infrastructure: Rust, Kubernetes, Apache Spark",
+  "unevidenced": "Rust, Kubernetes, Apache Spark",
+  "personalSubtle": "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+  "skillsD20Subtle": [
+    "Programming: Python, TypeScript, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGrpah, RAG, agent evaluation"
+  ],
+  "skillsD8Subtle": [
+    1,
+    "Kubernetes"
+  ],
+  "unevidencedSubtle": "Kubernetes",
+  "v2": {
+    "S1": "Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
+    "S2": "Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "T1": "Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.",
+    "T2": "Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "T3": "Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.",
+    "T4": "Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "N1": {
+      "head": "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country",
+      "dates": "Jun 2025 - Present",
+      "bullets": [
+        "Designed stamping dies for automotive brackets in SolidWorks, cutting the scrap rate from 6% to 4% on two press lines.",
+        "Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier."
+      ]
+    },
+    "A2": "Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.",
+    "desc": {
+      "T1": "GRPO computes each rollout's advantage relative to the other rollouts in its group; with a single rollout per prompt the advantage is always zero and nothing is learned.",
+      "T2": "Assistant-only loss masking excludes tool outputs from the loss, so it cannot teach the model to reproduce them — the method contradicts the stated goal.",
+      "T3": "Dynamic batching raises throughput by waiting to group requests; for single requests it adds queueing delay and cannot lower latency.",
+      "T4": "Mixed precision keeps FP32 master weights and optimizer state, so switching to BF16 mixed precision saves far less than 4x memory."
+    }
+  }
+}

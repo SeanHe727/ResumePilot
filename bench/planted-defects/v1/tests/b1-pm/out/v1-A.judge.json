@@ -1,0 +1,94 @@
+{
+  "file": "tmp/bench/tests/b1-pm/out/A.md",
+  "recall": 8,
+  "found": [
+    "D4",
+    "D9",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D17"
+  ],
+  "coverage": true,
+  "suggestions": 24,
+  "words": 1466,
+  "quotes": 9,
+  "grounded": 8,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3828,
+    "completion_tokens": 14254,
+    "total_tokens": 18082,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13784
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3828
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "The two dispute-feature bullets describe essentially the same requirements, metrics, collaboration, and early delivery work."
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Change the present-tense coordination bullet to match the past-tense role description."
+      },
+      {
+        "id": "D11",
+        "found": true,
+        "evidence": "The line says weekly active users went from 1,000 to 900, then calls that a 90% increase."
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "Another bullet describes merchant onboarding and payments, which does not match the listed regional hospital project. Confirm whether that bullet belongs under Harbor Payments or whether it should describe the hospital work."
+      },
+      {
+        "id": "D13",
+        "found": true,
+        "evidence": "Verify the scope of “managed a team of 40 people” and “owned the company’s P&L,” since those claims imply unusually broad responsibility for an internship."
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "“May 2024 – Jan 2024” is an impossible range."
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "One bullet is generic: “Collaborated with various stakeholders on multiple initiatives…”"
+      },
+      {
+        "id": "D17",
+        "found": true,
+        "evidence": "The final bullet contains a long list of responsibilities and ends with broad outcomes such as improved morale and smoother operations. Separate the responsibilities or replace them with specific results where you have evidence."
+      },
+      {
+        "id": "D20",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": true,
+    "suggestions": 24,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

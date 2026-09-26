@@ -1,0 +1,23 @@
+{
+  "s1:e0": "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+  "s2:e0": "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+  "s2:e0:b0": "Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+  "s2:e0:b1": "Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+  "s2:e0:b2": "Interviewed 25 merchants to size the chargeback problem and turned the findings into the business case that set the next quarter’s roadmap priority.",
+  "s2:e0:b3": "Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+  "s2:e0:b4": "Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+  "s2:e0:b5": "Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+  "s2:e1": "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+  "s2:e1:b0": "Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+  "s2:e1:b1": "Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+  "s2:e1:b2": "Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+  "s2:e1:b3": "Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+  "s3:e0": "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+  "s3:e0:b0": "Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+  "s3:e0:b1": "Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60 user interviews showed students missed pickup windows.",
+  "s3:e0:b2": "Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and removing the need for staff to cover gaps.",
+  "s3:e1": "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+  "s3:e1:b0": "Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+  "s3:e1:b1": "Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+  "s3:e1:b2": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding."
+}

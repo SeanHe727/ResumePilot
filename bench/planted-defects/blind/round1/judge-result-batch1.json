@@ -1,0 +1,134 @@
+[
+  {
+    "case": "case-1",
+    "scores": {
+      "Reviewer 1": {
+        "accuracy": 6,
+        "problems": 6,
+        "explanation": 7,
+        "actionability": 8,
+        "prioritization": 7,
+        "faithfulness": 6
+      },
+      "Reviewer 2": {
+        "accuracy": 9,
+        "problems": 9,
+        "explanation": 9,
+        "actionability": 9,
+        "prioritization": 9,
+        "faithfulness": 8
+      },
+      "Reviewer 3": {
+        "accuracy": 5,
+        "problems": 6,
+        "explanation": 7,
+        "actionability": 7,
+        "prioritization": 5,
+        "faithfulness": 5
+      },
+      "Reviewer 4": {
+        "accuracy": 8,
+        "problems": 9,
+        "explanation": 8,
+        "actionability": 8,
+        "prioritization": 6,
+        "faithfulness": 9
+      }
+    },
+    "ranking": [
+      "Reviewer 2",
+      "Reviewer 4",
+      "Reviewer 1",
+      "Reviewer 3"
+    ],
+    "why": "Reviewer 2 同时发现了百分比计算错误、GRPO 单轨迹与组内相对优势的矛盾，以及 single-request latency 与 dynamic batching 之间需要澄清的技术问题，兼顾准确性和优先级。Reviewer 4 同样抓住了关键技术问题，而且没有依赖大量示范改写，但反馈过于分散，部分要求对一页简历而言缺乏必要性。Reviewer 1 和 Reviewer 3 都在示范改写中保留了有问题的单轨迹 GRPO 训练表述；Reviewer 3 还错误地将已经开始的项目日期判断为未来日期，因此排在最后。"
+  },
+  {
+    "case": "case-2",
+    "scores": {
+      "Reviewer 1": {
+        "accuracy": 7,
+        "problems": 7,
+        "explanation": 8,
+        "actionability": 9,
+        "prioritization": 7,
+        "faithfulness": 6
+      },
+      "Reviewer 2": {
+        "accuracy": 9,
+        "problems": 9,
+        "explanation": 8,
+        "actionability": 8,
+        "prioritization": 6,
+        "faithfulness": 10
+      },
+      "Reviewer 3": {
+        "accuracy": 8,
+        "problems": 9,
+        "explanation": 9,
+        "actionability": 9,
+        "prioritization": 8,
+        "faithfulness": 7
+      },
+      "Reviewer 4": {
+        "accuracy": 7,
+        "problems": 8,
+        "explanation": 8,
+        "actionability": 9,
+        "prioritization": 7,
+        "faithfulness": 6
+      }
+    },
+    "ranking": [
+      "Reviewer 2",
+      "Reviewer 3",
+      "Reviewer 4",
+      "Reviewer 1"
+    ],
+    "why": "Reviewer 2 覆盖了简历中最重要的真实性问题，包括通过改变统计口径制造的配送改善、医院项目中的错误经历，以及 opt-in 对照组可能存在的选择偏差；其建议虽然没有示范改写，但足够具体，不因此扣分。Reviewer 3 的解释和改写更易直接执行，但在改写中加入了原文未证实的 senior leadership、冗余步骤识别和实施建议等事实，影响可信度。Reviewer 4 也发现了主要问题，却在改写中添加未证实的 completion rate 等内容；Reviewer 1 对非随机对照的因果解释不足，并在完整简历改写中加入了未经支持的技能和项目细节。"
+  },
+  {
+    "case": "case-3",
+    "scores": {
+      "Reviewer 1": {
+        "accuracy": 8,
+        "problems": 9,
+        "explanation": 9,
+        "actionability": 9,
+        "prioritization": 8,
+        "faithfulness": 8
+      },
+      "Reviewer 2": {
+        "accuracy": 6,
+        "problems": 6,
+        "explanation": 7,
+        "actionability": 8,
+        "prioritization": 6,
+        "faithfulness": 5
+      },
+      "Reviewer 3": {
+        "accuracy": 8,
+        "problems": 7,
+        "explanation": 8,
+        "actionability": 8,
+        "prioritization": 7,
+        "faithfulness": 7
+      },
+      "Reviewer 4": {
+        "accuracy": 8,
+        "problems": 9,
+        "explanation": 9,
+        "actionability": 8,
+        "prioritization": 6,
+        "faithfulness": 10
+      }
+    },
+    "ranking": [
+      "Reviewer 4",
+      "Reviewer 1",
+      "Reviewer 3",
+      "Reviewer 2"
+    ],
+    "why": "Reviewer 4 抓住了 Sharpe 年化错误、25% 与 33% 的计算矛盾，以及嵌套模型预测比较中标准 Diebold–Mariano 检验可能不适用的关键方法论问题，且没有通过编造结果来补全简历；不足是次要建议过多，并提出了不必要的技能删除和项目间隔解释要求。Reviewer 1 的覆盖范围与优先级也很好，尤其发现了研究助理任期与工作量的不协调，但其 HAC 标准误示范并不能充分解决嵌套模型检验问题。Reviewer 3 漏掉了这一重要方法论缺陷；Reviewer 2 不仅没有发现 0.20 到 0.15 的百分比错误，还在改写中延续有问题的检验表述，并加入未经证实的滚动验证和彻底消除数据泄漏等内容。"
+  }
+]

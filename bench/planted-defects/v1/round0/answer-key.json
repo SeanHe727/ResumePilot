@@ -1,0 +1,12 @@
+[
+  {"id":"D1","line":"Responsible for the monitoring dashboards of the diagnostics service.","defect":"Duty-style opener: 'Responsible for' names an assigned duty, with no action taken and no outcome."},
+  {"id":"D2","line":"Improved model performance by 35%.","defect":"A percentage with no metric and no baseline: which performance measure, compared against what."},
+  {"id":"D3","line":"Single-handedly built the company's entire ML platform used by every team.","defect":"Implausible overclaim for an intern: sole credit for an entire company-wide platform."},
+  {"id":"D4","line":"Fine-tuned a domain adapter that raised claim correctness, citation quality and tool-use accuracy on held-out diagnostic cases compared with the base model.","defect":"Duplicate of the previous bullet (the 7%/9%/8% fine-tuning result) in the same entry, restated in other words."},
+  {"id":"D5","line":"Leveraged cutting-edge AI synergies to drive innovation across the organization.","defect":"Empty buzzwords with no concrete action, subject matter or result."},
+  {"id":"D6","line":"I worked on improving the latency of our API and I also wrote tests for it.","defect":"First-person pronoun and a full conversational sentence; weak verb ('worked on') and no result."},
+  {"id":"D7","line":"EXPERIENCE section order","defect":"Experience is not in reverse-chronological order: the older Eastern Robotics internship (2023-2024) is listed before the newer Mobility Systems internship (2024-2025)."},
+  {"id":"D8","line":"SKILLS: Rust, Kubernetes, Apache Spark","defect":"Skills listed with no supporting evidence anywhere in the experience or projects (Rust, Kubernetes, Apache Spark)."},
+  {"id":"D9","line":"Builds and maintains the CI pipeline for the perception team's model releases.","defect":"Present tense for a role that has ended (Sep 2023 - Feb 2024); should be past tense."},
+  {"id":"D10","line":"B.S. Jun 2022 to first role Sep 2023","defect":"An unexplained gap of about 15 months between finishing the B.S. (Jun 2022) and the first role (Sep 2023)."}
+]

@@ -1,0 +1,118 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/C.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 26,
+  "words": 1225,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 20,
+  "inventedNumbers": [
+    "50",
+    "50"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3195,
+    "completion_tokens": 11460,
+    "total_tokens": 14655,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10273
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 2939
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Coordinated … and **prepares** the forecast pack"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Patient intake at 4 clinics was mapped… Better: Mapped patient intake workflows across four clinics and redesigned the intake form..."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Specify whether this was a relative increase or a percentage-point increase, and ideally mention how it was measured."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "This bullet under the hospital practicum is clearly copied from Harbor Payments... Delete it. The same accomplishment is already covered under Harbor Payments."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "This section is currently weak because it focuses on meetings and deliverables rather than outcomes."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "These bullets contradict each other... Present a logical sequence: discovery → prioritization → requirements and metrics → launch."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "This sounds too broad and unsupported: > Set the company’s logistics strategy, adopted across every region and business line."
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove date of birth and nationality... unnecessary and may introduce bias."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 26,
+    "rewrites": [
+      "Riley Chen | Metro City, USA\n+1… | email… | LinkedIn…",
+      "Interviewed 25 merchants to quantify chargeback pain points, building the business case that made dispute self-service a next-quarter roadmap priority.",
+      "Defined product requirements and success metrics for dispute self-service, aligning engineering, risk, and support to launch two weeks ahead of schedule.",
+      "Coordinated the quarterly S&OP review across sales, finance, and operations and prepared the forecast pack for each meeting.",
+      "Increased checkout conversion 35% relative to baseline by replacing a three-step flow with a one-page checkout across the merchant base.",
+      "Increased checkout conversion 35% in an A/B test by replacing a three-step flow with a one-page checkout.",
+      "Led weekly engineering and support triage, helping resolve 140 onboarding issues and reduce the open-ticket backlog by 50% over the summer.",
+      "Redesigned merchant onboarding around a single verification step, reducing median time to first payment from nine days to four for 2,300 merchants in the pilot region.",
+      "Developed a logistics strategy covering warehouse capacity, routing, and service levels; secured adoption across X regions and Y business lines.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations, consolidating regional forecasts into executive planning materials and improving forecast accuracy by X%.",
+      "Reduced warehouse picking errors 30% at two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
+      "Led rollout of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.",
+      "Launched a surplus-food pickup app with two dining halls, reaching 3,100 students and redistributing nine metric tons of food in its first year.",
+      "Grew weekly active users from 400 to 1,150 by introducing pickup reminders after 60 user interviews identified missed pickup windows as a key barrier.",
+      "Designed a volunteer scheduling system that filled 95% of weekly pickup shifts and eliminated the need for dining staff to cover gaps.",
+      "Led weekly working sessions with clinic managers to identify outpatient scheduling and intake bottlenecks across four clinics.",
+      "Mapped patient intake workflows across four clinics and redesigned the intake form, with the new process adopted by front-desk teams.",
+      "**Northfield School of Management**, Metro City, USA\nMaster of Business Administration, June 2025\n\n**Lakeview University**, Lake City, USA\nB.A. in Economics, June 2018",
+      "**Product:** Product discovery, roadmapping, PRDs, A/B testing, user interviews\n**Analytics:** SQL, Amplitude, Excel\n**Tools:** Jira, Figma",
+      "**Harbor Payments — Associate Product Manager Intern**\nMetro City, USA | Jun 2024–Aug 2024\n\n- Increased checkout conversion 35% relative to baseline by replacing a three-step flow with a one-page checkout.\n- Redesigned merchant onboarding around a single verification step, reducing median time to first payment from nine days to four for 2,300 merchants in the pilot region.\n- Interviewed 25 merchants to quantify chargeback pain points, building the business case that made dispute self-service a next-quarter roadmap priority.\n- Defined product requirements and success metrics for dispute self-service, aligning engineering, risk, and support to launch two weeks ahead of schedule.\n- Led weekly engineering and support triage, helping resolve 140 onboarding issues and reduce the open-ticket backlog by 50%."
+    ],
+    "falsePositives": []
+  }
+}

@@ -208,6 +208,10 @@ async function runTurn(
       systemPrompt: window.systemPrompt,
       messages: window.messages,
       tools: deps.tools.getSchemasFor(MAIN_AGENT_TOOLS.filter((n) => deps.tools.has(n))),
+      // Medium, not the high every untasked call fell through to. The
+      // coordinator dispatches and relays; it judges nothing, and its
+      // reasoning was a fifth of a review's cost.
+      effort: 'medium',
       abortSignal: session.abortController.signal,
     });
 
@@ -369,6 +373,15 @@ const RUN_TOGETHER: ReadonlySet<string> = new Set([
 const REVIEWS_AT_ONCE = 4;
 
 /**
+ * Content reads, at most two at a time, within that ceiling.
+ *
+ * Four started together, and none could use the cached prefix of the others
+ * because none had finished its first request. Two at a time lets the second
+ * pair start warm.
+ */
+const PER_TOOL_AT_ONCE: Readonly<Record<string, number>> = { review_content: 2 };
+
+/**
  * Runs the calls in the order issued, except that a run of consecutive reviews
  * goes at once. Results come back in the order the calls were issued, which is
  * the order the model will read them in.
@@ -379,6 +392,15 @@ export async function runInBatches<T>(
 ): Promise<T[]> {
   const results: T[] = new Array(calls.length);
   const pool = new SemaphorePool(REVIEWS_AT_ONCE);
+  const narrower = new Map(
+    Object.entries(PER_TOOL_AT_ONCE).map(([name, n]) => [name, new SemaphorePool(n)] as const),
+  );
+  // The narrower pool first, so a call waiting for its own kind holds no place
+  // in the shared ceiling.
+  const start = (call: ToolCall) => {
+    const own = narrower.get(call.name);
+    return own ? own.run(() => pool.run(() => run(call))) : pool.run(() => run(call));
+  };
   let i = 0;
   while (i < calls.length) {
     if (!RUN_TOGETHER.has(calls[i]!.name)) {
@@ -388,9 +410,9 @@ export async function runInBatches<T>(
     }
     let end = i;
     while (end < calls.length && RUN_TOGETHER.has(calls[end]!.name)) end += 1;
-    const start = i;
-    const batch = await pool.runAll(calls.slice(start, end).map((call) => () => run(call)));
-    batch.forEach((result, k) => { results[start + k] = result; });
+    const first = i;
+    const batch = await Promise.all(calls.slice(first, end).map((call) => start(call)));
+    batch.forEach((result, k) => { results[first + k] = result; });
     i = end;
   }
   return results;

@@ -11,7 +11,8 @@ import type {
 import { renderResume } from '../document/index.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
-import { buildWordingMessage } from '../tools/analyze-wording.js';
+import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
+import { buildTimeline, renderTimeline } from '../document/timeline.js';
 import { SemaphorePool } from './pool.js';
 import { ROLES } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
@@ -165,12 +166,19 @@ export class DefaultOrchestrator {
     briefing?: Briefing,
   ): Promise<NarrativeAssessment | null> {
     if (resume.sections.every((section) => section.entries.length === 0)) return null;
+    const timeline = renderTimeline(buildTimeline(resume));
 
     const [result] = await this.parallel([
       {
         agentConfig: ROLES['narrative']!,
         input: 'Read these entries in sequence and return the JSON described above.',
-        context: { entries: renderResume(resume), ...briefingContext(briefing) },
+        // The dates worked out in code, beside the text they came from: the
+        // reader judges what they mean, and no longer has to compute them.
+        context: {
+          entries: renderResume(resume),
+          ...(timeline ? { timeline } : {}),
+          ...briefingContext(briefing),
+        },
       },
     ]);
 
@@ -181,7 +189,8 @@ export class DefaultOrchestrator {
       overallScore: numeric(raw.overallScore),
       arc: typeof raw.arc === 'string' ? raw.arc : '',
       gaps: strings(raw.gaps),
-      orderingNotes: strings(raw.orderingNotes),
+      orderingNotes: strings(raw.orderingNotes).filter((note) => !confirmsOrder(note)),
+      unsupportedSkills: strings(raw.unsupportedSkills),
       withinEntries: readEntryReads(resume, raw.withinEntries),
     };
   }
@@ -447,6 +456,17 @@ function readSubstance(
   return normalised.data ?? null;
 }
 
+/**
+ * A note that the order is already right, rather than a change to make.
+ *
+ * The prompt asks for changes only and the reader still sends these. Measured
+ * three times, the last as a report's second-most-important point: "Keep
+ * Education before Experience".
+ */
+export function confirmsOrder(note: string): boolean {
+  return /^\s*(keep|leave|retain|maintain)\b/i.test(note) || /\balready (?:in|correct|right|appropriate|chronological)\b/i.test(note);
+}
+
 /** Ids are shown bracketed, so they come back bracketed. */
 function bareId(raw: unknown): string {
   return String(raw ?? '').replace(/[[\]]/g, '').trim();
@@ -470,9 +490,10 @@ function readWording(
   // Left alone it matches no bullet in the document and every wording score is
   // keyed to nothing. The sibling reader was fixed for this — in the tool that
   // is no longer reachable, while this path, the one that runs, was not.
-  const rows = (perBullet as WordingDiagnosis['perBullet']).map((row) => ({
+  const rows = (perBullet as Array<WordingDiagnosis['perBullet'][number] & { issues: unknown }>).map((row) => ({
     ...row,
     bulletId: bareId(row.bulletId),
+    ...wordingIssues(row.issues),
   }));
   const scores = rows.flatMap((b) => [b.verbStrength?.score ?? 0, b.concision?.score ?? 0]);
 

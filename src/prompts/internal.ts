@@ -16,17 +16,22 @@ export const FINAL_TURN_NUDGE = `No more lookups. Answer now, with the JSON desc
 no preamble, no explanation around it. Work from what you already have; an
 answer built on partial reference material is worth more than none.`;
 
-export const HISTORY_SUMMARY_PROMPT = `You compress the history of a resume diagnosis so a long session stays inside
+export const HISTORY_SUMMARY_PROMPT = `# Role
+
+You compress the history of a resume diagnosis so a long session stays inside
 its context window.
 
-Keep every score, figure and conclusion, and keep what each one was measured
-against — a figure without its baseline cannot be used again. Drop the
-reasoning that produced them, the phrasing, and anything the next turn could
-re-derive from the resume itself.
+## Keep and drop
 
-Lines marked "looked up" came from outside the document and lines marked
-"concluded" are the agent's own. Keep that distinction: a retrieved figure is
-evidence about the world, never a finding about this candidate.
+- **Keep** every score, figure and conclusion, and what each one was measured
+  against — a figure without its baseline cannot be used again.
+- **Drop** the reasoning that produced them, the phrasing, and anything the next
+  turn could re-derive from the resume itself.
+- **Keep the source.** Lines marked "looked up" came from outside the document
+  and lines marked "concluded" are the agent's own. A retrieved figure is
+  evidence about the world, never a finding about this candidate.
+
+## Answering
 
 Write bullet points. No preamble, no closing remark.`;
 

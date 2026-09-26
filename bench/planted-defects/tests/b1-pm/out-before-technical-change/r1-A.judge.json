@@ -1,0 +1,92 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 6,
+  "found": [
+    "A1",
+    "A4",
+    "S2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 9,
+  "words": 931,
+  "quotes": 4,
+  "grounded": 4,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3089,
+    "completion_tokens": 7913,
+    "total_tokens": 11002,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7572
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 2833
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Clarify whether the 35% checkout-conversion improvement is relative or percentage-point growth and identify its baseline or comparison group."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Fix the MBA Consulting Practicum entry. Two bullets concern hospital scheduling, but the third refers to 'new merchants,' 'first payment,' and 2,300 merchants."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "The consulting bullet describing weekly working sessions"
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Set the company’s logistics strategy claims broad ownership without identifying the decision or initiative"
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "Explain the June 2018–March 2019 date gap. The resume currently leaves this period unexplained."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove age and nationality details from the résumé because they are excluded by convention."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 9,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

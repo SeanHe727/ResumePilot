@@ -29,6 +29,8 @@ export async function writeFullReport(
   state: ResumeSessionState,
   findings: readonly SourceFinding[],
   ctx: ToolContext,
+  /** Words the page has left, when known. The write-up is fitted to it. */
+  room?: number,
 ): Promise<FullReport | null> {
   const plan = report.improvementPlan;
   const shortOf = new Map(aliasFindings(findings).named.map(({ short, finding }) => [finding.id, short]));
@@ -87,6 +89,15 @@ export async function writeFullReport(
       report.format.issues.map((i) => `- ${i}`).join('\n'),
   ];
 
+  // What the content reader found strong, verbatim and by short name. The
+  // writer picks up to three by name; the words stay the reader's.
+  const strengthsOffered = current.content.current.flatMap((entry) =>
+    entry.bullets.flatMap((bullet) => (bullet.strengths ?? []).map((text) => ({ bulletId: bullet.bulletId, text }))),
+  );
+  const strengthByName = new Map<string, { bulletId: string; text: string }>(
+    strengthsOffered.map((s, i) => [`s${i + 1}`, s]),
+  );
+
   // Every finding, under a short alias the model has to copy.
   //
   // The ids are uuids, which is right for storing and expensive to echo: of
@@ -115,7 +126,7 @@ export async function writeFullReport(
     .map((entry) => `- ${entry.id}: ${withoutContactDetails(entry.headerLines.join(' | '))}`)
     .join('\n');
 
-  const response = await ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => ctx.queryEngine.query({
     task: 'generate_report',
     systemPrompt: FULL_REPORT_PROMPT,
     messages: [
@@ -130,6 +141,12 @@ export async function writeFullReport(
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
           `The findings, by id:\n${offered}\n\n` +
           `The entries a point can be filed under:\n${targets}\n\n` +
+          (strengthsOffered.length > 0
+            ? `What the content reader found strong, by name:\n` +
+              [...strengthByName].map(([name, s]) => `- ${name} [${s.bulletId}] ${s.text}`).join('\n') +
+              `\n\nPick up to three of these, by name, that a candidate should keep doing — the ` +
+              `ones a recruiter would notice first. Names only; their words are kept as written.\n\n`
+            : '') +
           `Each section says what it is about. Use { "type": "entry", "entryId": "<one of the ids above>" } ` +
           `for a section about one entry, and { "type": "resume" } for anything that spans the whole ` +
           `document — dates, ordering, what the file itself does. Nothing else goes in "about", and no ` +
@@ -137,6 +154,7 @@ export async function writeFullReport(
           `Return JSON of exactly this shape:
 
 {
+  "strengths": ["s1"],
   "sections": [
     {
       "about": { "type": "entry", "entryId": "one of the entry ids listed above" },
@@ -146,16 +164,63 @@ export async function writeFullReport(
           "why": "what a reader would do differently knowing it",
           "evidence": "the shortest phrase from the résumé that shows the problem — a few words, not the line",
           "from": ["the short ids of the findings this point rests on, exactly as listed above — several where they agree, and none that is not on that list"],
-          "cost": "a number of words, like 'about 6 words' — or 'no words' where the fix removes or moves text rather than adding it. Not a description of the work."
+          "cost": "a number of words, like 'about 6 words' to add, 'saves about 10 words' for a cut, or 'no words' where text only moves. Not a description of the work."
         }
       ]
     }
   ]
 }`,
       },
+      ...(followUp
+        ? [
+            { role: 'assistant' as const, content: followUp.previous },
+            { role: 'user' as const, content: followUp.note },
+          ]
+        : []),
     ],
     abortSignal: ctx.abortSignal,
   });
+
+  // One look at the page before it is handed over. The selection chooses a
+  // little past the room on purpose, so the writing has something to trim
+  // rather than something to pad; what it wrote is measured by its own costs
+  // and, well outside the room either way, it is asked once to fit.
+  let response = await ask();
+  const firstParsed = parseJsonObject(response.content ?? '');
+  if (room !== undefined && Array.isArray(firstParsed?.sections) && firstParsed.sections.length > 0) {
+    const first = pageWords(firstParsed);
+    const count = pointCount(firstParsed);
+    // Points as well as words. Cuts count against the words, so a write-up
+    // full of small cuts could read as short and be asked to say more.
+    // Measured: 27 words under at 31 points, asked to expand, came back at 39.
+    const note =
+      count > 18
+        ? `What you wrote has ${count} points. Bring it to about fifteen: merge points that ask the ` +
+          `same of a line, and drop the least valuable. Keep the room in view: about ${room} words. ` +
+          `Same JSON shape.`
+        : first > room * 1.1
+        ? `What you wrote adds about ${first} words and the page has about ${room}. Rewrite it to fit: ` +
+          `shorten points, merge the ones that ask the same of a line, and drop the least valuable. ` +
+          `Same JSON shape.`
+        : first < room * 0.6 && room > 20 && count < 12
+          ? `What you wrote adds about ${first} words and the page has about ${room}. There is room to ` +
+            `say more: give the points that matter most their fuller fix, and split a point that bundles ` +
+            `two different fixes. Do not add anything the groups do not support. Same JSON shape.`
+          : null;
+    if (note) {
+      const second = await ask({ previous: response.content ?? '', note });
+      ctx.trace?.event(() => ({
+        phase: 'decision',
+        purpose: 'report fitted to the page',
+        input: { room, wordsBefore: first, pointsBefore: count },
+        output: {
+          wordsAfter: pageWords(parseJsonObject(second.content ?? '')),
+          pointsAfter: pointCount(parseJsonObject(second.content ?? '')),
+        },
+      }));
+      if (parseJsonObject(second.content ?? '')?.sections) response = second;
+    }
+  }
 
   const parsed = parseJsonObject(response.content ?? '');
   const rawSections = Array.isArray(parsed?.sections) ? parsed.sections : [];
@@ -215,6 +280,30 @@ export async function writeFullReport(
   const invented: string[] = [];
   const links: Array<{ reportPointId: string; sourceFindingIds: string[] }> = [];
 
+  // Where a point goes, worked out from what it rests on. Measured: a point
+  // about the agent runtime's hardening, citing only findings on that entry,
+  // was filed by the writer under the evaluation framework below it.
+  const findingById = new Map(findings.map((f) => [f.id, f] as const));
+  const entryOfLine = new Map<string, string>();
+  for (const entry of entries.values()) {
+    entryOfLine.set(entry.id, entry.id);
+    for (const bullet of entry.bullets) entryOfLine.set(bullet.id, entry.id);
+  }
+  const fileUnder = (sources: SourceFinding[], chosen: string): string => {
+    const owners = new Set(
+      sources.flatMap((f) => {
+        const owner = entryOfLine.get(f.target.replace(/, wording$/, ''));
+        return owner ? [owner] : [];
+      }),
+    );
+    // One entry: that one. None: the writer's choice, which is the résumé as a
+    // whole unless it named a real entry. Several: the writer's choice if it is
+    // one of them, otherwise the résumé as a whole.
+    if (owners.size === 1) return [...owners][0]!;
+    if (owners.size === 0) return chosen;
+    return owners.has(chosen) ? chosen : 'resume';
+  };
+
   const placed = drafts.map((draft) => {
     // Checked, not taken. A source that was never offered is dropped and said
     // out loud: a provenance chain nobody verifies is a chain of whatever the
@@ -228,7 +317,8 @@ export async function writeFullReport(
     ];
     invented.push(...draft.claimed.filter((id) => !byId.has(id)));
 
-    const { about, claimed: _claimed, ...rest } = draft;
+    const { about: chosen, claimed: _claimed, ...rest } = draft;
+    const about = fileUnder(sourceFindingIds.map((id) => findingById.get(id)!), chosen);
     const point: FullReportPoint = {
       id: `report_point_${randomUUID()}`,
       sourceFindingIds,
@@ -288,7 +378,54 @@ export async function writeFullReport(
     },
   }));
 
-  return { sections: built };
+  // The first three groups the selection chose, as the points that rest on
+  // them: where to start, worked out rather than written.
+  const startHere = (report.improvementPlan.groups ?? [])
+    .slice(0, 3)
+    .flatMap((group) => {
+      const point = accepted.find((p) => p.sourceFindingIds.some((id) => group.findingIds.includes(id)));
+      return point ? [point.id] : [];
+    });
+  // One strength per line. Measured: the same bullet praised twice in a list
+  // of three.
+  const praised = new Set<string>();
+  const strengths = (Array.isArray(parsed?.strengths) ? parsed.strengths : [])
+    .flatMap((name) => {
+      const s = typeof name === 'string' ? strengthByName.get(name.trim()) : undefined;
+      if (!s || praised.has(s.bulletId)) return [];
+      praised.add(s.bulletId);
+      return [`${s.bulletId}: ${s.text}`];
+    })
+    .slice(0, 3);
+
+  return {
+    ...(strengths.length > 0 ? { strengths } : {}),
+    ...(startHere.length > 0 ? { startHere: [...new Set(startHere)] } : {}),
+    sections: built,
+  };
+}
+
+/**
+ * What a write-up does to the page, by the costs it gave its own points:
+ * "about 6 words" adds six, "saves about 10 words" takes ten off.
+ */
+export function pageWords(parsed: Record<string, unknown> | null): number {
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  let net = 0;
+  for (const section of sections as Array<{ points?: Array<{ cost?: unknown }> }>) {
+    for (const point of section.points ?? []) {
+      const cost = typeof point.cost === 'string' ? point.cost : '';
+      const n = Number(/(\d+)/.exec(cost)?.[1] ?? 0);
+      net += /save|cut|remove/i.test(cost) ? -n : n;
+    }
+  }
+  return net;
+}
+
+/** How many points a write-up holds. */
+export function pointCount(parsed: Record<string, unknown> | null): number {
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  return (sections as Array<{ points?: unknown[] }>).reduce((n, s) => n + (s.points?.length ?? 0), 0);
 }
 
 /**

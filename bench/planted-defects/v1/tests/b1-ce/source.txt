@@ -1,0 +1,31 @@
+Jordan Lee
++1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee
+Age: 26 | Marital status: Single | Hobbies: watching TV, sleeping in
+EDUCATION
+Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026
+Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022
+EXPERIENCE
+Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Oct 2023 - Jul 2024
+- Responsible for the monitoring dashboards of the diagnostics service and for supporting the on-call team with weekly reports.
+- I worked on improving the latency of our API and I also wrote tests for it, which I think made the service a lot faster for users.
+- Maintained the CI pipeline for the perception team's model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.
+- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.
+Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
+- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.
+- Improved model performance by 35% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.
+- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, keeping every finding traceable to its source data.
+- Applied GRPO with grouped tool-use rollouts and a composite reward, cutting end-to-end latency 5% versus the SFT baseline with no loss in diagnostic accuracy.
+- Single-handedly built the company's entire ML platform, which is now used by every team across engineering, operations and research.
+- Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.
+PROJECTS
+Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
+- Leveraged cutting-edge AI synergies and next-generation agentic paradigms to drive innovation and unlock value across the organization.
+- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.
+- Led the Project Falcon migration to NGX on the KRT stack, coordinating the cutover of the Orion and Vega pipelines.
+Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
+- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.
+- Was involved in the process of helping to support the evaluation of the reports that were being produced by the pipeline at the time.
+- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.
+SKILLS
+Programming: Python, TypeScript, SQL, Bash, Git
+ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation

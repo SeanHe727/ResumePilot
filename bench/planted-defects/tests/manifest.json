@@ -1,0 +1,164 @@
+[
+  {
+    "id": "b1-ce",
+    "batch": 1,
+    "base": "ce",
+    "defects": [
+      "W5",
+      "W1",
+      "A2",
+      "A3",
+      "S3",
+      "S1",
+      "T1",
+      "T3",
+      "N2",
+      "N4"
+    ],
+    "bottom": 143
+  },
+  {
+    "id": "b1-pm",
+    "batch": 1,
+    "base": "pm",
+    "defects": [
+      "W3",
+      "W4",
+      "A1",
+      "A4",
+      "S4",
+      "S2",
+      "T4",
+      "T2",
+      "N5",
+      "N3"
+    ],
+    "bottom": 154
+  },
+  {
+    "id": "b1-quant",
+    "batch": 1,
+    "base": "quant",
+    "defects": [
+      "W6",
+      "W2",
+      "A3",
+      "A2",
+      "S3",
+      "S1",
+      "T3",
+      "T1",
+      "N1",
+      "N4"
+    ],
+    "bottom": 84
+  },
+  {
+    "id": "b2-ce",
+    "batch": 2,
+    "base": "ce",
+    "defects": [
+      "W5",
+      "W3",
+      "A4",
+      "A1",
+      "S2",
+      "S4",
+      "T2",
+      "T4",
+      "N3",
+      "N5"
+    ],
+    "bottom": 143
+  },
+  {
+    "id": "b2-pm",
+    "batch": 2,
+    "base": "pm",
+    "defects": [
+      "W1",
+      "W4",
+      "A3",
+      "A2",
+      "S3",
+      "S1",
+      "T3",
+      "T1",
+      "N1",
+      "N2"
+    ],
+    "bottom": 95
+  },
+  {
+    "id": "b2-quant",
+    "batch": 2,
+    "base": "quant",
+    "defects": [
+      "W6",
+      "W2",
+      "A4",
+      "A1",
+      "S4",
+      "S2",
+      "T4",
+      "T2",
+      "N4",
+      "N1"
+    ],
+    "bottom": 107
+  },
+  {
+    "id": "b3-ce",
+    "batch": 3,
+    "base": "ce",
+    "defects": [
+      "W5",
+      "W3",
+      "A3",
+      "A2",
+      "S3",
+      "S1",
+      "T3",
+      "T1",
+      "N3",
+      "N2"
+    ],
+    "bottom": 143
+  },
+  {
+    "id": "b3-pm",
+    "batch": 3,
+    "base": "pm",
+    "defects": [
+      "W2",
+      "W4",
+      "A4",
+      "A1",
+      "S4",
+      "S2",
+      "T4",
+      "T2",
+      "N5",
+      "N2"
+    ],
+    "bottom": 154
+  },
+  {
+    "id": "b3-quant",
+    "batch": 3,
+    "base": "quant",
+    "defects": [
+      "W1",
+      "W6",
+      "A2",
+      "A3",
+      "S1",
+      "S3",
+      "T1",
+      "T3",
+      "N4",
+      "N3"
+    ],
+    "bottom": 143
+  }
+]
