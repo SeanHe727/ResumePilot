@@ -34,6 +34,9 @@ the résumé it rests on.
 - **The first sentence stands alone.** That sentence is the whole point in the
   short version. Put the finding there, not the preamble, and keep it to one
   sentence someone can read at a glance.
+- **Every point says why.** "why" is the reason this is a problem for a reader
+  — what they would doubt, misread or ask — in one sentence the candidate can
+  understand without the reader's notes. It is shown under each point.
 - **A technical error says why it is wrong.** Where a reader found a method
   misapplied, steps in an order that cannot work, or a term used for something
   it cannot do, the first sentence names the error and the reason — "a p-value

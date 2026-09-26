@@ -68,12 +68,14 @@ describe('the brief and the full review', () => {
     }
   });
 
-  it('keeps the reasoning and the quotes out of the brief', async () => {
-    // The brief is read through; the full one is looked things up in.
+  it('gives each point its reason in the brief, and keeps the quotes for the full one', async () => {
+    // The brief is read through; the full one is looked things up in. The
+    // reason is in both: measured, a brief of instructions alone scored lowest
+    // on explanation with two blind judges.
     const brief = renderBrief(REPORT, 'cv.pdf');
     const point = REPORT.full!.sections[0]!.points[0]!;
 
-    expect(brief).not.toContain(point.why);
+    expect(brief).toContain(point.why);
     expect(brief).not.toContain(point.evidence!);
   });
 

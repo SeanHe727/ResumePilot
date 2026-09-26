@@ -4,7 +4,12 @@ EDUCATION
 Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025
 Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018
 EXPERIENCE
-Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2019 - Aug 2023
+Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present
+- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping
+dry-dock time under 5 days per job.
+- Maintained hydraulic winch systems and logged service records for the harbor authority’s
+annual inspections.
+Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023
 - Owned the weekly carrier scorecards for the regional managers and the monthly review meeting
 that discussed them.
 - Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor
@@ -27,11 +32,6 @@ drafting a business case with finance, set the next quarter’s roadmap priority
 lift as the effect on merchants’ customers.
 - Presented the onboarding results and a follow-up roadmap to the payments leadership team,
 who funded the rollout to two more regions.
-Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2018 - Jun 2019
-- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping
-dry-dock time under 5 days per job.
-- Maintained hydraulic winch systems and logged service records for the harbor authority’s
-annual inspections.
 PROJECTS
 Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
 - Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9

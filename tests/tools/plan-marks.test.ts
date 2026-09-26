@@ -182,3 +182,25 @@ describe('the write-up is fitted to the page', () => {
     expect(full?.sections[0]?.points[0]?.what).toBe('b');
   });
 });
+
+describe('each point once', () => {
+  it('does not repeat a start-here point under its entry', async () => {
+    const { renderBrief } = await import('../../src/skills/render-full.js');
+    const point = (id: string, what: string, why: string) => ({ id, what, why, from: [], sourceFindingIds: [] });
+    const report = {
+      summary: { overallScore: 80, formatScore: 100, substanceAvg: 70 },
+      perEntry: [], format: { overallScore: 100, issues: [] },
+      improvementPlan: { immediate: [], shortTerm: [], longTerm: [] },
+      full: {
+        startHere: ['p1'],
+        sections: [{ heading: 'A', points: [point('p1', 'fix the maths', 'a reader checks it'), point('p2', 'name the tool', 'it is vague')] }],
+      },
+    } as never;
+
+    const text = renderBrief(report, 'r.pdf');
+
+    expect(text.match(/fix the maths/g)).toHaveLength(1);
+    expect(text).toContain('1. fix the maths\n   a reader checks it');
+    expect(text).toContain('- name the tool\n  it is vague');
+  });
+});

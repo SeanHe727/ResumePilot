@@ -91,8 +91,18 @@ job is to decide which of them buy the most.
 - **longTerm:** no amount of rewriting closes it. The experience itself is
   missing.
 
-Order the groups by how much the change would move a reader's judgement. Mark
-every finding once: chosen in a group, or set aside with a reason. No preamble.
+List the groups in order of importance, whatever their kind: the first three
+become the candidate's top priorities. An error a reader in the field would
+catch — a method misapplied, figures that do not add up, a claim the page
+contradicts — comes before a wording fix. Measured: a review opened with a
+minor wording point while the technical errors it had found sat further down.
+
+A finding that repeats one you chose — the same problem raised by another
+reader — goes into that group, not into setAside. A report usually holds about
+twelve to fifteen points; where you have more, merge before you add.
+
+Mark every finding once: chosen in a group, or set aside with a reason. No
+preamble.
 
 ## Answering
 

@@ -44,11 +44,20 @@ const SET_ASIDE_SHOWN = 10;
 
 export function renderBrief(report: DiagnosisReport, sourcePath: string): string {
   const lines = [...head(report, sourcePath, 'Review'), ...opening(report)];
+  // Each point once. Measured, by two blind judges: the same point in the
+  // opening, under its entry and again in the set-aside list read as a review
+  // repeating itself.
+  const first = new Set(report.full?.startHere ?? []);
 
   for (const section of report.full?.sections ?? []) {
+    const points = section.points.filter((p) => !first.has(p.id));
+    if (points.length === 0) continue;
     lines.push(`## ${section.heading}`, '');
-    for (const point of section.points) {
+    for (const point of points) {
       lines.push(`- ${point.what}${point.cost ? ` *(${point.cost})*` : ''}`);
+      // Why it matters, with what to do. Measured: a brief of instructions
+      // alone scored lowest on explanation with both blind judges.
+      if (point.why) lines.push(`  ${point.why}`);
     }
     lines.push('');
   }
@@ -84,9 +93,16 @@ function opening(report: DiagnosisReport): string[] {
   const full = report.full;
   if (!full) return [];
   const points = new Map(full.sections.flatMap((s) => s.points).map((p) => [p.id, p] as const));
-  const first = (full.startHere ?? []).flatMap((id) => (points.has(id) ? [points.get(id)!.what] : []));
+  const first = (full.startHere ?? []).flatMap((id) => (points.has(id) ? [points.get(id)!] : []));
   const lines: string[] = [];
-  if (first.length > 0) lines.push('## Start here', '', ...first.map((what, i) => `${i + 1}. ${what}`), '');
+  if (first.length > 0) {
+    lines.push(
+      '## Start here',
+      '',
+      ...first.flatMap((p, i) => [`${i + 1}. ${p.what}`, ...(p.why ? [`   ${p.why}`] : [])]),
+      '',
+    );
+  }
   if ((full.strengths ?? []).length > 0) {
     lines.push('## Already working', '', ...full.strengths!.map((s) => `- ${s}`), '');
   }

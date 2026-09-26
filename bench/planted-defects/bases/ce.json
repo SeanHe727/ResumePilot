@@ -162,8 +162,7 @@
     "T4": "Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
     "N1": {
       "head": "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country",
-      "dates": "Aug 2022 - Jun 2023",
-      "shift": "Jul 2023 - Jul 2024",
+      "dates": "Jun 2025 - Present",
       "bullets": [
         "Designed stamping dies for automotive brackets in SolidWorks, cutting the scrap rate from 6% to 4% on two press lines.",
         "Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier."

@@ -71,8 +71,9 @@ def pick(n, rng):
         for ts in CATEGORIES.values():
             chosen += sorted(ts, key=lambda t: (used[t], rng.random()))[:2]
         slots = [SLOT[t] for t in chosen if t in SLOT]
-        # A line can carry one planted defect, and the unrelated entry and the
-        # gap both move the same role's start date.
+        # A line can carry one planted defect. The unrelated entry and the gap
+        # are kept apart as well: no longer necessary, but dropping the rule
+        # would change every draw from this seed.
         if len(slots) != len(set(slots)) or {'N1', 'N3'} <= set(chosen):
             rng.random()
             used = {t: used[t] + (0.01 if t in chosen else 0) for t in used}
@@ -121,17 +122,18 @@ def build(base, defects):
     if 'N3' in defects:
         exp1_dates = exp1['datesD10Subtle']
         note('N3', f"{base['graduated']} graduation to {exp1_dates.split(' - ')[0]}")
-    blocks = [entry(exp0, exp0['dates']), None]
-    if 'N1' in defects:
-        exp1_dates = v2['N1']['shift']
-    blocks[1] = entry(exp1, exp1_dates)
-    if 'N1' in defects:
-        n1 = v2['N1']
-        blocks.append([('text', f"{n1['head']} | {n1['dates']}")] + [('bullet', b) for b in n1['bullets']])
-        note('N1', f"{n1['head']} | {n1['dates']}")
+    blocks = [entry(exp0, exp0['dates']), entry(exp1, exp1_dates)]
     if 'N2' in defects:
         blocks[0], blocks[1] = blocks[1], blocks[0]
         note('N2', 'EXPERIENCE section order')
+    # The unrelated role is the most recent one and listed first, so no other
+    # role is shortened to make room for it. Measured: shifting a role to fit
+    # it in left three months carrying a paper, a semester of teaching and a
+    # year of downloads — an inconsistency the answer key did not list.
+    if 'N1' in defects:
+        n1 = v2['N1']
+        blocks.insert(0, [('text', f"{n1['head']} | {n1['dates']}")] + [('bullet', b) for b in n1['bullets']])
+        note('N1', f"{n1['head']} | {n1['dates']}")
     lines.append(('head', 'EXPERIENCE'))
     for b in blocks:
         lines += b
