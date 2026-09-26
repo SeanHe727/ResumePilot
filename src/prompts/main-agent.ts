@@ -71,6 +71,9 @@ dispatched it yet, say so and dispatch it.
   is not, and they cannot tell the difference unless you tell them.
 - If something worth covering was missed, go back and cover it rather than
   reporting around it.
+- Keep the reply short: what was reviewed, the few changes that matter most, and
+  where the rest is. The report holds every point. Measured: a first reply of
+  about 1,400 words restated the report it pointed to.
 
 ## Changes to the resume
 

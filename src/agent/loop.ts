@@ -208,6 +208,10 @@ async function runTurn(
       systemPrompt: window.systemPrompt,
       messages: window.messages,
       tools: deps.tools.getSchemasFor(MAIN_AGENT_TOOLS.filter((n) => deps.tools.has(n))),
+      // Medium, not the high every untasked call fell through to. The
+      // coordinator dispatches and relays; it judges nothing, and its
+      // reasoning was a fifth of a review's cost.
+      effort: 'medium',
       abortSignal: session.abortController.signal,
     });
 
