@@ -30,3 +30,16 @@ describe('abortable', () => {
     await expect(beforeAbort(new Promise(() => {}), AbortSignal.timeout(50))).rejects.toThrow('Request aborted');
   });
 });
+
+describe('what loses the race', () => {
+  it('leaves no unhandled rejection behind when the request fails after the abort', async () => {
+    const seen: unknown[] = [];
+    const onUnhandled = (e: unknown) => seen.push(e);
+    process.on('unhandledRejection', onUnhandled);
+    const late = new Promise((_, reject) => setTimeout(() => reject(new Error('aborted by the SDK')), 30));
+    await expect(beforeAbort(late, AbortSignal.timeout(5))).rejects.toThrow('Request aborted');
+    await new Promise((r) => setTimeout(r, 60));
+    process.off('unhandledRejection', onUnhandled);
+    expect(seen).toEqual([]);
+  });
+});

@@ -11,6 +11,8 @@ const key = JSON.parse(readFileSync(`bench/planted-defects/tests/${test}/key.jso
 const judge = new OpenAI({ apiKey: process.env.DEEPSEEK_API_KEY, baseURL: 'https://api.deepseek.com' });
 const prompt = `You are grading a resume review. Below are the resume, a list of known defects, and the review.
 
+Use exactly the defect ids listed below (${key.map((d) => d.id).join(', ')}), one entry each.
+
 For each defect, decide whether the review identifies THAT problem on THAT line (or, for section-level defects, that problem in the resume). Credit it only if the review names the problem itself, not merely mentions the line or rewrites it in passing. A rewrite of the line that silently fixes the defect without saying what was wrong counts as found only if the rewrite clearly removes that specific defect.
 
 Also report:
@@ -20,7 +22,7 @@ Also report:
 - falsePositives: suggestions that claim a problem the resume does not actually have — asking for something the line already states, misreading a line, or a factual error about the resume. Not suggestions you merely disagree with. Quote each briefly.
 
 Reply with JSON only:
-{"defects":[{"id":"D1","found":true,"evidence":"short quote from the review"}],"coverage":false,"suggestions":0,"rewrites":["..."],"falsePositives":["..."]}
+{"defects":[{"id":"${key[0]!.id}","found":true,"evidence":"short quote from the review"}],"coverage":false,"suggestions":0,"rewrites":["..."],"falsePositives":["..."]}
 
 <resume>
 ${resume}
@@ -41,6 +43,11 @@ const res = await judge.chat.completions.create({
   temperature: 0,
 });
 const verdict = JSON.parse(res.choices[0]!.message.content ?? '{}');
+// Only ids from the key count. Measured: a judge once answered D1..D10 for a
+// key of W/A/S/T/N ids, and every defect read as found.
+const ids = new Set(key.map((d) => d.id));
+const unknownIds = (verdict.defects ?? []).map((d: { id: string }) => d.id).filter((id: string) => !ids.has(id));
+if (unknownIds.length > 0) throw new Error(`judge used ids not in the key: ${unknownIds.join(', ')}`);
 
 // Mechanical checks.
 const norm = (s: string) => s.toLowerCase().replace(/-\n/g, '').replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ');

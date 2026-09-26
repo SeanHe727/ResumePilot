@@ -19,19 +19,26 @@ export async function* abortable<T>(source: AsyncIterable<T>, signal?: AbortSign
   });
   try {
     while (true) {
-      const next = await Promise.race([iterator.next(), aborted]);
+      const pending = iterator.next();
+      // The loser of the race still settles, and a rejection nobody awaits
+      // takes the process down. Measured: a timed-out stream crashed a run.
+      pending.catch(() => {});
+      const next = await Promise.race([pending, aborted]);
       if (next === 'aborted' || next.done) return;
       yield next.value;
     }
   } finally {
     // Let go of the connection; a stalled read is not waited on.
-    void iterator.return?.();
+    iterator.return?.()?.catch?.(() => {});
   }
 }
 
 /** The request itself, raced the same way: headers can stall as well as bodies. */
 export async function beforeAbort<T>(request: Promise<T>, signal?: AbortSignal): Promise<T> {
   if (!signal) return request;
+  // Whichever loses, its rejection is handled: the request rejects on its own
+  // once the SDK sees the abort, after this has already given up on it.
+  request.catch(() => {});
   if (signal.aborted) throw new DOMException('Request aborted', 'AbortError');
   return Promise.race([
     request,
