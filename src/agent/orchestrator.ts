@@ -191,6 +191,7 @@ export class DefaultOrchestrator {
       gaps: strings(raw.gaps),
       orderingNotes: strings(raw.orderingNotes).filter((note) => !confirmsOrder(note)),
       unsupportedSkills: strings(raw.unsupportedSkills),
+      conflicts: strings(raw.conflicts),
       withinEntries: readEntryReads(resume, raw.withinEntries),
     };
   }

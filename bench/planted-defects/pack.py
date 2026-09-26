@@ -46,7 +46,7 @@ def resumepilot_report(text, ids):
     # Line ids, read as the lines they name: "s2:e0:b1" and "s2:e0:b2-b3".
     body = re.sub(r'\b([sS]\d+:e\d+)(?::b(\d+))?(?:[-–]b?(\d+))?\b', named(ids), body)
     # Internal target labels on set-aside lines.
-    body = re.sub(r'^- (?:format|skills|whole resume, (?:order|dates)|[^:\n]*, wording): ', '- ', body, flags=re.M)
+    body = re.sub(r'^- (?:format|skills|whole resume, (?:order|dates|consistency)|[^:\n]*, wording): ', '- ', body, flags=re.M)
     body = body.replace('## Start here', '## Top priorities')
     body = body.replace('## Already working', '## What already works')
     body = re.sub(r'## Set aside \((\d+)\)', r'## Lower priority (\1)', body)

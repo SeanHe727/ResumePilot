@@ -83,7 +83,7 @@ describe('the report opens with where to start and what already works', () => {
 
     const text = renderBrief(report, 'r.pdf');
 
-    expect(text).toContain('## Start here\n\n1. first thing');
+    expect(text).toContain('## Start here\n\n1. **first thing**');
     expect(text).toContain('## Already working\n\n- s2:e0:b2: three held-out metrics');
     expect(text.indexOf('## Start here')).toBeLessThan(text.indexOf('## A'));
   });
@@ -200,8 +200,8 @@ describe('each point once', () => {
     const text = renderBrief(report, 'r.pdf');
 
     expect(text.match(/fix the maths/g)).toHaveLength(1);
-    expect(text).toContain('1. fix the maths\n   a reader checks it');
-    expect(text).toContain('- name the tool\n  it is vague');
+    expect(text).toContain('1. **fix the maths**\n   a reader checks it');
+    expect(text).toContain('- **name the tool**\n  it is vague');
   });
 });
 

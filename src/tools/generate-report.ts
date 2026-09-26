@@ -259,7 +259,8 @@ function supplied(state: ResumeSessionState): string {
 function asLine(short: string, finding: SourceFinding): string {
   const c = finding.costWords;
   const cost = c === undefined || c === 0 ? '' : c > 0 ? `, adds ~${c} words` : `, saves ~${-c} words`;
-  return `- ${short} [${finding.target}${cost}] ${finding.what}`;
+  const kind = finding.kind ? `, ${finding.kind}` : '';
+  return `- ${short} [${finding.target}${kind}${cost}] ${finding.what}`;
 }
 
 /**
@@ -619,7 +620,12 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
 
     ...input.entries.flatMap((entry) =>
       entry.bullets.flatMap((bullet) =>
-        bullet.issues.map((issue) => at('content', bullet.bulletId, issue.costWords, issue.what)),
+        bullet.issues.map((issue) => ({
+          ...at('content', bullet.bulletId, issue.costWords, issue.what),
+          ...(issue.kind ? { kind: issue.kind } : {}),
+          ...(issue.why ? { why: issue.why } : {}),
+          ...(issue.fix ? { fix: issue.fix } : {}),
+        })),
       ),
     ),
 
@@ -644,6 +650,11 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
           ...(input.narrative.unsupportedSkills ?? []).map((what) =>
             at('narrative', 'skills', undefined, what),
           ),
+          // Two claims that cannot both hold are wrong, whichever of them is.
+          ...(input.narrative.conflicts ?? []).map((what) => ({
+            ...at('narrative', 'whole resume, consistency', undefined, what),
+            kind: 'wrong' as const,
+          })),
           ...(input.narrative.withinEntries ?? []).flatMap((entry) => [
             ...entry.redundantPairs.map((pair) =>
               at(

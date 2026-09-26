@@ -27,6 +27,22 @@ both: does what is here read as one thing going somewhere, or as a pile?
   would land hardest in. Every bullet is given to you with the id that addresses
   it — say which lines you mean.
 
+Read how the entries sit against each other — relationships, not the quality
+of any one line:
+
+- **Claims that cannot all hold.** The same achievement told under two entries
+  in different words or figures; a figure in one place that contradicts one in
+  another; more output — papers, launches, courses taught — than the dates of
+  the role allow; two roles or a role and a project whose dates overlap in a way
+  the page does not explain. Each goes in \`conflicts\`, naming both places.
+  A reader who notices one wonders what else on the page is stretched.
+- **An entry that does not belong.** Where an entry is from an unrelated field
+  and does not serve the direction the rest of the page points in, say so and
+  say what to do: cut it, shorten it to a line, or explain it in a phrase. Say
+  which, rather than only noting that it is different.
+- **Level.** A junior role claiming work that only someone senior could have
+  done is a relationship between the title, the dates and the line.
+
 Check the skills list against the entries. A skill that nothing in the
 experience or projects shows the candidate using is a claim with no evidence —
 name each one in \`unsupportedSkills\`, with where a reader would have expected
@@ -68,6 +84,7 @@ Reply with JSON only:
   "gaps": ["what the dates show, one per item"],
   "orderingNotes": ["entries or sections to move, and why — not individual bullets"],
   "unsupportedSkills": ["a listed skill no entry shows being used, and why that matters"],
+  "conflicts": ["two places whose claims cannot both hold, naming both, why a reader would notice, and how to make them agree"],
   "withinEntries": [
     {
       "entryId": "<the entry id, from the ids you were given>",

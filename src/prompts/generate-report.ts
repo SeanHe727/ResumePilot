@@ -13,8 +13,16 @@ You are given every finding a resume review produced — from the readers that
 scored the lines, the one that judged how they are written, the one that read
 the career end to end, the file check, and the comparison against the posting
 where there was one. Each says where it came from and, where known, what it does
-to the page: "adds ~8 words" or "saves ~12 words". You are told how much room
-the page has left.
+to the page: "adds ~8 words" or "saves ~12 words". A content finding also says
+what kind of problem it is:
+
+- **wrong** — the line says something that does not hold up: figures that do
+  not add up, a method that cannot do what is claimed, a claim the rest of the
+  page contradicts;
+- **missing** — something the line needs is not there;
+- **unclear** — it is there and a reader cannot use it.
+
+You are told how much room the page has left.
 
 Choose what is worth doing, then sort what you chose by what it asks of the
 candidate.
@@ -32,6 +40,10 @@ has room to answer — the resolution, the batch size, the warm-up, the seed all
 genuinely change how a figure reads, and all of them together do not fit. Your
 job is to decide which of them buy the most.
 
+- **Wrong comes first.** A reader in the field who catches one error stops
+  trusting the rest of the page, so an error is worth choosing even where the
+  fix costs words — and fixing an error often costs none. Then what is missing,
+  then what is unclear, each weighed as below.
 - **Weigh each by what it is worth per word it adds.** Worth is how much it
   would raise the line's credibility, depth or quality in a reader's eyes. A few
   words that change a reader's judgement are the best choice there is; many
@@ -54,10 +66,12 @@ job is to decide which of them buy the most.
   weaknesses a reader notices, judged by how much they hurt the line, even when
   fixing them also saves a word or two. Measured: a duty-style opener was
   set aside as a two-word saving.
-- **Fill to just past the room.** What the groups you choose add, less what they
-  save, should come to the room the page has left or a little over — about a
-  tenth more. The write-up that follows fits it to the page exactly, and it can
-  trim what you chose but cannot add what you did not.
+- **Fill to just past the room, within the count.** What the groups you choose
+  add, less what they save, should come to the room the page has left or a
+  little over — about a tenth more. The write-up that follows fits it to the
+  page exactly, and it can trim what you chose but cannot add what you did not.
+  Where the room and the count below disagree, the count wins: room left over
+  is better spent on explaining the points you chose than on more points.
 - **Findings that ask the same thing in different places are one finding.** The
   same demand recurs across bullets — whether a percentage is relative or in
   points, what a comparison was against, what a measurement covered. Merge them
@@ -98,8 +112,10 @@ contradicts — comes before a wording fix. Measured: a review opened with a
 minor wording point while the technical errors it had found sat further down.
 
 A finding that repeats one you chose — the same problem raised by another
-reader — goes into that group, not into setAside. A report usually holds about
-twelve to fifteen points; where you have more, merge before you add.
+reader — goes into that group, not into setAside. A report holds about ten to
+twelve groups, and never more than fifteen; where you have more, merge before
+you add, and set aside the least worth having. A candidate acts on a short list
+they understand, not a long one they skim.
 
 Mark every finding once: chosen in a group, or set aside with a reason. No
 preamble.

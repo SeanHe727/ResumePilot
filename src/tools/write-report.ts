@@ -44,7 +44,12 @@ export async function writeFullReport(
         group.findingIds
           .map((id) => findings.find((f) => f.id === id))
           .filter((f): f is SourceFinding => f !== undefined)
-          .map((f) => `    ${shortOf.get(f.id)} [${f.target}] ${f.what}`)
+          .map(
+            (f) =>
+              `    ${shortOf.get(f.id)} [${f.target}${f.kind ? `, ${f.kind}` : ''}] ${f.what}` +
+              (f.why ? `\n      why: ${f.why}` : '') +
+              (f.fix ? `\n      fix: ${f.fix}` : ''),
+          )
           .join('\n'),
       )
     : [
@@ -80,7 +85,7 @@ export async function writeFullReport(
     ...(report.narrative
       ? [
           `## the résumé end to end (${report.narrative.overallScore})\n` +
-            [...report.narrative.gaps, ...report.narrative.orderingNotes]
+            [...report.narrative.gaps, ...report.narrative.orderingNotes, ...(report.narrative.conflicts ?? [])]
               .map((n) => `- ${n}`)
               .join('\n'),
         ]
@@ -160,9 +165,10 @@ export async function writeFullReport(
       "about": { "type": "entry", "entryId": "one of the entry ids listed above" },
       "points": [
         {
-          "what": "the finding in one sentence — this sentence is the short version",
-          "why": "what a reader would do differently knowing it",
-          "evidence": "the shortest phrase from the résumé that shows the problem — a few words, not the line",
+          "what": "the problem, in one sentence",
+          "why": "the reasoning, two or three sentences: what a reader would doubt, misread or ask, and what that costs the candidate",
+          "evidence": "the shortest phrase from the résumé that shows the problem, copied exactly — a few words, not the line",
+          "fix": "what doing it right looks like, in a phrase — no figure the résumé does not have",
           "from": ["the short ids of the findings this point rests on, exactly as listed above — several where they agree, and none that is not on that list"],
           "cost": "a number of words, like 'about 6 words' to add, 'saves about 10 words' for a cut, or 'no words' where text only moves. Not a description of the work."
         }
@@ -190,10 +196,21 @@ export async function writeFullReport(
   if (room !== undefined && Array.isArray(firstParsed?.sections) && firstParsed.sections.length > 0) {
     const first = pageWords(firstParsed);
     const count = pointCount(firstParsed);
+    // Every point is about words on the page, and says which. A quote that is
+    // not there is a point about a résumé nobody sent: measured, blind judges
+    // marked the report down for small misreadings of the line it named.
+    const page = [...entries.values()].flatMap((e) => [...e.headerLines, ...e.bullets.map((b) => b.text)]).join('\n');
+    const missing = unquoted(firstParsed, page);
+    const quoteNote =
+      missing.length > 0
+        ? `These quotes are not on the résumé: ${missing.map((q) => `"${q}"`).join(', ')}. Quote the ` +
+          `words exactly as the résumé has them, or drop the point if it is not about anything the ` +
+          `résumé says. `
+        : '';
     // Points as well as words. Cuts count against the words, so a write-up
     // full of small cuts could read as short and be asked to say more.
     // Measured: 27 words under at 31 points, asked to expand, came back at 39.
-    const note =
+    const fitNote =
       count > 18
         ? `What you wrote has ${count} points. Bring it to about fifteen: merge points that ask the ` +
           `same of a line, and drop the least valuable. Keep the room in view: about ${room} words. ` +
@@ -207,12 +224,13 @@ export async function writeFullReport(
             `say more: give the points that matter most their fuller fix, and split a point that bundles ` +
             `two different fixes. Do not add anything the groups do not support. Same JSON shape.`
           : null;
+    const note = fitNote || quoteNote ? `${quoteNote}${fitNote ?? 'Same JSON shape.'}` : null;
     if (note) {
       const second = await ask({ previous: response.content ?? '', note });
       ctx.trace?.event(() => ({
         phase: 'decision',
         purpose: 'report fitted to the page',
-        input: { room, wordsBefore: first, pointsBefore: count },
+        input: { room, wordsBefore: first, pointsBefore: count, notQuoted: missing },
         output: {
           wordsAfter: pageWords(parseJsonObject(second.content ?? '')),
           pointsAfter: pointCount(parseJsonObject(second.content ?? '')),
@@ -267,6 +285,7 @@ export async function writeFullReport(
           ...(typeof point?.cost === 'string' && point.cost.trim()
             ? { cost: point.cost.trim() }
             : {}),
+          ...(typeof point?.fix === 'string' && point.fix.trim() ? { fix: point.fix.trim() } : {}),
           claimed: Array.isArray(point?.from)
             ? point.from.filter((f): f is string => typeof f === 'string').map((f) => f.trim())
             : [],
@@ -319,10 +338,20 @@ export async function writeFullReport(
 
     const { about: chosen, claimed: _claimed, ...rest } = draft;
     const about = fileUnder(sourceFindingIds.map((id) => findingById.get(id)!), chosen);
+    // The lines it is about, from what it rests on: the report shows each
+    // point under the words it is about.
+    const lines = [
+      ...new Set(
+        sourceFindingIds
+          .map((id) => findingById.get(id)!.target.replace(/, wording$/, ''))
+          .filter((t) => /:b\d+$/.test(t)),
+      ),
+    ];
     const point: FullReportPoint = {
       id: `report_point_${randomUUID()}`,
       sourceFindingIds,
       ...rest,
+      ...(lines.length > 0 ? { lines } : {}),
       // Derived from the sources that checked out rather than claimed
       // separately. Asked for twice, the two answers disagree — and the one
       // that can be verified should be the one that decides.
@@ -420,6 +449,27 @@ export function pageWords(parsed: Record<string, unknown> | null): number {
     }
   }
   return net;
+}
+
+/**
+ * The evidence quotes a write-up gives that the page does not contain.
+ * Compared loosely — case, spacing, quote marks and a trailing ellipsis — and
+ * piece by piece where the quote elides with one.
+ */
+export function unquoted(parsed: Record<string, unknown> | null, page: string): string[] {
+  const norm = (t: string) =>
+    t.toLowerCase().replace(/[“”"‘’']/g, '').replace(/\s+/g, ' ').trim();
+  const text = norm(page);
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  const out: string[] = [];
+  for (const section of sections as Array<{ points?: Array<{ evidence?: unknown }> }>) {
+    for (const point of section.points ?? []) {
+      if (typeof point.evidence !== 'string' || !point.evidence.trim()) continue;
+      const pieces = point.evidence.split(/…|\.\.\./).map(norm).filter(Boolean);
+      if (pieces.some((piece) => !text.includes(piece))) out.push(point.evidence.trim());
+    }
+  }
+  return out;
 }
 
 /** How many points a write-up holds. */

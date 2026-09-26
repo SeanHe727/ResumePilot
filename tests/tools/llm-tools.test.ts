@@ -976,7 +976,7 @@ describe('analyze_entry: claims that need checking against the world', () => {
     // notice here and was taken out deliberately: judging the technique is not
     // this reader's job. What stays is the reason a figure gets read as a
     // strength at all, and what scale counts are and are not.
-    expect(prompt).toContain('A figure reads as a strength');
+    expect(prompt).toContain('a figure reads as a strength until someone checks it');
     expect(prompt).toContain('Repository stars');
     // Two axes, one gap: the fault this prompt is likeliest to produce.
     expect(prompt).toContain('counts one gap twice');

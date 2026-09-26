@@ -17,8 +17,18 @@ been chosen from and are given to you.
 
 It is for looking things up in. It is not the short version; a short version
 comes out of it afterwards. So the length you want is the length it takes to
-make each point land: what it is, why a reader would care, and the words from
-the résumé it rests on.
+make each point land. Each point is read in this order:
+
+1. **The words it is about** — quoted from the résumé.
+2. **The problem** — what is wrong with them, in one sentence.
+3. **Why** — the reasoning: what a reader would doubt, misread or ask, and what
+   that costs the candidate. Two or three sentences. This is where the review
+   earns its keep: a candidate who understands why can fix the next line on
+   their own.
+4. **What doing it right looks like** — the fix, in a phrase.
+
+Fewer points explained well beat more points listed. Where you have room, spend
+it on the why.
 
 ## How to write it
 
@@ -34,13 +44,14 @@ the résumé it rests on.
 - **The first sentence stands alone.** That sentence is the whole point in the
   short version. Put the finding there, not the preamble, and keep it to one
   sentence someone can read at a glance.
-- **Every point says why.** "why" is the reason this is a problem for a reader
-  — what they would doubt, misread or ask — in one sentence the candidate can
-  understand without the reader's notes. It is shown under each point.
+- **Every point says why, from the findings.** Build it from what the readers
+  said and the words on the page, not from general advice: a why that would fit
+  any résumé tells this candidate nothing. Every point rests on a finding and on
+  words the résumé actually has; if you cannot quote them, drop the point.
 - **A technical error says why it is wrong.** Where a reader found a method
   misapplied, steps in an order that cannot work, or a term used for something
-  it cannot do, the first sentence names the error and the reason — "a p-value
-  is not the probability the hypothesis is true, so …" — before the fix. A fix
+  it cannot do, the problem names the error, the why gives the reason in the
+  field's own terms, and the fix says what a correct version would say. A fix
   alone reads as a style note, and the candidate is left not knowing that an
   interviewer in the field would catch it. Measured: technical errors reached
   the report as "replace the vague wording", while a single-call reviewer said
@@ -53,6 +64,15 @@ the résumé it rests on.
 - Quote the shortest phrase that shows the problem. A whole bullet quoted back is
   not evidence, it is the line again — the reader has it in front of them, and
   what they need is the few words that carry the fault.
+
+## The fix
+
+A phrase saying what the line should do instead — "lead with the 30% drop",
+"say relative to what", "move the ablation before the tuning". Where the problem
+is an error, say what the correct version is, using the résumé's own figures:
+the right percentage from its own before and after, the right term for what the
+method did. Never a figure or fact the résumé does not have; where one is
+needed, name it as something to fill in.
 
 ## Cost
 

@@ -68,15 +68,27 @@ describe('the brief and the full review', () => {
     }
   });
 
-  it('gives each point its reason in the brief, and keeps the quotes for the full one', async () => {
-    // The brief is read through; the full one is looked things up in. The
-    // reason is in both: measured, a brief of instructions alone scored lowest
-    // on explanation with two blind judges.
+  it('gives each point in the brief the words it is about and its reason', async () => {
+    // Measured: a brief of instructions alone scored lowest on explanation
+    // with two blind judges.
     const brief = renderBrief(REPORT, 'cv.pdf');
     const point = REPORT.full!.sections[0]!.points[0]!;
 
     expect(brief).toContain(point.why);
-    expect(brief).not.toContain(point.evidence!);
+    expect(brief).toContain(`> ${point.evidence!}`);
+  });
+
+  it('quotes the whole line a point is about, and says what doing it right looks like', async () => {
+    const point = { ...REPORT.full!.sections[0]!.points[0]!, lines: ['e1:b1'], fix: 'lead with the result' };
+    const report = {
+      ...REPORT,
+      perEntry: [{ entryId: 'e1', label: 'x', status: 'reviewed' as const, topIssue: '', bullets: [{ bulletId: 'e1:b1', text: 'The whole original line', topIssue: '' }] }],
+      full: { ...REPORT.full!, sections: [{ ...REPORT.full!.sections[0]!, points: [point] }] },
+    };
+    const brief = renderBrief(report, 'cv.pdf');
+
+    expect(brief).toContain('> The whole original line');
+    expect(brief).toContain('**Instead:** lead with the result');
   });
 
   it('carries all of it in the full one', async () => {

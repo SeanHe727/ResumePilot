@@ -1,4 +1,4 @@
-import type { DiagnosisReport, FullReport } from '../domain.js';
+import type { DiagnosisReport, FullReport, FullReportPoint } from '../domain.js';
 
 /**
  * Two documents out of one, and only one of them is written.
@@ -21,6 +21,7 @@ export function renderFull(report: DiagnosisReport, sourcePath: string): string 
       lines.push(`### ${point.what}`, '');
       if (point.evidence) lines.push(`> ${point.evidence}`, '');
       if (point.why) lines.push(point.why, '');
+      if (point.fix) lines.push(`**Instead:** ${point.fix}`, '');
 
       const aside = [
         point.from.length > 0 ? `raised by ${point.from.join(', ')}` : '',
@@ -44,6 +45,7 @@ const SET_ASIDE_SHOWN = 10;
 
 export function renderBrief(report: DiagnosisReport, sourcePath: string): string {
   const lines = [...head(report, sourcePath, 'Review'), ...opening(report)];
+  const lineText = textOfLines(report);
   // Each point once. Measured, by two blind judges: the same point in the
   // opening, under its entry and again in the set-aside list read as a review
   // repeating itself.
@@ -54,10 +56,7 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
     if (points.length === 0) continue;
     lines.push(`## ${section.heading}`, '');
     for (const point of points) {
-      lines.push(`- ${point.what}${point.cost ? ` *(${point.cost})*` : ''}`);
-      // Why it matters, with what to do. Measured: a brief of instructions
-      // alone scored lowest on explanation with both blind judges.
-      if (point.why) lines.push(`  ${point.why}`);
+      lines.push(`- **${point.what}**${point.cost ? ` *(${point.cost})*` : ''}`, ...told(point, lineText, '  '));
     }
     lines.push('');
   }
@@ -99,7 +98,7 @@ function opening(report: DiagnosisReport): string[] {
     lines.push(
       '## Start here',
       '',
-      ...first.flatMap((p, i) => [`${i + 1}. ${p.what}`, ...(p.why ? [`   ${p.why}`] : [])]),
+      ...first.flatMap((p, i) => [`${i + 1}. **${p.what}**`, ...told(p, textOfLines(report), '   ')]),
       '',
     );
   }
@@ -107,6 +106,28 @@ function opening(report: DiagnosisReport): string[] {
     lines.push('## Already working', '', ...full.strengths!.map((s) => `- ${s}`), '');
   }
   return lines;
+}
+
+/**
+ * A point as the candidate reads it: the line it is about, why it is a
+ * problem, and what doing it right looks like. Measured: a brief of
+ * instructions alone scored lowest on explanation with both blind judges.
+ */
+function told(point: FullReportPoint, lineText: Map<string, string>, indent: string): string[] {
+  const quoted = (point.lines ?? []).flatMap((id) => (lineText.has(id) ? [lineText.get(id)!] : []));
+  return [
+    ...(quoted.length > 0
+      ? quoted.map((t) => `${indent}> ${t}`)
+      : point.evidence
+        ? [`${indent}> ${point.evidence}`]
+        : []),
+    ...(point.why ? [`${indent}${point.why}`] : []),
+    ...(point.fix ? [`${indent}**Instead:** ${point.fix}`] : []),
+  ];
+}
+
+function textOfLines(report: DiagnosisReport): Map<string, string> {
+  return new Map(report.perEntry.flatMap((e) => e.bullets.map((b) => [b.bulletId, b.text] as const)));
 }
 
 /**
