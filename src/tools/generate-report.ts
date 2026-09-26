@@ -641,6 +641,9 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
           ...input.narrative.orderingNotes.map((what) =>
             at('narrative', 'whole resume, order', undefined, what),
           ),
+          ...(input.narrative.unsupportedSkills ?? []).map((what) =>
+            at('narrative', 'skills', undefined, what),
+          ),
           ...(input.narrative.withinEntries ?? []).flatMap((entry) => [
             ...entry.redundantPairs.map((pair) =>
               at(

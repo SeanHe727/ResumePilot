@@ -23,6 +23,12 @@ both: does what is here read as one thing going somewhere, or as a pile?
   would land hardest in. Every bullet is given to you with the id that addresses
   it — say which lines you mean.
 
+Check the skills list against the entries. A skill that nothing in the
+experience or projects shows the candidate using is a claim with no evidence —
+name each one in \`unsupportedSkills\`, with where a reader would have expected
+to see it. A misspelled skill belongs there too. Measured: nobody read the skills list, and three unsupported skills
+went unreported in a run where a single-call reviewer caught them.
+
 Education, Skills and a Summary are part of the story, not decoration around
 it. A degree explains where the technical ground came from and where the
 timeline starts; a skills list says what the person believes they are, which
@@ -56,6 +62,7 @@ Reply with JSON only:
   "arc": "one or two sentences",
   "gaps": ["what the dates show, one per item"],
   "orderingNotes": ["entries or sections to move, and why — not individual bullets"],
+  "unsupportedSkills": ["a listed skill no entry shows being used, and why that matters"],
   "withinEntries": [
     {
       "entryId": "<the entry id, from the ids you were given>",

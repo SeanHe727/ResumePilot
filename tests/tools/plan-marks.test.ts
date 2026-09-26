@@ -133,3 +133,18 @@ describe('a wording finding carries its saving as a negative cost', () => {
     expect(found.map((f) => f.costWords)).toEqual([-12, undefined]);
   });
 });
+
+describe('the skills list has a reader', () => {
+  it('turns unsupported skills from the narrative reading into findings', async () => {
+    const { everyFinding } = await import('../../src/tools/generate-report.js');
+    const found = everyFinding({
+      resume: { sections: [] },
+      format: { overallScore: 100, issues: [] },
+      entries: [],
+      narrative: { overallScore: 70, arc: '', gaps: [], orderingNotes: [], withinEntries: [],
+        unsupportedSkills: ['Kubernetes: no entry shows it'] },
+    } as never);
+
+    expect(found).toContainEqual(expect.objectContaining({ role: 'narrative', target: 'skills', what: 'Kubernetes: no entry shows it' }));
+  });
+});

@@ -182,6 +182,7 @@ export class DefaultOrchestrator {
       arc: typeof raw.arc === 'string' ? raw.arc : '',
       gaps: strings(raw.gaps),
       orderingNotes: strings(raw.orderingNotes),
+      unsupportedSkills: strings(raw.unsupportedSkills),
       withinEntries: readEntryReads(resume, raw.withinEntries),
     };
   }

@@ -42,10 +42,16 @@ job is to decide which of them buy the most.
   well as words, and a list of thirty is a list nobody acts on. Measured: a
   report of 36 points, 25 of them small cuts. Choose about three per entry at
   most, and about three for the résumé as a whole, and fewer where fewer matter.
-- **A cut is worth little on its own.** Tidying a line rarely changes what a
-  reader thinks of the candidate; choose one for itself only where a line is
-  clearly overloaded. Its real worth is the room it makes: the words it saves
-  can pay for an addition that does matter.
+- **A cut is worth a moderate amount.** A tighter line reads better, but it
+  rarely changes what a reader thinks of the candidate as much as fixing a real
+  weakness does — rank it around the middle, a little above where the line is
+  clearly overloaded. It also makes room: the words it saves can pay for an
+  addition that matters.
+- **A writing flaw is not a cut.** A duty-style opener ("Responsible for"),
+  first person, the wrong tense, empty buzzwords, a spelling mistake — these are
+  weaknesses a reader notices, judged by how much they hurt the line, even when
+  fixing them also saves a word or two. Measured: "Responsible for the
+  monitoring dashboards" was set aside as a two-word saving.
 - **Stay inside the room.** What the groups you choose add, less what they save,
   should fit in what the page has left. Where it does not, keep what is worth
   most per word and set the rest aside.

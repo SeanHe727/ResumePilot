@@ -481,6 +481,8 @@ export interface NarrativeAssessment {
   gaps: string[];
   /** Entries that would land better reordered, shortened or cut. */
   orderingNotes: string[];
+  /** Listed skills that no entry shows being used. Absent on older readings. */
+  unsupportedSkills?: string[];
   /**
    * How each entry reads as a unit — the same judgement at a smaller scale.
    *
