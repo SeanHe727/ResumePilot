@@ -65,38 +65,6 @@ describe('planFromMarks', () => {
   });
 });
 
-describe('the page budget is held in code', () => {
-  const priced = [
-    { ...f('a', 'content', 's2:e0:b0', 'needs a baseline'), costWords: 30 },
-    { ...f('b', 'content', 's2:e0:b1', 'needs a count'), costWords: 20 },
-    f('c', 'wording', 's2:e0:b2, wording', 'cut the filler'),
-  ];
-
-  it('keeps chosen groups in order while they fit, and sets the rest aside', () => {
-    // Measured: about 120 words of additions chosen for a page with 46 left.
-    const { plan, reasons } = planFromMarks(
-      {
-        chosen: [
-          { kind: 'shortTerm', findings: ['c1'] },
-          { kind: 'shortTerm', findings: ['c2'] },
-          { kind: 'immediate', findings: ['w1'] },
-        ],
-      },
-      priced,
-      40,
-    );
-
-    expect(plan.groups!.map((g) => g.findingIds)).toEqual([['a'], ['c']]);
-    expect(plan.setAside).toEqual([{ what: 's2:e0:b1: needs a count' }]);
-    expect(reasons).toContainEqual({ findingIds: ['b'], chosen: false, reason: 'over the page budget' });
-  });
-
-  it('always keeps what costs no words, even with no room at all', () => {
-    const { plan } = planFromMarks({ chosen: [{ kind: 'immediate', findings: ['w1'] }] }, priced, 0);
-    expect(plan.groups!.map((g) => g.findingIds)).toEqual([['c']]);
-  });
-});
-
 describe('the report opens with where to start and what already works', () => {
   it('lists the start-here points and the strengths before the entries', async () => {
     const { renderBrief } = await import('../../src/skills/render-full.js');
@@ -121,44 +89,18 @@ describe('the report opens with where to start and what already works', () => {
   });
 });
 
-describe('over the page, the selection is asked again before anything is cut', () => {
-  it('tells it what its choice adds and uses the second answer', async () => {
-    const { generateReportTool } = await import('../../src/tools/index.js');
-    const asked: Array<{ messages: Array<{ role: string; content: string }> }> = [];
-    const replies = [
-      JSON.stringify({ chosen: [{ kind: 'shortTerm', findings: ['c1'] }] }),
-      JSON.stringify({ chosen: [], setAside: [{ findings: ['c1'], because: 'no room' }] }),
-      JSON.stringify({ sections: [] }),
+describe('what the selection adds is measured, not cut', () => {
+  it('counts each chosen group at its dearest member', async () => {
+    const { wordsAdded } = await import('../../src/tools/generate-report.js');
+    const priced = [
+      { ...f('a', 'content', 's2:e0:b0', 'needs a baseline'), costWords: 30 },
+      { ...f('b', 'content', 's2:e0:b1', 'needs a baseline'), costWords: 20 },
+      f('c', 'wording', 's2:e0:b2, wording', 'cut the filler'),
     ];
-    const ctx = {
-      session: {
-        state: {
-          resume: {
-            sourcePath: 'r.pdf', format: 'pdf', rawText: '',
-            sections: [{ id: 's2', kind: 'experience', heading: 'X', looseLines: [], span: { start: 0, end: 1 },
-              entries: [{ id: 's2:e0', sectionId: 's2', index: 0, headerLines: ['A'], span: { start: 0, end: 1 },
-                bullets: [{ id: 's2:e0:b0', entryId: 's2:e0', index: 0, text: 'Did a thing', span: { start: 0, end: 1 } }] }] }],
-            meta: { wordCount: 640, quality: 'clean', layoutWarnings: [] },
-          },
-          formatDiagnosis: { overallScore: 90, metrics: { length: { wordCount: 640, pageCount: 1 } }, issues: [] },
-          entryDiagnoses: [{ entryId: 's2:e0', overallScore: 50, bullets: [{ bulletId: 's2:e0:b0', overallScore: 50,
-            issues: [{ what: 'needs a baseline', costWords: 30 }], strengths: [] }] }],
-        },
-      },
-      queryEngine: {
-        async query(params: { messages: Array<{ role: string; content: string }> }) {
-          asked.push(params);
-          return { type: 'text', content: replies[asked.length - 1], usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' };
-        },
-        getUsageSummary: () => '',
-        checkBudget: () => ({ ok: true }),
-      },
-      abortSignal: new AbortController().signal,
-    } as never;
+    const marks = { chosen: [{ kind: 'shortTerm', findings: ['c1', 'c2'] }, { kind: 'immediate', findings: ['w1'] }] };
 
-    const result = await generateReportTool.execute({} as never, ctx);
-
-    expect(asked[1]!.messages.at(-1)!.content).toContain('adds about 30 words, and the page has about 10 left');
-    expect((result as { data: { improvementPlan: { shortTerm: string[] } } }).data.improvementPlan.shortTerm).toEqual([]);
+    expect(wordsAdded(marks, priced)).toBe(30);
+    // Nothing is set aside for the room: that is the selection's call.
+    expect(planFromMarks(marks, priced).plan.groups).toHaveLength(2);
   });
 });

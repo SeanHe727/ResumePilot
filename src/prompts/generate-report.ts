@@ -31,9 +31,15 @@ has room to answer — the resolution, the batch size, the warm-up, the seed all
 genuinely change how a figure reads, and all of them together do not fit. Your
 job is to decide which of them buy the most.
 
-- **Weigh each against what it costs:** how much a reader would revise their
-  judgement of this candidate, per word it would add. A four-word answer that
-  settles a whole class of doubt beats a sentence that adds a detail.
+- **Weigh each by what it is worth per word it adds.** Worth is how much it
+  would raise the line's credibility, depth or quality in a reader's eyes. A few
+  words that change a reader's judgement are the best choice there is; many
+  words that change it little — or make the line heavier to read — are a bad
+  one, and not worth choosing at all. A four-word answer that settles a whole
+  class of doubt beats a sentence that adds a detail.
+- **Stay inside the room.** The words the groups you choose would add should
+  fit in what the page has left. Where they do not, keep the ones worth most per
+  word and set the rest aside.
 - **Findings that ask the same thing in different places are one finding.** The
   same demand recurs across bullets — whether a percentage is relative or in
   points, what a comparison was against, what a measurement covered. Merge them

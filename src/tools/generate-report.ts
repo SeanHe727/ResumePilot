@@ -304,8 +304,6 @@ const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
 export function planFromMarks(
   parsed: Record<string, unknown> | null,
   findings: readonly SourceFinding[],
-  /** Words the page has left. Chosen groups past it are set aside. */
-  room = Number.POSITIVE_INFINITY,
 ): {
   plan: ImprovementPlan;
   unknown: string[];
@@ -332,34 +330,14 @@ export function planFromMarks(
   const reasonOf = (mark: Record<string, unknown> | null, key: string): string =>
     typeof mark?.[key] === 'string' ? (mark[key] as string).trim() : '';
 
-  const marked: Array<PlanGroup & { members: SourceFinding[] }> = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
+  const groups: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
     const kind = KINDS.find((k) => k === mark?.kind);
     const members = take(mark?.findings);
     if (!kind || members.length === 0) return [];
     reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
-    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members), members }];
+    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
   });
-
-  // The page's room, held in code. The prompt asked the selection to fill the
-  // room and stop, and measured, it chose about 120 words of additions for a
-  // page with 46 left. In the order chosen, a group that adds words is kept
-  // while it fits; one that takes none — a cut, a move — is always kept. A
-  // group that asks the same thing of several lines costs what its dearest
-  // member does, because the lines are answered once each.
-  let spent = 0;
-  const groups: PlanGroup[] = [];
-  const overBudget: SourceFinding[][] = [];
-  for (const { members, ...group } of marked) {
-    const cost = Math.max(0, ...members.map((f) => f.costWords ?? 0));
-    if (cost > 0 && spent + cost > room) {
-      overBudget.push(members);
-      reasons.push({ findingIds: group.findingIds, chosen: false, reason: 'over the page budget' });
-      continue;
-    }
-    spent += cost;
-    groups.push(group);
-  }
 
   const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
@@ -377,7 +355,7 @@ export function planFromMarks(
     (members.length > 1 ? ` (and ${members.length - 1} more like it)` : '');
   const byId = new Map(findings.map((f) => [f.id, f] as const));
   const membersOf = (group: PlanGroup): SourceFinding[] => group.findingIds.map((id) => byId.get(id)!);
-  const setAside = [...overBudget, ...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({
+  const setAside = [...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({
     what: say(members),
   }));
 
@@ -418,7 +396,7 @@ async function buildImprovementPlan(
       ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${roomWords(input)} words of room.`
       : `The resume runs ${length.wordCount} words over ${length.pageCount} pages. It is already long, so anything added has to displace something.`;
 
-  const ask = (followUp?: { previous: string; note: string }) => ctx.queryEngine.query({
+  const ask = () => ctx.queryEngine.query({
     task: 'generate_report',
     systemPrompt: IMPROVEMENT_PLAN_PROMPT,
     messages: [
@@ -437,12 +415,6 @@ Name findings only by the short names above. Return JSON of exactly this shape:
   "setAside": [{ "findings": ["c7"], "because": "one line on why, for the developers only" }]
 }`,
       },
-      ...(followUp
-        ? [
-            { role: 'assistant' as const, content: followUp.previous },
-            { role: 'user' as const, content: followUp.note },
-          ]
-        : []),
     ],
     ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
   });
@@ -458,34 +430,15 @@ Name findings only by the short names above. Return JSON of exactly this shape:
     response = await ask();
   }
 
-  let parsed = parseJsonObject(response.content ?? '');
+  const parsed = parseJsonObject(response.content ?? '');
 
-  // Over the page, asked once more rather than cut. Measured: about 120 words
-  // of additions chosen for a page with 46 left. The selection is told what its
-  // choice adds and asked to choose again to fit, which it can do better than
-  // a cut in order can — it knows which of two groups it would rather keep.
-  // Whatever still does not fit after that is set aside by the budget below.
+  // Room is the selection's to weigh, not the code's to enforce: it is told how
+  // much the page has left and chooses by what each change is worth per word.
+  // What it chose is measured against the room and recorded, so a run that
+  // overspends the page is visible in the trace rather than silently cut.
   const left = roomWords(input);
   const adds = wordsAdded(parsed, findings);
-  if (adds > left) {
-    const retry = await ask({
-      previous: response.content ?? '',
-      note:
-        `What you chose adds about ${adds} words, and the page has about ${left} left. Choose again ` +
-        `so the groups that add words fit in ${left}: keep the ones worth the most per word, move the ` +
-        `rest to setAside, and keep every group that adds no words. Same JSON shape.`,
-    });
-    const again = parseJsonObject(retry.content ?? '');
-    ctx.trace?.event(() => ({
-      phase: 'decision',
-      purpose: 'plan over the page, asked again',
-      input: { adds, room: left },
-      output: { addsAfter: wordsAdded(again, findings) },
-    }));
-    if (again) parsed = again;
-  }
-
-  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings, left);
+  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings);
 
   // Which findings this weighed. The plan model is shown the lines without
   // ids, deliberately, so this is the only place the set it chose from is
@@ -499,6 +452,8 @@ Name findings only by the short names above. Return JSON of exactly this shape:
       ...plan,
       // The selection's own reasons, kept here and nowhere downstream.
       reasons,
+      wordsAdded: adds,
+      room: left,
       ...(unmarked.length > 0 ? { unmarked } : {}),
       ...(unknown.length > 0 ? { unknownNames: unknown } : {}),
     },
