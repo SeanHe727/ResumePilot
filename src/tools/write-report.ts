@@ -29,6 +29,8 @@ export async function writeFullReport(
   state: ResumeSessionState,
   findings: readonly SourceFinding[],
   ctx: ToolContext,
+  /** Words the page has left, when known. The write-up is fitted to it. */
+  room?: number,
 ): Promise<FullReport | null> {
   const plan = report.improvementPlan;
   const shortOf = new Map(aliasFindings(findings).named.map(({ short, finding }) => [finding.id, short]));
@@ -124,7 +126,7 @@ export async function writeFullReport(
     .map((entry) => `- ${entry.id}: ${withoutContactDetails(entry.headerLines.join(' | '))}`)
     .join('\n');
 
-  const response = await ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => ctx.queryEngine.query({
     task: 'generate_report',
     systemPrompt: FULL_REPORT_PROMPT,
     messages: [
@@ -169,9 +171,45 @@ export async function writeFullReport(
   ]
 }`,
       },
+      ...(followUp
+        ? [
+            { role: 'assistant' as const, content: followUp.previous },
+            { role: 'user' as const, content: followUp.note },
+          ]
+        : []),
     ],
     abortSignal: ctx.abortSignal,
   });
+
+  // One look at the page before it is handed over. The selection chooses a
+  // little past the room on purpose, so the writing has something to trim
+  // rather than something to pad; what it wrote is measured by its own costs
+  // and, well outside the room either way, it is asked once to fit.
+  let response = await ask();
+  const firstParsed = parseJsonObject(response.content ?? '');
+  if (room !== undefined && Array.isArray(firstParsed?.sections) && firstParsed.sections.length > 0) {
+    const first = pageWords(firstParsed);
+    const note =
+      first > room * 1.1
+        ? `What you wrote adds about ${first} words and the page has about ${room}. Rewrite it to fit: ` +
+          `shorten points, merge the ones that ask the same of a line, and drop the least valuable. ` +
+          `Same JSON shape.`
+        : first < room * 0.6 && room > 20
+          ? `What you wrote adds about ${first} words and the page has about ${room}. There is room to ` +
+            `say more: give the points that matter most their fuller fix, and split a point that bundles ` +
+            `two different fixes. Do not add anything the groups do not support. Same JSON shape.`
+          : null;
+    if (note) {
+      const second = await ask({ previous: response.content ?? '', note });
+      ctx.trace?.event(() => ({
+        phase: 'decision',
+        purpose: 'report fitted to the page',
+        input: { room, wordsBefore: first },
+        output: { wordsAfter: pageWords(parseJsonObject(second.content ?? '')) },
+      }));
+      if (parseJsonObject(second.content ?? '')?.sections) response = second;
+    }
+  }
 
   const parsed = parseJsonObject(response.content ?? '');
   const rawSections = Array.isArray(parsed?.sections) ? parsed.sections : [];
@@ -349,6 +387,23 @@ export async function writeFullReport(
     ...(startHere.length > 0 ? { startHere: [...new Set(startHere)] } : {}),
     sections: built,
   };
+}
+
+/**
+ * What a write-up does to the page, by the costs it gave its own points:
+ * "about 6 words" adds six, "saves about 10 words" takes ten off.
+ */
+export function pageWords(parsed: Record<string, unknown> | null): number {
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  let net = 0;
+  for (const section of sections as Array<{ points?: Array<{ cost?: unknown }> }>) {
+    for (const point of section.points ?? []) {
+      const cost = typeof point.cost === 'string' ? point.cost : '';
+      const n = Number(/(\d+)/.exec(cost)?.[1] ?? 0);
+      net += /save|cut|remove/i.test(cost) ? -n : n;
+    }
+  }
+  return net;
 }
 
 /**

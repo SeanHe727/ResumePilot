@@ -148,3 +148,37 @@ describe('the skills list has a reader', () => {
     expect(found).toContainEqual(expect.objectContaining({ role: 'narrative', target: 'skills', what: 'Kubernetes: no entry shows it' }));
   });
 });
+
+describe('the write-up is fitted to the page', () => {
+  it('reads what a write-up does to the page from its own costs', async () => {
+    const { pageWords } = await import('../../src/tools/write-report.js');
+    const w = pageWords({
+      sections: [{ points: [{ cost: 'about 6 words' }, { cost: 'saves about 10 words' }, { cost: 'no words' }, { cost: 'about 30 words' }] }],
+    });
+    expect(w).toBe(26);
+  });
+
+  it('asks once more when the first write-up runs well past the room', async () => {
+    const { writeFullReport } = await import('../../src/tools/write-report.js');
+    const long = JSON.stringify({ sections: [{ about: { type: 'resume' }, points: [{ what: 'a', why: '', from: [], cost: 'about 80 words' }] }] });
+    const fitted = JSON.stringify({ sections: [{ about: { type: 'resume' }, points: [{ what: 'b', why: '', from: [], cost: 'about 20 words' }] }] });
+    const asked: Array<Array<{ role: string; content: string }>> = [];
+    const replies = [long, fitted];
+    const ctx = {
+      queryEngine: {
+        async query(p: { messages: Array<{ role: string; content: string }> }) {
+          asked.push(p.messages);
+          return { type: 'text', content: replies[asked.length - 1], usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' };
+        },
+      },
+      abortSignal: new AbortController().signal,
+    } as never;
+    const report = { format: { overallScore: 90, issues: [] }, improvementPlan: { groups: [{ kind: 'immediate', findingIds: [], targets: [] }], immediate: ['x'], shortTerm: [], longTerm: [] } } as never;
+
+    const full = await writeFullReport(report, { resume: { sections: [] } } as never, [], ctx, 25);
+
+    expect(asked).toHaveLength(2);
+    expect(asked[1]!.at(-1)!.content).toContain('adds about 80 words and the page has about 25');
+    expect(full?.sections[0]?.points[0]?.what).toBe('b');
+  });
+});

@@ -129,7 +129,7 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
     // forty findings against a page budget and then writing them all up gives
     // the writing whatever attention the weighing left over.
     // The same objects the plan was chosen from.
-    const full = await writeFullReport(report, state, findings, ctx);
+    const full = await writeFullReport(report, state, findings, ctx, roomWords(input));
     if (full) report.full = full;
 
     // Left where `/report` and `/export` read it: the coordinator is not asked

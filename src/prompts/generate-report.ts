@@ -38,10 +38,12 @@ job is to decide which of them buy the most.
   words that change it little — or make the line heavier to read — are a bad
   one, and not worth choosing at all. A four-word answer that settles a whole
   class of doubt beats a sentence that adds a detail.
-- **Only what really matters.** Every point costs the candidate attention as
-  well as words, and a list of thirty is a list nobody acts on. Measured: a
-  report of 36 points, 25 of them small cuts. Choose about three per entry at
-  most, and about three for the résumé as a whole, and fewer where fewer matter.
+- **What matters, up to the page.** Every point costs the candidate attention
+  as well as words, and a list of thirty is a list nobody acts on. Choose by
+  worth, not by a count per entry, and never set a whole kind of finding aside
+  in one go: judge them one by one. Measured: a selection told to keep about
+  three per entry set aside forty findings in two blocks and used ten words of
+  a page with a hundred and sixty left.
 - **A cut is worth a moderate amount.** A tighter line reads better, but it
   rarely changes what a reader thinks of the candidate as much as fixing a real
   weakness does — rank it around the middle, a little above where the line is
@@ -52,9 +54,10 @@ job is to decide which of them buy the most.
   weaknesses a reader notices, judged by how much they hurt the line, even when
   fixing them also saves a word or two. Measured: a duty-style opener was
   set aside as a two-word saving.
-- **Stay inside the room.** What the groups you choose add, less what they save,
-  should fit in what the page has left. Where it does not, keep what is worth
-  most per word and set the rest aside.
+- **Fill to just past the room.** What the groups you choose add, less what they
+  save, should come to the room the page has left or a little over — about a
+  tenth more. The write-up that follows fits it to the page exactly, and it can
+  trim what you chose but cannot add what you did not.
 - **Findings that ask the same thing in different places are one finding.** The
   same demand recurs across bullets — whether a percentage is relative or in
   points, what a comparison was against, what a measurement covered. Merge them
