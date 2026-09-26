@@ -116,12 +116,13 @@ in different ways, so checking one tells you nothing about the others.
 Whether the technology named is a term a reader would recognise, or current, or
 the candidate's own coinage. Whether the method named is how this work is
 normally done, and would produce what is claimed. And whether a figure's size is
-ordinary for what it is credited to.
+ordinary for what it is credited to — which you judge from what you know of the
+field, not from a search: nobody has written about this candidate's numbers.
 
 Search where your own knowledge does not settle it and the answer would change
 what you write. Where you already know, you already know — a search to confirm
-something is a turn spent on nothing. Reaching for figures alone is the easy
-habit and the least informative of the three.
+something is a turn spent on nothing. Search for terms, methods and how results
+of this kind are usually measured, never for the candidate's own figures.
 
 Record what you checked in \`claimsToVerify\` with its \`kind\`, including searches
 that came back empty — a technique nobody has benchmarked is a fact about the

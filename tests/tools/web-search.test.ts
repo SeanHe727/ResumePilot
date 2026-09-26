@@ -296,3 +296,14 @@ describe('how deep one search goes', () => {
     expect(body.max_results).toBe(4);
   });
 });
+
+describe('the candidate\'s figures stay out of the search box', () => {
+  it('finds a number standing on its own, and lets names with digits through', async () => {
+    const { findBareNumber } = await import('../../src/tools/web-search.js');
+
+    expect(findBareNumber('"8,400" "2,700" MB TensorRT VRAM latency')).toBe('8,400');
+    expect(findBareNumber('backlog reduction 68 percent')).toBe('68');
+    expect(findBareNumber('planted defect localization 82% 94%')).toBe('82%');
+    expect(findBareNumber('TensorRT INT8 FP16 top-1 p99 bm25 FTS5 explicit quantization')).toBeNull();
+  });
+});

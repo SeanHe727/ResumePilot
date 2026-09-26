@@ -77,6 +77,11 @@ Do not promote a related result into a benchmark and do not assemble a norm out
 of adjacent material — an invented norm is worse than none, because the
 candidate cannot tell the two apart.
 
+Never put the résumé's own figures in a query. Measured: a run searched for
+"8,400" "2,700" MB and "68 percent", which no page will ever contain, and sent
+the candidate's numbers to a stranger to learn nothing. The tool refuses a
+query that carries a bare number.
+
 Search to calibrate your judgement, never to supply material. What you find on
 the web belongs to somebody else. It can tell you that a claim is unremarkable
 or that a term is standard; it can never become the candidate's own.
