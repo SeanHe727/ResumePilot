@@ -38,7 +38,7 @@ export async function writeFullReport(
   // expanding a summary of it.
   const chosen = plan.groups
     ? plan.groups.map((group, i) =>
-        `- group ${i + 1} (${label[group.kind]}), about ${group.targets.join(', ')}: ${group.note}\n` +
+        `- group ${i + 1} (${label[group.kind]}), about ${group.targets.join(', ')}:\n` +
         group.findingIds
           .map((id) => findings.find((f) => f.id === id))
           .filter((f): f is SourceFinding => f !== undefined)

@@ -715,8 +715,6 @@ export interface PlanGroup {
   findingIds: string[];
   /** The lines its findings are about, derived from them rather than written. */
   targets: string[];
-  /** What the findings ask for together, in one line, naming no lines. */
-  note: string;
 }
 
 export interface ImprovementPlan {
@@ -737,7 +735,11 @@ export interface ImprovementPlan {
    * see what was set aside can disagree with the ordering, where one who sees a
    * shorter list cannot tell it was ever longer.
    */
-  setAside?: Array<{ what: string; because: string }>;
+  setAside?: Array<{
+    what: string;
+    /** Absent on reports written after the selection's reasons moved to the trace. */
+    because?: string;
+  }>;
 }
 
 export interface VersionComparison {

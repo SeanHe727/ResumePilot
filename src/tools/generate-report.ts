@@ -271,18 +271,32 @@ const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
 /**
  * The selection's marks, checked and turned into a plan.
  *
+ * The selection chooses; it does not say anything the readers did not. Its
+ * answer is finding names in groups, and every word that reaches the writer or
+ * the candidate is a reader's own. The one-line reasons it gives go to the
+ * trace and nowhere else: a note written alongside a group was measured
+ * reaching the report as advice — "so the review outcome leads the bullet",
+ * about a line the wording reader had called outcome-first.
+ *
  * Each finding is placed once — the first mark wins — and a name that was not
- * offered is dropped. A finding the selection did not mark at all is set aside
- * with that said, because nothing is meant to disappear. The lines a group is
- * about come from its findings; the selection never writes them.
+ * offered is dropped. A finding the selection did not mark at all is set aside,
+ * because nothing is meant to disappear. The lines a group is about come from
+ * its findings.
  */
 export function planFromMarks(
   parsed: Record<string, unknown> | null,
   findings: readonly SourceFinding[],
-): { plan: ImprovementPlan; unknown: string[] } {
+): {
+  plan: ImprovementPlan;
+  unknown: string[];
+  /** For the trace only. */
+  reasons: Array<{ findingIds: string[]; chosen: boolean; reason: string }>;
+  unmarked: string[];
+} {
   const { alias } = aliasFindings(findings);
   const placed = new Set<string>();
   const unknown: string[] = [];
+  const reasons: Array<{ findingIds: string[]; chosen: boolean; reason: string }> = [];
   const take = (raw: unknown): SourceFinding[] =>
     (Array.isArray(raw) ? raw : []).flatMap((name) => {
       const finding = typeof name === 'string' ? alias.get(name.trim()) : undefined;
@@ -295,43 +309,47 @@ export function planFromMarks(
       return [finding];
     });
   const targetsOf = (group: SourceFinding[]): string[] => [...new Set(group.map(lineOf))];
+  const reasonOf = (mark: Record<string, unknown> | null, key: string): string =>
+    typeof mark?.[key] === 'string' ? (mark[key] as string).trim() : '';
 
   const groups: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
     const kind = KINDS.find((k) => k === mark?.kind);
-    const note = typeof mark?.note === 'string' ? mark.note.trim() : '';
     const members = take(mark?.findings);
-    if (!kind || !note || members.length === 0) return [];
-    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members), note }];
+    if (!kind || members.length === 0) return [];
+    reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
+    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
   });
 
-  const setAsideMarks = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
+  const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
     const members = take(mark?.findings);
     if (members.length === 0) return [];
-    return [{ members, because: typeof mark?.because === 'string' ? mark.because.trim() : '' }];
+    reasons.push({ findingIds: members.map((f) => f.id), chosen: false, reason: reasonOf(mark, 'because') });
+    return [members];
   });
   const unmarked = findings.filter((f) => !placed.has(f.id));
-  const setAside = [
-    ...setAsideMarks,
-    ...(unmarked.length > 0 ? unmarked.map((f) => ({ members: [f], because: 'not weighed by the selection' })) : []),
-  ].map(({ members, because }) => ({
-    what:
-      `${targetsOf(members).join(', ')}: ${members[0]!.what}` +
-      (members.length > 1 ? ` (and ${members.length - 1} more like it)` : ''),
-    because,
-  }));
 
-  const line = (group: PlanGroup): string => `${group.targets.join(', ')}: ${group.note}`;
+  // In the reader's words: the finding first in the group, and a count of the
+  // rest, which the full report carries in full.
+  const say = (members: SourceFinding[]): string =>
+    `${targetsOf(members).join(', ')}: ${members[0]!.what}` +
+    (members.length > 1 ? ` (and ${members.length - 1} more like it)` : '');
+  const byId = new Map(findings.map((f) => [f.id, f] as const));
+  const membersOf = (group: PlanGroup): SourceFinding[] => group.findingIds.map((id) => byId.get(id)!);
+  const setAside = [...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({ what: say(members) }));
+
   return {
     plan: {
       groups,
-      immediate: groups.filter((g) => g.kind === 'immediate').map(line),
-      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map(line),
-      longTerm: groups.filter((g) => g.kind === 'longTerm').map(line),
+      immediate: groups.filter((g) => g.kind === 'immediate').map((g) => say(membersOf(g))),
+      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map((g) => say(membersOf(g))),
+      longTerm: groups.filter((g) => g.kind === 'longTerm').map((g) => say(membersOf(g))),
       ...(setAside.length > 0 ? { setAside } : {}),
     },
     unknown,
+    reasons,
+    unmarked: unmarked.map((f) => f.id),
   };
 }
 
@@ -372,9 +390,9 @@ Name findings only by the short names above. Return JSON of exactly this shape:
 
 {
   "chosen": [
-    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "note": "what these findings ask for together, in one line, naming no lines" }
+    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "why": "one line on why these, for the developers only" }
   ],
-  "setAside": [{ "findings": ["c7"], "because": "one line on why" }]
+  "setAside": [{ "findings": ["c7"], "because": "one line on why, for the developers only" }]
 }`,
       },
     ],
@@ -393,7 +411,7 @@ Name findings only by the short names above. Return JSON of exactly this shape:
   }
 
   const parsed = parseJsonObject(response.content ?? '');
-  const { plan, unknown } = planFromMarks(parsed, findings);
+  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings);
 
   // Which findings this weighed. The plan model is shown the lines without
   // ids, deliberately, so this is the only place the set it chose from is
@@ -403,7 +421,13 @@ Name findings only by the short names above. Return JSON of exactly this shape:
     phase: 'decision',
     purpose: 'plan chosen',
     input: { fromFindingIds: findings.map((f) => f.id) },
-    output: { ...plan, ...(unknown.length > 0 ? { unknownNames: unknown } : {}) },
+    output: {
+      ...plan,
+      // The selection's own reasons, kept here and nowhere downstream.
+      reasons,
+      ...(unmarked.length > 0 ? { unmarked } : {}),
+      ...(unknown.length > 0 ? { unknownNames: unknown } : {}),
+    },
   }));
 
   return plan;

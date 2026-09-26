@@ -212,7 +212,7 @@ describe('through the tool that actually runs it', () => {
           if (asked.length === 1) {
             return {
               type: 'text',
-              content: JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], note: 'name the figure' }] }),
+              content: JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], why: 'name the figure' }] }),
               usage: { inputTokens: 0, outputTokens: 0 },
               stopReason: 'end_turn',
             };
@@ -255,7 +255,9 @@ describe('through the tool that actually runs it', () => {
   it('hands the writer each chosen group with its findings as the readers wrote them', async () => {
     const { asked } = await runReport();
 
-    expect(asked[1]).toMatch(/- group 1 \(fix now\), about experience:0:0: name the figure\n {4}c1 \[experience:0:0\]/);
+    expect(asked[1]).toMatch(/- group 1 \(fix now\), about experience:0:0:\n {4}c1 \[experience:0:0\] no measurable outcome/);
+    // The selection's own words never reach the writer.
+    expect(asked[1]).not.toContain('name the figure');
   });
 
   it('carries one set of ids across both model calls', async () => {

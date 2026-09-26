@@ -73,8 +73,8 @@ const REPLIES: Record<string, string> = {
   }),
   generate_report: JSON.stringify({
     chosen: [
-      { kind: 'immediate', findings: ['w1'], note: 'delete the pronoun' },
-      { kind: 'shortTerm', findings: ['c1'], note: 'find the latency number' },
+      { kind: 'immediate', findings: ['w1'], why: 'delete the pronoun' },
+      { kind: 'shortTerm', findings: ['c1'], why: 'find the latency number' },
     ],
   }),
 };

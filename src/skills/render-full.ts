@@ -52,7 +52,7 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
       '',
       'Worth knowing, and not worth the space on this page:',
       '',
-      ...setAside.map((s) => `- ${s.what} — *${s.because}*`),
+      ...setAside.map((s) => `- ${s.what}${s.because ? ` — *${s.because}*` : ''}`),
       '',
     );
   }

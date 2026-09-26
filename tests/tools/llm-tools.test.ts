@@ -612,7 +612,7 @@ describe('generate_report: the improvement plan', () => {
     }],
   }];
 
-  const PLAN = JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], note: 'drop "Responsible for"' }] });
+  const PLAN = JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], why: 'drop "Responsible for"' }] });
 
   /** Replies in the order given, so a test can script a retry. */
   function scriptedCtx(replies: ParsedResponse[]) {
@@ -844,7 +844,7 @@ describe('generate_report: the improvement plan', () => {
     expect(sent).toMatch(/words of room|has to displace/);
   });
 
-  it('keeps what it left out, with a reason', async () => {
+  it('keeps what it left out, in the readers\' words and without the selection\'s reason', async () => {
     // A list nobody can see was trimmed reads as a short list. Someone who can
     // see what was set aside can disagree with the order.
     const withSetAside: ParsedResponse = {
@@ -860,9 +860,9 @@ describe('generate_report: the improvement plan', () => {
 
     expect(result.data?.improvementPlan.setAside).toEqual([
       // In the reader's own words, about the line it named.
-      { what: 's1:e0:b0: "Responsible for" states a duty, not an outcome', because: 'the page has no room left' },
-      // Not marked at all, and said so rather than dropped.
-      { what: expect.stringContaining('opens with a duty'), because: 'not weighed by the selection' },
+      { what: 's1:e0:b0: "Responsible for" states a duty, not an outcome' },
+      // Not marked at all, and kept rather than dropped.
+      { what: expect.stringContaining('opens with a duty') },
     ]);
   });
 
@@ -877,7 +877,7 @@ describe('generate_report: the improvement plan', () => {
     // Two for the plan — the truncated answer and its retry — then one more
     // for the write-up, which is a separate call on purpose.
     expect(calls()).toBe(3);
-    expect(result.data?.improvementPlan.immediate).toEqual(['s1:e0:b0: drop "Responsible for"']);
+    expect(result.data?.improvementPlan.immediate).toEqual(['s1:e0:b0: "Responsible for" states a duty, not an outcome']);
   });
 
   it('does not retry an answer that merely ran long', async () => {
