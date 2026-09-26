@@ -251,6 +251,32 @@ describe('what the model is shown', () => {
     expect(prompt).toContain('unbroken run');
   });
 
+  it('withholds the block above the first named heading and redacts contact details below it', () => {
+    const page = rows([
+      'Alex Example',
+      '+1 (555) 010-0000 | alex@example.com | example.com/in/alex-example',
+      'EXPERIENCE',
+      'Acme Corp, Engineer',
+      '- Built the routing layer; on call at +1 (555) 010-0001',
+    ]);
+    const prompt = groupingPrompt(page, 10, [2]);
+
+    expect(prompt).toContain('[0] size=1.00 plain gap=top :: [withheld]');
+    expect(prompt).toContain('[1] size=1.00 plain gap=1.2 :: [withheld]');
+    expect(prompt).toContain(':: EXPERIENCE');
+    expect(prompt).toContain('on call at [phone]');
+    for (const secret of ['Alex Example', '010-0000', 'alex@example.com', 'alex-example', '010-0001']) {
+      expect(prompt).not.toContain(secret);
+    }
+  });
+
+  it('withholds nothing by position when no heading was named', () => {
+    const prompt = groupingPrompt(rows(['Alex Example', 'EXPERIENCE']), 10);
+
+    expect(prompt).toContain(':: Alex Example');
+    expect(prompt).not.toContain('[0] size=1.00 plain gap=top :: [withheld]');
+  });
+
   it('warns about the case the rules get wrong', () => {
     expect(groupingPrompt(DOCUMENT, 10)).toContain('Selected Projects');
   });
