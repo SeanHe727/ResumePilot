@@ -270,6 +270,15 @@ function roomWords(input: GenerateReportInput): number {
   return length.pageCount <= 1 ? Math.max(0, 650 - length.wordCount) : 0;
 }
 
+/** Words the chosen groups would add, each at its dearest member's cost. */
+export function wordsAdded(parsed: Record<string, unknown> | null, findings: readonly SourceFinding[]): number {
+  const byId = new Map(findings.map((f) => [f.id, f] as const));
+  return (planFromMarks(parsed, findings).plan.groups ?? []).reduce(
+    (sum, group) => sum + Math.max(0, ...group.findingIds.map((id) => byId.get(id)?.costWords ?? 0)),
+    0,
+  );
+}
+
 /** The line a finding is about, without the reader's suffix. */
 function lineOf(finding: SourceFinding): string {
   return finding.target.replace(/, wording$/, '');
@@ -409,7 +418,7 @@ async function buildImprovementPlan(
       ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${roomWords(input)} words of room.`
       : `The resume runs ${length.wordCount} words over ${length.pageCount} pages. It is already long, so anything added has to displace something.`;
 
-  const ask = () => ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => ctx.queryEngine.query({
     task: 'generate_report',
     systemPrompt: IMPROVEMENT_PLAN_PROMPT,
     messages: [
@@ -428,6 +437,12 @@ Name findings only by the short names above. Return JSON of exactly this shape:
   "setAside": [{ "findings": ["c7"], "because": "one line on why, for the developers only" }]
 }`,
       },
+      ...(followUp
+        ? [
+            { role: 'assistant' as const, content: followUp.previous },
+            { role: 'user' as const, content: followUp.note },
+          ]
+        : []),
     ],
     ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
   });
@@ -443,8 +458,34 @@ Name findings only by the short names above. Return JSON of exactly this shape:
     response = await ask();
   }
 
-  const parsed = parseJsonObject(response.content ?? '');
-  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings, roomWords(input));
+  let parsed = parseJsonObject(response.content ?? '');
+
+  // Over the page, asked once more rather than cut. Measured: about 120 words
+  // of additions chosen for a page with 46 left. The selection is told what its
+  // choice adds and asked to choose again to fit, which it can do better than
+  // a cut in order can — it knows which of two groups it would rather keep.
+  // Whatever still does not fit after that is set aside by the budget below.
+  const left = roomWords(input);
+  const adds = wordsAdded(parsed, findings);
+  if (adds > left) {
+    const retry = await ask({
+      previous: response.content ?? '',
+      note:
+        `What you chose adds about ${adds} words, and the page has about ${left} left. Choose again ` +
+        `so the groups that add words fit in ${left}: keep the ones worth the most per word, move the ` +
+        `rest to setAside, and keep every group that adds no words. Same JSON shape.`,
+    });
+    const again = parseJsonObject(retry.content ?? '');
+    ctx.trace?.event(() => ({
+      phase: 'decision',
+      purpose: 'plan over the page, asked again',
+      input: { adds, room: left },
+      output: { addsAfter: wordsAdded(again, findings) },
+    }));
+    if (again) parsed = again;
+  }
+
+  const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings, left);
 
   // Which findings this weighed. The plan model is shown the lines without
   // ids, deliberately, so this is the only place the set it chose from is

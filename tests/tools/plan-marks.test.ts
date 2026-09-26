@@ -120,3 +120,45 @@ describe('the report opens with where to start and what already works', () => {
     expect(text.indexOf('## Start here')).toBeLessThan(text.indexOf('## A'));
   });
 });
+
+describe('over the page, the selection is asked again before anything is cut', () => {
+  it('tells it what its choice adds and uses the second answer', async () => {
+    const { generateReportTool } = await import('../../src/tools/index.js');
+    const asked: Array<{ messages: Array<{ role: string; content: string }> }> = [];
+    const replies = [
+      JSON.stringify({ chosen: [{ kind: 'shortTerm', findings: ['c1'] }] }),
+      JSON.stringify({ chosen: [], setAside: [{ findings: ['c1'], because: 'no room' }] }),
+      JSON.stringify({ sections: [] }),
+    ];
+    const ctx = {
+      session: {
+        state: {
+          resume: {
+            sourcePath: 'r.pdf', format: 'pdf', rawText: '',
+            sections: [{ id: 's2', kind: 'experience', heading: 'X', looseLines: [], span: { start: 0, end: 1 },
+              entries: [{ id: 's2:e0', sectionId: 's2', index: 0, headerLines: ['A'], span: { start: 0, end: 1 },
+                bullets: [{ id: 's2:e0:b0', entryId: 's2:e0', index: 0, text: 'Did a thing', span: { start: 0, end: 1 } }] }] }],
+            meta: { wordCount: 640, quality: 'clean', layoutWarnings: [] },
+          },
+          formatDiagnosis: { overallScore: 90, metrics: { length: { wordCount: 640, pageCount: 1 } }, issues: [] },
+          entryDiagnoses: [{ entryId: 's2:e0', overallScore: 50, bullets: [{ bulletId: 's2:e0:b0', overallScore: 50,
+            issues: [{ what: 'needs a baseline', costWords: 30 }], strengths: [] }] }],
+        },
+      },
+      queryEngine: {
+        async query(params: { messages: Array<{ role: string; content: string }> }) {
+          asked.push(params);
+          return { type: 'text', content: replies[asked.length - 1], usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' };
+        },
+        getUsageSummary: () => '',
+        checkBudget: () => ({ ok: true }),
+      },
+      abortSignal: new AbortController().signal,
+    } as never;
+
+    const result = await generateReportTool.execute({} as never, ctx);
+
+    expect(asked[1]!.messages.at(-1)!.content).toContain('adds about 30 words, and the page has about 10 left');
+    expect((result as { data: { improvementPlan: { shortTerm: string[] } } }).data.improvementPlan.shortTerm).toEqual([]);
+  });
+});
