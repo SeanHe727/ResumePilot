@@ -189,12 +189,20 @@ export async function writeFullReport(
   const firstParsed = parseJsonObject(response.content ?? '');
   if (room !== undefined && Array.isArray(firstParsed?.sections) && firstParsed.sections.length > 0) {
     const first = pageWords(firstParsed);
+    const count = pointCount(firstParsed);
+    // Points as well as words. Cuts count against the words, so a write-up
+    // full of small cuts could read as short and be asked to say more.
+    // Measured: 27 words under at 31 points, asked to expand, came back at 39.
     const note =
-      first > room * 1.1
+      count > 18
+        ? `What you wrote has ${count} points. Bring it to about fifteen: merge points that ask the ` +
+          `same of a line, and drop the least valuable. Keep the room in view: about ${room} words. ` +
+          `Same JSON shape.`
+        : first > room * 1.1
         ? `What you wrote adds about ${first} words and the page has about ${room}. Rewrite it to fit: ` +
           `shorten points, merge the ones that ask the same of a line, and drop the least valuable. ` +
           `Same JSON shape.`
-        : first < room * 0.6 && room > 20
+        : first < room * 0.6 && room > 20 && count < 12
           ? `What you wrote adds about ${first} words and the page has about ${room}. There is room to ` +
             `say more: give the points that matter most their fuller fix, and split a point that bundles ` +
             `two different fixes. Do not add anything the groups do not support. Same JSON shape.`
@@ -204,8 +212,11 @@ export async function writeFullReport(
       ctx.trace?.event(() => ({
         phase: 'decision',
         purpose: 'report fitted to the page',
-        input: { room, wordsBefore: first },
-        output: { wordsAfter: pageWords(parseJsonObject(second.content ?? '')) },
+        input: { room, wordsBefore: first, pointsBefore: count },
+        output: {
+          wordsAfter: pageWords(parseJsonObject(second.content ?? '')),
+          pointsAfter: pointCount(parseJsonObject(second.content ?? '')),
+        },
       }));
       if (parseJsonObject(second.content ?? '')?.sections) response = second;
     }
@@ -404,6 +415,12 @@ export function pageWords(parsed: Record<string, unknown> | null): number {
     }
   }
   return net;
+}
+
+/** How many points a write-up holds. */
+export function pointCount(parsed: Record<string, unknown> | null): number {
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  return (sections as Array<{ points?: unknown[] }>).reduce((n, s) => n + (s.points?.length ?? 0), 0);
 }
 
 /**
