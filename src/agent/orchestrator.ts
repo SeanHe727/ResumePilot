@@ -1,4 +1,5 @@
 import type {
+  BulletIssue,
   EntryDiagnosis,
   EntryRead,
   JdMatch,
@@ -10,11 +11,11 @@ import type {
 } from '../domain.js';
 import { renderResume } from '../document/index.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
-import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
+import { buildClaimsMessage, buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
 import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
 import { buildTimeline, renderTimeline } from '../document/timeline.js';
 import { SemaphorePool } from './pool.js';
-import { ROLES } from './roles.js';
+import { CLAIMS_AGENT, CONSISTENCY_AGENT, ROLES } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
 import type {
   AgentRunStat,
@@ -29,7 +30,10 @@ import type {
 } from './types.js';
 
 const DEFAULTS: OrchestratorConfig = {
-  maxConcurrency: 3,
+  // Two readers per content review now — the reading and the claim check —
+  // and two for the whole page. At three, a content review's second reader
+  // queued behind the rest of the fan-out, on a deadline that counts the wait.
+  maxConcurrency: 6,
   timeoutMs: 300_000,
   // `retry` rather than `continue`, and it is still `continue`'s promise that
   // holds: a role that fails twice is dropped, not allowed to fail the batch.
@@ -65,10 +69,10 @@ const PER_ENTRY: ReadonlySet<RoleId> = new Set(PER_ENTRY_ROLES);
  * adding a role without saying what it reads is a compile error, which is where
  * that mistake belongs.
  */
-const MESSAGE_FOR: Record<PerEntryRole, (entry: ResumeEntry, background?: string) => string> = {
+const MESSAGE_FOR: Record<PerEntryRole, (entry: ResumeEntry) => string> = {
   // The same user message the matching tool builds, so a sub-agent and a direct
   // call ask for the same JSON and agree on bullet ids.
-  content: (entry, background) => buildEntryMessage({ entry, ...(background ? { background } : {}) }),
+  content: (entry) => buildEntryMessage({ entry }),
   wording: (entry) => buildWordingMessage(entry),
 };
 
@@ -128,7 +132,11 @@ export class DefaultOrchestrator {
     }
 
     const chosen = roles.roles.filter((role): role is PerEntryRole => PER_ENTRY.has(role));
-    const results = await this.parallel(chosen.map((role) => taskFor(role, entry, briefing, background)));
+    // The claims reader goes wherever the content reader does: its errors are
+    // part of that reading, found by a reader whose only job is checking.
+    const tasks = chosen.map((role) => taskFor(role, entry, briefing));
+    if (chosen.includes('content')) tasks.push(claimsTask(entry, briefing, background));
+    const results = await this.parallel(tasks);
 
     return aggregate(entry, results, this.failures);
   }
@@ -169,7 +177,7 @@ export class DefaultOrchestrator {
     if (resume.sections.every((section) => section.entries.length === 0)) return null;
     const timeline = renderTimeline(buildTimeline(resume));
 
-    const [result] = await this.parallel([
+    const [result, check] = await this.parallel([
       {
         agentConfig: ROLES['narrative']!,
         input: 'Read these entries in sequence and return the JSON described above.',
@@ -181,19 +189,26 @@ export class DefaultOrchestrator {
           ...briefingContext(briefing),
         },
       },
+      // The page checked against itself, beside the reading of its story.
+      {
+        agentConfig: CONSISTENCY_AGENT,
+        input: 'Check this résumé against itself and return the JSON described above.',
+        context: { entries: renderResume(resume), ...(timeline ? { timeline } : {}) },
+      },
     ]);
 
     const raw = this.readWholeDocument('narrative', result);
     if (!raw) return null;
+    const checked = this.readWholeDocument('consistency', check) ?? {};
 
     return {
       overallScore: numeric(raw.overallScore),
       arc: typeof raw.arc === 'string' ? raw.arc : '',
       gaps: strings(raw.gaps),
       orderingNotes: strings(raw.orderingNotes).filter((note) => !confirmsOrder(note)),
-      unsupportedSkills: strings(raw.unsupportedSkills),
-      conflicts: strings(raw.conflicts),
-      misspellings: strings(raw.misspellings),
+      unsupportedSkills: strings(checked.unsupportedSkills),
+      conflicts: strings(checked.conflicts),
+      misspellings: strings(checked.misspellings),
       withinEntries: readEntryReads(resume, raw.withinEntries),
     };
   }
@@ -377,10 +392,18 @@ function readEntryReads(resume: ResumeDocument, raw: unknown): EntryRead[] {
   });
 }
 
-function taskFor(role: PerEntryRole, entry: ResumeEntry, briefing?: Briefing, background?: string): SubAgentTask {
+function claimsTask(entry: ResumeEntry, briefing?: Briefing, background?: string): SubAgentTask {
+  return {
+    agentConfig: CLAIMS_AGENT,
+    input: buildClaimsMessage(entry, background),
+    context: { entry: withoutContactDetails(entry.headerLines.join(' | ')), ...briefingContext(briefing) },
+  };
+}
+
+function taskFor(role: PerEntryRole, entry: ResumeEntry, briefing?: Briefing): SubAgentTask {
   return {
     agentConfig: ROLES[role]!,
-    input: MESSAGE_FOR[role](entry, background),
+    input: MESSAGE_FOR[role](entry),
     context: { entry: withoutContactDetails(entry.headerLines.join(' | ')), ...briefingContext(briefing) },
   };
 }
@@ -413,7 +436,10 @@ function aggregate(
   results: SubAgentResult[],
   failures: Map<string, string>,
 ): EntryVerdict {
-  const substance = readSubstance(entry, results, (r) => failures.set(`content:${entry.id}`, r));
+  const read = readSubstance(entry, results, (r) => failures.set(`content:${entry.id}`, r));
+  const substance = read
+    ? withErrors(read, readClaims(entry, results, (r) => failures.set(`claims:${entry.id}`, r)))
+    : null;
   const wording = readWording(entry, results, (r) => failures.set(`wording:${entry.id}`, r));
 
   const scores = [substance?.overallScore, wording?.overallScore].filter(
@@ -457,6 +483,55 @@ function readSubstance(
   }
 
   return normalised.data ?? null;
+}
+
+/** The claims reader's errors, on lines of this entry only. */
+function readClaims(
+  entry: ResumeEntry,
+  results: SubAgentResult[],
+  note: (reason: string) => void,
+): Array<{ bulletId: string; issue: BulletIssue }> {
+  const raw = successOutput(results, 'claims', note);
+  const errors = Array.isArray(raw?.errors) ? raw.errors : [];
+  const ids = new Set(entry.bullets.map((b) => b.id));
+  const axes = ['impact', 'measurement', 'method'] as const;
+  return errors.flatMap((item) => {
+    const record = item as Record<string, unknown> | null;
+    const bulletId = bareId(record?.bulletId);
+    const what = typeof record?.what === 'string' ? record.what.trim() : '';
+    // A line of another entry is that entry's reader's to report.
+    if (!what || !ids.has(bulletId)) return [];
+    const axis = axes.find((a) => a === record?.axis);
+    const text = (key: string) => (typeof record?.[key] === 'string' ? (record[key] as string).trim() : '');
+    return [
+      {
+        bulletId,
+        issue: {
+          what,
+          costWords: 0,
+          kind: 'wrong' as const,
+          ...(axis ? { axis } : {}),
+          ...(text('why') ? { why: text('why') } : {}),
+          ...(text('fix') ? { fix: text('fix') } : {}),
+        },
+      },
+    ];
+  });
+}
+
+/** The errors placed first among each line's issues: they matter most. */
+function withErrors(
+  diagnosis: EntryDiagnosis,
+  errors: Array<{ bulletId: string; issue: BulletIssue }>,
+): EntryDiagnosis {
+  if (errors.length === 0) return diagnosis;
+  return {
+    ...diagnosis,
+    bullets: diagnosis.bullets.map((bullet) => {
+      const own = errors.filter((e) => e.bulletId === bullet.bulletId).map((e) => e.issue);
+      return own.length > 0 ? { ...bullet, issues: [...own, ...bullet.issues] } : bullet;
+    }),
+  };
 }
 
 /**
@@ -511,7 +586,7 @@ function readWording(
 
 function successOutput(
   results: SubAgentResult[],
-  agentId: RoleId,
+  agentId: string,
   note: (reason: string) => void,
 ): Record<string, unknown> | null {
   const result = results.find((r) => r.agentId === agentId);

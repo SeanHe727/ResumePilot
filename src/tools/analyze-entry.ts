@@ -15,12 +15,6 @@ export interface AnalyzeEntryInput {
   entry: ResumeEntry;
   /** Corpus entries already retrieved for the dimensions being checked. */
   references?: Array<{ question: string; weakExample: string; strongExample: string; gap: string }>;
-  /**
-   * The whole résumé, rendered, to check this entry against. Measured: read
-   * one entry at a time, the reader could not check a role's dates against the
-   * degrees, which a reader of the whole page did.
-   */
-  background?: string;
 }
 
 /**
@@ -80,15 +74,20 @@ export const analyzeEntryTool: Tool<AnalyzeEntryInput, EntryDiagnosis> = {
   },
 };
 
+/** The claims reader's message: the page for reference, then the entry to check. */
+export function buildClaimsMessage(entry: ResumeEntry, background?: string): string {
+  return (
+    (background
+      ? `The whole résumé, for reference only — check the entry after it, and nothing else:\n\n${background}\n\n`
+      : '') +
+    `The entry to check:\n<resume_content>\n${renderEntry(entry)}\n</resume_content>\n\n` +
+    `Reply with JSON only, in the shape your instructions give.`
+  );
+}
+
 /** Exported so a sub-agent asks for the same shape this tool does. */
 export function buildEntryMessage(input: AnalyzeEntryInput): string {
-  const { entry, references, background } = input;
-  const backgroundBlock = background
-    ? `The whole résumé, for reference only. Judge the entry after it, and nothing else; read the rest ` +
-      `to check that entry against — its dates against the degrees and the other roles, its figures ` +
-      `against the same figures elsewhere, its claims against the role's level. Findings go on the ` +
-      `entry's own lines, and may cite a line elsewhere as the reason.\n\n${background}\n\nThe entry to judge:\n`
-    : '';
+  const { entry, references } = input;
 
 
   const referenceBlock = references?.length
@@ -100,7 +99,7 @@ export function buildEntryMessage(input: AnalyzeEntryInput): string {
         .join('\n')}\n`
     : '';
 
-  return `${backgroundBlock}<resume_content>
+  return `<resume_content>
 ${renderEntry(entry)}
 </resume_content>
 ${referenceBlock}
@@ -121,7 +120,7 @@ Return JSON of exactly this shape:
       "issues": [
         {
           "axis": "impact | measurement | method",
-          "kind": "wrong | missing | unclear",
+          "kind": "missing | unclear",
           "what": "the problem, one sentence, quoting the line's words",
           "why": "why it is a problem for a reader, one or two sentences",
           "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets] — nothing the resume does not contain",

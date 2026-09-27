@@ -259,11 +259,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
-      'query_knowledge_base',
-      'verify_claims',
-      'examine_technical_depth',
-    ]);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base']);
   });
 
   it('offers an optional tool once something is behind it', async () => {
@@ -273,12 +269,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
-      'query_knowledge_base',
-      'verify_claims',
-      'examine_technical_depth',
-      'web_search',
-    ]);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'web_search']);
   });
 
   it('sends a role its whole prompt, however long it has grown', async () => {
@@ -550,13 +541,37 @@ describe('DefaultOrchestrator', () => {
 
     const verdict = await orchestrator(engine).diagnoseEntry(entry, bothRoles);
 
-    expect(call).toBe(2);
+    // Content, wording, and the claim check beside the content reader.
+    expect(call).toBe(3);
     expect(verdict.substance?.bullets[0]?.issues).toEqual([
       { what: 'no measurable outcome', costWords: 4 },
     ]);
     expect(verdict.wording?.perBullet[0]?.verbStrength.score).toBe(20);
     expect(verdict.overallScore).toBe(30);
-    expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Entry Substance', 'Entry Wording']);
+    expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Claim Check', 'Entry Substance', 'Entry Wording']);
+  });
+
+  it('puts the claim check\'s errors first on their lines, and only on this entry\'s lines', async () => {
+    const errors = JSON.stringify({
+      errors: [
+        { bulletId: `[${entry.bullets[0]!.id}]`, axis: 'measurement', what: 'the percentage does not match its figures', why: 'w', fix: 'f' },
+        { bulletId: 'elsewhere:0', what: 'not this entry' },
+      ],
+    });
+    const engine: QueryEngine = {
+      async query(params) {
+        return text(params.systemPrompt?.includes('Chain of verification') ? errors : SUBSTANCE_JSON);
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+
+    const verdict = await orchestrator(engine).diagnoseEntry(entry, { roles: ['content'], reasons: {} });
+
+    expect(verdict.substance?.bullets[0]?.issues).toEqual([
+      { what: 'the percentage does not match its figures', costWords: 0, kind: 'wrong', axis: 'measurement', why: 'w', fix: 'f' },
+      { what: 'no measurable outcome', costWords: 4 },
+    ]);
   });
 
   it('takes the brackets off the ids the wording reader hands back', async () => {
@@ -645,7 +660,8 @@ describe('DefaultOrchestrator', () => {
       { roles: ['content'], reasons: {} },
     );
 
-    expect(attempts).toBe(2);
+    // The first of the two readers fails once and is tried again.
+    expect(attempts).toBe(3);
     expect(verdict.substance).not.toBeNull();
   });
 
@@ -734,6 +750,24 @@ describe('whole-document roles', () => {
     expect(narrative?.gaps).toHaveLength(1);
     // Both entries reached the agent, wrapped as data rather than instructions.
     expect(seen[0]?.messages.some((m) => m.content.includes('<resume_content>'))).toBe(true);
+  });
+
+  it('takes the checks from the consistency reader and the story from the career reader', async () => {
+    const checks = JSON.stringify({ conflicts: ['two dates disagree'], unsupportedSkills: ['Fortran'], misspellings: ['Pyhton'] });
+    const engine: QueryEngine = {
+      async query(params) {
+        return text(params.systemPrompt?.includes('check a résumé against itself') ? checks : NARRATIVE_JSON);
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+
+    const narrative = await orch(engine).assessNarrative(doc([entry]));
+
+    expect(narrative?.arc).toMatch(/no visible progression/);
+    expect(narrative?.conflicts).toEqual(['two dates disagree']);
+    expect(narrative?.unsupportedSkills).toEqual(['Fortran']);
+    expect(narrative?.misspellings).toEqual(['Pyhton']);
   });
 
   it('shows the agent which section each entry sits under', async () => {

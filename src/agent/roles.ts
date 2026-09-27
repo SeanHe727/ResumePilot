@@ -1,6 +1,8 @@
 import {
   CONTENT_PROMPT,
   DEEP_RESEARCH_PLAN_PROMPT,
+  CLAIMS_PROMPT,
+  CONSISTENCY_PROMPT,
   DEEP_RESEARCH_PROMPT,
   WORDING_PROMPT,
   JD_MATCH_PROMPT,
@@ -32,7 +34,9 @@ export const CONTENT_AGENT: SubAgentConfig = {
   // `examine_technical_depth` runs a second agent inside one of these turns.
   // It takes no pool slot, so it costs latency and a call rather than a place
   // in the fan-out.
-  tools: ['query_knowledge_base', 'verify_claims', 'examine_technical_depth'],
+  // Checking whether a claim holds is the claims reader's; this one looks up
+  // rules and, where it can, the world.
+  tools: ['query_knowledge_base'],
   optionalTools: ['web_search'],
   optionalPrompt: `${WEB_SEARCH_CORE}\n\n${CONTENT_SEARCH_TRIGGERS}`,
   // One more than before for the claim check, which is a turn of its own.
@@ -145,6 +149,42 @@ export const DEEP_RESEARCH_PLANNER: SubAgentConfig = {
   description: 'Decides what one question still needs, after a first search',
   systemPrompt: DEEP_RESEARCH_PLAN_PROMPT,
   timeoutMs: 60_000,
+};
+
+/**
+ * Whether one entry's claims hold, checked one by one.
+ *
+ * Runs beside the content reader on every entry that reader is sent, and its
+ * errors join that reader's findings. Not in `ROLES`: nothing dispatches it
+ * on its own, because a check without the reading beside it is half a review.
+ */
+export const CLAIMS_AGENT: SubAgentConfig = {
+  id: 'claims',
+  task: 'diagnose_bullet',
+  name: 'Claim Check',
+  description: 'Checks whether each claim in one entry can be true',
+  systemPrompt: CLAIMS_PROMPT,
+  tools: ['verify_claims', 'examine_technical_depth'],
+  // Lists, one check call, a confirmation or two, and the answer.
+  maxTurns: 6,
+  timeoutMs: 420_000,
+  contextBoundary: ['briefing', 'entry'],
+};
+
+/**
+ * The whole page checked against itself. Runs beside the career reader, and
+ * fills the parts of its reading that are checks rather than judgement.
+ */
+export const CONSISTENCY_AGENT: SubAgentConfig = {
+  id: 'consistency',
+  task: 'assess_narrative',
+  name: 'Consistency Check',
+  description: 'Checks the page against itself: dates, repeated figures, skills, spelling',
+  systemPrompt: CONSISTENCY_PROMPT,
+  tools: [],
+  maxTurns: 1,
+  timeoutMs: 180_000,
+  contextBoundary: ['entries', 'timeline'],
 };
 
 export const ROLES: Readonly<Record<string, SubAgentConfig>> = {
