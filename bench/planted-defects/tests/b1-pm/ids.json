@@ -1,6 +1,4 @@
 {
-  "s1:e0": "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
-  "s1:e1": "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
   "s2:e0": "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
   "s2:e0:b0": "Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
   "s2:e0:b1": "Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
@@ -20,5 +18,7 @@
   "s3:e1": "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
   "s3:e1:b0": "Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
   "s3:e1:b1": "Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
-  "s3:e1:b2": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding."
+  "s3:e1:b2": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+  "s1:e0": "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+  "s1:e1": "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018"
 }

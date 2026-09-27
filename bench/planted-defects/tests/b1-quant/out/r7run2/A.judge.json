@@ -1,0 +1,106 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 20,
+  "words": 1990,
+  "quotes": 13,
+  "grounded": 5,
+  "rewrites": 8,
+  "inventedNumbers": [
+    "25"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4707,
+    "completion_tokens": 10901,
+    "total_tokens": 15608,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10336
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2787
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "The bullet uses a first-person pronoun in \"my proof,\" which does not belong in a résumé bullet."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "The Methods skills line misspells \"econometrics.\""
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 52% to 58% is 6 percentage points, not a 6% relative improvement."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The reduction from 0.20 to 0.15 is 25%, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The construction also makes the reader work through several methods before reaching the result that the team reused the store in two later projects."
+      },
+      {
+        "id": "S3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "A daily Sharpe ratio is conventionally annualized by multiplying by the square root of 252, not by 252."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Standard Diebold–Mariano tests are invalid for this nested-model forecast comparison."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Move the bakery role to \"Additional Experience,\" shorten it, or otherwise de-emphasize it so the current retail role does not lead the quantitative story."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "SQL, C++, Kafka, and Bayesian inference are listed but are not supported by the experience or project bullets."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 20,
+    "rewrites": [
+      "the proof",
+      "√252",
+      "improved forecast accuracy by [effect size] versus the nested HAR-RV baseline",
+      "reported annualized Sharpe of [value] versus [comparison]",
+      "a 25% reduction",
+      "by 6 percentage points",
+      "Switched to time-grouped folds; the local-validation-to-leaderboard gap changed by 0.02",
+      "econometrics"
+    ],
+    "falsePositives": []
+  }
+}

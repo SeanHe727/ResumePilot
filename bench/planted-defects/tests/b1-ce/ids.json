@@ -1,6 +1,4 @@
 {
-  "s1:e0": "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
-  "s1:e1": "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
   "s2:e0": "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
   "s2:e0:b0": "Owned the diagnostics service’s monitoring dashboards across two major releases and the on-call rotation that used them.",
   "s2:e0:b1": "Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.",
@@ -20,5 +18,7 @@
   "s3:e1": "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
   "s3:e1:b0": "Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
   "s3:e1:b1": "Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
-  "s3:e1:b2": "Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream."
+  "s3:e1:b2": "Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+  "s1:e0": "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+  "s1:e1": "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022"
 }
