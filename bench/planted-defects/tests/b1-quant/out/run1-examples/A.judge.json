@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 8,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 22,
+  "words": 2361,
+  "quotes": 14,
+  "grounded": 11,
+  "rewrites": 1,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5372,
+    "completion_tokens": 14458,
+    "total_tokens": 19830,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14105
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3452
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove the first-person phrase “my proof.”"
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "a spelling error: “econometircs” should be “econometrics.”"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Moving directional hit rate from 52% to 58% is a **6-percentage-point increase**, not simply “6%.”"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "Reducing forecast error from 0.20 to 0.15 is a **25% reduction**, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "bundles unrelated activities into the package achievement, reducing scanability; move the result forward and separate or remove the extra duties."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "The Sharpe-ratio annualization uses the wrong factor... conventional annualization multiplies it by the square root of 252."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Move Sunrise Bakery out of the first position or compress it so the quantitative-research narrative leads."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review found skills such as **C++, SQL, and Kafka** that are not demonstrated in the experience or project bullets."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 22,
+    "rewrites": [
+      "Cut unsold bread from 12% to 7% of production by running daily stock counts and supplier orders."
+    ],
+    "falsePositives": []
+  }
+}

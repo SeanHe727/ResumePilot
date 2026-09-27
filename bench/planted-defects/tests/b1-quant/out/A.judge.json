@@ -1,46 +1,46 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/A.md",
-  "recall": 10,
+  "recall": 7,
   "found": [
     "W2",
     "W6",
     "A2",
     "A3",
-    "S1",
     "S3",
     "T1",
-    "T3",
-    "N1",
-    "N4"
+    "N1"
   ],
   "coverage": true,
-  "suggestions": 24,
-  "words": 2460,
-  "quotes": 16,
-  "grounded": 11,
-  "rewrites": 2,
+  "suggestions": 30,
+  "words": 2814,
+  "quotes": 18,
+  "grounded": 12,
+  "rewrites": 0,
   "inventedNumbers": [],
-  "falsePositives": [],
+  "falsePositives": [
+    "s2:e0:b0, s2:e0:b1, s2:e2:b0, s2:e2:b1... 'Managed' is past tense even though the role is current; use 'Manage' to match 'Sep 2025 - Present.' (Ridgeway role is past, not current)",
+    "s2:e1:b1, s2:e1:b2, s2:e1:b3... 'by a third' uses a less precise number format... replace it with 'by 33%' (many listed lines do not contain 'by a third')"
+  ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5436,
-    "completion_tokens": 13989,
-    "total_tokens": 19425,
+    "prompt_tokens": 5973,
+    "completion_tokens": 12282,
+    "total_tokens": 18255,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 13480
+      "reasoning_tokens": 11819
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 3516
+    "prompt_cache_miss_tokens": 4053
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Replace the first-person wording in “my proof.”"
+        "evidence": "Remove the first-person pronoun in the research-assistantship bullet."
       },
       {
         "id": "W6",
@@ -50,50 +50,50 @@
       {
         "id": "A2",
         "found": true,
-        "evidence": "Replace \"by 6%\" with \"by 6 percentage points\""
+        "evidence": "The directional-performance claim describes a six-percentage-point increase as a 6% improvement"
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "the change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+        "evidence": "The change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
       },
       {
         "id": "S1",
-        "found": true,
-        "evidence": "The three technical methods also delay the feature-store outcome, weakening the ownership and impact of the infrastructure work."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "Separate or reduce the unrelated cluster maintenance, reading-group, and grading responsibilities."
+        "evidence": "The package result is buried in an overloaded bullet that combines unrelated duties"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "annualized daily Sharpe as daily Sharpe multiplied by 252; the specialist identified this as technically incorrect."
+        "evidence": "The Sharpe-ratio annualization uses the wrong scaling factor"
       },
       {
         "id": "T3",
-        "found": true,
-        "evidence": "standard Diebold-Mariano inference generally is not valid for nested forecasts..."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "Opening with a bakery management role makes the résumé appear to be moving away from quantitative work"
+        "evidence": "Sunrise Bakery should not appear as the first and only current role in a résumé aimed at quantitative work"
       },
       {
         "id": "N4",
-        "found": true,
-        "evidence": "SQL, C++, Kafka, and Bayesian inference are not supported elsewhere in the resume. Remove them unless you can connect them to actual experience."
+        "found": false,
+        "evidence": ""
       }
     ],
     "coverage": true,
-    "suggestions": 24,
-    "rewrites": [
-      "Joined 120 microstructure features point-in-time across six venues, deduplicated late prints, versioned each schema, and built",
-      "Cut unsold bread from 12% to 7% of production by running daily stock counts and supplier orders."
-    ],
-    "falsePositives": []
+    "suggestions": 30,
+    "rewrites": [],
+    "falsePositives": [
+      "s2:e0:b0, s2:e0:b1, s2:e2:b0, s2:e2:b1... 'Managed' is past tense even though the role is current; use 'Manage' to match 'Sep 2025 - Present.' (Ridgeway role is past, not current)",
+      "s2:e1:b1, s2:e1:b2, s2:e1:b3... 'by a third' uses a less precise number format... replace it with 'by 33%' (many listed lines do not contain 'by a third')"
+    ]
   }
 }

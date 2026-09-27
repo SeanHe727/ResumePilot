@@ -1,0 +1,99 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 24,
+  "words": 2460,
+  "quotes": 16,
+  "grounded": 11,
+  "rewrites": 2,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5436,
+    "completion_tokens": 13989,
+    "total_tokens": 19425,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13480
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3516
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Replace the first-person wording in “my proof.”"
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct “econometircs” to “econometrics.”"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Replace \"by 6%\" with \"by 6 percentage points\""
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "the change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The three technical methods also delay the feature-store outcome, weakening the ownership and impact of the infrastructure work."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Separate or reduce the unrelated cluster maintenance, reading-group, and grading responsibilities."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "annualized daily Sharpe as daily Sharpe multiplied by 252; the specialist identified this as technically incorrect."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "standard Diebold-Mariano inference generally is not valid for nested forecasts..."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Opening with a bakery management role makes the résumé appear to be moving away from quantitative work"
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "SQL, C++, Kafka, and Bayesian inference are not supported elsewhere in the resume. Remove them unless you can connect them to actual experience."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 24,
+    "rewrites": [
+      "Joined 120 microstructure features point-in-time across six venues, deduplicated late prints, versioned each schema, and built",
+      "Cut unsold bread from 12% to 7% of production by running daily stock counts and supplier orders."
+    ],
+    "falsePositives": []
+  }
+}

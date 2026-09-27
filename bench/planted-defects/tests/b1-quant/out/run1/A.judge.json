@@ -1,95 +1,105 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/A.md",
-  "recall": 8,
+  "recall": 10,
   "found": [
     "W2",
     "W6",
     "A2",
     "A3",
+    "S1",
     "S3",
     "T1",
+    "T3",
     "N1",
     "N4"
   ],
   "coverage": true,
-  "suggestions": 22,
-  "words": 2361,
-  "quotes": 14,
-  "grounded": 11,
-  "rewrites": 1,
-  "inventedNumbers": [],
+  "suggestions": 24,
+  "words": 2919,
+  "quotes": 23,
+  "grounded": 18,
+  "rewrites": 7,
+  "inventedNumbers": [
+    "25"
+  ],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5372,
-    "completion_tokens": 14458,
-    "total_tokens": 19830,
+    "prompt_tokens": 6076,
+    "completion_tokens": 13639,
+    "total_tokens": 19715,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 14105
+      "reasoning_tokens": 13288
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 3452
+    "prompt_cache_miss_tokens": 4156
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove the first-person phrase “my proof.”"
+        "evidence": "Remove the first-person pronoun in “my proof.”"
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "a spelling error: “econometircs” should be “econometrics.”"
+        "evidence": "Correct “econometircs” to “econometrics.”"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "Moving directional hit rate from 52% to 58% is a **6-percentage-point increase**, not simply “6%.”"
+        "evidence": "The hit-rate change is six percentage points, not a 6% increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "Reducing forecast error from 0.20 to 0.15 is a **25% reduction**, not a 33% improvement."
+        "evidence": "the change from forecast error 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
       },
       {
         "id": "S1",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "the feature-store result should be surfaced earlier"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "bundles unrelated activities into the package achievement, reducing scanability; move the result forward and separate or remove the extra duties."
+        "evidence": "Separate or remove lower-priority duties such as cluster maintenance, reading-group organization, and grading."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "The Sharpe-ratio annualization uses the wrong factor... conventional annualization multiplies it by the square root of 252."
+        "evidence": "daily Sharpe annualization uses the square root of 252"
       },
       {
         "id": "T3",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "A standard Diebold–Mariano test has important limitations for nested-model comparisons"
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "Move Sunrise Bakery out of the first position or compress it so the quantitative-research narrative leads."
+        "evidence": "Move Sunrise Bakery into a separate \"Additional Experience\" section below the quantitative and research experience"
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "The narrative review found skills such as **C++, SQL, and Kafka** that are not demonstrated in the experience or project bullets."
+        "evidence": "Remove SQL, C++, Kafka, and Bayesian inference unless you add a corresponding experience or project entry"
       }
     ],
     "coverage": true,
-    "suggestions": 22,
+    "suggestions": 24,
     "rewrites": [
-      "Cut unsold bread from 12% to 7% of production by running daily stock counts and supplier orders."
+      "multiplying it by √252",
+      "a 25% reduction",
+      "by 6 percentage points",
+      "while unsold bread fell",
+      "making runs reproducible with fixed seeds",
+      "the proof",
+      "econometrics"
     ],
     "falsePositives": []
   }
