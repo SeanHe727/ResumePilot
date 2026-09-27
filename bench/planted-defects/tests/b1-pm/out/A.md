@@ -3,158 +3,183 @@ hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'i
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
-I reviewed all six entries: content and wording reviews covered the four experience/project entries; education was not applicable. I also ran the format and narrative reviews. No job description was loaded, so this does not include a posting-specific match analysis.
+Reviewed:
 
-The full report is available in `/report --full`. The main changes to make are:
+- **Format/ATS:** clean one-page PDF, parses correctly, consistent layout, no layout warnings.
+- **Content:** all 4 entries with bullets reviewed:
+  - Harbor Payments
+  - Crestline Logistics
+  - Campus Food Rescue App
+  - MBA Consulting Practicum
+- **Wording:** all 4 entries reviewed.
+- **Narrative:** full resume reviewed.
+- **Job-description match:** not reviewed because no posting was provided.
 
-1. **Fix the consulting practicum entry.**  
-   Its third bullet repeats the Harbor Payments result about reducing time to first payment across 2,300 merchants. Because the practicum is described as work for a hospital network, remove that claim or replace it with the actual hospital-project outcome.
+Main changes to make:
 
-2. **Resolve redundancy in Harbor Payments.**  
-   Two bullets describe evaluating the same merchant-onboarding redesign. Combine the measurement method with the bullet that contains the result, or remove the standalone measurement bullet.
+1. **Resolve the duplicated or conflicting achievement.**  
+   The Harbor Payments internship and MBA Consulting Practicum both claim a merchant-onboarding result involving 2,300 merchants and reduced time to first payment. That result does not fit the hospital practicum as currently described. Confirm which entry owns it, then remove or replace the incorrect bullet.
 
-3. **Clarify the operations metrics.**  
-   The claim that late deliveries fell from 11% to 7% is attributed to excluding weather-delayed shipments from the calculation. Make clear that this was a reporting-definition change, not necessarily an operational reduction in late deliveries.
+2. **Clarify the Crestline late-delivery metric.**  
+   The bullet compares 11% and 7% while also changing the calculation by excluding weather-delayed shipments. Explain the measurement consistently so the result is not presented as a performance improvement caused merely by changing the calculation.
 
-4. **Add outcomes or context to activity-only bullets.**  
-   The reviewers identified these areas:
-   - Harbor Payments: the chargeback interviews are described as “sizing” the problem without explaining how the size was established.
-   - Crestline Logistics: the S&OP/forecast-pack responsibility has no stated outcome.
-   - Hospital practicum: weekly working sessions have no result attached.
-   - Hospital practicum: the shortened intake form has no amount of reduction or measurable effect.
+3. **Add outcomes to activity-only bullets.**  
+   The weakest areas are:
+   - the chargeback research bullet, which gives the interview count but not the size or consequence of the problem;
+   - the S&OP coordination bullet, which describes recurring preparation but not its effect;
+   - both hospital-practicum bullets, which describe meetings and process changes without showing operational results.
 
-5. **Verify the causal and numerical claims.**  
-   The reviewers flagged:
-   - “Improved checkout conversion by 35%” — clarify whether this is a relative increase or percentage-point increase and, if available, include the baseline.
-   - The food-rescue app’s increase from 400 to 1,150 weekly active users — establish the measurement dates and avoid implying the reminders alone caused the entire increase unless that was tested.
-   - The app’s 95% pickup-slot coverage — avoid claiming that staff coverage was entirely unnecessary unless the evidence supports it.
-   - The 9 tonnes of food redistributed — clarify whether this was directly recorded or estimated.
-   - The 1,800 annual driver-hour saving — document the calculation basis if possible.
+4. **Support or qualify causal claims.**  
+   Several bullets attribute the entire result to one intervention:
+   - checkout conversion to the one-page flow;
+   - user growth to pickup reminders;
+   - reduction in late deliveries to the calculation change.  
+   Verify the measurement method and distinguish correlation from demonstrated causation.
 
-6. **Improve chronology and positioning.**  
-   The narrative review recommends:
-   - Put **Experience** before **Education**, since the resume includes four years of professional experience.
-   - Put **Projects** after Experience and before Education.
-   - Investigate or explain the eight-month gap between June 2018 and March 2019.
-   - Either demonstrate Figma use in the experience/projects or remove it from Skills.
+5. **Add context for figures.**  
+   Clarify whether:
+   - the 35% checkout improvement is relative or percentage-point growth;
+   - the 30% pick-error reduction uses a defined baseline;
+   - the 1,800 saved driver hours is measured or modeled;
+   - the 95% pickup-slot figure supports the claim about eliminating staff coverage.
 
-7. **Correct smaller wording issues.**
-   - Use “by 30%” rather than “30%” for the warehouse-pick-error reduction.
-   - Use past tense for completed roles, including “prepared.”
-   - Define or spell out “S&OP.”
-   - Make passive project bullets clearly show your actions.
-   - Clarify what “with two dining halls” modifies in the food-rescue project.
+6. **Reorder the sections.**  
+   The narrative review recommends placing **Experience before Education**, since the resume includes five years of post-undergraduate work and an MBA-led product transition.
 
-The file itself is one page, parses cleanly for ATS purposes, and has no layout warnings. The format review also flagged personal details such as date of birth and nationality; those should generally be omitted unless a specific application requires them.
+7. **Address the June 2018–March 2019 gap.**  
+   Add relevant activity if one exists, or be prepared to explain the period.
+
+8. **Check the Skills section against the experience bullets.**  
+   The narrative review identified skills such as A/B testing, SQL, and Figma that are not demonstrated in the entries. Either connect them to specific experience or remove them.
+
+9. **Clean up wording and tense.**
+   - Fix “Cut warehouse pick errors 30%” so the percentage is grammatically complete.
+   - Use past tense consistently for the completed Crestline role.
+   - Expand “S&OP” on first use.
+   - Replace passive constructions in the campus-app and hospital-practicum bullets where they obscure ownership.
+   - Make the strongest outcomes more prominent rather than burying them after process details.
+
+10. **Review personal details.**  
+    The format check flagged “Date of birth” and “Nationality” as personal details conventionally omitted from resumes.
+
+The full specialist report contains the entry-by-entry comments and bullet IDs. No resume wording was changed.
 
 > /report
 # Review: resume.pdf
 
-**78/100** — format 100 · content 63 · wording 82 · narrative 56
+**76/100** — format 100 · content 59 · wording 84 · narrative 54
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **The late-delivery line misstates a reporting-definition change as an operational reduction in late deliveries.**
+1. **The onboarding bullets duplicate each other and leave the strongest achievement split across two lines.**
+   > Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.
+   The resume presents the measurement method in one bullet and the result in another, then repeats the same merchant-onboarding result under the hospital practicum. A recruiter may question which role actually owns the work and miss the internship's clearest product story.
+   **How to change it:** Delete the duplicate practicum claim, merge the comparison method into the Harbor outcome bullet, and state that the opt-in comparison was observational unless you have a controlled evaluation. Add the measured result from that comparison: [metric] was [new-flow result] versus [old-flow result].
+2. **The late-delivery line incorrectly presents a reporting-definition change as an operational improvement.**
    > Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
-   Excluding weather-delayed shipments changes the measured population rather than preventing shipments from arriving late, so the reported fall from 11% to 7% does not show that overall delivery performance improved. A logistics reader will also assume the figures describe all shipments unless the restricted population is labeled explicitly.
-   **How to change it:** Replace "Cut late deliveries" with the defined non-weather-related or controllable late-delivery rate and label both percentages accordingly. If the intended claim is about all late deliveries, use an all-in calculation with [the all-in late-delivery rates before and after the operational change], and describe the actual intervention rather than the exclusion as the cause.
-2. **The chargeback interviews do not by themselves substantiate a claim that the problem was sized.**
-   > Interviewed 25 merchants to size the chargeback problem and turned the findings into the business case that set the next quarter’s roadmap priority.
-   Interviews can reveal merchant experiences and generate hypotheses, but a sample of 25 may be non-representative and subject to recall or selection bias. A reader therefore cannot infer prevalence or financial magnitude from the interviews alone.
-   **How to change it:** Replace that phrase with the qualitative research objective, or add [chargeback rate or financial exposure from transaction data] before claiming that the problem was sized.
-3. **The MBA Consulting Practicum entry contains a merchant-onboarding achievement that is duplicated from Harbor Payments and does not fit the hospital-network project.**
-   > Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
-   A hiring manager will read "new merchant" and "2,300 merchants" as unrelated to the surrounding hospital scheduling and intake work. The duplication makes the project look copied or misattributed, weakening confidence in both the entry and the claimed result.
-   **How to change it:** Delete the third practicum bullet unless it genuinely belongs to the hospital engagement; if it does, replace the merchant language and figures with [the hospital-network population and outcome actually affected]. Shorten or remove the entry if no genuine hospital outcome remains.
+   Excluding weather-delayed shipments removes some late shipments from the calculation rather than making deliveries arrive sooner. The 11% and 7% figures are not a clean before-and-after comparison unless the same exclusion was applied to both periods, so the claim can undermine trust in the metric.
+   **How to change it:** Replace "Cut late deliveries" with "Reduced the reported late-delivery rate" and identify both figures as rates under the revised definition. If delivery performance actually improved, replace them with [comparable late-delivery rates calculated using the same weather-delay treatment in both periods] and add [the operational intervention].
+3. **The pickup-reminder line attributes all user growth to the reminders without evidence that they caused it.**
+   > Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60 user interviews showed students missed pickup windows.
+   The interviews support the decision to test reminders because students missed pickup windows, but they do not prove that reminders produced the full increase from 400 to 1,150 weekly active users. A product reader may therefore question the causal claim and the evaluation discipline.
+   **How to change it:** Replace "by adding pickup reminders" with "after adding pickup reminders" unless you can add [the evaluation showing how much of the user growth came from reminders]. Replace "chosen after 60 user interviews showed students missed pickup windows" with "after interviewing 60 users who reported missing pickup windows."
 
 ## Already working
 
-- s2:e0:b5: Uses a strong before-and-after measurement with a defined median metric.
-- s2:e0:b1: Shows ownership of requirements and success metrics.
-- s3:e0:b0: Quantifies both user reach and food redistributed.
+- s2:e0:b5: It is the entry's strongest end-to-end product story: intervention, outcome, metric, and scale are all present.
+- s2:e1:b1: The outcome appears before the method and is tied to a concrete operational metric.
+- s2:e0:b0: It leads with a business outcome rather than a task.
 
 ## Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
 
-- **The onboarding comparison bullet is incomplete and cannot establish a redesign effect from self-selected groups without an outcome or adjustment method.** *(about 8 words to add)*
-  > Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.
-  The line names who was compared but never says what metric differed or by how much, so the reader cannot tell what the measurement proved. Because merchants opted into the new flow, pre-existing differences between the groups could explain any observed gap rather than the redesign.
-  **How to change it:** Add [the outcome metric] and [the observed difference] after the comparison, and describe it as an observational comparison; add [the method used to control for pre-existing differences] if one exists. Otherwise merge the comparison method into the onboarding-result bullet or remove this bullet.
-- **The checkout-conversion improvement needs its baseline and percentage interpretation.** *(about 5 words to add)*
+- **The checkout-conversion claim does not identify its baseline or establish that the flow replacement caused the gain.** *(about 8 words to add)*
   > Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.
-  A reader cannot judge the size of the result without knowing the starting conversion rate. "35%" could mean a relative increase or a 35-percentage-point increase, which are materially different outcomes.
-  **How to change it:** Add [the baseline checkout conversion rate] and label 35% as either a relative increase or a percentage-point change, whichever the data supports.
-- **The ticket-queue reduction is not supported without starting and ending counts or the period's ticket inflow.** *(about 4 words to add)*
+  A reader cannot tell whether 35% means a relative increase or a percentage-point change, so the size of the result is ambiguous. The line also leaves open whether traffic mix, seasonality, or another change produced the improvement rather than the one-page flow.
+  **How to change it:** Replace the percentage with [conversion before] to [conversion after] and label it as a relative or percentage-point increase. Add the supporting [randomized test or comparison period] and [sample or merchant scope] rather than attributing the result to the redesign alone.
+- **The chargeback research claims to size a problem without providing quantitative sizing evidence.** *(about 8 words to add)*
+  > Interviewed 25 merchants to size the chargeback problem and turned the findings into the business case that set the next quarter’s roadmap priority.
+  Twenty-five interviews can reveal causes and user perspectives, but interviews alone do not establish the rate, volume, or cost of a problem across a population. Without that anchor, the roadmap priority appears to rest on qualitative input alone.
+  **How to change it:** Replace "size" with "characterize" if interviews were the only input, or name the quantitative source and analysis used alongside them: [chargeback or transaction data and how it was analyzed]. Add [chargeback rate, volume, or cost] across [the relevant population].
+- **The ticket-queue reduction cannot be checked because the line omits the starting and ending counts and measurement window.** *(about 8 words to add)*
   > Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.
-  Closing 140 tickets does not itself prove that the queue fell by half because new tickets and other queue changes may have affected the result. A reader cannot validate the claimed reduction from the current figures.
-  **How to change it:** Add [starting open-ticket count] and [ending open-ticket count], or state the net queue change after accounting for new tickets; retain 140 only if it adds useful context.
+  Closing 140 tickets does not by itself establish that the queue fell by half; the result depends on the initial queue and tickets arriving during the period. A hiring reader may therefore doubt the percentage even though the operating responsibility is credible.
+  **How to change it:** Add the queue counts and measurement window: from [starting open tickets] to [ending open tickets] between [dates], alongside the 140 tickets closed.
 
 ## Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
 
-- **The S&OP bullet describes recurring planning activity but gives no business outcome.** *(about 4 words to replace)*
+- **The pick-error claim is grammatically incomplete and does not define what the 30% reduction measures.** *(about 5 words to add)*
+  > Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.
+  The reader cannot tell whether 30% is a relative reduction in the error rate, a reduction in total errors, or a percentage-point change. That ambiguity makes the result harder to compare and verify.
+  **How to change it:** Change "Cut warehouse pick errors 30%" to "Cut warehouse pick errors by 30%" and, if available, add [the before-and-after error rates or error counts and comparison period].
+- **The S&OP bullet describes recurring coordination but gives no measurable value and uses inconsistent tense and unexplained jargon.** *(about 5 words to add)*
   > Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.
-  Quarterly meetings and a forecast pack show responsibility and cadence, but they do not tell the reader whether the process improved forecast accuracy, inventory, service levels, or decision-making. The work therefore reads as administration rather than measurable operational value.
-  **How to change it:** Replace one activity detail with the strongest defensible result, such as [forecast-accuracy change], [planning-cycle time saved], [inventory reduction], or [service-level change], and change "prepares" to "prepared" if retaining the sentence.
-- **The route-planning savings figure lacks the baseline or calculation basis needed to validate it.** *(about 7 words to add)*
+  A reader can see the meeting cadence and forecast-pack responsibility but cannot tell whether the work improved forecasting, shortened planning, or enabled a material decision. "Prepares" is also present tense for a role that ended in 2023, and readers outside logistics may not know S&OP.
+  **How to change it:** Change "S&OP" to "sales and operations planning (S&OP)" and "prepares" to "prepared." Keep the scope, then add [forecast-accuracy change], [planning-cycle reduction], or [business units, sites, or decisions covered].
+- **The route-planning bullet buries its strongest result and does not explain how the 1,800-hour saving was measured.** *(no words)*
   > Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.
-  A reader cannot tell whether 1,800 hours came from measured before-and-after driver time, modeled route time, or another estimate. Without that reference point, the result may look speculative even though the rollout scope and intervention are clear.
-  **How to change it:** Move the savings result immediately after the opening action and add [driver hours before versus after rollout], [hours saved per route or depot], or [the pre-rollout planning baseline used to calculate the annual saving].
+  The annual saving is the most recruiter-visible evidence of value, but it appears after rollout and training details. Without knowing whether it came from logged hours, route-time comparisons, or a model, the reader cannot judge how directly the tool produced it.
+  **How to change it:** Move "saving 1,800 driver hours a year" to the front, then follow with the three-depot rollout and training details. Add [whether the saving came from actual logged hours, route-time comparisons, or a forecast] and, if available, the comparison period.
 
 ## Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
 
-- **The pickup-reminder bullet attributes the entire weekly-active-user increase to the reminders without causal evidence and omits the measurement periods.** *(about 5 words to add)*
-  > Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60 user interviews showed students missed pickup windows.
-  The interviews explain why reminders were chosen, but they do not isolate the reminders' effect from other changes or normal growth. Without the baseline and endpoint periods, the reader also cannot judge whether the increase was rapid, gradual, or seasonal.
-  **How to change it:** Replace "by adding" with "after adding" and add [the baseline period and endpoint period] after the two user figures. Retain causal wording only if you can add [a controlled comparison or other evidence isolating the reminders' effect].
-- **The food-redistribution figure does not show whether the 9 tonnes was weighed or estimated against a disposal baseline.** *(about 8 words to add)*
-  > Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.
-  A hiring manager cannot tell how the waste-prevention claim was established, so the figure may read as a projection rather than a measured result. The strong environmental outcome loses credibility because its measurement basis is hidden.
-  **How to change it:** Replace the counterfactual wording with [how the 9 tonnes was weighed or reconciled against recorded disposal], while retaining the redistribution figure.
-- **The 95% pickup-slot rate cannot support the absolute claim that staff no longer covered gaps.** *(saves about 7 words if deleted)*
+- **The 95% pickup-slot fill rate does not establish that staff no longer needed to cover gaps.** *(about 8 words to add)*
   > Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and removing the need for staff to cover gaps.
-  A 95% filled-slot rate leaves some slots unfilled and measures assignment rather than confirmed attendance during pickup. The line therefore cannot establish that staff coverage was eliminated.
-  **How to change it:** Delete that phrase unless you can add [staff coverage hours or gaps eliminated]; otherwise replace it with a qualified result such as reduced staff coverage needs and clarify whether the system operated across both dining halls.
+  A 95% fill rate leaves 5% of slots uncovered, and the line does not say whether staff covered those slots or whether they occurred at important times. The unsupported absolute claim can make the otherwise credible coverage figure look inflated.
+  **How to change it:** Replace the clause with "reducing staff coverage needs by [the staff coverage hours or gaps eliminated each week]" or state the actual consequence supported by the 95% fill rate. Change "with two dining halls" to "across two dining halls."
+- **The food-rescue result uses a longer passive construction than necessary.** *(saves about 3 words)*
+  > Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.
+  The phrase makes the environmental outcome slower to scan without adding evidence. The concise wording keeps the same meaning and gives the result more room to stand out.
+  **How to change it:** Replace "that would have been thrown away" with "otherwise discarded."
 
 ## MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
 
-- **The hospital practicum's third bullet is a copied merchant-onboarding claim and should be removed or replaced with the actual hospital result.** *(saves about 20 words if deleted; otherwise about 6 words to replace)*
+- **The final practicum bullet incorrectly assigns Harbor's merchant-onboarding result to a hospital project and duplicates the Harbor entry.** *(saves about 15 words)*
   > Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
-  The first two bullets establish a hospital scheduling and intake project, so the sudden reference to a new merchant and 2,300 merchants looks unrelated. The duplicate claim also makes the entry appear misattributed and undermines confidence in the rest of the project.
-  **How to change it:** Delete the bullet unless it genuinely belongs to this engagement; if it does, replace the merchant terms with [the hospital-network population and outcome actually affected]. If the project has no further hospital outcome, shorten or remove the entry.
-- **The practicum's working-session bullet gives activity and scope but no scheduling outcome or affected scale.** *(about 7 words to add)*
+  The entry establishes outpatient scheduling and patient intake for a regional hospital network, so a merchant population and merchant-payment result make the entire engagement look inaccurate. The 9-days-to-4-days result is also approximately a 56% reduction, not exactly a halving, which makes the duplicate formulation more conspicuous.
+  **How to change it:** Delete the merchant-payment bullet and keep the achievement and figures only under Harbor Payments. Replace it with [the measurable result produced by the hospital practicum], using [the hospital clinics, patients, appointments, or other population actually measured] and the correct before-and-after result; do not use "by redesigning onboarding."
+- **The outpatient-scheduling bullet describes stakeholder activity without stating what changed or what result it produced.** *(about 8 words to add)*
   > Held weekly working sessions with clinic managers on outpatient scheduling across the network.
-  A reader can see that clinic managers were engaged across the network, but cannot tell what changed as a result. Scope alone does not show improved scheduling, capacity, time, or error rates.
-  **How to change it:** Replace the meeting activity with [the outpatient scheduling change adopted or implemented] and add [the number of clinics or appointments affected] or [the change in scheduling time, capacity, or error rate]. Retain the collaboration detail only if space allows.
-- **The intake-form bullet does not quantify the shortening or the result that followed.** *(about 6 words to add)*
+  Weekly sessions show engagement, but a hiring manager cannot tell whether scheduling improved, a recommendation was delivered, or a process was adopted. "Across the network" adds scope but does not show effectiveness.
+  **How to change it:** Change "Held weekly working sessions" to "Led weekly sessions," then add [the scheduling outcome or recommendation adopted] and [the number of clinics or scheduling measures affected] with [the resulting change].
+- **The intake-process bullet stops at implementation and does not quantify what the shortened form improved.** *(about 8 words to add)*
   > Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.
-  The word "shortened" gives no sense of scale, while adoption by front-desk staff shows implementation but not whether intake became faster, more complete, or less error-prone. The reader cannot judge the operational value of the intervention.
-  **How to change it:** Replace or supplement "shortened" with [the number or percentage of fields removed] or [the reduction in intake time or errors], while retaining the four-clinic scope.
-- **The remaining onboarding claim gives an unsupported 50% reduction without a time unit, boundary, or specific intervention.** *(about 8 words to replace)*
-  > Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
-  The reader cannot tell whether the interval was measured in days or hours or what counted as the start and end of first-payment time. "Redesigning onboarding" is also too broad to show what the candidate actually changed.
-  **How to change it:** Delete the bullet if it does not belong to the hospital project; otherwise replace "Halved the time it takes" with [the before-and-after time to first payment] and replace "by redesigning onboarding" with [the specific onboarding change].
+  Adoption by front-desk staff shows acceptance, not a benefit to patients or staff. The four-clinic scope is useful, but without the amount of shortening or an outcome measure, the reader cannot judge the scale of the improvement.
+  **How to change it:** Use active voice: "Mapped patient intake at 4 clinics and shortened the intake form," then add [the change in intake time, completion, errors, or another measured result]. Move the adoption result earlier if it is important: [shortened form] adopted by front-desk staff.
 
 ## Across the whole résumé
 
-- **Move Experience before Education and place Projects immediately after Experience, with Skills last.** *(no words)*
-  > Northfield School of Management | MBA
-  With four years of professional experience, leading with the MBA makes the résumé read more like a student résumé than an experienced candidate moving into product management. Putting the projects after Experience lets the product evidence follow the Harbor internship and operations background instead of being separated from it.
-  **How to change it:** Reorder the sections to Experience, Projects, Education, and Skills; move the existing sections without changing their wording.
+- **Move EXPERIENCE above EDUCATION because the current order makes a candidate with five years of post-undergraduate work read as education-led.** *(no words)*
+  > Northfield School of Management
+  The reader encounters the MBA and bachelor's degree before the substantive Operations Analyst and product experience. That ordering can obscure the career evidence that should carry the first impression, while the MBA can remain visible below experience.
+  **How to change it:** Place the experience entries before the education entries; retain the MBA and bachelor's degree below them.
+- **The résumé leaves an unexplained gap from June 2018 to March 2019.** *(about 3 words to add)*
+  > Jun 2018
+  The bachelor's degree ends in June 2018 and the Operations Analyst role begins in March 2019, so a reader may wonder whether work, study, or another activity is missing. An unexplained gap can prompt questions before the candidate's experience is assessed.
+  **How to change it:** Add the relevant activity for Jun 2018–Mar 2019 as [employment, study, caregiving, travel, or other explanation], or show the dates of an activity already omitted.
+- **Remove personal details that readers are not expected to weigh, including the date of birth and nationality.** *(saves about 10 words)*
+  > Date of birth
+  These details do not support the candidate's qualifications and are conventionally omitted from résumés. Leaving them in can distract from relevant evidence and introduce information a hiring reader should not need to consider.
+  **How to change it:** Delete "Date of birth: 2 Nov 1996 | Nationality: American."
+- **The résumé's strongest results should lead their bullets, while passive and buried wording weakens several otherwise credible achievements.** *(saves about 4 words)*
+  > Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.
+  > Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.
+  > Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.
+  > Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
+  The route-planning result is hidden after the rollout and training, and the hospital intake bullet hides ownership behind passive voice. Leading with the measurable outcome and using direct verbs lets a recruiter see value and responsibility before process detail.
+  **How to change it:** Move "saving 1,800 driver hours a year" before the rollout and training details, replace "that would have been thrown away" with "otherwise discarded," and use "Mapped patient intake at 4 clinics and shortened the intake form" in the practicum. Remove the duplicate merchant bullet rather than repeating the same result.
 
-## Set aside (7)
+## Set aside (4)
 
 Worth knowing, and not worth the space on this page:
 
 - format: personal details a reader is not meant to weigh are left off by convention — "Date of birth: 2 Nov 1996 | Nationality: American"
-- s3:e0:b2: "filling 95% of pickup slots" does not establish whether the slots were actually staffed during pickup.
-- s2:e1:b2, s2:e1:b3: "Coordinated" and "prepares" use inconsistent tense for a role that ended in Aug 2023; change "prepares" to "prepared." (and 2 more like it)
-- s3:e0:b0, s3:e0:b1, s3:e0:b2, s3:e1:b1, s3:e1:b2: "to 3,100 students with two dining halls" makes "with two dining halls" ambiguous because it is unclear whether the app served the students, the dining halls, or both. (and 6 more like it)
-- whole resume, dates: The timeline shows 8 months with no study or work listed from Jun 2018 to Mar 2019, immediately after the B.A. in Economics.
-- skills: Figma is listed under Tools, but no entry shows creating wireframes, prototypes, or other design artifacts with Figma. Either show its use in the product work or remove it.
-- whole resume, consistency, s2:e0: The Harbor Payments bullets [s2:e0:b4] and [s2:e0:b5] describe the same onboarding redesign and measurement effort, while [s2:e0:b5] contains the outcome. A reader may interpret them as two separate achievements; merge the measurement method into [s2:e0:b5] or remove [s2:e0:b4]. (and 1 more like it)
+- skills: A/B testing — no entry shows a controlled A/B test; the onboarding comparison is described as an opt-in versus old-flow comparison. (and 3 more like it)
+- s3:e0:b1, s3:e0:b2: "chosen after 60 user interviews showed students missed pickup windows" passively describes the candidate's product decision and makes the sentence harder to scan; use "after interviewing 60 users who reported missing pickup windows." (and 1 more like it)
+- s2:e0: s2:e0:b0 and s2:e0:b5 repeat: Both describe redesigning a merchant checkout or onboarding flow, though they use different outcomes. Clarify that they were separate initiatives or merge them.
 
 
 > /report --full
-Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-0aeb7c9e.md.
+Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-8e5c4321.md.
 

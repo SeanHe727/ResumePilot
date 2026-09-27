@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 25,
+  "words": 2798,
+  "quotes": 8,
+  "grounded": 7,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5534,
+    "completion_tokens": 12022,
+    "total_tokens": 17556,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11704
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 3870
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "change 'prepares' to 'prepared'"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Make passive project bullets clearly show your actions."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "needs its baseline and percentage interpretation"
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Its third bullet repeats the Harbor Payments result"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "gives activity and scope but no scheduling outcome"
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "cannot establish a redesign effect from self-selected groups"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "misstates a reporting-definition change as an operational reduction"
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "Investigate or explain the eight-month gap between June 2018 and March 2019."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "personal details a reader is not meant to weigh are left off by convention"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 25,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

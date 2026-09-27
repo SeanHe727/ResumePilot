@@ -1,102 +1,110 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/A.md",
-  "recall": 10,
+  "recall": 8,
   "found": [
     "W2",
-    "W6",
     "A2",
     "A3",
     "S1",
     "S3",
     "T1",
-    "T3",
     "N1",
     "N4"
   ],
   "coverage": true,
-  "suggestions": 26,
-  "words": 2503,
-  "quotes": 10,
-  "grounded": 6,
-  "rewrites": 1,
-  "inventedNumbers": [],
+  "suggestions": 23,
+  "words": 2136,
+  "quotes": 14,
+  "grounded": 8,
+  "rewrites": 9,
+  "inventedNumbers": [
+    "25"
+  ],
   "falsePositives": [
-    "does not identify ... whether it came from a live allocation or backtest (the bullet says out-of-sample backtest)"
+    "only 9 of 18 bullets begin with action verbs"
   ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5472,
-    "completion_tokens": 12289,
-    "total_tokens": 17761,
+    "prompt_tokens": 5004,
+    "completion_tokens": 14325,
+    "total_tokens": 19329,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11749
+      "reasoning_tokens": 13932
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 3552
+    "prompt_cache_miss_tokens": 3084
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "uses a personal pronoun; resume lines are phrases, not sentences — \"Derived a variance bound for a sparse regression estimator; my proof...\""
+        "evidence": "Remove the first-person wording in “my proof.”"
       },
       {
         "id": "W6",
-        "found": true,
-        "evidence": "the skill is misspelled; ... should be corrected to time-series econometrics."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The change from 52% to 58% is 6 percentage points, not a 6% relative increase."
+        "evidence": "The directional hit-rate change from 52% to 58% should be described using percentage points, not simply “6%.”"
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The line incorrectly calls the change from 0.20 to 0.15 a 33% improvement. ... 25% reduction"
+        "evidence": "The 0.20-to-0.15 change is a 25% reduction, not a 33% improvement"
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "Put outcomes before long method lists where possible, particularly in the Sunrise Bakery and feature-store bullets."
+        "evidence": "The Northpeak feature-store bullet similarly buries the result beneath implementation details."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "Both mention maintaining or building shared research infrastructure on the lab cluster; separate the cluster work from the R-package and service responsibilities."
+        "evidence": "The research-assistant entry combines the R-package release, cluster maintenance, reading-group organization, and course grading in one bullet."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "annualizes a daily Sharpe by multiplying by 252 instead of using the square root of 252"
+        "evidence": "Daily Sharpe is normally multiplied by √252, not 252"
       },
       {
         "id": "T3",
-        "found": true,
-        "evidence": "standard Diebold–Mariano inference is generally not calibrated for nested model comparisons"
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "The Assistant Store Manager role currently appears first and interrupts the quantitative progression."
+        "evidence": "Sunrise Bakery currently dominates the narrative and obscures the quantitative direction."
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "The narrative review found no supporting experience for SQL, C++, Kafka, or Bayesian inference."
+        "evidence": "The narrative review identified skills such as C++, SQL, and Kafka that are not demonstrated in the experience or project bullets."
       }
     ],
     "coverage": true,
-    "suggestions": 26,
+    "suggestions": 23,
     "rewrites": [
-      "Kept the store within its weekly labour budget while managing opening shifts and a team of 6 bakers and cashiers."
+      "by 6 percentage points",
+      "a 25% reduction",
+      "√252",
+      "retaining 90% of the pre-smoothing gross returns",
+      "by 33%",
+      "Built a feature store reused in two later projects",
+      "the proof tightened",
+      "Cut unsold bread from 12% to 7% of production by running daily stock counts and supplier orders",
+      "the proof"
     ],
     "falsePositives": [
-      "does not identify ... whether it came from a live allocation or backtest (the bullet says out-of-sample backtest)"
+      "only 9 of 18 bullets begin with action verbs"
     ]
   }
 }
