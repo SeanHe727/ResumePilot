@@ -1,233 +1,296 @@
-Your resume has strong product/operations evidence, especially the quantified outcomes. The biggest issues are **credibility/clarity, one obvious incorrect bullet, and some formatting/content choices that may hurt you in the U.S. job market.**
-
 ## Highest-priority changes
 
-### 1. Remove date of birth and nationality
-For a U.S. resume, omit:
+1. **Remove date of birth and nationality.**  
+   They are not relevant to your qualifications for most U.S. roles and can introduce bias or create unnecessary screening concerns.
 
-- Date of birth
-- Nationality
+2. **Delete or replace the final practicum bullet.**  
+   The merchant-onboarding result belongs to Harbor Payments, not a hospital-network project. It looks like an accidental duplicate and seriously undermines credibility.
 
-They are unnecessary and can create bias or screening complications. Your phone, email, LinkedIn, and location are sufficient.
+3. **Fix the weak or incomplete bullets.**  
+   Several bullets describe activity without showing an outcome, especially in the practicum and the S&OP bullet.
 
-Also replace `example.com/in/riley-chen` with your actual LinkedIn URL or remove it.
+4. **Clarify metric definitions.**  
+   State whether percentages are relative or percentage-point changes, identify the measurement period, and provide baselines where they are currently missing.
 
----
-
-### 2. Fix the clearly incorrect practicum bullet
-This bullet does not belong under the hospital project:
-
-> Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
-
-It duplicates your Harbor Payments experience and refers to merchants, not patients or clinics. Delete it unless you intended to describe a different project result.
-
-You could replace it with something like:
-
-> Mapped patient intake workflows across four clinics, identifying bottlenecks that informed a shorter intake form later adopted by front-desk staff.
-
-Only use this if accurate and, ideally, add a measurable result such as reduced intake time, fewer form fields, or improved completion rate.
+5. **Correct tense and consistency.**  
+   The Crestline bullet using “prepares” is inconsistent with the role’s past dates. Also use consistent punctuation and date formatting throughout.
 
 ---
 
-### 3. Make questionable metrics more precise
-Several bullets sound impressive but may invite skepticism because the causal claim or measurement method is unclear.
+## Header and contact information
 
-#### Current:
-> Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.
+- **Remove “Date of birth” and “Nationality.”**  
+  Neither helps establish your fit for product or operations roles.
 
-Clarify whether this means a **35% relative increase** or **35 percentage points**, and explain the measurement period.
+- **Verify the LinkedIn URL.**  
+  The current address appears to be a placeholder-style domain. Use your actual LinkedIn profile URL if you have one.
 
-Better:
-
-> Increased checkout conversion by 35% relative [or X percentage points] after replacing the three-step flow with a one-page checkout used by all merchants.
-
-Only include “increased” if you can support causality. If this was not an experiment, use:
-
-> Checkout conversion increased by 35% following the launch of a one-page checkout flow across all merchants.
-
-#### Current:
-> Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
-
-This reads as if you improved the metric by changing the definition rather than improving delivery performance. Reframe it transparently:
-
-> Reworked on-time-delivery reporting to separate controllable delays from weather disruptions, giving operations leaders a clearer view of carrier and warehouse performance.
-
-If you also improved actual delivery performance, state that separately. Do not present an adjusted metric as an operational improvement.
-
-#### Current:
-> Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.
-
-This is more of a responsibility than an accomplishment. Explain the result or methodology:
-
-> Evaluated the onboarding redesign using an opt-in comparison of merchants on the new and legacy flows, tracking time to first payment and completion rate.
-
-Even better, combine it with the next bullet if they describe the same initiative.
+- **Consider adding your city or region if relevant to the jobs you are targeting.**  
+  This can help with location screening, while the full mailing address is unnecessary.
 
 ---
 
-### 4. Remove redundancy in the Harbor Payments section
-These three bullets overlap:
+## Education
 
-- Measured the onboarding redesign...
-- Redesigned merchant onboarding...
-- Cut the time to first payment...
+### Northfield School of Management
 
-Combine them into one or two stronger bullets:
+- **Clarify whether the MBA is completed or in progress.**  
+  If the stated end date has passed, mark it as completed or include the graduation month and year. If it is still underway, make that status clear.
 
-> Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 across 2,300 merchants in a pilot region.
+- **Add selected academic information only if it strengthens your candidacy.**  
+  Examples include a strong GPA, relevant coursework, honors, or a product-related leadership role. Do not add these if they are ordinary or unrelated.
 
-> Evaluated the redesign using an opt-in comparison between merchants on the new and legacy flows, tracking completion rate and time to first payment.
+### Lakeview University
 
-The first bullet is already strong; the second adds useful analytical detail.
+- **Consider adding relevant academic distinctions or coursework if you have room.**  
+  Economics supports your product and analytical positioning, but the section would be stronger if it showed evidence of quantitative or analytical preparation.
 
----
-
-### 5. Correct the tense inconsistency
-This bullet uses present tense while the role is in the past:
-
-> Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.
-
-Change to:
-
-> Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared the forecast pack for each meeting.
-
-Use past tense consistently for completed roles. Your current project can use present tense.
+- **Check whether the degree title should use a consistent format.**  
+  The MBA and bachelor’s degree should follow the same style for degree names, locations, and dates.
 
 ---
 
-## Recommended structure
+## Harbor Payments
 
-For product management or product operations roles, use:
+### “Improved checkout conversion by 35%…”
 
-1. Name and contact information  
-2. Optional one-line headline or summary  
-3. Education  
-4. Experience  
-5. Projects  
-6. Skills  
+- **Clarify whether the 35% figure is a relative increase or a percentage-point increase.**  
+  These have very different meanings.
 
-Because you are pursuing an MBA and have relevant experience, a summary is optional. If included, keep it to two lines and tailor it to the job.
+- **Add the measurement method and time period.**  
+  A recruiter will want to know whether this was based on an A/B test, before-and-after analysis, or another comparison.
 
-Example:
+- **Qualify the scope of “for all merchants.”**  
+  If this was a rollout to all merchants, explain the rollout period or population. If it was only tested with a subset, do not imply universal deployment.
 
-> MBA candidate with experience in payments, logistics, and product-led process improvement. Skilled in user research, roadmap prioritization, experimentation, SQL, and cross-functional delivery.
+- **Be careful with the causal claim.**  
+  “After” does not necessarily prove that the redesign caused the improvement. Your resume should make the strength of the evidence clear.
 
-Avoid generic phrases such as “results-driven,” “passionate,” or “strategic thinker.”
+### “Wrote the requirements and success metrics…”
 
----
+- **Keep this, but connect it more directly to the shipped product’s result.**  
+  The bullet currently proves that you produced requirements and coordinated stakeholders, but not whether the feature improved self-service usage, resolution time, support volume, or dispute outcomes.
 
-## Section-by-section feedback
+- **Clarify your ownership relative to the team.**  
+  Make sure the wording distinguishes what you personally owned from what the broader team delivered.
 
-### Education
-Your education section is clear. Consider adding:
+- **Explain the significance of shipping two weeks early.**  
+  The schedule result is useful, but it would be stronger alongside the reason it mattered—for example, an earlier launch, reduced operational burden, or accelerated testing.
 
-- MBA concentration, if relevant
-- Graduation distinction, if applicable
-- Relevant coursework only if you have limited professional experience
-- Leadership or significant campus involvement if relevant to the target role
+### “Interviewed 25 merchants…”
 
-Because you have substantial experience, do not overload this section.
+- **Add the business-case outcome.**  
+  The bullet says the findings influenced the roadmap, but it does not show what decision was made or what priority was established.
 
-If the MBA has already been completed, update:
+- **Clarify what “size the chargeback problem” means.**  
+  This could refer to financial impact, merchant volume, support burden, or customer impact. Specify the dimension you quantified.
 
-> Sep 2023 – Jun 2025
+- **Keep the number of interviews.**  
+  It gives useful evidence of customer discovery, especially for product roles.
 
-to reflect the degree status accurately.
+### “Ran weekly triage…”
 
----
+- **Define what the 140 tickets represent.**  
+  Clarify whether you personally resolved them, coordinated their resolution, or helped the team close them.
 
-### Harbor Payments
-This is your strongest section for product roles. Put the most product-relevant bullets first:
+- **Add the starting and ending queue sizes or the time period.**  
+  “Cutting the queue by half” is useful but more credible with a baseline and timeframe.
 
-1. Onboarding redesign and business outcome  
-2. Merchant research and roadmap impact  
-3. Dispute self-service requirements and launch  
-4. Checkout conversion improvement  
-5. Triage and ticket reduction  
+- **Clarify the connection to product work.**  
+  This can demonstrate operational judgment and prioritization, but the bullet should make clear whether triage uncovered recurring product issues or informed backlog decisions.
 
-You likely do not need all six bullets. Use four or five, depending on space.
+### “Measured the onboarding redesign…”
 
-Possible revised version:
+- **Do not leave this as a standalone bullet in its current form.**  
+  It describes an evaluation approach but gives no result, conclusion, or decision.
 
-**Harbor Payments — Associate Product Manager Intern**  
-*Metro City, USA | Jun 2024 – Aug 2024*
+- **Either connect it to the onboarding outcome or remove it.**  
+  The methodology is valuable only if it demonstrates that you assessed impact rigorously.
 
-- Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 across 2,300 merchants in a pilot region.
-- Interviewed 25 merchants to size the chargeback problem and developed the business case that led to a next-quarter roadmap priority.
-- Wrote requirements and success metrics for dispute self-service, aligning engineering, risk, and support; the team shipped two weeks ahead of plan.
-- Increased checkout conversion by 35% relative [clarify measurement] after replacing a three-step flow with a one-page flow.
-- Ran weekly engineering/support triage, closing 140 onboarding tickets and reducing the open-ticket queue by 50%.
+- **Be precise about the comparison group.**  
+  Merchants who opted into the new flow may differ systematically from those who stayed on the old one. If you retain the analysis, clarify the limitations or the controls used.
 
-Make sure every metric is defensible and that “shipped two weeks ahead of plan” reflects your contribution without overstating ownership.
+### “Redesigned merchant onboarding…”
 
----
+- **Move this bullet higher, likely near the top of the role.**  
+  It is one of your strongest bullets because it combines ownership, scale, and a quantified outcome.
 
-### Crestline Logistics
-This section demonstrates strong operational impact. The warehouse and route-planning bullets are particularly good.
+- **Clarify the measurement period and pilot scope.**  
+  Include when the result was measured and what “pilot region” represents.
 
-Suggested revision:
+- **Explain whether the reduction was median time or average time.**  
+  You already say “median,” which is good; preserve that precision and make sure the comparison periods are equivalent.
 
-**Crestline Logistics — Operations Analyst**  
-*Lake City, USA | Mar 2019 – Aug 2023*
-
-- Reduced warehouse picking errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.
-- Led rollout of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.
-- Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared the forecast pack for each meeting.
-- Reworked on-time-delivery reporting to distinguish weather-related delays from controllable performance issues, improving visibility into operational drivers.
-
-The last bullet is deliberately more honest. If you have a real improvement in delivery performance, replace it with that result.
+- **Clarify how this relates to the checkout bullet.**  
+  Both involve flow redesigns. Distinguish the customer journey, metric, and product area so they do not seem repetitive.
 
 ---
 
-### Projects
-The Campus Food Rescue App is excellent because it shows product discovery, launch, growth, and operations. Consider labeling it as **Product Lead, Student Venture** and treating it almost like experience.
+## Crestline Logistics
 
-The hospital practicum is weaker because the bullets lack outcomes. Strengthen it with numbers:
+### “Cut late deliveries from 11% to 7% by excluding weather-delayed shipments…”
 
-- Number of clinics involved
-- Number of patients or visits analyzed
-- Reduction in intake time
-- Number of form fields removed
-- Adoption rate
-- Measured operational impact
+- **Reconsider or remove this bullet in its current form.**  
+  Excluding a category from the calculation can look like manipulating the metric rather than improving delivery performance.
 
-Current bullets such as:
+- **If the change was operationally legitimate, explain the reporting rationale separately from the performance claim.**  
+  Otherwise, replace it with a result tied to an actual process, planning, routing, or service improvement.
 
-> Held weekly working sessions...
+- **Do not present a reporting-definition change as an operational improvement.**  
+  This is the most potentially damaging bullet in the resume because an experienced operations recruiter may view it as metric gaming.
 
-are reasonable but not very differentiated. Try to emphasize what changed as a result.
+### “Cut warehouse pick errors 30%…”
 
-For example:
+- **Specify whether the 30% is relative or percentage-point reduction.**
 
-> Led weekly working sessions with clinic managers across the network to identify outpatient scheduling and intake bottlenecks.
+- **Add the measurement period and baseline if available.**  
+  The number of sites and pickers is useful; include the operational scale consistently.
 
-> Mapped patient intake at four clinics and redesigned the intake form; the revised process was adopted by front-desk staff across the participating clinics.
+- **Clarify your role in the redesign.**  
+  The collaboration with floor supervisors and training of 45 pickers shows implementation ownership, so preserve that distinction.
 
-Add a quantified result if available.
+### “Coordinated the quarterly S&OP review…”
+
+- **Fix the tense.**  
+  “Prepares” should match the past-tense framing of the role.
+
+- **Add an outcome or measurable responsibility.**  
+  The current bullet describes meetings and forecast-pack preparation but does not show business impact.
+
+- **Quantify the scope.**  
+  Include the number of business units, sites, products, revenue coverage, or stakeholders involved if meaningful.
+
+- **Show what improved because of your work.**  
+  Possibilities include forecast accuracy, decision speed, inventory levels, service levels, or meeting preparation time. Use only metrics you can support.
+
+### “Led the rollout of a route-planning tool…”
+
+- **Clarify the basis of the 1,800-hour savings estimate.**  
+  State whether it was measured after implementation or projected from route-time reductions.
+
+- **Add the implementation timeframe.**  
+  This helps establish the scale and pace of the rollout.
+
+- **Clarify who was trained and how many people that represents.**  
+  You already give a count; distinguish drivers from dispatchers if the difference matters.
+
+- **Add the business consequence if available.**  
+  For example, capacity, cost, utilization, delivery performance, or overtime impact would make the result more meaningful.
 
 ---
 
-### Skills
-Your skills are relevant, but organize them more clearly and include proficiency only where meaningful.
+## Campus Food Rescue App
 
-Possible format:
+### “Launched a surplus-food pickup app…”
 
-**Product:** Roadmapping, user interviews, PRDs, experimentation, A/B testing, requirements definition, stakeholder alignment  
-**Analytics:** SQL, funnel analysis, cohort analysis, KPI definition  
-**Tools:** Jira, Figma, Amplitude, Excel  
+- **Clarify whether 3,100 students were users, registered users, or the total addressable student population.**  
+  “Launched to” is ambiguous.
 
-Do not list a skill unless you can discuss or demonstrate it in an interview. If you used specific SQL tools, databases, or analytics platforms, naming them can help.
+- **Resolve the time-period issue.**  
+  The project is listed as ongoing, but the bullet refers to its “first year.” Make sure the dates and result period align.
+
+- **Explain how the 9 tonnes figure was measured.**  
+  This is a strong social-impact metric, but the measurement basis should be credible.
+
+- **Consider clarifying your individual ownership.**  
+  “Product Lead” establishes leadership, but the bullet should reflect what you personally drove versus what the student venture accomplished collectively.
+
+### “Raised weekly active users from 400 to 1,150…”
+
+- **Specify the timeframe for the increase.**  
+  Without it, the magnitude is difficult to evaluate.
+
+- **Clarify whether the reminders were tested or simply launched.**  
+  Since your skills list includes A/B testing, show experimentation only if you actually conducted it.
+
+- **Be cautious about the causal connection to the 60 interviews.**  
+  The interviews may have informed the feature, but they did not necessarily cause the user increase. Keep the discovery and outcome logically distinct.
+
+- **Add a retention or usage-quality measure if available.**  
+  Weekly active users alone do not show whether the feature improved successful pickups or repeat behavior.
+
+### “Set up a volunteer shift system…”
+
+- **Add the baseline for the 95% figure.**  
+  Explain whether this was an improvement from a lower fill rate or simply the current operating level.
+
+- **Quantify the operational benefit.**  
+  “Removing the need for staff to cover gaps” is useful, but it would be stronger with the number of staff hours or shifts affected.
+
+- **Clarify your role in the two-dining-hall arrangement.**  
+  Show whether you designed the process, negotiated participation, managed scheduling, or implemented the system.
 
 ---
 
-## Additional recommendations
+## MBA Consulting Practicum
 
-- Keep it to **one page** if possible, especially for internship or early-career product roles.
-- Use consistent punctuation: either periods on all bullets or none. I recommend no periods for resume bullets.
-- Avoid line wrapping that splits bullets awkwardly.
-- Use standard section headings and a simple ATS-friendly layout.
-- Include a location such as `Metro City, USA`; a full street address is unnecessary.
-- Tailor the resume for each role. For product manager roles, emphasize research, prioritization, experimentation, and product launches. For product operations roles, emphasize process improvement, analytics, cross-functional coordination, and operational scale.
-- Add a LinkedIn URL only if the profile is complete and consistent with the resume.
+### “Held weekly working sessions…”
 
-Overall, the content is strong. After removing the personal details, correcting the hospital-project error, clarifying the metrics, and tightening the bullets, this could be a competitive resume for **Associate Product Manager, Product Operations, Product Analyst, or operations-focused MBA roles**.
+- **Add a deliverable or outcome.**  
+  Weekly meetings are an activity, not an accomplishment by themselves.
+
+- **Quantify the scope of the work.**  
+  Include the number of clinics, managers, processes, or patient visits involved if relevant.
+
+- **Show what decision or recommendation resulted from the sessions.**  
+  This would make the bullet demonstrate problem solving and stakeholder management rather than attendance.
+
+### “Patient intake at 4 clinics was mapped…”
+
+- **Replace the passive, vague framing with measurable evidence of your contribution.**  
+  The current bullet does not clearly show what you did.
+
+- **Quantify the form reduction.**  
+  State the number of fields, pages, or minutes removed if you have the information.
+
+- **Explain what “adopted” means.**  
+  Indicate whether all four clinics implemented the changes, whether the changes became standard practice, or whether they were only approved.
+
+- **Add a patient or operational outcome.**  
+  Useful measures could include intake time, completion rate, errors, staff workload, or patient throughput.
+
+### “Halved the time it takes a new merchant…”
+
+- **Delete this bullet from the practicum.**  
+  It is clearly unrelated to a regional hospital network and duplicates the Harbor Payments content.
+
+- **Replace it with the practicum’s actual result.**  
+  If the project did not produce a measurable outcome, use a specific deliverable, recommendation, implementation decision, or scope metric instead.
+
+---
+
+## Skills
+
+- **Keep the skills section concise and evidence-based.**  
+  The listed tools are relevant, but only include skills you can discuss credibly in an interview.
+
+- **Clarify your level of SQL and analytics experience if the target roles require it.**  
+  A recruiter may interpret “SQL” as anything from basic querying to advanced analysis.
+
+- **Distinguish product methods from generic terms.**  
+  “Roadmapping” and “user interviews” are relevant, but they are more persuasive when supported by the experience bullets—as several already are.
+
+- **Consider adding experimentation or analytics tools only if you used them directly.**  
+  Your resume currently claims A/B testing, but none of the bullets clearly demonstrates a controlled experiment.
+
+- **Order the skills according to your target role.**  
+  For product roles, prioritize product discovery, analytics, experimentation, requirements, and stakeholder management; for operations roles, prioritize process improvement, forecasting, implementation, and operational analytics.
+
+---
+
+## Overall positioning
+
+- **Your strongest profile is product management with operational and analytical depth.**  
+  Harbor Payments and the food-rescue app provide the clearest product evidence. Make those sections more prominent through stronger ordering and sharper outcomes.
+
+- **The resume currently mixes strong quantified accomplishments with vague activity statements.**  
+  Bring the weaker bullets up to the same standard by adding scope, outcome, timeframe, and measurement method.
+
+- **Avoid questionable or inflated causal claims.**  
+  Recruiters will scrutinize the checkout conversion, onboarding, user growth, and delivery metrics. Make the evidence behind each claim transparent.
+
+- **Use consistent punctuation.**  
+  Either end every bullet with a period or omit periods from all bullets.
+
+- **Keep the resume focused on the target role.**  
+  If applying primarily to product roles, retain the logistics experience but emphasize process ownership, analytics, cross-functional work, implementation, and measurable business impact rather than routine coordination.

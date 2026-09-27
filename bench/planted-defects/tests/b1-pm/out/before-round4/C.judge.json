@@ -1,0 +1,133 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/C.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "S4",
+    "T2",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 38,
+  "words": 1306,
+  "quotes": 1,
+  "grounded": 0,
+  "rewrites": 35,
+  "inventedNumbers": [
+    "50"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3394,
+    "completion_tokens": 17799,
+    "total_tokens": 21193,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 16718
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3394
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Correct the tense inconsistency"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Mapped end-to-end intake workflows, identified redundant steps, and redesigned the intake form for adoption by front-desk teams across four clinics."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Is the 35% conversion increase relative or percentage points?"
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "This bullet appears copied from Harbor Payments and does not belong under the hospital project: Halved the time it takes a new merchant to receive a first payment... Delete it and replace it with an actual hospital-project outcome."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "The first two bullets describe activity but not much impact."
+      },
+      {
+        "id": "S4",
+        "found": true,
+        "evidence": "Lead with the most important product outcomes"
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "That is not a randomized A/B test and may have selection bias."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "This did not improve delivery performance; it changed the metric definition."
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "They are unnecessary and can create bias or compliance concerns."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 38,
+    "rewrites": [
+      "Standardized on-time delivery reporting by separating weather-related exceptions from operational delays, improving root-cause analysis and accountability.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for senior leadership.",
+      "Increased checkout conversion 35% relative to baseline...",
+      "Increased checkout conversion from X% to Y%...",
+      "Evaluated pilot performance by comparing time to first payment for participating merchants against the legacy-flow cohort.",
+      "Riley Chen",
+      "+1 (555) 010-7731 | riley.chen@example.com | linkedin.com/in/riley-chen",
+      "Northfield School of Management, Metro City, USA",
+      "Master of Business Administration, Jun 2025",
+      "Lakeview University, Lake City, USA",
+      "B.A. Economics, Jun 2018",
+      "MBA, Jun 2025",
+      "MBA Candidate, Expected Jun 2025",
+      "Harbor Payments — Associate Product Manager Intern",
+      "Metro City, USA | Jun–Aug 2024",
+      "Increased checkout conversion by 35% by replacing a three-step checkout process with a one-page flow across [scope of launch].",
+      "Reduced median time to first payment from 9 to 4 days for 2,300 merchants by redesigning onboarding around a single verification step.",
+      "Interviewed 25 merchants to quantify chargeback pain points and developed the business case that established dispute self-service as a top roadmap priority.",
+      "Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support to launch two weeks ahead of schedule.",
+      "Led weekly engineering and support triage, resolving 140 onboarding tickets and reducing the open queue by 50%.",
+      "Crestline Logistics — Operations Analyst",
+      "Lake City, USA | Mar 2019–Aug 2023",
+      "Reduced warehouse picking errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
+      "Led deployment of a route-planning tool across three depots, training 60 drivers and dispatchers and saving 1,800 driver hours annually.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials for [leadership group].",
+      "Standardized on-time delivery reporting by separating weather-related exceptions from operational delays, enabling more accurate root-cause analysis.",
+      "Launched a surplus-food pickup app with two dining halls, reaching 3,100 students and redirecting 9 metric tons of food from waste in its first year.",
+      "Increased weekly active users from 400 to 1,150 by introducing pickup reminders based on insights from 60 user interviews.",
+      "Built a volunteer scheduling system that filled 95% of weekly pickup shifts and eliminated the need for dining staff to cover gaps.",
+      "Led a consulting team assessing outpatient scheduling and patient intake across four clinics, facilitating weekly working sessions with clinic managers.",
+      "Mapped end-to-end intake workflows, identified redundant steps, and redesigned the intake form for adoption by front-desk teams across four clinics.",
+      "Presented implementation recommendations to [hospital leadership group], including [brief description of recommendation].",
+      "Product: Product strategy, roadmapping, requirements definition, user research, experimentation",
+      "Analytics: SQL, Amplitude, Excel",
+      "Tools: Jira, Figma"
+    ],
+    "falsePositives": []
+  }
+}

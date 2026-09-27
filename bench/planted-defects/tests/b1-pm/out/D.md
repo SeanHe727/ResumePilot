@@ -1,299 +1,477 @@
 # Resume Review
 
-**Target role inferred:** Associate Product Manager / Product Manager  
-**Overall assessment:** Strong raw material, especially the Harbor Payments internship and the quantified operations experience. The main problems are focus, credibility, and a few apparent copy/paste or wording errors. With revision, this could become a competitive early-career product resume.
+## Overall assessment
 
-## Highest-priority changes
+You have a strong early-career product profile: measurable product outcomes, user research, cross-functional work, and prior operations experience. The main problems are:
 
-1. **Remove date of birth and nationality.**
-   - They are generally irrelevant in the U.S. and can introduce bias.
-   - Keep only phone, email, LinkedIn/portfolio, and location.
+1. **No summary or target-role signal.**
+2. **One clearly incorrect bullet under the hospital project.**
+3. **Several claims need more measurement context to be credible.**
+4. **The strongest product achievements are not ordered or framed consistently.**
+5. **Some bullets describe activity rather than impact.**
+6. **Personal information should be removed in most U.S. applications.**
 
-2. **Add a short product-focused summary.**
-   - The resume currently makes the reader infer the career direction.
-   - Your experience supports a clear story: operations analytics → MBA → payments/product management.
-
-   Example:
-
-   > Product manager with 4+ years of operations and analytics experience plus payments-product experience at Harbor Payments. Skilled in customer discovery, roadmap prioritization, requirements definition, experimentation, and cross-functional delivery. Improved merchant onboarding, reduced time to first payment, and translated user research into product priorities.
-
-   If you have already graduated, change “MBA” education status accordingly.
-
-3. **Fix the obvious duplicate/wrong bullet.**
-   This bullet under the hospital consulting project is clearly copied from Harbor Payments:
-
-   > Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
-
-   It does not belong under a hospital project. Remove it immediately. This is the most damaging issue in the document because it raises questions about accuracy.
-
-4. **Reorder bullets so the strongest product evidence comes first.**
-   Harbor Payments should lead with onboarding and checkout outcomes, not ticket triage.
-
-5. **Correct or clarify claims that may look misleading.**
-   In particular:
-
-   > Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
-
-   This sounds like the metric improved because the calculation changed, not because delivery performance improved. Reframe it transparently:
-
-   > Rebuilt the on-time delivery metric to separately report weather-related delays, giving operations leaders a clearer view of controllable service performance.
-
-   If delivery performance itself improved, state the operational action that caused the improvement.
+For an **Associate Product Manager or Product Manager role**, the experience is promising, but the resume currently looks partly like a product resume and partly like an operations resume.
 
 ---
 
-## How a recruiter would currently read it
+# Highest-priority changes
 
-**Verdict: Maybe, with potential to become Forward.**
+## 1. Remove date of birth and nationality
 
-The MBA, payments internship, and strong metrics are attractive. However:
+**Change:** Delete the date of birth and nationality.
 
-- There is no headline or summary explaining that you are pursuing product roles.
-- The resume contains a clearly misplaced bullet.
-- Some claims need more precise definitions.
-- The six Harbor bullets are not ordered around the strongest product outcomes.
+**Why:** They are not needed for U.S. hiring and can create age, national-origin, or discrimination concerns. They do not strengthen your candidacy.
 
-A recruiter should understand your target within the first five seconds. Right now, they have to assemble the story themselves.
+Also verify that the phone number, email, and URL are real and professionally usable. If these are placeholders, replace them before submitting.
 
 ---
 
-## Recommended structure
+## 2. Add a clear target-role summary
 
-1. Name and contact information  
-2. Product-focused summary  
-3. Experience  
-4. Projects  
-5. Education  
-6. Skills  
+**Change:** Add a short summary near the top that establishes you as a product candidate and connects your operations background, MBA, product internship, user research, experimentation, and measurable outcomes.
 
-Because the MBA is your most recent education and your internship is directly relevant, you could also use:
+**Why:** A recruiter currently has to infer your target from one internship, a student venture, and a skills section. Your current title is not prominent enough, and there is no immediate explanation of why your logistics experience is relevant to product management.
 
-1. Summary  
-2. Product Experience  
-3. Additional Experience  
-4. Projects  
-5. Education  
-6. Skills  
+The summary should clarify:
 
-Do not overemphasize “intern” if the work was substantial, but do not remove the official title.
+- Your target level: APM, Product Manager, or another specific role
+- Your product experience
+- Your strongest evidence of impact
+- Your transferable strengths from operations
+- The types of products or problems you are interested in
+
+Do not make it a generic list of traits. Its purpose is to make the rest of the resume easy to interpret.
 
 ---
 
-# Detailed edits
+## 3. Fix the incorrect hospital-project bullet immediately
 
-## Header
+Under **MBA Consulting Practicum**, this bullet is clearly misplaced:
 
-Current:
+> “Halved the time it takes a new merchant to receive a first payment…”
 
-> Riley Chen  
-> +1... | ...  
-> Date of birth... | Nationality...
+**Change:** Remove it from the hospital project and either delete it or place it under the Harbor Payments internship if it is a duplicate of the onboarding achievement.
 
-Recommended:
+**Why:** “Merchant” and “first payment” have no apparent connection to outpatient scheduling or a hospital network. This looks like a copy-and-paste error and is the most damaging credibility issue on the resume.
 
-> **Riley Chen**  
-> Metro City, USA | +1 (555) 010-7731 | riley.chen@example.com | linkedin.com/in/riley-chen
-
-Use a real LinkedIn or portfolio URL rather than `example.com`.
+Also check whether the onboarding result appears twice. A duplicate achievement weakens the document and may make the metrics look inflated.
 
 ---
 
-## Education
+## 4. Reorder the Harbor Payments bullets
 
-The education section is clear, but verify the status:
+**Change:** Put the strongest product outcome first, followed by the other high-value product work. Move lower-impact operational work later or remove it.
 
-> Northfield School of Management | MBA | Metro City, USA | Sep 2023 – Jun 2025
+**Why:** The current ordering begins with a compelling conversion result, but the bullets then move through requirements writing, research, triage, measurement, and onboarding redesign. The most important product story is split apart.
 
-If the degree is complete, write:
+Your Harbor Payments section should make the following sequence obvious:
 
-> **MBA**, Northfield School of Management, Metro City, USA — Jun 2025
+1. Product outcome
+2. Product discovery or customer research
+3. Product execution and cross-functional delivery
+4. Experimentation or measurement
+5. Operational support, if space permits
 
-You generally do not need to list the full date range after graduation. If you have relevant coursework, leadership, awards, or a strong GPA, add only the most useful items.
+The onboarding redesign and first-payment result appear especially important and should not be buried after ticket triage.
 
 ---
+
+# Detailed bullet-by-bullet review
 
 ## Harbor Payments
 
-This is your strongest section. I would rewrite and reorder it as follows:
+### “Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.”
 
-- Redesigned merchant onboarding around a single verification step, reducing median time to first payment from **9 days to 4 days** across **2,300 merchants** in a pilot region.
-- Improved checkout conversion by **35%** by replacing a three-step checkout flow with a single-page experience; specify whether this was a relative increase or a percentage-point increase.
-- Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support; the team shipped the capability **two weeks ahead of schedule**.
-- Interviewed **25 merchants** to quantify chargeback pain points and translated findings into the business case that made the issue a next-quarter roadmap priority.
-- Led weekly engineering and support triage, resolving **140 onboarding tickets** and reducing the open-ticket queue by **50%**.
-- Evaluated onboarding adoption by comparing merchants who opted into the new flow with merchants who remained on the legacy experience.
+**Change:**
 
-### Important issue with the last bullet
+- Clarify what “conversion” means.
+- State the measurement period and comparison group or baseline.
+- Confirm whether “for all merchants” means a full rollout or only the merchants in the measured population.
+- Avoid implying that the redesign alone caused the entire improvement unless the analysis supports that conclusion.
+- Explain your role in the decision and implementation.
 
-This sentence describes an evaluation method but not a result:
+**Why:** This is potentially your strongest product bullet, but it currently creates questions about causality, scope, and measurement. A 35% improvement is substantial, so a hiring manager will want to know whether it was measured through an experiment, before-and-after analysis, or another method.
 
-> Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.
+### “Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.”
 
-If you have the result, add it:
+**Change:**
 
-> Compared merchants who adopted the new onboarding flow with those who remained on the legacy experience, finding a **[X%] improvement in [metric]**.
+- Clarify the product problem and the intended customer or business outcome.
+- Distinguish what you personally owned from what the broader team delivered.
+- Add the result of shipping early, if there was one.
+- Preserve the cross-functional detail, especially the involvement of risk and support.
 
-If you do not have a result, this is weaker than the other bullets and can be removed or combined with the onboarding bullet.
+**Why:** This demonstrates core product work, but “shipped two weeks ahead of plan” is primarily a delivery metric. The bullet would be stronger if it showed why the feature mattered and what changed after launch.
 
-### Be precise about the 35% metric
+### “Interviewed 25 merchants to size the chargeback problem and turned the findings into the business case that set the next quarter’s roadmap priority.”
 
-Clarify one of these:
+**Change:**
 
-- “increased checkout conversion from 40% to 54%” — percentage points or absolute rates
-- “increased checkout conversion by 35% relative”
-- “increased checkout conversion by 35 percentage points”
+- Keep this bullet, but add the decision or business consequence if available.
+- Clarify whether the research influenced prioritization, investment, scope, or a specific product decision.
+- Make the connection between interviews, problem sizing, and roadmap selection explicit.
 
-Without the baseline or metric definition, a technical reviewer may question the claim.
+**Why:** This is good discovery and strategy evidence. It shows that you did more than conduct interviews—you influenced prioritization. That is valuable for APM roles, but the current bullet could better demonstrate the quality of the decision you enabled.
+
+### “Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.”
+
+**Change:**
+
+- Clarify whether you personally resolved the tickets or coordinated their resolution.
+- Explain the type of issues involved.
+- Add the product or customer impact if available.
+- Consider moving this bullet lower in the section or removing it if you need space.
+
+**Why:** It shows ownership and cross-functional coordination, but it reads more like support operations than product management. Keep it only if it demonstrates meaningful product insight, prioritization, or feedback-loop ownership.
+
+### “Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.”
+
+**Change:**
+
+- Add the result of the comparison.
+- Explain why this comparison was used and acknowledge whether the groups were self-selected.
+- If this was not a controlled experiment, do not present it as one.
+
+**Why:** As written, this is a methodology statement without an outcome. It also raises a selection-bias concern because merchants opted into different flows. A technical reviewer may question whether the comparison supports your conclusion.
+
+### “Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.”
+
+**Change:**
+
+- Clarify whether you led, contributed to, or supported the redesign.
+- Connect the bullet to the underlying product problem.
+- Explain whether the result was measured against a prior cohort, control group, or another baseline.
+- Reconcile this bullet with the separate onboarding measurement bullet.
+
+**Why:** This is one of your best bullets because it has a clear outcome, baseline, metric, and scale. However, it currently sits after a less impactful ticket-triage bullet and is separated from the measurement method used to evaluate it.
 
 ---
 
 ## Crestline Logistics
 
-The experience is relevant because it demonstrates analytics, process improvement, implementation, and stakeholder management. Make the bullets more product- and impact-oriented.
+### “Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.”
 
-Recommended edits:
+**Change:** Rework or remove this bullet. Do not present exclusion from the metric as equivalent to operational improvement. If you actually improved weather-related delivery performance, describe that work instead. Otherwise, frame the achievement as improving the measurement methodology, not reducing late deliveries.
 
-- Reduced warehouse pick errors by **30% across two sites** by redesigning slotting rules with floor supervisors and retraining **45 pickers**.
-- Led rollout of a route-planning tool across **three depots**, training **60 drivers and dispatchers** and saving **1,800 driver hours annually**.
-- Coordinated quarterly S&OP reviews across sales, finance, and operations; prepared the forecasting pack used to align stakeholders on demand and capacity plans.
-- Rebuilt the on-time delivery metric to separate weather-related delays from controllable service failures, improving visibility into operational performance.
+**Why:** This is the most problematic claim in the logistics section. It appears to improve the reported metric by changing what counts, not by improving delivery performance. A hiring manager may view this as metric manipulation.
 
-The original first bullet should not claim that late deliveries were “cut” if only the reporting methodology changed.
+### “Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.”
 
-Also fix the tense error:
+**Change:**
 
-> “and prepares the forecast pack”
+- Keep this bullet.
+- Clarify the baseline or timeframe if available.
+- Emphasize the combination of process redesign, frontline collaboration, and implementation.
+- Add a business consequence if known, such as fewer re-shipments, lower cost, or faster fulfillment.
 
-should be:
+**Why:** This is a credible, quantified operations achievement. It also demonstrates skills relevant to product work: diagnosing a problem, working with users, designing a solution, and driving adoption.
 
-> “and prepared the forecast pack”
+### “Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.”
+
+**Change:**
+
+- Correct the tense inconsistency.
+- Decide whether this is a past responsibility or an ongoing responsibility.
+- Add the scale or business consequence of the work.
+- Consider removing it if you need room for more analytical or product-relevant accomplishments.
+
+**Why:** The grammar error is noticeable. More importantly, the bullet describes a recurring task but does not show an outcome, decision, or improvement.
+
+### “Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.”
+
+**Change:**
+
+- Keep this bullet.
+- Clarify what you owned in the rollout.
+- Explain how the savings were calculated.
+- If relevant, mention adoption, implementation challenges, or the operational decision the tool supported.
+
+**Why:** This is strong evidence of implementation, change management, and quantified impact. It helps bridge your operations background to product because it shows you introduced a tool to real users and achieved measurable adoption-related value.
 
 ---
 
 ## Campus Food Rescue App
 
-This is excellent product evidence. Make the product-management actions more explicit:
+### “Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.”
 
-- Led launch of a surplus-food pickup app for **3,100 students** across two dining halls, redistributing **9 tonnes of food** in its first year.
-- Increased weekly active users from **400 to 1,150** by introducing pickup reminders based on insights from **60 user interviews**.
-- Designed and implemented a volunteer shift system with two dining halls, filling **95% of pickup slots weekly** and eliminating staff coverage gaps.
+**Change:**
 
-If you personally owned prioritization, product decisions, testing, or launch planning, state that. For example:
+- Clarify whether 3,100 students were registered users, eligible users, or the full student population reached.
+- Explain your product ownership more specifically.
+- Verify the “would have been thrown away” basis for the 9-tonne figure.
+- Make the timing consistent with the project’s “Present” status.
 
-> Prioritized and launched...
+**Why:** This is a strong product launch and scale bullet, but the scope and measurement definitions need to be precise. A reviewer will want to distinguish reach, adoption, and actual usage.
 
-Only use “owned” or “led” where accurate.
+### “Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60 user interviews showed students missed pickup windows.”
+
+**Change:** Keep this bullet and clarify:
+
+- Whether the increase was measured over a defined period
+- Whether other changes occurred at the same time
+- Your role in deciding, designing, and evaluating the reminder feature
+- Whether reminders improved retention, completed pickups, or only activity
+
+**Why:** This is probably your strongest end-to-end product bullet. It connects research, prioritization, feature development, and a measurable behavioral outcome. It should receive prominent placement.
+
+### “Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and removing the need for staff to cover gaps.”
+
+**Change:**
+
+- Keep it if you want to emphasize marketplace or operations design.
+- Clarify whether you designed the workflow, recruited volunteers, or implemented the system.
+- Add the number of shifts or volunteers if available.
+- Consider whether the bullet belongs under product impact or operational execution.
+
+**Why:** It demonstrates solving a supply-side problem and creating a repeatable operating process. It is useful, but less directly product-oriented than the user-growth bullet.
 
 ---
 
 ## MBA Consulting Practicum
 
-The current section is weaker than it could be because the first bullet is activity-based and the second lacks a measurable result.
+### “Held weekly working sessions with clinic managers on outpatient scheduling across the network.”
 
-Recommended version:
+**Change:**
 
-- Led weekly working sessions with clinic managers to identify bottlenecks in outpatient scheduling across a regional hospital network.
-- Mapped patient intake processes across **four clinics** and redesigned the intake form; the changes were adopted by front-desk staff.
-- Reduced intake time from **[X] to [Y]**, if you have the measurement.
+- Add the specific problem you were investigating.
+- Explain what decisions or deliverables resulted from the sessions.
+- Avoid presenting meeting frequency as the main accomplishment.
 
-If you do not have a quantified result, combine the first two bullets and keep the project to two bullets. Most of the space should go to Harbor Payments and the food-rescue app.
+**Why:** This shows stakeholder access but not yet meaningful impact. The value lies in what you learned, decided, or changed.
 
----
+### “Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.”
 
-# Skills section
+**Change:**
 
-The current categories are useful but could signal product capability more strongly.
+- Add the measurable effect of shortening the form, if available.
+- Clarify your role in the mapping and redesign.
+- Replace passive phrasing with clear ownership in the final version, without overstating your contribution.
+- Specify how adoption was assessed.
 
-Recommended:
+**Why:** This is a relevant process-improvement bullet, but it lacks an outcome. Adoption alone is weaker than showing reduced intake time, fewer errors, higher completion, or improved patient throughput.
 
-**Product:** Product discovery, user interviews, roadmap prioritization, requirements definition, PRDs, success metrics, experimentation  
-**Analytics:** SQL, Excel, funnel analysis, cohort analysis, A/B testing  
-**Tools:** Jira, Figma, Amplitude
+### Incorrect merchant bullet
 
-Only include “A/B testing” if you have actually run randomized experiments. Your onboarding comparison was based on merchants who opted in versus those who did not, so that specific analysis is not necessarily an A/B test. You could use:
+**Change:** Delete, relocate, or replace with the correct hospital-related result. Do not leave it under this project.
 
-> Experimentation, conversion analysis, cohort analysis
-
-If you have different proficiency levels, indicate them honestly, such as “SQL — intermediate.”
-
----
-
-# Narrative assessment
-
-Your strongest narrative is:
-
-> Operations analyst who developed process and analytics discipline, completed an MBA, and moved into payments product management through customer research, product experimentation, and cross-functional delivery.
-
-Make that narrative obvious in the summary and bullet order.
-
-Your differentiators are:
-
-- Payments experience
-- Direct merchant research
-- Quantified onboarding and checkout improvements
-- Four years of operational execution
-- Experience taking a product from launch through adoption and iteration
-- Ability to work across engineering, operations, support, and business stakeholders
-
-Your main competitive gap is limited full-time product-management tenure. Compensate by emphasizing ownership, decision-making, metrics, and shipped outcomes rather than administrative tasks.
+**Why:** It creates an immediate credibility problem.
 
 ---
 
-# Provisional scoring
+# Section-level changes
 
-This is based on the resume alone, since no job description was provided.
+## Education
+
+### MBA dates
+
+**Change:** If you graduated in June 2025, use a completed-degree designation rather than a current student implication. If the resume is being submitted before graduation, make the expected graduation status explicit.
+
+**Why:** The document should make your current status unambiguous.
+
+### Education placement
+
+**Change:** Keep education near the top for an early-career candidate, but make sure the product summary and product experience appear quickly after it.
+
+**Why:** The MBA supports your transition into product, but the resume should lead with evidence of product capability rather than academic credentials alone.
+
+---
+
+## Experience and projects ordering
+
+**Change:** Consider whether the Campus Food Rescue App should appear before Crestline Logistics, or whether it should be clearly labeled as a substantial product leadership project.
+
+**Why:** The student venture contains more directly relevant product evidence than several of the logistics bullets. It should not look like a minor extracurricular item if it involved launch, user research, growth, operations, and measurable impact.
+
+You can retain reverse chronology, but ensure the product relevance is visually obvious.
+
+---
+
+## Skills
+
+### Product skills
+
+**Change:** Keep the product skills, but make the level of proficiency and application credible. Do not list tools you barely used.
+
+**Why:** “Roadmapping,” “A/B testing,” user interviews, PRDs, and SQL are relevant, but each should be supported somewhere in the experience or project bullets.
+
+### Add analytical detail where truthful
+
+**Change:** If applicable, identify the types of analysis you performed with SQL, Excel, Amplitude, or experimentation tools.
+
+**Why:** Tools alone are weaker than evidence that you used them to measure funnels, cohorts, conversion, retention, or operational outcomes.
+
+### Reduce generic tool emphasis
+
+**Change:** Keep Jira, Figma, Amplitude, and Excel only if they are relevant to the roles you are targeting and you can discuss how you used them.
+
+**Why:** Recruiters care more about what you accomplished with the tools than about a long tool inventory.
+
+---
+
+# Five-reader assessment
+
+## ATS
+
+**Assessment:** Probably moderate for general APM roles, but impossible to score accurately without a job description.
+
+**Strengths:**
+
+- Product management
+- User interviews
+- Roadmapping
+- PRDs
+- A/B testing
+- SQL
+- Cross-functional collaboration
+- Merchant and customer research
+- Conversion and onboarding metrics
+
+**Weaknesses:**
+
+- No explicit target title
+- No product summary
+- No mention of common product concepts such as prioritization, discovery, experimentation, launch, adoption, retention, or analytics unless they are supported accurately
+- Product language is uneven across sections
+
+**Change:** Tailor the skills and summary to each job description, using only terms that accurately describe your work.
+
+---
+
+## Recruiter glance
+
+**Verdict:** Maybe, with potential to become a forward.
+
+**Why:** The internship and MBA create a plausible APM profile, but there is no immediate positioning statement. The recruiter may not know whether you are pursuing product, operations, strategy, or consulting.
+
+**Most important change:** Add clear target-role positioning and put the strongest product outcome near the top.
+
+---
+
+## HR screen
+
+**Verdict:** Likely phone screen for APM roles after corrections; borderline for standard PM roles requiring several years of direct product experience.
+
+**Why:** You have relevant product work, measurable impact, customer research, and cross-functional execution. The main concerns are the copied hospital bullet, unclear employment/project framing, and lack of a concise product narrative.
+
+---
+
+## Hiring manager
+
+**Verdict:** Maybe to interview.
+
+**What will impress them:**
+
+1. The merchant onboarding result across 2,300 merchants
+2. The user-growth result from 400 to 1,150 weekly active users
+3. The connection between user interviews and product decisions
+4. Cross-functional work with engineering, risk, support, clinic managers, and operational users
+
+**What will concern them:**
+
+1. The weather-delivery metric appears manipulated.
+2. The hospital project contains an obviously unrelated bullet.
+3. Several outcomes lack measurement methodology.
+4. The resume does not yet establish a coherent product-management narrative.
+
+**Likely first question:** They will probably ask you to explain exactly how you measured one of the major product improvements and what you personally owned.
+
+---
+
+## Technical reviewer
+
+**Verdict:** Potentially positive, but with credibility concerns.
+
+**Main audit issues:**
+
+- Checkout conversion: unclear measurement design and scope
+- Onboarding time: unclear comparison method
+- Weather-delivery metric: misleading unless carefully reframed
+- Food redistribution: unclear calculation
+- Hospital intake: no quantified outcome
+- Duplicate or misplaced merchant result
+- “Prepares” tense inconsistency
+
+---
+
+# Eight-dimension score
+
+Because there is no job description, the ATS score is an estimate for a general APM role.
 
 | Dimension | Score | Comments |
 |---|---:|---|
-| Target-role positioning | 7/10 | Product direction is present but not stated early enough |
-| Summary | 3/10 | No summary currently |
-| Skills | 7/10 | Relevant, but could use stronger categories and more precise terminology |
-| Bullet quality | 7/10 | Strong metrics, with some weak or ambiguous bullets |
-| Product relevance | 8/10 | Harbor Payments and the app provide credible product evidence |
-| Narrative coherence | 6/10 | Good underlying story, but the resume does not frame it clearly |
-| Credibility and accuracy | 5/10 | Duplicate hospital bullet and metric-redefinition issue are significant |
-| Formatting/content efficiency | 7/10 | Generally concise, but space should favor the strongest product work |
-| **Overall** | **6.5–7/10** | Strong foundation after accuracy and positioning fixes |
+| ATS keyword match | 7/10 | Good general product terms, but no target-role summary and no JD-specific tailoring |
+| Summary | 3/10 | No summary or clear positioning |
+| Skills section | 7/10 | Relevant tools and methods, but could be more tightly supported by the bullets |
+| Bullet quality | 7/10 | Strong metrics overall; several bullets need clearer ownership, method, or outcomes |
+| Publication selection | N/A | No publications listed; not necessary for most APM roles |
+| Narrative coherence | 6/10 | Product, operations, and consulting experience are not yet tied together clearly |
+| Page fill and visual | N/A | Cannot assess without the formatted document |
+| Credibility signals | 6/10 | Strong metrics, but the weather metric and misplaced hospital bullet materially hurt credibility |
+
+**Estimated overall readiness:** **6.5–7/10**
+
+This is a good foundation, but it needs a focused product-positioning and credibility pass before submission.
 
 ---
 
-# Interview bridge points
+# Changes ranked by impact
 
-Use these connections when explaining your background:
+## Tier 1: Do these first
 
-| Resume experience | Product-management connection |
+1. **Remove date of birth and nationality.**
+   - Prevents unnecessary screening and privacy concerns.
+
+2. **Add a product-focused summary.**
+   - Establishes the target role and connects the different parts of your background.
+
+3. **Fix or remove the misplaced merchant bullet under the hospital project.**
+   - Eliminates the most obvious credibility problem.
+
+4. **Rework or remove the weather-delivery bullet.**
+   - Prevents a hiring manager from concluding that you manipulated a performance metric.
+
+5. **Reorder the strongest product achievements.**
+   - Makes onboarding, conversion, user research, and growth visible within the first few seconds.
+
+6. **Add measurement context to the major metrics.**
+   - Especially checkout conversion, onboarding time, weekly active users, and food redistribution.
+
+7. **Add outcomes to the hospital practicum bullets.**
+   - Otherwise the project reads as meetings and process mapping rather than product or analytical impact.
+
+## Tier 2: Important refinements
+
+1. Clarify your personal ownership in team achievements.
+2. Make dates and current/completed status unambiguous.
+3. Decide whether the food-rescue app belongs in a prominent product section.
+4. Add relevant product-analysis concepts only where supported by your experience.
+5. Remove lower-impact task bullets if space is limited.
+6. Standardize tense across every position.
+
+## Tier 3: Lower priority
+
+1. Minor wording polish.
+2. Further tool-list refinement.
+3. Adding more soft skills.
+4. Adding decorative formatting or excessive section labels.
+
+---
+
+# Interview bridge points to prepare
+
+Prepare concise explanations for these topics:
+
+| Resume topic | What you need to explain |
 |---|---|
-| Merchant onboarding redesign | “I identified a major activation bottleneck and redesigned the flow around reducing time to first value.” |
-| Merchant interviews | “I used qualitative research to quantify a customer problem and turn it into a roadmap recommendation.” |
-| Dispute self-service | “I translated a cross-functional operational problem into requirements and measurable success criteria.” |
-| Logistics process improvement | “My operations background taught me how to diagnose process bottlenecks, manage stakeholders, and measure whether a change actually worked.” |
-| Food-rescue app | “I took a product from user research through launch, adoption analysis, and iteration.” |
-| Route-planning rollout | “I have experience driving adoption of a tool across multiple locations and user groups, not just defining the solution.” |
+| Checkout conversion | How conversion was defined, how the baseline was established, and what analysis supports the 35% improvement |
+| Merchant onboarding | Your specific role, the redesign decision, the comparison method, and why the result is reliable |
+| Dispute self-service | How you prioritized the problem, aligned risk and support, and defined success |
+| Food-rescue app | How interviews changed the product decision and how you measured active users |
+| Logistics pick-error reduction | How you diagnosed the problem, involved frontline users, and achieved adoption |
+| Route-planning rollout | How you managed implementation and validated the claimed driver-hour savings |
+| Hospital practicum | What the actual scheduling or intake problem was and what measurable outcome resulted |
 
-A likely first interview question will be:
+## Bottom line
 
-> “Tell me about the merchant onboarding redesign. How did you identify the problem, decide what to change, and determine whether it worked?”
-
-Prepare a clear answer covering user insight, alternatives considered, implementation partners, metric definition, and the limitations of the comparison methodology.
-
----
-
-# Final priority list
-
-## Do these first
-
-1. Remove date of birth and nationality.
-2. Delete the misplaced merchant bullet from the hospital project.
-3. Add a product-focused summary.
-4. Reorder Harbor Payments bullets around onboarding, checkout, discovery, and shipping.
-5. Clarify the 35% conversion metric.
-6. Rewrite the late-delivery bullet so it does not imply operational improvement from merely changing the calculation.
-7. Fix tense and grammar errors.
-
-## Do next
-
-8. Add results to the hospital project if available.
-9. Strengthen skills categories with product discovery, metrics, prioritization, and analytics.
-10. Replace activity-only bullets with outcomes wherever possible.
-11. Use a real LinkedIn URL.
-12. Keep the resume to one page if possible, especially for APM applications.
+Your resume has enough evidence for a credible APM application, particularly in payments, operations software, logistics technology, marketplaces, or workflow products. Before applying, make the document unmistakably product-focused, remove or correct the misleading or misplaced claims, and add measurement context wherever a result is unusually large.

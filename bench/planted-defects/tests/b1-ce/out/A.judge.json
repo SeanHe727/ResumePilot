@@ -14,87 +14,83 @@
     "N4"
   ],
   "coverage": true,
-  "suggestions": 25,
-  "words": 2583,
+  "suggestions": 17,
+  "words": 2921,
   "quotes": 19,
-  "grounded": 16,
+  "grounded": 12,
   "rewrites": 0,
   "inventedNumbers": [],
-  "falsePositives": [
-    "Correct 'on- call' to 'on-call.'"
-  ],
+  "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5519,
-    "completion_tokens": 17572,
-    "total_tokens": 23091,
+    "prompt_tokens": 5927,
+    "completion_tokens": 7166,
+    "total_tokens": 13093,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 17065
+      "reasoning_tokens": 6760
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 3727
+    "prompt_cache_miss_tokens": 4135
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "Owned the diagnostics service’s monitoring dashboards uses duty framing, describing what the candidate was in charge of rather than what they changed or built."
+        "evidence": "“Owned” and “the on-call rotation that used them” tell the reader what was assigned to you, but not whether the dashboards improved detection, resolution, or incident handling."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "accelerating delivery and improving outcomes for downstream teams makes broad claims without stating what improved or by how much."
+        "evidence": "“AI-first engineering practices” does not tell a hiring reader what was introduced, while “accelerating delivery and improving outcomes for downstream teams” does not identify a measurable change"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The increase from 71% to 83% is a 12-percentage-point increase, not a 12% increase."
+        "evidence": "The task-completion change is labeled as a relative percentage when it is a percentage-point increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The Agent Runtime Suite claim of reducing latency from 900 ms to 600 ms represents approximately a 33% reduction, not 50%."
+        "evidence": "The reduction from 900 ms to 600 ms is 300 ms, or 33.3% of the 900 ms baseline, not 50%."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "The 5% latency result is buried after a long method list."
+        "evidence": "Move \"reduced end-to-end latency 5%\" to the front"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The final robotics bullet mixes migration work with hiring and on-call responsibilities."
+        "evidence": "the longer fleet bullet chains too many secondary actions around its result"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "Standard GRPO generally uses multiple rollouts per prompt to compare relative rewards and form an informative advantage signal. A single rollout usually increases variance or makes that signal uninformative."
+        "evidence": "Standard GRPO needs within-prompt groups to form relative advantages; with one scored trajectory, that comparison collapses"
       },
       {
         "id": "T3",
         "found": true,
-        "evidence": "Dynamic batching has no other request to combine with in an isolated single-request workload and can leave latency unchanged or increase it."
+        "evidence": "Dynamic batching can improve throughput under concurrent traffic but can add delay to an isolated request"
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "The Experience entries are not ordered newest-first."
+        "evidence": "Move the Mobility Systems Company entry, dated Oct 2024–May 2025, above the Eastern Robotics Co. entry, dated Aug 2022–Jul 2024."
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "The narrative review found no supporting evidence in the body for Kubernetes or SQL."
+        "evidence": "The narrative review found no supporting evidence in the entries for SQL, LoRA, LangGraph, RAG, or Kubernetes."
       }
     ],
     "coverage": true,
-    "suggestions": 25,
+    "suggestions": 17,
     "rewrites": [],
-    "falsePositives": [
-      "Correct 'on- call' to 'on-call.'"
-    ]
+    "falsePositives": []
   }
 }

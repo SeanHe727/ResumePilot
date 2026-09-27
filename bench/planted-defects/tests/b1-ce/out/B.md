@@ -1,161 +1,299 @@
-Your resume has strong technical depth and unusually good quantification, especially around latency, accuracy, throughput, and operational impact. The main issues are **ordering, clarity, a numerical inconsistency, and several bullets that are too dense or vague**.
+## Overall priorities
 
-## Highest-priority changes
+1. **Fix the numerical inconsistency in the Agent Runtime Suite project.** Reducing latency from 900 ms to 600 ms is a **33.3% reduction**, not 50%. This is the most important correction because the current statement undermines credibility.
+2. **Clarify chronology.** Your M.S. begins in September 2024, your internship runs from October 2024 to May 2025, and your project runs from February/August 2025 onward. Make sure the dates accurately reflect part-time, academic, or concurrent work.
+3. **Replace vague impact claims with measurable outcomes.** Several bullets use phrases such as “improving outcomes,” “drove adoption,” or “owned” without showing scope or results.
+4. **Distinguish percentage points from percentage improvement.** A change from 71% to 83% is a 12-percentage-point increase, or approximately a 17% relative increase.
+5. **Reduce technically dense process detail where it does not demonstrate an outcome.** The GRPO bullets may be valuable for research-oriented roles, but they need clearer framing and evidence of why the work mattered.
 
-### 1. Fix the numerical inconsistency
+---
 
-You wrote:
+## Header
 
-> Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction
+**`Jordan Lee`**  
+No substantive change needed.
 
-That is a **33% reduction**, not 50%. Change it to:
+**Phone, email, and portfolio URL**  
+- Make sure the portfolio URL is live, professional, and directly relevant to the projects listed.
+- If the site contains code, demos, papers, or benchmarks, link directly to the strongest material rather than only to a general landing page.
+- You could add LinkedIn or GitHub if either provides meaningful evidence of your work. Do not add them merely to fill space.
 
-> Reduced p95 tool-call latency from 900 ms to 600 ms, a 33% reduction, by caching tool results and reusing completed sub-agent answers.
+---
 
-Or, if the actual reduction was 50%, the ending latency should be 450 ms.
+## Education
 
-### 2. Reorder experience chronologically
+### Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026
 
-Your Mobility Systems internship, ending May 2025, should appear **above** Eastern Robotics, which ended July 2024.
+- The line is clear.
+- Consider adding a specialization, thesis topic, or selected coursework only if it supports the jobs you are targeting.
+- Because your internship overlaps with this degree, make sure the resume makes the concurrent status understandable. You do not necessarily need to explain it, but the dates should not look accidental.
 
-Recommended order:
+### Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022
 
-1. Mobility Systems Company — Oct 2024–May 2025  
-2. Eastern Robotics Co. — Aug 2022–Jul 2024
+- The line is clear.
+- Use consistent location formatting. The first degree lists a U.S. location while the second uses “Country”; replace any placeholder or inconsistent country naming before submitting.
+- If your academic record is especially strong or relevant, you could include honors, GPA, or relevant coursework. Otherwise, leave it as is.
 
-The overlap with your M.S. is acceptable, but clarify whether the internship was part-time, remote, or concurrent if relevant.
+---
 
-### 3. Replace vague or low-value language
+## Experience
 
-This bullet is too generic:
+### Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024
 
-> Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.
+The role is well supported by quantitative engineering results. The main issue is that the first and fourth bullets are less precise than the middle two.
 
-It does not say what you built, how many teams adopted it, or what improved. Replace it with a concrete contribution, such as:
+### Bullet 1: Diagnostics monitoring dashboards and on-call rotation
 
-> Built and maintained a TypeScript agent-runtime toolkit used by [X] engineers to standardize tool calling, retries, caching, and sub-agent execution.
+Change:
+- Specify the scope of the dashboards: number of services, users, alerts, deployments, or operational workflows.
+- Clarify what “owned” involved—design, implementation, alert tuning, reliability, incident response, or maintenance.
+- Explain the significance of the on-call rotation if you retain it. At present, the relationship between the dashboards and the rotation is somewhat circular.
 
-Only include the adoption metric if you can substantiate it.
+Why:
+- “Owned” is common resume language and does not by itself establish seniority or impact.
+- The bullet currently describes responsibility more than an outcome.
 
-### 4. Reduce jargon or explain it through outcomes
+### Bullet 2: p95 API latency from 420 ms to 180 ms
 
-The internship section currently reads like a research log. Terms such as:
+Change:
+- Keep the exact before-and-after numbers.
+- Clarify the measurement scope: endpoint or service, traffic level, test environment, and whether the result was sustained in production.
+- State what the load tests prevented or validated, if you have a concrete result.
+- Make sure the cache and batching changes are technically accurate and that the improvement was not caused by unrelated changes.
 
-- assistant-only loss masking
-- grouped tool-use rollouts
-- composite reward
-- GRPO
-- frozen SFT reference
-- sparse rewards
+Why:
+- This is one of your strongest bullets because it combines technical action and measurable impact.
+- Additional measurement context would make the claim more credible and reproducible.
 
-can be valuable for an ML/research role, but several appear without enough context. Keep the strongest technical details, but connect them to the result.
+### Bullet 3: CI pipeline and regression checks
 
-For example, instead of:
+Change:
+- Clarify whether the release-cycle reduction—from two weeks to three days—applied to all model releases, a particular model family, or a specific team.
+- Add the number or type of regression checks if that demonstrates meaningful scope.
+- Explain whether the checks reduced manual review, rollback risk, failed releases, or test time.
 
-> Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.
+Why:
+- The result is strong, but the causal connection between “automated regression checks” and “release cycles” could be clearer.
+- “Maintained” sounds routine; the improvement should be the focus.
 
-Use:
+### Bullet 4: Migrated 30 services, rewrote logging library, onboarded hires, and took over on-call
 
-> Improved agentic diagnostic latency by 5% through GRPO fine-tuning with rewards for accuracy, citation validity, and tool-call efficiency.
+Change:
+- Split this into two bullets or remove one of the secondary responsibilities.
+- Separate the migration, logging-library rewrite, onboarding, and on-call work unless they were part of one clearly connected initiative.
+- Quantify the “nightly backlogs” outcome: number of delayed jobs, average delay, failure rate, or dispatch improvement.
+- Clarify your individual role in the migration and shared-library rewrite.
+- Avoid presenting onboarding and weekend on-call as if they directly caused the removal of nightly backlogs unless they did.
 
-This preserves the substance while making the accomplishment easier to scan.
+Why:
+- This bullet contains too many accomplishments and becomes difficult to scan.
+- The strongest result is the operational improvement; the other items compete with it.
+- The phrase “which removed” creates an unclear causal connection because it could refer to several preceding actions.
 
-### 5. Make the accuracy improvement precise
+---
 
-This is mostly good:
+### Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 
-> Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79%
+This section has strong metrics, but the order and technical framing need refinement. Put the most relevant result first for the target role, and make clear which work was deployed versus experimental.
 
-Consider adding “8 percentage points” to avoid ambiguity:
+### Bullet 1: Diagnostics triage branch and 68% backlog reduction
 
-> Improved diagnostic accuracy by 8 percentage points, from 71% to 79%, across 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories.
+Change:
+- Clarify what “branch” means. It may refer to a product workflow, model branch, code branch, or decision path.
+- State whether the 68% reduction was measured against a defined baseline and over what time period.
+- Explain your contribution relative to the broader system if you were one contributor rather than the sole owner.
+- Consider clarifying what “800+ sensor signals per case” means operationally.
 
-## Suggested revised experience section
+Why:
+- The backlog reduction is compelling, but “triage branch” may be unclear to readers outside the organization.
+- The metric needs enough context to show that it was a real operational result rather than a temporary launch effect.
 
-### Mobility Systems Company — Machine Learning Engineering Intern  
-Metro City, USA | Oct 2024–May 2025
+### Bullet 2: Accuracy from 71% to 79% using a domain adapter
 
-- Built a machine-learning diagnostic triage branch for an industrial inspection system that analyzed 800+ sensor signals per case, reducing the pending-case backlog by 68% in its first quarter.
-- Improved diagnostic accuracy by 8 percentage points, from 71% to 79%, across 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories.
-- Reduced p95 latency for single-request edge inference by 40% by deploying an INT8 engine with dynamic batching.
-- Improved agentic diagnostic latency by 5% through GRPO fine-tuning with rewards for accuracy, citation validity, and tool-call efficiency.
-- Stabilized sparse-reward GRPO training by using one scored rollout per prompt, producing consistent single-trajectory updates.
-- Documented abstention rules and escalation paths for on-call reviewers; the documentation became the team’s diagnostic triage runbook.
+Change:
+- Define “diagnostic accuracy” more precisely if the task involved multiple labels, severity levels, or abstentions.
+- Clarify whether the 1,200 held-out cases were fully independent from training and tuning data.
+- Explain “validated tool-use trajectories” and “assistant-only loss masking” only if the target audience will understand them.
+- If this was a research or modeling contribution, include the baseline model or comparison point.
 
-### Eastern Robotics Co. — Junior Software Engineer  
-Metro City, Country | Aug 2022–Jul 2024
+Why:
+- The quantitative improvement is strong.
+- The current technical terminology may be impressive to a specialist but opaque to a general hiring manager.
+- Evaluation methodology is particularly important when claiming an accuracy increase.
 
-- Owned monitoring dashboards for the diagnostics service across two major releases and supported the on-call rotation that relied on them.
-- Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regression.
-- Automated model-release regression checks in the perception team’s CI pipeline, reducing release cycles from two weeks to three days.
-- Migrated 30 robot-fleet services from cron jobs to an event queue and rewrote the shared logging library, eliminating nightly backlogs that delayed morning dispatch.
-- Onboarded two new hires and assumed responsibility for the weekend on-call rotation.
+### Bullet 3: INT8 inference and dynamic batching
 
-The final bullet in your original version combines too many accomplishments. Splitting it improves readability and makes each contribution easier to evaluate.
+Change:
+- Clarify whether the 40% p95 improvement applies to end-to-end inference, model execution, or request-serving latency.
+- Reconcile “single-request” with “dynamic batching.” Dynamic batching generally depends on concurrent requests, so explain the workload or benchmark conditions.
+- Include the hardware or serving stack if it is relevant to the role.
 
-## Suggested revised projects section
+Why:
+- The result is useful, but the current phrasing may raise a technical question about how batching improved a single-request workload.
+- Precise latency terminology will prevent readers from comparing this metric incorrectly with the other latency claims.
 
-### Agent Runtime Suite — Owner  
-TypeScript, Multi-Agent Systems | Aug 2025–Present
+### Bullet 4: Grouped rollouts, composite reward, GRPO, and 5% latency reduction
 
-- Built a TypeScript runtime for tool calling, caching, retries, and multi-agent task execution.
-- Reduced p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.
-- Improved benchmark task-completion rate from 71% to 83% by retrying failed sub-agent calls with preserved partial context.
+Change:
+- Clarify whether the 5% reduction was measured in production, offline evaluation, or a training experiment.
+- Explain the relationship between the reinforcement-learning method and the end-to-end latency result.
+- Add a stronger metric if available, such as reward improvement, tool-call reduction, success rate, cost reduction, or evaluation stability.
+- Consider moving this bullet after the more concrete production results or combining it with the next bullet if space is limited.
+- Define “composite reward” and “frozen SFT reference” only if they are important to the role.
 
-### Research-Agent Evaluation Framework — Contributor  
-LLM Evaluation | Feb 2025–Jul 2025
+Why:
+- This is technically sophisticated but currently reads like a list of methods followed by a relatively modest result.
+- The causal connection between the training setup and latency is not immediately obvious.
+- Recruiters may skip it unless the business or system impact is clearer.
 
-- Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.
-- Demonstrated that the evaluator detected injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials.
-- Used layered instrumentation to identify three pipeline defects involving stability, sourcing, and parameter handling; all three were fixed upstream.
+### Bullet 5: One rollout per prompt and sparse-reward stabilization
 
-## Formatting and structure changes
+Change:
+- Add a measurable outcome: training variance, convergence time, reward stability, failed-run rate, compute cost, or final evaluation result.
+- Explain why using one rollout per prompt was beneficial despite reducing sampling diversity.
+- Clarify whether this was a discovery, an ablation result, or the final production training configuration.
+- Consider omitting or combining it if you cannot quantify its impact.
 
-### Use consistent date formatting
+Why:
+- The bullet describes an implementation choice but not its result.
+- For a research resume, the methodological contribution may be sufficient, but for a general engineering resume it needs evidence that the choice improved something.
 
-Use en dashes and consistent month formatting:
+### Bullet 6: Abstention rules, escalation paths, and runbook adoption
 
-- `Sep 2024 – Expected Jun 2026`
-- `Aug 2022 – Jul 2024`
+Change:
+- Quantify adoption or operational effect if possible: number of reviewers, reduced ambiguity, reduced escalations, faster review time, or fewer incorrect diagnoses.
+- Clarify whether you authored the rules, validated them, or merely documented an existing process.
+- Keep “adopted as the team’s runbook” only if you can substantiate that it became the standard operating document.
 
-Avoid mixing hyphen styles.
+Why:
+- This shows practical communication and operational ownership, which balances the highly technical bullets.
+- The current claim is good but would be stronger with evidence of how adoption changed the workflow.
 
-### Consider adding a short summary
+---
 
-For ML engineering, applied AI, or agent-infrastructure roles, a two-line summary could help position you:
+## Projects
 
-> Machine learning engineer and computer engineering graduate student focused on agentic systems, model evaluation, inference optimization, and production robotics software. Experience improving diagnostic accuracy, latency, CI/CD reliability, and fleet operations.
+### Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
 
-Skip the summary if you need the space for stronger accomplishments.
+- Verify that the project date is correct and that it does not conflict with your M.S. or internship dates.
+- “Owner” is useful, but clarify whether this means sole developer, technical lead, maintainer, or project manager.
+- Consider adding a repository, demo, benchmark, or deployment status if available.
 
-### Improve the skills section
+### Bullet 1: AI-first engineering practices and improved outcomes
 
-Your current skills are good but could be organized more precisely:
+Change:
+- Remove or substantially revise the claim unless you can provide concrete evidence.
+- Specify what practices you introduced, how many people or teams adopted them, and what measurable delivery or quality improvement resulted.
+- Avoid “AI-first,” “accelerating delivery,” and “improving outcomes” without metrics.
 
-**Languages:** Python, TypeScript, SQL, Bash  
-**ML/Deep Learning:** PyTorch, LoRA, GRPO, model fine-tuning, INT8 inference  
-**Agents/LLM Systems:** RAG, LangGraph, tool-use agents, agent evaluation  
-**Infrastructure:** Kubernetes, Git, CI/CD, distributed systems
+Why:
+- This is the weakest bullet in the resume because it is broad, promotional, and unsupported.
+- It does not tell the reader what you built or what changed.
 
-Only add technologies you can discuss in an interview. If you used Docker, cloud platforms, message queues, or specific databases, include them—but avoid listing them unless they are supported by your experience bullets.
+### Bullet 2: Tool-call latency from 900 ms to 600 ms
 
-### Make the portfolio URL clickable and complete
+Change:
+- Correct the stated percentage reduction: the figures represent approximately a **33% reduction**, not 50%.
+- Clarify whether this is p50, p95, or another percentile; the line currently says p95, so retain that precision consistently.
+- Explain how often cached results were reused and whether caching affected correctness, freshness, or task success.
+- State whether the measurement came from production traffic or a benchmark.
 
-Instead of:
+Why:
+- The result is strong, but the incorrect arithmetic is a serious credibility issue.
+- Caching and answer reuse can introduce correctness risks, so acknowledging the evaluation conditions would strengthen the claim.
 
-> example.com/code/jordan-lee
+### Bullet 3: Task completion from 71% to 83%
 
-Use the full URL, and add LinkedIn or GitHub if relevant:
+Change:
+- Describe this as a **12-percentage-point increase**, not simply “by 12%,” unless you explicitly mean relative improvement.
+- Clarify the benchmark size, task types, and whether the benchmark was held out from development.
+- Explain how partial-context retries affected latency, cost, or failure modes.
+- Make sure the denominator and evaluation procedure are consistent across the two percentages.
 
-> GitHub: github.com/jordan-lee  
-> LinkedIn: linkedin.com/in/jordan-lee
+Why:
+- This is a strong outcome, but percentage terminology matters.
+- The retry mechanism could improve completion while increasing cost or latency, so the tradeoff should be addressed if relevant.
 
-## Potential concerns to address
+---
 
-- **Current M.S. and internship overlap:** Not a problem, but be prepared to explain the arrangement.
-- **Project dates overlap with employment and school:** Also fine, especially for open-source or personal work, but label the project as open source if applicable.
-- **“Owner” may be ambiguous:** Use “Creator,” “Lead Developer,” or “Maintainer” if that more accurately describes your role.
-- **“Junior” title:** Keep your official title, but let the bullets demonstrate that you performed beyond entry-level scope.
-- **Highly technical ML claims:** Be ready to explain the training setup, evaluation methodology, baseline, and whether metrics were offline or production metrics.
+### Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
 
-Overall, the resume is strong for **ML engineering, LLM/agent infrastructure, robotics software, and applied research engineering**. The biggest immediate win is to make it easier to scan: lead with impact, shorten the dense technical bullets, reorder the experience, and correct the 900-to-600 ms percentage.
+- Consider adding the repository or project link if the contributions are publicly verifiable.
+- “Contributor” is accurate but undersells the work if you had substantial ownership of the metrics or instrumentation. Use the role label that reflects your actual responsibility.
+- Make sure the project does not appear to overlap confusingly with the internship unless that overlap is intentional and explainable.
+
+### Bullet 1: Eight metrics upstreamed into an open-source framework
+
+Change:
+- Identify the kinds of metrics or their evaluation dimensions if they are not obvious from the project title.
+- Clarify whether you designed, implemented, tested, documented, or maintained all eight.
+- Verify that they truly run in the default benchmark for every release; this is a strong claim and should be easy to substantiate.
+
+Why:
+- “Upstreamed” and “default benchmark” communicate meaningful open-source impact.
+- The bullet will be more convincing if it distinguishes your contribution from the framework’s overall functionality.
+
+### Bullet 2: Kendall correlation of 0.89 across 400+ trials
+
+Change:
+- Specify that this is Kendall’s tau if that is the statistic used.
+- Explain what the evaluator score was correlated with and what “tracks injected degradation” means.
+- Clarify the unit of analysis and independence of the 400+ trials.
+- State whether the correlation was computed across degradation levels, reports, models, or another grouping.
+
+Why:
+- The statistic is impressive but currently lacks enough experimental context to interpret it.
+- Technical readers may question what exactly was correlated and whether the trials are independent.
+
+### Bullet 3: Three structural pipeline defects
+
+Change:
+- Name the types of defects more concretely if they are not confidential.
+- Quantify the effect of the fixes, such as failure reduction, improved reproducibility, or restored benchmark coverage.
+- Clarify whether you identified the defects, proposed fixes, implemented them, or only traced them.
+- Confirm that “each was fixed upstream” is accurate and that the fixes were merged rather than merely reported.
+
+Why:
+- Finding three defects and getting them fixed upstream is valuable, but the current bullet emphasizes diagnosis more than impact.
+- This is an opportunity to show debugging and cross-team influence.
+
+---
+
+## Skills
+
+### Programming: Python, TypeScript, SQL, Bash, Git
+
+Change:
+- Keep this list if you can support each item through the experience and project sections.
+- Consider separating Git from programming languages because it is a tool rather than a language.
+- Add relevant technologies used in the bullets—such as a serving framework, cloud platform, testing framework, message queue, or database—only if you have meaningful experience with them.
+- Avoid listing tools you have used only briefly.
+
+Why:
+- The list is credible but could better reflect the technologies demonstrated in the body of the resume.
+
+### ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation, Kubernetes
+
+Change:
+- Group infrastructure and ML concepts separately if you have enough skills to justify multiple categories.
+- Specify proficiency or evidence indirectly through the experience bullets rather than adding unsupported labels.
+- “Agent evaluation” is a broad capability; make sure the evaluation-framework project clearly supports it.
+- Kubernetes appears in the skills list but is not mentioned elsewhere. Either add relevant evidence in the experience section or remove it if your exposure was limited.
+- Consider adding the tools used for inference serving, experiment tracking, data processing, or model evaluation if they were central to the roles you are targeting.
+
+Why:
+- Skills sections are most effective when they reinforce technologies already demonstrated in the resume.
+- The current list is strong for LLM/agent roles but may look slightly disconnected from the robotics and systems work unless the supporting technologies are made more visible.
+
+---
+
+## Formatting and consistency
+
+- Use consistent punctuation across bullets. Either use periods on all bullets or omit them consistently.
+- Keep capitalization consistent for terms such as p95, INT8, ML, API, and on-call.
+- Make sure line wrapping is handled by the document layout rather than manual hyphens such as “on- call,” “regression checks,” or “stabilised.”
+- Use one date style throughout. Your current month-year format is fine.
+- Consider ordering experience by actual chronology. The internship appears after the earlier full-time role despite occurring later; that is acceptable if intentional, but reverse chronological order is usually easiest to scan.
+- Decide whether to use American or British spelling consistently. You use “Stabilised,” which may conflict with the U.S. locations and likely U.S.-oriented applications.
+- Avoid unexplained internal terms such as “branch,” “assistant-only loss masking,” “tool-use trajectories,” and “frozen SFT reference” unless the target audience is highly technical.
+- Your strongest themes are **latency optimization, evaluation rigor, production reliability, and agent/ML systems**. Make those themes more prominent and reduce generic leadership language.

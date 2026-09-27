@@ -1,49 +1,47 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/D.md",
-  "recall": 5,
+  "recall": 6,
   "found": [
-    "W2",
     "W6",
+    "A3",
     "S3",
     "T1",
-    "N1"
+    "N1",
+    "N4"
   ],
   "coverage": true,
-  "suggestions": 17,
-  "words": 3012,
-  "quotes": 9,
-  "grounded": 0,
-  "rewrites": 28,
-  "inventedNumbers": [
-    "0.40",
-    "0.40"
-  ],
+  "suggestions": 80,
+  "words": 3777,
+  "quotes": 6,
+  "grounded": 6,
+  "rewrites": 0,
+  "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 6116,
-    "completion_tokens": 11256,
-    "total_tokens": 17372,
+    "prompt_tokens": 6706,
+    "completion_tokens": 14518,
+    "total_tokens": 21224,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 9914
+      "reasoning_tokens": 14238
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 4324
+    "prompt_cache_miss_tokens": 4914
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
-        "found": true,
-        "evidence": "“My proof” is less formal than “derived” or “established.”"
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "There is a typo: > time-series econometircs Correct it to: > time-series econometrics"
+        "evidence": "Correct the spelling of “econometrics.”"
       },
       {
         "id": "A2",
@@ -52,8 +50,8 @@
       },
       {
         "id": "A3",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "That is a 0.05 reduction from a 0.20 baseline, which corresponds to a 25% reduction. The stated 33% figure does not follow from the numbers shown."
       },
       {
         "id": "S1",
@@ -63,12 +61,12 @@
       {
         "id": "S3",
         "found": true,
-        "evidence": "This combines too many unrelated achievements. Split it"
+        "evidence": "The current bullet hides it inside a long list of unrelated activities."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "This bullet is mathematically incorrect: ... Multiplying by 252 is a serious credibility problem"
+        "evidence": "Daily Sharpe is generally annualized using the square root of the number of periods, not the number itself."
       },
       {
         "id": "T3",
@@ -78,46 +76,17 @@
       {
         "id": "N1",
         "found": true,
-        "evidence": "The resume currently makes your most recent role—Assistant Store Manager—the most prominent item. A recruiter scanning for quant talent may initially see a retail operations candidate rather than a statistics Ph.D. with trading research experience."
+        "evidence": "A quantitative-research recruiter will see a current assistant-store-manager role above a highly relevant quant internship"
       },
       {
         "id": "N4",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "the experience section gives no evidence for some of these, especially Kafka and C++."
       }
     ],
     "coverage": true,
-    "suggestions": 17,
-    "rewrites": [
-      "Managed opening operations and a six-person team while maintaining weekly labor and inventory budgets; reduced unsold production from 12% to 7%.",
-      "Standardized daily-to-annual performance reporting using a 252-trading-day convention and square-root-of-time Sharpe annualization.",
-      "Statistics Ph.D. candidate with quantitative research experience in market microstructure, volatility forecasting, time-series modeling, and statistical learning. Built and evaluated transaction-cost-aware signals for liquid index futures, including point-in-time feature pipelines and out-of-sample validation across 30 indices. Proficient in Python, R, SQL, PyTorch, and statistical modeling.",
-      "Ridgeway University | Ph.D. Candidate in Statistics\nSep 2021 – Expected May 2026\n- Research focus: statistical learning, high-dimensional inference, volatility forecasting, and time-series methods.\n- Dissertation work examines [specific problem], using [methods] to [research objective].",
-      "Volatility Forecasting Study | Doctoral Research Project",
-      "- Developed a short-horizon order-book imbalance signal for liquid index futures that improved the desk portfolio’s out-of-sample Sharpe by 0.40 over an 18-month backtest after transaction costs.",
-      "- Developed a short-horizon order-book imbalance signal for liquid index futures with a 0.40 out-of-sample Sharpe contribution over 18 months after transaction costs.",
-      "- Reduced signal turnover from 34% to 21% using a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by one-third.",
-      "- Compared forecast errors against a nested HAR-RV benchmark across 30 indices using Diebold–Mariano tests; report statistical significance or confidence levels if available.",
-      "- Confirmed lower forecast loss than the nested HAR-RV baseline across 30 indices using Diebold–Mariano tests, with significance at [threshold] for [number] indices.",
-      "- Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted in two subsequent projects.",
-      "- Built a point-in-time feature store for 120 microstructure features across six venues, deduplicating late prints and versioning schemas to prevent look-ahead leakage; reused in two subsequent projects.",
-      "- Documented backtest assumptions, transaction-cost modeling, validation procedures, and known failure regimes in the desk research wiki.",
-      "- Built a reproducible cluster-based simulation pipeline that reduced a 2,000-run Monte Carlo study from 3 days to 5 hours through parallel execution and seed-controlled experiments.",
-      "- Derived a variance bound for a sparse regression estimator that improves the prior bound by a logarithmic factor; result appears in Section 3 of a manuscript under review at the Journal of the American Statistical Association.",
-      "- Released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.",
-      "- Maintained the lab’s shared cluster and organized its weekly statistical learning reading group.",
-      "- Developed a temporal convolutional model for realized-volatility forecasting, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.",
-      "- Reduced forecast error from 0.20 to 0.15 and improved directional hit rate from 52% to 58% using realized-volatility features and an asymmetric loss.",
-      "- Evaluated robustness across rolling time splits and documented feature availability to avoid look-ahead bias.",
-      "- Reduced out-of-sample RMSE from 0.20 to 0.15...",
-      "- Placed 41st of 2,900 teams—top 2%—using a gradient-boosting ensemble over 300 engineered features.",
-      "- Eliminated a 0.02 local-validation/leaderboard gap by switching to time-grouped cross-validation, reducing validation leakage.",
-      "- Built a permutation-importance feature-selection pipeline that reduced 900 candidate features to 300 without lowering validation performance.",
-      "time-series econometrics",
-      "Programming: Python, R, SQL, C++\nMachine Learning: PyTorch, gradient boosting, feature selection, temporal convolutional networks\nStatistics: Time-series econometrics, volatility modeling, Bayesian inference, statistical learning, high-dimensional inference\nQuantitative Finance: Market microstructure, order-book signals, transaction-cost modeling, backtesting, realized volatility\nData/Infrastructure: Kafka, Linux, Git, distributed computing, reproducible simulation",
-      "PUBLICATIONS\nPatel, M. et al. “[Paper title].” Under review at the Journal of the American Statistical Association.",
-      "- Open-source R package for high-dimensional covariance estimation; 3,000 downloads in first year."
-    ],
+    "suggestions": 80,
+    "rewrites": [],
     "falsePositives": []
   }
 }

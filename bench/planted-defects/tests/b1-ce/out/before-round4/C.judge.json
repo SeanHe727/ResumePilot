@@ -1,0 +1,114 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/C.md",
+  "recall": 7,
+  "found": [
+    "W5",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "T3",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 27,
+  "words": 1152,
+  "quotes": 3,
+  "grounded": 1,
+  "rewrites": 18,
+  "inventedNumbers": [
+    "33"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3423,
+    "completion_tokens": 8082,
+    "total_tokens": 11505,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7322
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3423
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "It contains no concrete action, scope, or result."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "71% to 83% is an increase of 12 percentage points, not simply “12%.”"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "900 ms to 600 ms is a 33% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Current version combines: 30-service migration, logging-library rewrite, onboarding two hires, weekend on-call, backlog elimination. Split or prioritize..."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "GRPO typically relies on multiple outputs in a group to calculate relative advantages. A technical reviewer may challenge this. Clarify what “single rollout” means..."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Dynamic batching usually improves throughput or concurrent-request performance, not isolated single-request latency."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Put experience in reverse chronological order... Your internship is more recent than Eastern Robotics..."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 27,
+    "rewrites": [
+      "Reduced p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.",
+      "Increased benchmark task-completion rate by 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with partial context.",
+      "Reduced p95 edge-inference latency 40% by deploying an INT8-optimized engine and tuning the serving pipeline.",
+      "Eliminated nightly processing backlogs that delayed morning dispatch by migrating 30 robot-fleet services from cron jobs to an event-driven queue.",
+      "Rewrote the shared logging library and onboarded two engineers to the new event-driven architecture.",
+      "Reduced the diagnostic-case backlog 68% in the first quarter after launch by building an ML triage path that screened 800+ sensor signals per case.",
+      "Improved held-out diagnostic accuracy from 71% to 79% across 1,200 cases by fine-tuning a domain adapter on validated tool-use trajectories.",
+      "Authored abstention and escalation procedures adopted as the on-call review team’s runbook.",
+      "Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent performance regressions.",
+      "Shortened perception-model release cycles from two weeks to three days by adding automated regression checks to the CI pipeline.",
+      "Eliminated nightly backlogs that delayed morning dispatch by migrating 30 robot-fleet services from cron jobs to an event-driven queue.",
+      "Owned diagnostics monitoring and on-call operations across two major releases.",
+      "Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.",
+      "Validated evaluator sensitivity to injected degradation, achieving Kendall’s τ of 0.89 across 400+ report-level trials involving removed citations, sources, and claims.",
+      "Identified three pipeline defects in stability, source handling, and parameter propagation using layered instrumentation; all three were fixed upstream.",
+      "**Languages:** Python, TypeScript, SQL, Bash",
+      "**ML/LLM:** PyTorch, LoRA, RAG, LangGraph, GRPO, agent evaluation",
+      "**Infrastructure & Tools:** Kubernetes, Git, CI/CD"
+    ],
+    "falsePositives": []
+  }
+}
