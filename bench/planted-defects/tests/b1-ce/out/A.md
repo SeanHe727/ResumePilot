@@ -5,159 +5,157 @@ hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'i
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
 I reviewed the full resume:
 
-- **Format/ATS:** reviewed; it parses cleanly as a one-page, 521-word resume with no layout blockers.
-- **Content:** all 4 experience/project entries reviewed.
-- **Wording:** all 4 experience/project entries reviewed.
-- **Narrative:** reviewed.
-- **Job-description match:** not reviewed because no posting was provided.
-- **Education:** present, but there are no bullets requiring content review.
+- **Format/ATS:** format review completed; it is one page, parses cleanly, and has no layout blockers.
+- **Content and wording:** all four entries with bullets reviewed:
+  - Eastern Robotics Co.
+  - Mobility Systems Company
+  - Agent Runtime Suite
+  - Research-Agent Evaluation Framework
+- **Narrative:** reviewed across all six entries.
+- **Job-description match:** not run because no posting was provided.
 
 ### Changes to make first
 
-1. **Reverse the Experience section order**
-   - Put **Mobility Systems Company — Machine Learning Engineering Intern** before **Eastern Robotics Co. — Junior Software Engineer**.
-   - The current order places the older role above the newer one.
+1. **Correct the Agent Runtime Suite arithmetic**
+   - The reduction from **900 ms to 600 ms** is approximately **33%**, not 50%.
+   - The increase from **71% to 83%** should be described as a **12-percentage-point increase**, unless you intend to state the relative percentage increase.
 
-2. **Correct the Agent Runtime Suite figures**
-   - The change from **900 ms to 600 ms** is approximately a **33% reduction**, not 50%.
-   - The change from **71% to 83%** is a **12-percentage-point increase**. Clarify whether you intend percentage points or relative percentage growth.
+2. **Fix the GRPO bullet**
+   - The content review flagged the claim that using **one rollout per prompt** “stabilised GRPO training” as technically questionable for standard GRPO.
+   - Either substantiate the specific training behavior and result or remove the stabilization claim.
 
-3. **Strengthen or remove the first Agent Runtime Suite bullet**
-   - “Drove adoption,” “accelerating delivery,” and “improving outcomes for downstream teams” are not tied to a specific measured result.
-   - Add a concrete adoption or delivery result if you have one; otherwise, make the bullet more specific or remove it.
+3. **Make unsupported outcomes measurable**
+   - The opening Agent Runtime Suite bullet claims adoption, faster delivery, and improved downstream outcomes without evidence.
+   - Replace those general outcomes with the specific adoption, delivery, or team result you can document.
 
-4. **Separate overloaded Eastern Robotics claims**
-   - The bullet covering the shared logging library, onboarding, and weekend on-call combines several unrelated responsibilities.
-   - The reviewers also found overlap between the diagnostics-dashboard bullet and the on-call responsibility. Clarify the distinct accomplishment of each or consolidate them.
+4. **Strengthen the first Robotics bullet**
+   - It currently describes ownership of monitoring dashboards and on-call work but does not state what changed as a result.
+   - Add the operational effect, or use the space for a more consequential contribution.
 
-5. **Clarify causal claims in the ML internship**
-   - The latency bullets attribute improvements directly to particular methods without enough measurement context.
-   - Add before-and-after latency values or comparison conditions where available.
-   - The GRPO-training bullet claims improved stability but provides no stability measure.
-   - Either provide the observed stability result or avoid presenting the training change as a demonstrated improvement.
+5. **Separate or clarify overlapping responsibilities**
+   - The Robotics entry contains overlapping on-call claims.
+   - The Mobility Systems entry has two highly technical training bullets whose relationship is unclear.
+   - Explain whether the Research-Agent project ran concurrently with the Mobility internship and whether the Agent Runtime Suite was part of your master’s work, independent work, or employment.
 
-6. **Clarify the project overlap**
-   - The Research-Agent Evaluation Framework ran from February–July 2025 while the internship ran from October 2024–May 2025.
-   - If the project was academic, part-time, open source, or otherwise concurrent, label that relationship so the timeline is clear.
+6. **Reorder entries chronologically**
+   - Within **Experience**, list Mobility Systems before Eastern Robotics.
+   - Within **Projects**, list Agent Runtime Suite before Research-Agent Evaluation Framework.
+   - If you are targeting agent/LLM roles, the narrative review found that placing Projects before Experience may foreground the most relevant work.
 
-7. **Check the Skills section against the evidence**
-   - The narrative review found no supporting evidence in the entries for **SQL, LoRA, LangGraph, RAG, or Kubernetes**.
-   - Either add supporting experience where accurate or remove skills that are not demonstrated elsewhere.
+7. **Review date gaps**
+   - The resume leaves approximately two months after the bachelor’s degree, three months between the Robotics role and internship, and one month between the two projects unexplained.
+   - Add context only if those periods involved relevant work, study, relocation, or another useful explanation.
 
-8. **Improve the weakest quantified claims**
-   - For the internship backlog result, include the starting backlog or comparison period if available.
-   - For the evaluation framework, explain what the **0.89 Kendall correlation** was measuring and how the injected degradation was controlled.
-   - For the defect-fixing bullet, clarify what the instrumentation revealed and what “fixed upstream” means.
+8. **Align the skills section with the evidence**
+   - The narrative review identified **LangGraph** as listed but not demonstrated in any entry.
+   - Either show where you used it or remove it from Skills.
 
-The detailed findings and supporting quotes are available in the full report. No job-description comparison was performed; provide the target posting if you want that review.
+The detailed report contains the bullet-level findings and reasoning. No revisions were applied to the resume.
 
 > /report
 # Review: resume.pdf
 
-**82/100** — format 100 · content 68 · wording 84 · narrative 78
+**86/100** — format 100 · content 79 · wording 82 · narrative 78
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **The latency percentage is arithmetically incorrect.**
-   > Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.
-   The reduction from 900 ms to 600 ms is 300 ms, or 33.3% of the 900 ms baseline, not 50%. A technical reader can check this immediately, so the error may make the other measurements in the résumé less credible.
-   **How to change it:** Replace "a 50% reduction" with "a 33.3% reduction" or "a 300 ms reduction"; keep the stated endpoint values if they are correct.
-2. **The task-completion change is labeled as a relative percentage when it is a percentage-point increase.**
-   > Raised the runtime’s task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.
-   The stated endpoints rise from 71% to 83%, which is 12 percentage points but approximately a 16.9% relative increase. Leaving "by 12%" beside those endpoints can make a technical reader think the calculation is wrong or that the benchmark is being presented imprecisely.
-   **How to change it:** Replace "by 12%" with "by 12 percentage points"; alternatively, write the relative result as "+16.9% relative".
-3. **The single-rollout GRPO claim is technically wrong or unsupported and lacks a stability measure.**
+1. **The GRPO bullet makes a technically incorrect claim: standard GRPO cannot produce a within-prompt learning signal from exactly one rollout.**
    > Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.
-   Standard GRPO needs within-prompt groups to form relative advantages; with one scored trajectory, that comparison collapses or requires an unstated alternative estimator and baseline. The line also gives no definition of “stabilised,” so a reader cannot tell whether loss variance, failed updates, or reward consistency improved.
-   **How to change it:** Replace the claimed mechanism with the actual stabilization method and add [stability metric] versus [prior configuration]. If single-rollout sampling was used, identify the alternative baseline, normalization, and training method; otherwise correct the rollout count. Remove "so each update used exactly one scored trajectory" because it repeats the first clause.
+   GRPO compares multiple rollouts for the same prompt to compute a relative reward or normalized advantage; with one rollout, its reward equals the group mean, so there is no within-prompt comparison, and normalization may be undefined. Calling this standard GRPO could be caught by a technical interviewer and undermine confidence in the surrounding training claims.
+   **How to change it:** Remove the claim that single-rollout sampling stabilized GRPO, or replace it with the actual multi-rollout stabilization mechanism and measured result. If the objective truly used one rollout, identify it as [the actual alternative objective or baseline], not GRPO, and remove the redundant procedure wording.
+2. **The tool-call latency percentage is mathematically incorrect: falling from 900 ms to 600 ms is a 33.3% reduction, not 50%.**
+   > Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.
+   The decrease is 300 ms, and 300 divided by the original 900 ms is 33.3%; a 50% reduction would produce 450 ms. Leaving the error in a current project with quantitative claims can make the rest of the benchmark results less trustworthy.
+   **How to change it:** Replace "a 50% reduction" with "a 33.3% reduction" or remove the percentage. Because the project is current, change "Cut" to "Reduce" only if the improvement describes an ongoing responsibility.
+3. **The task-completion result should say that the rate rose by 12 percentage points, not by 12%.**
+   > Raised the runtime’s task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.
+   The endpoints move from 71% to 83%, which is a 12-percentage-point increase; expressed as relative growth, it is approximately 16.9%. Without the unit, a reader may interpret the claim as either relative growth or a percentage-point change and misjudge the improvement.
+   **How to change it:** Replace "by 12%" with "by 12 percentage points," retaining "from 71% to 83%." If the intended measure is relative growth instead, use "16.9% relative" and verify that interpretation; change "Raised" to "Raise" only if the work is ongoing.
+
+## Already working
+
+- s2:e0:b2: Provides a strong before-and-after release-cycle measure.
+- s2:e1:b1: The result comes before the technical detail, so the value is visible during a quick scan.
+- s3:e1:b0: Connects the contribution to a durable adoption outcome rather than merely stating that code was submitted.
 
 ## Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024
 
-- **The load-test wording incorrectly implies that tests directly maintained the 180 ms latency.** *(saves about 3 words)*
-  > Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.
-  Load tests expose regressions under representative load, but they do not by themselves keep production latency at a target. A technical reader will ask whether a deployment gate, monitoring alert, or remediation process actually controlled future latency.
-  **How to change it:** Replace "to keep it there" with "to detect latency regressions"; if a control prevented regressions, name it as [deployment gate or monitoring alert].
-- **The dashboard and on-call bullet describes responsibility without showing an operational result or concrete scale.** *(about 6 words to add; saves about 4 words)*
+- **The monitoring-dashboard bullet states ownership and release scope but does not show an operational result.** *(about 3 words to add)*
   > Owned the diagnostics service’s monitoring dashboards across two major releases and the on-call rotation that used them.
-  “Owned” and “the on-call rotation that used them” tell the reader what was assigned to you, but not whether the dashboards improved detection, resolution, or incident handling. With no metric or other anchor, the reader cannot judge the effectiveness or scale of the ownership, and the on-call responsibility repeats the later bullet.
-  **How to change it:** Replace the duty framing with the dashboard or operational change, add [reduction in detection or resolution time], [services or alerts covered], or [incidents handled], and retain the on-call detail only in the stronger supporting bullet rather than repeating it.
-- **The dashboard and fleet-migration bullets repeat on-call ownership and the longer fleet bullet chains too many secondary actions around its result.** *(saves about 8 words)*
+  A hiring reader can see that you were responsible for the dashboards and on-call process, but cannot tell whether they improved incident detection, response time, reliability, or another outcome. The two-release count shows duration or scope rather than the value of the work, so the bullet asks the reader to infer impact.
+  **How to change it:** Replace "Owned" with an action such as "Built and maintained," and add [the clearest operational result or checkable usage fact]. Keep "across two major releases" only if it supports that result, and change "the on-call rotation that used them" to "supporting the on-call rotation."
+- **The load tests are incorrectly described as maintaining the API at 180 ms.** *(no words)*
+  > Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.
+  Load tests measure performance under defined workloads and detect regressions; they do not control production latency. Saying they kept the latency at 180 ms assigns the tests an operational effect they cannot provide unless an explicit enforcement process connects them to deployment or operations.
+  **How to change it:** Replace "to keep it there" with "to detect latency regressions" or "to prevent latency regressions," making clear that the tests verify the improvement rather than maintain production latency.
+- **The fleet-migration bullet buries an unmeasured dispatch outcome beneath several secondary responsibilities.** *(saves about 8 words if secondary duties are removed)*
   > Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.
-  The résumé presents on-call responsibility in both the dashboard bullet and the fleet-migration bullet, which dilutes the strongest version of that ownership. The fleet bullet also places rewriting, onboarding, and weekend coverage in one clause, making the dispatch outcome harder to identify.
-  **How to change it:** Keep the strongest on-call statement in one bullet and make the other line support it with the operational result. Split or trim the secondary actions around the fleet migration, and move the dispatch outcome immediately after the migration result.
+  The reader can see the technical scope of migrating 30 services, but cannot judge how often or how severely the nightly backlogs had affected dispatch. The logging rewrite, onboarding, and on-call duties make the main migration result harder to scan, while the unmeasured outcome limits its credibility.
+  **How to change it:** Move the dispatch result immediately after "30 robot-fleet services" and add [the before-and-after backlog frequency, processing delay, or number of delayed dispatches]. Remove or separate the logging-library, onboarding, and weekend-on-call details unless one directly supports the measured result.
 
 ## Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 
-- **The end-to-end latency claim does not establish that GRPO caused the result and gives too little measurement context.** *(about 8 words to add; no words for the move)*
+- **The 5% latency result does not identify the workflow or workload being measured, and the method-first construction makes the result difficult to scan.** *(about 4 words to add)*
   > Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.
-  Serving configuration, batching, hardware, or software changes could explain a 5% latency difference, so a technical reader would need an ablation or controlled comparison before accepting the causal attribution. The relative figure alone also hides the actual latency scale and the workload or measurement window.
-  **How to change it:** Move "reduced end-to-end latency 5%" to the front, then either remove the GRPO attribution or add [controlled comparison or ablation result]. Add [latency before the change], [latency after the change], and [comparable workload or evaluation window], and distinguish this end-to-end result from the single-request edge-inference result in the adjacent bullet.
-- **The edge-inference latency claim lacks baseline and workload details, and “single-request” is ambiguous beside dynamic batching.** *(about 8 words to add)*
+  A reader cannot tell whether the comparison covers model execution, tool calls, preprocessing, or the complete diagnostic workflow, so the size and relevance of the improvement are unclear. Leading with a long list of rollout and reward details also delays the main achievement and obscures the subject of "reduced."
+  **How to change it:** Move the result to the front as "Reduced [the measured workflow] latency 5% using..." and replace "end-to-end" with [the exact workflow and workload]. Add [the before-and-after latency values] if available.
+- **The edge-inference latency bullet gives only a relative reduction and omits the before-and-after p95 values.** *(about 4 words to add)*
   > Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.
-  A p95 percentage is hard to interpret without before-and-after values and the request rate or concurrency used for both measurements. Dynamic batching can improve throughput under concurrent traffic but can add delay to an isolated request, so the current wording leaves the measurement condition unclear.
-  **How to change it:** Replace "single-request" with [the actual workload condition] and add [p95 before the change], [p95 after the change], and [request rate or concurrency]. State whether the result came from INT8, dynamic batching, or both.
-- **The pending-backlog percentage needs its starting count and comparison window.** *(about 6 words to add)*
+  The reader knows latency improved by 40% but cannot judge whether the starting system was materially slow or whether the resulting latency met a requirement. Absolute values under the same workload would make the performance claim more concrete and comparable.
+  **How to change it:** Add [the before-and-after p95 latency values in milliseconds, measured under the same edge-inference workload] after "40%."
+- **The feature-extraction phrase does not identify the technical approach behind the triage system.** *(about 2 words to add)*
   > Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.
-  The 68% figure identifies when it was observed but not the baseline used to calculate it. Without the initial and final counts, a recruiter cannot judge the operational scale or reproduce the result.
-  **How to change it:** Add [starting pending-case count] and the corresponding ending count, or at least the starting count, and name [comparison period] alongside "in the first quarter after launch."
-- **The runbook adoption claim shows implementation but not operational effect or scale.** *(about 5 words to add)*
-  > Documented the triage branch’s abstention rules and escalation paths for the on-call reviewers, who adopted them as the team’s runbook.
-  A reader can see that the reviewers accepted the abstention and escalation rules, but cannot tell whether triage became faster or more consistent or how broadly the runbook was used. Adoption alone is weaker evidence than an operational result, user count, usage period, or case volume.
-  **How to change it:** Add [measured operational outcome] if tracked; otherwise add [number of reviewers or team members], [period of use], or [number of cases handled under the runbook].
+  A hiring reader can tell that machine learning was involved, but cannot tell what you engineered or which technical decision produced the backlog reduction. The phrase therefore contributes little evidence for the technical depth of the system.
+  **How to change it:** Replace or qualify "ML-extracted features" with [the model or feature-extraction approach you implemented or used].
 
 ## Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
 
-- **The adoption and impact claim is too broad and has no measurable result.** *(about 8 words to add)*
+- **The adoption bullet uses vague benefit language without identifying what practices changed or how widely they were adopted.** *(about 6 words to add)*
   > Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.
-  “AI-first engineering practices” does not tell a hiring reader what was introduced, while “accelerating delivery and improving outcomes for downstream teams” does not identify a measurable change or its beneficiaries. The line therefore asserts broad ownership without showing what was implemented or how large the contribution was.
-  **How to change it:** Replace the broad label with [the specific practices introduced], and replace the vague outcome with [adoption count or rate] plus [delivery-time or downstream result]. Remove "improving outcomes for downstream teams" if no concrete result is available.
+  A recruiter cannot tell what "AI-first engineering practices" actually involved, whether delivery became faster, or what downstream teams changed. Without a reach or outcome measure, "Drove adoption" and "accelerating delivery" remain assertions rather than evidence of platform impact.
+  **How to change it:** Replace the generic benefit phrase with [the specific delivery, adoption, quality, or downstream-team outcome and its comparison], and add [the number of teams or engineers adopting the practices or a before-and-after delivery measure].
 
 ## Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
 
-- **The evaluator-correlation claim does not define either the degradation scale or the variable paired with the evaluator score.** *(about 10 words to add)*
+- **The Kendall correlation is overstated as proof that the evaluator tracks degradation, and the compared variables and resulting capability are not named.** *(about 6 words to add)*
   > Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.
-  A Kendall correlation is meaningful here only if the perturbations have an independently ordered severity and the other variable is clearly identified. Without a controlled baseline and defined degradation levels, the 0.89 figure may reflect arbitrary edits rather than evidence that the evaluator tracks quality loss.
-  **How to change it:** Name [the evaluator score] correlated with [the independently defined degradation level or quality score], and add [baseline report and defined degradation levels or perturbation protocol] for the removals.
-- **The upstream-contribution claims do not establish the verified adoption boundary or the integration and validation work.** *(about 8 words to add)*
-  > Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.
-  “Upstreamed” shows that code was contributed, but does not prove that the metrics are enabled in the maintained default benchmark for every release. The bullet also gives no evidence of how the metrics were integrated or tested, so the technical depth of the contribution is difficult to assess.
-  **How to change it:** Replace the broad adoption claim with [verified release, version, or number of releases] in which the metrics ran in the maintained default benchmark, and add [integration or test work used to validate the metrics].
-- **The defect-diagnosis wording is awkward and the upstream-fix claim does not show what improved.** *(about 6 words to add)*
+  A Kendall correlation of 0.89 supports a strong monotonic association between evaluator scores and the specified injected degradation, but does not establish accurate measurement, causation, or generalization beyond those perturbations. Without saying what rankings were compared or what evaluation capability the result enabled, the figure is difficult to interpret and its practical value remains unclear.
+  **How to change it:** Replace that phrase with "Observed a Kendall correlation of 0.89 between [the evaluator-score ranking and the injected-degradation ranking] across 400+ report-level trials," and add [the concrete evaluation capability or downstream decision this enabled]. Add "that" only if retaining the original sentence structure.
+- **The defect bullet measures findings but not the post-fix effect, and its passive wording hides whether you made the upstream fixes.** *(saves about 3 words if process wording is removed)*
   > Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.
-  Defects affect stability, sourcing, and parameter handling; they are not literally “in” those qualities. Saying they were “fixed upstream” also uses project jargon and tells the reader where the change went without showing whether a failing behavior was restored or a released version adopted it.
-  **How to change it:** Replace "structural pipeline defects in stability, sourcing and parameter handling" with "structural pipeline defects affecting stability, sourcing, and parameter handling," and replace "fixed upstream" with "fixed in the upstream project." Add [failing behavior or test that passed] or [released version containing the fixes].
+  The three defect areas show useful debugging scope, but the reader cannot judge whether the fixes reduced failures, changed pipeline behavior, or improved test results. "Each was fixed upstream" also leaves your contribution to the resolution ambiguous, while "with layered instrumentation" adds process detail without showing its value.
+  **How to change it:** Keep the three-defect count and named areas, remove "with layered instrumentation" unless it is essential, and replace "each was fixed upstream" with "upstreamed fixes for each" if you made the fixes. Add [the downstream behavior, failure reduction, or test result that changed after the fixes].
 
 ## Across the whole résumé
 
-- **Experience is not listed newest-first.** *(no words)*
+- **Experience is not in newest-first order: the 2024–2025 internship appears below the 2022–2024 software role.** *(no words)*
   > Aug 2022 - Jul 2024
-  Eastern Robotics Co. appears above the more recent Mobility Systems Company internship, so the reader encounters an older role before the later experience. That makes the career progression harder to scan and conflicts with the expected reverse-chronological structure.
-  **How to change it:** Move the Mobility Systems Company entry, dated Oct 2024–May 2025, above the Eastern Robotics Co. entry, dated Aug 2022–Jul 2024.
-- **The overlap between the internship and research project should be explained if both were concurrent work.** *(about 2 words to add)*
+  A reader scanning the document expects the most recent role first, so the current order makes the career progression appear to move backward. The older robotics role also leads attention away from the newer machine-learning experience.
+  **How to change it:** Move Mobility Systems Company, dated "Oct 2024 - May 2025," above Eastern Robotics Co. within Experience.
+- **The résumé does not explain the overlap between the Mobility Systems internship and the Research-Agent Evaluation Framework project.** *(about 3 words to add)*
   > Feb 2025 - Jul 2025
-  The dates show the Research-Agent Evaluation Framework project overlapping the Mobility Systems Company internship from February through May 2025. Without a label, a reader may wonder whether the dates are inaccurate or whether the project was part-time, academic, or open source alongside the internship.
-  **How to change it:** Add a short label such as [part-time], [academic], or [open source] to the Research-Agent Evaluation Framework entry if that accurately describes the concurrent work.
-- **The operational-outcome bullets need their results moved forward and quantified across the two roles.** *(about 8 words to add)*
-  > Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.
-  > Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.
-  “Removed the nightly backlogs that delayed morning dispatch” is buried after several unrelated actions, while the 68% pending-case reduction lacks its starting count and comparison period. A scanning reader can miss the stronger operational outcomes and cannot judge their scale.
-  **How to change it:** Move the dispatch outcome earlier in the Eastern Robotics bullet and add [number of backlog items], [dispatch-delay reduction], or [mornings no longer delayed]. Add [starting pending-case count] and [comparison period] to the Mobility Systems bullet.
+  The internship runs from October 2024 to May 2025 while the contributor project runs from February to July 2025, so a reader may wonder whether the project was part-time, academic, or dated inaccurately. Leaving the overlap unexplained creates uncertainty about the scope and timing of both experiences.
+  **How to change it:** Add [a brief part-time, academic, or concurrent-project explanation] to the project or correct the dates to reflect when the work actually occurred.
 
-## Set aside (7)
+## Set aside (16)
 
 Worth knowing, and not worth the space on this page:
 
-- s2:e0:b2: "shortened release cycles from 2 weeks to 3 days" gives the endpoints but not what the cycle-time measurement covers.
-- s2:e0:b3: "while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation" chains unrelated actions under one "while" clause and makes the primary accomplishment difficult to identify.
-- s3:e1:b1: "Showed the evaluator tracks injected degradation" is awkward because "tracks" can be read as a noun or as a present-tense verb; corrected form: "Demonstrated that the evaluator tracked injected degradation."
-- s3:e1:b2: "with layered instrumentation" does not identify what was instrumented or how the traces localized the defects.
-- whole resume, dates: Jun 2022 to Aug 2022: two months between the bachelor's degree and the first full-time role. (and 1 more like it)
-- skills: SQL — no experience or project bullet shows database querying or SQL development. (and 4 more like it)
-- s3:e0:b2: "their partial context" has an unclear antecedent because the nearest subject is "failed sub-agent calls" rather than the sub-agents supplying the context.
+- s2:e1:b3: "Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%" puts the result after a long list of methods. (and 1 more like it)
+- s2:e1:b5: "who adopted them as the team’s runbook" shows adoption but does not indicate how broadly or consistently it was used.
+- s3:e0:b0: "AI-first engineering practices" does not identify what you actually introduced or changed. (and 1 more like it)
+- s2:e0:b0: "the on-call rotation that used them" is indirect and makes the relationship between the dashboards and the rotation harder to scan; use "supporting the on-call rotation" instead.
+- s2:e0:b3: "while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation" strings together three secondary responsibilities, obscuring the migration's main point; separate the strongest supporting result or remove the less relevant duties.
+- s2:e1:b4: "so each update used exactly one scored trajectory" restates "sampling a single rollout per prompt" rather than adding a distinct result; delete it or replace it with a measured training outcome.
+- s3:e0:b0, s3:e0:b1, s3:e0:b2: "Drove" is past tense even though the role is current; use present tense, such as "Drive," unless this work has ended. (and 2 more like it)
+- s3:e1:b1: "Showed the evaluator tracks injected degradation" is missing "that" before the dependent clause, making the sentence read as though "the evaluator" is the object of "showed." Corrected form: "Showed that the evaluator tracks injected degradation..."
+- s3:e1:b2: "each was fixed upstream" uses passive voice and hides who performed the fixes; if the candidate made them, write "fixed each upstream" or "upstreamed fixes for each." (and 1 more like it)
+- whole resume, dates: Jun 2022–Aug 2022: approximately two months between the bachelor's degree and the first listed role; add a brief explanation only if there was a relevant activity. (and 2 more like it)
+- …and 6 more, in `/report --full`.
 
 
 > /report --full
-Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-e8e1f5a8.md.
+Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-019a02d2.md.
 

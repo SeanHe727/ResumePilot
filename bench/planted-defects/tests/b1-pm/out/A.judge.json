@@ -13,53 +13,55 @@
     "N5"
   ],
   "coverage": true,
-  "suggestions": 20,
-  "words": 2993,
-  "quotes": 23,
-  "grounded": 13,
-  "rewrites": 12,
+  "suggestions": 18,
+  "words": 2476,
+  "quotes": 17,
+  "grounded": 10,
+  "rewrites": 9,
   "inventedNumbers": [],
-  "falsePositives": [],
+  "falsePositives": [
+    "s2:e0:b0 and s2:e0:b4 repeat: Both describe the redesigned merchant flow and its evaluation; fold the comparison method from b4 into the stronger result in b0 or delete b4 as a standalone line."
+  ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5826,
-    "completion_tokens": 12119,
-    "total_tokens": 17945,
+    "prompt_tokens": 5095,
+    "completion_tokens": 11287,
+    "total_tokens": 16382,
     "prompt_tokens_details": {
       "cached_tokens": 1664
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11574
+      "reasoning_tokens": 10712
     },
     "prompt_cache_hit_tokens": 1664,
-    "prompt_cache_miss_tokens": 4162
+    "prompt_cache_miss_tokens": 3431
   },
   "verdict": {
     "defects": [
       {
         "id": "W3",
         "found": true,
-        "evidence": "\"Prepares\" is also present tense for a role that ended in 2023"
+        "evidence": "The line uses the wrong tense for an ended role: 'prepares' must be past tense."
       },
       {
         "id": "W4",
         "found": true,
-        "evidence": "the hospital intake bullet hides ownership behind passive voice"
+        "evidence": "Passive wording makes it unclear that the candidate performed the mapping and redesign"
       },
       {
         "id": "A1",
         "found": true,
-        "evidence": "cannot tell whether 35% means a relative increase or a percentage-point change"
+        "evidence": "The reader also cannot tell whether 35% means relative growth or percentage-point growth"
       },
       {
         "id": "A4",
         "found": true,
-        "evidence": "The final practicum bullet incorrectly assigns Harbor's merchant-onboarding result to a hospital project and duplicates the Harbor entry."
+        "evidence": "The onboarding result is duplicated or assigned to the wrong project"
       },
       {
         "id": "S2",
         "found": true,
-        "evidence": "The outpatient-scheduling bullet describes stakeholder activity without stating what changed or what result it produced."
+        "evidence": "The scheduling bullet states meeting activity but not the scheduling change or measurable result produced"
       },
       {
         "id": "S4",
@@ -69,40 +71,39 @@
       {
         "id": "T2",
         "found": true,
-        "evidence": "state that the opt-in comparison was observational unless you have a controlled evaluation"
+        "evidence": "The opt-in comparison is confounded"
       },
       {
         "id": "T4",
         "found": true,
-        "evidence": "The late-delivery line incorrectly presents a reporting-definition change as an operational improvement."
+        "evidence": "The late-delivery line incorrectly presents a KPI-definition change as an improvement"
       },
       {
         "id": "N3",
         "found": true,
-        "evidence": "The résumé leaves an unexplained gap from June 2018 to March 2019."
+        "evidence": "eight months with no study or work listed after the B.A. and before the Crestline Logistics role"
       },
       {
         "id": "N5",
         "found": true,
-        "evidence": "Delete \"Date of birth: 2 Nov 1996 | Nationality: American.\""
+        "evidence": "Do not add personal details such as date of birth or nationality"
       }
     ],
     "coverage": true,
-    "suggestions": 20,
+    "suggestions": 18,
     "rewrites": [
-      "Reduced the reported late-delivery rate",
-      "after adding pickup reminders",
-      "after interviewing 60 users who reported missing pickup windows.",
-      "characterize",
-      "Cut warehouse pick errors by 30%",
-      "sales and operations planning (S&OP)",
+      "Reduced the adjusted late-delivery rate from 11% to 7% after excluding weather-delayed shipments",
       "prepared",
-      "Led weekly sessions",
+      "Increased weekly active users from 400 to 1,150 after adding pickup reminders",
+      "Implemented a volunteer shift system",
       "Mapped patient intake at 4 clinics and shortened the intake form",
-      "across two dining halls",
-      "otherwise discarded",
-      "reducing staff coverage needs by [the staff coverage hours or gaps eliminated each week]"
+      "Led",
+      "Cut warehouse pick errors by 30%",
+      "the time it took a new merchant to receive a first payment",
+      "across participating merchants"
     ],
-    "falsePositives": []
+    "falsePositives": [
+      "s2:e0:b0 and s2:e0:b4 repeat: Both describe the redesigned merchant flow and its evaluation; fold the comparison method from b4 into the stronger result in b0 or delete b4 as a standalone line."
+    ]
   }
 }
