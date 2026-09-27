@@ -291,9 +291,9 @@ The resume has unusually strong quantified impact for an early-career candidate.
 
 ## What already works
 
-- s1:e0:b1: Provides a strong before-and-after performance measure.
-- s1:e1:b1: Provides an explicit before-and-after result.
-- “Raised diagnostic accuracy on 1,200 held-out…”: Uses a strong statistical result instead of an unsupported quality claim.
+- “Reduced p95 API latency from 420…”: Provides a strong before-and-after performance measure.
+- “Raised diagnostic accuracy on 1,200 held-out…”: Provides an explicit before-and-after result.
+- “Showed the evaluator tracks injected degradation…”: Uses a strong statistical result instead of an unsupported quality claim.
 
 ## Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 
@@ -339,9 +339,9 @@ The resume has unusually strong quantified impact for an early-career candidate.
 
 ## Lower priority (3)
 
-- s1:e0:b0, s1:e0:b1, s1:e0:b2, s1:e0:b3: "Owned" frames the work as a duty rather than naming what was built, improved, or operated. (and 5 more like it)
-- “Maintained the CI pipeline for the…”, “Raised diagnostic accuracy on 1,200 held-out…”, “Cut p95 latency of single-request edge…”: “Raised the runtime’s task-completion rate by 12%” is ambiguous alongside “from 71% to 83%.” (and 5 more like it)
-- “Owned the diagnostics service’s monitoring dashboards…”, “Reduced p95 API latency from 420…”, “Maintained the CI pipeline for the…”, s1:e1:b0, s1:e1:b2, s1:e1:b4: "Accelerating delivery and improving outcomes for downstream teams" makes broad claims without stating the specific result or measurement; replace it with a concrete outcome. (and 5 more like it)
+- “Owned the diagnostics service’s monitoring dashboards…”, “Reduced p95 API latency from 420…”, “Maintained the CI pipeline for the…”, “Migrated 30 robot-fleet services from cron…”: "Owned" frames the work as a duty rather than naming what was built, improved, or operated. (and 5 more like it)
+- “Raised the runtime’s task-completion rate by…”, “Showed the evaluator tracks injected degradation…”, “Traced 3 structural pipeline defects in…”: “Raised the runtime’s task-completion rate by 12%” is ambiguous alongside “from 71% to 83%.” (and 5 more like it)
+- “Drove adoption of AI-first engineering practices…”, “Cut p95 tool-call latency from 900…”, “Raised the runtime’s task-completion rate by…”, “Built a diagnostics triage branch for…”, “Cut p95 latency of single-request edge…”, “Stabilised GRPO training on sparse rewards…”: "Accelerating delivery and improving outcomes for downstream teams" makes broad claims without stating the specific result or measurement; replace it with a concrete outcome. (and 5 more like it)
 
 ## Reviewer 3
 
