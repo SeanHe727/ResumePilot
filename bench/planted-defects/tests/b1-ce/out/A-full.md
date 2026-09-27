@@ -1,113 +1,178 @@
 # Full review: resume.pdf
 
-**81/100** — format 85 · content 79 · wording 80 · narrative 82
+**84/100** — format 100 · content 74 · wording 81 · narrative 82
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **The résumé makes an unsupported causal claim for the backlog reduction, attributes single-request latency improvement to dynamic batching, and reports the two Agent Runtime percentage changes incorrectly.**
-   > Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch.
-   > Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.
+1. **The claim that reducing latency from 900 ms to 600 ms is a 50% reduction is mathematically wrong.**
    > Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.
+   The reduction is 300 ms, which is 33.3% of the original 900 ms. A 50% reduction from 900 ms would produce 450 ms, so the incorrect percentage can make the reader question the reliability of the resume's other metrics.
+   **How to change it:** Replace "a 50% reduction" with "a 33.3% reduction"; alternatively, remove the percentage.
+2. **The resume reports the 900 ms-to-600 ms latency change as a 50% reduction even though the figures show a 33.3% reduction.**
+   > from 900 ms to 600 ms
+   The inconsistency is visible both within the bullet and across the resume's presentation of quantitative results. A wrong percentage can undermine confidence in otherwise strong performance metrics, especially for a technical reader checking the arithmetic.
+   **How to change it:** Change "50%" to "33.3%" or revise the latency figures so that they support the stated percentage.
+3. **The increase from 71% to 83% is 12 percentage points, not 12%.**
    > Raised the runtime’s task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.
-   A before-and-after backlog change does not show that the triage branch caused the reduction, and dynamic batching primarily improves concurrent throughput rather than single-request latency. Also, 900 ms to 600 ms is a 33.3% reduction, while 71% to 83% is a 12-percentage-point increase, not a 12% relative increase. These errors make otherwise strong quantitative claims look unreliable.
-   **How to change it:** Change the backlog result to "associated with a 68% reduction" unless the candidate has [controlled rollout or comparison evidence supporting causation]. Attribute the 40% single-request latency reduction to the INT8 engine only if [the measured experiment identifies it as the cause], and describe dynamic batching as a throughput optimization. Replace "a 50% reduction" with "a 33.3% reduction" and "by 12%" with "by 12 percentage points".
+   The absolute change is 12 percentage points, while the relative increase is approximately 16.9%. Using the wrong form makes the achievement mathematically inconsistent and can distract a technical reader from the strong benchmark result.
+   **How to change it:** Replace "by 12%" with "by 12 percentage points"; if a relative increase is intended, use approximately "17%" instead.
 
 ## Already working
 
-- s1:e0:b1: Provides a strong before-and-after performance measure.
-- s1:e1:b1: Provides an explicit before-and-after result.
-- s2:e1:b1: Uses a strong statistical result instead of an unsupported quality claim.
+- s2:e0:b1: The from-and-to p95 figures make the performance improvement immediately credible and interpretable.
+- s2:e0:b2: The bullet connects a concrete engineering intervention to a clear release-process outcome.
+- s2:e1:b0: Leads with a concrete system contribution and a clear operational outcome.
+
+## Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024
+
+### The diagnostics-dashboard line states ownership and scope but not the operational result or the technical work that produced it.
+
+> monitoring dashboards
+
+A reader can see the assignment but cannot tell whether monitoring or on-call work improved incident detection, response time, reliability, or another outcome. "Across two major releases" measures duration of responsibility rather than contribution, while the dashboard and rotation wording gives little evidence of how the system was built or operated.
+
+**How to change it:** Replace "Owned" with a concrete action such as "Built" or "Managed," state the on-call work directly, and add [telemetry, alerting, log aggregation, or incident-triage mechanism] plus [specific incident, detection, response, or reliability improvement].
+
+*raised by content, wording · costs about 10 words to add*
+
+### The sentence makes the event-queue migration, logging rewrite, onboarding, and on-call work collectively appear to have removed the nightly backlogs.
+
+> which removed the nightly backlogs
+
+A scanning reader may not know which engineering action produced the dispatch improvement. The strongest operational result is therefore separated from the migration that appears most directly connected to it, weakening the line's cause-and-effect evidence.
+
+**How to change it:** Move "which removed the nightly backlogs that delayed morning dispatch" immediately after the event-queue migration, then keep the logging, onboarding, and on-call details afterward if they must remain.
+
+*raised by content, wording · costs no words*
+
+### The operational improvements in both backlog claims lack a baseline or endpoint that shows their magnitude.
+
+> removed the nightly backlogs
+
+The reader can see the direction of improvement but cannot judge how large the nightly backlog was or what the 68% pending-case reduction meant in practice. The first-quarter timeframe helps, but counts before and after the changes would make both results more concrete.
+
+**How to change it:** Add [number of queued jobs or dispatch-delay frequency before and after the migration] and add [backlog count before launch] and [backlog count after the first quarter] to the 68% claim.
+
+*raised by content · costs about 8 words to add*
 
 ## Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 
-### The line claims that single-rollout sampling stabilized sparse-reward GRPO training, but that sampling removes the within-prompt comparison signal and no observable stability result is given.
+### The statement that single-rollout sampling stabilised GRPO training is technically incorrect as written.
+
+> a single rollout per prompt
+
+Standard GRPO computes relative advantages by comparing multiple completions for the same prompt. With one rollout, its reward equals the group mean, producing a zero relative advantage and no useful GRPO learning signal; singleton sampling therefore cannot, by itself, stabilise GRPO training.
+
+**How to change it:** State that training used [multiple rollouts per prompt], or specify the [additional baseline, reward signal, or alternative policy-gradient method] that made single-rollout updates valid.
+
+*raised by content · costs about 3 words to add*
+
+### The 5% latency result is buried after dense method details and does not identify the affected end-to-end path or its baseline and endpoint.
+
+> reduced end-to-end latency 5%
+
+A scanning reader may miss the only outcome in the bullet. Without knowing whether the measurement covers inference, tool use, evaluation, or another workflow, and without an absolute before-and-after value, the operational meaning of 5% is difficult to judge.
+
+**How to change it:** Move the latency result to the opening, name [what end-to-end latency measured], and add [baseline end-to-end latency] and [resulting end-to-end latency]. Keep the rollout, reward, and GRPO details after the result.
+
+*raised by content, wording · costs about 6 words to add*
+
+### The claim that GRPO training was stabilised gives no measured training outcome, and the single-rollout setup describes the method rather than proving the effect.
 
 > Stabilised GRPO training
 
-GRPO uses relative comparisons among rollouts to form a useful advantage signal; using one scored trajectory per prompt generally increases update variance rather than stabilizing training. A reader also cannot tell whether stability meant fewer failed updates, lower reward variance or more reliable convergence, so the implementation detail does not establish the claimed benefit.
+A reader cannot tell whether stability meant fewer failed runs, lower reward variance, faster convergence, or another observable change. Without a comparison against the prior setup, the claimed improvement has no evidence by which its scale can be judged.
 
-**How to change it:** Do not attribute stabilization to single-rollout sampling alone. State that each update used one scored trajectory, and add [the external baseline or other variance-reduction mechanism] plus [the measured stability outcome against the prior setup].
+**How to change it:** Replace or supplement "Stabilised" with [stability measure or training outcome] compared with [prior sampling setup or baseline].
 
-*raised by content · costs about 8 words*
+*raised by content · costs about 6 words to add*
+
+## Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
+
+### The claim that reducing latency from 900 ms to 600 ms is a 50% reduction is mathematically wrong.
+
+> a 50% reduction
+
+The reduction is 300 ms, which is 33.3% of the original 900 ms. A 50% reduction from 900 ms would produce 450 ms, so the incorrect percentage can make the reader question the reliability of the resume's other metrics.
+
+**How to change it:** Replace "a 50% reduction" with "a 33.3% reduction"; alternatively, remove the percentage.
+
+*raised by content, wording · costs no words*
+
+### The increase from 71% to 83% is 12 percentage points, not 12%.
+
+> by 12%
+
+The absolute change is 12 percentage points, while the relative increase is approximately 16.9%. Using the wrong form makes the achievement mathematically inconsistent and can distract a technical reader from the strong benchmark result.
+
+**How to change it:** Replace "by 12%" with "by 12 percentage points"; if a relative increase is intended, use approximately "17%" instead.
+
+*raised by content, wording · costs no words*
+
+### The line uses broad language for the work, its outcome, and its scale without identifying a concrete engineering change or measurement.
+
+> AI-first engineering practices
+
+A reader cannot tell what "AI-first engineering practices" involved or whether delivery became faster, more reliable, or easier for downstream teams. Without an adoption figure, baseline, or specific result, "Drove adoption" reads more like a claim of influence than evidence of platform engineering impact.
+
+**How to change it:** Replace the broad method and outcome with [specific platform capability or workflow] and [delivery or downstream-team result], then add [adoption measure or before-and-after metric].
+
+*raised by content, wording · costs about 8 words to add*
 
 ## Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
 
-### The line claims that three defects were fixed upstream without evidence that upstream changes and regression validation confirmed the fixes, and it does not explain how the instrumentation localized them.
+### The metrics contribution does not explain how the eight metrics were implemented or integrated.
 
-> each was fixed upstream
+> 8 citation and faithfulness metrics
 
-Tracing defects to modules shows localization, not that each defect was fixed. A hiring reader needs evidence of implemented upstream changes followed by regression testing or repeated instrumentation showing that the original failures no longer occur.
+The default-benchmark outcome shows sustained adoption, but a reader still cannot distinguish substantive metric development or adaptation from simply submitting changes. One technical implementation detail would make the contribution more credible without weakening the clear adoption result.
 
-**How to change it:** Keep the three defect areas and module tracing, add [the specific layered-instrumentation step that localized them], and add [evidence of the upstream fixes and regression validation].
+**How to change it:** After identifying the eight metrics, add [how the metrics were implemented, adapted, validated, or integrated].
 
-*raised by content · costs about 8 words*
-
-### The citation and faithfulness metrics contribution does not show how the metrics were integrated or validated.
-
-> Upstreamed 8 citation and faithfulness metrics
-
-The count and default-benchmark adoption show reach, but not the technical or evaluation work that made the metrics usable. A recruiter may therefore see an upstream contribution without being able to judge the candidate's personal implementation skill.
-
-**How to change it:** Add [the single most telling integration or validation step that made the metrics run in the default benchmark].
-
-*raised by content · costs about 6 words*
+*raised by content · costs about 5 words to add*
 
 ## Across the whole résumé
 
-### The résumé makes an unsupported causal claim for the backlog reduction, attributes single-request latency improvement to dynamic batching, and reports the two Agent Runtime percentage changes incorrectly.
-
-> cutting the pending-case backlog 68%
-
-A before-and-after backlog change does not show that the triage branch caused the reduction, and dynamic batching primarily improves concurrent throughput rather than single-request latency. Also, 900 ms to 600 ms is a 33.3% reduction, while 71% to 83% is a 12-percentage-point increase, not a 12% relative increase. These errors make otherwise strong quantitative claims look unreliable.
-
-**How to change it:** Change the backlog result to "associated with a 68% reduction" unless the candidate has [controlled rollout or comparison evidence supporting causation]. Attribute the 40% single-request latency reduction to the INT8 engine only if [the measured experiment identifies it as the cause], and describe dynamic batching as a throughput optimization. Replace "a 50% reduction" with "a 33.3% reduction" and "by 12%" with "by 12 percentage points".
-
-*raised by content, narrative · costs about 8 words*
-
-### The timeline contains two unexplained one-month gaps and three unexplained overlaps between the master's program, internship, contributor project and current project.
-
-> Sep 2024 - Expected Jun 2026
-
-A reader cannot tell whether the gaps reflect ordinary transitions or missing experience. The overlaps also leave open whether the work was part-time, academic, completed during leave, or accidentally dated, which can create doubts about the timeline's accuracy.
-
-**How to change it:** Add [the reason for the Jun 2022–Aug 2022 gap] and [the reason for the Jul 2024–Sep 2024 gap]. Add part-time, academic, leave or other accurate context to the overlapping entries, or revise the dates if they are not accurate.
-
-*raised by narrative · costs about 10 words*
-
-### Experience is not listed newest-first.
+### The Experience entries are not ordered newest-first.
 
 > Eastern Robotics Co. | Junior Software Engineer
 
-Eastern Robotics appears before the more recent Mobility Systems internship, so the reader encounters older software work before the résumé's newer ML and agent-systems direction. That weakens the first impression of current relevance.
+Eastern Robotics Co. is listed before Mobility Systems Company even though the internship ran from October 2024 to May 2025 and the robotics role ended in July 2024. A recruiter scanning from the top may therefore miss the more recent experience or read the chronology incorrectly.
 
-**How to change it:** Move the Mobility Systems Company entry above Eastern Robotics Co. in EXPERIENCE.
+**How to change it:** Move the Mobility Systems Company entry above Eastern Robotics Co. within Experience.
 
-*raised by file, narrative · costs no words*
+*raised by narrative · costs no words*
 
-### Several results are buried after long method lists or attached through ambiguous clauses, weakening scan order across the résumé.
+### The resume reports the 900 ms-to-600 ms latency change as a 50% reduction even though the figures show a 33.3% reduction.
 
-> Using grouped tool-use rollouts
+> from 900 ms to 600 ms
 
-A scanning reader may stop before reaching the measurable result when a bullet opens with implementation details. In the robotics and evaluation bullets, pronouns and delayed relative clauses also make it harder to identify which action produced the outcome.
+The inconsistency is visible both within the bullet and across the resume's presentation of quantitative results. A wrong percentage can undermine confidence in otherwise strong performance metrics, especially for a technical reader checking the arithmetic.
 
-**How to change it:** Move "reduced end-to-end latency 5%" to the beginning of that bullet and retain only the one or two most useful method details. Move the nightly-backlog result and benchmark-adoption result closer to their actions, replace ambiguous "which" and "them" references with explicit nouns, and shorten the method chain where needed.
+**How to change it:** Change "50%" to "33.3%" or revise the latency figures so that they support the stated percentage.
 
-*raised by content, wording · costs saves about 10 words*
+*raised by narrative · costs no words*
 
-### The dashboard, platform-practice and downstream-impact claims lack both concrete implementation detail and measurable outcomes.
+### The resume describes the change from 71% to 83% as a 12% increase even though it is a 12-percentage-point increase.
 
-> accelerating delivery and improving outcomes for downstream teams
+> from 71% to 83%
 
-The reader can see areas of responsibility but not what was built or changed within the dashboards and on-call process. Broad claims about AI-first practices, delivery and downstream outcomes do not show what changed or how substantial the result was, making the engineering contribution difficult to assess.
+The figures support either a 12-percentage-point increase or an approximately 16.9% relative increase. Leaving the current wording makes the quantitative claims inconsistent and may cause a technical reader to question the precision of the benchmark reporting.
 
-**How to change it:** Add [the most important monitoring, alerting or diagnostic capability implemented] and [the specific operational improvement] to the dashboard bullet. Replace "AI-first engineering practices" with [the specific practice or platform change introduced], and replace the broad outcome phrase with [one measurable delivery or downstream outcome compared with its baseline].
+**How to change it:** Change "12%" to "12 percentage points," or use approximately "16.9%" if the relative increase is intended.
 
-*raised by content · costs about 12 words*
+*raised by narrative · costs no words*
 
-## Set aside (3)
+## Set aside (9)
 
-- s1:e0:b0, s1:e0:b1, s1:e0:b2, s1:e0:b3: "Owned" frames the work as a duty rather than naming what was built, improved, or operated. (and 5 more like it)
-- s2:e0:b2, s2:e1:b1, s2:e1:b2: “Raised the runtime’s task-completion rate by 12%” is ambiguous alongside “from 71% to 83%.” (and 5 more like it)
-- s2:e0:b0, s2:e0:b1, s2:e0:b2, s1:e1:b0, s1:e1:b2, s1:e1:b4: "Accelerating delivery and improving outcomes for downstream teams" makes broad claims without stating the specific result or measurement; replace it with a concrete outcome. (and 5 more like it)
+- s3:e0:b1, s3:e0:b2: The line says "from 900 ms to 600 ms, a 50% reduction." (and 1 more like it)
+- s2:e1:b0, s2:e1:b2: The method is compressed into "with ML-extracted features," without showing what part of the diagnostic triage branch you engineered. (and 1 more like it)
+- s2:e1:b5: The phrase "who adopted them as the team’s runbook" shows acceptance but does not specify the scope or evidence of adoption.
+- s3:e1:b1, s3:e1:b2: The phrase "with a Kendall correlation of 0.89" does not say what the evaluator's scores were correlated against. (and 2 more like it)
+- s3:e0:b1, s3:e0:b2: "reusing completed sub-agent answers" is imprecise because it does not clearly identify whether answers were cached, deduplicated, or reused across calls. (and 1 more like it)
+- s2:e0:b1, s2:e0:b2: "Keep it there" does not clearly identify whether the cache, batching, or the load tests maintained the 180 ms latency; replace it with "prevent regressions" or a specific maintenance result. (and 1 more like it)
+- s2:e1:b4, s2:e1:b5: The phrase "so each update used exactly one scored trajectory" restates the preceding method rather than adding a distinct result; tighten it to "Stabilised GRPO training on sparse rewards by using one rollout per prompt in each update." (and 1 more like it)
+- s3:e1:b0, s3:e1:b1, s3:e1:b2: "where they now run" makes the antecedent of "they" slightly ambiguous between the metrics and the framework. (and 5 more like it)
+- format: Experience is not newest-first: "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024" is listed above the more recent "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025".

@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 15,
+  "words": 2006,
+  "quotes": 13,
+  "grounded": 10,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4783,
+    "completion_tokens": 8937,
+    "total_tokens": 13720,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8478
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2863
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "uses a first-person pronoun, breaking the resume's phrase-based style"
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "The Methods skills line misspells 'econometrics.'"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 52% to 58% is six percentage points, while the relative increase is approximately 11.5%"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "A reduction from 0.20 to 0.15 is 0.05 divided by 0.20, or a 25% reduction, not 33%"
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "puts the reusable outcome after too many implementation details"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "separate the software-package accomplishment from unrelated lab duties"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "A daily Sharpe ratio is annualized by multiplying by the square root of 252, not by 252"
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Standard Diebold–Mariano tests generally do not have the correct null distribution for nested forecasting models"
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "its current placement makes the career appear to move backward from quantitative research"
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "either support or remove skills such as SQL, C++, Kafka, and Bayesian inference that are not demonstrated elsewhere"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 15,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

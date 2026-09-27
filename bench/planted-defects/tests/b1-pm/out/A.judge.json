@@ -1,9 +1,8 @@
 {
   "file": "bench/planted-defects/tests/b1-pm/out/A.md",
-  "recall": 9,
+  "recall": 8,
   "found": [
     "W3",
-    "W4",
     "A1",
     "A4",
     "S2",
@@ -13,53 +12,53 @@
     "N5"
   ],
   "coverage": true,
-  "suggestions": 18,
-  "words": 2277,
-  "quotes": 11,
-  "grounded": 9,
+  "suggestions": 14,
+  "words": 2174,
+  "quotes": 6,
+  "grounded": 5,
   "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4837,
-    "completion_tokens": 13256,
-    "total_tokens": 18093,
+    "prompt_tokens": 4676,
+    "completion_tokens": 10654,
+    "total_tokens": 15330,
     "prompt_tokens_details": {
       "cached_tokens": 1664
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 12776
+      "reasoning_tokens": 10259
     },
     "prompt_cache_hit_tokens": 1664,
-    "prompt_cache_miss_tokens": 3173
+    "prompt_cache_miss_tokens": 3012
   },
   "verdict": {
     "defects": [
       {
         "id": "W3",
         "found": true,
-        "evidence": "s2:e1:b2: \"Coordinated\" is past tense but \"prepares\" is present tense even though the role ended in 2023."
+        "evidence": "and “prepares” is in the wrong tense."
       },
       {
         "id": "W4",
-        "found": true,
-        "evidence": "The intake bullet uses passive wording and gives adoption and scope without a measured operational or patient result."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "A1",
         "found": true,
-        "evidence": "The 35% checkout-conversion improvement is not supported by a stated baseline, comparison design, or verified result for all merchants."
+        "evidence": "specify whether it was a 35% relative lift or a 35-percentage-point increase."
       },
       {
         "id": "A4",
         "found": true,
-        "evidence": "The practicum section contains a merchant-onboarding bullet that duplicates Harbor Payments work and breaks the hospital consulting narrative."
+        "evidence": "duplicates the Harbor Payments achievement"
       },
       {
         "id": "S2",
         "found": true,
-        "evidence": "The weekly clinic-manager sessions have no stated result."
+        "evidence": "Add outcomes to activity-only bullets... Holding weekly hospital working sessions"
       },
       {
         "id": "S4",
@@ -69,26 +68,26 @@
       {
         "id": "T2",
         "found": true,
-        "evidence": "The opt-in comparison does not by itself measure the causal effect of the onboarding redesign."
+        "evidence": "The opt-in cohort comparison measures association, not the onboarding redesign's causal effect"
       },
       {
         "id": "T4",
         "found": true,
-        "evidence": "The line credits a measurement-definition change with reducing late deliveries, and 11% to 7% is a 4-percentage-point change rather than a 30% reduction."
+        "evidence": "The late-delivery improvement is reported using a changed denominator"
       },
       {
         "id": "N3",
         "found": true,
-        "evidence": "The dates show an unexplained eight-month gap between the B.A. and the Operations Analyst role."
+        "evidence": "leaves an eight-month period unaccounted for between the bachelor's degree and the first full-time role"
       },
       {
         "id": "N5",
         "found": true,
-        "evidence": "The résumé includes personal details that should be left off by convention. > Date of birth: 2 Nov 1996"
+        "evidence": "Remove “Date of birth: 2 Nov 1996 | Nationality: American” from the résumé."
       }
     ],
     "coverage": true,
-    "suggestions": 18,
+    "suggestions": 14,
     "rewrites": [],
     "falsePositives": []
   }

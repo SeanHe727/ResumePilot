@@ -1,6 +1,4 @@
 {
-  "s1:e0": "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
-  "s1:e1": "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
   "s2:e0": "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
   "s2:e0:b0": "Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
   "s2:e0:b1": "Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
@@ -23,5 +21,7 @@
   "s3:e1": "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
   "s3:e1:b0": "Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
   "s3:e1:b1": "Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
-  "s3:e1:b2": "Wrote the team’s feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score."
+  "s3:e1:b2": "Wrote the team’s feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+  "s1:e0": "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+  "s1:e1": "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020"
 }

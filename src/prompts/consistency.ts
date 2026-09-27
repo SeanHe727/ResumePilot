@@ -42,6 +42,9 @@ Common cases, not a complete list: report anything else you find, using your jud
 
 ## Reporting
 
+- **Two places or more:** a fault here always involves at least two places on
+  the page (or a word outside the bullets). Arithmetic inside one line is
+  checked by another reader; do not report it.
 - Confirmed only: report a fault only when you have confirmed it. Do not write
   out your checking.
 - Once each: name every place involved, why a reader would notice, and how to

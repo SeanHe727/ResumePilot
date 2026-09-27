@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 10,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 1752,
+  "quotes": 6,
+  "grounded": 4,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Add an email address and phone number; neither appears in the resume body."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4347,
+    "completion_tokens": 8535,
+    "total_tokens": 12882,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8061
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2555
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "The robotics monitoring-dashboard bullet describes ownership but not what changed or resulted."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The first Agent Runtime Suite bullet uses broad claims about 'AI-first engineering practices' without a specific result."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "71% to 83% is a 12-percentage-point increase, or approximately a 16.9% relative increase—not simply 12%."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "900 ms to 600 ms is a 33.3% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Several results are buried after long method lists or attached through ambiguous clauses, weakening scan order across the résumé."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "shorten the method chain where needed"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "GRPO uses relative comparisons among rollouts to form a useful advantage signal; using one scored trajectory per prompt generally increases update variance rather than stabilizing training."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "dynamic batching primarily improves concurrent throughput rather than single-request latency."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Experience is not listed newest-first."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "LangGraph, RAG, and Kubernetes are not supported elsewhere in the resume."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": [],
+    "falsePositives": [
+      "Add an email address and phone number; neither appears in the resume body."
+    ]
+  }
+}

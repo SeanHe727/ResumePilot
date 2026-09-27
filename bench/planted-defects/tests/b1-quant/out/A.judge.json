@@ -15,77 +15,77 @@
   ],
   "coverage": true,
   "suggestions": 15,
-  "words": 2006,
-  "quotes": 13,
-  "grounded": 10,
+  "words": 2131,
+  "quotes": 15,
+  "grounded": 9,
   "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4783,
-    "completion_tokens": 8937,
-    "total_tokens": 13720,
+    "prompt_tokens": 4917,
+    "completion_tokens": 10774,
+    "total_tokens": 15691,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 8478
+      "reasoning_tokens": 10315
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 2863
+    "prompt_cache_miss_tokens": 2997
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "uses a first-person pronoun, breaking the resume's phrase-based style"
+        "evidence": "The first-person phrasing also breaks the resume's otherwise consistent style"
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "The Methods skills line misspells 'econometrics.'"
+        "evidence": "The Methods skills list misspells 'econometrics.'"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The change from 52% to 58% is six percentage points, while the relative increase is approximately 11.5%"
+        "evidence": "The line describes the increase from 52% to 58% as a 6% improvement instead of a 6-percentage-point increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "A reduction from 0.20 to 0.15 is 0.05 divided by 0.20, or a 25% reduction, not 33%"
+        "evidence": "The line incorrectly calls the reduction from 0.20 to 0.15 a 33% improvement"
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "puts the reusable outcome after too many implementation details"
+        "evidence": "The feature-store bullet delays its main result behind an awkward chain of participles and process details."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "separate the software-package accomplishment from unrelated lab duties"
+        "evidence": "The research-assistant entry combines several unrelated responsibilities"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "A daily Sharpe ratio is annualized by multiplying by the square root of 252, not by 252"
+        "evidence": "A daily Sharpe ratio is annualized with the square root of 252, so multiplying by 252 overstates the reported risk-adjusted performance."
       },
       {
         "id": "T3",
         "found": true,
-        "evidence": "Standard Diebold–Mariano tests generally do not have the correct null distribution for nested forecasting models"
+        "evidence": "A standard Diebold-Mariano test is not generally valid for nested forecasts because parameter estimation changes the null distribution."
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "its current placement makes the career appear to move backward from quantitative research"
+        "evidence": "its current placement and length interrupt the quantitative-research narrative"
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "either support or remove skills such as SQL, C++, Kafka, and Bayesian inference that are not demonstrated elsewhere"
+        "evidence": "Verify whether C++ and Kafka belong in Skills, since the reviewed entries do not show where they were used."
       }
     ],
     "coverage": true,
