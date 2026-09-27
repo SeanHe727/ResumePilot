@@ -118,9 +118,8 @@ A finding that repeats one you chose — the same problem raised by another
 reader — goes into that group, not into setAside. Where a finding says a line
 should go — it repeats another entry, or does not belong — set aside what asks
 to improve that line: polishing a line the candidate should delete is advice
-that contradicts itself. Measured: a line copied from another entry was
-flagged as a copy and, in two more points, asked for a time unit and a
-stronger verb. A report holds about ten to
+that contradicts itself. Measured: a line flagged as a copy of another
+entry's was, in two more points, asked for more detail and a stronger verb. A report holds about ten to
 twelve groups, and never more than fifteen; where you have more, merge before
 you add, and set aside the least worth having. A candidate acts on a short list
 they understand, not a long one they skim.

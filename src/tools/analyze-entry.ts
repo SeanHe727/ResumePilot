@@ -17,8 +17,8 @@ export interface AnalyzeEntryInput {
   references?: Array<{ question: string; weakExample: string; strongExample: string; gap: string }>;
   /**
    * The whole résumé, rendered, to check this entry against. Measured: read
-   * one entry at a time, the reader could not see that a graduate role ended
-   * before the graduate degree began, which a reader of the whole page caught.
+   * one entry at a time, the reader could not check a role's dates against the
+   * degrees, which a reader of the whole page did.
    */
   background?: string;
 }

@@ -85,7 +85,7 @@ export async function writeFullReport(
     ...(report.narrative
       ? [
           `## the résumé end to end (${report.narrative.overallScore})\n` +
-            [...report.narrative.gaps, ...report.narrative.orderingNotes, ...(report.narrative.conflicts ?? [])]
+            [...report.narrative.gaps, ...report.narrative.orderingNotes, ...(report.narrative.conflicts ?? []), ...(report.narrative.misspellings ?? [])]
               .map((n) => `- ${n}`)
               .join('\n'),
         ]

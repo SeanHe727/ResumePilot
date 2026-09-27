@@ -111,7 +111,7 @@ Return JSON of exactly this shape:
       "bulletId": "<the id given above, verbatim>",
       "verbStrength": { "score": 0, "detail": "one sentence" },
       "concision":    { "score": 0, "detail": "one sentence" },
-      "issues": [{ "kind": "missing | unclear", "what": "what is wrong with the wording, one sentence", "savesWords": 0 }]
+      "issues": [{ "kind": "wrong | missing | unclear", "what": "what is wrong with the wording, one sentence", "savesWords": 0 }]
     }
   ]
 }`;
@@ -124,12 +124,12 @@ Return JSON of exactly this shape:
 export function wordingIssues(raw: unknown): {
   issues: string[];
   issueSavings?: number[];
-  issueKinds?: Array<'missing' | 'unclear' | undefined>;
+  issueKinds?: Array<'wrong' | 'missing' | 'unclear' | undefined>;
 } {
   const items = Array.isArray(raw) ? raw : [];
   const issues: string[] = [];
   const savings: number[] = [];
-  const kinds: Array<'missing' | 'unclear' | undefined> = [];
+  const kinds: Array<'wrong' | 'missing' | 'unclear' | undefined> = [];
   for (const item of items) {
     if (typeof item === 'string') {
       issues.push(item);
@@ -140,7 +140,7 @@ export function wordingIssues(raw: unknown): {
       const kind = (item as { kind?: unknown }).kind;
       issues.push((item as { what: string }).what);
       savings.push(Number.isFinite(saves) && saves > 0 ? Math.round(saves) : 0);
-      kinds.push(kind === 'missing' || kind === 'unclear' ? kind : undefined);
+      kinds.push(kind === 'wrong' || kind === 'missing' || kind === 'unclear' ? kind : undefined);
     }
   }
   return {

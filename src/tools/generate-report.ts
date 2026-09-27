@@ -660,6 +660,12 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
           ...(input.narrative.unsupportedSkills ?? []).map((what) =>
             at('narrative', 'skills', undefined, what),
           ),
+          // A misspelling reads as carelessness, most of all in the skills the
+          // candidate claims: ranked with the errors.
+          ...(input.narrative.misspellings ?? []).map((what) => ({
+            ...at('narrative', 'skills', undefined, what),
+            kind: 'wrong' as const,
+          })),
           // Two claims that cannot both hold are wrong, whichever of them is.
           ...(input.narrative.conflicts ?? []).map((what) => ({
             ...at('narrative', 'whole resume, consistency', undefined, what),

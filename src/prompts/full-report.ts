@@ -55,10 +55,10 @@ it on the why.
 - **An error is said as an error.** Where any finding in a group is marked
   wrong, the problem sentence states that error plainly, first, before
   anything else the group asks of the line — not "may", "usually" or "could
-  question". Measured: a single-rollout GRPO line a reader had marked wrong
-  reached the report merged with two gaps on the same line, as "usually makes
-  the estimate noisier", and a reviewer could not tell it had been called an
-  error at all.
+  question". Measured: a training-method line a reader had marked wrong
+  reached the report merged with two gaps on the same line, softened to
+  "usually", and a reviewer could not tell it had been called an error at
+  all.
 - **A technical error says why it is wrong.** Where a reader found a method
   misapplied, steps in an order that cannot work, or a term used for something
   it cannot do, the problem names the error, the why gives the reason in the
@@ -79,9 +79,9 @@ it on the why.
 ## How to change it
 
 Tell the candidate exactly what to do to the line, in a sentence or two: which
-words to move, cut or replace, and what goes there — "move '30% drop' to the
-front and cut 'using a range of techniques'", "replace '12%' with '12
-percentage points'". Where the problem is an error, say what the correct
+words to move, cut or replace, and what goes there — "move 'halved return
+rates' to the front and cut 'using a range of techniques'", "replace 'grew 5%'
+with 'grew 5 percentage points'". Where the problem is an error, say what the correct
 version is, using the résumé's own figures: the right percentage from its own
 before and after, the right term for what the method did. Where the change
 needs a fact only the candidate has, name it in brackets — "[the p95 before the

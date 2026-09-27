@@ -58,7 +58,7 @@ export const examineDepthTool: Tool<ExamineDepthInput, unknown> = {
   description:
     'Put one question about a fact of this entry\'s field to a specialist. For confirming a ' +
     'candidate error before you report it, or a question that needs a practitioner\'s longer ' +
-    'answer — not for what evidence a line should carry. See Checking what you take on trust. Costs a nested agent run. What comes back ' +
+    'answer — not for what evidence a line should carry. See Chain of verification. Costs a nested agent run. What comes back ' +
     'is more detail than a resume line can hold: take from it what changes your reading.',
   parameters: {
     type: 'object',

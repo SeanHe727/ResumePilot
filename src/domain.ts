@@ -481,8 +481,8 @@ export interface WordingDiagnosis {
      * read as free, and every cut on every line was chosen.
      */
     issueSavings?: number[];
-    /** Missing or unclear, per issue, parallel to `issues`. Absent on older readings. */
-    issueKinds?: Array<'missing' | 'unclear' | undefined>;
+    /** Wrong, missing or unclear, per issue, parallel to `issues`. Absent on older readings. */
+    issueKinds?: Array<'wrong' | 'missing' | 'unclear' | undefined>;
   }>;
 }
 
@@ -503,6 +503,8 @@ export interface NarrativeAssessment {
    * allow, overlapping roles that do not fit. Absent on older readings.
    */
   conflicts?: string[];
+  /** Misspelled words outside the bullets — skills, headings, titles. Absent on older readings. */
+  misspellings?: string[];
   /**
    * How each entry reads as a unit — the same judgement at a smaller scale.
    *

@@ -26,9 +26,9 @@ const MAX_QUESTIONS = 10;
  *
  * The content reader takes a line's claims on trust unless something already
  * makes it suspicious, and a wrong claim that reads fluently never does.
- * Measured: "cut single-request latency by serving with dynamic batching" was
- * read as a missing baseline, while the same model, asked outright whether
- * dynamic batching lowers single-request latency, would say no. So the claims
+ * Measured: a line whose method cannot produce its result, under the condition
+ * the line itself names, was read as a missing baseline — while the same model,
+ * asked outright whether the method can do that, would say no. So the claims
  * are put as short questions to a call that never sees the line: it cannot be
  * led by the line's confidence, only by what it knows (Dhuliawala et al.,
  * 2023, the factored variant).
@@ -40,8 +40,8 @@ export const verifyClaimsTool: Tool<VerifyClaimsInput, { answers: ClaimAnswer[] 
   name: 'verify_claims',
   description:
     'Check the claims you are taking on trust. Put each as a short question that stands on its ' +
-    'own — "Does dynamic batching lower the latency of a single request?" — with no resume text ' +
-    'and no candidate names. They are answered by someone who never sees the resume. Up to ' +
+    'own — "Can a paired t-test compare two independent groups?" — keeping every qualifier the ' +
+    'claim turns on, with no resume text and no candidate names. They are answered by someone who never sees the resume. Up to ' +
     `${MAX_QUESTIONS} per call; one call per entry is usually enough.`,
   parameters: {
     type: 'object',

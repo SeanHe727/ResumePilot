@@ -40,10 +40,12 @@ you find as an issue:
 For each issue, quote the words, say why it costs the line, and give the
 corrected form where it is a correction rather than a rewrite.
 
-Mark each issue's kind. **Unclear** — the words are there and get in the way:
-a result buried behind the method instead of leading the line, passive voice,
-duty framing, filler, and slips of spelling, tense or person. **Missing** —
-something the line needs is not there at all, such as an action verb.
+Mark each issue's kind. **Wrong** — a spelling or grammar mistake: it tells
+a reader the candidate is careless, which costs more than any one weak line.
+**Unclear** — the words are there and get in the way: a result buried behind
+the method instead of leading the line, passive voice, duty framing, filler,
+the wrong tense or person. **Missing** — something the line needs is not there
+at all, such as an action verb.
 
 Leave technical depth, credibility and whether the achievement matters to
 another pass.
