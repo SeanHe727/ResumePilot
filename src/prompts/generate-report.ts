@@ -28,20 +28,17 @@ candidate. You choose; you do not write.
 
 ## Priority
 
-Rank in this order. **Errors always come before everything else.**
+Two levels.
 
-1. **Errors:** findings of type wrong, including personal details a resume
-   should not carry. A practitioner who catches one error stops trusting the
-   page. Choose them even when the fix costs words.
-2. Missing, and results buried after the method (moving them costs no words).
-3. Unclear, and writing flaws (duty-style openers, first person, wrong tense,
-   empty words). Judge these by how much they hurt the line, not by the words
-   they save.
-4. Order, layout and cuts: worth a moderate amount. Never above an error.
-
-Within a level, weigh each finding by its worth per word added (how much it
-raises the line's credibility or quality in a reader's eyes). A few words that
-settle a whole class of doubt beat a sentence that adds a detail.
+1. **Errors, all of them:** findings of type wrong, including personal details a
+   resume should not carry. List every error, first, whatever it costs. A
+   practitioner who catches one error stops trusting the page.
+2. Refinements: everything else (what is missing or unclear, buried results,
+   writing flaws, order, layout, cuts) on one level, ranked by efficiency.
+   - Efficiency: how much the change improves how the line reads to a hiring
+     reader, against what it costs (words added, effort to find a figure).
+   - A change that costs no words or saves words is cheap; one that changes a
+     reader's judgement is valuable. Cheap and valuable ranks first.
 
 ## Choosing
 
@@ -55,12 +52,12 @@ settle a whole class of doubt beat a sentence that adds a detail.
 - **Do not polish a line that should go:** where a finding says a line should be
   removed (it repeats another entry or does not belong), set aside findings
   that ask to improve that line.
-- Count: usually ten to twelve groups. A resume with more real problems can
-  have a few more, but merge before you add: a candidate acts on a short list
-  they understand.
+- Rising cost per point: every point you add costs the candidate attention,
+  and each costs more than the one before. The first few refinements are
+  cheap; past about ten, a refinement must be clearly worth it; past fifteen,
+  only an exceptional one. Errors are exempt: list them all.
 - Room: what the chosen groups add, less what they save, should reach the room
-  left or a little over (about a tenth). Where room and count disagree, the
-  count wins.
+  left or a little over (about a tenth).
 - **Nothing disappears:** everything you leave out goes in setAside, with a
   reason.
 
@@ -72,9 +69,10 @@ settle a whole class of doubt beat a sentence that adds a detail.
 
 ## Order of groups
 
-- List groups by priority (the levels above), whatever their fix type.
+- Errors first, then refinements from most to least efficient, whatever their
+  fix type.
 - **The first three become the candidate's top priorities.** Any error goes
-  there before any order, layout or wording point.
+  there before any refinement.
 
 ## Answer
 
