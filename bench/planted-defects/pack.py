@@ -95,18 +95,18 @@ decided it.
 
 ## What to pay attention to
 
-- Check what a review claims against the résumé yourself: the arithmetic, the
-  dates, what a line actually says.
+- Check: verify what a review claims against the résumé yourself (the
+  arithmetic, the dates, what a line actually says).
 - An error a practitioner in the field would catch outweighs a wording issue.
   A review that misses one, or praises or keeps it, has missed what matters
   most.
-- Invention means figures, results, scope or methods presented as the
+- Invention: invention means figures, results, scope or methods presented as the
   candidate's. A word offered for the candidate to choose from, or a bracketed
   placeholder to fill, is not invention; if what it suggests contradicts the
   résumé, count that under accuracy.
-- Saying which words to change is actionable enough; a rewritten line earns
+- Suggestions: saying which words to change is actionable enough; a rewritten line earns
   nothing extra.
-- Length is not quality. Extra material counts only if it is correct and worth
+- Length: length is not quality. Extra material counts only if it is correct and worth
   acting on.
 - Judge each review against the résumé, not against the other reviews.
 

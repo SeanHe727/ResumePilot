@@ -80,7 +80,7 @@ ${NEVER_INVENT}
 
 - 0-40: nothing on this axis.
 - 40-70: there, but too vague to use.
-- 70-90: there, but not stated clearly.
+- 70-90: there, but not stated quite clearly.
 - 90-100: there and clear.
 
 Band the line as written; whether it holds is checked elsewhere.
