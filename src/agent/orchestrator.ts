@@ -509,7 +509,9 @@ function readClaims(
         issue: {
           what,
           costWords: 0,
-          kind: 'wrong' as const,
+          // A possible error ranks with the refinements; only a line false as
+          // written leads the report.
+          kind: record?.certain === false ? ('unclear' as const) : ('wrong' as const),
           ...(axis ? { axis } : {}),
           ...(text('why') ? { why: text('why') } : {}),
           ...(text('fix') ? { fix: text('fix') } : {}),

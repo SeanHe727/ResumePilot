@@ -59,7 +59,8 @@ why.
   term for what the method did.
 - **The candidate's choice:** a fact only the candidate has goes in [brackets]. A
   replacement word is offered as a choice ("if accurate, ..."), never as their
-  fact.
+  fact. A fix that needs a method, test or step the candidate may not have done
+  is conditional: if they did it, name it; if not, remove or soften the claim.
 - No rewritten lines, and no figure, method or fact the resume does not have.
 
 ## Cost

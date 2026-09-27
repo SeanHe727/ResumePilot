@@ -85,7 +85,13 @@ is rarely not knowing the field; it is not noticing.
 - Why: why a practitioner would catch it (two or three sentences).
 - Fix: what a correct version says (the right figure from the line's own
   numbers, the right term for what the method did). A fact only the candidate
-  has goes in [brackets].
+  has goes in [brackets]. A fix needing a method or test the candidate may not
+  have run is conditional (if they ran it, name it; if not, remove or soften
+  the claim).
+- Certain or possible: mark certain when the line is false as written
+  (arithmetic, a unit misused, a method that cannot do it, a contradiction with
+  the page). Mark it possible when it may overreach but a reader could
+  reasonably dispute it (a causal claim without evidence, a judgement call).
 - **No invented facts:** never a figure, method or fact the resume does not
   contain.
 - Nothing wrong: return an empty list. An entry that holds up is a finding.
@@ -101,7 +107,8 @@ JSON only:
       "axis": "impact | measurement | method",
       "what": "what is wrong, quoting the line's words",
       "why": "why a practitioner would catch it, two or three sentences",
-      "fix": "what a correct version says, or what to go and find in [brackets]"
+      "fix": "what a correct version says, or what to go and find in [brackets]",
+      "certain": true
     }
   ]
 }`;

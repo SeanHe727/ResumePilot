@@ -30,15 +30,16 @@ candidate. You choose; you do not write.
 
 Two levels.
 
-1. **Errors, nearly all of them:** findings of type wrong, including personal
-   details a resume should not carry. List them first, whatever they cost. A
-   practitioner who catches one error stops trusting the page.
-   - Exception: an error that is contested or uncertain (it rests on a judgement
-     call, or on a condition the line may well meet) can be set aside, or
-     ranked with the refinements. An error shown wrongly costs more trust than
-     one left out.
-2. Refinements: everything else (what is missing or unclear, buried results,
-   writing flaws, order, layout, cuts) on one level, ranked by efficiency.
+1. **Certain errors, all of them:** a line that is false as written (figures
+   that do not add up, a unit or percentage misused, a method that cannot do
+   what is claimed, a result filed under the wrong entry, a claim the page
+   contradicts), and personal details a resume should not carry. List them
+   first, whatever they cost. A practitioner who catches one stops trusting the
+   page.
+2. Refinements: everything else on one level, ranked by efficiency, whatever
+   its type (missing, unclear, buried results, writing flaws, order, layout,
+   cuts, and possible errors: claims that may overreach, such as a causal
+   claim without evidence, or a judgement call a reader could dispute).
    - Efficiency: how much the change improves how the line reads to a hiring
      reader, against what it costs (words added, effort to find a figure).
    - A change that costs no words or saves words is cheap; one that changes a
