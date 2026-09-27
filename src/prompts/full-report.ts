@@ -34,6 +34,10 @@ it on the why.
 
 - **Group by where it belongs.** One section per entry, and a section for what
   runs across the whole résumé. Inside a section, strongest first.
+- **One point per line.** Where several groups are about the same line, write
+  them as one point that takes the line's problems in order of weight, rather
+  than a point per problem. Measured: a line criticised in three separate
+  points read as a review repeating itself.
 - **Merge what repeats.** The same demand arrives from several readers in
   different words — a percentage that does not say whether it is relative, a
   comparison with nothing named on the other side. One point, and say which

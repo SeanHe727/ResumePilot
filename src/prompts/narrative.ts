@@ -34,7 +34,10 @@ of any one line:
   in different words or figures; a figure in one place that contradicts one in
   another; more output — papers, launches, courses taught — than the dates of
   the role allow; two roles or a role and a project whose dates overlap in a way
-  the page does not explain. Each goes in \`conflicts\`, naming both places.
+  the page does not explain; a title that does not fit its dates against the
+  education — a graduate role that ends before the graduate programme begins,
+  full-time work during full-time study; the same quantity given differently
+  in two places. Check every role's dates against every degree's. Each goes in \`conflicts\`, naming both places.
   A reader who notices one wonders what else on the page is stretched.
 - **An entry that does not belong.** Where an entry is from an unrelated field
   and does not serve the direction the rest of the page points in, say so and

@@ -616,7 +616,13 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
   });
 
   return [
-    ...input.format.issues.map((what) => at('file', 'format', undefined, what)),
+    // Personal details a reader is not meant to weigh invite bias and cost
+    // nothing to remove: ranked with the errors. Measured: a date of birth and
+    // a nationality were set among the lower priorities.
+    ...input.format.issues.map((what) => ({
+      ...at('file', 'format', undefined, what),
+      ...(what.startsWith('personal details a reader is not meant to weigh') ? { kind: 'wrong' as const } : {}),
+    })),
 
     ...input.entries.flatMap((entry) =>
       entry.bullets.flatMap((bullet) =>
