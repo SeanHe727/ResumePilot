@@ -4,7 +4,12 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const [arm, test] = process.argv.slice(2);
 const resume = readFileSync(`bench/planted-defects/tests/${test}/resume.txt`, 'utf8');
-const ask = `Please review my resume and tell me what to change.\n\n${resume}`;
+// No rewritten lines or example rewrites: ResumePilot gives none, and a judge
+// comparing reviews should compare what each found and explained, not one
+// side's sample sentences against the other's silence.
+const ask =
+  `Please review my resume and tell me what to change. Don't rewrite my lines or give example ` +
+  `rewrites — tell me what to change in each and why.\n\n${resume}`;
 const ARMS: Record<string, { model: string; instructions?: string }> = {
   B: { model: 'gpt-5.6-luna' },
   C: { model: 'gpt-5.6-sol' },

@@ -158,7 +158,19 @@ function appendTo(open: OpenSection, sink: Sink, text: string, span: SourceSpan)
 function extendLast(lines: string[], text: string): void {
   const last = lines.length - 1;
   if (last < 0) lines.push(text);
-  else lines[last] = `${lines[last]!} ${text}`;
+  else lines[last] = joinWrapped(lines[last]!, text);
+}
+
+/**
+ * Two rows of one line, joined where the page broke them.
+ *
+ * A row ending in a hyphen after a letter was a compound broken at its hyphen
+ * — `on-` over `call` — and is joined without the space. Measured: joined with
+ * one, "on- call" reached the report as a spelling mistake the candidate never
+ * made.
+ */
+export function joinWrapped(before: string, after: string): string {
+  return /[A-Za-z]-$/.test(before) ? `${before}${after}` : `${before} ${after}`;
 }
 
 function extendBullet(
@@ -168,7 +180,7 @@ function extendBullet(
 ): void {
   const last = bullets.at(-1);
   if (!last) return;
-  last.text = `${last.text} ${text}`;
+  last.text = joinWrapped(last.text, text);
   last.span = widen(last.span, span)!;
 }
 
