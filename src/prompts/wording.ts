@@ -16,7 +16,7 @@ ${UNTRUSTED_NOTICE}
 
 ## What to mark
 
-Read every line as a careful editor and report each issue:
+Read every line as a careful editor and report each issue. Common cases, not a complete list: report anything else you find, using your judgement.
 
 - Tense: past for work that has ended, present only for a current role.
 - Person: no first-person pronouns in a bullet.

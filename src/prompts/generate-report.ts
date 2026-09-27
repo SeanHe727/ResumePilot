@@ -55,8 +55,9 @@ settle a whole class of doubt beat a sentence that adds a detail.
 - **Do not polish a line that should go:** where a finding says a line should be
   removed (it repeats another entry or does not belong), set aside findings
   that ask to improve that line.
-- Count: about ten to twelve groups, never more than fifteen. Merge before you
-  add. A candidate acts on a short list they understand.
+- Count: usually ten to twelve groups. A resume with more real problems can
+  have a few more, but merge before you add: a candidate acts on a short list
+  they understand.
 - Room: what the chosen groups add, less what they save, should reach the room
   left or a little over (about a tenth). Where room and count disagree, the
   count wins.

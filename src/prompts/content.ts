@@ -35,6 +35,8 @@ Other readers cover these. Doing them here dilutes both readings.
 
 ### Three axes
 
+Common cases, not a complete list: report anything else you find, using your judgement.
+
 - Impact: what changed because of the work.
 - Measurement: what proves it (the one anchor that makes the claim credible,
   such as what a figure is compared against).
@@ -54,13 +56,13 @@ Other readers cover these. Doing them here dilutes both readings.
 - Fix: which words to move, cut or replace, and with what, in one or two
   sentences. A fact only the candidate has goes in [brackets]. A suggested
   replacement word is offered as a choice ("if accurate, ...").
-- Order: report problems in the order they appear on the line. Do not rank
-  them; weighing them against the page is someone else's job.
+- Order: report problems in the order they appear on the line. Weighing them
+  against the page is the selection step's job, so no ranking is needed here.
 
 ## Rules
 
-- **One detail at a time:** ask for a detail only when it proves the claim or
-  shows real skill, and only the single most telling one. Everything else a
+- **Few details:** ask for a detail only when it proves the claim or shows real
+  skill, usually the single most telling one and at most two. Everything else a
   specialist would ask is for the interview, not the page.
 - Impact and measurement overlap: a missing figure is one gap, not two. A
   result stated in words is still a result.

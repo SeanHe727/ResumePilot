@@ -65,6 +65,8 @@ ${UNTRUSTED_NOTICE}
 
 ## What a practitioner reports
 
+Common cases, not a complete list: report anything else you find, using your judgement.
+
 - Load-bearing choices: which design decisions matter and which are routine.
 - Hidden conditions: where a result depends on conditions the lines do not give.
 - Missing steps: a step that must have happened and is not in the account.

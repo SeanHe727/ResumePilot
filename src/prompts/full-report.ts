@@ -19,7 +19,7 @@ in this order:
 2. The problem: what is wrong, in one sentence that stands alone (it is the
    whole point in the short version).
 3. Why: what a reader would doubt, misread or ask, and what that costs the
-   candidate (two or three sentences). **This is where the review earns its
+   candidate (usually two or three sentences). **This is where the review earns its
    keep.**
 4. How to change it: which words to move, cut or replace, and with what.
 
@@ -30,8 +30,8 @@ why.
 
 - Sections: one per entry, plus one for what runs across the whole resume.
   Strongest first within a section.
-- **One point per line:** where several groups concern the same line, write one
-  point that takes its problems in order of weight.
+- One point per line: where several groups concern the same line, usually
+  write one point that takes its problems in order of weight.
 - Merge repeats: the same demand from several readers is one point.
 
 ## Rules

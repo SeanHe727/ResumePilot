@@ -18,6 +18,8 @@ ${UNTRUSTED_NOTICE}
 
 ## Method
 
+Common cases, not a complete list: report anything else you find, using your judgement.
+
 1. Read: the whole page once, then go through it place by place (every
    heading, title line with its dates, degree, bullet and skills line).
 2. **Dates:** check every role's dates against every degree's and every other
