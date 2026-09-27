@@ -224,7 +224,9 @@ describe('the write-up is fitted in points too', () => {
     await writeFullReport(report, { resume: { sections: [] } } as never, [], ctx, 100);
 
     expect(asked).toHaveLength(2);
-    expect(asked[1]!.at(-1)!.content).toContain('has 25 points. Bring it to about fifteen');
+    expect(asked[1]!.at(-1)!.content).toContain('has 25 points. Bring it down to about eighteen');
+    // Trimming never costs an error.
+    expect(asked[1]!.at(-1)!.content).toContain('Keep every error');
   });
 });
 
