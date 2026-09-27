@@ -1,6 +1,6 @@
 {
   "file": "bench/planted-defects/tests/b1-ce/out/A.md",
-  "recall": 8,
+  "recall": 10,
   "found": [
     "W1",
     "W5",
@@ -9,107 +9,92 @@
     "S1",
     "S3",
     "T1",
-    "N2"
+    "T3",
+    "N2",
+    "N4"
   ],
   "coverage": true,
   "suggestions": 18,
-  "words": 2742,
-  "quotes": 28,
-  "grounded": 12,
-  "rewrites": 18,
-  "inventedNumbers": [
-    "33.3"
+  "words": 1752,
+  "quotes": 6,
+  "grounded": 4,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Add an email address and phone number; neither appears in the resume body."
   ],
-  "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5721,
-    "completion_tokens": 12789,
-    "total_tokens": 18510,
+    "prompt_tokens": 4347,
+    "completion_tokens": 8535,
+    "total_tokens": 12882,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11885
+      "reasoning_tokens": 8061
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 3929
+    "prompt_cache_miss_tokens": 2555
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "The monitoring-dashboard bullet states ownership and release scope but does not show an operational result."
+        "evidence": "The robotics monitoring-dashboard bullet describes ownership but not what changed or resulted."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "The adoption bullet uses vague benefit language without identifying what practices changed or how widely they were adopted."
+        "evidence": "The first Agent Runtime Suite bullet uses broad claims about 'AI-first engineering practices' without a specific result."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The task-completion result should say that the rate rose by 12 percentage points, not by 12%."
+        "evidence": "71% to 83% is a 12-percentage-point increase, or approximately a 16.9% relative increase—not simply 12%."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The tool-call latency percentage is mathematically incorrect: falling from 900 ms to 600 ms is a 33.3% reduction, not 50%."
+        "evidence": "900 ms to 600 ms is a 33.3% reduction, not 50%."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "Leading with a long list of rollout and reward details also delays the main achievement"
+        "evidence": "Several results are buried after long method lists or attached through ambiguous clauses, weakening scan order across the résumé."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The fleet-migration bullet buries an unmeasured dispatch outcome beneath several secondary responsibilities."
+        "evidence": "shorten the method chain where needed"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "standard GRPO cannot produce a within-prompt learning signal from exactly one rollout"
+        "evidence": "GRPO uses relative comparisons among rollouts to form a useful advantage signal; using one scored trajectory per prompt generally increases update variance rather than stabilizing training."
       },
       {
         "id": "T3",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "dynamic batching primarily improves concurrent throughput rather than single-request latency."
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "Experience is not in newest-first order: the 2024–2025 internship appears below the 2022–2024 software role."
+        "evidence": "Experience is not listed newest-first."
       },
       {
         "id": "N4",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "LangGraph, RAG, and Kubernetes are not supported elsewhere in the resume."
       }
     ],
     "coverage": true,
     "suggestions": 18,
-    "rewrites": [
-      "Replace 'a 50% reduction' with 'a 33.3% reduction' or remove the percentage.",
-      "Replace 'by 12%' with 'by 12 percentage points,' retaining 'from 71% to 83%.'",
-      "Replace 'Owned' with an action such as 'Built and maintained,'",
-      "change 'the on-call rotation that used them' to 'supporting the on-call rotation.'",
-      "Replace 'to keep it there' with 'to detect latency regressions' or 'to prevent latency regressions,'",
-      "Move the dispatch result immediately after '30 robot-fleet services' and add [the before-and-after backlog frequency, processing delay, or number of delayed dispatches].",
-      "Move the result to the front as 'Reduced [the measured workflow] latency 5% using...'",
-      "Add [the before-and-after p95 latency values in milliseconds, measured under the same edge-inference workload] after '40%.'",
-      "Replace or qualify 'ML-extracted features' with [the model or feature-extraction approach you implemented or used].",
-      "Replace the generic benefit phrase with [the specific delivery, adoption, quality, or downstream-team outcome and its comparison]",
-      "Replace that phrase with 'Observed a Kendall correlation of 0.89 between [the evaluator-score ranking and the injected-degradation ranking] across 400+ report-level trials,'",
-      "replace 'each was fixed upstream' with 'upstreamed fixes for each' if you made the fixes",
-      "Move Mobility Systems Company, dated 'Oct 2024 - May 2025,' above Eastern Robotics Co. within Experience.",
-      "Remove the claim that single-rollout sampling stabilized GRPO, or replace it with the actual multi-rollout stabilization mechanism and measured result.",
-      "Replace 'Cut' with 'Reduce' only if the improvement describes an ongoing responsibility.",
-      "Replace 'Raised' with 'Raise' only if the work is ongoing.",
-      "Use present tense, such as 'Drive,' unless this work has ended.",
-      "Corrected form: 'Showed that the evaluator tracks injected degradation...'"
-    ],
-    "falsePositives": []
+    "rewrites": [],
+    "falsePositives": [
+      "Add an email address and phone number; neither appears in the resume body."
+    ]
   }
 }

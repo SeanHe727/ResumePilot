@@ -1,178 +1,200 @@
 # Full review: resume.pdf
 
-**85/100** — format 100 · content 79 · wording 81 · narrative 68
+**84/100** — format 100 · content 75 · wording 81 · narrative 72
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **Do not add personal details such as date of birth or nationality to the résumé.**
-   > Date of birth: 2 Nov 1996 | Nationality: American
-   These details are not information a recruiter is meant to weigh and are conventionally left off a résumé. Including them uses space without strengthening the candidacy and can introduce irrelevant personal information into screening.
-   **How to change it:** Leave date of birth and nationality out of the résumé; do not add them to the file.
-2. **Move Education below Experience and likely below Projects so the page leads with more than four years of professional and product evidence.**
-   > Northfield School of Management | MBA
-   The current ordering gives the MBA and bachelor's degree prominence before the Harbor Payments, Crestline Logistics, and product work. A recruiter deciding quickly will see the candidate's strongest evidence later than necessary, even though the résumé shows substantial experience.
-   **How to change it:** Move the Education section below Experience and below Projects if the resulting layout remains clear; do not change the education text itself.
-3. **“Improved checkout conversion by 35% ... for all merchants” overstates the aggregate result and leaves the comparison and meaning of 35% unclear.**
+1. **The résumé includes personal details that should be left off by convention.**
+   > Date of birth: 2 Nov 1996
+   A reader is not meant to weigh date of birth or nationality in assessing the candidate’s qualifications. Including them uses scarce space on information unrelated to the work evidence and can introduce unnecessary bias or screening concerns.
+   **How to change it:** Delete "Date of birth: 2 Nov 1996 | Nationality: American" from the file.
+2. **The line credits a measurement-definition change with reducing late deliveries, and 11% to 7% is a 4-percentage-point change rather than a 30% reduction.**
+   > Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
+   Excluding weather-delayed shipments changes which deliveries are counted; it does not make those shipments arrive on time or reduce the underlying number of late deliveries. The figures describe a 4-percentage-point decline, or approximately a 36.4% relative reduction, so the claimed operational improvement is misleading without a consistent definition.
+   **How to change it:** Replace "Cut late deliveries" with "Changed the reported late-delivery rate," retain the 11% to 7% figures as a 4-percentage-point change, and add [the actual late-delivery reduction using a consistent definition].
+3. **The 35% checkout-conversion improvement is not supported by a stated baseline, comparison design, or verified result for all merchants.**
    > Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.
-   An aggregate result across merchants does not show that every merchant improved by the same amount because merchant mix, devices, payment methods, and baseline conversion can differ. The reader also cannot tell whether 35% means relative growth or percentage-point growth, so the size and credibility of the result are difficult to judge.
-   **How to change it:** Replace “for all merchants” with the measured population, such as “across participating merchants,” and state the before-and-after conversion rates or specify whether 35% was a relative increase or a percentage-point increase over [comparison period].
+   The flow change alone does not establish that it caused the improvement; other changes or differences among merchants could explain the result. The phrase "for all merchants" also overstates what the evidence supports because conversion can vary by merchant, device, payment method, and baseline.
+   **How to change it:** State the measured conversion change with its unit and comparison design, and replace "for all merchants" with [the merchants included in the analysis] unless the result was verified for all merchants.
 
 ## Already working
 
-- s2:e0:b1: Shows ownership of core product work rather than only participation.
-- s2:e1:b3: Combines ownership, implementation scope, adoption reach, and a quantified annual benefit.
-- s3:e0:b0: Uses multiple checkable scope signals: student reach, dining-hall coverage, food redistributed, and first-year timing.
+- s2:e1:b1: Leads with a clear operational result.
+- s2:e0:b1: Shows both product ownership and cross-functional influence.
+- s3:e0:b1: Uses a strong before-and-after metric rather than an unanchored user count.
 
 ## Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
 
-### The onboarding result is duplicated or assigned to the wrong project because the same 2,300-merchant redesign appears under Harbor Payments and the earlier MBA practicum.
+### The 35% checkout-conversion improvement is not supported by a stated baseline, comparison design, or verified result for all merchants.
 
-> 2,300 new merchants in the pilot region
+> Improved checkout conversion by 35%
 
-The practicum is dated January–May 2024, before the Harbor Payments internship dated June–August 2024, yet both entries claim essentially the same reduction in first-payment time for 2,300 merchants. A reader cannot tell which project owned the result and may treat it as inflated duplication rather than verified impact.
+The flow change alone does not establish that it caused the improvement; other changes or differences among merchants could explain the result. The phrase "for all merchants" also overstates what the evidence supports because conversion can vary by merchant, device, payment method, and baseline.
 
-**How to change it:** Verify the dates and merchant populations, distinguish the two redesigns if they were different, or keep the 2,300-merchant result under Harbor Payments and remove or relocate the duplicate practicum line.
+**How to change it:** State the measured conversion change with its unit and comparison design, and replace "for all merchants" with [the merchants included in the analysis] unless the result was verified for all merchants.
 
-*raised by content, narrative · costs no words if moved; otherwise saves about 15 words*
+*raised by content · costs about 6 words to add*
 
-### “Improved checkout conversion by 35% ... for all merchants” overstates the aggregate result and leaves the comparison and meaning of 35% unclear.
+### The chargeback interviews did not by themselves size the chargeback problem.
 
-> for all merchants
+> Interviewed 25 merchants to size
 
-An aggregate result across merchants does not show that every merchant improved by the same amount because merchant mix, devices, payment methods, and baseline conversion can differ. The reader also cannot tell whether 35% means relative growth or percentage-point growth, so the size and credibility of the result are difficult to judge.
+Interviews can reveal merchants’ experiences and possible causes, but they cannot reliably quantify chargeback prevalence, volume, or financial impact. Without supporting operational, transaction, or financial data, a reader may question how the interviews produced a defensible roadmap priority.
 
-**How to change it:** Replace “for all merchants” with the measured population, such as “across participating merchants,” and state the before-and-after conversion rates or specify whether 35% was a relative increase or a percentage-point increase over [comparison period].
+**How to change it:** Replace "to size the chargeback problem" with language describing how the interviews informed the business case, or add [the operational, transaction, or financial data used to size the chargeback problem].
 
-*raised by content, narrative · costs about 8 words to add*
+*raised by content · costs about 8 words to add*
 
-### The opt-in comparison is confounded and reports no measured onboarding outcome.
+### The chargeback bullet gives the interview count but not the finding that made the roadmap decision persuasive.
+
+> the findings into the business case
+
+The reader can see the research effort, but not the magnitude or significance of the problem uncovered. The count shows scope rather than why the next-quarter priority was warranted.
+
+**How to change it:** Replace "the findings" with [the single quantified chargeback finding or decision-relevant insight] that supported the roadmap priority.
+
+*raised by content · costs about 6 words to add*
+
+### The opt-in comparison does not by itself measure the causal effect of the onboarding redesign.
+
+> merchants who opted into the new flow
+
+Merchants who opted in may differ from those who stayed on the old flow in motivation, size, capability, or other factors unrelated to the redesign. The comparison can show an association, but not that the redesign caused the difference without randomization or adjustment.
+
+**How to change it:** Describe the line as comparing outcomes between opt-in and non-opt-in merchants, or add [the randomization or adjustment method used to support a causal effect].
+
+*raised by content · costs about 8 words to add*
+
+### The onboarding-evaluation bullet states the comparison method but not the measured outcome.
 
 > Measured the onboarding redesign
 
-Merchants who opted into the new flow may differ from those who stayed on the old flow in size, motivation, sophistication, or readiness, so the comparison cannot isolate the redesign's effect without randomization or credible adjustment. The line then stops at describing the analysis and gives the recruiter no difference in time, completion, or another product result.
+A reader cannot tell whether the redesign improved onboarding, had no effect, or produced a negative result. The comparison setup is method rather than the achievement delivered during the internship.
 
-**How to change it:** Label the result as an observational comparison unless randomization or an adjustment method was used, and add [the measured difference in the key onboarding outcome] between the new- and old-flow groups; fold the method into the stronger result line or delete this standalone bullet if it duplicates it.
+**How to change it:** Add [the metric compared and the result for the new-flow group versus the old-flow group] after the comparison description.
 
-*raised by content, wording · costs about 8 words to add*
+*raised by content · costs about 10 words to add*
 
 ## Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
 
-### The late-delivery line incorrectly presents a KPI-definition change as an improvement in delivery performance.
+### The line credits a measurement-definition change with reducing late deliveries, and 11% to 7% is a 4-percentage-point change rather than a 30% reduction.
 
-> excluding weather-delayed shipments
+> Cut late deliveries from 11% to 7%
 
-Excluding weather-delayed shipments changes the measured population and can lower the reported rate without making any shipment arrive sooner. The 11% and 7% figures are therefore not comparable as actual delivery performance unless both use the same inclusion rules.
+Excluding weather-delayed shipments changes which deliveries are counted; it does not make those shipments arrive on time or reduce the underlying number of late deliveries. The figures describe a 4-percentage-point decline, or approximately a 36.4% relative reduction, so the claimed operational improvement is misleading without a consistent definition.
 
-**How to change it:** Replace “Cut late deliveries from 11% to 7%” with “Reduced the adjusted late-delivery rate from 11% to 7% after excluding weather-delayed shipments,” or use [before-and-after rates under the unchanged company KPI] and state the operational intervention that produced the improvement.
+**How to change it:** Replace "Cut late deliveries" with "Changed the reported late-delivery rate," retain the 11% to 7% figures as a 4-percentage-point change, and add [the actual late-delivery reduction using a consistent definition].
 
-*raised by content, wording · costs about 6 words to add*
+*raised by content · costs about 10 words to add*
 
-### The line uses the wrong tense for an ended role: “prepares” must be past tense.
+### The warehouse-error result is grammatically incomplete because the percentage needs the preposition "by."
+
+> Cut warehouse pick errors 30%
+
+As written, "Cut warehouse pick errors 30%" is missing the grammatical link between the action and the amount of reduction. The reader has to supply the intended construction, which creates an avoidable wording flaw in an otherwise strong quantified result.
+
+**How to change it:** Insert "by" before "30%."
+
+*raised by wording · costs adds 1 word*
+
+### The S&OP responsibility has no stated outcome.
 
 > prepares the forecast pack
 
-The Crestline role ended in August 2023, while “Coordinated” correctly describes completed work in the past tense. The mixed tense makes the timing of the responsibility inconsistent and can make the reader wonder whether the role is still active.
+A hiring reader can see recurring coordination across sales, finance, and operations and ownership of the forecast pack, but cannot see why the work mattered. The line therefore reads as a duty rather than evidence of an improvement in forecasting, inventory, service, or planning speed.
 
-**How to change it:** Change “prepares” to “prepared.”
+**How to change it:** Add [the single most meaningful forecast accuracy, inventory, service-level, or planning-cycle result] after the responsibility, using a before-and-after or other concrete comparison if available.
 
-*raised by content, wording · costs no words*
-
-### The S&OP line describes activities without a business result, uses an unexplained abbreviation, and needs a consistent past-tense verb.
-
-> quarterly S&OP review
-
-“Coordinated” and “prepares” make the line read as meeting administration rather than an operations-analysis contribution, and the abbreviation may be unclear to readers outside the team. Without a result or measure, the recruiter cannot judge what the process enabled for planning, inventory, capacity, or service performance.
-
-**How to change it:** Change “prepares” to “prepared,” spell out [Sales and Operations Planning] before using “S&OP,” and replace the activity-only ending with [the decision or operational outcome enabled] plus [one measure such as forecast accuracy, planning-cycle time, inventory, capacity, or service performance].
-
-*raised by content, wording · costs about 8 words to add*
+*raised by content · costs about 8 words to add*
 
 ## Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
 
-### The weekly-active-user increase should not be attributed entirely to pickup reminders without causal evidence.
-
-> by adding pickup reminders
-
-The figures show that weekly active users rose from 400 to 1,150 after the change, but the 60 interviews only explain why reminders were chosen. Seasonality, marketing, overall app growth, or other changes could have produced part of the increase, so the causal wording overstates the evidence.
-
-**How to change it:** Change “Raised” to “Increased” or say users increased from 400 to 1,150 “after adding pickup reminders”; claim that reminders caused the increase only if supported by [a controlled or quasi-experimental comparison].
-
-*raised by content · costs no words*
-
-### The 95% volunteer fill rate is internally inconsistent with claiming that staff coverage gaps were eliminated.
+### A 95% pickup-slot fill rate does not establish that staff no longer covered gaps.
 
 > removing the need for staff to cover gaps
 
-A 95% fill rate leaves 5% of pickup slots uncovered, so volunteers alone could not remove the need for staff if every slot required coverage. The wording also frames the work as a generic setup and describes the result indirectly.
+A 95% fill rate leaves 5% of slots unfilled, so the aggregate figure cannot prove that no staff coverage was needed. That conclusion requires evidence about how the remaining slots were handled or whether they were noncritical.
 
-**How to change it:** Use “Implemented a volunteer shift system” and state that it filled 95% of pickup slots; claim eliminated staff coverage gaps only if [the remaining 5% were cancelled, tolerated, or covered through another reliable arrangement], otherwise remove that claim.
+**How to change it:** Keep the claim that volunteers filled 95% of pickup slots, or replace the staff-coverage claim with [evidence that no staff coverage was needed for the remaining slots].
 
-*raised by content, wording · costs saves about 2 words*
+*raised by content · costs about 8 words to add*
 
 ## MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
 
-### The practicum bullet is wrong for a hospital-network project: it claims a merchant-onboarding result that belongs to another entry.
+### The practicum section contains a merchant-onboarding bullet that duplicates Harbor Payments work and breaks the hospital consulting narrative.
 
 > new merchant to receive a first payment
 
-Merchants, first payments, and merchant onboarding do not fit the surrounding clinic scheduling and patient-intake work. The same 2,300-merchant result already appears under Harbor Payments, so this line looks copied, duplicated, and assigned to the wrong project.
+The first two bullets establish a regional hospital scheduling and intake project, while the merchant result belongs to product work elsewhere on the résumé. A reader may therefore see the third bullet as misplaced or duplicated and question the accuracy of the section.
 
-**How to change it:** Replace the bullet with [the verified outcome of the outpatient scheduling or patient-intake work], or remove it; do not retain the merchant population or first-payment metric unless they genuinely describe this hospital project.
+**How to change it:** Remove [s3:e1:b2] from the practicum or move it to the relevant product entry; if it stays, replace it with a hospital-related result.
 
-*raised by content, narrative · costs about 12 words to replace*
+*raised by narrative · costs saves about 18 words if removed*
 
-### The scheduling bullet states meeting activity but not the scheduling change or measurable result produced.
+### The weekly clinic-manager sessions have no stated result.
 
 > Held weekly working sessions
 
-“Held weekly working sessions” tells the recruiter that participation occurred but not what decision or intervention the candidate led. “Across the network” supplies scope without showing whether wait time, appointment capacity, utilization, or no-shows improved.
+The line shows direct engagement with stakeholders and the scope of the scheduling work, but not what the sessions produced or improved. A reader cannot tell whether scheduling became faster, more reliable, or otherwise more effective.
 
-**How to change it:** Replace “Held” with the specific action, such as “Led,” and add [the outpatient scheduling change or decision adopted] plus [the strongest measured result and comparison point].
+**How to change it:** Replace the activity-only ending with [the scheduling outcome produced by the sessions], followed by [the result measure compared with the pre-project baseline].
 
-*raised by content, wording · costs about 8 words to add*
+*raised by content · costs about 10 words to add*
 
-### The patient-intake bullet hides ownership and gives no measurable size or benefit for the shortened form.
+### The intake bullet uses passive wording and gives adoption and scope without a measured operational or patient result.
 
-> the intake form was shortened
+> Patient intake at 4 clinics was mapped
 
-Passive wording makes it unclear that the candidate performed the mapping and redesign, while adoption by front-desk staff is buried after the methods. The reader still cannot tell how much the form changed or whether intake became faster, easier, or less error-prone.
+The passive construction obscures the candidate’s role, while adoption by front-desk staff proves implementation but not effectiveness. The four-clinic count establishes scale, yet the reader still cannot judge whether the shortened form reduced effort, delays, errors, or another meaningful problem.
 
-**How to change it:** Use active phrasing such as “Mapped patient intake at 4 clinics and shortened the intake form,” lead with the adoption by front-desk staff, and add [the number of fields or questions removed or the change in intake-completion time] plus [the resulting operational or patient-facing improvement].
+**How to change it:** Replace the passive construction with an active description of the mapping and form-shortening work, keep the adoption detail only if space allows, and add [one intake outcome compared with its pre-change level].
 
-*raised by content, wording · costs about 8 words to add*
+*raised by content · costs about 8 words to add*
 
 ## Across the whole résumé
 
-### Do not add personal details such as date of birth or nationality to the résumé.
+### The résumé includes personal details that should be left off by convention.
 
-> Date of birth: 2 Nov 1996 | Nationality: American
+> Date of birth: 2 Nov 1996
 
-These details are not information a recruiter is meant to weigh and are conventionally left off a résumé. Including them uses space without strengthening the candidacy and can introduce irrelevant personal information into screening.
+A reader is not meant to weigh date of birth or nationality in assessing the candidate’s qualifications. Including them uses scarce space on information unrelated to the work evidence and can introduce unnecessary bias or screening concerns.
 
-**How to change it:** Leave date of birth and nationality out of the résumé; do not add them to the file.
+**How to change it:** Delete "Date of birth: 2 Nov 1996 | Nationality: American" from the file.
 
-*raised by file · costs no words*
+*raised by file · costs saves about 7 words*
 
-### Move Education below Experience and likely below Projects so the page leads with more than four years of professional and product evidence.
+### The résumé should place EXPERIENCE before EDUCATION.
 
-> Northfield School of Management | MBA
+> Northfield School of Management
 
-The current ordering gives the MBA and bachelor's degree prominence before the Harbor Payments, Crestline Logistics, and product work. A recruiter deciding quickly will see the candidate's strongest evidence later than necessary, even though the résumé shows substantial experience.
+With more than four years of pre-MBA work, the operations and product evidence should establish the career story before the degrees. Leading with education delays the strongest evidence of ownership, scale, and results.
 
-**How to change it:** Move the Education section below Experience and below Projects if the resulting layout remains clear; do not change the education text itself.
+**How to change it:** Move the experience section above the education section.
 
 *raised by narrative · costs no words*
 
-## Set aside (9)
+### The dates show an unexplained eight-month gap between the B.A. and the Operations Analyst role.
 
-- s2:e0:b1: "the team shipped it two weeks ahead of plan" shows delivery timing but not what changed for merchants, support, or dispute operations after launch.
-- s2:e0:b3: "cutting the open-ticket queue by half" gives a relative change but does not state the starting queue size or when the comparison was made.
-- s3:e0:b0: "Launched a surplus-food pickup app" identifies the deliverable but not the product-lead work behind launching it.
-- whole resume, dates: Jun 2018 to Mar 2019: eight months with no study or work listed after the B.A. and before the Crestline Logistics role.
-- skills: Figma — listed under Tools, but no entry shows wireframing, mockup, prototyping, or other work that specifically supports using Figma; a reader would expect it in a bullet describing the product or app interface design.
-- s2:e0:b3: The phrase "over the summer" adds little because the entry already gives the internship dates and can be removed without losing meaning.
-- s2:e1:b1: "Cut warehouse pick errors 30%" is grammatically incomplete because the percentage needs the preposition "by"; use "Cut warehouse pick errors by 30%".
-- s3:e1:b2: "the time it takes a new merchant to receive a first payment" uses present-tense wording inside an ended project; change it to "the time it took a new merchant to receive a first payment." (and 2 more like it)
-- s2:e0: s2:e0:b0 and s2:e0:b4 repeat: Both describe the redesigned merchant flow and its evaluation; fold the comparison method from b4 into the stronger result in b0 or delete b4 as a standalone line.
+> Jun 2018
+
+The B.A. ends in Jun 2018 and the next role begins in Mar 2019, leaving a reader to wonder what occupied that period. An unexplained gap can prompt questions during screening even when the work history itself is strong.
+
+**How to change it:** Add [the activity that accounts for the gap] between the education and work dates, if relevant to the application.
+
+*raised by narrative · costs about 4 words to add*
+
+## Set aside (11)
+
+- s2:e1:b0, s2:e0:b0: The comparison in "Cut late deliveries from 11% to 7%" is unclear because it was achieved "by excluding weather-delayed shipments from the on-time calculation." (and 1 more like it)
+- s3:e1:b2: “Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.” (and 2 more like it)
+- s3:e0:b2: The phrase "removing the need for staff to cover gaps" states an operational result without measuring how staff coverage changed. (and 1 more like it)
+- s3:e0:b0, s3:e0:b1, s3:e0:b2: "that would have been thrown away" buries the environmental result in a passive, wordy clause. (and 2 more like it)
+- s2:e1:b2: "Coordinated" is past tense but "prepares" is present tense even though the role ended in 2023.
+- s2:e1:b3: The quantified result appears after a long method phrase, so the scan-friendly impact is easy to miss.
+- s2:e0:b3: "over the summer" is redundant context that does not strengthen the result.
+- s2:e0:b4: The bullet needs the measured outcome, such as the difference in conversion or completion between the two groups.
+- s2:e0:b5: The key result is buried after the redesign method; lead with the reduction in time to first payment and then state how the redesign achieved it.
+- s3:e1:b0, s3:e1:b1: "Working sessions" is a vague phrase that does not tell a scanning reader what the sessions produced. (and 3 more like it)
+- s3:e1:b2: "It takes" is present tense even though the practicum ended in May 2024. (and 1 more like it)

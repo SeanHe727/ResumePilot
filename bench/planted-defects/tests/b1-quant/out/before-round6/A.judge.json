@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 22,
+  "words": 3021,
+  "quotes": 20,
+  "grounded": 15,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "only about half of the bullets begin with action verbs, so make the remaining openings grammatically direct and consistent."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 6116,
+    "completion_tokens": 10438,
+    "total_tokens": 16554,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10015
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4196
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove first-person phrasing - One research bullet uses “my proof.” Resume bullets otherwise use an objective style, so remove the personal pronoun."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct the spelling of “econometircs” to “econometrics.”"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 52% to 58% is 6 percentage points, not simply 6%."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "the change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The feature-store outcome should lead the line, and the opening should use a finite past-tense verb instead of \"Joining.\""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Separate the package release from the unrelated lab duties and move the download result immediately after the package description."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "The Sharpe-ratio annualization is technically wrong: a daily Sharpe ratio must be multiplied by the square root of 252, not by 252."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "The Diebold-Mariano claim is technically wrong for the nested HAR-RV comparison... Replace the test description with an appropriate nested-forecast comparison such as a Clark-West test."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Shorten Sunrise Bakery because it is unrelated to the quantitative direction and currently receives the résumé's most prominent position."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The skills section lists Kafka, but no bullet shows its use. Either connect it to documented experience or remove it."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 22,
+    "rewrites": [],
+    "falsePositives": [
+      "only about half of the bullets begin with action verbs, so make the remaining openings grammatically direct and consistent."
+    ]
+  }
+}

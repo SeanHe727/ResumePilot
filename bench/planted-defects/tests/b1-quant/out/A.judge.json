@@ -14,87 +14,83 @@
     "N4"
   ],
   "coverage": true,
-  "suggestions": 22,
-  "words": 3021,
-  "quotes": 20,
-  "grounded": 15,
+  "suggestions": 15,
+  "words": 2006,
+  "quotes": 13,
+  "grounded": 10,
   "rewrites": 0,
   "inventedNumbers": [],
-  "falsePositives": [
-    "only about half of the bullets begin with action verbs, so make the remaining openings grammatically direct and consistent."
-  ],
+  "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 6116,
-    "completion_tokens": 10438,
-    "total_tokens": 16554,
+    "prompt_tokens": 4783,
+    "completion_tokens": 8937,
+    "total_tokens": 13720,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 10015
+      "reasoning_tokens": 8478
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 4196
+    "prompt_cache_miss_tokens": 2863
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove first-person phrasing - One research bullet uses “my proof.” Resume bullets otherwise use an objective style, so remove the personal pronoun."
+        "evidence": "uses a first-person pronoun, breaking the resume's phrase-based style"
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "Correct the spelling of “econometircs” to “econometrics.”"
+        "evidence": "The Methods skills line misspells 'econometrics.'"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The change from 52% to 58% is 6 percentage points, not simply 6%."
+        "evidence": "The change from 52% to 58% is six percentage points, while the relative increase is approximately 11.5%"
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "the change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+        "evidence": "A reduction from 0.20 to 0.15 is 0.05 divided by 0.20, or a 25% reduction, not 33%"
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "The feature-store outcome should lead the line, and the opening should use a finite past-tense verb instead of \"Joining.\""
+        "evidence": "puts the reusable outcome after too many implementation details"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "Separate the package release from the unrelated lab duties and move the download result immediately after the package description."
+        "evidence": "separate the software-package accomplishment from unrelated lab duties"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "The Sharpe-ratio annualization is technically wrong: a daily Sharpe ratio must be multiplied by the square root of 252, not by 252."
+        "evidence": "A daily Sharpe ratio is annualized by multiplying by the square root of 252, not by 252"
       },
       {
         "id": "T3",
         "found": true,
-        "evidence": "The Diebold-Mariano claim is technically wrong for the nested HAR-RV comparison... Replace the test description with an appropriate nested-forecast comparison such as a Clark-West test."
+        "evidence": "Standard Diebold–Mariano tests generally do not have the correct null distribution for nested forecasting models"
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "Shorten Sunrise Bakery because it is unrelated to the quantitative direction and currently receives the résumé's most prominent position."
+        "evidence": "its current placement makes the career appear to move backward from quantitative research"
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "The skills section lists Kafka, but no bullet shows its use. Either connect it to documented experience or remove it."
+        "evidence": "either support or remove skills such as SQL, C++, Kafka, and Bayesian inference that are not demonstrated elsewhere"
       }
     ],
     "coverage": true,
-    "suggestions": 22,
+    "suggestions": 15,
     "rewrites": [],
-    "falsePositives": [
-      "only about half of the bullets begin with action verbs, so make the remaining openings grammatically direct and consistent."
-    ]
+    "falsePositives": []
   }
 }

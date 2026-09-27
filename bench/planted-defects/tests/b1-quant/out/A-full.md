@@ -1,222 +1,170 @@
 # Full review: resume.pdf
 
-**89/100** — format 100 · content 85 · wording 87 · narrative 67
+**87/100** — format 100 · content 83 · wording 85 · narrative 64
 
 Read 5 of 5 entries for content, 5 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **The Diebold-Mariano claim is technically wrong for the nested HAR-RV comparison, and the line also needs the actual forecast result and its statistical evidence.**
+1. **The claim uses standard Diebold–Mariano tests incorrectly for a nested-model comparison and does not report the result that supposedly confirms the gain.**
    > Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.
-   The usual Diebold-Mariano null distribution is not generally valid when the forecasts come from nested models, so a technical reader may reject the stated confirmation method. The line also says neither what forecast metric improved nor what the tests found across the 30 indices, leaving the statistical procedure more visible than the research result.
-   **How to change it:** Replace the test description with an appropriate nested-forecast comparison such as a Clark-West test, apply suitable dependence and multiple-comparison treatment across the 30 indices, and add [the forecast metric and key result, such as the p-value or percentage of indices with significant improvement].
-2. **The Sharpe-ratio annualization is technically wrong: a daily Sharpe ratio must be multiplied by the square root of 252, not by 252.**
+   Standard Diebold–Mariano tests generally do not have the correct null distribution for nested forecasting models because parameter estimation affects the comparison. Testing 30 indices also requires multiple-comparison handling, so a reader cannot judge whether the reported gain is statistically supported or how large it was.
+   **How to change it:** Replace the standard nested-model comparison with an appropriate procedure such as a Clark–West adjustment or valid bootstrap, include multiple-comparison handling across the 30 indices, and add [the validated test result or significance level].
+2. **The annualized Sharpe calculation is wrong, and the line reports a calculation without showing what result or decision it enabled.**
    > Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
-   Multiplying the Sharpe ratio directly by 252 substantially overstates annualized risk-adjusted performance. Because the line presents the calculation as a research result, a quantitative reader may doubt the reliability of the reported signal evaluation.
-   **How to change it:** Replace "multiplying it by 252" with "multiplying it by the square root of 252," subject to the usual return-dependence assumptions, after verifying the calculation basis.
-3. **Replace "making runs reproducible by seed" because a seed alone does not establish reproducible cluster runs.**
-   > Built the lab’s simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours and making runs reproducible by seed.
-   A fixed seed controls the random-number stream, but results can still differ with changes in software, dependencies, numerical libraries, hardware, configuration, or parallel execution. Claiming full reproducibility from the seed alone may therefore draw scrutiny from a technical reader even though the 14.4-fold speedup is correct.
-   **How to change it:** Replace it with "making random draws reproducible under a fixed seed" or, if verified, state the additional environment and execution controls that made the full runs reproducible; use "enabling seed-based reproducibility" only if that narrower claim is intended.
+   A daily Sharpe ratio is annualized by multiplying by the square root of 252, not by 252, so the current wording materially overstates the reported performance. A reader also sees an activity—reporting a metric—but no validated result, comparison, or research conclusion that demonstrates its value.
+   **How to change it:** Replace "252" with "√252" and replace "before reporting it to the desk" with [the validated annualized performance result and the comparison it supported].
+3. **The stated 33% improvement is mathematically incorrect, and the line does not name the forecast-error metric.**
+   > Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.
+   A reduction from 0.20 to 0.15 is 0.05 divided by 0.20, or a 25% reduction, not 33%. Without the metric name, a reader cannot tell whether the values are RMSE, MAE, MAPE, or another measure, so the result is difficult to interpret.
+   **How to change it:** Replace "a 33% improvement" with "a 25% reduction" and replace "forecast error" with [the specific error metric].
 
 ## Already working
 
-- s2:e1:b0: Combines contribution, asset class, evaluation period, out-of-sample validation, and costs in one credible line.
-- s2:e1:b3: Includes downstream adoption rather than stopping at construction of the feature store.
-- s3:e0:b0: Names a credible forecasting baseline, evaluation metric, out-of-sample setting, and evaluation scope.
-
-## Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present
-
-### Shorten Sunrise Bakery because it is unrelated to the quantitative direction and currently receives the résumé's most prominent position.
-
-> Assistant Store Manager
-
-The two bullets make a coherent store-operations entry, but the move from graduate research to store management can make the career direction look uncertain when this role appears first. Its recent dates and two-bullet treatment give it more attention than the quantitative research that supports the target path.
-
-**How to change it:** Move Sunrise Bakery to a one-line Additional Experience entry at the bottom, or reduce it to one bullet; do not develop the entry further.
-
-*raised by narrative · costs saves about 20 words*
+- s2:e1:b0: Pairs a concrete performance result with out-of-sample validation and transaction costs.
+- s2:e1:b3: Shows technically specific ownership of difficult point-in-time market-data preparation.
+- s3:e0:b0: Uses a direct baseline comparison rather than an unsupported performance claim.
 
 ## Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
 
-### The Diebold-Mariano claim is technically wrong for the nested HAR-RV comparison, and the line also needs the actual forecast result and its statistical evidence.
+### The claim uses standard Diebold–Mariano tests incorrectly for a nested-model comparison and does not report the result that supposedly confirms the gain.
 
 > standard Diebold-Mariano tests
 
-The usual Diebold-Mariano null distribution is not generally valid when the forecasts come from nested models, so a technical reader may reject the stated confirmation method. The line also says neither what forecast metric improved nor what the tests found across the 30 indices, leaving the statistical procedure more visible than the research result.
+Standard Diebold–Mariano tests generally do not have the correct null distribution for nested forecasting models because parameter estimation affects the comparison. Testing 30 indices also requires multiple-comparison handling, so a reader cannot judge whether the reported gain is statistically supported or how large it was.
 
-**How to change it:** Replace the test description with an appropriate nested-forecast comparison such as a Clark-West test, apply suitable dependence and multiple-comparison treatment across the 30 indices, and add [the forecast metric and key result, such as the p-value or percentage of indices with significant improvement].
+**How to change it:** Replace the standard nested-model comparison with an appropriate procedure such as a Clark–West adjustment or valid bootstrap, include multiple-comparison handling across the 30 indices, and add [the validated test result or significance level].
 
-*raised by content, wording · costs about 8 words to add*
+*raised by content, wording · costs about 6 words to add*
 
-### The feature-store outcome should lead the line, and the opening should use a finite past-tense verb instead of "Joining."
-
-> built a feature store the team reused in two later projects
-
-A scanner currently encounters three implementation details before reaching the evidence that the work was reused. The awkward opening also makes the sentence harder to parse, so the contribution can look like a list of data-handling tasks rather than an adopted research asset.
-
-**How to change it:** Move "built a feature store the team reused in two later projects" to the front, replace "Joining" with "Joined" or another finite past-tense verb, and retain only the most telling implementation detail after the outcome.
-
-*raised by content, wording · costs saves about 8 words*
-
-### The Sharpe-ratio annualization is technically wrong: a daily Sharpe ratio must be multiplied by the square root of 252, not by 252.
+### The annualized Sharpe calculation is wrong, and the line reports a calculation without showing what result or decision it enabled.
 
 > multiplying it by 252
 
-Multiplying the Sharpe ratio directly by 252 substantially overstates annualized risk-adjusted performance. Because the line presents the calculation as a research result, a quantitative reader may doubt the reliability of the reported signal evaluation.
+A daily Sharpe ratio is annualized by multiplying by the square root of 252, not by 252, so the current wording materially overstates the reported performance. A reader also sees an activity—reporting a metric—but no validated result, comparison, or research conclusion that demonstrates its value.
 
-**How to change it:** Replace "multiplying it by 252" with "multiplying it by the square root of 252," subject to the usual return-dependence assumptions, after verifying the calculation basis.
+**How to change it:** Replace "252" with "√252" and replace "before reporting it to the desk" with [the validated annualized performance result and the comparison it supported].
 
-*raised by content · costs no words*
+*raised by content, wording · costs about 6 words to add*
 
-### The Sharpe-ratio line describes a calculation and a reporting endpoint but does not show the resulting performance or decision it enabled.
+### The feature-store bullet begins with a dangling modifier and puts the reusable outcome after too many implementation details.
 
-> before reporting it to the desk
+> Joining 120 microstructure features
 
-A factor such as 252 is not enough for a reader to judge the signal's performance, and "before reporting it to the desk" establishes only that a number was delivered. The line needs the resulting annualized Sharpe and the comparison or desk decision that made the calculation consequential.
+The opening participial phrase has no grammatical subject that performs the joining, deduplication, and versioning, so the sentence is grammatically unstable. A scanning reader also encounters data-preparation methods before seeing that the work produced a reusable capability adopted in two later projects.
 
-**How to change it:** Replace the reporting endpoint with [the desk decision or research outcome enabled], and add [the resulting annualized Sharpe and the comparison it supported], using the verified square-root-of-252 convention.
+**How to change it:** Move "built a feature store the team reused in two later projects" to the start of the bullet, make the feature store the grammatical subject of the implementation work, and retain only the most telling implementation detail.
 
-*raised by content · costs about 10 words to add*
+*raised by content, wording · costs saves about 8 words*
 
-### The documentation bullet names what was written but not whether it was used or improved later work, and "known failure regimes" may be unclear outside a trading desk.
+### The documentation bullet states what was recorded but not what the documentation enabled.
 
 > for future interns
 
-A reader can see careful research documentation, but cannot tell whether it changed onboarding, supported later projects, or was merely completed for future interns. The specialized phrase may also slow a non-specialist reader who does not immediately recognize it as conditions under which the signal failed.
+A reader can see the assumptions, cost model, and failure regimes, but cannot tell whether the wiki improved reuse, handoff, debugging, or later research. Ending with "for future interns" describes a narrow audience rather than a concrete benefit.
 
-**How to change it:** Replace or supplement "for future interns" with [the clearest adoption or outcome measure, such as projects or interns using the documentation or onboarding time reduced], and replace "known failure regimes" with "known failure conditions" if that is technically accurate.
+**How to change it:** Replace "for future interns" with [the single most concrete reuse or benefit the wiki enabled].
 
 *raised by content, wording · costs about 4 words to add*
 
 ## Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
 
-### Replace "making runs reproducible by seed" because a seed alone does not establish reproducible cluster runs.
+### The phrase "making runs reproducible by seed" overstates what seeding alone establishes.
 
-> making runs reproducible by seed
+> reproducible by seed
 
-A fixed seed controls the random-number stream, but results can still differ with changes in software, dependencies, numerical libraries, hardware, configuration, or parallel execution. Claiming full reproducibility from the seed alone may therefore draw scrutiny from a technical reader even though the 14.4-fold speedup is correct.
+A seed can make random-number generation repeatable, but parallel execution, software versions, inputs, configuration, and cluster settings can still change results. A reader may therefore doubt the reproducibility claim because the line does not identify the controls that made the full study repeatable.
 
-**How to change it:** Replace it with "making random draws reproducible under a fixed seed" or, if verified, state the additional environment and execution controls that made the full runs reproducible; use "enabling seed-based reproducibility" only if that narrower claim is intended.
+**How to change it:** Replace the phrase with wording that says the runs were reproducible with fixed seeds and add [recorded code, dependencies, inputs, configuration, and controlled parallel random-number handling].
 
-*raised by content, wording · costs saves about 2 words*
+*raised by content, wording · costs about 6 words to add*
 
-### Specify the exact logarithmic terms behind "tightens the previous bound by a log factor."
-
-> by a log factor
-
-A mathematical reader can tell that the result is stronger, but cannot judge the size or form of the improvement from the current phrase. Without the old and new logarithmic terms, the contribution sounds less precise than the underlying proof.
-
-**How to change it:** Replace or supplement "by a log factor" with [the exact previous and new logarithmic terms or the specific log-factor improvement], and replace "my proof" with "the proof."
-
-*raised by content, wording · costs about 4 words to add*
-
-### Add a learning outcome to the recitation bullet or make the teaching rating the clearly stated primary outcome.
-
-> earning a 4.8/5 teaching rating
-
-The line establishes weekly responsibility, student reach, materials created, and satisfaction, but it does not show what students learned or whether their performance changed. A hiring reader can therefore judge teaching activity more readily than teaching effectiveness.
-
-**How to change it:** Add [one student-learning or course-performance outcome attributable to the recitations] after the teaching activity; if none is available, retain the rating as the primary outcome without implying a learning effect.
-
-*raised by content · costs about 8 words to add*
-
-### Separate the package release from the unrelated lab duties and move the download result immediately after the package description.
-
-> while maintaining the lab’s shared cluster
-
-The package is a strong technical output with meaningful adoption, but the cluster, reading-group, and grading duties make the bullet read like an unordered list. Placing the 3,000-download result after those duties also makes its referent less immediate and weakens the package's impact.
-
-**How to change it:** End the package clause with "downloaded 3,000 times in its first year," then place the cluster, reading-group, and grading duties in a separate bullet or remove them from this line; add [the estimator, algorithm, or validation method implemented] after identifying the package.
-
-*raised by content, wording, narrative · costs saves about 10 words*
-
-## Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
-
-### The forecast-error claim is arithmetically wrong and does not name the error metric.
-
-> a 33% improvement
-
-The reduction from 0.20 to 0.15 is 0.05 divided by 0.20, or a 25% reduction, not a 33% improvement. A forecasting reader also cannot tell whether the values are MAE, MSE, RMSE, or another measure, so the result is both incorrect and less interpretable.
-
-**How to change it:** Replace "a 33% improvement" with "a 25% reduction in [name of the error metric]"; keep the stated values 0.20 and 0.15 unless they are themselves being revised.
-
-*raised by content, wording, narrative · costs no words*
-
-### Describe the hit-rate change as 6 percentage points, not 6%.
-
-> improved the model’s directional hit rate by 6%
-
-The increase from 52% to 58% is six percentage points; expressed as a relative increase, it is approximately 11.5%. The current wording mixes those conventions and can make a technical reader question the arithmetic of an otherwise clear result.
-
-**How to change it:** Replace "by 6%" with "by 6 percentage points" and retain "from 52% to 58%."
-
-*raised by content, wording, narrative · costs adds 1 word*
-
-### Avoid repeating closely related model-performance claims in the Volatility Forecasting Study.
-
-> with a temporal convolutional model
-
-The QLIKE result and directional hit-rate result both describe the same temporal-convolutional model across the same 30 indices, so two bullets can make the project feel repetitive rather than broader. A recruiter has less room to notice the distinct evaluation dimensions when the central model description is repeated.
-
-**How to change it:** Keep the stronger QLIKE comparison as the lead result, then retain the hit-rate result only if it adds a distinct decision-relevant outcome; otherwise combine or cut the repeated model description.
-
-*raised by narrative · costs saves about 10 words*
-
-## Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
-
-### Clarify what the 0.02 validation-to-leaderboard gap measures and show the before-and-after scores if available.
-
-> closed a 0.02 gap
-
-The reader can see that time-grouped folds improved evaluation alignment, but cannot tell whether 0.02 is a score-point difference, a loss difference, or another unit. Without the before-and-after relationship, the extent of the correction and whether the gap was eliminated remain unclear.
-
-**How to change it:** Replace or supplement the phrase with [the validation and leaderboard score values or the exact labeled score-point gap before and after the fold change].
-
-*raised by content · costs about 6 words to add*
-
-## Across the whole résumé
-
-### Make the intended quantitative career direction explicit because the Ph.D., store-manager role, and independent research overlap in a way that can otherwise look like a career pivot.
-
-> Assistant Store Manager | Metro City, USA | Sep 2025 - Present
-
-The dates do not show a major unexplained education gap, but they do show a move from graduate research to store management immediately after the quantitative internship. Since the store role overlaps with the Ph.D. and independent research, a recruiter may not know whether quantitative work is the intended path or an occasional side interest.
-
-**How to change it:** Add a concise quantitative target or research-focused summary near the top, and use the shorter Additional Experience treatment for Sunrise Bakery so the dates support rather than dominate the intended direction.
-
-*raised by narrative · costs about 12 words to add*
-
-### Remove Kafka from Programming unless the résumé identifies where it was used, and correct "econometircs" to "econometrics."
-
-> econometircs
-
-An unsubstantiated technology can make the skills section look inflated when no experience or project bullet demonstrates Kafka. The spelling error in a methods skill is immediately visible and can undermine confidence in the care taken with technical details.
-
-**How to change it:** Add [the Kafka use, most naturally in the Northpeak feature-store work] or remove Kafka from Programming, and change "econometircs" to "econometrics."
-
-*raised by narrative · costs no words*
-
-### Remove the personal pronoun from the research bullet so the résumé maintains its direct, phrase-based style.
+### The bullet uses a first-person pronoun, breaking the resume's phrase-based style.
 
 > my proof
 
-The rest of the résumé presents accomplishments without first-person possessives, while "my proof" makes this line read more like prose than a résumé phrase. The inconsistency is small but visible in a technical research bullet that should sound especially precise.
+The rest of the resume presents accomplishments without first-person narration, so "my proof" makes this line look less polished and less consistent. It also draws attention to the writer instead of the mathematical contribution.
 
-**How to change it:** Replace "my proof" with "the proof."
+**How to change it:** Replace "my proof" with "the proof" or remove the pronoun, keeping the publication detail attached to the contribution.
 
-*raised by file · costs saves 1 word*
+*raised by file, wording · costs no words*
+
+### The teaching rating does not identify the basis on which the 4.8/5 score was collected.
+
+> earning a 4.8/5 teaching rating
+
+A reader cannot tell whether the rating came from student course evaluations, a subset of responses, or another source. Without that context, the number is harder to interpret as evidence of teaching effectiveness.
+
+**How to change it:** Add [the rating's response basis] immediately after the teaching rating.
+
+*raised by content · costs about 3 words to add*
+
+### The package's download result is separated from the package contribution by several unrelated duties.
+
+> while maintaining the lab’s shared cluster
+
+The downloads show the package's reach, but the line leaves the effect of maintaining the cluster, organizing the reading group, and grading unstated. Combining those duties also makes the stronger software accomplishment harder to scan and connect to its outcome.
+
+**How to change it:** Place "which was downloaded 3,000 times in its first year" immediately after the package contribution, then remove the unrelated duties or add [the single most meaningful outcome of those duties] if they must remain.
+
+*raised by content, wording · costs saves about 10 words*
+
+## Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
+
+### The stated 33% improvement is mathematically incorrect, and the line does not name the forecast-error metric.
+
+> a 33% improvement
+
+A reduction from 0.20 to 0.15 is 0.05 divided by 0.20, or a 25% reduction, not 33%. Without the metric name, a reader cannot tell whether the values are RMSE, MAE, MAPE, or another measure, so the result is difficult to interpret.
+
+**How to change it:** Replace "a 33% improvement" with "a 25% reduction" and replace "forecast error" with [the specific error metric].
+
+*raised by content, wording · costs about 2 words to add*
+
+### The directional hit-rate change should be stated in percentage points, and the result is quantified redundantly.
+
+> by 6% ... from 52% to 58%
+
+The change from 52% to 58% is six percentage points, while the relative increase is approximately 11.5%, so "6%" is ambiguous and can appear mathematically inconsistent. Giving both the change and the endpoints also repeats the same result.
+
+**How to change it:** Replace "by 6%" with "by 6 percentage points" and remove either the endpoint values or the percentage-point statement; retain only one form of the result.
+
+*raised by content, wording · costs saves about 3 words*
+
+## Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
+
+### The validation and leaderboard comparisons use unnamed metrics, so the reported gaps and preserved performance are not interpretable.
+
+> 0.02 gap
+
+A reader cannot tell what the 0.02 gap measures or whether the preserved validation score is an error, ranking, or another evaluation metric. Naming each metric would make the before-and-after comparisons credible without requiring another result.
+
+**How to change it:** Replace "0.02 gap" with "a 0.02 [validation metric] gap" and replace "validation score" with [the validation metric] if accurate.
+
+*raised by content, wording · costs about 3 words to add*
+
+## Across the whole résumé
+
+### The Methods skills line misspells "econometrics."
+
+> econometircs
+
+The error is immediately visible in a compact skills section, where recruiters often scan for keywords quickly. The misspelling can prevent matching against the correctly spelled term and weakens the document's presentation.
+
+**How to change it:** Replace "econometircs" with "econometrics."
+
+*raised by narrative · costs no words*
 
 ## Set aside (11)
 
-- format, s2:e2:b0, s2:e2:b1: uses a personal pronoun; resume lines are phrases, not sentences — "Derived a variance bound for a sparse regression estimator; my proof..." (and 2 more like it)
-- s2:e0:b0, s2:e0:b1: "keeping the store within its weekly labour budget" gives a comparison point but not the size of the result. (and 1 more like it)
-- s2:e2:b3, s2:e2: The ending "which was downloaded 3,000 times in its first year" follows "maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses," so its referent is not immediate. (and 3 more like it)
-- s2:e1:b3: The opening "Joining 120 microstructure features point-in-time across six venues" is grammatically awkward and should use a finite past-tense verb.
-- s2:e1:b5: The phrase "known failure regimes" is specialized jargon that may be unclear to readers outside the desk.
-- s3:e1:b2: The result is buried after "Wrote the team’s feature-selection script using permutation importance," so a scanning reader reaches the method before the measurable reduction; lead with "trimmed 900 candidate features to 300" and follow with how it was done.
-- whole resume, dates: The dates show no major unexplained education gap: the Ph.D. runs from Sep 2021 to May 2026 and covers the period without a listed full-time research role.
-- whole resume, dates: The dates show a move from Graduate Research Assistant to Assistant Store Manager, with the quantitative internship occurring immediately before the store role; this pivot needs either a brief explanation or a less prominent presentation. (and 1 more like it)
-- skills: Kafka is listed under Programming, but no experience or project bullet shows Kafka being used. Add a bullet identifying its use, most naturally in the Northpeak feature-store work, or remove it from the skills section.
-- skills: econometircs in [SKILLS] > Methods is misspelled; the correct spelling is econometrics.
-- s3:e0: s3:e0:b0 and s3:e0:b1 repeat: Both lines describe improved forecasting performance from the same study and spend two bullets on closely related model-performance results. (and 1 more like it)
+- s2:e0:b0: The phrase "keeping the store within its weekly labour budget" does not show the size of the budget result.
+- s2:e2:b1: "my proof tightens the previous bound by a log factor" does not show the specific bounds being compared.
+- s2:e2:b2: "earning a 4.8/5 teaching rating" does not identify the rating's response basis.
+- s2:e0:b0, s2:e0:b1: "Managed" is past tense even though the role is current. (and 1 more like it)
+- s2:e2:b1: "is now Section 3 of a paper under review at JASA" puts the publication detail after a dense technical clause and makes the bullet harder to scan.
+- s3:e0:b0: "QLIKE" is unexplained specialist shorthand; write "QLIKE loss" only if the audience knows the metric, or spell out the metric on first use.
+- s3:e0:b2: "with a temporal convolutional model" repeats the model description in bullet 0 without adding a distinct action or result.
+- s3:e1:b0: "Placed 41st of 2,900 teams" and "finishing in the top 2%" repeat the ranking rather than adding distinct information.
+- s3:e1:b1, s3:e1:b2: The result appears after the implementation detail, making the measurable improvement harder to scan. (and 2 more like it)
+- whole resume, order: Move Sunrise Bakery to a brief Additional Experience line at the bottom, or cut it if it is not needed. Its current placement makes the career appear to move backward from Quantitative Research Intern to Assistant Store Manager.
+- skills: SQL — listed under Programming, but no entry shows or requires SQL use; a reader would expect it in the feature-store, simulation-pipeline, or stock-management entries. (and 3 more like it)
