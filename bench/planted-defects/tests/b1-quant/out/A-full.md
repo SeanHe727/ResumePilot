@@ -1,217 +1,216 @@
 # Full review: resume.pdf
 
-**88/100** — format 100 · content 85 · wording 85 · narrative 67
+**88/100** — format 100 · content 83 · wording 85 · narrative 68
 
 Read 5 of 5 entries for content, 5 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **The line claims that stock counts and supplier orders caused the reduction in unsold bread without evidence isolating their effect.**
-   > Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.
-   Daily stock counts and supplier orders alone do not establish that these actions caused the reduction; other changes could explain the decrease. Without a comparison or analysis isolating their effect, the strong result is less credible to a reader.
-   **How to change it:** Replace the causal construction with “Ran daily stock counts and supplier orders; unsold bread fell from 12% to 7% of production,” or add [evidence isolating how these actions caused the reduction]. Clarify “supplier orders” as the specific ordering change, such as [adjusted order quantities or ordering frequency based on daily counts], if accurate.
-2. **“Added 0.4 Sharpe to the desk’s book” treats Sharpe ratios as additive.**
-   > Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
-   Portfolio Sharpe ratios do not add directly; the combined result depends on the signal’s volatility, correlation with existing positions, sizing, and combination method. Without a defined attribution method, the 0.4 figure does not establish the signal’s contribution to the desk’s Sharpe ratio.
-   **How to change it:** Report the desk’s Sharpe ratio before and after the signal, or specify [the portfolio attribution method used to calculate the 0.4 improvement].
-3. **“Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests” uses an inappropriate test for a nested model comparison.**
+1. **The Diebold–Mariano result is not valid as stated for nested forecasts and does not establish a confirmed gain across 30 indices.**
    > Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.
-   Standard Diebold-Mariano tests are not generally valid when one forecast model nests the other because estimation noise from the additional model terms distorts the usual null distribution. The comparison also needs appropriate treatment of multiple comparisons across the 30 indices.
-   **How to change it:** Replace “standard Diebold-Mariano tests” with “Clark-West tests” or another valid nested-model forecast comparison, and add [an appropriate multiple-testing or joint-testing procedure across the 30 indices].
+   An unmodified Diebold–Mariano test can give invalid inference when the forecasts being compared are nested, as they are here. Testing 30 indices also requires accounting for multiple comparisons and dependence; unadjusted per-index tests do not support the word “confirmed,” so a quantitative reader may question the statistical claim.
+   **How to change it:** If run, replace the testing description with a nested-model procedure such as a Clark–West adjustment or suitable nested-model bootstrap, and state that inference across the 30 indices was multiplicity-adjusted. Otherwise remove or soften “confirmed.”
+2. **The daily Sharpe ratio was annualized incorrectly by multiplying it by 252.**
+   > Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
+   A daily Sharpe ratio is conventionally annualized by multiplying it by the square root of 252, not by 252. The stated method materially overstates the annualized Sharpe unless a nonstandard ratio definition was used, and the bullet describes a reporting action rather than a research effect.
+   **How to change it:** Replace “multiplying it by 252” with “multiplying it by the square root of 252.” If the bullet has no substantive result beyond reporting the figure, remove it.
+3. **The claim that reducing forecast error from 0.20 to 0.15 was a 33% improvement is mathematically incorrect.**
+   > Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.
+   The reduction is 0.05, which is 0.05 divided by the original 0.20, or 25%. Calling it a 33% improvement gives the reader an inflated result and makes the surrounding quantitative claims less credible.
+   **How to change it:** Replace “a 33% improvement” with “a 25% reduction.” Replace “forecast error” with [the metric name] and identify [the baseline or model being compared], if accurate.
+
+## Already working
+
+- s2:e1:b0: Uses a risk-adjusted result with an explicit out-of-sample and transaction-cost context.
+- s2:e2:b3: The open-source package is a concrete artifact with measurable external reach.
+- s3:e1:b0: Leads with a concrete competitive result.
 
 ## Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present
 
-### The line claims that stock counts and supplier orders caused the reduction in unsold bread without evidence isolating their effect.
-
-> cutting unsold bread from 12% to 7%
-
-Daily stock counts and supplier orders alone do not establish that these actions caused the reduction; other changes could explain the decrease. Without a comparison or analysis isolating their effect, the strong result is less credible to a reader.
-
-**How to change it:** Replace the causal construction with “Ran daily stock counts and supplier orders; unsold bread fell from 12% to 7% of production,” or add [evidence isolating how these actions caused the reduction]. Clarify “supplier orders” as the specific ordering change, such as [adjusted order quantities or ordering frequency based on daily counts], if accurate.
-
-*raised by content, wording · costs about 2 words to add*
-
-### “Keeping the store within its weekly labour budget” does not show the actual budget result.
+### The labour-budget statement gives no actual budget result.
 
 > within its weekly labour budget
 
-Staying within budget could mean barely meeting it or substantially underspending. Without a specific variance or budget amount, the management outcome is difficult to assess.
+A reader can tell that spending stayed within a constraint, but cannot judge whether the store merely met the budget or came in materially under it. The line therefore shows compliance without quantifying the achievement.
 
-**How to change it:** Replace or supplement this phrase with [weekly labour-budget variance or amount under budget, measured against the approved budget].
+**How to change it:** Replace the phrase with [amount or percentage under the weekly labour budget], measured against the weekly budget, if accurate.
 
-*raised by content · costs about 3 words to add*
+*raised by content, wording · costs about 3–6 words to add*
+
+### The bullet uses “ran” for two different activities and attributes the full waste reduction to those activities without establishing causation.
+
+> Ran daily stock counts and supplier orders
+
+“Ran daily stock counts and supplier orders” makes the supplier-ordering action imprecise. The reduction is meaningful only if both percentages use the same definition and denominator, and other material conditions such as production, demand, or promotions did not also change.
+
+**How to change it:** Replace “ran” with separate precise verbs, such as “conducted” for stock counts and [the accurate supplier-ordering verb]. If other material conditions were unchanged, state that the practices reduced unsold bread; otherwise say unsold bread fell from 12% to 7% during the period after they were introduced.
+
+*raised by content, wording · costs about 2–5 words to add*
 
 ## Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
 
-### “Added 0.4 Sharpe to the desk’s book” treats Sharpe ratios as additive.
-
-> Added 0.4 Sharpe
-
-Portfolio Sharpe ratios do not add directly; the combined result depends on the signal’s volatility, correlation with existing positions, sizing, and combination method. Without a defined attribution method, the 0.4 figure does not establish the signal’s contribution to the desk’s Sharpe ratio.
-
-**How to change it:** Report the desk’s Sharpe ratio before and after the signal, or specify [the portfolio attribution method used to calculate the 0.4 improvement].
-
-*raised by content · costs about 6 words to add*
-
-### “Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests” uses an inappropriate test for a nested model comparison.
+### The Diebold–Mariano result is not valid as stated for nested forecasts and does not establish a confirmed gain across 30 indices.
 
 > standard Diebold-Mariano tests
 
-Standard Diebold-Mariano tests are not generally valid when one forecast model nests the other because estimation noise from the additional model terms distorts the usual null distribution. The comparison also needs appropriate treatment of multiple comparisons across the 30 indices.
+An unmodified Diebold–Mariano test can give invalid inference when the forecasts being compared are nested, as they are here. Testing 30 indices also requires accounting for multiple comparisons and dependence; unadjusted per-index tests do not support the word “confirmed,” so a quantitative reader may question the statistical claim.
 
-**How to change it:** Replace “standard Diebold-Mariano tests” with “Clark-West tests” or another valid nested-model forecast comparison, and add [an appropriate multiple-testing or joint-testing procedure across the 30 indices].
+**How to change it:** If run, replace the testing description with a nested-model procedure such as a Clark–West adjustment or suitable nested-model bootstrap, and state that inference across the 30 indices was multiplicity-adjusted. Otherwise remove or soften “confirmed.”
 
 *raised by content · costs about 3 words to add*
 
-### The bullet says there was a “forecast gain” but does not quantify the improvement over the nested HAR-RV baseline or state the test result.
+### The test description does not give the size or consistency of the forecast improvement.
 
 > forecast gain
 
-A quantitative-research reader cannot judge the value of the model comparison from a qualitative reference to a gain alone. The reader also sees that validation was attempted but not whether the improvement was statistically supported across the instruments.
+A reader can see how the comparison was tested, but cannot tell whether the gain was small, substantial, or present across most of the indices. The result therefore spends valuable space on methodology without showing the evidence that would make the claim persuasive.
 
-**How to change it:** Replace “forecast gain” with [improvement in the forecast metric relative to the nested HAR-RV baseline], and replace “standard” with [the test result or significance outcome across the 30 indices].
+**How to change it:** Keep the HAR-RV baseline and corrected test, then add the single most useful result: [forecast-error reduction or effect size versus HAR-RV], or [number of indices with statistically significant improvement].
 
-*raised by content, wording · costs about 5 words to add*
+*raised by content, wording · costs about 4–8 words to add*
 
-### “Joining 120 microstructure features” uses the wrong tense for a completed internship and creates a dangling modifier before “built.”
+### The entry disperses a strong signal narrative across infrastructure, validation, documentation, and a distracting calculation note.
 
-> Joining 120 microstructure features
+> Annualized the signal’s daily Sharpe ratio
 
-“Joining” makes the completed work sound ongoing and grammatically attaches the feature-joining action ambiguously to “built.” The long opening clause also delays the feature store’s reuse, which is the clearest evidence of impact.
+The opening signal and trading results establish a clear quantitative-research story, but the later bullets make the reader reconstruct how the work progressed from signal to implementation to validation. The annualization note is a routine calculation rather than a contribution, so it weakens the entry's research focus.
 
-**How to change it:** Replace “Joining” with “Joined,” and move “built a feature store” to the start of the bullet or immediately after the subject so the reuse result appears earlier.
+**How to change it:** Order the bullets as signal result, trading-cost improvement, validation evidence, reusable feature-store contribution, and documentation. Move the annualization note out of the entry or remove it; if retained, place it only after correcting the calculation.
 
-*raised by wording · costs no words*
+*raised by narrative · costs saves about 16 words if the calculation note is removed; otherwise no words*
 
-### “Annualized the signal’s daily Sharpe ratio by multiplying it by 252” uses the wrong annualization factor.
+### The daily Sharpe ratio was annualized incorrectly by multiplying it by 252.
 
 > multiplying it by 252
 
-Under the usual daily-Sharpe convention, a daily Sharpe ratio is annualized by multiplying it by the square root of 252, not by 252. Multiplication by 252 annualizes a mean return and materially overstates a Sharpe ratio.
+A daily Sharpe ratio is conventionally annualized by multiplying it by the square root of 252, not by 252. The stated method materially overstates the annualized Sharpe unless a nonstandard ratio definition was used, and the bullet describes a reporting action rather than a research effect.
 
-**How to change it:** Replace “multiplying it by 252” with “multiplying it by the square root of 252.”
+**How to change it:** Replace “multiplying it by 252” with “multiplying it by the square root of 252.” If the bullet has no substantive result beyond reporting the figure, remove it.
 
-*raised by content · costs about 3 words to add*
+*raised by content, wording · costs about 3 words to add, or saves about 10 words if removed*
 
-### The annualized-Sharpe bullet gives no actual Sharpe value or comparison and ends with reporting the calculation rather than its research or trading value.
+### The feature-store bullet begins with an ill-formed participial construction and buries the reusable outcome.
 
-> before reporting it to the desk
+> Joining 120 microstructure features
 
-A reader cannot assess the result from “annualized the signal’s daily Sharpe ratio” without the resulting value or a comparison. “Before reporting it to the desk” describes where the calculation went, not what decision, evaluation, or downstream use it enabled.
+“Joining” does not clearly attach to the subject, so the reader must work out who joined the features and built the store. The sequence of implementation steps also delays the result that matters most: a reusable asset adopted in two later projects.
 
-**How to change it:** Add [the annualized Sharpe value or comparison] and replace the reporting-focused ending with [the decision, evaluation, or downstream use enabled by the annualized Sharpe figure].
+**How to change it:** Move “built a feature store” to the front of the bullet and follow it with the joining, deduplication, and schema-versioning details. Keep the reuse in two later projects immediately after the outcome.
 
-*raised by content · costs about 6 words to add*
+*raised by wording · costs no words*
 
 ## Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
 
-### “My proof” introduces a personal pronoun and makes the research result less direct in a résumé bullet.
+### The phrase “my proof” uses a first-person pronoun in a resume bullet.
 
 > my proof
 
-Résumé lines are phrases rather than first-person sentences, so the pronoun weakens the formal style. It also places the important result after the estimator description instead of presenting the tightened bound as the direct continuation of the action.
+Resume bullets are written as phrases rather than first-person sentences, and “my” adds no ownership beyond the verb “Derived.” The pronoun makes the line feel less consistent with the rest of the document.
 
-**How to change it:** Delete “my” and move the result into a direct continuation of the action, such as “Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor.”
+**How to change it:** Delete “my” and retain the ownership already conveyed by “Derived.”
 
-*raised by file, wording · costs saves about 1 word*
+*raised by file, wording · costs saves 1 word*
+
+### “Making runs reproducible by seed” overstates what seed control alone guarantees.
+
+> reproducible by seed
+
+A fixed seed can reproduce random-number streams, but cluster scheduling, software versions, hardware, and nondeterministic numerical operations can still change results. A technically informed reader may therefore doubt the reproducibility claim even though the runtime reduction is clear.
+
+**How to change it:** If those settings were controlled, replace the phrase with “making stochastic runs reproducible through controlled seeds and execution settings.” If not, soften it to “adding seeded, repeatable runs.”
+
+*raised by content, wording · costs about 3–6 words to add*
+
+### The 4.8/5 rating is not attributed to a clear teaching activity or evaluation source.
+
+> earning a 4.8/5 teaching rating
+
+A reader cannot tell whether the score evaluated your recitations, your teaching specifically, or the course overall. Without that context, the strongest evidence in the bullet may not be confidently attributable to your work.
+
+**How to change it:** Replace or qualify “teaching rating” with the accurate context, such as [student rating for my recitations] or [course evaluation rating attributable to my teaching].
+
+*raised by content · costs about 2–5 words to add*
 
 ## Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
 
-### “Cut forecast error from 0.20 to 0.15, a 33% improvement” contains an incorrect percentage and does not identify the error metric.
+### The claim that reducing forecast error from 0.20 to 0.15 was a 33% improvement is mathematically incorrect.
 
 > a 33% improvement
 
-The reduction is 0.05, which is 25% of the original 0.20, not 33%. Without naming the metric, a reader cannot interpret the two values or compare this claim with the QLIKE result elsewhere in the study.
+The reduction is 0.05, which is 0.05 divided by the original 0.20, or 25%. Calling it a 33% improvement gives the reader an inflated result and makes the surrounding quantitative claims less credible.
 
-**How to change it:** Replace “a 33% improvement” with “a 25% reduction,” and replace “forecast error” with [forecast-error metric].
+**How to change it:** Replace “a 33% improvement” with “a 25% reduction.” Replace “forecast error” with [the metric name] and identify [the baseline or model being compared], if accurate.
 
 *raised by content, wording · costs about 1 word to add*
 
-### “Improved the model’s directional hit rate by 6%” is numerically misleading, and the repeated model reference does not say what produced the higher hit rate.
+### The directional hit-rate increase is 6 percentage points, not 6%.
 
 > by 6%
 
-The change from 52% to 58% is an increase of 6 percentage points, not 6% in relative terms; the relative increase is approximately 11.5%. Repeating “with a temporal convolutional model” does not explain what was done with the model to produce this result.
+The hit rate moved from 52% to 58%, which is a six-percentage-point increase; expressed relatively, it is approximately 11.5%. Writing “by 6%” is ambiguous and makes the result harder to interpret quickly, especially because the same line already supplies the two percentages.
 
-**How to change it:** Replace “by 6%” with “by 6 percentage points,” and replace the repeated model phrase with [the specific training, feature, objective, or evaluation change that produced the higher hit rate].
+**How to change it:** Replace “by 6%” with “by 6 percentage points.” If the technical choice is material and accurate, name the [modeling or loss-function choice] that connected the temporal convolutional model to this result; otherwise remove the repeated model phrase.
 
-*raised by content, wording · costs about 2 words to add*
-
-### All three bullets repeat the model-performance theme instead of establishing a headline result followed by supporting technical detail.
-
-> Improved the model’s directional hit rate
-
-The overlapping QLIKE, forecast-error, and directional-hit-rate claims make the study read as three similar performance assertions. The entry would be easier to scan if one result led and the other metrics supported it with distinct technical detail.
-
-**How to change it:** Keep one headline performance result first, then use the remaining bullets for the distinct error metric and the specific modeling or feature change that supports it.
-
-*raised by narrative · costs saves about 5 words*
+*raised by content, wording · costs about 1 word to add*
 
 ## Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
 
-### “Closed a 0.02 gap between local validation and leaderboard scores” does not identify the score or metric represented by 0.02.
+### The feature-selection result is buried after the method and feature counts, and “without losing validation score” does not identify the evaluation measure.
 
-> a 0.02 gap
+> without losing validation score
 
-An ML reader can understand the direction of improvement but cannot judge the size or meaning of the change without the metric or score scale. “Which closed” also makes the causal relationship less direct than stating the improvement as the result of the fold change.
+A scanning reader first sees the script, permutation importance, and feature counts rather than the outcome. The phrase also leaves unclear whether the score stayed exactly unchanged or was statistically equivalent, so the preservation claim is difficult to assess.
 
-**How to change it:** Replace “a 0.02 gap” with “[metric] gap of 0.02,” and replace “which closed” with a direct result such as “reducing the [metric] gap to [remaining gap],” if accurate.
+**How to change it:** Lead with the preserved result, then name the permutation-importance method and feature reduction. Replace the vague ending with “preserving [validation metric] at [score or score change],” if accurate.
 
-*raised by content · costs about 2 words to add*
+*raised by wording · costs about 3–6 words to add*
 
 ## Across the whole résumé
 
-### Sunrise Bakery currently appears before Northpeak Capital, making an unrelated current role the first and most prominent experience entry.
+### Sunrise Bakery currently leads the resume with an unrelated career direction.
 
 > Sunrise Bakery | Assistant Store Manager
 
-A recruiter scanning for quantitative work encounters bakery management before the quantitative research internship. That ordering can obscure the experience most relevant to the target role.
+Because it is the newest role and appears first in the experience section, it shapes a recruiter's initial impression before the quantitative research work. That ordering can obscure the statistics and quantitative-finance profile that the rest of the page supports.
 
-**How to change it:** Move Northpeak Capital ahead of Sunrise Bakery, or place Sunrise Bakery under a shortened additional-experience section.
+**How to change it:** Move Sunrise Bakery into an “Additional Experience” subsection below the quantitative experience, or compress it to one line if it must remain in the main section.
 
 *raised by narrative · costs no words*
 
-### Sunrise Bakery receives two bullets despite being unrelated to the quantitative work.
-
-> Assistant Store Manager
-
-The two-bullet treatment gives the role similar visual weight to the quantitative research and statistical-learning experience. Its prominence can make the résumé’s professional direction less clear.
-
-**How to change it:** Shorten Sunrise Bakery to one line, or add a brief explanation of its relevance if it must remain prominent.
-
-*raised by narrative · costs saves about 15 words*
-
-### The skills list includes SQL, C++, Kafka, and Bayesian inference without supporting evidence elsewhere in the résumé.
-
-> SQL
-
-No entry describes use of these tools or methods, so a reader cannot verify whether they were applied in substantive work. Unsupported skills take space that could instead reinforce the methods demonstrated by the experience and projects.
-
-**How to change it:** Remove SQL, C++, Kafka, and Bayesian inference unless the résumé adds work that demonstrates their use.
-
-*raised by narrative · costs saves about 4 words*
-
-### “econometircs” is misspelled.
+### The methods skill is misspelled as “econometircs.”
 
 > econometircs
 
-The misspelling is visible in a skills section and can make the document look insufficiently proofread. It also prevents the field from appearing correctly in a keyword scan.
+The misspelling is visible in a high-scan section and can make a reader question attention to detail. It also obscures the intended technical subject at the point where skills are being screened.
 
 **How to change it:** Replace “econometircs” with “econometrics.”
 
 *raised by narrative · costs no words*
 
-## Set aside (12)
+### Several quantitative results state percentages or score changes without naming the metric, comparison, or outcome precisely enough.
 
-- s2:e2:b1: The phrase "tightens the previous bound by a log factor" gives a comparison without identifying what the bound measures.
-- s2:e2:b2: The line says "earning a 4.8/5 teaching rating" but does not state a student-learning or course outcome.
-- s2:e2:b3: The phrase "while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses" lists additional work without saying what those activities changed. (and 3 more like it)
-- s2:e1:b4: "Annualized the signal’s daily Sharpe ratio" gives no actual Sharpe value or comparison.
-- s2:e1:b5: "for future interns" identifies an intended audience but not the value the documentation created for them or the desk. (and 1 more like it)
-- s3:e0:b2: The phrase “with a temporal convolutional model” identifies the model but not what was done with it to produce the higher hit rate. (and 1 more like it)
-- s2:e2:b0: "Making runs reproducible by seed" is awkward and does not clearly say that the pipeline used fixed or recorded seeds.
-- s2:e2:b1: The result that the bound is tighter is placed after the estimator description and could be stated as the direct continuation of the action.
-- s2:e1:b3: The result is buried after four method details, so the reader reaches the feature store's reuse only after a long opening clause.
-- s3:e1:b0: "Placed 41st of 2,900 teams" and "top 2%" are redundant results, so the line spends words restating the same ranking.
-- s3:e1:b2: "without losing validation score" is vague because it does not say whether the score stayed exactly unchanged or remained within a stated tolerance.
-- s3:e1:b2: "the team's feature-selection script" foregrounds ownership context instead of the feature-selection action itself.
+> closed a 0.02 gap
+
+In the HAR-RV, volatility-study, and Kaggle bullets, a reader can see that performance changed but cannot always tell whether the percentage is relative, what the loss or score measures, or whether a gap was eliminated or merely narrowed. Adding the relevant metric, baseline-to-result values, or number of significant indices would make the claims easier to verify and compare without relying on inference.
+
+**How to change it:** For the HAR-RV comparison, add [forecast-error reduction or effect size] or [number of indices with statistically significant improvement]. For the volatility and Kaggle bullets, name [the evaluation metric], add [baseline and model loss values] where accurate, and clarify whether the 0.02 gap was reduced to zero or only narrowed.
+
+*raised by content, wording · costs about 12–20 words to add*
+
+## Set aside (15)
+
+- s2:e1:b4: "Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk" describes a reporting action rather than an effect of the work. (and 1 more like it)
+- s2:e1:b5: "for future interns" identifies the intended audience but not what the documentation enabled or improved for them. (and 1 more like it)
+- s2:e2:b3: The clauses "maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses" describe responsibilities but give no result for those activities. (and 1 more like it)
+- s3:e0:b2: The phrase "with a temporal convolutional model" names the model but does not show what technical choice connected it to the directional hit-rate improvement.
+- s3:e0:b2: The repeated phrase "with a temporal convolutional model" adds little after the same model is named in the first bullet.
+- s2:e2:b1: "is now Section 3 of a paper under review at JASA" puts secondary publication context after the technical result and makes the ending heavier than necessary.
+- s2:e2:b3: "while maintaining the lab’s shared cluster, organizing the weekly reading group and grading for two courses" adds an overloaded list of duties that obscures the main achievement. (and 1 more like it)
+- s2:e2:b3: "which was downloaded 3,000 times" appears after several intervening duties, so a scanning reader may not immediately know that "which" refers to the R package.
+- s2:e1:b0: The relative clause "that added 0.4 Sharpe" is slightly less direct than stating the measured result after the action.
+- s2:e1:b1: "Keeping 90% of gross returns" is ambiguous because it does not specify whether this means returns, gross P&L, or signal performance.
+- s2:e1:b2: "Forecast gain" is vague and does not tell the reader what metric improved. (and 1 more like it)
+- s2:e1:b3: The sequence of joining, deduplicating, versioning, and building buries the reusable outcome at the end.
+- s3:e1:b0: The phrase "on 300 engineered features" makes it unclear whether the ensemble used or produced those features.
+- s3:e1:b1: "Validation leakage" is specialized shorthand that may not be immediately clear to a reader outside machine learning.
+- skills: Bayesian inference — listed under Methods, but no experience or project entry describes Bayesian modeling or inference.

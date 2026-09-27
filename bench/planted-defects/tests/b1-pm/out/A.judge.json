@@ -13,53 +13,53 @@
     "N5"
   ],
   "coverage": true,
-  "suggestions": 18,
-  "words": 2008,
-  "quotes": 7,
-  "grounded": 4,
-  "rewrites": 0,
+  "suggestions": 17,
+  "words": 1924,
+  "quotes": 8,
+  "grounded": 3,
+  "rewrites": 5,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4492,
-    "completion_tokens": 8529,
-    "total_tokens": 13021,
+    "prompt_tokens": 4385,
+    "completion_tokens": 11237,
+    "total_tokens": 15622,
     "prompt_tokens_details": {
       "cached_tokens": 1664
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 8246
+      "reasoning_tokens": 10873
     },
     "prompt_cache_hit_tokens": 1664,
-    "prompt_cache_miss_tokens": 2828
+    "prompt_cache_miss_tokens": 2721
   },
   "verdict": {
     "defects": [
       {
         "id": "W3",
         "found": true,
-        "evidence": "“Prepares” conflicts with the completed role"
+        "evidence": "\"Coordinated\" and \"prepares\" are not parallel in an ended role."
       },
       {
         "id": "W4",
         "found": true,
-        "evidence": "The intake bullet uses passive voice"
+        "evidence": "Passive wording also obscures who performed the work."
       },
       {
         "id": "A1",
         "found": true,
-        "evidence": "The 35% also lacks a baseline or comparison period"
+        "evidence": "The checkout-conversion claim lacks a baseline or comparison."
       },
       {
         "id": "A4",
         "found": true,
-        "evidence": "duplicates the Harbor Payments onboarding achievement"
+        "evidence": "The résumé assigns the same merchant-onboarding achievement to both Harbor Payments and the hospital practicum."
       },
       {
         "id": "S2",
         "found": true,
-        "evidence": "The scheduling bullet describes meetings rather than the analysis, change, or resulting improvement."
+        "evidence": "Working sessions and front-desk adoption show engagement and implementation, but not whether access, capacity, intake time, errors, or completion improved."
       },
       {
         "id": "S4",
@@ -69,27 +69,33 @@
       {
         "id": "T2",
         "found": true,
-        "evidence": "self-selection bias"
+        "evidence": "Opt-in merchants may differ systematically from those who stayed on the old flow, so the comparison shows association rather than causation."
       },
       {
         "id": "T4",
         "found": true,
-        "evidence": "misrepresents a KPI-definition change as an operational reduction"
+        "evidence": "The changed calculation makes 11% and 7% potentially non-comparable, so it does not establish that actual late deliveries fell."
       },
       {
         "id": "N3",
         "found": true,
-        "evidence": "The resume has no entry between the June 2018 degree completion and the March 2019 start at Crestline."
+        "evidence": "The timeline leaves June 2018 to March 2019 unexplained."
       },
       {
         "id": "N5",
         "found": true,
-        "evidence": "flagged personal details such as date of birth and nationality as unnecessary"
+        "evidence": "Date of birth and nationality do not help a recruiter weigh these qualifications and use attention on irrelevant information."
       }
     ],
     "coverage": true,
-    "suggestions": 18,
-    "rewrites": [],
+    "suggestions": 17,
+    "rewrites": [
+      "from 9 days to 4 days",
+      "pick errors by 30%",
+      "redistributing 9 tonnes of surplus food",
+      "Sales and Operations Planning (S&OP)",
+      "four clinics"
+    ],
     "falsePositives": []
   }
 }

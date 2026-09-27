@@ -1,6 +1,6 @@
 {
   "file": "bench/planted-defects/tests/b1-ce/out/A.md",
-  "recall": 8,
+  "recall": 10,
   "found": [
     "W1",
     "W5",
@@ -9,46 +9,48 @@
     "S1",
     "S3",
     "T1",
-    "N2"
+    "T3",
+    "N2",
+    "N4"
   ],
   "coverage": true,
-  "suggestions": 18,
-  "words": 2229,
-  "quotes": 9,
-  "grounded": 4,
+  "suggestions": 13,
+  "words": 1795,
+  "quotes": 4,
+  "grounded": 3,
   "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4966,
-    "completion_tokens": 9539,
-    "total_tokens": 14505,
+    "prompt_tokens": 4351,
+    "completion_tokens": 8835,
+    "total_tokens": 13186,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 9196
+      "reasoning_tokens": 8458
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 3174
+    "prompt_cache_miss_tokens": 2559
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "The diagnostics-dashboard bullet describes ownership but gives no resulting change."
+        "evidence": "The dashboard and on-call ownership shows responsibility but not the resulting operational change."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "The Agent Runtime Suite opening bullet uses broad claims such as “accelerating delivery,” “improving outcomes,” and “AI-first engineering practices” without specifying what changed."
+        "evidence": "The adoption and delivery claim is vague and has no measurable scale."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The task-completion increase is 12 percentage points, not 12% relative growth."
+        "evidence": "The task-completion increase is 12 percentage points, not 12% as written."
       },
       {
         "id": "A3",
@@ -58,36 +60,36 @@
       {
         "id": "S1",
         "found": true,
-        "evidence": "The 5% latency result is buried after a dense method list and does not identify the workflow or latency path measured."
+        "evidence": "The latency result is buried after a long method list and gives insufficient context for attribution."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The migration result is not quantified, and the long list of parallel work obscures which actions produced it."
+        "evidence": "The result is also buried after several unrelated actions."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "Sampling exactly one scored trajectory per prompt does not provide the within-group comparison required by GRPO and therefore does not itself stabilize sparse-reward training."
+        "evidence": "Sampling exactly one rollout per prompt does not stabilize standard GRPO as stated."
       },
       {
         "id": "T3",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "Dynamic batching can add batching-wait overhead when no concurrent requests are available, so it does not generally reduce the latency of an isolated request."
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "Experience is not in newest-first order."
+        "evidence": "Experience is not listed in reverse chronological order."
       },
       {
         "id": "N4",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "no supporting resume entries for LangGraph, RAG, or Kubernetes."
       }
     ],
     "coverage": true,
-    "suggestions": 18,
+    "suggestions": 13,
     "rewrites": [],
     "falsePositives": []
   }

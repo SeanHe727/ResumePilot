@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 2008,
+  "quotes": 7,
+  "grounded": 4,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4492,
+    "completion_tokens": 8529,
+    "total_tokens": 13021,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8246
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 2828
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "“Prepares” conflicts with the completed role"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "The intake bullet uses passive voice"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "The 35% also lacks a baseline or comparison period"
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "duplicates the Harbor Payments onboarding achievement"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "The scheduling bullet describes meetings rather than the analysis, change, or resulting improvement."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "self-selection bias"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "misrepresents a KPI-definition change as an operational reduction"
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "The resume has no entry between the June 2018 degree completion and the March 2019 start at Crestline."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "flagged personal details such as date of birth and nationality as unnecessary"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

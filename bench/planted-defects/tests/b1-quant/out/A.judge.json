@@ -1,98 +1,103 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/A.md",
-  "recall": 10,
+  "recall": 8,
   "found": [
     "W2",
     "W6",
     "A2",
     "A3",
     "S1",
-    "S3",
     "T1",
     "T3",
-    "N1",
-    "N4"
+    "N1"
   ],
   "coverage": true,
-  "suggestions": 25,
-  "words": 2301,
-  "quotes": 22,
-  "grounded": 16,
-  "rewrites": 2,
-  "inventedNumbers": [],
+  "suggestions": 19,
+  "words": 2517,
+  "quotes": 15,
+  "grounded": 9,
+  "rewrites": 7,
+  "inventedNumbers": [
+    "25"
+  ],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5160,
-    "completion_tokens": 14904,
-    "total_tokens": 20064,
+    "prompt_tokens": 5465,
+    "completion_tokens": 9605,
+    "total_tokens": 15070,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 14394
+      "reasoning_tokens": 9138
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 3240
+    "prompt_cache_miss_tokens": 3545
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove the first-person phrase “my proof.”"
+        "evidence": "The phrase “my proof” uses a first-person pronoun in a resume bullet."
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "Correct the skills typo “econometircs” → “econometrics.”"
+        "evidence": "Correct “econometircs” to “econometrics.”"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "52% to 58% is a 6-percentage-point increase, not simply a 6% increase."
+        "evidence": "The directional hit-rate increase is 6 percentage points, not 6%."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+        "evidence": "The claim that reducing forecast error from 0.20 to 0.15 was a 33% improvement is mathematically incorrect."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "move “built a feature store” to the start of the bullet or immediately after the subject so the reuse result appears earlier."
+        "evidence": "The feature-store bullet begins with an ill-formed participial construction and buries the reusable outcome."
       },
       {
         "id": "S3",
-        "found": true,
-        "evidence": "Split or simplify the overloaded research-assistant bullet."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "Replace “multiplying it by 252” with “multiplying it by the square root of 252.”"
+        "evidence": "The daily Sharpe ratio was annualized incorrectly by multiplying it by 252."
       },
       {
         "id": "T3",
         "found": true,
-        "evidence": "uses an inappropriate test for a nested model comparison."
+        "evidence": "The Diebold–Mariano result is not valid as stated for nested forecasts"
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "Sunrise Bakery currently appears before Northpeak Capital, making an unrelated current role the first and most prominent experience entry."
+        "evidence": "Sunrise Bakery currently leads the resume with an unrelated career direction."
       },
       {
         "id": "N4",
-        "found": true,
-        "evidence": "The skills list includes SQL, C++, Kafka, and Bayesian inference without supporting evidence elsewhere in the résumé."
+        "found": false,
+        "evidence": ""
       }
     ],
     "coverage": true,
-    "suggestions": 25,
+    "suggestions": 19,
     "rewrites": [
-      "Ran daily stock counts and supplier orders; unsold bread fell from 12% to 7% of production,",
-      "Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor."
+      "a 25% reduction",
+      "multiplying it by the square root of 252",
+      "econometrics",
+      "6 percentage points",
+      "making stochastic runs reproducible through controlled seeds and execution settings",
+      "adding seeded, repeatable runs",
+      "conducted"
     ],
     "falsePositives": []
   }

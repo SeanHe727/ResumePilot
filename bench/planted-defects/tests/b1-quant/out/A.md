@@ -4,140 +4,146 @@ hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'i
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
 hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
-Coverage: content reviewed for 5 entries, wording for 5 entries, narrative for the full resume, and format/ATS. No job-description match was run because no posting was provided. Education entries were not applicable to bullet review.
+Content review: 5 entries; wording review: 5 entries; narrative review: 1 resume; format review: 1 file; JD-match review: not run because no job posting was provided.
 
-The specialists’ main recommended changes:
+The main changes to make are:
 
-1. **Reframe the experience order**
-   - Move Northpeak Capital before Sunrise Bakery, or reduce the bakery role to a short “Additional Experience” entry.
-   - The current bakery role is the first and most prominent experience, while the rest of the resume points toward quantitative research.
-   - Correct the skills typo **“econometircs” → “econometrics.”**
-   - Either support or remove skills not demonstrated elsewhere: SQL, C++, Kafka, and Bayesian inference.
+1. **Reposition or compress Sunrise Bakery.**  
+   The narrative review found that placing this unrelated role first makes the resume appear less focused than your quantitative research background. Move it under an **Additional Experience** section or reduce it to one line.
 
-2. **Correct quantitative claims**
-   - The Northpeak bullet saying **“Added 0.4 Sharpe to the desk’s book”** treats Sharpe ratios as additive; verify and re-express the underlying result.
-   - Verify the forecast-validation method for the nested HAR-RV comparison; the reviewer flagged standard Diebold–Mariano testing as inappropriate for that comparison.
-   - The annualization bullet uses an incorrect factor and does not show the resulting metric or decision impact.
-   - In the volatility project, **0.20 to 0.15 is a 25% reduction**, not a 33% improvement.
-   - **52% to 58% is a 6-percentage-point increase**, not simply a 6% increase.
+2. **Correct quantitative claims and calculations.**
+   - In the volatility project, “from 0.20 to 0.15, a 33% improvement” is mathematically incorrect; the reduction is 25%.
+   - “Improved ... by 6% from 52% to 58%” should distinguish between percentage points and relative percentage improvement.
+   - In the internship, multiplying a daily Sharpe ratio by 252 is incorrect; annualization conventionally uses the square root of 252. The specialist also found that this routine calculation does not demonstrate an outcome and may not belong as a bullet.
 
-3. **Make outcomes more specific**
-   - Add the actual labor-budget result for Sunrise Bakery if available.
-   - Identify the error metric in the volatility project.
-   - State what the statistical tests showed, rather than only naming the tests.
-   - Explain what the documentation, cluster maintenance, reading group, and grading enabled.
-   - Replace vague outcomes such as “before reporting it to the desk” and “for future interns” with the resulting decision or benefit.
+3. **Replace claims that lack outcomes with measurable results.**
+   - “Keeping the store within its weekly labour budget” needs the actual budget result if you have it.
+   - “Confirmed the forecast gain...” should state the measured forecasting improvement or statistical result.
+   - The documentation and teaching/cluster-maintenance bullets should explain what those activities enabled, rather than only listing responsibilities.
 
-4. **Tighten wording and structure**
-   - Remove the first-person phrase **“my proof.”**
-   - Fix the awkward wording around “supplier orders.”
-   - Split or simplify the overloaded research-assistant bullet.
-   - Lead bullets with their strongest result where possible.
-   - Clarify ambiguous references such as **“which was downloaded 3,000 times.”**
+4. **Improve precision and remove distractions.**
+   - “Ran daily stock counts and supplier orders” uses “ran” imprecisely for two different activities.
+   - Remove the first-person wording in “my proof.”
+   - The quantitative internship entry becomes less focused when infrastructure, validation, documentation, and reporting details are mixed together.
+   - Correct **“econometircs”** to **“econometrics.”**
+   - The skills section lists Bayesian inference without supporting evidence elsewhere in the resume; either add relevant evidence or remove it.
 
-The file itself is clean: one page, 555 words, ATS-readable, with no layout warnings. The full combined report is available through `/report --full`.
+5. **Keep the current format.**  
+   The file is one page, parses cleanly for ATS systems, has consistent formatting, and contains figures in 17 of 18 bullets. No layout repair is needed.
+
+The full combined report is available via `/report --full`.
 
 > /report
 # Review: resume.pdf
 
-**88/100** — format 100 · content 85 · wording 85 · narrative 67
+**88/100** — format 100 · content 83 · wording 85 · narrative 68
 
 Read 5 of 5 entries for content, 5 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **The line claims that stock counts and supplier orders caused the reduction in unsold bread without evidence isolating their effect.**
-   > Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.
-   Daily stock counts and supplier orders alone do not establish that these actions caused the reduction; other changes could explain the decrease. Without a comparison or analysis isolating their effect, the strong result is less credible to a reader.
-   **How to change it:** Replace the causal construction with “Ran daily stock counts and supplier orders; unsold bread fell from 12% to 7% of production,” or add [evidence isolating how these actions caused the reduction]. Clarify “supplier orders” as the specific ordering change, such as [adjusted order quantities or ordering frequency based on daily counts], if accurate.
-2. **“Added 0.4 Sharpe to the desk’s book” treats Sharpe ratios as additive.**
-   > Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk’s book over 18 months of out-of-sample backtest after costs.
-   Portfolio Sharpe ratios do not add directly; the combined result depends on the signal’s volatility, correlation with existing positions, sizing, and combination method. Without a defined attribution method, the 0.4 figure does not establish the signal’s contribution to the desk’s Sharpe ratio.
-   **How to change it:** Report the desk’s Sharpe ratio before and after the signal, or specify [the portfolio attribution method used to calculate the 0.4 improvement].
-3. **“Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests” uses an inappropriate test for a nested model comparison.**
+1. **The Diebold–Mariano result is not valid as stated for nested forecasts and does not establish a confirmed gain across 30 indices.**
    > Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.
-   Standard Diebold-Mariano tests are not generally valid when one forecast model nests the other because estimation noise from the additional model terms distorts the usual null distribution. The comparison also needs appropriate treatment of multiple comparisons across the 30 indices.
-   **How to change it:** Replace “standard Diebold-Mariano tests” with “Clark-West tests” or another valid nested-model forecast comparison, and add [an appropriate multiple-testing or joint-testing procedure across the 30 indices].
+   An unmodified Diebold–Mariano test can give invalid inference when the forecasts being compared are nested, as they are here. Testing 30 indices also requires accounting for multiple comparisons and dependence; unadjusted per-index tests do not support the word “confirmed,” so a quantitative reader may question the statistical claim.
+   **How to change it:** If run, replace the testing description with a nested-model procedure such as a Clark–West adjustment or suitable nested-model bootstrap, and state that inference across the 30 indices was multiplicity-adjusted. Otherwise remove or soften “confirmed.”
+2. **The daily Sharpe ratio was annualized incorrectly by multiplying it by 252.**
+   > Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
+   A daily Sharpe ratio is conventionally annualized by multiplying it by the square root of 252, not by 252. The stated method materially overstates the annualized Sharpe unless a nonstandard ratio definition was used, and the bullet describes a reporting action rather than a research effect.
+   **How to change it:** Replace “multiplying it by 252” with “multiplying it by the square root of 252.” If the bullet has no substantive result beyond reporting the figure, remove it.
+3. **The claim that reducing forecast error from 0.20 to 0.15 was a 33% improvement is mathematically incorrect.**
+   > Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.
+   The reduction is 0.05, which is 0.05 divided by the original 0.20, or 25%. Calling it a 33% improvement gives the reader an inflated result and makes the surrounding quantitative claims less credible.
+   **How to change it:** Replace “a 33% improvement” with “a 25% reduction.” Replace “forecast error” with [the metric name] and identify [the baseline or model being compared], if accurate.
+
+## Already working
+
+- s2:e1:b0: Uses a risk-adjusted result with an explicit out-of-sample and transaction-cost context.
+- s2:e2:b3: The open-source package is a concrete artifact with measurable external reach.
+- s3:e1:b0: Leads with a concrete competitive result.
 
 ## Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present
 
-- **“Keeping the store within its weekly labour budget” does not show the actual budget result.** *(about 3 words to add)*
+- **The labour-budget statement gives no actual budget result.** *(about 3–6 words to add)*
   > Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.
-  Staying within budget could mean barely meeting it or substantially underspending. Without a specific variance or budget amount, the management outcome is difficult to assess.
-  **How to change it:** Replace or supplement this phrase with [weekly labour-budget variance or amount under budget, measured against the approved budget].
+  A reader can tell that spending stayed within a constraint, but cannot judge whether the store merely met the budget or came in materially under it. The line therefore shows compliance without quantifying the achievement.
+  **How to change it:** Replace the phrase with [amount or percentage under the weekly labour budget], measured against the weekly budget, if accurate.
+- **The bullet uses “ran” for two different activities and attributes the full waste reduction to those activities without establishing causation.** *(about 2–5 words to add)*
+  > Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.
+  “Ran daily stock counts and supplier orders” makes the supplier-ordering action imprecise. The reduction is meaningful only if both percentages use the same definition and denominator, and other material conditions such as production, demand, or promotions did not also change.
+  **How to change it:** Replace “ran” with separate precise verbs, such as “conducted” for stock counts and [the accurate supplier-ordering verb]. If other material conditions were unchanged, state that the practices reduced unsold bread; otherwise say unsold bread fell from 12% to 7% during the period after they were introduced.
 
 ## Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025
 
-- **The bullet says there was a “forecast gain” but does not quantify the improvement over the nested HAR-RV baseline or state the test result.** *(about 5 words to add)*
+- **The test description does not give the size or consistency of the forecast improvement.** *(about 4–8 words to add)*
   > Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.
-  A quantitative-research reader cannot judge the value of the model comparison from a qualitative reference to a gain alone. The reader also sees that validation was attempted but not whether the improvement was statistically supported across the instruments.
-  **How to change it:** Replace “forecast gain” with [improvement in the forecast metric relative to the nested HAR-RV baseline], and replace “standard” with [the test result or significance outcome across the 30 indices].
-- **“Joining 120 microstructure features” uses the wrong tense for a completed internship and creates a dangling modifier before “built.”** *(no words)*
+  > Beat a HAR-RV baseline’s out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.
+  > Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.
+  > Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.
+  > Wrote the team’s feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.
+  A reader can see how the comparison was tested, but cannot tell whether the gain was small, substantial, or present across most of the indices. The result therefore spends valuable space on methodology without showing the evidence that would make the claim persuasive.
+  **How to change it:** Keep the HAR-RV baseline and corrected test, then add the single most useful result: [forecast-error reduction or effect size versus HAR-RV], or [number of indices with statistically significant improvement].
+- **The entry disperses a strong signal narrative across infrastructure, validation, documentation, and a distracting calculation note.** *(saves about 16 words if the calculation note is removed; otherwise no words)*
+  > Annualized the signal’s daily Sharpe ratio
+  The opening signal and trading results establish a clear quantitative-research story, but the later bullets make the reader reconstruct how the work progressed from signal to implementation to validation. The annualization note is a routine calculation rather than a contribution, so it weakens the entry's research focus.
+  **How to change it:** Order the bullets as signal result, trading-cost improvement, validation evidence, reusable feature-store contribution, and documentation. Move the annualization note out of the entry or remove it; if retained, place it only after correcting the calculation.
+- **The feature-store bullet begins with an ill-formed participial construction and buries the reusable outcome.** *(no words)*
   > Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.
-  “Joining” makes the completed work sound ongoing and grammatically attaches the feature-joining action ambiguously to “built.” The long opening clause also delays the feature store’s reuse, which is the clearest evidence of impact.
-  **How to change it:** Replace “Joining” with “Joined,” and move “built a feature store” to the start of the bullet or immediately after the subject so the reuse result appears earlier.
-- **“Annualized the signal’s daily Sharpe ratio by multiplying it by 252” uses the wrong annualization factor.** *(about 3 words to add)*
-  > Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
-  Under the usual daily-Sharpe convention, a daily Sharpe ratio is annualized by multiplying it by the square root of 252, not by 252. Multiplication by 252 annualizes a mean return and materially overstates a Sharpe ratio.
-  **How to change it:** Replace “multiplying it by 252” with “multiplying it by the square root of 252.”
-- **The annualized-Sharpe bullet gives no actual Sharpe value or comparison and ends with reporting the calculation rather than its research or trading value.** *(about 6 words to add)*
-  > Annualized the signal’s daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.
-  A reader cannot assess the result from “annualized the signal’s daily Sharpe ratio” without the resulting value or a comparison. “Before reporting it to the desk” describes where the calculation went, not what decision, evaluation, or downstream use it enabled.
-  **How to change it:** Add [the annualized Sharpe value or comparison] and replace the reporting-focused ending with [the decision, evaluation, or downstream use enabled by the annualized Sharpe figure].
+  “Joining” does not clearly attach to the subject, so the reader must work out who joined the features and built the store. The sequence of implementation steps also delays the result that matters most: a reusable asset adopted in two later projects.
+  **How to change it:** Move “built a feature store” to the front of the bullet and follow it with the joining, deduplication, and schema-versioning details. Keep the reuse in two later projects immediately after the outcome.
 
 ## Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021
 
-- **“My proof” introduces a personal pronoun and makes the research result less direct in a résumé bullet.** *(saves about 1 word)*
+- **The phrase “my proof” uses a first-person pronoun in a resume bullet.** *(saves 1 word)*
   > Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.
-  Résumé lines are phrases rather than first-person sentences, so the pronoun weakens the formal style. It also places the important result after the estimator description instead of presenting the tightened bound as the direct continuation of the action.
-  **How to change it:** Delete “my” and move the result into a direct continuation of the action, such as “Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor.”
+  Resume bullets are written as phrases rather than first-person sentences, and “my” adds no ownership beyond the verb “Derived.” The pronoun makes the line feel less consistent with the rest of the document.
+  **How to change it:** Delete “my” and retain the ownership already conveyed by “Derived.”
+- **“Making runs reproducible by seed” overstates what seed control alone guarantees.** *(about 3–6 words to add)*
+  > Built the lab’s simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours and making runs reproducible by seed.
+  A fixed seed can reproduce random-number streams, but cluster scheduling, software versions, hardware, and nondeterministic numerical operations can still change results. A technically informed reader may therefore doubt the reproducibility claim even though the runtime reduction is clear.
+  **How to change it:** If those settings were controlled, replace the phrase with “making stochastic runs reproducible through controlled seeds and execution settings.” If not, soften it to “adding seeded, repeatable runs.”
+- **The 4.8/5 rating is not attributed to a clear teaching activity or evaluation source.** *(about 2–5 words to add)*
+  > Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.
+  A reader cannot tell whether the score evaluated your recitations, your teaching specifically, or the course overall. Without that context, the strongest evidence in the bullet may not be confidently attributable to your work.
+  **How to change it:** Replace or qualify “teaching rating” with the accurate context, such as [student rating for my recitations] or [course evaluation rating attributable to my teaching].
 
 ## Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present
 
-- **“Cut forecast error from 0.20 to 0.15, a 33% improvement” contains an incorrect percentage and does not identify the error metric.** *(about 1 word to add)*
-  > Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.
-  The reduction is 0.05, which is 25% of the original 0.20, not 33%. Without naming the metric, a reader cannot interpret the two values or compare this claim with the QLIKE result elsewhere in the study.
-  **How to change it:** Replace “a 33% improvement” with “a 25% reduction,” and replace “forecast error” with [forecast-error metric].
-- **“Improved the model’s directional hit rate by 6%” is numerically misleading, and the repeated model reference does not say what produced the higher hit rate.** *(about 2 words to add)*
+- **The directional hit-rate increase is 6 percentage points, not 6%.** *(about 1 word to add)*
   > Improved the model’s directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.
-  The change from 52% to 58% is an increase of 6 percentage points, not 6% in relative terms; the relative increase is approximately 11.5%. Repeating “with a temporal convolutional model” does not explain what was done with the model to produce this result.
-  **How to change it:** Replace “by 6%” with “by 6 percentage points,” and replace the repeated model phrase with [the specific training, feature, objective, or evaluation change that produced the higher hit rate].
-- **All three bullets repeat the model-performance theme instead of establishing a headline result followed by supporting technical detail.** *(saves about 5 words)*
-  > Improved the model’s directional hit rate
-  The overlapping QLIKE, forecast-error, and directional-hit-rate claims make the study read as three similar performance assertions. The entry would be easier to scan if one result led and the other metrics supported it with distinct technical detail.
-  **How to change it:** Keep one headline performance result first, then use the remaining bullets for the distinct error metric and the specific modeling or feature change that supports it.
+  The hit rate moved from 52% to 58%, which is a six-percentage-point increase; expressed relatively, it is approximately 11.5%. Writing “by 6%” is ambiguous and makes the result harder to interpret quickly, especially because the same line already supplies the two percentages.
+  **How to change it:** Replace “by 6%” with “by 6 percentage points.” If the technical choice is material and accurate, name the [modeling or loss-function choice] that connected the temporal convolutional model to this result; otherwise remove the repeated model phrase.
 
 ## Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023
 
-- **“Closed a 0.02 gap between local validation and leaderboard scores” does not identify the score or metric represented by 0.02.** *(about 2 words to add)*
-  > Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.
-  An ML reader can understand the direction of improvement but cannot judge the size or meaning of the change without the metric or score scale. “Which closed” also makes the causal relationship less direct than stating the improvement as the result of the fold change.
-  **How to change it:** Replace “a 0.02 gap” with “[metric] gap of 0.02,” and replace “which closed” with a direct result such as “reducing the [metric] gap to [remaining gap],” if accurate.
+- **The feature-selection result is buried after the method and feature counts, and “without losing validation score” does not identify the evaluation measure.** *(about 3–6 words to add)*
+  > Wrote the team’s feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.
+  A scanning reader first sees the script, permutation importance, and feature counts rather than the outcome. The phrase also leaves unclear whether the score stayed exactly unchanged or was statistically equivalent, so the preservation claim is difficult to assess.
+  **How to change it:** Lead with the preserved result, then name the permutation-importance method and feature reduction. Replace the vague ending with “preserving [validation metric] at [score or score change],” if accurate.
 
 ## Across the whole résumé
 
-- **Sunrise Bakery currently appears before Northpeak Capital, making an unrelated current role the first and most prominent experience entry.** *(no words)*
+- **Sunrise Bakery currently leads the resume with an unrelated career direction.** *(no words)*
   > Sunrise Bakery | Assistant Store Manager
-  A recruiter scanning for quantitative work encounters bakery management before the quantitative research internship. That ordering can obscure the experience most relevant to the target role.
-  **How to change it:** Move Northpeak Capital ahead of Sunrise Bakery, or place Sunrise Bakery under a shortened additional-experience section.
-- **Sunrise Bakery receives two bullets despite being unrelated to the quantitative work.** *(saves about 15 words)*
-  > Assistant Store Manager
-  The two-bullet treatment gives the role similar visual weight to the quantitative research and statistical-learning experience. Its prominence can make the résumé’s professional direction less clear.
-  **How to change it:** Shorten Sunrise Bakery to one line, or add a brief explanation of its relevance if it must remain prominent.
-- **The skills list includes SQL, C++, Kafka, and Bayesian inference without supporting evidence elsewhere in the résumé.** *(saves about 4 words)*
-  > SQL
-  No entry describes use of these tools or methods, so a reader cannot verify whether they were applied in substantive work. Unsupported skills take space that could instead reinforce the methods demonstrated by the experience and projects.
-  **How to change it:** Remove SQL, C++, Kafka, and Bayesian inference unless the résumé adds work that demonstrates their use.
-- **“econometircs” is misspelled.** *(no words)*
+  Because it is the newest role and appears first in the experience section, it shapes a recruiter's initial impression before the quantitative research work. That ordering can obscure the statistics and quantitative-finance profile that the rest of the page supports.
+  **How to change it:** Move Sunrise Bakery into an “Additional Experience” subsection below the quantitative experience, or compress it to one line if it must remain in the main section.
+- **The methods skill is misspelled as “econometircs.”** *(no words)*
   > econometircs
-  The misspelling is visible in a skills section and can make the document look insufficiently proofread. It also prevents the field from appearing correctly in a keyword scan.
+  The misspelling is visible in a high-scan section and can make a reader question attention to detail. It also obscures the intended technical subject at the point where skills are being screened.
   **How to change it:** Replace “econometircs” with “econometrics.”
+- **Several quantitative results state percentages or score changes without naming the metric, comparison, or outcome precisely enough.** *(about 12–20 words to add)*
+  > Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.
+  > Beat a HAR-RV baseline’s out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.
+  > Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.
+  > Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.
+  > Wrote the team’s feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.
+  In the HAR-RV, volatility-study, and Kaggle bullets, a reader can see that performance changed but cannot always tell whether the percentage is relative, what the loss or score measures, or whether a gap was eliminated or merely narrowed. Adding the relevant metric, baseline-to-result values, or number of significant indices would make the claims easier to verify and compare without relying on inference.
+  **How to change it:** For the HAR-RV comparison, add [forecast-error reduction or effect size] or [number of indices with statistically significant improvement]. For the volatility and Kaggle bullets, name [the evaluation metric], add [baseline and model loss values] where accurate, and clarify whether the 0.02 gap was reduced to zero or only narrowed.
 
-## Set aside (12)
+## Set aside (15)
 
-12 smaller points were left out to keep this to what matters most; they are in `/report --full`.
+15 smaller points were left out to keep this to what matters most; they are in `/report --full`.
 
 
 > /report --full
-Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-804132ea.md.
+Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-d7699e57.md.
 

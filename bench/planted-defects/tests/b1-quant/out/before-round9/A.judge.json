@@ -1,0 +1,99 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 25,
+  "words": 2301,
+  "quotes": 22,
+  "grounded": 16,
+  "rewrites": 2,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5160,
+    "completion_tokens": 14904,
+    "total_tokens": 20064,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14394
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3240
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove the first-person phrase “my proof.”"
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct the skills typo “econometircs” → “econometrics.”"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "52% to 58% is a 6-percentage-point increase, not simply a 6% increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "move “built a feature store” to the start of the bullet or immediately after the subject so the reuse result appears earlier."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Split or simplify the overloaded research-assistant bullet."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Replace “multiplying it by 252” with “multiplying it by the square root of 252.”"
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "uses an inappropriate test for a nested model comparison."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Sunrise Bakery currently appears before Northpeak Capital, making an unrelated current role the first and most prominent experience entry."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The skills list includes SQL, C++, Kafka, and Bayesian inference without supporting evidence elsewhere in the résumé."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 25,
+    "rewrites": [
+      "Ran daily stock counts and supplier orders; unsold bread fell from 12% to 7% of production,",
+      "Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor."
+    ],
+    "falsePositives": []
+  }
+}
