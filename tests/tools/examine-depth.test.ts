@@ -178,3 +178,76 @@ describe('what the caller is allowed to name', () => {
     expect(result.error?.message).toContain('experience:0');
   });
 });
+
+describe('research: search, plan, search again, answer', () => {
+  const planned = (subquestions: unknown): SubAgentResult =>
+    ({ ...answered([]), output: { subquestions } }) as SubAgentResult;
+
+  function pipeline(plan: SubAgentResult, options: { search?: boolean } = {}) {
+    const queries: string[] = [];
+    const tasks: SubAgentTask[] = [];
+    const ctx = {
+      session: { state: { resume: RESUME } },
+      subAgents: {
+        async run(task: SubAgentTask) {
+          tasks.push(task);
+          return tasks.length === 1 ? plan : answered([{ ...FINDING, basis: 'S2' }]);
+        },
+      },
+      ...(options.search === false
+        ? {}
+        : {
+            search: {
+              name: 'fake',
+              async search(query: string) {
+                queries.push(query);
+                return [{ title: `about ${query}`, url: 'https://example.org', content: 'a page' }];
+              },
+            },
+          }),
+      abortSignal: new AbortController().signal,
+    } as unknown as ToolContext;
+    return { ctx, queries, tasks };
+  }
+
+  it('searches the question first, then the sub-questions the plan says need it', async () => {
+    const { ctx, queries, tasks } = pipeline(
+      planned([
+        { question: 'Does dynamic batching lower single-request latency?', search: true },
+        { question: 'What does INT8 quantisation change?', search: false },
+      ]),
+    );
+    const result = await examineDepthTool.execute({ about: 'experience:0:0', question: 'Can batching cut latency?' }, ctx);
+
+    expect(queries).toEqual(['Can batching cut latency?', 'Does dynamic batching lower single-request latency?']);
+    expect(tasks.map((t) => t.agentConfig.name)).toEqual(['Deep Research (plan)', 'Deep Research']);
+    // The plan sees the first results; the answer sees every search, numbered.
+    expect(tasks[0]!.input).toContain('[S1] about Can batching cut latency?');
+    expect(tasks[1]!.input).toContain('[S2] about Does dynamic batching lower single-request latency?');
+    expect(tasks[1]!.input).toContain('2. What does INT8 quantisation change?');
+    expect((result as { data: { findings: Array<{ basis?: string }> } }).data.findings[0]?.basis).toBe('S2');
+  });
+
+  it('never sends the candidate\'s figures to the search engine', async () => {
+    const { ctx, queries } = pipeline(planned([{ question: 'Is a cut from 900 to 600 ms a 50% drop?', search: true }]));
+    await examineDepthTool.execute({ about: 'experience:0:0', question: 'Does 71% hold for p95 latency?' }, ctx);
+
+    for (const q of queries) expect(q).not.toMatch(/(^|\s)\d/);
+    expect(queries[0]).toBe('Does hold for p95 latency?');
+  });
+
+  it('takes at most three sub-questions', async () => {
+    const { ctx, queries } = pipeline(planned(Array.from({ length: 5 }, (_, i) => ({ question: `q${String.fromCharCode(97 + i)}?`, search: true }))));
+    await examineDepthTool.execute({ about: 'experience:0:0', question: 'first?' }, ctx);
+
+    expect(queries).toHaveLength(4);
+  });
+
+  it('still answers where there is no search, or the plan fails', async () => {
+    const { ctx, tasks } = pipeline({ success: false, error: 'timed out' } as SubAgentResult, { search: false });
+    const result = await examineDepthTool.execute({ about: 'experience:0:0', question: 'q?' }, ctx);
+
+    expect(result.success).toBe(true);
+    expect(tasks[1]!.input).toContain('No web search was available');
+  });
+});

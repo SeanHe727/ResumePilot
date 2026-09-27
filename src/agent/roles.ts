@@ -1,7 +1,7 @@
 import {
   CONTENT_PROMPT,
+  DEEP_RESEARCH_PLAN_PROMPT,
   DEEP_RESEARCH_PROMPT,
-  DEEP_RESEARCH_SEARCH,
   WORDING_PROMPT,
   JD_MATCH_PROMPT,
   JD_SEARCH_TRIGGERS,
@@ -125,17 +125,26 @@ export const DEEP_RESEARCH_AGENT: SubAgentConfig = {
   id: 'deep-research',
   task: 'research_domain',
   name: 'Deep Research',
-  description: 'Answers one question about the technical field an entry comes from',
+  description: 'Answers one question about the field an entry comes from, from searches already run',
   systemPrompt: DEEP_RESEARCH_PROMPT,
+  // No tools: the searching is done before it is asked, by the tool that
+  // created it, so each of its calls is one turn.
   tools: [],
-  optionalTools: ['web_search'],
-  optionalPrompt: DEEP_RESEARCH_SEARCH,
-  maxTurns: 6,
+  maxTurns: 1,
   // Nested inside a content review, whose own deadline is running. Kept well
   // under it so a slow specialist fails on its own rather than taking the
   // review down with it.
-  timeoutMs: 240_000,
+  timeoutMs: 120_000,
   contextBoundary: ['entry'],
+};
+
+/** The first of its two calls: what the first search leaves open. */
+export const DEEP_RESEARCH_PLANNER: SubAgentConfig = {
+  ...DEEP_RESEARCH_AGENT,
+  name: 'Deep Research (plan)',
+  description: 'Decides what one question still needs, after a first search',
+  systemPrompt: DEEP_RESEARCH_PLAN_PROMPT,
+  timeoutMs: 60_000,
 };
 
 export const ROLES: Readonly<Record<string, SubAgentConfig>> = {
