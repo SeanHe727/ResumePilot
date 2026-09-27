@@ -354,14 +354,28 @@ export function planFromMarks(
   const reasonOf = (mark: Record<string, unknown> | null, key: string): string =>
     typeof mark?.[key] === 'string' ? (mark[key] as string).trim() : '';
 
-  const groups: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
+  const chosen: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
     const kind = KINDS.find((k) => k === mark?.kind);
     const members = take(mark?.findings);
     if (!kind || members.length === 0) return [];
     reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
-    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
+    // Errors on different lines are different errors, whatever the selection
+    // made of them. Measured: four unrelated errors merged into one point
+    // borrowed a figure from one line into another's explanation, and filed a
+    // project's line under the entry above it.
+    const erroneous = new Set(members.filter((f) => f.kind === 'wrong').map(lineOf));
+    if (erroneous.size < 2) return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
+    const byLine = new Map<string, SourceFinding[]>();
+    for (const f of members) byLine.set(lineOf(f), [...(byLine.get(lineOf(f)) ?? []), f]);
+    return [...byLine.values()].map((part) => ({ kind, findingIds: part.map((f) => f.id), targets: targetsOf(part) }));
   });
+  // Errors first, in the selection's own order otherwise: the first three
+  // become the candidate's top priorities, and an order or layout point there
+  // while an error sits further down was measured, twice.
+  const isError = (group: PlanGroup) =>
+    group.findingIds.some((id) => findings.find((f) => f.id === id)?.kind === 'wrong');
+  const groups = [...chosen.filter(isError), ...chosen.filter((g) => !isError(g))];
 
   const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;

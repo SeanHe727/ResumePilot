@@ -46,9 +46,10 @@ settle a whole class of doubt beat a sentence that adds a detail.
 ## Choosing
 
 - Judge one by one: never set aside a whole type of finding in one go.
-- **Same demand, one group:** findings that ask the same thing of different
-  lines go in one group. A finding asking something else goes in its own group,
-  however alike they sound.
+- **Same fix, one group:** group findings only when they ask for the same change
+  on different lines. Different errors are different groups, even of the same
+  type or on the same entry; a group mixing them turns into one long point
+  nobody can act on.
 - Impact and proof before method: conditions a specialist would probe belong to
   the interview, not the page.
 - **Do not polish a line that should go:** where a finding says a line should be

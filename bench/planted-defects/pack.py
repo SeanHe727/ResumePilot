@@ -49,7 +49,7 @@ def resumepilot_report(text, ids):
     body = re.sub(r'^- (?:format|skills|whole resume, (?:order|dates|consistency)|[^:\n]*, wording): ', '- ', body, flags=re.M)
     body = body.replace('## Start here', '## Top priorities')
     body = body.replace('## Already working', '## What already works')
-    body = re.sub(r'## Set aside \((\d+)\)', r'## Lower priority (\1)', body)
+    body = re.sub(r'## Set aside \((\d+)\)\n\n[^\n]*\n', '', body)
     body = body.replace('Worth knowing, and not worth the space on this page:', '')
     body = re.sub(r'- …and (\d+) more, in `/report --full`\.', r'- …and \1 more.', body)
     body = re.sub(r'\n{3,}', '\n\n', body)

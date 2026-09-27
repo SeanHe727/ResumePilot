@@ -41,7 +41,6 @@ export function renderFull(report: DiagnosisReport, sourcePath: string): string 
 }
 
 /** The same points, each reduced to the sentence written to stand alone. */
-const SET_ASIDE_SHOWN = 10;
 
 export function renderBrief(report: DiagnosisReport, sourcePath: string): string {
   const lines = [...head(report, sourcePath, 'Review'), ...opening(report)];
@@ -61,23 +60,18 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
     lines.push('');
   }
 
+  // A count, not the list. Measured: judges read the set-aside lines, merged
+  // across many lines, as a garbled second report; the full list is in the
+  // full review.
   const setAside = report.improvementPlan.setAside ?? [];
   if (setAside.length > 0) {
     lines.push(
       `## Set aside (${setAside.length})`,
       '',
-      'Worth knowing, and not worth the space on this page:',
-      '',
-      // The first ten, and a count. Measured: 38 set-aside lines under a
-      // report of 18 points, longer than the report it was set aside from.
-      ...setAside.slice(0, SET_ASIDE_SHOWN).map((s) => `- ${s.what}${s.because ? ` — *${s.because}*` : ''}`),
-      ...(setAside.length > SET_ASIDE_SHOWN
-        ? [`- …and ${setAside.length - SET_ASIDE_SHOWN} more, in \`/report --full\`.`]
-        : []),
+      `${setAside.length} smaller points were left out to keep this to what matters most; they are in \`/report --full\`.`,
       '',
     );
   }
-
   return `${lines.join('\n').trimEnd()}\n`;
 }
 

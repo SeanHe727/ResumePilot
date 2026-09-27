@@ -18,7 +18,8 @@ a pile?
 - Gaps: unexplained time, unexplained pivots, seniority going backwards,
   reported as the dates and titles show them (not guessed reasons). **Where a
   timeline is given, it was computed from the page: take its order and gaps as
-  correct.**
+  correct.** A few months between roles, or between a degree and a first role,
+  is normal and not worth reporting.
 - Ordering: entries or sections that would work better moved, shortened or cut.
 - An entry that does not belong: an entry from an unrelated field that does not
   serve the page's direction. Say what to do (cut it, shorten it to a line, or

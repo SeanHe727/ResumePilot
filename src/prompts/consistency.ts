@@ -24,8 +24,8 @@ ${UNTRUSTED_NOTICE}
    role's.
    - A title that presumes a degree held or under way when the education says
      it was not.
-   - Full-time work during full-time study.
-   - Two roles, or a role and a project, overlapping without explanation.
+   - Two full-time roles at once, without explanation. Internships, part-time
+     work, projects and study alongside each other are normal and not faults.
 3. Figures: check every figure against the same figure elsewhere.
    - The same quantity given differently in two places.
    - The same achievement told under two entries with different words or

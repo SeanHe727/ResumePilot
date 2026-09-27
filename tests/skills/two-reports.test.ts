@@ -108,8 +108,12 @@ describe('the brief and the full review', () => {
     }
   });
 
-  it('shows what was set aside, in the one meant to be read through', async () => {
-    // A list nobody can see was trimmed reads as a short list.
-    expect(renderBrief(REPORT, 'cv.pdf')).toContain('the batch size');
+  it('says how much was set aside in the brief, and lists it in the full one', async () => {
+    // A list nobody can see was trimmed reads as a short list; the list itself,
+    // merged across lines, read to judges as a garbled second report.
+    const brief = renderBrief(REPORT, 'cv.pdf');
+    expect(brief).toMatch(/## Set aside \(\d+\)/);
+    expect(brief).not.toContain('the batch size');
+    expect(renderFull(REPORT, 'cv.pdf')).toContain('the batch size');
   });
 });

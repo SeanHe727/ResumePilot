@@ -236,3 +236,25 @@ describe('a note that the order is already right is not a finding', () => {
     expect(confirmsOrder('Move Mobility Systems above Eastern Robotics.')).toBe(false);
   });
 });
+
+describe('errors in the plan', () => {
+  const e = (id: string, target: string, kind?: SourceFinding['kind']): SourceFinding => ({
+    id, role: 'content', target, what: `about ${target}`, ...(kind ? { kind } : {}),
+  });
+  const ERRS = [e('a', 's1:e0:b0', 'wrong'), e('b', 's1:e1:b2', 'wrong'), e('c', 's1:e1:b2'), e('d', 's2:e0:b1', 'unclear')];
+
+  it('splits a group holding errors on different lines into one group per line', () => {
+    const { plan } = planFromMarks({ chosen: [{ kind: 'immediate', findings: ['c1', 'c2', 'c3'] }] }, ERRS);
+
+    expect(plan.groups?.map((g) => g.findingIds)).toEqual([['a'], ['b', 'c']]);
+  });
+
+  it('puts groups with an error ahead of the rest, keeping their order otherwise', () => {
+    const { plan } = planFromMarks(
+      { chosen: [{ kind: 'immediate', findings: ['c4'] }, { kind: 'immediate', findings: ['c2'] }] },
+      ERRS,
+    );
+
+    expect(plan.groups?.map((g) => g.findingIds)).toEqual([['b'], ['d']]);
+  });
+});
