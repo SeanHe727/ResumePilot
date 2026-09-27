@@ -6,89 +6,93 @@
     "W5",
     "A2",
     "A3",
-    "S1",
     "S3",
-    "N2",
-    "N4"
+    "T1",
+    "T3",
+    "N2"
   ],
   "coverage": true,
   "suggestions": 21,
-  "words": 2469,
-  "quotes": 9,
-  "grounded": 4,
+  "words": 2699,
+  "quotes": 14,
+  "grounded": 10,
   "rewrites": 0,
   "inventedNumbers": [],
-  "falsePositives": [],
+  "falsePositives": [
+    "Correct \"on- call\" to \"on-call\" (misreads a line break as a space)"
+  ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5384,
-    "completion_tokens": 18740,
-    "total_tokens": 24124,
+    "prompt_tokens": 5653,
+    "completion_tokens": 16484,
+    "total_tokens": 22137,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 18287
+      "reasoning_tokens": 15955
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 3592
+    "prompt_cache_miss_tokens": 3861
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "The dashboard bullet describes ownership but not what changed because of that work."
+        "evidence": "\"Owned\" is duty framing that states what the candidate was in charge of rather than what they did; replace it with a concrete action... The monitoring-dashboard and on-call ownership bullet gives no operational outcome or scale measure."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "The Agent Runtime Suite bullet beginning with “Drove adoption…” does not identify which practices were introduced or how widely they were adopted."
+        "evidence": "The adoption claim is too broad to show what AI-first practices were introduced or what changed for downstream teams."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The change from 71% to 83% is a 12-percentage-point increase, not a 12% increase."
+        "evidence": "The task-completion result is a 12-percentage-point increase, not a 12% increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The change from 900 ms to 600 ms is a 33% reduction, not 50%."
+        "evidence": "The latency percentage is incorrect: 900 ms to 600 ms is a 33.3% reduction, not a 50% reduction."
       },
       {
         "id": "S1",
-        "found": true,
-        "evidence": "The GRPO latency bullet leads with a dense method list and leaves its grammatical subject unclear."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The event-queue bullet combines too many responsibilities and leaves the backlog outcome unmeasured."
+        "evidence": "s2:e0:b3: \"while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation\" chains three additional responsibilities onto the migration, weakening scanability; split the work or remove the least relevant clause."
       },
       {
         "id": "T1",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "The claim that single-rollout sampling stabilised GRPO training is technically unsupported and conflicts with standard GRPO's group-relative advantage calculation."
       },
       {
         "id": "T3",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "The dynamic-batching latency claim is technically incorrect as written because it assigns the result to single-request inference."
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "Experience entries are not in newest-first order, and the more recent, more relevant Mobility Systems role should appear first."
+        "evidence": "The Experience entries are not in reverse-chronological order."
       },
       {
         "id": "N4",
-        "found": true,
-        "evidence": "The narrative review flagged skills including Python, SQL, Bash, Git, PyTorch, LoRA, LangGraph, RAG, and Kubernetes as not explicitly demonstrated in the entries."
+        "found": false,
+        "evidence": ""
       }
     ],
     "coverage": true,
     "suggestions": 21,
     "rewrites": [],
-    "falsePositives": []
+    "falsePositives": [
+      "Correct \"on- call\" to \"on-call\" (misreads a line break as a space)"
+    ]
   }
 }

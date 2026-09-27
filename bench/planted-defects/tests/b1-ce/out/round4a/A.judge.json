@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 21,
+  "words": 2469,
+  "quotes": 9,
+  "grounded": 4,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5384,
+    "completion_tokens": 18740,
+    "total_tokens": 24124,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 18287
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3592
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "The dashboard bullet describes ownership but not what changed because of that work."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The Agent Runtime Suite bullet beginning with “Drove adoption…” does not identify which practices were introduced or how widely they were adopted."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 71% to 83% is a 12-percentage-point increase, not a 12% increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The change from 900 ms to 600 ms is a 33% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The GRPO latency bullet leads with a dense method list and leaves its grammatical subject unclear."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The event-queue bullet combines too many responsibilities and leaves the backlog outcome unmeasured."
+      },
+      {
+        "id": "T1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Experience entries are not in newest-first order, and the more recent, more relevant Mobility Systems role should appear first."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review flagged skills including Python, SQL, Bash, Git, PyTorch, LoRA, LangGraph, RAG, and Kubernetes as not explicitly demonstrated in the entries."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 21,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}
