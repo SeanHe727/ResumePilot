@@ -1,6 +1,6 @@
 {
   "file": "bench/planted-defects/tests/b1-ce/out/A.md",
-  "recall": 9,
+  "recall": 8,
   "found": [
     "W1",
     "W5",
@@ -8,68 +8,67 @@
     "A3",
     "S1",
     "S3",
-    "T1",
     "N2",
     "N4"
   ],
   "coverage": true,
-  "suggestions": 20,
-  "words": 2365,
+  "suggestions": 21,
+  "words": 2469,
   "quotes": 9,
-  "grounded": 8,
-  "rewrites": 1,
+  "grounded": 4,
+  "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5177,
-    "completion_tokens": 8881,
-    "total_tokens": 14058,
+    "prompt_tokens": 5384,
+    "completion_tokens": 18740,
+    "total_tokens": 24124,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 8385
+      "reasoning_tokens": 18287
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 3385
+    "prompt_cache_miss_tokens": 3592
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "describes responsibility and scope but not the operational improvement it produced"
+        "evidence": "The dashboard bullet describes ownership but not what changed because of that work."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "The platform-ownership claim is too generic to show what you introduced or how it helped downstream teams."
+        "evidence": "The Agent Runtime Suite bullet beginning with “Drove adoption…” does not identify which practices were introduced or how widely they were adopted."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The task-completion result should be expressed in percentage points rather than as a percentage increase."
+        "evidence": "The change from 71% to 83% is a 12-percentage-point increase, not a 12% increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The latency percentage is arithmetically incorrect."
+        "evidence": "The change from 900 ms to 600 ms is a 33% reduction, not 50%."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "begin with an active subject and verb, such as 'Reduced end-to-end latency 5% by using grouped tool-use rollouts, a composite reward, and a GRPO loop with a frozen SFT reference.'"
+        "evidence": "The GRPO latency bullet leads with a dense method list and leaves its grammatical subject unclear."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The migration bullet stacks several unrelated actions together"
+        "evidence": "The event-queue bullet combines too many responsibilities and leaves the backlog outcome unmeasured."
       },
       {
         "id": "T1",
-        "found": true,
-        "evidence": "Standard GRPO compares multiple completions for the same prompt; with one rollout, the within-prompt relative advantage is zero or undefined"
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "T3",
@@ -79,19 +78,17 @@
       {
         "id": "N2",
         "found": true,
-        "evidence": "The Experience entries are not in reverse chronological order."
+        "evidence": "Experience entries are not in newest-first order, and the more recent, more relevant Mobility Systems role should appear first."
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "the resume’s entries do not explicitly demonstrate several listed skills, including SQL, Bash, Git, Python, PyTorch, LoRA, LangGraph, RAG, and Kubernetes."
+        "evidence": "The narrative review flagged skills including Python, SQL, Bash, Git, PyTorch, LoRA, LangGraph, RAG, and Kubernetes as not explicitly demonstrated in the entries."
       }
     ],
     "coverage": true,
-    "suggestions": 20,
-    "rewrites": [
-      "Reduced end-to-end latency 5% by using grouped tool-use rollouts, a composite reward, and a GRPO loop with a frozen SFT reference."
-    ],
+    "suggestions": 21,
+    "rewrites": [],
     "falsePositives": []
   }
 }

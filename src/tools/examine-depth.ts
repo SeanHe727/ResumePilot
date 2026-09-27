@@ -219,10 +219,16 @@ async function searchFor(ctx: ToolContext, question: string): Promise<Searched |
   }
 }
 
-/** A question with the numbers standing on their own taken out: `68`, `82%`, `8,400`. */
+/**
+ * A question fit to send to a search engine: without the candidate's figures
+ * (`68`, `82%`, `8,400`, `400+`, `3x`) and without anything it quotes, which
+ * is the résumé's own wording. Measured: a first search sent a whole quoted
+ * bullet, and a count written as `400+`, to the search provider.
+ */
 export function withoutFigures(question: string): string {
   return question
-    .replace(/(^|[\s"'(])\d[\d,.]*%?(?=$|[\s"'),.;:?])/g, '$1')
+    .replace(/[“"‘'][^“”"‘’']{12,}[”"’']/g, ' ')
+    .replace(/(^|[\s"'(~≈])\d[\d,.]*(?:%|\+|x|×)?(?=$|[\s"'),.;:?—–-])/g, '$1')
     .replace(/\s+([,.;:?])/g, '$1')
     .replace(/\s+/g, ' ')
     .trim();

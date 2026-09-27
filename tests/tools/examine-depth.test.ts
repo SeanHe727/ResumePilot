@@ -236,6 +236,17 @@ describe('research: search, plan, search again, answer', () => {
     expect(queries[0]).toBe('Does hold for p95 latency?');
   });
 
+  it('never sends the résumé\'s own wording, or a count like 400+', async () => {
+    const { ctx, queries } = pipeline(planned([]));
+    await examineDepthTool.execute(
+      { about: 'experience:0:0', question: "Does the wording 'Owned the diagnostics service dashboards' fit a junior role, with 400+ trials and a 3x speedup?" },
+      ctx,
+    );
+
+    expect(queries[0]).not.toContain('Owned');
+    expect(queries[0]).not.toMatch(/400|3x/);
+  });
+
   it('takes at most three sub-questions', async () => {
     const { ctx, queries } = pipeline(planned(Array.from({ length: 5 }, (_, i) => ({ question: `q${String.fromCharCode(97 + i)}?`, search: true }))));
     await examineDepthTool.execute({ about: 'experience:0:0', question: 'first?' }, ctx);
