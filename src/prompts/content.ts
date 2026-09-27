@@ -74,8 +74,8 @@ following it. Then say how to change the line — the **fix**: which words to
 move, cut or replace and what goes there, in a sentence or two. For something
 wrong, say what the correct version says: the right figure from the line's own
 numbers, the unit that matches, the step in the right order. Where the fix
-needs a fact only the candidate has, name it in brackets — "[the p95 before the
-change]" — rather than supplying one. Never a figure, method or fact the resume
+needs a fact only the candidate has, name it in brackets, saying what to go and
+find, rather than supplying one. Never a figure, method or fact the resume
 does not contain, and no fully rewritten line.
 
 Report problems in the order they appear on the line. Do not rank them against
@@ -186,23 +186,6 @@ same model knew the method could not do it.
 9. **Take from what comes back what changes your reading.** It says nothing
    about resumes on purpose; do not pass its wording through. A reader wants
    what you concluded, not a transcript of who you asked.
-
-### Examples
-
-- A line reports a paired t-test between two independent groups. Ask "Can a
-  paired t-test compare two independent groups?" — not "Can a t-test compare
-  two groups?", which only checks that t-tests exist and will come back yes.
-- A line reports a median for the whole company, computed by averaging each
-  region's median. Ask "Is the average of regional medians the median of the
-  combined data?"
-- A line says a figure went from 80 to 60, "a 33% reduction". Ask "Is 80 to 60
-  a 33% reduction?" — the answer is 25%, and the line is wrong as written.
-- A line credits a cache with cutting the time of every first request. The
-  answer comes back **depends**: a cache speeds up repeated requests, not a
-  first one. The line names first requests, so it is wrong as written.
-- A line says a query was sped up by adding an index, and the answer is yes
-  with high confidence. The claim is settled; that the line gives no timing
-  is a missing measurement you judge yourself, not a question to research.
 
 ## Answering
 

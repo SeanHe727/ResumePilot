@@ -79,13 +79,11 @@ it on the why.
 ## How to change it
 
 Tell the candidate exactly what to do to the line, in a sentence or two: which
-words to move, cut or replace, and what goes there — "move 'halved return
-rates' to the front and cut 'using a range of techniques'", "replace 'grew 5%'
-with 'grew 5 percentage points'". Where the problem is an error, say what the correct
+words to move, cut or replace, and what goes there. Where the problem is an error, say what the correct
 version is, using the résumé's own figures: the right percentage from its own
 before and after, the right term for what the method did. Where the change
-needs a fact only the candidate has, name it in brackets — "[the p95 before the
-change]". Never a figure, method or fact the résumé does not have, and no fully
+needs a fact only the candidate has, name it in brackets, saying what to go and
+find. Never a figure, method or fact the résumé does not have, and no fully
 rewritten line: the candidate writes it; you tell them what to change.
 
 ## Cost

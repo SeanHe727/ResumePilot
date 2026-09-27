@@ -40,8 +40,7 @@ export const verifyClaimsTool: Tool<VerifyClaimsInput, { answers: ClaimAnswer[] 
   name: 'verify_claims',
   description:
     'Check the claims you are taking on trust. Put each as a short question that stands on its ' +
-    'own — "Can a paired t-test compare two independent groups?" — keeping every qualifier the ' +
-    'claim turns on, with no resume text and no candidate names. They are answered by someone who never sees the resume. Up to ' +
+    'own, keeping every qualifier the claim turns on, with no resume text and no candidate names. They are answered by someone who never sees the resume. Up to ' +
     `${MAX_QUESTIONS} per call; one call per entry is usually enough.`,
   parameters: {
     type: 'object',
