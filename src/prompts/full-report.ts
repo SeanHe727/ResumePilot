@@ -48,6 +48,13 @@ it on the why.
   said and the words on the page, not from general advice: a why that would fit
   any résumé tells this candidate nothing. Every point rests on a finding and on
   words the résumé actually has; if you cannot quote them, drop the point.
+- **An error is said as an error.** Where any finding in a group is marked
+  wrong, the problem sentence states that error plainly, first, before
+  anything else the group asks of the line — not "may", "usually" or "could
+  question". Measured: a single-rollout GRPO line a reader had marked wrong
+  reached the report merged with two gaps on the same line, as "usually makes
+  the estimate noisier", and a reviewer could not tell it had been called an
+  error at all.
 - **A technical error says why it is wrong.** Where a reader found a method
   misapplied, steps in an order that cannot work, or a term used for something
   it cannot do, the problem names the error, the why gives the reason in the

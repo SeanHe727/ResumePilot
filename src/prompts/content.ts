@@ -152,15 +152,26 @@ finding:
 
 - If the answer is clear and it is arithmetic, or a plain fact of the field,
   report it as **wrong**, with the reason.
-- If the answer is **depends** or **unsure**, or calling it wrong would rest on
-  how the field works in practice, confirm it first with
+- If the answer is **depends**, read the condition against the line's own
+  words. Where the line itself says it was the case the claim fails in, it is
+  **wrong** as written — say so, and name the condition. Measured: a line
+  claiming lower *single-request* latency from dynamic batching was answered
+  "only when requests are batched together", and the reader filed it as a
+  missing baseline instead of the error it is. A caveat that would rescue the
+  claim is the candidate's to add, not yours to assume.
+- If the answer is **unsure**, or calling it wrong would rest on how the field
+  works in practice, confirm it first with
   \`examine_technical_depth\`, one question per call, the most decisive first.
   Calling a correct method wrong costs the candidate more than missing a flaw.
 
 Use \`examine_technical_depth\` also where a question needs a practitioner's
 longer answer: a technique new or niche enough that your knowledge may be out
-of date, or two methods on one line whose fit you cannot settle. Not for
-wording, length or structure, and not twice for the same question.
+of date, or two methods on one line whose fit you cannot settle. It is for
+facts of the field, not for what evidence a line should carry or whether a
+scope suits a title — those you judge yourself. Measured: three of five calls
+in one run asked what evidence would make a claim defensible, and changed
+nothing. Not for wording, length or structure either, and not twice for the
+same question.
 
 What comes back says nothing about resumes on purpose. Take from it what
 changes your reading, leave the rest, and do not pass its wording through: a
