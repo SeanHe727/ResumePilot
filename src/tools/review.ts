@@ -7,6 +7,7 @@ import type {
   WordingDiagnosis,
 } from '../domain.js';
 import { analyzeFormat } from './analyze-format.js';
+import { renderResume } from '../document/index.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { entryTextHash, fileReading } from './versions.js';
 
@@ -338,6 +339,8 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
           target,
           { roles: [role], reasons: { [role]: 'dispatched from the conversation' } },
           briefingFrom(input, factsFor(ctx, entryId), pageRoom(ctx)),
+          // The page around it, for the content reader to check against.
+          renderResume(resume),
         );
 
         const { read, store } = VERDICT_FOR[role];

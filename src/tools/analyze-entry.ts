@@ -15,6 +15,12 @@ export interface AnalyzeEntryInput {
   entry: ResumeEntry;
   /** Corpus entries already retrieved for the dimensions being checked. */
   references?: Array<{ question: string; weakExample: string; strongExample: string; gap: string }>;
+  /**
+   * The whole résumé, rendered, to check this entry against. Measured: read
+   * one entry at a time, the reader could not see that a graduate role ended
+   * before the graduate degree began, which a reader of the whole page caught.
+   */
+  background?: string;
 }
 
 /**
@@ -76,7 +82,13 @@ export const analyzeEntryTool: Tool<AnalyzeEntryInput, EntryDiagnosis> = {
 
 /** Exported so a sub-agent asks for the same shape this tool does. */
 export function buildEntryMessage(input: AnalyzeEntryInput): string {
-  const { entry, references } = input;
+  const { entry, references, background } = input;
+  const backgroundBlock = background
+    ? `The whole résumé, for reference only. Judge the entry after it, and nothing else; read the rest ` +
+      `to check that entry against — its dates against the degrees and the other roles, its figures ` +
+      `against the same figures elsewhere, its claims against the role's level. Findings go on the ` +
+      `entry's own lines, and may cite a line elsewhere as the reason.\n\n${background}\n\nThe entry to judge:\n`
+    : '';
 
 
   const referenceBlock = references?.length
@@ -88,7 +100,7 @@ export function buildEntryMessage(input: AnalyzeEntryInput): string {
         .join('\n')}\n`
     : '';
 
-  return `<resume_content>
+  return `${backgroundBlock}<resume_content>
 ${renderEntry(entry)}
 </resume_content>
 ${referenceBlock}

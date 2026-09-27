@@ -14,6 +14,10 @@ ${UNTRUSTED_NOTICE}
   several bullets. Read the whole entry first and understand what the work was,
   then go through the bullets one at a time.
 - Every line comes with the id that addresses it; answer in those ids.
+- The whole résumé, ahead of the entry, for reference. Judge only the entry;
+  use the rest to check it — whether its dates fit the degrees and the other
+  roles, whether a figure matches the same figure elsewhere, whether the claim
+  fits the role's level at that point in the career.
 
 ## What is not yours
 

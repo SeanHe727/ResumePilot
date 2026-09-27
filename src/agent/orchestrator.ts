@@ -65,10 +65,10 @@ const PER_ENTRY: ReadonlySet<RoleId> = new Set(PER_ENTRY_ROLES);
  * adding a role without saying what it reads is a compile error, which is where
  * that mistake belongs.
  */
-const MESSAGE_FOR: Record<PerEntryRole, (entry: ResumeEntry) => string> = {
+const MESSAGE_FOR: Record<PerEntryRole, (entry: ResumeEntry, background?: string) => string> = {
   // The same user message the matching tool builds, so a sub-agent and a direct
   // call ask for the same JSON and agree on bullet ids.
-  content: (entry) => buildEntryMessage({ entry }),
+  content: (entry, background) => buildEntryMessage({ entry, ...(background ? { background } : {}) }),
   wording: (entry) => buildWordingMessage(entry),
 };
 
@@ -112,6 +112,7 @@ export class DefaultOrchestrator {
     entry: ResumeEntry,
     roles: RoleSelection,
     briefing?: Briefing,
+    background?: string,
   ): Promise<EntryVerdict> {
     // Both per-entry roles score bullets, and a degree is a header with none —
     // school, qualification, dates. Dispatching it buys two model calls that
@@ -127,7 +128,7 @@ export class DefaultOrchestrator {
     }
 
     const chosen = roles.roles.filter((role): role is PerEntryRole => PER_ENTRY.has(role));
-    const results = await this.parallel(chosen.map((role) => taskFor(role, entry, briefing)));
+    const results = await this.parallel(chosen.map((role) => taskFor(role, entry, briefing, background)));
 
     return aggregate(entry, results, this.failures);
   }
@@ -375,10 +376,10 @@ function readEntryReads(resume: ResumeDocument, raw: unknown): EntryRead[] {
   });
 }
 
-function taskFor(role: PerEntryRole, entry: ResumeEntry, briefing?: Briefing): SubAgentTask {
+function taskFor(role: PerEntryRole, entry: ResumeEntry, briefing?: Briefing, background?: string): SubAgentTask {
   return {
     agentConfig: ROLES[role]!,
-    input: MESSAGE_FOR[role](entry),
+    input: MESSAGE_FOR[role](entry, background),
     context: { entry: withoutContactDetails(entry.headerLines.join(' | ')), ...briefingContext(briefing) },
   };
 }

@@ -188,6 +188,8 @@ export interface Orchestrator {
     entry: ResumeEntry,
     roles: RoleSelection,
     briefing?: Briefing,
+    /** The whole résumé, rendered, for the content reader to check this entry against. */
+    background?: string,
   ): Promise<EntryVerdict>;
   /** Entries are independent, so the pool decides how many run at once. */
   diagnoseAll(
