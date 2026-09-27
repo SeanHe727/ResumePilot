@@ -30,9 +30,13 @@ candidate. You choose; you do not write.
 
 Two levels.
 
-1. **Errors, all of them:** findings of type wrong, including personal details a
-   resume should not carry. List every error, first, whatever it costs. A
+1. **Errors, nearly all of them:** findings of type wrong, including personal
+   details a resume should not carry. List them first, whatever they cost. A
    practitioner who catches one error stops trusting the page.
+   - Exception: an error that is contested or uncertain (it rests on a judgement
+     call, or on a condition the line may well meet) can be set aside, or
+     ranked with the refinements. An error shown wrongly costs more trust than
+     one left out.
 2. Refinements: everything else (what is missing or unclear, buried results,
    writing flaws, order, layout, cuts) on one level, ranked by efficiency.
    - Efficiency: how much the change improves how the line reads to a hiring
@@ -55,7 +59,7 @@ Two levels.
 - Rising cost per point: every point you add costs the candidate attention,
   and each costs more than the one before. The first few refinements are
   cheap; past about ten, a refinement must be clearly worth it; past fifteen,
-  only an exceptional one. Errors are exempt: list them all.
+  only an exceptional one. Errors are exempt.
 - Room: what the chosen groups add, less what they save, should reach the room
   left or a little over (about a tenth).
 - **Nothing disappears:** everything you leave out goes in setAside, with a

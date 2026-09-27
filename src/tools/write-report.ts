@@ -221,10 +221,10 @@ export async function writeFullReport(
     // full of small cuts could read as short and be asked to say more.
     // Measured: 27 words under at 31 points, asked to expand, came back at 39.
     const fitNote =
-      count > 18
-        ? `What you wrote has ${count} points. Bring it to about fifteen: merge points that ask the ` +
-          `same of a line, and drop the least valuable. Keep the room in view: about ${room} words. ` +
-          `Same JSON shape.`
+      count > 20
+        ? `What you wrote has ${count} points. Bring it down to about eighteen: merge points that ask ` +
+          `the same of a line, and drop the least efficient refinements. Keep every error; do not merge ` +
+          `or drop one. Keep the room in view: about ${room} words. Same JSON shape.`
         : first > room * 1.1
         ? `What you wrote adds about ${first} words and the page has about ${room}. Rewrite it to fit: ` +
           `shorten points, merge the ones that ask the same of a line, and drop the least valuable. ` +
