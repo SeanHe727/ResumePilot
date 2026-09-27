@@ -636,7 +636,11 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
       diagnosis.perBullet.flatMap((bullet) =>
         bullet.issues.map((what, i) => {
           const saves = bullet.issueSavings?.[i] ?? 0;
-          return at('wording', `${bullet.bulletId}, wording`, saves > 0 ? -saves : undefined, what);
+          const kind = bullet.issueKinds?.[i];
+          return {
+            ...at('wording', `${bullet.bulletId}, wording`, saves > 0 ? -saves : undefined, what),
+            ...(kind ? { kind } : {}),
+          };
         }),
       ),
     ),

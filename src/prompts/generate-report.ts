@@ -13,8 +13,8 @@ You are given every finding a resume review produced — from the readers that
 scored the lines, the one that judged how they are written, the one that read
 the career end to end, the file check, and the comparison against the posting
 where there was one. Each says where it came from and, where known, what it does
-to the page: "adds ~8 words" or "saves ~12 words". A content finding also says
-what kind of problem it is:
+to the page: "adds ~8 words" or "saves ~12 words". A finding from the content
+or the wording reader also says what kind of problem it is:
 
 - **wrong** — the line says something that does not hold up: figures that do
   not add up, a method that cannot do what is claimed, a claim the rest of the
@@ -44,6 +44,9 @@ job is to decide which of them buy the most.
   trusting the rest of the page, so an error is worth choosing even where the
   fix costs words — and fixing an error often costs none. Then what is missing,
   then what is unclear, each weighed as below.
+- **A fix that only moves words is nearly free.** A result buried at the end
+  of a line, moved to the front, changes what a reader takes from the line at
+  no cost to the page; weigh it with what is missing, not below it.
 - **Weigh each by what it is worth per word it adds.** Worth is how much it
   would raise the line's credibility, depth or quality in a reader's eyes. A few
   words that change a reader's judgement are the best choice there is; many

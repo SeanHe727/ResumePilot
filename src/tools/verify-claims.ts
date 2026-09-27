@@ -12,6 +12,10 @@ export interface ClaimAnswer {
   /** yes / no to the question as asked; `depends` and `unsure` say which. */
   verdict: 'yes' | 'no' | 'depends' | 'unsure';
   reason: string;
+  /** The conditions it holds under, and where it fails — what makes it `depends`. */
+  conditions?: string;
+  /** How sure the answer is, so the reader knows when a second look is worth it. */
+  confidence?: 'high' | 'medium' | 'low';
 }
 
 /** Enough for an entry's worth of claims; more is a list, not a check. */
@@ -78,7 +82,10 @@ export const verifyClaimsTool: Tool<VerifyClaimsInput, { answers: ClaimAnswer[] 
           role: 'user',
           content:
             questions.map((q, i) => `${i + 1}. ${q}`).join('\n') +
-            `\n\nReply with JSON only:\n{ "answers": [ { "n": 1, "verdict": "yes | no | depends | unsure", "reason": "one or two sentences" } ] }`,
+            `\n\nReply with JSON only:\n{ "answers": [ { "n": 1, "verdict": "yes | no | depends | unsure", ` +
+            `"reason": "two or three sentences: the mechanism, as you would explain it to a colleague", ` +
+            `"conditions": "when it holds and when it fails, in a sentence — or empty where it does not depend on any", ` +
+            `"confidence": "high | medium | low" } ] }`,
         },
       ],
       abortSignal: ctx.abortSignal,
@@ -92,7 +99,15 @@ export const verifyClaimsTool: Tool<VerifyClaimsInput, { answers: ClaimAnswer[] 
         | Record<string, unknown>
         | undefined;
       const verdict = verdicts.find((v) => v === record?.verdict) ?? 'unsure';
-      return { question, verdict, reason: typeof record?.reason === 'string' ? record.reason.trim() : '' };
+      const conditions = typeof record?.conditions === 'string' ? record.conditions.trim() : '';
+      const confidence = (['high', 'medium', 'low'] as const).find((c) => c === record?.confidence);
+      return {
+        question,
+        verdict,
+        reason: typeof record?.reason === 'string' ? record.reason.trim() : '',
+        ...(conditions ? { conditions } : {}),
+        ...(confidence ? { confidence } : {}),
+      };
     });
     return { success: true, data: { answers } };
   },

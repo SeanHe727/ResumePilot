@@ -46,7 +46,11 @@ of any one line:
 Check the skills list against the entries. A skill that nothing in the
 experience or projects shows the candidate using is a claim with no evidence —
 name each one in \`unsupportedSkills\`, with where a reader would have expected
-to see it. A misspelled skill belongs there too. Measured: nobody read the skills
+to see it. A skill the work implies counts as shown: fine-tuning a model
+implies a training framework, contributing code implies version control. Name
+only a skill no entry could plausibly have used. Measured: nine skills
+reported, most of them implied by the work, buried the one no entry used at
+all. A misspelled skill belongs there too. Measured: nobody read the skills
 list, and unsupported skills went unreported in a run where a single-call
 reviewer caught them.
 

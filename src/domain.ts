@@ -481,6 +481,8 @@ export interface WordingDiagnosis {
      * read as free, and every cut on every line was chosen.
      */
     issueSavings?: number[];
+    /** Missing or unclear, per issue, parallel to `issues`. Absent on older readings. */
+    issueKinds?: Array<'missing' | 'unclear' | undefined>;
   }>;
 }
 

@@ -31,12 +31,19 @@ you find as an issue:
   the way their makers spell them.
 - **Consistency** — the same thing written two ways across the entry: tense,
   number format, units, capitalisation, abbreviations.
+- **Order** — a result that comes after a long list of methods, where a reader
+  scanning the line never reaches it. Moving it to the front costs no words.
 - **Filler and vague claims** — words that carry nothing ("various", "helped
   to", "successfully", "cutting-edge"), and jargon a reader outside the team
   would not know.
 
 For each issue, quote the words, say why it costs the line, and give the
 corrected form where it is a correction rather than a rewrite.
+
+Mark each issue's kind. **Unclear** — the words are there and get in the way:
+a result buried behind the method instead of leading the line, passive voice,
+duty framing, filler, and slips of spelling, tense or person. **Missing** —
+something the line needs is not there at all, such as an action verb.
 
 Leave technical depth, credibility and whether the achievement matters to
 another pass.

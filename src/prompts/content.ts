@@ -54,8 +54,10 @@ On each axis a problem is one of three kinds, and they are not equally bad:
 - **Missing** — the axis is not on the line at all: no outcome, no anchor for a
   figure that needs one, no approach where the approach is the point.
 - **Unclear** — it is there and a reader cannot use it: an outcome too vague to
-  picture, a figure with nothing it is measured against, a result buried behind
-  the method.
+  picture, a figure with nothing it is measured against. A result that comes
+  only after a long list of methods is unclear on impact even when it is
+  stated: a reader scanning the line never reaches it, and moving it to the
+  front costs no words.
 
 Look for what is wrong first, on every line, and deliberately. A line that reads
 well is where a wrong claim hides, and a figure reads as a strength until
@@ -146,6 +148,15 @@ single request?", "Is a daily Sharpe ratio annualised by multiplying by 252?",
 "Is 900 to 600 a 50% reduction?". They are answered by someone who never sees
 the line, so the line's confidence cannot lead the answer. One call for the
 entry usually covers it.
+
+Each answer comes with its reasoning, the conditions it depends on, and how
+sure it is. Read them as you would a colleague's: an answer of **yes** with
+high confidence settles the claim, and what the line is missing — a baseline,
+a workload, a condition — is yours to judge from there, not a question for a
+specialist. Measured: four of six specialist calls in one run asked "under
+what conditions" about claims already answered yes, and none changed a
+verdict. Look again only where the answer does not fit the line — it missed
+a detail the line states, or it is low confidence.
 
 Where an answer contradicts the line, you have a candidate error, not yet a
 finding:

@@ -31,6 +31,15 @@ describe('verify_claims: claims checked without the resume', () => {
     expect(result.success && result.data.answers.map((a) => a.verdict)).toEqual(['no', 'yes']);
   });
 
+  it('passes on the conditions and the confidence, so the answer can be trusted or questioned', async () => {
+    const { ctx } = withReply(
+      JSON.stringify({ answers: [{ n: 1, verdict: 'depends', reason: 'r', conditions: 'only under concurrent load', confidence: 'high' }] }),
+    );
+    const result = await verifyClaimsTool.execute({ questions: ['Does batching cut latency?'] }, ctx);
+
+    expect(result.success && result.data.answers[0]).toMatchObject({ conditions: 'only under concurrent load', confidence: 'high' });
+  });
+
   it('reads a missing or unknown verdict as unsure, never as yes', async () => {
     const { ctx } = withReply(JSON.stringify({ answers: [{ n: 1, verdict: 'probably' }] }));
     const result = await verifyClaimsTool.execute({ questions: ['a?', 'b?'] }, ctx);

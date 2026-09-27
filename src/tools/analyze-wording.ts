@@ -111,7 +111,7 @@ Return JSON of exactly this shape:
       "bulletId": "<the id given above, verbatim>",
       "verbStrength": { "score": 0, "detail": "one sentence" },
       "concision":    { "score": 0, "detail": "one sentence" },
-      "issues": [{ "what": "what is wrong with the wording, one sentence", "savesWords": 0 }]
+      "issues": [{ "kind": "missing | unclear", "what": "what is wrong with the wording, one sentence", "savesWords": 0 }]
     }
   ]
 }`;
@@ -121,21 +121,33 @@ Return JSON of exactly this shape:
  * Issues as text, with what each would save alongside. Accepts the older shape,
  * a list of strings, so a reply in either form is read.
  */
-export function wordingIssues(raw: unknown): { issues: string[]; issueSavings?: number[] } {
+export function wordingIssues(raw: unknown): {
+  issues: string[];
+  issueSavings?: number[];
+  issueKinds?: Array<'missing' | 'unclear' | undefined>;
+} {
   const items = Array.isArray(raw) ? raw : [];
   const issues: string[] = [];
   const savings: number[] = [];
+  const kinds: Array<'missing' | 'unclear' | undefined> = [];
   for (const item of items) {
     if (typeof item === 'string') {
       issues.push(item);
       savings.push(0);
+      kinds.push(undefined);
     } else if (item && typeof item === 'object' && typeof (item as { what?: unknown }).what === 'string') {
       const saves = Number((item as { savesWords?: unknown }).savesWords);
+      const kind = (item as { kind?: unknown }).kind;
       issues.push((item as { what: string }).what);
       savings.push(Number.isFinite(saves) && saves > 0 ? Math.round(saves) : 0);
+      kinds.push(kind === 'missing' || kind === 'unclear' ? kind : undefined);
     }
   }
-  return savings.some((n) => n > 0) ? { issues, issueSavings: savings } : { issues };
+  return {
+    issues,
+    ...(savings.some((n) => n > 0) ? { issueSavings: savings } : {}),
+    ...(kinds.some(Boolean) ? { issueKinds: kinds } : {}),
+  };
 }
 
 function scored(raw: unknown): ScoredDimension {
