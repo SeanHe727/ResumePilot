@@ -14,93 +14,89 @@
     "N4"
   ],
   "coverage": true,
-  "suggestions": 24,
-  "words": 2919,
-  "quotes": 23,
+  "suggestions": 20,
+  "words": 2416,
+  "quotes": 21,
   "grounded": 18,
-  "rewrites": 7,
-  "inventedNumbers": [
-    "25"
+  "rewrites": 1,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Split the compressed Education line into two separately formatted degrees, with the Ph.D. first and the B.S. second."
   ],
-  "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 6076,
-    "completion_tokens": 13639,
-    "total_tokens": 19715,
+    "prompt_tokens": 5345,
+    "completion_tokens": 15202,
+    "total_tokens": 20547,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 13288
+      "reasoning_tokens": 14652
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 4156
+    "prompt_cache_miss_tokens": 3425
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove the first-person pronoun in “my proof.”"
+        "evidence": "uses a personal pronoun; resume lines are phrases, not sentences — \"Derived a variance bound for a sparse regression estimator; my proof...\""
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "Correct “econometircs” to “econometrics.”"
+        "evidence": "Correct the misspelled Methods skill 'econometircs' to 'econometrics.'"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The hit-rate change is six percentage points, not a 6% increase."
+        "evidence": "The directional hit-rate change should be described as 6 percentage points, not 6%."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "the change from forecast error 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+        "evidence": "The bullet reports a 33% improvement even though the stated reduction from 0.20 to 0.15 is 25%."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "the feature-store result should be surfaced earlier"
+        "evidence": "buries the main result behind three methods and makes the opening participial phrase awkward."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "Separate or remove lower-priority duties such as cluster maintenance, reading-group organization, and grading."
+        "evidence": "The current final bullet contains several unrelated responsibilities, which obscures the package’s adoption result."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "daily Sharpe annualization uses the square root of 252"
+        "evidence": "The Sharpe-ratio annualization is mathematically wrong: a daily Sharpe ratio should be multiplied by √252, not 252."
       },
       {
         "id": "T3",
         "found": true,
-        "evidence": "A standard Diebold–Mariano test has important limitations for nested-model comparisons"
+        "evidence": "The standard Diebold–Mariano test is not generally valid for comparing nested forecasts because its null distribution is distorted."
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "Move Sunrise Bakery into a separate \"Additional Experience\" section below the quantitative and research experience"
+        "evidence": "Because the bakery role is unrelated to the quantitative trajectory, shorten it or place it in a brief additional-experience section."
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "Remove SQL, C++, Kafka, and Bayesian inference unless you add a corresponding experience or project entry"
+        "evidence": "The narrative review also flagged Kafka as unsupported elsewhere in the resume; either remove it or show where you used it."
       }
     ],
     "coverage": true,
-    "suggestions": 24,
+    "suggestions": 20,
     "rewrites": [
-      "multiplying it by √252",
-      "a 25% reduction",
-      "by 6 percentage points",
-      "while unsold bread fell",
-      "making runs reproducible with fixed seeds",
-      "the proof",
-      "econometrics"
+      "Cut unsold bread from 12% to 7% of production by [specific change]."
     ],
-    "falsePositives": []
+    "falsePositives": [
+      "Split the compressed Education line into two separately formatted degrees, with the Ph.D. first and the B.S. second."
+    ]
   }
 }

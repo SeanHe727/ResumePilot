@@ -1,99 +1,113 @@
 {
   "file": "bench/planted-defects/tests/b1-quant/out/A.md",
-  "recall": 7,
+  "recall": 10,
   "found": [
     "W2",
     "W6",
     "A2",
     "A3",
+    "S1",
     "S3",
     "T1",
-    "N1"
+    "T3",
+    "N1",
+    "N4"
   ],
   "coverage": true,
-  "suggestions": 30,
-  "words": 2814,
-  "quotes": 18,
-  "grounded": 12,
-  "rewrites": 0,
-  "inventedNumbers": [],
+  "suggestions": 28,
+  "words": 2746,
+  "quotes": 28,
+  "grounded": 22,
+  "rewrites": 10,
+  "inventedNumbers": [
+    "25"
+  ],
   "falsePositives": [
-    "s2:e0:b0, s2:e0:b1, s2:e2:b0, s2:e2:b1... 'Managed' is past tense even though the role is current; use 'Manage' to match 'Sep 2025 - Present.' (Ridgeway role is past, not current)",
-    "s2:e1:b1, s2:e1:b2, s2:e1:b3... 'by a third' uses a less precise number format... replace it with 'by 33%' (many listed lines do not contain 'by a third')"
+    "The resume does not explain the period between August 2021 and June 2025."
   ],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 5973,
-    "completion_tokens": 12282,
-    "total_tokens": 18255,
+    "prompt_tokens": 5839,
+    "completion_tokens": 19714,
+    "total_tokens": 25553,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 11819
+      "reasoning_tokens": 19055
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 4053
+    "prompt_cache_miss_tokens": 3919
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove the first-person pronoun in the research-assistantship bullet."
+        "evidence": "Remove the first-person wording in the proof bullet."
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "Correct “econometircs” to “econometrics.”"
+        "evidence": "Correct the spelling of “econometircs” to “econometrics.”"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The directional-performance claim describes a six-percentage-point increase as a 6% improvement"
+        "evidence": "The change from **52% to 58%** is a **6-percentage-point increase**, not 6%."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+        "evidence": "The change from **0.20 to 0.15** is a **25% reduction**, not a 33% improvement."
       },
       {
         "id": "S1",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "The feature-store bullet leads with a long technical process before its outcome; make the result or adoption clearer."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The package result is buried in an overloaded bullet that combines unrelated duties"
+        "evidence": "The final bullet combines the package release with unrelated duties and leaves its strongest result buried at the end."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "The Sharpe-ratio annualization uses the wrong scaling factor"
+        "evidence": "The daily Sharpe ratio is normally annualized by multiplying by the square root of 252, not by 252."
       },
       {
         "id": "T3",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "A standard Diebold–Mariano test is not generally valid without adjustment when the competing forecasting models are nested..."
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "Sunrise Bakery should not appear as the first and only current role in a résumé aimed at quantitative work"
+        "evidence": "The current **Sunrise Bakery** role interrupts the statistics/quantitative-research trajectory."
       },
       {
         "id": "N4",
-        "found": false,
-        "evidence": ""
+        "found": true,
+        "evidence": "**Kafka** appears in Skills without being demonstrated elsewhere. Either connect it to a project or remove it."
       }
     ],
     "coverage": true,
-    "suggestions": 30,
-    "rewrites": [],
+    "suggestions": 28,
+    "rewrites": [
+      "multiplying it by √252",
+      "a 25% reduction",
+      "improved the model’s directional hit rate by 6 percentage points, from 52% to 58%",
+      "Released an open-source R package for high-dimensional covariance estimation",
+      "the package reached 3,000 downloads in its first year",
+      "Closed a 0.02 gap between local validation and leaderboard scores by switching to time-grouped folds",
+      "Built a feature store",
+      "econometrics",
+      "Manage opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+      "Cut unsold bread from 12% to 7% of production by running daily stock counts and supplier orders."
+    ],
     "falsePositives": [
-      "s2:e0:b0, s2:e0:b1, s2:e2:b0, s2:e2:b1... 'Managed' is past tense even though the role is current; use 'Manage' to match 'Sep 2025 - Present.' (Ridgeway role is past, not current)",
-      "s2:e1:b1, s2:e1:b2, s2:e1:b3... 'by a third' uses a less precise number format... replace it with 'by 33%' (many listed lines do not contain 'by a third')"
+      "The resume does not explain the period between August 2021 and June 2025."
     ]
   }
 }
