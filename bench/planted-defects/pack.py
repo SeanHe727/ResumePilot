@@ -73,21 +73,21 @@ Each case is one early-career, one-page résumé from one of three fields:
 machine learning and software engineering, product management, or
 quantitative research. Each was written clean and then had about ten problems
 put into it on purpose, across five kinds: wording; numbers; how a line is
-built; technical or methodological content; and the career as a whole —
-order, gaps, an entry that does not belong, skills nothing supports, personal
-details. Some are subtle, and a résumé can also have problems nobody planted.
+built; technical or methodological content; and the career as a whole (order,
+gaps, an entry that does not belong, skills nothing supports, personal
+details). Some are subtle, and a résumé can also have problems nobody planted.
 
 The four reviews of a case are shuffled, and the labels say nothing about who
 wrote them. Every reviewer was asked not to rewrite lines for the candidate.
 
 ## Score each review from 1 to 10 on
 
-1. **Accuracy** — is what it says about the résumé true?
-2. **Problems found** — does it catch what actually weakens this résumé?
-3. **Explanation** — does the candidate understand why each problem matters?
-4. **Actionability** — could the candidate make the change today?
-5. **Prioritization** — is it clear what matters most?
-6. **Faithfulness** — does it avoid presenting invented facts as the
+1. Accuracy: is what it says about the résumé true?
+2. Problems found: does it catch what actually weakens this résumé?
+3. Explanation: does the candidate understand why each problem matters?
+4. Actionability: could the candidate make the change today?
+5. Prioritization: is it clear what matters most?
+6. Faithfulness: does it avoid presenting invented facts as the
    candidate's?
 
 Then rank the four from best to worst, with two or three sentences on what

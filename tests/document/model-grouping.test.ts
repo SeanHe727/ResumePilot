@@ -246,8 +246,8 @@ describe('what the model is shown', () => {
     const prompt = groupingPrompt(DOCUMENT, 10);
 
     expect(prompt).toContain('appears exactly once');
-    expect(prompt).toContain('Return numbers only');
-    expect(prompt).toContain('ascending order');
+    expect(prompt).toContain('Numbers only');
+    expect(prompt).toContain('every list ascending');
     expect(prompt).toContain('unbroken run');
   });
 

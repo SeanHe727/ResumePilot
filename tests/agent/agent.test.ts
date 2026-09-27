@@ -433,7 +433,7 @@ describe('SubAgentRuntime', () => {
     expect(seen[1]?.tools).toBeUndefined();
     // Taking the tools away is not enough: a model that was about to look
     // something up writes about what it would have looked up instead.
-    expect(seen[1]?.messages.at(-1)?.content).toMatch(/No more lookups/);
+    expect(seen[1]?.messages.at(-1)?.content).toMatch(/Stop looking things up/);
   });
 
   it('does not nudge an agent that answered on its first turn', async () => {
@@ -442,7 +442,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: WORDING_AGENT, input: 'judge' });
 
-    expect(JSON.stringify(seen[0])).not.toContain('No more lookups');
+    expect(JSON.stringify(seen[0])).not.toContain('Stop looking things up');
   });
 
   it('fails cleanly when the last turn asks for another tool instead of answering', async () => {
@@ -756,7 +756,7 @@ describe('whole-document roles', () => {
     const checks = JSON.stringify({ conflicts: ['two dates disagree'], unsupportedSkills: ['Fortran'], misspellings: ['Pyhton'] });
     const engine: QueryEngine = {
       async query(params) {
-        return text(params.systemPrompt?.includes('check a résumé against itself') ? checks : NARRATIVE_JSON);
+        return text(params.systemPrompt?.includes('check a resume against itself') ? checks : NARRATIVE_JSON);
       },
       getUsageSummary: () => '',
       checkBudget: () => ({ ok: true }),
