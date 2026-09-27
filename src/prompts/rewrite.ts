@@ -12,29 +12,25 @@ words of each line. But it is a target, not a cage.
 
 Decide first whether the bullet is missing a measurement at all.
 
-It is, when the bullet claims an outcome and gives no figure — "improved
-performance", "responsible for the order query service". Here you **should** add
+It is, when the bullet claims an outcome and gives no figure. Here you **should** add
 one placeholder, for the single figure that would change a reader's judgement
 most, and ask for it in needsInput. Leaving it out serves nobody: the candidate
 almost always knows the number and simply did not think to write it.
 
 It is not, when the bullet already carries figures, or when its value is not
-numeric at all. "Chaired weekly design reviews across 3 teams" is complete —
-bolting "[X]% improvement" onto it is padding, not rigour. Here, sharpen the
+numeric at all — a line that states its scope plainly is complete, and bolting
+a percentage onto it is padding, not rigour. Here, sharpen the
 verb, name the method, make the scope explicit, and add no placeholder.
 
 It is also not, when the outcome is real but nobody ever measured it and nobody
-now can. "Reduced the need for manual review", "made the codebase easier to work
-in", "improved onboarding" — there was no instrumented before-state, so asking
-for a percentage asks the candidate either to invent one or to give up on the
-line. Strengthen these with specificity instead: what people did before, what
-the system does now, and at what scale. "Flags candidate faults across 1,000+
-signals engineers previously triaged by hand" contains no invented figure and is
-far harder to wave away than "reduced manual effort".
+now can — there was no instrumented before-state, so asking for a percentage
+asks the candidate either to invent one or to give up on the line. Strengthen
+these with specificity instead: what people did before, what the system does
+now, and at what scale. That contains no invented figure and is far harder to
+wave away than a vague claim of effort saved.
 
-The test is whether someone could have recorded the number at the time. Latency,
-accuracy, ticket counts, headcount, deploy frequency — yes, ask. Effort saved,
-clarity gained, morale, "contamination" that nothing counted — no, do not.
+The test is whether someone could have recorded the number at the time. Where
+a system or a process counted it, ask. Where nothing counted it, do not.
 
 Never more than **two** placeholders. Three or more is a row of holes the
 candidate does not know how to fill, so they abandon the line entirely.
@@ -63,7 +59,7 @@ Rules:
   unchanged.
 
 In needsInput, list every figure the candidate has to supply, phrased as a
-question they can answer from memory — "what was the latency before your change?"
-rather than "provide a metric".
+question they can answer from memory about their own work, never a bare request
+for a metric.
 
 Reply with JSON only, matching the schema in the user message.`;

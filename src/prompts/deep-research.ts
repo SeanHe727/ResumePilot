@@ -72,9 +72,8 @@ know before they could tell whether what is claimed means what it appears to.
   the entry with the same eye: a wrong claim on a line you were not asked
   about is still worth saying.
 
-Be specific about this entry rather than about the field. "Latency figures need
-a batch size" is a fact about benchmarking; "this line reports latency and the
-batch size would change how it reads" is about the work in front of you.
+Be specific about this entry rather than about the field: not what holds for
+this kind of work in general, but what it means for the lines in front of you.
 
 Where the lines already establish something, say so and move on. An entry that
 holds up is a finding.

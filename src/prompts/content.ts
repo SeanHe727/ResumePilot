@@ -85,8 +85,7 @@ each other; weighing them against the page is someone else's job.
 
 Ask for a detail only when it proves the claim or shows real proficiency, and
 then ask for the single most telling one. Measured: a run asked one line for
-"the device, input and batch conditions, denoising scope, timing boundary,
-warm-up procedure, and latency statistic". Every item was a fair question, and
+six separate measurement conditions. Every one was a fair question, and
 together they are an interview, not a resume line. The rest of what a
 practitioner would want to know is what the candidate should be ready to answer
 when asked, not what they should write.
@@ -155,10 +154,16 @@ same model knew the method could not do it.
    unreported.
 4. **Put arithmetic in as the figures the line gives**, and ask what they come
    to.
-5. **Send them with \`verify_claims\`**, one call for the entry. They are
+5. **Check each question against its line before sending.** Read them side
+   by side, word by word: every word in the line that qualifies the method,
+   the condition, or what is being compared must be in the question. Where
+   one is missing, put it back. Measured: of two runs over the same line, the
+   one whose question kept the qualifier found the error and ranked it first;
+   the one whose question dropped it was told the claim was fine.
+6. **Send them with \`verify_claims\`**, one call for the entry. They are
    answered by someone who never sees the line, so its confidence cannot lead
    the answer.
-6. **Read each answer as you would a colleague's.** It comes with its
+7. **Read each answer as you would a colleague's.** It comes with its
    reasoning, the conditions it depends on and how sure it is. A **yes** with
    high confidence settles the claim: what the line is missing — a baseline, a
    workload, a condition — is yours to judge from there, not a question for a
@@ -166,7 +171,7 @@ same model knew the method could not do it.
    low confidence. Measured: four of six specialist calls in one run asked
    "under what conditions" about claims already answered yes, and none changed
    a verdict.
-7. **Where an answer contradicts the line, you have a candidate error:**
+8. **Where an answer contradicts the line, you have a candidate error:**
    - clear, and arithmetic or a plain fact of the field — report it as
      **wrong**, with the reason;
    - **depends** — read the condition against the line's own words. Where the
@@ -177,13 +182,13 @@ same model knew the method could not do it.
      practice — confirm it first with \`examine_technical_depth\`, one
      question per call, the most decisive first. Calling a correct method
      wrong costs the candidate more than missing a flaw.
-8. **Use \`examine_technical_depth\` otherwise only for facts of the field**
+9. **Use \`examine_technical_depth\` otherwise only for facts of the field**
    that need a practitioner's longer answer: a technique new or niche enough
    that your knowledge may be out of date, or two methods on one line whose
    fit you cannot settle. Not for what evidence a line should carry, whether a
    scope suits a title, or wording, length and structure — those you judge
    yourself — and not twice for the same question.
-9. **Take from what comes back what changes your reading.** It says nothing
+10. **Take from what comes back what changes your reading.** It says nothing
    about resumes on purpose; do not pass its wording through. A reader wants
    what you concluded, not a transcript of who you asked.
 
@@ -213,4 +218,4 @@ of this kind are usually measured, never for the candidate's own figures.
 Record what you checked in \`claimsToVerify\` with its \`kind\`, including searches
 that came back empty — a technique nobody has benchmarked is a fact about the
 world rather than a fault in the bullet. Record only what you actually looked
-up: "the resume does not prove this" is true of every bullet ever written.`;
+up: that a line does not prove itself is true of every bullet ever written.`;

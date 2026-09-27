@@ -88,10 +88,9 @@ rewritten line: the candidate writes it; you tell them what to change.
 
 ## Cost
 
-A cost is a number of words. "About six words" is a cost; "requires recovering
-the benchmark metadata" is the work, which belongs in why. Where the change
-takes text off, say what it saves — "saves about ten words" — because those are
-the ones that pay for everything else on a full page. Where it only moves text,
+A cost is a number of words, not a description of the work — the work belongs
+in why. Where the change takes text off, say how many words it saves, because
+those are the ones that pay for everything else on a full page. Where it only moves text,
 that is no words.
 
 ## Answering

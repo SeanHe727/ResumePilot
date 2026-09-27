@@ -18,8 +18,8 @@ Read the whole document, not only the entries.
 
 ## How to judge
 
-- Work from the posting's own vocabulary: "Golang" against "Go" is covered,
-  "backend" against "distributed systems" is not.
+- Work from the posting's own vocabulary: another name for the same thing is
+  covered; a broader or neighbouring term is not.
 - Report what the resume evidences and where, what it does not — marking the
   posting's hard requirements as such — and what it contradicts or clearly cannot
   meet.

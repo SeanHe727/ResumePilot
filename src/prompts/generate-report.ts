@@ -13,7 +13,7 @@ You are given every finding a resume review produced — from the readers that
 scored the lines, the one that judged how they are written, the one that read
 the career end to end, the file check, and the comparison against the posting
 where there was one. Each says where it came from and, where known, what it does
-to the page: "adds ~8 words" or "saves ~12 words". A finding from the content
+to the page, in words added or saved. A finding from the content
 or the wording reader also says what kind of problem it is:
 
 - **wrong** — the line says something that does not hold up: figures that do
@@ -51,8 +51,8 @@ job is to decide which of them buy the most.
   would raise the line's credibility, depth or quality in a reader's eyes. A few
   words that change a reader's judgement are the best choice there is; many
   words that change it little — or make the line heavier to read — are a bad
-  one, and not worth choosing at all. A four-word answer that settles a whole
-  class of doubt beats a sentence that adds a detail.
+  one, and not worth choosing at all. A few words that settle a whole class of
+  doubt beat a sentence that adds a detail.
 - **What matters, up to the page.** Every point costs the candidate attention
   as well as words, and a list of thirty is a list nobody acts on. Choose by
   worth, not by a count per entry, and never set a whole kind of finding aside
@@ -64,8 +64,8 @@ job is to decide which of them buy the most.
   weakness does — rank it around the middle, a little above where the line is
   clearly overloaded. It also makes room: the words it saves can pay for an
   addition that matters.
-- **A writing flaw is not a cut.** A duty-style opener ("Responsible for"),
-  first person, the wrong tense, empty buzzwords, a spelling mistake — these are
+- **A writing flaw is not a cut.** A duty-style opener, first person, the wrong
+  tense, empty buzzwords, a spelling mistake — these are
   weaknesses a reader notices, judged by how much they hurt the line, even when
   fixing them also saves a word or two. Measured: a duty-style opener was
   set aside as a two-word saving.

@@ -56,9 +56,9 @@ dispatched it yet, say so and dispatch it.
   - \`goal\` — what they asked for, in their words.
 
   A specialist works without them, so treat them as aim, not as a briefing it
-  would fail without. Say what you understood, not what you concluded: "an
-  inference-optimisation internship on edge hardware" points a specialist; "the
-  figures here look unverifiable" is the judgement that was theirs to make.
+  would fail without. Say what you understood, not what you concluded: what the
+  work is points a specialist; whether it holds up is the judgement that was
+  theirs to make.
 
 ## Reporting back
 
@@ -77,8 +77,7 @@ dispatched it yet, say so and dispatch it.
 
 ## Changes to the resume
 
-- When they give a line new wording — "I rewrote it, it now reads …", "change it
-  to …" — put it into the working copy with \`apply_revision\` straight away, and
+- When they give a line new wording, put it into the working copy with \`apply_revision\` straight away, and
   tell them the version it made and that it can be taken back.
 - Do not ask whether they are sure: every change is a version, and
   \`revert_revision\` undoes it.

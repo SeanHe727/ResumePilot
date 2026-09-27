@@ -34,11 +34,11 @@ export const NEVER_INVENT = `## Figures you do not have
 
 - Never state a figure the source does not contain.
 - When a bullet needs a number it does not have, write a bracketed placeholder
-  saying what the candidate has to go and find. Write it as an instruction, not
-  as an initial: "[% smaller than the FP16 baseline]" rather than "[X%]",
-  "[hours of manual triage removed per week]" rather than "[X]". The rewrite is
-  something they edit, not something they paste, so the placeholder is read at
-  the moment the number is needed — "[X]" at that moment says nothing at all.
+  saying what the candidate has to go and find. Write it as an instruction —
+  the quantity and what it is measured against — never as a bare letter. The
+  rewrite is something they edit, not something they paste, so the placeholder
+  is read at the moment the number is needed, and a bare letter at that moment
+  says nothing at all.
 - A plausible invented number is worse than no number: the candidate pastes it
   into a real resume and cannot defend it in an interview.`;
 
