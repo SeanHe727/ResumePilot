@@ -1,208 +1,211 @@
 # Full review: resume.pdf
 
-**86/100** — format 100 · content 78 · wording 81 · narrative 78
+**86/100** — format 100 · content 79 · wording 80 · narrative 79
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
 ## Start here
 
-1. **The stated 50% reduction in p95 tool-call latency is arithmetically incorrect.**
-   > Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.
-   The reduction from 900 ms to 600 ms is 300 ms, or 33.3% of the starting value. A 50% reduction from 900 ms would produce 450 ms, so the inconsistency can make the surrounding performance claim look unreliable.
-   **How to change it:** Replace "a 50% reduction" with "a 33.3% reduction."
-2. **The task-completion increase is expressed as 12% when the stated values show a 12-percentage-point increase.**
-   > Raised the runtime’s task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.
-   The change from 71% to 83% is 12 percentage points, not a 12% relative increase. If expressed relatively, the increase is approximately 16.9%; using the wrong form can make the benchmark claim appear mathematically careless.
-   **How to change it:** Replace "by 12%" with "by 12 percentage points." If you intend to report relative growth instead, use approximately "16.9%" and retain the 71% and 83% figures.
-3. **The claim that sampling a single rollout per prompt stabilised standard GRPO training is technically backwards.**
+1. **Sampling exactly one scored trajectory per prompt does not provide the within-group comparison required by GRPO and therefore does not itself stabilize sparse-reward training.**
    > Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.
-   Standard GRPO derives its advantage by comparing multiple rollouts for the same prompt. With exactly one rollout, that within-prompt relative-reward signal collapses and can increase variance; a frozen reference does not restore the missing comparison.
-   **How to change it:** Use multiple rollouts per prompt for standard GRPO, or rewrite the claim to identify [the alternative baseline or single-rollout estimator that actually produced the reported stability]. Do not describe single-rollout sampling as standard GRPO stabilization unless that alternative method is named.
-
-## Already working
-
-- s2:e1:b1: Uses the strongest form of measurement by giving a baseline, outcome, and evaluation-set size.
-- s2:e1:b2: Combines a precise performance metric with relevant deployment methods.
-- s3:e1:b0: Connects the contribution to durable upstream adoption and a recurring release process.
+   GRPO forms a relative advantage by comparing multiple sampled rollouts for the same prompt. With one trajectory, that comparison is unavailable, so the claimed stabilization can produce high-variance or uninformative updates and a technical reader may challenge the method.
+   **How to change it:** State the actual stabilizing mechanism, or revise the method to use multiple scored rollouts per prompt; add [the stability measure that improved] after "stabilised" if that evidence is available.
+2. **Load tests cannot keep production p95 latency at 180 ms after deployment.**
+   > Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.
+   Load tests measure performance under defined conditions and can detect regressions or block a release, but they do not maintain production latency. A reader may question whether the 180 ms result persisted and what operational controls supported it, weakening an otherwise precise performance claim.
+   **How to change it:** Replace "keep it there" with "detect performance regressions"; if accurate, add [the production monitoring, capacity-management, configuration, or remediation mechanism] that maintained the target.
+3. **The latency reduction is 33.3%, not 50%.**
+   > Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.
+   The result falls by 300 ms from a 900 ms baseline, which is one-third of the original latency. The stated percentage conflicts with the visible figures, so a recruiter may question the reliability of the other measurements.
+   **How to change it:** Replace "a 50% reduction" with "a 33.3% reduction."
 
 ## Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024
 
-### The dashboard bullet states responsibility but does not show what changed because of that ownership.
+### Load tests cannot keep production p95 latency at 180 ms after deployment.
+
+> added load tests to keep it there
+
+Load tests measure performance under defined conditions and can detect regressions or block a release, but they do not maintain production latency. A reader may question whether the 180 ms result persisted and what operational controls supported it, weakening an otherwise precise performance claim.
+
+**How to change it:** Replace "keep it there" with "detect performance regressions"; if accurate, add [the production monitoring, capacity-management, configuration, or remediation mechanism] that maintained the target.
+
+*raised by content, wording · costs about 2 words to add, plus any words for the mechanism*
+
+### The dashboard and on-call ownership has no measured operational result.
 
 > Owned the diagnostics service’s monitoring dashboards
 
-A hiring reader cannot tell whether the dashboards improved incident detection, service reliability, response time, or another operational outcome. Without that result, the bullet proves that you were responsible for monitoring but not that your ownership made the service or on-call work better.
+The line shows responsibility for a production diagnostic system, but a reader cannot tell whether detection, diagnosis, reliability, or response improved. Without an outcome, the ownership reads as maintenance rather than engineering value.
 
-**How to change it:** Replace the responsibility-only wording with the most direct result of the dashboard and on-call work, such as [reduced incident-detection or response time], [increased alert coverage], or [improved service availability], if accurate. Keep the dashboard scope only if it supports the result.
+**How to change it:** Replace the duty-focused wording with the concrete improvement you made, and add [the most meaningful result] measured against [a baseline]; keep "two major releases" only if it supports that result.
 
-*raised by content · costs about 6 words to add*
+*raised by content, wording · costs about 6 words to add, plus the result*
 
-### The phrase "across two major releases" gives assignment scope but no measure of dashboard effectiveness.
+### The two-week-to-three-day comparison does not identify what interval those durations measure.
 
-> across two major releases
+> release cycles
 
-Release count tells the reader how long or broadly the work was assigned, not whether the monitoring process worked better. A proof point tied to the period before and after your ownership would make the operational improvement credible.
+A hiring reader cannot tell whether the change covers code change to model release, approval to release, or release cadence. That ambiguity makes the strong delivery improvement harder to compare and defend.
 
-**How to change it:** Replace or supplement the release count with [the change in alert response time, incident rate, or service availability compared with before].
+**How to change it:** Replace "release cycles" with [the exact interval being measured], while retaining "2 weeks" and "3 days" if accurate.
 
-*raised by content · costs about 7 words to add*
+*raised by content · costs about 2 words to add*
+
+### The migration result is not quantified, and the long list of parallel work obscures which actions produced it.
+
+> removed the nightly backlogs
+
+The reader understands that the migration helped morning dispatch, but cannot judge the size or reliability of the improvement. Rewriting the logging library, onboarding hires, and taking weekend on-call appear in the same sequence, so the main infrastructure achievement is harder to scan.
+
+**How to change it:** Move the migration result closer to the start of the bullet, separate or shorten the unrelated workstreams, and add [the backlog or dispatch-delay measure] compared with [the pre-migration baseline].
+
+*raised by content, wording · costs about 5 words to add, plus the figure*
 
 ## Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 
-### The claim that sampling a single rollout per prompt stabilised standard GRPO training is technically backwards.
+### Sampling exactly one scored trajectory per prompt does not provide the within-group comparison required by GRPO and therefore does not itself stabilize sparse-reward training.
 
 > sampling a single rollout per prompt
 
-Standard GRPO derives its advantage by comparing multiple rollouts for the same prompt. With exactly one rollout, that within-prompt relative-reward signal collapses and can increase variance; a frozen reference does not restore the missing comparison.
+GRPO forms a relative advantage by comparing multiple sampled rollouts for the same prompt. With one trajectory, that comparison is unavailable, so the claimed stabilization can produce high-variance or uninformative updates and a technical reader may challenge the method.
 
-**How to change it:** Use multiple rollouts per prompt for standard GRPO, or rewrite the claim to identify [the alternative baseline or single-rollout estimator that actually produced the reported stability]. Do not describe single-rollout sampling as standard GRPO stabilization unless that alternative method is named.
+**How to change it:** State the actual stabilizing mechanism, or revise the method to use multiple scored rollouts per prompt; add [the stability measure that improved] after "stabilised" if that evidence is available.
 
-*raised by content · costs no words*
+*raised by content · costs about 5 words to add, plus the corrected method or measure*
 
-### The phrase "Stabilised GRPO training" does not state what instability decreased or what measurable training result followed.
+### The 5% latency result is buried after a dense method list and does not identify the workflow or latency path measured.
 
-> Stabilised GRPO training
+> reduced end-to-end latency 5%
 
-A reader cannot tell whether stabilization meant fewer failed runs, lower reward variance, faster convergence, or another observable change. The bullet currently gives the intervention but not evidence that the intervention produced the claimed effect.
+A scanning reader may miss the only outcome while working through the rollout, reward, and reference-model clauses. The dense opening also frames the bullet around methods rather than ownership, and "end-to-end" leaves unclear what process became faster.
 
-**How to change it:** Replace or follow the phrase with [the observable training change and what it was measured against], such as [fewer failed runs], [lower reward variance], or [faster convergence], if accurate. Keep only the corrected rollout or estimator description as supporting method detail.
+**How to change it:** Move "reduced end-to-end latency 5%" to the front, replace "end-to-end" with [the measured workflow or latency path] if accurate, and follow the result with the existing method details.
 
-*raised by content · costs about 5 words to add*
+*raised by content, wording · costs no words*
 
-### The 5% latency result is buried after three implementation details and is missing "by" before the percentage.
+### The phrase "with ML-extracted features" does not show what feature-extraction or modeling work you performed.
 
-> Using grouped tool-use rollouts
+> with ML-extracted features
 
-A scanning reader may stop at the method list and read this as an implementation description rather than an achievement. The technical details are useful, but they should explain a visible result rather than delay it.
+A hiring reader can see the system context and scale but cannot identify your machine-learning contribution beyond using extracted features. That leaves the technical ownership of the triage branch unclear.
 
-**How to change it:** Move "reduced end-to-end latency by 5%" to the opening of the bullet. Retain the one or two most important method details after it and cut the least important detail if needed.
+**How to change it:** Replace "ML-extracted features" with [the specific feature-extraction or modeling contribution], if accurate.
 
-*raised by content, wording · costs saves about 5 words*
-
-### The phrase "ML-extracted features" is too broad and compressed to show the technical method behind the triage branch.
-
-> ML-extracted features
-
-A hiring manager can see that machine learning was involved but cannot tell what you built or selected. That leaves the contribution less credible as evidence of modeling or feature-engineering skill, despite the strong backlog result.
-
-**How to change it:** Replace "ML-extracted features" with [the specific feature-extraction or modeling approach used], if accurate. Keep the 68% backlog result and its first-quarter comparison immediately visible.
-
-*raised by content, wording · costs about 4 words to add*
+*raised by content · costs about 2 words to add*
 
 ## Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
 
-### The stated 50% reduction in p95 tool-call latency is arithmetically incorrect.
+### The latency reduction is 33.3%, not 50%.
 
 > a 50% reduction
 
-The reduction from 900 ms to 600 ms is 300 ms, or 33.3% of the starting value. A 50% reduction from 900 ms would produce 450 ms, so the inconsistency can make the surrounding performance claim look unreliable.
+The result falls by 300 ms from a 900 ms baseline, which is one-third of the original latency. The stated percentage conflicts with the visible figures, so a recruiter may question the reliability of the other measurements.
 
 **How to change it:** Replace "a 50% reduction" with "a 33.3% reduction."
 
 *raised by content, wording · costs no words*
 
-### The task-completion increase is expressed as 12% when the stated values show a 12-percentage-point increase.
+### The task-completion increase is 12 percentage points, not 12% relative growth.
 
-> by 12%
+> by 12% on the benchmark suite
 
-The change from 71% to 83% is 12 percentage points, not a 12% relative increase. If expressed relatively, the increase is approximately 16.9%; using the wrong form can make the benchmark claim appear mathematically careless.
+The benchmark rate rises from 71% to 83%, which is a 12-percentage-point increase and approximately 16.9% relative growth. Leaving the delta as "12%" makes the reader reconcile two different interpretations of an otherwise strong before-and-after result.
 
-**How to change it:** Replace "by 12%" with "by 12 percentage points." If you intend to report relative growth instead, use approximately "16.9%" and retain the 71% and 83% figures.
+**How to change it:** Replace "by 12%" with "by 12 percentage points" and retain the 71%-to-83% figures; use the relative change only if that is the intended measurement.
 
-*raised by content, wording · costs adds about 1 word*
+*raised by content, wording · costs about 1 word to add*
 
-### The phrase "accelerating delivery and improving outcomes for downstream teams" does not identify the specific result those teams gained.
-
-> improving outcomes for downstream teams
-
-A reader cannot tell whether delivery became faster, more reliable, or more autonomous, or what changed for the downstream teams. The broad phrase reads as a general assessment rather than evidence of the platform initiative's effect.
-
-**How to change it:** Replace the broad outcome phrase with [the single most important delivery or downstream-team change], and name the affected platform capability if accurate. For example, specify whether the result was [faster delivery], [more reliable releases], or [greater team autonomy] only if that is the demonstrated outcome.
-
-*raised by content · costs about 5 words to add*
-
-### The claims about accelerating delivery and improving outcomes have no measurement or comparison.
-
-> accelerating delivery
-
-Without a baseline, delta, adoption count, or other anchor, the reader cannot judge the size or credibility of the improvement. Even a concise comparison would distinguish a measured result from a broad claim about impact.
-
-**How to change it:** Add one measure tied to the stated outcome, such as [delivery time compared with the prior process], [number or share of downstream teams adopting the practices], or [the change in release reliability], if accurate.
-
-*raised by content · costs about 6 words to add*
-
-### The phrase "Drove adoption of AI-first engineering practices" does not say which practices you introduced or how you drove adoption.
+### The line claims broad adoption and benefits without identifying the practices, work, or measured result.
 
 > AI-first engineering practices
 
-The phrase signals platform-wide ownership but not a reconstructable technical contribution. A reader cannot see whether you introduced an AI-assisted workflow, an agent integration, an evaluation process, or developer tooling, so the ownership claim does not demonstrate the underlying skill.
+A reader cannot tell whether delivery speed, reliability, throughput, adoption, or another outcome improved. The broad phrase "AI-first engineering practices" reads as jargon and leaves the ownership claim difficult to evaluate as technical work.
 
-**How to change it:** Replace the broad phrase with [the specific AI-assisted workflow, agent integration, evaluation process, or developer tooling] that you introduced. If adoption was part of the result, add [how many or what share of teams adopted it], if accurate.
+**How to change it:** Replace "AI-first engineering practices" with [the one or two specific practices introduced or enabled], and replace the broad benefits with [the specific downstream result] measured against [its baseline or comparison].
 
-*raised by content · costs about 6 words to add*
+*raised by content, wording · costs about 4 words to add, plus the practices and result*
 
 ## Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
 
-### The phrase "Upstreamed 8 citation and faithfulness metrics" does not show what you technically did to implement or integrate them.
+### The phrase "Showed the evaluator tracks" is grammatically incorrect.
+
+> Showed the evaluator tracks
+
+The missing "that" makes the sentence read as though "evaluator tracks" were a noun phrase rather than a clause. The awkward construction interrupts an otherwise credible statistical validation result.
+
+**How to change it:** Replace "Showed the evaluator tracks" with "Showed that the evaluator tracked" or "Demonstrated that the evaluator tracked."
+
+*raised by wording · costs about 1 word to add*
+
+### The metric implementation is not described beyond the count of metrics that were upstreamed.
 
 > Upstreamed 8 citation and faithfulness metrics
 
-The adoption result demonstrates contribution, but a technical reader cannot tell whether you designed, implemented, validated, or integrated the metrics. One concrete implementation detail would better demonstrate your skill without weakening the durable upstream-adoption result.
+The default-benchmark adoption proves the contribution was used, but a reader cannot tell what technical skill you demonstrated in integrating the metrics. The bullet therefore shows impact more clearly than implementation ownership.
 
-**How to change it:** Keep the fact that the metrics now run in the default benchmark, but replace or supplement "Upstreamed" with [the most telling implementation or integration detail], if accurate. Move "now run" directly after the benchmark clause to make the adoption outcome explicit.
+**How to change it:** Add one compact implementation detail after the metric count, such as [the specific integration, test, or interface work that made the metrics compatible with the default benchmark].
 
 *raised by content · costs about 5 words to add*
 
-### The Kendall correlation of 0.89 is not tied to the reference point against which it was measured.
+### The evaluator result does not state what validation decision or framework capability it enabled.
 
-> tracks injected degradation
+> Showed the evaluator tracks injected degradation
 
-A reader cannot tell whether the correlation compares evaluator scores with the known severity or the ordering of the injected degradation. Naming that reference makes the statistic interpretable rather than merely impressive.
+The correlation and trial count show that the evaluator tracked the injected changes, but the reader must infer why that mattered to the project. Naming the consequence would connect the strong measurement to a practical use.
 
-**How to change it:** Replace the vague comparison with [tracked the known degradation severity] or [matched the ordering of the injected degradation], whichever is accurate. Also change "Showed the evaluator tracks" to "Demonstrated that the evaluator tracked."
+**How to change it:** Replace or supplement "Showed" with [the validation consequence or decision enabled by confirming that the evaluator tracked the degradation].
 
-*raised by content, wording · costs about 4 words to add*
+*raised by content · costs about 5 words to add*
+
+### The phrase "with layered instrumentation" does not identify what signals or comparisons localized the defects.
+
+> with layered instrumentation
+
+A technical reader can tell the diagnosis was systematic but cannot judge the specific debugging skill behind it. The technique name supplies process without showing how the three defects were exposed.
+
+**How to change it:** Replace "layered instrumentation" with [the single most revealing instrumentation or tracing technique used to localize the defects].
+
+*raised by content · costs about 3 words to add*
+
+### The line says the defects were fixed upstream without measuring what improved afterward.
+
+> each was fixed upstream
+
+The count establishes the scope of the debugging contribution, but not the value of resolving the defects. A reader cannot tell whether the fixes changed tests, benchmark behavior, stability, or reproducibility.
+
+**How to change it:** Replace the passive ending with an active ending such as "and drove each fix upstream," then add [the one observable post-fix result] compared with [its pre-fix state].
+
+*raised by content · costs about 5 words to add, plus the result*
 
 ## Across the whole résumé
 
-### Experience is not listed newest-first because the 2024–2025 Mobility Systems Company internship appears below the 2022–2024 Eastern Robotics Co. role.
+### Experience appears below Education, so the career direction is established after the degrees rather than before them.
 
-> Eastern Robotics Co. | Junior Software Engineer
+> Western State University
 
-A recruiter scanning dates expects the most recent work to appear first. The current order makes the experience section harder to follow and hides the more recent ML engineering work below an older role.
+A recruiter scanning the document first sees the academic timeline and must look farther down to find the two years of software engineering and the subsequent machine-learning internship. That delays the evidence most relevant to the candidate's current direction.
 
-**How to change it:** Move the Mobility Systems Company entry above Eastern Robotics Co. within EXPERIENCE, keeping the entries in reverse chronological order by their end dates.
-
-*raised by file, narrative · costs no words*
-
-### EDUCATION appears before EXPERIENCE and PROJECTS even though the résumé contains substantial technical work.
-
-> Western State University | M.S. in Computer Engineering
-
-Leading with the M.S. makes the candidate appear primarily academic rather than an engineer transitioning into ML systems. Putting the work first lets the recruiter see the strongest engineering evidence before the degree details.
-
-**How to change it:** Move EXPERIENCE and PROJECTS above EDUCATION so the page opens with the current technical ownership and engineering work rather than the degree in progress.
+**How to change it:** Move the EXPERIENCE section above EDUCATION.
 
 *raised by narrative · costs no words*
 
-## Set aside (19)
+### Experience is not in newest-first order.
 
-- format: Experience is not newest-first: "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024" is listed above the more recent "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025".
-- s2:e0:b1: "added load tests to keep it there" does not state what condition or duration demonstrated that latency stayed at 180 ms.
-- s2:e0:b2: "automated regression checks" names the mechanism but not what they tested in the perception model releases.
-- s2:e0:b3: "removed the nightly backlogs that delayed morning dispatch" describes an operational result without showing how large the backlog or delay was.
-- s3:e1:b2: The phrase "with layered instrumentation" names a technique without showing what kind of instrumentation exposed the defects.
-- s3:e1:b0: “Where they now run” uses an ambiguous pronoun and slightly weakens the direct connection between the metrics and the benchmark; use “now run” after the benchmark clause instead.
-- s3:e1:b1: “Showed the evaluator tracks” is grammatically awkward and can read as a missing “that”; correct it to “Demonstrated that the evaluator tracked.”
-- s3:e1:b2: “Defects in stability, sourcing and parameter handling” makes stability sound like a defect category rather than a pipeline area; use “defects affecting stability, sourcing and parameter handling.”
-- s3:e1:b2: “With layered instrumentation” is specialized process language that interrupts the result; move it after the module-tracing clause or omit it if space is tight.
-- s2:e0:b0: "Owned" frames the work as a duty, while "the on-call rotation that used them" makes the relationship between the rotation and dashboards awkward and unclear.
-- s2:e0:b1: "Keep it there" uses a vague pronoun and does not specify whether the load tests prevented latency from rising.
-- s2:e0:b2: "Maintained" frames the opening as pipeline ownership rather than leading with the concrete improvement made to the release process.
-- s2:e0:b3: The migration, logging rewrite, onboarding, and on-call work are packed into one sentence, so the reader cannot quickly identify the primary achievement.
-- s2:e0:b3: "Which removed the nightly backlogs" appears to refer to the entire preceding chain rather than clearly identifying which change produced the result.
-- s2:e1:b1: "assistant-only loss masking" is specialized terminology whose function is not apparent from the wording.
-- s2:e1:b4: "by sampling a single rollout per prompt, so each update used exactly one scored trajectory" repeats the same fact and makes the causal explanation unnecessarily long.
-- s2:e1:b5: "who adopted them as the team’s runbook" makes the antecedent of "them" slightly unclear because it could refer to either the rules or the rules and paths together.
-- whole resume, order: Move the Mobility Systems Company internship above Eastern Robotics Co. within EXPERIENCE so the entries are reverse chronological.
-- whole resume, order: Move EXPERIENCE and PROJECTS above EDUCATION. The page now has substantial technical work, and leading with the M.S. makes the candidate appear primarily academic rather than an engineer transitioning into ML systems.
+> Aug 2022 - Jul 2024
+
+The Oct 2024–May 2025 Mobility Systems Company role appears below the Aug 2022–Jul 2024 Eastern Robotics Co. role. The backward chronology can make the work history look careless and makes the recent machine-learning experience easier to overlook.
+
+**How to change it:** Within EXPERIENCE, move Mobility Systems Company above Eastern Robotics Co.
+
+*raised by file, narrative · costs no words*
+
+## Set aside (8)
+
+- s3:e1:b1: "Injected degradation" is abstract and the sequence "citations, sources and claims" makes it unclear what was removed in each trial.
+- s3:e1:b2: "Each was fixed upstream" uses passive voice and hides who made the fixes; use an active ending such as "and drove each fix upstream."
+- s3:e1:b2: "Defects in stability" is vague because stability is an outcome rather than a clearly named pipeline component.
+- s2:e0:b3: "while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation" combines unrelated workstreams, making the scope and main achievement difficult to scan.
+- s2:e0:b3: The result in "which removed the nightly backlogs" appears only after a long sequence of methods and does not clearly indicate which actions caused it.
+- s2:e1:b2: "Single-request edge inference" compresses several concepts into a phrase that may require interpretation outside the immediate team.
+- s2:e1:b3: "Composite reward over accuracy, citation validity and call count" is dense jargon that makes the sentence harder to scan.
+- s2:e1:b4: "So each update used exactly one scored trajectory" restates the preceding method without explaining an additional outcome.

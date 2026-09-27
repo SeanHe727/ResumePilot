@@ -14,91 +14,85 @@
     "N4"
   ],
   "coverage": true,
-  "suggestions": 17,
-  "words": 2061,
-  "quotes": 11,
-  "grounded": 6,
-  "rewrites": 5,
-  "inventedNumbers": [
-    "25",
-    "11.5"
-  ],
+  "suggestions": 25,
+  "words": 2301,
+  "quotes": 22,
+  "grounded": 16,
+  "rewrites": 2,
+  "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4806,
-    "completion_tokens": 7115,
-    "total_tokens": 11921,
+    "prompt_tokens": 5160,
+    "completion_tokens": 14904,
+    "total_tokens": 20064,
     "prompt_tokens_details": {
       "cached_tokens": 1920
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 6601
+      "reasoning_tokens": 14394
     },
     "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 2886
+    "prompt_cache_miss_tokens": 3240
   },
   "verdict": {
     "defects": [
       {
         "id": "W2",
         "found": true,
-        "evidence": "Remove the first-person reference in the research-assistant entry"
+        "evidence": "Remove the first-person phrase “my proof.”"
       },
       {
         "id": "W6",
         "found": true,
-        "evidence": "The Methods skill is misspelled: \"econometircs\" should be \"econometrics.\""
+        "evidence": "Correct the skills typo “econometircs” → “econometrics.”"
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The change from 52% to 58% is 6 percentage points, not a 6% improvement."
+        "evidence": "52% to 58% is a 6-percentage-point increase, not simply a 6% increase."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The line incorrectly calls the reduction from 0.20 to 0.15 a 33% improvement."
+        "evidence": "0.20 to 0.15 is a 25% reduction, not a 33% improvement."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "the reuse result is buried after three implementation details without saying what the reuse enabled"
+        "evidence": "move “built a feature store” to the start of the bullet or immediately after the subject so the reuse result appears earlier."
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The research-assistant entry mixes research, systems work, teaching, grading, reading-group organization, and cluster maintenance"
+        "evidence": "Split or simplify the overloaded research-assistant bullet."
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "The daily Sharpe ratio was annualized incorrectly by multiplying it by 252 instead of by the square root of 252."
+        "evidence": "Replace “multiplying it by 252” with “multiplying it by the square root of 252.”"
       },
       {
         "id": "T3",
         "found": true,
-        "evidence": "The claim that standard Diebold–Mariano tests confirmed the gain is technically incorrect for a nested baseline"
+        "evidence": "uses an inappropriate test for a nested model comparison."
       },
       {
         "id": "N1",
         "found": true,
-        "evidence": "Sunrise Bakery currently appears first and interrupts the quantitative-research narrative."
+        "evidence": "Sunrise Bakery currently appears before Northpeak Capital, making an unrelated current role the first and most prominent experience entry."
       },
       {
         "id": "N4",
         "found": true,
-        "evidence": "SQL, C++, Kafka, and Bayesian inference are listed as skills without corresponding evidence anywhere in the résumé."
+        "evidence": "The skills list includes SQL, C++, Kafka, and Bayesian inference without supporting evidence elsewhere in the résumé."
       }
     ],
     "coverage": true,
-    "suggestions": 17,
+    "suggestions": 25,
     "rewrites": [
-      "multiplying it by √252",
-      "a 25% reduction",
-      "by 6 percentage points",
-      "by approximately 11.5% relative",
-      "econometrics."
+      "Ran daily stock counts and supplier orders; unsold bread fell from 12% to 7% of production,",
+      "Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor."
     ],
     "falsePositives": []
   }
