@@ -16,32 +16,32 @@ TESTS = HERE / os.environ.get('TESTS', 'tests')
 R = {
     'W1': r"\bown|responsib|in charge|dut(y|ies)|action verb|what (you|they) (did|built|changed)|accomplish",
     'W2': r"pronoun|first[- ]person|\bmy\b",
-    'W3': r"tense|present|past",
-    'W4': r"passive|who (did|performed|mapped)|actor|active voice|your role",
-    'W5': r"vague|generic|buzzword|concrete|specific|filler|empty|unclear what",
+    'W3': r"tense|present|past|completed role|role (has )?ended|role dates",
+    'W4': r"passive|who (did|performed|mapped)|actor|active voice|\bactive\b|your role",
+    'W5': r"vague|generic|buzzword|concrete|specif|filler|empty|unclear what|broad|promotional|self-assess|substantiate|does not (say|show|tell|identify) what",
     'W6': r"spell|typo",
     'A1': r"baseline|relative|absolute|compar|against|from what|before|starting",
     'A2': r"percentage[- ]point|\bpoints?\b|\bpp\b|relative",
-    'A3': r"incorrect|wrong|actually|math|arithmetic|should be|inconsistent|does not match|doesn.t match|not \d|miscalculat",
-    'A4': r"duplicat|same (achievement|result|claim|work|project|figure)|repeat|copied|appears (twice|in both|also)|twice|both entries|double|does not belong|another entry|other entry|wrong entry",
-    'S1': r"lead with|front|buried|bury|end of|start with|result first|beginning|comes (after|last)|after (the|a) (long|list)",
+    'A3': r"incorrect|wrong|actually|math|arithmetic|should be|inconsistent|does not match|doesn.t match|not \d|miscalculat|not (a |an )?\d|conflicts? with|misstat|does not (equal|represent|follow)|correct the|cannot all be right",
+    'A4': r"duplicat|same (achievement|result|claim|work|project|figure)|repeat|copied|appears (twice|in both|also)|twice|both entries|double|does not belong|another entry|other entry|wrong entry|same\b.{0,40}\b(achievement|result|claim|work|project|figure|signal|branch)|two (different )?entries|misattribut|wrongly assign",
+    'S1': r"lead with|front|buried|bury|end of|start with|result first|beginning|comes (after|last)|after (the|a) (long|list)|hides the result|obscures? .{0,40}(outcome|result)",
     'S2': r"result|impact|outcome|what changed|so what",
-    'S3': r"too long|overload|pack|several|split|multiple|cram|dense|too many|unrelated (activities|tasks|duties)|run[- ]on|long",
-    'S4': r"strongest|most impressive|(move|put|lead|place).{0,40}(first|top)|reorder",
-    'N1': r"unrelated|irrelevant|different (field|career)|not relevant|off[- ]target|distract|additional experience|remove|cut",
-    'N2': r"chronolog|reverse|newest|most recent|out of order",
+    'S3': r"too long|overload|pack|several|split|multiple|cram|dense|too many|unrelated (activities|tasks|duties)|run[- ]on|long|separate|combin|crowded|compete for attention|many contributions",
+    'S4': r"strongest|most impressive|(move|put|lead|place).{0,40}(first|top|earlier)|reorder|strong lead",
+    'N1': r"unrelated|irrelevant|different (field|career)|not relevant|off[- ]target|distract|additional experience|remove|cut|not (clearly |directly )?(connected|relevant)|relevance is (unexplained|unclear)|departure|interrupt|outside (the )?(product|target|field)|less space|less directly relevant",
+    'N2': r"chronolog|reverse|newest|most recent|out of order|more recent|by date|ended .{0,25}after|back to (19|20)\d\d",
     'N3': r"\bgap|unexplained|between",
     'N5': r"birth|nationality|personal",
 }
 T = {  # technical: both patterns must match, and the item must call it an error
-    ('b1-ce', 'T1'): [r"group|single rollout|one rollout|advantage"],
+    ('b1-ce', 'T1'): [r"group|single rollout|one rollout|advantage|scored rollout|within-prompt"],
     ('b1-ce', 'T3'): [r"batch", r"single|latency|queue|throughput"],
     ('b1-pm', 'T2'): [r"self[- ]select|selection bias|opt[- ]in|opted|confound|random"],
     ('b1-pm', 'T4'): [r"definition|exclud|denominator|redefin|reclassif|gam|calculation|reporting|metric change|population"],
     ('b1-quant', 'T1'): [r"square root|sqrt|√"],
-    ('b1-quant', 'T3'): [r"nested", r"clark|west|invalid|not valid|inappropriate|not appropriate|not suitable|unsuitable"],
+    ('b1-quant', 'T3'): [r"nested", r"clark|west|invalid|not valid|inappropriate|not (be )?appropriate|not suitable|unsuitable|not provide .{0,20}valid"],
     ('b2-ce', 'T2'): [r"mask", r"tool output|reproduce|exclud|contradict|cannot|can.t|won.t"],
-    ('b2-ce', 'T4'): [r"master weight|optimi[sz]er|fp32|precision", r"less than|not 4|cannot|can.t|overstat|won.t|far less|unlikely"],
+    ('b2-ce', 'T4'): [r"master weight|optimi[sz]er|fp32|precision", r"less than|not 4|cannot|can.t|overstat|won.t|far less|unlikely|not (be )?supported|does not (by itself )?(explain|support)|would not|not adequately"],
     ('b2-pm', 'T1'): [r"session", r"customer|user|independen|same (user|person|customer)|unit"],
     ('b2-pm', 'T3'): [r"reach", r"ticket|impact|double|misplac|wrong|incorrect"],
     ('b2-quant', 'T2'): [r"best of|\b400\b|multiple[- ]testing|deflated|selection bias|snoop|overfit|cherry"],
@@ -92,7 +92,7 @@ def found(test, k, items, lines):
     if k['id'] == 'N4':
         skill = norm(k['defect'].split('(')[-1].rstrip(')'))
         pat = rf"{re.escape(skill)}"
-        ok = [it for it in items if re.search(pat, said_(it)) and re.search(r"evidence|support|not (shown|used|mentioned|demonstrat|reflect)|no .{0,20}(use|experience|project)|nowhere|isn.t|doesn.t appear|remove", said_(it))]
+        ok = [it for it in items if re.search(pat, said_(it)) and re.search(r"evidence|support|not (shown|used|mentioned|demonstrat|reflect)|no .{0,20}(use|experience|project)|nowhere|isn.t|doesn.t appear|remove|only in (the )?skills|appears only|not in the experience|reconsider listing|what you used it for", said_(it))]
         return 'right' if ok else ('mentioned' if near else 'missed')
     if k['id'] == 'W6':
         bad = [w for w in re.findall(r"[a-z]+", norm(k['line'])) if len(w) > 4]
