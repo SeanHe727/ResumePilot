@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W5",
+    "category": "wording",
+    "line": "Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "defect": "Generic claims with no concrete action, subject or result."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Tested three onboarding prototypes with 24 new customers and shipped the design that lifted completed sign-ups by 41% in its first quarter.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Tested the telehealth waiting-room screens with 16 older patients while also running the team's recruiting calendar, updating the style guide, onboarding two interns and taking notes for the accessibility working group, which cut support calls about joining a video visit by 30%.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "defect": "An open card sort shows how people group content; it cannot measure whether they find items in a given navigation, which needs a tree test or task-based test."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "defect": "WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for body text; 3:1 is enough only for large text, so the design system does not meet AA."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "May 2019 graduation to Apr 2020",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Tableau)"
+  }
+]

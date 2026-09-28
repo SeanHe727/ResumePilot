@@ -1,0 +1,29 @@
+Jamie Alvarez
++1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez
+EDUCATION
+Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018
+EXPERIENCE
+Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025
+- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.
+- Cut inbound freight cost per pallet from $48 to $41 over two quarters by consolidating supplier pickups into four regional milk runs.
+- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.
+- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.
+- Led the monthly sales and operations planning meeting, reconciling the sales forecast with plant capacity for the finance and production teams.
+- Trained 6 planners on the new forecasting workflow and wrote its exception-handling guide, which the team still uses for promotions.
+Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021
+- Redesigned the pick paths for the fast-moving zone, cutting walking distance per order by 28% and raising picks per labor hour from 92 to 110.
+- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.
+- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.
+- Set up cycle counting for the 2,000 highest-value locations, raising inventory record accuracy from 91% to 98.5% within a year.
+PROJECTS
+Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present
+- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.
+- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.
+- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.
+Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022
+- Re-slotted the food bank's dry-goods warehouse by turnover, cutting volunteer picking time per pantry order from 25 to 15 minutes.
+- Mapped the donation intake process with the warehouse lead and removed two duplicate data-entry steps, so donations reached the shelves a day sooner.
+- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again after its spring expansion.
+SKILLS
+Tools: Excel, Python
+Methods: demand forecasting, inventory planning, time studies, vehicle routing

@@ -1,0 +1,29 @@
+Casey Morgan
++1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan
+EDUCATION
+Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019
+EXPERIENCE
+Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025
+- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.
+- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.
+- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.
+- Built a research repository of 250 tagged session clips that product managers searched before writing new requirements.
+- Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.
+- Trained 12 product managers to run their own unmoderated tests with a shared script template, which doubled the number of tests run each quarter.
+Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022
+- Ran the monthly patient survey and rebuilt its reporting dashboard, cutting the time from survey close to published findings from 3 weeks to 4 days.
+- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.
+- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.
+- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.
+PROJECTS
+Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present
+- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.
+- Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds and errors from 11 to 3 across the 12 sessions.
+- Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review.
+Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023
+- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.
+- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.
+- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.
+SKILLS
+Tools: Figma, screen-reader testing (VoiceOver, NVDA)
+Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing

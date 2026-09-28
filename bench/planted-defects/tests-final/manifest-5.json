@@ -1,0 +1,182 @@
+[
+  {
+    "id": "b1-ux",
+    "batch": 1,
+    "base": "ux",
+    "defects": [
+      "W5",
+      "W1",
+      "A4",
+      "A1",
+      "S4",
+      "S3",
+      "T2",
+      "T3",
+      "N3",
+      "N4"
+    ],
+    "bottom": 168
+  },
+  {
+    "id": "b1-ops",
+    "batch": 1,
+    "base": "ops",
+    "defects": [
+      "W4",
+      "W2",
+      "A3",
+      "A2",
+      "S1",
+      "S2",
+      "T1",
+      "T4",
+      "N2",
+      "N1"
+    ],
+    "bottom": 120
+  },
+  {
+    "id": "b2-ux",
+    "batch": 2,
+    "base": "ux",
+    "defects": [
+      "W3",
+      "W6",
+      "A3",
+      "A2",
+      "S4",
+      "S1",
+      "T3",
+      "T4",
+      "N5",
+      "N4"
+    ],
+    "bottom": 155
+  },
+  {
+    "id": "b2-ops",
+    "batch": 2,
+    "base": "ops",
+    "defects": [
+      "W4",
+      "W1",
+      "A1",
+      "A4",
+      "S3",
+      "S2",
+      "T2",
+      "T1",
+      "N1",
+      "N2"
+    ],
+    "bottom": 120
+  },
+  {
+    "id": "b3-ux",
+    "batch": 3,
+    "base": "ux",
+    "defects": [
+      "W5",
+      "W6",
+      "A2",
+      "A3",
+      "S1",
+      "S4",
+      "T2",
+      "T1",
+      "N5",
+      "N3"
+    ],
+    "bottom": 155
+  },
+  {
+    "id": "b3-ops",
+    "batch": 3,
+    "base": "ops",
+    "defects": [
+      "W3",
+      "W2",
+      "A1",
+      "A4",
+      "S2",
+      "S3",
+      "T4",
+      "T3",
+      "N3",
+      "N4"
+    ],
+    "bottom": 179
+  },
+  {
+    "id": "b4-ux",
+    "batch": 4,
+    "base": "ux",
+    "defects": [
+      "W4",
+      "W3",
+      "A1",
+      "A2",
+      "S2",
+      "S1",
+      "T1",
+      "T4",
+      "N2",
+      "N1"
+    ],
+    "bottom": 120
+  },
+  {
+    "id": "b4-ops",
+    "batch": 4,
+    "base": "ops",
+    "defects": [
+      "W5",
+      "W6",
+      "A3",
+      "A4",
+      "S3",
+      "S4",
+      "T2",
+      "T3",
+      "N5",
+      "N4"
+    ],
+    "bottom": 143
+  },
+  {
+    "id": "b5-ux",
+    "batch": 5,
+    "base": "ux",
+    "defects": [
+      "W1",
+      "W2",
+      "A3",
+      "A1",
+      "S1",
+      "S2",
+      "T2",
+      "T1",
+      "N5",
+      "N2"
+    ],
+    "bottom": 179
+  },
+  {
+    "id": "b5-ops",
+    "batch": 5,
+    "base": "ops",
+    "defects": [
+      "W5",
+      "W6",
+      "A1",
+      "A3",
+      "S1",
+      "S2",
+      "T1",
+      "T2",
+      "N4",
+      "N5"
+    ],
+    "bottom": 179
+  }
+]

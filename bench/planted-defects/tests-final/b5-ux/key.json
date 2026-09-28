@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Interviewed 40 patients about appointment reminders; my findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Conducted user interviews and created wireframes for a free clinic's online booking flow.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "defect": "The System Usability Scale runs from 0 to 100, so a score of 104 is impossible; the figure is misreported."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "defect": "An open card sort shows how people group content; it cannot measure whether they find items in a given navigation, which needs a tree test or task-based test."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

@@ -46,6 +46,15 @@ T = {  # technical: both patterns must match, and the item must call it an error
     ('b2-pm', 'T3'): [r"reach", r"ticket|impact|double|misplac|wrong|incorrect"],
     ('b2-quant', 'T2'): [r"best of|\b400\b|multiple[- ]testing|deflated|selection bias|snoop|overfit|cherry"],
     ('b2-quant', 'T4'): [r"seed", r"same|identical|independen|correlat"],
+    # The fourth and fifth bases, written before any review of them was read.
+    ('b1-ux', 'T1'): [r"\bsus\b|usability scale", r"\b100\b|maximum|impossible|cannot|can.t|exceed|out of range|range"],
+    ('b1-ux', 'T2'): [r"card sort", r"tree test|findab|generative|cannot|can.t|does not (measure|test|validate|show)|not (measure|validate|test)|task"],
+    ('b1-ux', 'T3'): [r"contrast|3:1", r"4\.5|large text|not (meet|satisf|enough|sufficient)|fail|insufficient|below|does not|doesn.t"],
+    ('b1-ux', 'T4'): [r"\bnps\b|net promoter", r"promoter|detractor|percentage|-100|average|mean|not (how|the)|cannot|can.t|scale"],
+    ('b1-ops', 'T1'): [r"\boee\b|equipment effectiveness", r"\b100\b|maximum|impossible|cannot|can.t|exceed|above"],
+    ('b1-ops', 'T2'): [r"little|\bwip\b|work[- ]in[- ](process|progress)", r"lead time|throughput|cannot|can.t|contradict|inconsistent|double|halve|increase"],
+    ('b1-ops', 'T3'): [r"\beoq\b|economic order", r"safety stock|order quantity|variab|service level|not (set|determin|meant)|cannot|can.t|does not|doesn.t"],
+    ('b1-ops', 'T4'): [r"mape|forecast accuracy", r"exclud|only|intermittent|subset|redefin|definition|denominator|metric|not .{0,20}(improv|accura)|gam"],
 }
 WEIGHT = {'technical': 2, 'data': 2}
 

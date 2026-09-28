@@ -1,0 +1,50 @@
+Jamie Alvarez
++1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez
+EDUCATION
+Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018
+EXPERIENCE
+Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present
+- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the
+door.
+- Prepared weekend wedding orders with the head florist and kept the cooler stocked and
+labeled.
+Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021
+- Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only
+SKUs that sold every week.
+- Ran a time study of the returns desk; my findings led to a triage station that cut returns
+processing time from 3 days to 1.
+- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock
+from 95 to 40 minutes.
+- Set up cycle counting for the 2,000 highest-value locations, raising inventory record
+accuracy from 91% to 98.5% within a year.
+Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025
+- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal
+forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.
+- Cut inbound freight cost per pallet from $48 to $41 over two quarters by consolidating
+supplier pickups into four regional milk runs.
+- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data,
+reviewed monthly with the category managers.
+- Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice
+accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-
+time inbound deliveries from 81% to 93%.
+- Raised the packaging line’s overall equipment effectiveness (OEE) from 71% to 112% by
+cutting changeover time and micro-stops.
+- Trained 6 planners on the new forecasting workflow and wrote its exception-handling guide,
+which the team still uses for promotions.
+PROJECTS
+Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present
+- Modeled a regional grocer’s 85 daily delivery stops as a vehicle-routing problem, cutting
+planned route miles 18% against the grocer’s current routes.
+- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing
+problem with customer time windows.
+- Raised on-time deliveries by 9% in simulation, from 84% to 93%, by adding customer time
+windows to the routing model.
+Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022
+- Analyzed warehouse operations and made recommendations to the food bank’s leadership.
+- The donation intake process was mapped and two duplicate data-entry steps were removed, so
+donations reached the shelves a day sooner.
+- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again
+after its spring expansion.
+SKILLS
+Tools: Excel, Python
+Methods: demand forecasting, inventory planning, time studies, vehicle routing
