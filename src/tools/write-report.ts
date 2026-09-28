@@ -260,7 +260,14 @@ export async function writeFullReport(
           pointsAfter: pointCount(parseJsonObject(second.content ?? '')),
         },
       }));
-      if (parseJsonObject(second.content ?? '')?.sections) response = second;
+      const secondParsed = parseJsonObject(second.content ?? '');
+      if (secondParsed?.sections) {
+        // A retry asked to fix one quote must not cost the groups it already
+        // covered. Measured: asked to requote one phrase, a write-up went from
+        // 25 points to 18 and lost a certain error the selection ranked first.
+        const groups = (plan.groups ?? []).map((group) => group.findingIds.map((id) => shortOf.get(id) ?? id));
+        response = { ...second, content: JSON.stringify(keepCovered(firstParsed, secondParsed, groups)) };
+      }
     }
   }
 
@@ -513,6 +520,38 @@ export function unquoted(parsed: Record<string, unknown> | null, page: string): 
 }
 
 /** How many points a write-up holds. */
+/**
+ * The retry, with any group the first answer covered and the retry dropped put
+ * back as the first answer wrote it, under the same section.
+ */
+export function keepCovered(
+  first: Record<string, unknown>,
+  second: Record<string, unknown>,
+  groups: readonly (readonly string[])[],
+): Record<string, unknown> {
+  type Point = { from?: unknown };
+  type Section = { about?: unknown; points?: Point[] };
+  const cites = (point: Point) => (Array.isArray(point.from) ? point.from.map(String) : []);
+  const sectionsOf = (parsed: Record<string, unknown>) =>
+    (Array.isArray(parsed.sections) ? parsed.sections : []) as Section[];
+  const sections = sectionsOf(second).map((section) => ({ ...section, points: [...(section.points ?? [])] }));
+  const citedBy = (all: Section[]) => new Set(all.flatMap((section) => (section.points ?? []).flatMap(cites)));
+  const before = citedBy(sectionsOf(first));
+  const after = citedBy(sections);
+  const lost = groups.filter((names) => names.some((n) => before.has(n)) && !names.some((n) => after.has(n)));
+  if (lost.length === 0) return second;
+  const lostNames = new Set(lost.flat());
+  for (const section of sectionsOf(first)) {
+    const points = (section.points ?? []).filter((point) => cites(point).some((n) => lostNames.has(n)));
+    if (points.length === 0) continue;
+    const about = JSON.stringify(section.about);
+    const home = sections.find((s) => JSON.stringify(s.about) === about);
+    if (home) home.points.push(...points);
+    else sections.push({ ...section, points });
+  }
+  return { ...second, sections };
+}
+
 export function pointCount(parsed: Record<string, unknown> | null): number {
   const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
   return (sections as Array<{ points?: unknown[] }>).reduce((n, s) => n + (s.points?.length ?? 0), 0);

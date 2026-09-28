@@ -260,7 +260,10 @@ function asLine(short: string, finding: SourceFinding): string {
   const c = finding.costWords;
   const cost = c === undefined || c === 0 ? '' : c > 0 ? `, adds ~${c} words` : `, saves ~${-c} words`;
   const kind = finding.kind ? `, ${finding.kind}` : '';
-  return `- ${short} [${finding.target}${kind}${cost}] ${finding.what}`;
+  // Without the why, a finding whose what only quotes the line reads as no
+  // problem at all. Measured: a certain error set aside for exactly that.
+  const why = finding.why ? ` (why: ${finding.why})` : '';
+  return `- ${short} [${finding.target}${kind}${cost}] ${finding.what}${why}`;
 }
 
 /**

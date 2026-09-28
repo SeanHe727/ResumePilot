@@ -60,12 +60,21 @@ Two levels guide the score.
 ## Choosing
 
 - Judge one by one: never set aside a whole type of finding in one go.
+- **Certain errors are never set aside:** every finding marked wrong is
+  chosen, however many points the report already has.
+- **One problem, one group:** readers overlap. Findings from different readers
+  that name the same problem (the same duplicate, the same misspelling) are one
+  group, however each words it.
 - **Same fix, one group:** group findings only when they ask for the same change
   on different lines. Different errors are different groups, even of the same
   type or on the same entry; a group mixing them turns into one long point
   nobody can act on.
-- Impact and proof before method: conditions a specialist would probe belong to
-  the interview, not the page.
+- Impact and proof before method: detail a specialist would probe (conditions,
+  settings, how exactly it was run) belongs to the interview, not the page.
+  **A method that cannot support the line's conclusion is a problem on the
+  page**, certain or possible (a comparison that does not isolate the effect, a
+  metric redefined to show a gain). Measured: a confounded comparison was set
+  aside as a question for the interview.
 - **Do not polish a line that should go:** where a finding says a line should be
   removed (it repeats another entry or does not belong), set aside findings
   that ask to improve that line.

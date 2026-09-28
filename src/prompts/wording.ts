@@ -40,8 +40,10 @@ Read every line as a careful editor and report each issue. Common cases, not a c
 - Correction: the corrected form, where it is a correction rather than a
   rewrite.
 - Kind:
-  - wrong: a spelling or grammar mistake. **It reads as carelessness**, which
-    costs more than any one weak line.
+  - wrong: a misspelling, or grammar no careful writer would accept. **It
+    reads as carelessness**, which costs more than any one weak line. Grammar
+    a careful writer might choose (an omitted "that", a clipped phrase) is not
+    wrong; it is unclear only if it gets in the way.
   - unclear: the words are there and get in the way (buried result, passive
     voice, duty framing, filler, wrong tense or person).
   - missing: something the line needs is not there.

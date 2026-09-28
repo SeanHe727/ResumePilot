@@ -81,7 +81,8 @@ is rarely not knowing the field; it is not noticing.
 ## Reporting an error
 
 - Where: on the line it is in.
-- What: what is wrong, quoting the line.
+- What: what is wrong, in your own words, quoting the words it turns on. A
+  quote alone does not say what is wrong.
 - Why: why a practitioner would catch it (two or three sentences).
 - Fix: what a correct version says (the right figure from the line's own
   numbers, the right term for what the method did). A fact only the candidate
@@ -92,6 +93,9 @@ is rarely not knowing the field; it is not noticing.
   (arithmetic, a unit misused, a method that cannot do it, a contradiction with
   the page). Mark it possible when it may overreach but a reader could
   reasonably dispute it (a causal claim without evidence, a judgement call).
+- **Not established is possible:** a finding that the line does not prove,
+  guarantee or establish what it claims is possible, however likely; certain
+  needs the line to be false as written.
 - **No invented facts:** never a figure, method or fact the resume does not
   contain.
 - Nothing wrong: return an empty list. An entry that holds up is a finding.
@@ -105,7 +109,7 @@ JSON only:
     {
       "bulletId": "<the id of a line in the entry you were asked to check>",
       "axis": "impact | measurement | method",
-      "what": "what is wrong, quoting the line's words",
+      "what": "what is wrong, in your own words, quoting the words it turns on",
       "why": "why a practitioner would catch it, two or three sentences",
       "fix": "what a correct version says, or what to go and find in [brackets]",
       "certain": true
