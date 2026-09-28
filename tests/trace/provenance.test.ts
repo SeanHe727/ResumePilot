@@ -521,7 +521,7 @@ describe('filing a point under something real', () => {
     expect(renderFull({ ...REPORT, full }, 'r.pdf')).not.toContain('138 0000 0000');
   });
 
-  it('files the whole-résumé points under one fixed title, after the entries', async () => {
+  it('files the whole-résumé points under one fixed title, before the entries', async () => {
     const findings = everyFinding(INPUT);
     const full = await writeFullReport(
       REPORT,
@@ -537,10 +537,11 @@ describe('filing a point under something real', () => {
       }),
     );
 
+    // The page as a whole first, then the entries in the résumé's order.
     expect(full?.sections.map((s) => s.heading)).toEqual([
+      'Across the whole résumé',
       'Mobility Systems Company | AI Research Intern | Oct 2024 - May 2025',
       'A Second Company | Engineer | reach me on [phone]',
-      'Across the whole résumé',
     ]);
   });
 });

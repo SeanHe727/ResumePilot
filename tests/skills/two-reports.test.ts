@@ -88,7 +88,7 @@ describe('the brief and the full review', () => {
     const brief = renderBrief(report, 'cv.pdf');
 
     expect(brief).toContain('> The whole original line');
-    expect(brief).toContain('**How to change it:** lead with the result');
+    expect(brief).toContain('**How to change it**\nlead with the result');
   });
 
   it('carries all of it in the full one', async () => {

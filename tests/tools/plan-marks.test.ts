@@ -26,7 +26,9 @@ describe('planFromMarks', () => {
       FINDINGS,
     );
 
-    expect(plan.groups).toEqual([{ kind: 'immediate', findingIds: ['x3', 'x4'], targets: ['s2:e0:b3', 's2:e0:b2'] }]);
+    expect(plan.groups).toEqual([
+      { kind: 'immediate', findingIds: ['x3', 'x4'], targets: ['s2:e0:b3', 's2:e0:b2'], score: 3, tag: 'polish' },
+    ]);
     // Not b0: nothing in the group was about it. And in the reader's words.
     expect(plan.immediate).toEqual(['s2:e0:b3, s2:e0:b2: method before result (and 1 more like it)']);
     expect(JSON.stringify(plan)).not.toContain('lead with the result');
@@ -65,27 +67,43 @@ describe('planFromMarks', () => {
   });
 });
 
-describe('the report opens with where to start and what already works', () => {
-  it('lists the start-here points and the strengths before the entries', async () => {
+describe('the report in the résumé order, with the key problems marked', () => {
+  const point = (id: string, what: string, extra: Record<string, unknown> = {}) =>
+    ({ id, what, why: `why ${id}`, fix: `fix ${id}`, from: [], sourceFindingIds: [], ...extra });
+  const reportWith = (points: unknown[], strengths?: string[]) => ({
+    summary: { overallScore: 83, formatScore: 100, substanceAvg: 71 },
+    perEntry: [{ entryId: 'e', label: 'e', status: 'reviewed', topIssue: '', bullets: [{ bulletId: 'e:b0', text: 'The line as written', topIssue: '' }] }],
+    format: { overallScore: 100, issues: [] },
+    improvementPlan: { immediate: [], shortTerm: [], longTerm: [] },
+    full: { ...(strengths ? { strengths } : {}), sections: [{ heading: 'A', points }] },
+  }) as never;
+
+  it('opens with a count of each kind and no list of top points', async () => {
     const { renderBrief } = await import('../../src/skills/render-full.js');
-    const point = (id: string, what: string) => ({ id, what, why: '', from: [], sourceFindingIds: [] });
-    const report = {
-      summary: { overallScore: 83, formatScore: 100, substanceAvg: 71 },
-      perEntry: [],
-      format: { overallScore: 100, issues: [] },
-      improvementPlan: { immediate: [], shortTerm: [], longTerm: [] },
-      full: {
-        startHere: ['p2'],
-        strengths: ['s2:e0:b2: three held-out metrics, each against the base model'],
-        sections: [{ heading: 'A', points: [point('p1', 'second thing'), point('p2', 'first thing')] }],
-      },
-    } as never;
+    const text = renderBrief(reportWith([point('p1', 'maths wrong', { tag: 'error' }), point('p2', 'vague', { tag: 'polish' })]), 'r.pdf');
 
-    const text = renderBrief(report, 'r.pdf');
+    expect(text).toContain('1 error, 0 important, 1 polish.');
+    expect(text).not.toContain('Start here');
+  });
 
-    expect(text).toContain('## Start here\n\n1. **first thing**');
-    expect(text).toContain('## Already working\n\n- s2:e0:b2: three held-out metrics');
-    expect(text.indexOf('## Start here')).toBeLessThan(text.indexOf('## A'));
+  it('puts the line first, then its problems, reasons and changes numbered alike', async () => {
+    const { renderBrief } = await import('../../src/skills/render-full.js');
+    const text = renderBrief(
+      reportWith([point('p1', 'maths wrong', { tag: 'error', lines: ['e:b0'] }), point('p2', 'vague', { tag: 'polish', lines: ['e:b0'] })]),
+      'r.pdf',
+    );
+
+    expect(text).toContain('> The line as written\n\n**Problem**\n1. [Error] maths wrong\n2. [Polish] vague');
+    expect(text).toContain('**Why**\n1. why p1\n2. why p2');
+    expect(text).toContain('**How to change it**\n1. fix p1\n2. fix p2');
+    expect(text.match(/The line as written/g)).toHaveLength(1);
+  });
+
+  it('keeps what already works, after the problems', async () => {
+    const { renderBrief } = await import('../../src/skills/render-full.js');
+    const text = renderBrief(reportWith([point('p1', 'x')], ['e:b0: a clear result']), 'r.pdf');
+
+    expect(text.indexOf('## Already working')).toBeGreaterThan(text.indexOf('## A'));
   });
 });
 
@@ -183,28 +201,6 @@ describe('the write-up is fitted to the page', () => {
   });
 });
 
-describe('each point once', () => {
-  it('does not repeat a start-here point under its entry', async () => {
-    const { renderBrief } = await import('../../src/skills/render-full.js');
-    const point = (id: string, what: string, why: string) => ({ id, what, why, from: [], sourceFindingIds: [] });
-    const report = {
-      summary: { overallScore: 80, formatScore: 100, substanceAvg: 70 },
-      perEntry: [], format: { overallScore: 100, issues: [] },
-      improvementPlan: { immediate: [], shortTerm: [], longTerm: [] },
-      full: {
-        startHere: ['p1'],
-        sections: [{ heading: 'A', points: [point('p1', 'fix the maths', 'a reader checks it'), point('p2', 'name the tool', 'it is vague')] }],
-      },
-    } as never;
-
-    const text = renderBrief(report, 'r.pdf');
-
-    expect(text.match(/fix the maths/g)).toHaveLength(1);
-    expect(text).toContain('1. **fix the maths**\n   a reader checks it');
-    expect(text).toContain('- **name the tool**\n  it is vague');
-  });
-});
-
 describe('the write-up is fitted in points too', () => {
   it('asks to merge when there are far more points than a report should hold', async () => {
     const { writeFullReport } = await import('../../src/tools/write-report.js');
@@ -258,5 +254,25 @@ describe('errors in the plan', () => {
     );
 
     expect(plan.groups?.map((g) => g.findingIds)).toEqual([['b'], ['d']]);
+  });
+});
+
+describe('the selection scores, the code orders', () => {
+  it('orders groups by score, highest first, keeping the selection order for ties', async () => {
+    const F = [
+      { id: 'a', role: 'content', target: 's1:e0:b0', what: 'polish' },
+      { id: 'b', role: 'content', target: 's1:e0:b1', what: 'error', kind: 'wrong' },
+      { id: 'c', role: 'content', target: 's1:e0:b2', what: 'important' },
+    ] as SourceFinding[];
+    const { plan } = planFromMarks(
+      { chosen: [
+        { kind: 'immediate', findings: ['c1'], score: 2 },
+        { kind: 'immediate', findings: ['c2'], score: 9 },
+        { kind: 'immediate', findings: ['c3'], score: 6 },
+      ] },
+      F,
+    );
+
+    expect(plan.groups?.map((g) => [g.findingIds[0], g.tag])).toEqual([['b', 'error'], ['c', 'important'], ['a', 'polish']]);
   });
 });

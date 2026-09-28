@@ -360,22 +360,38 @@ export function planFromMarks(
     const members = take(mark?.findings);
     if (!kind || members.length === 0) return [];
     reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
+    const scored = Number(mark?.score);
+    const score = Number.isFinite(scored) ? Math.min(10, Math.max(1, Math.round(scored))) : undefined;
     // Errors on different lines are different errors, whatever the selection
     // made of them. Measured: four unrelated errors merged into one point
     // borrowed a figure from one line into another's explanation, and filed a
     // project's line under the entry above it.
+    const make = (part: SourceFinding[]): PlanGroup => {
+      const error = part.some((f) => f.kind === 'wrong');
+      // Unscored, an error is taken as mattering a great deal and anything
+      // else as polish: the order then falls back to errors first.
+      const s = score ?? (error ? 8 : 3);
+      return {
+        kind,
+        findingIds: part.map((f) => f.id),
+        targets: targetsOf(part),
+        score: s,
+        tag: error ? 'error' : s >= 5 ? 'important' : 'polish',
+      };
+    };
     const erroneous = new Set(members.filter((f) => f.kind === 'wrong').map(lineOf));
-    if (erroneous.size < 2) return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
+    if (erroneous.size < 2) return [make(members)];
     const byLine = new Map<string, SourceFinding[]>();
     for (const f of members) byLine.set(lineOf(f), [...(byLine.get(lineOf(f)) ?? []), f]);
-    return [...byLine.values()].map((part) => ({ kind, findingIds: part.map((f) => f.id), targets: targetsOf(part) }));
+    return [...byLine.values()].map(make);
   });
-  // Errors first, in the selection's own order otherwise: the first three
-  // become the candidate's top priorities, and an order or layout point there
-  // while an error sits further down was measured, twice.
-  const isError = (group: PlanGroup) =>
-    group.findingIds.some((id) => findings.find((f) => f.id === id)?.kind === 'wrong');
-  const groups = [...chosen.filter(isError), ...chosen.filter((g) => !isError(g))];
+  // By score, highest first; the selection's own order breaks ties. Scored
+  // rather than listed in order: listed, errors came out in the order they
+  // sit on the page, a small one first and the worst fourth.
+  const groups = chosen
+    .map((group, i) => ({ group, i }))
+    .sort((a, b) => (b.group.score ?? 0) - (a.group.score ?? 0) || a.i - b.i)
+    .map(({ group }) => group);
 
   const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
     const mark = raw as Record<string, unknown> | null;
@@ -448,7 +464,7 @@ Name findings only by the short names above. Return JSON of exactly this shape:
 
 {
   "chosen": [
-    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "why": "one line on why these, for the developers only" }
+    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "score": 7, "why": "one line on why these, for the developers only" }
   ],
   "setAside": [{ "findings": ["c7"], "because": "one line on why, for the developers only" }]
 }`,

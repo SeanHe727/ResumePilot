@@ -26,9 +26,21 @@ candidate. You choose; you do not write.
   - unclear: it is there but a reader cannot use it.
 - Room: how many words the page has left.
 
-## Priority
+## Scoring
 
-Two levels.
+Score every chosen group from 1 to 10 for how much it matters to this résumé.
+The report is ordered by these scores, so they are the priority.
+
+- 9-10: a certain error that undermines the line or the page (figures that do
+  not add up, a method that cannot do what is claimed, a result under the wrong
+  entry).
+- 7-8: a smaller certain error, or a possible error that would change a
+  reader's judgement if true.
+- 4-6: a refinement that clearly improves how the line reads, especially a
+  cheap one.
+- 1-3: polish.
+
+Two levels guide the score.
 
 1. **Certain errors, all of them:** a line that is false as written (figures
    that do not add up, a unit or percentage misused, a method that cannot do
@@ -60,7 +72,7 @@ Two levels.
 - Rising cost per point: every point you add costs the candidate attention,
   and each costs more than the one before. The first few refinements are
   cheap; past about ten, a refinement must be clearly worth it; past fifteen,
-  only an exceptional one. Errors are exempt.
+  only an exceptional one. Errors are exempt. There is no fixed number.
 - Room: what the chosen groups add, less what they save, should reach the room
   left or a little over (about a tenth).
 - **Nothing disappears:** everything you leave out goes in setAside, with a
@@ -71,13 +83,6 @@ Two levels.
 - immediate: fixable now from the page alone.
 - shortTerm: the fix is clear but needs a figure the candidate has to find.
 - longTerm: rewriting cannot close it; the experience itself is missing.
-
-## Order of groups
-
-- Errors first, then refinements from most to least efficient, whatever their
-  fix type.
-- **The first three become the candidate's top priorities.** Any error goes
-  there before any refinement.
 
 ## Answer
 

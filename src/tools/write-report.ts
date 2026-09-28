@@ -15,6 +15,7 @@ import { currentReadings } from './versions.js';
 
 /** The program's own title for what is not about one entry. */
 const ACROSS_THE_RESUME = 'Across the whole résumé';
+const SKILLS = 'Skills';
 
 /**
  * The diagnosis written out at length, from findings something else has chosen.
@@ -101,7 +102,9 @@ export async function writeFullReport(
   // first thing to fix and was praised two lines further down.
   const strengthsOffered = current.content.current.flatMap((entry) =>
     entry.bullets
-      .filter((bullet) => !bullet.issues.some((issue) => issue.kind === 'wrong'))
+      // Only a line nobody found anything to fix on. Measured: a line packed
+      // with four activities was praised as the entry's strongest.
+      .filter((bullet) => bullet.issues.length === 0 && !findings.some((f) => f.target.startsWith(bullet.bulletId)))
       .flatMap((bullet) => (bullet.strengths ?? []).map((text) => ({ bulletId: bullet.bulletId, text }))),
   );
   const strengthByName = new Map<string, { bulletId: string; text: string }>(
@@ -145,7 +148,7 @@ export async function writeFullReport(
         content:
           `The résumé:\n${state.resume ? renderForQuoting(state) : ''}\n\n` +
           `What was chosen, as groups of findings:\n${chosen.join('\n')}\n\n` +
-          `Write one point per group. Its "from" is the ids listed under that group, and it is about ` +
+          `Write one point per group, in the order given; do not merge groups. Its "from" is the ids listed under that group, and it is about ` +
           `the lines those findings are about and no others: check it against those lines' text and ` +
           `against what the readers said, and leave out anything that is not true of a line.\n\n` +
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
@@ -328,9 +331,11 @@ export async function writeFullReport(
     // One entry: that one. None: the writer's choice, which is the résumé as a
     // whole unless it named a real entry. Several: the writer's choice if it is
     // one of them, otherwise the résumé as a whole.
+    // Several: the résumé as a whole. Measured: a point about lines in three
+    // entries, filed under the first, put two projects' lines under a job.
     if (owners.size === 1) return [...owners][0]!;
     if (owners.size === 0) return chosen;
-    return owners.has(chosen) ? chosen : 'resume';
+    return 'resume';
   };
 
   const placed = drafts.map((draft) => {
@@ -357,11 +362,19 @@ export async function writeFullReport(
           .filter((t) => /:b\d+$/.test(t)),
       ),
     ];
+    // The group it rests on decides its score and how it is shown; the
+    // highest where it rests on several.
+    const groups = (report.improvementPlan.groups ?? []).filter((g) =>
+      g.findingIds.some((id) => sourceFindingIds.includes(id)),
+    );
+    const top = groups.sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0];
     const point: FullReportPoint = {
       id: `report_point_${randomUUID()}`,
       sourceFindingIds,
       ...rest,
       ...(lines.length > 0 ? { lines } : {}),
+      ...(top?.score !== undefined ? { score: top.score } : {}),
+      ...(top?.tag ? { tag: top.tag } : {}),
       // Derived from the sources that checked out rather than claimed
       // separately. Asked for twice, the two answers disagree — and the one
       // that can be verified should be the one that decides.
@@ -371,10 +384,24 @@ export async function writeFullReport(
     return { about, point };
   });
 
-  // Grouped in the document's own order, not the order the model wrote them
-  // in. Two runs of the same review then produce reports that can be read side
-  // by side.
+  // In the résumé's own order, so the candidate can work down the page: what
+  // concerns the page as a whole first, then each entry line by line, then
+  // the skills. Within a line, the points go by the selection's score.
+  const lineOrder = new Map<string, number>();
+  let n = 0;
+  for (const entry of entries.values()) for (const bullet of entry.bullets) lineOrder.set(bullet.id, n++);
+  const position = (point: FullReportPoint) =>
+    Math.min(...(point.lines ?? []).map((l) => lineOrder.get(l) ?? -1), Number.MAX_SAFE_INTEGER);
+  const ordered = (points: FullReportPoint[]) =>
+    [...points].sort((a, b) => position(a) - position(b) || (b.score ?? 0) - (a.score ?? 0));
+  const aboutSkills = (point: FullReportPoint) =>
+    point.sourceFindingIds.every((id) => findingById.get(id)?.target === 'skills');
+
   const built: FullReport['sections'] = [];
+  const wide = placed.filter((p) => p.about === 'resume' && !aboutSkills(p.point)).map((p) => p.point);
+  if (wide.length > 0) {
+    built.push({ heading: ACROSS_THE_RESUME, target: { type: 'resume' }, points: ordered(wide) });
+  }
   for (const entry of entries.values()) {
     const points = placed.filter((p) => p.about === entry.id).map((p) => p.point);
     if (points.length === 0) continue;
@@ -384,12 +411,12 @@ export async function writeFullReport(
       // would otherwise read out here with everything else.
       heading: withoutContactDetails(entry.headerLines.join(' | ')) || entry.id,
       target: { type: 'entry', entryId: entry.id },
-      points,
+      points: ordered(points),
     });
   }
-  const wide = placed.filter((p) => p.about === 'resume').map((p) => p.point);
-  if (wide.length > 0) {
-    built.push({ heading: ACROSS_THE_RESUME, target: { type: 'resume' }, points: wide });
+  const skills = placed.filter((p) => p.about === 'resume' && aboutSkills(p.point)).map((p) => p.point);
+  if (skills.length > 0) {
+    built.push({ heading: SKILLS, target: { type: 'resume' }, points: ordered(skills) });
   }
 
   const accepted = built.flatMap((section) => section.points);
@@ -417,14 +444,6 @@ export async function writeFullReport(
     },
   }));
 
-  // The first three groups the selection chose, as the points that rest on
-  // them: where to start, worked out rather than written.
-  const startHere = (report.improvementPlan.groups ?? [])
-    .slice(0, 3)
-    .flatMap((group) => {
-      const point = accepted.find((p) => p.sourceFindingIds.some((id) => group.findingIds.includes(id)));
-      return point ? [point.id] : [];
-    });
   // One strength per line. Measured: the same bullet praised twice in a list
   // of three.
   const praised = new Set<string>();
@@ -439,7 +458,6 @@ export async function writeFullReport(
 
   return {
     ...(strengths.length > 0 ? { strengths } : {}),
-    ...(startHere.length > 0 ? { startHere: [...new Set(startHere)] } : {}),
     sections: built,
   };
 }

@@ -28,11 +28,10 @@ why.
 
 ## Structure
 
+- **One point per group:** write one point for each group, in the order given,
+  and do not merge groups. The report places each point under the line it is
+  about, in the résumé's order, and orders them by the selection's scores.
 - Sections: one per entry, plus one for what runs across the whole resume.
-  Strongest first within a section.
-- One point per line: where several groups concern the same line, usually
-  write one point that takes its problems in order of weight.
-- Merge repeats: the same demand from several readers is one point.
 
 ## Rules
 

@@ -748,6 +748,9 @@ export interface FullReportPoint {
   fix?: string;
   /** The résumé lines it is about, by id, worked out from its findings. */
   lines?: string[];
+  /** The selection's score of the group it rests on, and how it is shown. */
+  score?: number;
+  tag?: 'error' | 'important' | 'polish';
 }
 
 /**
@@ -765,6 +768,10 @@ export interface PlanGroup {
   findingIds: string[];
   /** The lines its findings are about, derived from them rather than written. */
   targets: string[];
+  /** How much it matters, 1 to 10, as the selection scored it. */
+  score?: number;
+  /** How it is shown: a certain error, an important point, or polish. */
+  tag?: 'error' | 'important' | 'polish';
 }
 
 export interface ImprovementPlan {

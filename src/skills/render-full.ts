@@ -1,4 +1,4 @@
-import type { DiagnosisReport, FullReport, FullReportPoint } from '../domain.js';
+import type { DiagnosisReport, FullReportPoint } from '../domain.js';
 
 /**
  * Two documents out of one, and only one of them is written.
@@ -12,112 +12,99 @@ import type { DiagnosisReport, FullReport, FullReportPoint } from '../domain.js'
  * than scanned in a terminal.
  */
 export function renderFull(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Full review'), ...opening(report)];
+  const lines = [...head(report, sourcePath, 'Full review'), ...tally(report), ...body(report, true)];
 
-  for (const section of report.full?.sections ?? []) {
-    lines.push(`## ${section.heading}`, '');
-
-    for (const point of section.points) {
-      lines.push(`### ${point.what}`, '');
-      if (point.evidence) lines.push(`> ${point.evidence}`, '');
-      if (point.why) lines.push(point.why, '');
-      if (point.fix) lines.push(`**How to change it:** ${point.fix}`, '');
-
-      const aside = [
-        point.from.length > 0 ? `raised by ${point.from.join(', ')}` : '',
-        point.cost ? `costs ${point.cost}` : '',
-      ].filter(Boolean);
-      if (aside.length > 0) lines.push(`*${aside.join(' · ')}*`, '');
-    }
-  }
-
-  // All of it here, where the brief shows ten.
+  // All of it here; the brief gives the count.
   const setAside = report.improvementPlan.setAside ?? [];
   if (setAside.length > 0) {
     lines.push(`## Set aside (${setAside.length})`, '', ...setAside.map((s) => `- ${s.what}`), '');
   }
-
   return `${lines.join('\n').trimEnd()}\n`;
 }
 
-/** The same points, each reduced to the sentence written to stand alone. */
-
 export function renderBrief(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Review'), ...opening(report)];
-  const lineText = textOfLines(report);
-  // Each point once. Measured, by two blind judges: the same point in the
-  // opening, under its entry and again in the set-aside list read as a review
-  // repeating itself.
-  const first = new Set(report.full?.startHere ?? []);
-
-  for (const section of report.full?.sections ?? []) {
-    const points = section.points.filter((p) => !first.has(p.id));
-    if (points.length === 0) continue;
-    lines.push(`## ${section.heading}`, '');
-    for (const point of points) {
-      lines.push(`- **${point.what}**${point.cost ? ` *(${point.cost})*` : ''}`, ...told(point, lineText, '  '));
-    }
-    lines.push('');
-  }
+  const lines = [...head(report, sourcePath, 'Review'), ...tally(report), ...body(report, false)];
 
   // A count, not the list. Measured: judges read the set-aside lines, merged
-  // across many lines, as a garbled second report; the full list is in the
-  // full review.
+  // across many lines, as a garbled second report.
   const setAside = report.improvementPlan.setAside ?? [];
   if (setAside.length > 0) {
     lines.push(
       `## Set aside (${setAside.length})`,
       '',
-      `${setAside.length} smaller points were left out to keep this to what matters most; they are in \`/report --full\`.`,
+      `${setAside.length} smaller points were left out; they are in \`/report --full\`.`,
       '',
     );
   }
   return `${lines.join('\n').trimEnd()}\n`;
 }
 
-/**
- * Where to start, and what already works, before the list by entry.
- *
- * A review that is only a list of faults reads as though everything is broken,
- * and one that lists thirty points gives no way in. Both come from the
- * write-up: the first three chosen groups, and strengths in the reader's words.
- */
-function opening(report: DiagnosisReport): string[] {
-  const full = report.full;
-  if (!full) return [];
-  const points = new Map(full.sections.flatMap((s) => s.points).map((p) => [p.id, p] as const));
-  const first = (full.startHere ?? []).flatMap((id) => (points.has(id) ? [points.get(id)!] : []));
-  const lines: string[] = [];
-  if (first.length > 0) {
-    lines.push(
-      '## Start here',
-      '',
-      ...first.flatMap((p, i) => [`${i + 1}. **${p.what}**`, ...told(p, textOfLines(report), '   ')]),
-      '',
-    );
-  }
-  if ((full.strengths ?? []).length > 0) {
-    lines.push('## Already working', '', ...full.strengths!.map((s) => `- ${s}`), '');
-  }
-  return lines;
+const TAG = { error: 'Error', important: 'Important', polish: 'Polish' } as const;
+
+/** One line saying how much of each kind there is, so the key problems stand out. */
+function tally(report: DiagnosisReport): string[] {
+  const points = (report.full?.sections ?? []).flatMap((s) => s.points);
+  if (points.length === 0) return [];
+  const count = (tag: keyof typeof TAG) => points.filter((p) => p.tag === tag).length;
+  const parts = [
+    `${count('error')} error${count('error') === 1 ? '' : 's'}`,
+    `${count('important')} important`,
+    `${count('polish')} polish`,
+  ];
+  return [`${parts.join(', ')}. Errors are marked [Error]; fix those first.`, ''];
 }
 
 /**
- * A point as the candidate reads it: the line it is about, why it is a
- * problem, and what doing it right looks like. Measured: a brief of
- * instructions alone scored lowest on explanation with both blind judges.
+ * The review in the résumé's own order, one block per line.
+ *
+ * Each block: the line as written, then its problems, the reasons and the
+ * changes, numbered alike, the most important problem first. The candidate
+ * works down the page with the résumé beside it; the tags say what matters
+ * most, where a list at the top once repeated points and held only three.
  */
-function told(point: FullReportPoint, lineText: Map<string, string>, indent: string): string[] {
-  const quoted = (point.lines ?? []).flatMap((id) => (lineText.has(id) ? [lineText.get(id)!] : []));
-  return [
-    ...(quoted.length > 0
-      ? quoted.map((t) => `${indent}> ${t}`)
-      : point.evidence
-        ? [`${indent}> ${point.evidence}`]
-        : []),
-    ...(point.why ? [`${indent}${point.why}`] : []),
-    ...(point.fix ? [`${indent}**How to change it:** ${point.fix}`] : []),
-  ];
+function body(report: DiagnosisReport, full: boolean): string[] {
+  const out: string[] = [];
+  const lineText = textOfLines(report);
+  for (const section of report.full?.sections ?? []) {
+    out.push(`## ${section.heading}`, '');
+    // Consecutive points about the same line share its block.
+    const blocks: Array<{ key: string; points: FullReportPoint[] }> = [];
+    for (const point of section.points) {
+      const key = (point.lines ?? []).join('+') || `point:${point.id}`;
+      const last = blocks.at(-1);
+      if (last && last.key === key && point.lines?.length) last.points.push(point);
+      else blocks.push({ key, points: [point] });
+    }
+    for (const { points } of blocks) out.push(...block(points, lineText, full), '');
+  }
+  if ((report.full?.strengths ?? []).length > 0) {
+    out.push('## Already working', '', ...report.full!.strengths!.map((s) => `- ${s}`), '');
+  }
+  return out;
+}
+
+function block(points: FullReportPoint[], lineText: Map<string, string>, full: boolean): string[] {
+  const first = points[0]!;
+  const quoted = (first.lines ?? []).flatMap((id) => (lineText.has(id) ? [lineText.get(id)!] : []));
+  const quote = quoted.length > 0 ? quoted : first.evidence ? [first.evidence] : [];
+  const numbered = (i: number, text: string) => `${points.length > 1 ? `${i + 1}. ` : ''}${text}`;
+  const out = [...quote.map((t) => `> ${t}`), ''];
+  out.push(
+    '**Problem**',
+    ...points.map((p, i) =>
+      numbered(i, `${p.tag ? `[${TAG[p.tag]}] ` : ''}${p.what}${p.cost ? ` *(${p.cost})*` : ''}`),
+    ),
+    '',
+  );
+  const whys = points.filter((p) => p.why);
+  if (whys.length > 0) out.push('**Why**', ...points.map((p, i) => numbered(i, p.why || '—')), '');
+  const fixes = points.filter((p) => p.fix);
+  if (fixes.length > 0) out.push('**How to change it**', ...points.map((p, i) => numbered(i, p.fix || '—')), '');
+  if (full) {
+    const from = [...new Set(points.flatMap((p) => p.from))];
+    if (from.length > 0) out.push(`*raised by ${from.join(', ')}*`, '');
+  }
+  return out.slice(0, -1);
 }
 
 function textOfLines(report: DiagnosisReport): Map<string, string> {
