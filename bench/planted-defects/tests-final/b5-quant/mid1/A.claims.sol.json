@@ -1,0 +1,229 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Feb 2021 - Aug 2021",
+    "- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability and writes the problem sets, earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Pioneered a data-driven, research-first approach to volatility modeling that delivered robust, actionable insights.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometrics, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes personal details that are conventionally left off.",
+      "because": "Date of birth and nationality can distract from the candidate’s qualifications."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The Northpeak and Kaggle bullets appear to describe the same order-book imbalance result with different dates and framing.",
+      "because": "Both report a 0.4 Sharpe increase over 18 months, leaving it unclear whether they are separate results."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The dates leave an eight-month gap between the B.S. and the Research Assistant role.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Improved risk-adjusted returns by 35%” lacks a return measure, comparison point and period.",
+      "because": "A reader cannot tell what the 35% represents or how to interpret it."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Purged splits and an embargo do not guarantee that every backtest decision used only information available at the time.",
+      "because": "They do not verify the full data and feature pipeline, so other look-ahead can remain."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The point-in-time explanation is lengthy without stating a separate validation result.",
+      "because": "It leaves the outcome of testing six years of data unstated."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Validated the signal” does not state the validation result.",
+      "because": "A reader can see how the signal was tested, but not what the test established."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The feature-store reuse outcome is delayed by a bulky relative clause.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The live-allocation outcome is delayed until after the presentation details.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The best Sharpe from 400 backtested configurations is not a valid estimate of expected live Sharpe as written.",
+      "because": "Selecting the best configuration tends to select for backtest noise and upward-bias its Sharpe."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The line gives neither the best Sharpe value nor a clear basis for calling it a live estimate.",
+      "because": "A reader cannot distinguish a measured backtest figure from a live-performance expectation."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The Sharpe improvement is buried after the signal description and evaluation details.",
+      "because": "A reader scanning the entry may miss its clearest result."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "“Desk book” is team-specific jargon that may not be clear to outside readers.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Using the same random seed on every worker can invalidate the Monte Carlo study.",
+      "because": "Workers can produce identical or overlapping random streams and undermine simulation independence."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "“By running the runs in parallel” repeats “runs” and makes the method cumbersome.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The comparison for the claimed log-factor improvement is unidentified.",
+      "because": "A reader cannot tell which prior result the bound improves on or whether the comparison depends on a particular regime."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The variance-bound contribution should lead the Research Assistant entry.",
+      "because": "It is the entry’s clearest research contribution."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The paper-status clause makes the sentence less direct.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Taught … and writes” mixes past and present tense in a completed role.",
+      "because": "“Writes” makes the problem-set work sound current despite the role’s 2021 end date."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The 4.8/5 teaching rating lacks its source and response count.",
+      "because": "A reader cannot judge how the rating was gathered or how representative it is."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The opening claim is vague and does not connect its claimed impact to the study’s concrete research sequence.",
+      "because": "“Robust, actionable insights” does not say what changed or how anyone used the result."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The opening does not identify the modeling approach used.",
+      "because": "“Data-driven” and “research-first” provide little technical evidence about the study."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The significance result does not define the forecast gain, its size or the benchmark.",
+      "because": "Statistical significance alone does not show the practical value of the improvement."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The 24-index result is buried after the test and correction.",
+      "because": "The main finding arrives late for a reader scanning the bullet."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“The 30 indices” includes an unnecessary article.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Which was presented” leaves unclear who presented the paper.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The competition entry gives no result from the feature-engineering and modeling work.",
+      "because": "Without a placement or score relative to the field, the contribution is difficult to assess."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.02 gap has no named score metric or scale.",
+      "because": "A reader cannot tell what the difference measures or whether it is large."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The most concrete competition outcome appears last in the entry.",
+      "because": "A reader has to reach the final bullet to find its clearest measurable outcome."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Tested over 18 months out of sample” has an unclear referent.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 4088,
+    "input_tokens_details": {
+      "cache_write_tokens": 4085,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1778,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 5866
+  }
+}

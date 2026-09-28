@@ -1,0 +1,187 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The file includes a date of birth and nationality, personal details readers are not meant to weigh.",
+      "because": "They are unrelated to assessing the résumé and take space from relevant content."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The dates leave an eight-month gap between the B.A. and the Operations Analyst role.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The business-case and roadmap outcome comes after the research methods and loss estimate.",
+      "because": "It is harder to spot quickly."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The opt-in comparison does not establish that the redesign caused an outcome.",
+      "because": "Merchants who opted in may differ from those who stayed on the old flow, so the comparison cannot isolate the redesign’s effect."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The comparison method has no stated outcome.",
+      "because": "A reader cannot tell whether onboarding improved or what the measurement found."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The 11%-to-7% figures are an adjusted rate, not evidence that actual late deliveries fell.",
+      "because": "Excluding weather-delayed shipments changes which deliveries count; it does not show that fewer were late."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The method and training details after the result can be compressed.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The S&OP activities are listed without saying what they enabled.",
+      "because": "The line does not show why the work mattered or what decision it supported."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Prepares” is present tense in an entry for a role that ended in August 2023.",
+      "because": "The tense conflicts with the dates and can make the timing of the work unclear."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The 1,800-hour figure is not identified as measured savings or a projection.",
+      "because": "Readers cannot tell whether it represents realized or forecast savings."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The route-planning rollout result is not the opening bullet in the entry.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The launch line does not say what product or rollout work you personally owned.",
+      "because": "A reader can see the app’s reach but not the product-lead contribution behind it."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Surplus-food” and “that would have been thrown away” repeat the same idea.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The weekly-active-user result comes after the interview context.",
+      "because": "It is slower to find."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Each week” and “a week” repeat the same timeframe.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The scheduling line describes meetings without stating a resulting change.",
+      "because": "Without a concrete scheduling outcome, it does not show what the practicum achieved or why the work mattered."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line does not say how much the form was shortened or what effect the change had.",
+      "because": "Adoption shows the change was put into practice, but readers cannot judge its size or value."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The intake result is buried after the methods instead of leading the entry.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Passive voice hides who mapped the intake and shortened the form.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding result is assigned to the hospital practicum, where it does not belong.",
+      "because": "It repeats the Harbor Payments result for the same 2,300 merchants under an unrelated project that ended before the internship began."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The bullet does not specify which part of onboarding was redesigned.",
+      "because": "“Redesigning onboarding” does not tell readers what changed or let them assess the contribution."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“The time it takes” is wordy and present tense for a past result.",
+      "because": "The practicum ended in May 2024, and the wording takes more space than a concise measure."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3372,
+    "input_tokens_details": {
+      "cache_write_tokens": 3369,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1218,
+    "output_tokens_details": {
+      "reasoning_tokens": 264
+    },
+    "total_tokens": 4590
+  }
+}
