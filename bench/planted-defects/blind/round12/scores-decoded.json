@@ -1,0 +1,170 @@
+[
+  {
+    "case": "case-1",
+    "test": "b1-ce",
+    "scores": {
+      "B": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "C": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "D": {
+        "actionability": 5,
+        "readability": 5
+      },
+      "A": {
+        "actionability": 6,
+        "readability": 7
+      }
+    },
+    "ranking": [
+      "C",
+      "B",
+      "A",
+      "D"
+    ]
+  },
+  {
+    "case": "case-2",
+    "test": "b1-pm",
+    "scores": {
+      "D": {
+        "actionability": 7,
+        "readability": 6
+      },
+      "A": {
+        "actionability": 8,
+        "readability": 7
+      },
+      "C": {
+        "actionability": 6,
+        "readability": 7
+      },
+      "B": {
+        "actionability": 6,
+        "readability": 6
+      }
+    },
+    "ranking": [
+      "A",
+      "D",
+      "C",
+      "B"
+    ]
+  },
+  {
+    "case": "case-3",
+    "test": "b1-quant",
+    "scores": {
+      "C": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "B": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "D": {
+        "actionability": 6,
+        "readability": 6
+      },
+      "A": {
+        "actionability": 8,
+        "readability": 7
+      }
+    },
+    "ranking": [
+      "C",
+      "A",
+      "B",
+      "D"
+    ]
+  },
+  {
+    "case": "case-4",
+    "test": "b2-ce:out-r1",
+    "scores": {
+      "B": {
+        "actionability": 6,
+        "readability": 7
+      },
+      "C": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "A": {
+        "actionability": 8,
+        "readability": 7
+      },
+      "D": {
+        "actionability": 5,
+        "readability": 5
+      }
+    },
+    "ranking": [
+      "A",
+      "C",
+      "B",
+      "D"
+    ]
+  },
+  {
+    "case": "case-5",
+    "test": "b2-pm:out-r1",
+    "scores": {
+      "A": {
+        "actionability": 8,
+        "readability": 6
+      },
+      "D": {
+        "actionability": 5,
+        "readability": 6
+      },
+      "C": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "B": {
+        "actionability": 6,
+        "readability": 6
+      }
+    },
+    "ranking": [
+      "C",
+      "A",
+      "B",
+      "D"
+    ]
+  },
+  {
+    "case": "case-6",
+    "test": "b2-quant:out-r1",
+    "scores": {
+      "D": {
+        "actionability": 7,
+        "readability": 6
+      },
+      "B": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "C": {
+        "actionability": 8,
+        "readability": 7
+      },
+      "A": {
+        "actionability": 8,
+        "readability": 7
+      }
+    },
+    "ranking": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ]
+  }
+]

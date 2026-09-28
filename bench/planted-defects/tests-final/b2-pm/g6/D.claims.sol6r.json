@@ -1,0 +1,321 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé has no summary or target-role framing.",
+      "because": "Readers have to infer that you are pursuing product management."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The product and operations experience does not form an immediately coherent career story.",
+      "because": "The résumé does not explicitly connect that experience to a clear next step in product management."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Only one clearly titled product-management role is shown, and it was an internship.",
+      "because": "No explicit post-MBA PM role appears on the résumé."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Product strategy, go-to-market, and product-lifecycle evidence is not listed.",
+      "because": "Some PM openings may require those capabilities."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Some bullets describe activities without clearly distinguishing them from measured product outcomes.",
+      "because": "The scope or outcome of the contribution can be hard to see."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Consider whether the education location is worth its space.",
+      "because": "Locations do not help establish PM fit."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider whether the education location is worth its space.",
+      "because": "Locations do not help establish PM fit."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The current Diesel Mechanic role makes the post-MBA career direction hard to read.",
+      "because": "It is a surprising endpoint after an MBA and product internship."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Explain the PM relevance of the engine and gearbox rebuild work.",
+      "because": "Without its operational constraints, coordination, or reliability outcomes, it may look like a sharp departure from product experience."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The maintenance and inspection-record bullet lacks a meaningful outcome.",
+      "because": "It reads as routine maintenance and recordkeeping rather than distinctive PM-relevant evidence."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The carrier-scorecard bullet does not show what changed because of the work.",
+      "because": "It establishes responsibility but gives no scale, decision informed, or improvement produced."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify the measurement period for the pick-error reduction.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Add the business consequence of fewer pick errors, if known.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Define what the forecast-error measure represents.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify whether the forecast-error reduction held over 12 quarters or was the final observed result.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The route-planning bullet combines too many activities.",
+      "because": "Rollout, SOP changes, training, and negotiations obscure the measured impact."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify how the annual driver hours saved were estimated.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Explain how time to first payment was calculated.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the onboarding result covers the whole pilot cohort or only a subset.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Keep the checkout-conversion unit of change precise.",
+      "because": "Going from 61% to 66% is a five-percentage-point increase, not a 5% increase."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify what shipping the flow to all merchants covers.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Say whether the measured conversion lift was sustained after rollout.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify how Reach was scored in the RICE method.",
+      "because": "Tickets a feature would close may describe expected support-ticket reduction rather than conventional Reach."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The activity sequence obscures what roadmap decision you influenced.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Distinguish your recommendation from the final decision-maker’s authority.",
+      "because": "Your role in setting the priority is unclear."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The checkout A/B-test bullet repeats the conversion result claimed in the earlier checkout bullet.",
+      "because": "It does not clearly add a distinct contribution."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Be exact about what was randomized and what the reported outcome measures.",
+      "because": "Session-level assignment and customer conversion are related but not the same unit."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether the additional rollout was funded or actually deployed.",
+      "because": "Approval for a plan should not be confused with deployment."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Define what the 3,100 students represent.",
+      "because": "They could be students reached, registered, or eligible to use the app."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether the 9 tonnes reflects measured redistribution.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Support the description of the food as otherwise wasted.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The stated 150% weekly-active-user increase is incorrect.",
+      "because": "An increase from 400 to 1,150 is 187.5%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify the period over which weekly active users increased.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether both user figures use the same WAU definition.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The fill-rate change is called a 20% increase rather than a 20-percentage-point increase.",
+      "because": "The rate went from 75% to 95%."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify the fill-rate measurement period.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify whether the fill-rate change was observed consistently across both halls.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Distinguish the modeled annual saving from realized savings.",
+      "because": "Pilot funding is not evidence that the full projected saving was achieved."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Clarify your role in the patient-intake work.",
+      "because": "The passive construction hides what you did."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Clarify the actual patient-intake change adopted.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Give the effect of the intake change, if measured.",
+      "because": "The bullet does not show its effect on intake time, completion, or staff workload."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The pilot-approval outcome repeats the approval in the first practicum bullet.",
+      "because": "It spends space on the same outcome twice rather than a separate contribution."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "The product skills list does not show depth or scope.",
+      "because": "It names methods rather than the strongest capabilities evidenced in the experience."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "The tools list is short and does not say what each tool was used for.",
+      "because": "It gives limited coverage and detail."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "SQL or analytics depth is not listed.",
+      "because": "Some PM postings may require it, though tools should not be added without actual experience."
+    }
+  ],
+  "usage": {
+    "input_tokens": 5080,
+    "input_tokens_details": {
+      "cache_write_tokens": 5077,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2222,
+    "output_tokens_details": {
+      "reasoning_tokens": 594
+    },
+    "total_tokens": 7302
+  }
+}

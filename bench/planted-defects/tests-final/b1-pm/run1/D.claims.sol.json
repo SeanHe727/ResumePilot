@@ -1,0 +1,325 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the profile link works and shows relevant product work.",
+      "because": "The link should give a useful view of your product experience."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth.",
+      "because": "It is not needed to assess your qualifications and introduces irrelevant personal information."
+    },
+    {
+      "line": 3,
+      "kind": "suggestion",
+      "says": "Usually remove nationality for U.S. applications.",
+      "because": "It is generally unnecessary unless an application requests relevant work-authorization information."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Make the MBA’s completion status clear when you apply.",
+      "because": "The degree status should be accurate."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Give the older degree less visual emphasis if space is tight.",
+      "because": "The MBA and experience are more important to emphasize."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the 35% increase is relative or in percentage points.",
+      "because": "The size of the conversion improvement is ambiguous."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify the measurement period and comparison for the conversion claim.",
+      "because": "They need to support the reported improvement."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Verify the claim that the change applied to all merchants.",
+      "because": "That is a broad scope claim that should be literally accurate."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Show the feature’s user, support, or business outcome if available.",
+      "because": "The bullet emphasizes coordination and shipping ahead of plan more than impact."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify your specific contribution to the dispute self-service launch.",
+      "because": "The bullet emphasizes the team’s work."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify the currency for the 1.1 million-dollar estimate.",
+      "because": "The amount does not identify a currency."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Make clear how the chargeback-loss estimate was annualized.",
+      "because": "The bullet calls it an annual estimate."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Substantiate the claim that your analysis set the roadmap priority.",
+      "because": "Your work should have materially informed that decision."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Use consistent U.S. English for “analysed.”",
+      "because": "The roles and contact details suggest U.S. applications."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you or the team closed the 140 tickets.",
+      "because": "Ownership of the ticket closures is ambiguous."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Explain how the queue reduction was measured.",
+      "because": "The scope of the reported reduction is unclear."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add the comparison’s finding or impact, or remove the bullet.",
+      "because": "It states a method but no result."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Acknowledge the opt-in comparison’s limits.",
+      "because": "Opt-in merchants may differ from nonparticipants, so the comparison alone may not establish causation."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Move the onboarding outcome earlier in the internship.",
+      "because": "It is one of the role’s strongest, most relevant results."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify that the 2,300 merchants were in the pilot region.",
+      "because": "The scope of the result should be clear."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Explain whether the first-payment times use comparable measurements.",
+      "because": "The reported reduction needs a sound comparison."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Excluding weather delays changes the late-delivery metric rather than demonstrating improved service.",
+      "because": "The bullet presents the adjusted figure as a reduction in late deliveries."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify the pick-error measurement period or scale.",
+      "because": "It would give the 30% reduction more context."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Check that pick errors have the same definition before and after the change.",
+      "because": "The reduction needs a consistent measure."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Prepares” shifts to present tense.",
+      "because": "The other bullets describe completed work."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add the S&OP review’s scope, supported decision, or result.",
+      "because": "The bullet reads as a responsibility rather than an outcome."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Say whether the annual driver-hour savings were measured or forecast.",
+      "because": "That distinction matters to credibility."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify the period meant by “in its first year.”",
+      "because": "The project is listed as ongoing."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify the baseline and measurement period for weekly active users.",
+      "because": "The increase needs measurement context."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Avoid implying the reminders alone caused user growth without evidence.",
+      "because": "The reported growth followed the change but may not have been caused by it."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Define what the 95% pickup-slot figure measures.",
+      "because": "The measure is unclear."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify the period and attribution of the drop in staff cover shifts.",
+      "because": "The review asks whether it is weekly and due to the new system."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain your contribution to the working sessions.",
+      "because": "The bullet shows stakeholder contact but not what you contributed."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Add a concrete project output or impact.",
+      "because": "The bullet does not say what changed as a result."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Use active wording that makes your role clear.",
+      "because": "The passive construction obscures your contribution."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Quantify how much the intake form was shortened.",
+      "because": "“Shortened” gives no measure."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Give an observed result of the intake changes if available.",
+      "because": "Adoption by staff does not show whether the changes helped."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding result duplicates the Harbor achievement.",
+      "because": "It strongly resembles an accidental paste."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding claim is misplaced in the hospital practicum.",
+      "because": "The wording gives no clear reason it belongs to that project."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Substantiate the A/B-testing skill or remove it.",
+      "because": "The résumé shows an observational opt-in comparison, not necessarily a randomized experiment."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Give more indication of your level or use of the listed tools.",
+      "because": "The tools section is short and provides neither."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider a brief target-specific summary or headline.",
+      "because": "Readers currently have to infer the transition from operations to product work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make the skills section more specific and evidence-based.",
+      "because": "Its labels are broad and could read as unsubstantiated keywords."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Standardize date style, punctuation, and number and unit formatting.",
+      "because": "The review calls for consistency throughout."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Check length and visual hierarchy in the final document.",
+      "because": "The supplied text does not show page breaks or layout."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep projects from crowding out paid work.",
+      "because": "An early-career product résumé should make its strongest experience easy to scan."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3083,
+    "input_tokens_details": {
+      "cache_write_tokens": 3080,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2718,
+    "output_tokens_details": {
+      "reasoning_tokens": 1024
+    },
+    "total_tokens": 5801
+  }
+}

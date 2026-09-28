@@ -1,0 +1,291 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing, Python",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The current mechanic role makes the product-career direction and transition unclear.",
+      "because": "Recruiters may wonder whether you are pursuing product roles and what led to the change."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Give the product internship and food-rescue app more prominence.",
+      "because": "They are the strongest product credentials but are interrupted by the current role outside product."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add a brief product-focused summary near the top.",
+      "because": "Without one, readers must infer your direction from the timeline."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Standardize units and metric presentation across the page.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the profile link works and points to a professional profile.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Consider adding a location.",
+      "because": "It can help with roles that have location or relocation constraints."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Assess how much space the engine-rebuild bullet deserves.",
+      "because": "It is less directly relevant to product applications than the product experience."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Make sure the under-five-days claim is representative and its timeframe is clear.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The hydraulic-systems bullet has no outcome and may be lower priority.",
+      "because": "It has less impact than the first mechanic bullet."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify which merchants the 9-to-4-day result covers.",
+      "because": "The boundary between the pilot region and later rollout is unclear."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Express the conversion change in percentage points.",
+      "because": "The reader currently has to infer the size of the change."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Distinguish the tested population from the rollout scope.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain how support tickets closed served as a proxy for RICE Reach.",
+      "because": "Reach generally concerns users or customers affected over a defined period."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify how the rest of the RICE framework was applied.",
+      "because": "The bullet mentions only Reach."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Make the main contribution and resulting decision or impact easier to identify.",
+      "because": "The bullet packs discovery, analysis, business-case work, and a decision together."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The checkout A/B test duplicates the earlier checkout-conversion bullet.",
+      "because": "The same experiment is given two bullets."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify what was measured and what the reported lift represents.",
+      "because": "The phrase about the effect on merchants’ customers is unclear."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make the funded rollout the central outcome.",
+      "because": "That would keep the bullet distinct from the onboarding result."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify what “funded” means.",
+      "because": "It could be read in more than one way."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Make the scorecard work’s connection to a product role more explicit.",
+      "because": "The result supports a product profile through data-informed decisions, but the connection is not stated."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Add the measurement period for the pick-error reduction, if available.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify how the slotting changes relate to the 30% reduction.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify the consensus forecast’s relationship to the reduction in forecast error.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Separate or prioritize the route-planning contributions.",
+      "because": "The bullet combines rollout, SOP changes, training, vendor negotiations, and time saved."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify which actions drove the savings and which were your direct ownership.",
+      "because": "The combined account makes both difficult to tell."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain how the 1,800 driver hours were calculated or attributed.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Distinguish the potential audience of 3,100 students from actual users.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Make the one-year measurement period for the food total clear.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "Calling growth from 400 to 1,150 weekly active users a 150% increase is incorrect.",
+      "because": "It is a 187.5% increase."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Make sure the weekly-active-user measurement periods are comparable.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify how the interviews connected to the reminder feature.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "Calling the rise from 75% to 95% a 20% increase uses the wrong unit.",
+      "because": "It is a 20-percentage-point rise."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain the volunteer system’s role in the fill-rate result if it can be substantiated.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Distinguish the modeled $2.4M opportunity from realized savings.",
+      "because": "Readers could mistake the estimate for savings already achieved."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Replace the passive account with a clearer statement of your contribution.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Clarify what changed or was adopted and report a meaningful result if available.",
+      "because": "The bullet has no measurable result and may be lower priority without one."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The pilot-approval outcome repeats the savings bullet.",
+      "because": "The approval is already mentioned there."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Make broad product skills such as roadmapping and requirements writing more specific or supported by experience.",
+      "because": "Broad skills are harder to evaluate."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Indicate the kind or level of Python work you can perform if relevant.",
+      "because": "The skill should not imply proficiency beyond actual use."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Show what you use Excel for.",
+      "because": "Excel is broad, and the résumé does not show its use."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3806,
+    "input_tokens_details": {
+      "cache_write_tokens": 3803,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2158,
+    "output_tokens_details": {
+      "reasoning_tokens": 716
+    },
+    "total_tokens": 5964
+  }
+}

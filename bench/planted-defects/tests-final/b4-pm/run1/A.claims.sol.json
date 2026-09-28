@@ -1,0 +1,147 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing, Python",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Projects appear after Experience rather than before it.",
+      "because": "The venture and practicum could establish the intended direction before the current diesel mechanic role."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The roadmap bullet does not name the priority selected.",
+      "because": "The reader cannot tell what the team chose as a result of the work."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The explanation of the RICE Reach score is lengthy and may be unfamiliar to readers outside the team.",
+      "because": "It takes attention away from the main action and may make readers work through the framework first."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The roadmap bullet does not name the priority selected.",
+      "because": "The reader cannot tell what the team chose as a result of the analysis."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The checkout test and 5-point conversion lift repeat an achievement already described in another bullet.",
+      "because": "A reader may see the same achievement counted twice, weakening the sense of breadth in the internship."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The 30% reduction lacks a comparable before-and-after error measure, baseline, or timeframe.",
+      "because": "A reader cannot check how the reduction was measured or assess its size."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“My redesign” uses a first-person possessive that does not belong in a résumé bullet.",
+      "because": "It shifts the bullet away from the concise résumé style used elsewhere."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The forecast-error reduction does not specify the error measure or comparable periods.",
+      "because": "A process change alone does not establish the reduction, and the reader cannot evaluate its size."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The annual driver-hours saving is buried after a long list of rollout activities.",
+      "because": "A scanning reader may miss the result, and the activity list dilutes it."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The app-launch claim does not show what product or launch work you personally owned.",
+      "because": "A reader cannot tell what you contributed to delivering the app."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The bullet does not establish that the 9 tonnes would otherwise have been thrown away.",
+      "because": "Redistributing surplus food does not by itself show that it would have been discarded."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The increase is 187.5%, not 150%.",
+      "because": "The increase of 750 users is 187.5% of the starting figure of 400."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The change is 20 percentage points, not a 20% increase.",
+      "because": "Moving from 75% to 95% is a relative increase of about 26.7%."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The savings estimate does not identify the baseline or cost it is measured against.",
+      "because": "The reader cannot tell what costs or staffing level the estimate compares against."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The bullet names a model without explaining what analysis produced the estimate.",
+      "because": "“The model” does not make the basis for the projected savings clear."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The bullet does not establish that front-desk staff adopted the changes.",
+      "because": "Mapping intake and shortening the form do not show that staff used the changes in practice."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3466,
+    "input_tokens_details": {
+      "cache_write_tokens": 3463,
+      "cached_tokens": 0
+    },
+    "output_tokens": 998,
+    "output_tokens_details": {
+      "reasoning_tokens": 250
+    },
+    "total_tokens": 4464
+  }
+}

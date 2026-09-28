@@ -1,0 +1,229 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The code link should be clickable and lead to work you want employers to see.",
+      "because": "Reviewers may use it to assess your projects."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality should not appear on this US résumé unless required.",
+      "because": "They generally do not help and disclose unnecessary personal information."
+    },
+    {
+      "line": 5,
+      "kind": "error",
+      "says": "“Expected May 2026” is outdated and should reflect your actual status.",
+      "because": "That date has passed."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Northpeak Capital should appear above Ridgeway University.",
+      "because": "Experience should be in reverse chronological order."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify the pipeline’s scale or the effect of the reproducibility checks, if measurable.",
+      "because": "“Owned” conveys responsibility but not significance."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Verify the claimed log-factor improvement.",
+      "because": "The technical claim invites scrutiny."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Update the paper’s current submission status.",
+      "because": "The publication status invites scrutiny."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify your contribution if the result is coauthored.",
+      "because": "The technical claim invites scrutiny."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Check that the 4.8/5 rating is attributable to your teaching.",
+      "because": "Precise, defensible attribution makes the metric credible."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Check that “writing 12 problem sets” reflects your role.",
+      "because": "Precise, defensible attribution makes the metric credible."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Separate the R package’s impact from the cluster, reading-group and grading duties, keeping the most relevant duties.",
+      "because": "Too many activities obscure the 3,000-download result."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify what the final “which” refers to.",
+      "because": "Its reference is ambiguous."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify that both Sharpe figures come from the same backtest, if they do, rather than implying an improvement to the live desk book.",
+      "because": "This is a high-impact claim."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Substantiate the out-of-sample period, costs and attribution to your signal.",
+      "because": "This is a high-impact claim."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Verify that turnover, gross returns and slippage use consistent periods and assumptions.",
+      "because": "Otherwise the trade-off is hard to interpret."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Recheck the inference and name only a testing method you actually used and can defend.",
+      "because": "Standard Diebold–Mariano tests can be inappropriate for a nested-model comparison."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Fix the sentence structure and clarify your contribution to the joins and schema versioning.",
+      "because": "The opening obscures the engineering accomplishment."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Multiplying daily Sharpe by 252 is not standard annualization, and the bullet should be removed.",
+      "because": "Under common assumptions the factor is √252, with additional care for serial correlation."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Give this bullet’s space to stronger research results if documentation and handoff do not matter for the target roles.",
+      "because": "It is less distinctive than the signal work."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Confirm that “Present” still describes the project and update it if not.",
+      "because": "Ongoing dates should reflect current activity."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Define the evaluation setup for the 7% out-of-sample improvement.",
+      "because": "The result’s credibility depends on the comparison."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Ensure the HAR-RV baseline is directly comparable.",
+      "because": "The result’s credibility depends on the comparison."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The change from 0.20 to 0.15 is a 25% reduction, not 33%.",
+      "because": "The percentage is calculated relative to 0.20."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Name the forecast-error metric.",
+      "because": "The metric needs to be clear."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The change from 52% to 58% is 6 percentage points, not an unqualified 6% improvement.",
+      "because": "Percent and percentage-point changes differ."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Check whether the three Volatility Forecasting Study results are distinct experiments and reduce repetition if they are not.",
+      "because": "Repeated claims can look like three independent results."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Verify that the competition name is identifiable.",
+      "because": "Readers may want to check the rank."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Make sure “leakage” was established rather than merely a validation mismatch.",
+      "because": "Leakage is a specific methodological diagnosis."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Explain how “without losing validation score” was assessed using time-grouped validation.",
+      "because": "That connection makes the selection result more convincing."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled; it should be “econometrics.”",
+      "because": "A typo in the skills section is conspicuous."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2296,
+    "input_tokens_details": {
+      "cache_write_tokens": 2293,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2007,
+    "output_tokens_details": {
+      "reasoning_tokens": 807
+    },
+    "total_tokens": 4303
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed newest-first: the 2024 Harbor Payments role appears below the 2018–2023 Crestline Logistics role.",
+      "because": "The order interrupts the chronology and makes Experience harder to scan."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience despite five years of professional experience.",
+      "because": "Leading with the MBA puts a substantial work record later than intended."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The prominent Coastal Marine Services entry appears unrelated to the career direction shown elsewhere.",
+      "because": "Its two bullets do not explain its connection to the product and operations experience."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The 1,800-hour saving is attached to a long list of actions, leaving its cause unclear.",
+      "because": "“Which” could refer to the vendor negotiations or the full set of work."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The line attributes the conversion rise to the one-page flow without establishing a causal estimate.",
+      "because": "The session count and observed rates do not show allocation, alternative explanations or uncertainty."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The roadmap outcome does not name the priority selected.",
+      "because": "A reader cannot judge what the interviews, analysis and business case led the team to prioritize."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Two Harbor Payments bullets repeat the same checkout test and conversion result.",
+      "because": "The 61%-to-66% change and the 5-point lift describe one achievement but may look like separate results."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The claim that all 9 tonnes would have been thrown away is an unverified counterfactual.",
+      "because": "The amount redistributed does not establish what would otherwise have happened to the food."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The launch claim does not explain how you brought the app and dining halls into operation.",
+      "because": "A reader cannot see what product decision or coordination enabled the launch."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The rise from 400 to 1,150 weekly active users is 187.5%, not 150%.",
+      "because": "The increase of 750 users is 187.5% of the starting 400."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line does not show how the 60 interviews informed the choice of pickup reminders.",
+      "because": "It gives no finding that connects the research to the product decision."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The change from 75% to 95% is 20 percentage points, not a 20% increase.",
+      "because": "Relative to the starting 75%, the increase is about 26.7%."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The intake-form change has no measure of how much it changed or what effect it had.",
+      "because": "Staff adoption does not show whether intake became faster or simpler."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Passive phrasing hides that you mapped intake and shortened the form.",
+      "because": "“Was mapped” and “was shortened” do not name who did the work."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The funded pilot overlaps with the pilot approval reported in another bullet.",
+      "because": "A reader may mistake the same decision for two separate results."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3458,
+    "input_tokens_details": {
+      "cache_write_tokens": 3455,
+      "cached_tokens": 0
+    },
+    "output_tokens": 958,
+    "output_tokens_details": {
+      "reasoning_tokens": 230
+    },
+    "total_tokens": 4416
+  }
+}

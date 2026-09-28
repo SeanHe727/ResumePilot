@@ -1,0 +1,289 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience, delaying the most role-relevant experience.",
+      "because": "The Northpeak internship is the strongest direct evidence for the assumed target role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not in reverse chronological order.",
+      "because": "The 2020–2021 Research Assistant role appears before the 2025 internship, which can confuse recruiters and automated parsing."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé has no summary or explicit positioning statement.",
+      "because": "The target role has to be inferred from the experience."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality should not be included.",
+      "because": "They are not relevant qualifications and can introduce avoidable bias."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Make the Ph.D. status and expected completion date easy to read.",
+      "because": ""
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider adding a dissertation or research-area description if it connects to financial modeling.",
+      "because": "It could make the statistical work more relevant to the target role."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Other students relied on” is subjective, and the pipeline’s scale, use, or effect is not shown.",
+      "because": "The bullet does not show what improved."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify the comparison behind “tightens the previous bound by a log factor.”",
+      "because": "The result is hard to evaluate without knowing the comparison."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Give the paper’s identifying details and make your authorship and exact contribution clear.",
+      "because": "The title, authorship, and your contribution are not provided."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The teaching bullet may be lower priority than research and engineering accomplishments.",
+      "because": "Its value depends on whether teaching is relevant to the roles being pursued."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The bullet combines too many unrelated responsibilities.",
+      "because": "Package release, cluster maintenance, reading-group organization, and grading are packed into one bullet."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The “which” clause makes it unclear what earned 3,000 downloads.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Identify the package and clarify what the download figure measures and over what period.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify how the 18-month out-of-sample period relates to the internship and strategy evaluation.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Establish that the Sharpe improvement is attributable to your signal.",
+      "because": "Other changes could have contributed to the result."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Give more context about the benchmark, transaction costs, or evaluation method if permitted.",
+      "because": "That would make the result interpretable."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the comparison behind “keeping 90% of gross returns.”",
+      "because": "A reader should be able to tell what changed and what was held constant."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Explain how slippage was estimated.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify the forecast target and the size and significance of the gain.",
+      "because": "The test name alone does not establish the size or significance of the improvement."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Explain how multiple comparisons across 30 indices were handled.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Fix the awkward opening construction.",
+      "because": "The participle does not clearly connect to the action that follows."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify what the feature store enabled and quantify its reuse or reliability benefit if possible.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Multiplying daily Sharpe by 252 is incorrect annualization.",
+      "because": "Under the usual independent-return assumption, annualization uses the square root of the number of trading days."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The reporting mistake does not belong as an achievement.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The claim that the next intern cohort used the wiki to onboard in their first week is vague.",
+      "because": "It does not describe a concrete benefit."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Add the forecast horizon, data split, and held-out test-period details.",
+      "because": "The QLIKE result needs enough evaluation detail to be assessed."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Volatility Forecasting Study bullets repeat the same model and adjacent performance claims.",
+      "because": "Repetition makes the project feel less substantial and obscures distinct contributions or results."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Show that the volatility-project improvements used a leakage-resistant evaluation.",
+      "because": "The claimed improvements need to be supported by that evaluation."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "A drop from 0.20 to 0.15 is a 25% reduction, not a 33% improvement relative to 0.20.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Identify what “forecast error” measures.",
+      "because": "The term is too vague on its own."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether “6%” means percentage points or a relative increase.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Define the directional hit-rate calculation.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Keep the hit-rate result only if it adds a distinct, useful outcome.",
+      "because": "It overlaps with the other model-performance bullets."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Make the competition and private-leaderboard result easy to verify if possible.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Specify what the 0.02 gap represents and how time-grouped folds addressed leakage.",
+      "because": "A validation/leaderboard gap is not, by itself, proof of leakage."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify that feature selection did not use validation or test information in a way that caused leakage.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Give this bullet a distinct purpose from the first competition bullet.",
+      "because": "Both mention the 300 features."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent capitalization and formatting in the Skills section.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The tools list is short; consider adding relevant tools you actually use.",
+      "because": "Unsupported additions would hurt more than help."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "“econometircs” is misspelled.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3723,
+    "input_tokens_details": {
+      "cache_write_tokens": 3720,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2084,
+    "output_tokens_details": {
+      "reasoning_tokens": 586
+    },
+    "total_tokens": 5807
+  }
+}

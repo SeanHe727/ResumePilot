@@ -1,0 +1,265 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm the contact details and LinkedIn URL are real and working if they are placeholders.",
+      "because": "Recruiters need to be able to reach you."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality.",
+      "because": "They are generally unnecessary for a US application and can invite bias."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Confirm the MBA was awarded in June 2025 or mark the date as expected.",
+      "because": "The line should distinguish an expected date from a completed degree."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Confirm the B.A. completion date if needed.",
+      "because": "The line should distinguish an expected date from a completed degree."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Define what the 35% conversion figure measures and its comparison period.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Qualify “for all merchants” if the change was not deployed to all of them.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Do not attribute the entire conversion gain to the redesign unless the measurement supports it.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether you owned the requirements, the delivery, or both.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Verify that the planned date was established beforehand.",
+      "because": "The early ship date is useful only if it was."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain how six months of data became an annual $1.1 million estimate.",
+      "because": "Otherwise the sizing sounds more certain than the analysis supports."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify whether the $1.1 million figure represents losses or something else.",
+      "because": "Otherwise the sizing sounds more certain than the analysis supports."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Standardize “analysed” with the spelling used for US-based roles.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you resolved the tickets or facilitated their resolution.",
+      "because": "That makes your contribution easier to judge."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Give the queue’s starting and ending counts if available.",
+      "because": "That makes the reduction easier to judge."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The opt-in comparison does not prove the redesign worked.",
+      "because": "Merchants who opted in may differ from those who did not."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Specify what you owned in the onboarding redesign.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify whether all 2,300 merchants experienced the new flow.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Do not present the median-time result as solely caused by the redesign unless the evidence supports it.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Calling the changed late-delivery figure a reduction in late deliveries is misleading.",
+      "because": "Excluding weather-delayed shipments changes the calculation, not necessarily delivery performance."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Specify the period or baseline behind the 30% pick-error reduction if available.",
+      "because": "It would make the result’s scale clear."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Fix the tense inconsistency between “coordinated” and “prepares.”",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Indicate what the forecast pack enabled or improved if you can substantiate an outcome.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify how the annual 1,800-hour saving was measured or estimated.",
+      "because": "You may have observed only part of a year."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Check whether “Present” is still accurate for the student venture.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Distinguish students who had access to the app from those who used it.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Confirm that nine tonnes were redistributed during the stated first-year period.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Do not imply reminders alone caused all the active-user growth unless that attribution is supported.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether the fill rate and staff-cover reduction are averages over the same period.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Add what you contributed to the working sessions or what they produced.",
+      "because": "Attendance alone says little about your impact."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Replace the passive patient-intake description with your specific role.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Add a measured effect of the intake changes if one exists.",
+      "because": "Staff adoption does not establish that intake improved."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "Delete the merchant first-payment bullet from the practicum.",
+      "because": "It belongs to Harbor Payments, duplicates that result, and is unrelated to a hospital practicum."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Reconsider listing “A/B testing” unless you ran a randomized test.",
+      "because": "The opt-in comparison is not one."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Keep only tools you can discuss confidently in an interview.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Prioritize tools relevant to the product roles you are targeting.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Standardize date and number formatting across the page.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2049,
+    "input_tokens_details": {
+      "cache_write_tokens": 2046,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1996,
+    "output_tokens_details": {
+      "reasoning_tokens": 741
+    },
+    "total_tokens": 4045
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé lacks a clear product-role headline or summary.",
+      "because": "A quick reader has to infer the target role, and the operations background may dominate the first impression."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The strongest product outcomes should appear before lower-level operational work.",
+      "because": "The onboarding and checkout achievements are stronger for a PM application than ticket triage."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The professional profile link should be a real, polished URL rather than a placeholder.",
+      "because": ""
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality do not belong on a U.S. résumé.",
+      "because": "They are unnecessary and can introduce bias or privacy concerns."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "The MBA entry should make clear whether the degree is complete.",
+      "because": "Its status could be ambiguous if the résumé is used after the listed June 2025 end date."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% conversion figure does not say whether it is a relative increase or a percentage-point change.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The conversion result needs a measurement period and an explanation of how it was evaluated.",
+      "because": "A reviewer may question how the lift was measured."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The “for all merchants” scope needs to be accurate and supportable.",
+      "because": "It is a broad claim."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The dispute self-service feature’s scope or intended outcome is unclear.",
+      "because": "Shipping two weeks early says more about schedule than product impact."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The $1.1 million figure should be clearly identified as an estimate of annual losses.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The basis for the chargeback-loss estimate should be defensible.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The time period behind the 140 tickets and halved queue is unclear.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The opt-in comparison gives a measurement method but no result.",
+      "because": "It does not explain what the analysis established."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The comparison should explain its limitations or be consolidated with the onboarding result.",
+      "because": "Merchants chose whether to opt in, so the groups may differ in ways that affect the comparison."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The 2,300-merchant result needs a clearer pilot-region scope and time period.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The evaluation should support attributing the time-to-first-payment change to the redesign.",
+      "because": "The opt-in comparison cannot establish that the redesign caused the improvement."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The late-delivery reduction comes from excluding weather-delayed shipments from the calculation.",
+      "because": "That reads as changing how performance was counted rather than improving delivery performance."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The pick-error result could include a reliable before-and-after period or downstream impact.",
+      "because": "That would make the result easier to assess."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Prepares” is inconsistent with the past-dated role.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The S&OP bullet describes a recurring responsibility without an outcome.",
+      "because": "It does not show what changed or what the work enabled."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The period or basis for the 1,800 annual driver hours saved is unclear.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The bullet should explain how the 9 tonnes of food were measured.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“In its first year” needs a clear referent.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "A reliable indicator of user participation or service impact could strengthen the result.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The length of the “following term” is unclear.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The bullet should not imply that reminders alone caused active-user growth without measuring that.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Repeating “launched” in the project’s first two bullets sounds repetitive.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“95% of pickup slots” needs a clear denominator.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The staff-cover-shift reduction should refer to comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The weekly working-sessions bullet describes an activity rather than an outcome.",
+      "because": "It does not show the resulting analysis, recommendation, decision, or deliverable."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The passive construction obscures your role in the patient-intake work.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Shortened” and “adopted” leave the result vague.",
+      "because": "They do not show how much changed or what improved."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding achievement is misplaced under the hospital project and duplicates the Harbor Payments result.",
+      "because": "It risks undermining confidence in the résumé’s accuracy."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The product-skills list is broad and should be substantiated by the bullets.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The opt-in comparison does not establish A/B testing experience.",
+      "because": "Merchants chose whether to opt in, rather than being in a controlled experiment."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "The tools section is brief.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3046,
+    "input_tokens_details": {
+      "cache_write_tokens": 3043,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1626,
+    "output_tokens_details": {
+      "reasoning_tokens": 317
+    },
+    "total_tokens": 4672
+  }
+}

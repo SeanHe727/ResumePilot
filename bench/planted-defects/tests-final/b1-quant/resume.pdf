@@ -1,0 +1,82 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 5869>>
+stream
+BT /F1 16 Tf 72 752 Td (Morgan Patel) Tj ET
+BT /F1 9.4 Tf 72 733 Td (+1 \(555\) 010-4410 | morgan.patel@example.com | example.com/code/mpatel) Tj ET
+BT /F1 12 Tf 72 716.3 Td (EDUCATION) Tj ET
+BT /F1 9.4 Tf 72 702.3 Td (Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026) Tj ET
+BT /F1 9.4 Tf 72 690.5999999999999 Td (Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020) Tj ET
+BT /F1 12 Tf 72 673.8999999999999 Td (EXPERIENCE) Tj ET
+BT /F1 9.4 Tf 72 659.8999999999999 Td (Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present) Tj ET
+BT /F1 9.4 Tf 80 648.1999999999998 Td (- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly) Tj ET
+BT /F1 9.4 Tf 86 637.1999999999998 Td (labour budget.) Tj ET
+BT /F1 9.4 Tf 80 626.1999999999998 Td (- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.) Tj ET
+BT /F1 9.4 Tf 72 615.1999999999998 Td (Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025) Tj ET
+BT /F1 9.4 Tf 80 603.4999999999998 Td (- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk) Tj ET
+BT /F1 9.4 Tf 86 592.4999999999998 Td (book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.) Tj ET
+BT /F1 9.4 Tf 80 581.4999999999998 Td (- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90%) Tj ET
+BT /F1 9.4 Tf 86 570.4999999999998 Td (of gross returns and lowering estimated slippage by a third.) Tj ET
+BT /F1 9.4 Tf 80 559.4999999999998 Td (- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests) Tj ET
+BT /F1 9.4 Tf 86 548.4999999999998 Td (across the 30 indices.) Tj ET
+BT /F1 9.4 Tf 80 537.4999999999998 Td (- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and) Tj ET
+BT /F1 9.4 Tf 86 526.4999999999998 Td (versioning each schema, built a feature store the team reused in two later projects.) Tj ET
+BT /F1 9.4 Tf 80 515.4999999999998 Td (- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the) Tj ET
+BT /F1 9.4 Tf 86 504.4999999999998 Td (desk.) Tj ET
+BT /F1 9.4 Tf 80 493.4999999999998 Td (- Documented the backtest assumptions, transaction-cost model and known failure regimes in the) Tj ET
+BT /F1 9.4 Tf 86 482.4999999999998 Td (desk's research wiki, which the next intern cohort used to onboard in their first week.) Tj ET
+BT /F1 9.4 Tf 72 471.4999999999998 Td (Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021) Tj ET
+BT /F1 9.4 Tf 80 459.7999999999998 Td (- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study) Tj ET
+BT /F1 9.4 Tf 86 448.7999999999998 Td (from 3 days to 5 hours, with every run reproducible from its seed and configuration file.) Tj ET
+BT /F1 9.4 Tf 80 437.7999999999998 Td (- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound) Tj ET
+BT /F1 9.4 Tf 86 426.7999999999998 Td (by a log factor and is now Section 3 of a paper under review at JASA.) Tj ET
+BT /F1 9.4 Tf 80 415.7999999999998 Td (- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and) Tj ET
+BT /F1 9.4 Tf 86 404.7999999999998 Td (earning a 4.8/5 teaching rating.) Tj ET
+BT /F1 9.4 Tf 80 393.7999999999998 Td (- Released an open-source R package for high-dimensional covariance estimation while maintaining the) Tj ET
+BT /F1 9.4 Tf 86 382.7999999999998 Td (lab's shared cluster, organizing the weekly reading group and grading for two courses, which was) Tj ET
+BT /F1 9.4 Tf 86 371.7999999999998 Td (downloaded 3,000 times in its first year.) Tj ET
+BT /F1 12 Tf 72 355.7999999999998 Td (PROJECTS) Tj ET
+BT /F1 9.4 Tf 72 341.7999999999998 Td (Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present) Tj ET
+BT /F1 9.4 Tf 80 330.0999999999998 Td (- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal) Tj ET
+BT /F1 9.4 Tf 86 319.0999999999998 Td (convolutional model trained on realized-volatility features.) Tj ET
+BT /F1 9.4 Tf 80 308.0999999999998 Td (- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features) Tj ET
+BT /F1 9.4 Tf 86 297.0999999999998 Td (and an asymmetric loss.) Tj ET
+BT /F1 9.4 Tf 80 286.0999999999998 Td (- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a) Tj ET
+BT /F1 9.4 Tf 86 275.0999999999998 Td (temporal convolutional model.) Tj ET
+BT /F1 9.4 Tf 72 264.0999999999998 Td (Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023) Tj ET
+BT /F1 9.4 Tf 80 252.3999999999998 Td (- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing) Tj ET
+BT /F1 9.4 Tf 86 241.3999999999998 Td (in the top 2% of the private leaderboard.) Tj ET
+BT /F1 9.4 Tf 80 230.3999999999998 Td (- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local) Tj ET
+BT /F1 9.4 Tf 86 219.3999999999998 Td (validation and leaderboard scores.) Tj ET
+BT /F1 9.4 Tf 80 208.3999999999998 Td (- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate) Tj ET
+BT /F1 9.4 Tf 86 197.3999999999998 Td (features to 300 without losing validation score.) Tj ET
+BT /F1 12 Tf 72 181.3999999999998 Td (SKILLS) Tj ET
+BT /F1 9.4 Tf 72 167.3999999999998 Td (Programming: Python, R, PyTorch, Kafka) Tj ET
+BT /F1 9.4 Tf 72 155.69999999999982 Td (Methods: time-series econometircs, high-dimensional statistics, gradient boosting) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+6199
+%%EOF

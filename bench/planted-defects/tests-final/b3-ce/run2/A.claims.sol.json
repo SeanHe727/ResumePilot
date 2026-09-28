@@ -1,0 +1,150 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Rebuilt the diagnostics service's monitoring dashboards around per-sensor error budgets, cutting mean time to detect incidents from 40 to 12 minutes.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "- Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.",
+    "- Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
+    "- Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.",
+    "- Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
+    "- Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed newest first.",
+      "because": "The current order makes the timeline harder to scan."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "“Adds” is present tense in a role that ended in July 2024.",
+      "because": "It makes the past-tense role’s timeline inconsistent."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The line does not establish that the checks produced the three-day release cycle.",
+      "because": "It gives no basis for attributing that result to the checks."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The operational result comes after a long sequence of activities.",
+      "because": "A scanning reader may miss the main impact."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Removed the nightly backlogs” gives no before-and-after measure of backlog or dispatch delay.",
+      "because": "The reader cannot judge the improvement’s scale."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Dynamic batching cannot account for the stated single-request latency reduction.",
+      "because": "Batching benefits grouped requests, but can add waiting time to a single request."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The 5% end-to-end latency reduction does not identify the workflow measured.",
+      "because": "A reader cannot tell which user or system path improved."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "One scored rollout per prompt cannot provide the within-prompt comparisons GRPO uses.",
+      "because": "Without multiple scored trajectories, the stated setup cannot provide the claimed GRPO stabilization."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Stabilised” does not specify what became more stable.",
+      "because": "The line gives no observable outcome, such as fewer failed runs or lower training variation."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“AI-first engineering practices” does not identify the practices or the specific action taken.",
+      "because": "A reader cannot tell what work the contributor did or what skill it demonstrates."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The broad delivery and downstream benefits lack evidence or a basis for comparison.",
+      "because": "Adoption alone does not establish those effects or show that the practices caused them."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Going from 900 ms to 600 ms is a 33.3% reduction, not 50%.",
+      "because": "The 300 ms decrease is 33.3% of the starting latency."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Going from 71% to 83% is an increase of 12 percentage points, not 12%.",
+      "because": "The relative increase is about 16.9%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Citation and faithfulness metrics” does not explain how the metrics were built or implemented.",
+      "because": "A reader cannot tell what evaluation skill or technical work the contribution demonstrates."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The Kendall correlation of 0.89 does not specify the two quantities correlated.",
+      "because": "A reader cannot tell what the correlation demonstrates about the evaluator."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The result appears after the method.",
+      "because": "The instrumentation appears before the reader learns that the defects were fixed."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Each was fixed upstream” does not say who fixed the defects.",
+      "because": "The passive phrasing leaves responsibility for the fixes unclear."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3455,
+    "input_tokens_details": {
+      "cache_write_tokens": 3452,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1131,
+    "output_tokens_details": {
+      "reasoning_tokens": 390
+    },
+    "total_tokens": 4586
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "There is no summary or headline positioning you for quant research.",
+      "because": "Recruiters have to infer your target role from the experience section."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The current bakery role is too prominent for a quant-focused application.",
+      "because": "It can take attention away from the directly relevant internship and research."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The volatility-project bullets repeat the same model and evaluation setting.",
+      "because": "Closely related measurements read as separate achievements without explaining how they differ."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "There is no publication or research section.",
+      "because": "Such a section could help reviewers identify the under-review work and understand your contribution."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the code link is accessible, current and suitable for technical review.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Confirm that the Ph.D. status and expected May 2026 graduation date are current.",
+      "because": "The timeline needs to be accurate and easy to interpret when you apply."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Make your availability clearer if relevant.",
+      "because": "Otherwise a recruiter must infer it from the Ph.D. timeline."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Make the transition to the current bakery role understandable.",
+      "because": "Reviewers may question your near-term career direction and time commitments."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Keep the spelling convention used in “labour” consistent across the résumé.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify what the Sharpe ratios of 1.1 and 1.5 represent.",
+      "because": "The comparison should be like-for-like, with its benchmark, costs and evaluation window understandable."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify what “90% of gross returns” means.",
+      "because": "A quant reviewer will want to understand the return-and-cost trade-off."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Make the slippage estimate unambiguous.",
+      "because": "A quant reviewer will want to understand how costs were assessed."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "State which forecasts the Diebold–Mariano tests compared and what the tests support.",
+      "because": "The forecast-gain claim needs a clear interpretation."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain how testing across 30 indices was handled.",
+      "because": "A reviewer may ask about repeated testing and interpretation across the set."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Fix the feature-store bullet’s awkward opening and sentence structure.",
+      "because": "They make a strong infrastructure accomplishment harder to understand."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify your personal contribution to the feature store.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Explain what reuse in two later projects meant in practice.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Multiplying a daily Sharpe ratio by 252 is not the standard annualization method.",
+      "because": "Under common assumptions, the factor is the square root of the number of trading days."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Give fuller identifying detail for the paper under review.",
+      "because": "A reviewer should be able to identify the work and understand your contribution."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Separate or deprioritize the duties crowded into the package bullet.",
+      "because": "Cluster maintenance, the reading group and grading obscure the package release and download count."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Give the QLIKE result more statistical context.",
+      "because": "Readers cannot tell whether the project results share a test period, baseline and experimental setup."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The stated 33% forecast-error improvement does not match the values 0.20 and 0.15.",
+      "because": "The reduction relative to 0.20 is 25%, not 33%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify the forecast-error metric, baseline and denominator.",
+      "because": "The project results need to be comparable and reproducible."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Give the directional-hit-rate result more statistical context.",
+      "because": "Readers cannot tell whether the project results share a test period, baseline and experimental setup."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Reword “cut validation leakage” to describe what changed.",
+      "because": "It sounds like leakage was directly measured."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Clarify what the 0.02 validation-to-leaderboard gap measures.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Check that every listed tool belongs in the skills section and is supported by your experience.",
+      "because": "The section has limited evidence and context."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled.",
+      "because": ""
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Make the broad “Methods” label more precise.",
+      "because": "It may obscure strengths in time-series forecasting, econometrics and statistical learning."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Use consistent method names and capitalization.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 4347,
+    "input_tokens_details": {
+      "cache_write_tokens": 4344,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1796,
+    "output_tokens_details": {
+      "reasoning_tokens": 638
+    },
+    "total_tokens": 6143
+  }
+}

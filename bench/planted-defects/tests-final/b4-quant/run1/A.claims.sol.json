@@ -1,0 +1,187 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality.",
+      "because": "These personal details are not relevant to the listed qualifications and can distract from the evidence."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed newest-first.",
+      "because": "The 2025 internship appears below the 2020–2021 research role, making the chronology harder to follow."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The reproducibility-check claim does not say what you did or what the checks enabled.",
+      "because": "A reader cannot tell whether they reproduced results, caught errors, or supported a particular workflow."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Owned” describes responsibility for the pipeline rather than a specific action.",
+      "because": "The technical skill behind the pipeline work is not clear."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“It is now Section 3” gives the paper context late and uses an indirect reference.",
+      "because": "The connection to the paper under review at JASA is less immediate in a quick scan."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The package’s download result is buried after unrelated duties, and “which” has an unclear referent.",
+      "because": "A reader may have to pause to work out what was downloaded."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Saying the signal raised the desk book’s Sharpe overstates what the backtest establishes.",
+      "because": "The backtest alone does not establish that conclusion without a like-for-like comparison and a robust result."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "A standard Diebold-Mariano test over a nested baseline does not justify saying the gain was “confirmed.”",
+      "because": "Usual inference can be invalid for nested models, and testing across 30 indices can require handling multiple comparisons."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The line gives neither the size of the forecast gain nor the test results.",
+      "because": "A reader cannot judge the size or strength of the improvement."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "“Joining ... built” is grammatically incorrect.",
+      "because": "The participial opening makes the joining appear to be the subject of “built.”"
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The methods come before the feature-store result.",
+      "because": "Readers reach the concrete outcome late in the sentence."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Multiplying a daily Sharpe ratio by 252 is not the conventional annualization method.",
+      "because": "Under the usual assumptions, annualization uses √252, so multiplying by 252 substantially overstates it."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line ends with a routine reporting step rather than a meaningful outcome.",
+      "because": "“Before reporting it to the desk” does not show what changed or how the figure was used."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement.",
+      "because": "The reduction of 0.05 is 25% of the original 0.20."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The line does not name the error metric for 0.20 and 0.15.",
+      "because": "Without the metric, a reader cannot interpret or compare the figures."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The increase from 52% to 58% is 6 percentage points, not a 6% relative increase.",
+      "because": "A 6-point gain is about an 11.5% relative increase from 52%."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The index count and model details repeat the first bullet.",
+      "because": "They cost space without distinguishing this result."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The top-2% phrase repeats what the 41st-place finish already establishes.",
+      "because": "The placement and total number of teams make the percentile clear."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.02 score gap does not establish that switching folds cut validation leakage.",
+      "because": "A smaller gap could also result from leaderboard noise, sampling variation, or other changes."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.02 gap does not identify its scoring metric.",
+      "because": "Without the metric, a reader cannot interpret the difference or compare it with other outcomes."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.02-gap result comes after the fold change and leakage claim.",
+      "because": "Leading with the observed result would make the point quicker to scan."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Validation score” does not identify its metric.",
+      "because": "The preserved score is unclear without the metric."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "“econometircs” is misspelled.",
+      "because": "The error is visible in a skills label and can distract from the technical knowledge listed."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4278,
+    "input_tokens_details": {
+      "cache_write_tokens": 4275,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1593,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 5871
+  }
+}

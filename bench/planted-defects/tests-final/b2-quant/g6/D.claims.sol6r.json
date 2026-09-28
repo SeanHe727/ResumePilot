@@ -1,0 +1,261 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé lacks a summary or role-focused heading.",
+      "because": "Readers have to infer the quantitative-research target from the experience section."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The strongest quantitative-research narrative starts too late.",
+      "because": "The current bakery role can overshadow the statistical research applied to systematic finance."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Northpeak bullets should put the clearest, best-validated research outcome first.",
+      "because": "The strongest result is near the bottom, away from supporting validation evidence."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Consider shortening the bakery experience.",
+      "because": "It takes attention away from the target field."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify the scale or outcome of the weekly labour-budget responsibility.",
+      "because": "It reads as a responsibility claim rather than a measurable result."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Use a consistent spelling convention for “labour.”",
+      "because": "The U.S. location alongside that spelling may look inconsistent."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify the basis of the 12%-to-7% unsold-bread comparison.",
+      "because": "The comparison needs a clear basis."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the unsold-bread reduction was attributable to your changes.",
+      "because": "The review says that attribution should be established."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify what the 35% risk-adjusted-returns improvement measures and its comparison point.",
+      "because": "Without that context, the large improvement is difficult to interpret."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Give the test period and evaluation setting for the 35% improvement.",
+      "because": "Without that context, the large improvement is difficult to interpret."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Explain the split design and how the embargo addressed leakage.",
+      "because": "The validation claim supports the performance result."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify your contribution to the feature store and what reuse in two later projects means.",
+      "because": "That reuse is stronger evidence of impact than simply building the store."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify whether the live allocation followed a research review.",
+      "because": "The bullet describes a real decision-maker response without explaining that step."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Explain what “small” means for the live allocation if shareable.",
+      "because": "The size of the allocation is unclear."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The allocation is mentioned without realized live-trading results.",
+      "because": "The review calls the evidence of live-trading performance partial."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Reconsider reporting the best of 400 backtested Sharpes as the expected live Sharpe.",
+      "because": "Treating a selected backtest result as a forward expectation raises overfitting and credibility concerns."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Distinguish parameter-selection data from an untouched evaluation set.",
+      "because": "The expected-live-Sharpe claim sits beside claims of out-of-sample validation."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The 18-month order-book signal result also appears in the Kaggle project.",
+      "because": "Presenting the same work twice can make it look like separate evidence."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make the Sharpe comparison and testing period directly interpretable.",
+      "because": "The review says the result needs a clearer comparison and test context."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify the signal’s ownership and whether it is distinct from the Kaggle work.",
+      "because": "The same signal and 18-month test may be reported in both places."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Verify or correct the claim that every Monte Carlo worker used the same random seed.",
+      "because": "Identical seeds can produce duplicated or correlated streams, threatening valid replication."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify your role in the variance-bound proof and the log-factor improvement.",
+      "because": "The contribution and mathematical result should be explainable."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Prioritize research evidence over the teaching bullet if space is tight.",
+      "because": "Teaching is less central to quantitative research."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Be able to substantiate and explain how the 3,000 downloads were measured.",
+      "because": "The download count is a scale claim."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify the baseline, evaluation period and forecasting setup for the 7% QLIKE improvement.",
+      "because": "Those details are needed to interpret the result."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify the testing procedure and how the crisis periods were identified.",
+      "because": "Those details support the significance claim."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Emphasize the working paper’s status and seminar audience rather than its 12-page length.",
+      "because": "The length is less persuasive than the work’s status and audience."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Add a specific result or contribution to the feature-engineering bullet.",
+      "because": "It is generic compared with the other bullets and adds little beyond the project title."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Explain how the 0.02 validation-to-leaderboard gap was measured.",
+      "because": "The review asks for the basis of that figure."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Explain why closing the gap improved confidence in model evaluation.",
+      "because": "The benefit of the validation change needs to be clear."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The 18-month order-book signal result repeats the Northpeak internship result.",
+      "because": "The same result should not be presented as distinct evidence."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Clarify the project’s timeline and your ownership of the order-book work.",
+      "because": "It is unclear whether this was separate work, a precursor to the internship, or the same result."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Reassess whether Kafka belongs in Skills.",
+      "because": "The résumé gives no supporting example of practical Kafka experience."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "“Time-series econometircs” is misspelled.",
+      "because": "A typo in a skills keyword can hurt credibility and search matching."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make the Skills section more informative about relevant methods and finance experience.",
+      "because": "The section is brief, while the bullets carry much of that evidence."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4443,
+    "input_tokens_details": {
+      "cache_write_tokens": 4440,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2118,
+    "output_tokens_details": {
+      "reasoning_tokens": 670
+    },
+    "total_tokens": 6561
+  }
+}

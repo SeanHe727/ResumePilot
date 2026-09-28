@@ -1,0 +1,24 @@
+{
+  "A": [
+    {
+      "test": "b1-pm",
+      "recall": 0.6428571428571429,
+      "precision": 1.0,
+      "f1": 0.782608695652174,
+      "errors": 5,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W3": "right",
+        "W4": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "missed",
+        "S4": "mentioned",
+        "T2": "mentioned",
+        "T4": "right",
+        "N3": "missed",
+        "N5": "right"
+      }
+    }
+  ]
+}

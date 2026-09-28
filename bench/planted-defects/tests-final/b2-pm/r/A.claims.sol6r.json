@@ -1,0 +1,153 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The funding outcome appears after the presentation details, where scanning readers may miss it.",
+      "because": "A reader scanning for impact may stop before reaching the funding outcome."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The pilot approval appears after the presentation details, where scanning readers may miss it.",
+      "because": "A reader scanning for impact may stop before reaching the approval outcome."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The unrelated mechanic role takes too much space and attention.",
+      "because": "Its two bullets give substantial space to a role less aligned with the product and operations direction."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed newest-first.",
+      "because": "Crestline appears above the more recent Harbor Payments role, so readers may get the chronology wrong."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience.",
+      "because": "Leading with degrees delays the work history that better establishes the page’s direction."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The annual savings appear after a long list of implementation activities.",
+      "because": "Scanning readers may miss the 1,800-hour saving, and the details obscure which work supports it."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The redesign is credited with the time reduction without a causal comparison.",
+      "because": "A before-and-after difference alone cannot show that the redesign caused the reduction."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "RICE Reach is incorrectly defined as ticket volume rather than users or people affected over a defined period.",
+      "because": "Tickets do not directly measure unique users reached, so raw counts can make RICE scores misleading."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Prioritized the dispute roadmap” does not identify the selected priority or its intended result.",
+      "because": "Readers cannot see what decision the framework produced or why it mattered."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The bullet does not say what the next quarter’s roadmap priority was or what outcome it targeted.",
+      "because": "Without the priority or its intended outcome, the research and business case have no visible decision impact."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The bullet repeats the checkout test and its conversion result.",
+      "because": "The preceding bullet already reports the test, its scale and its conversion lift without leaving a distinct contribution here."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The claim that all 9 tonnes would have been thrown away is not established.",
+      "because": "The amount redistributed does not show what would have happened to the food otherwise."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Launched” does not show what product or launch work you personally did.",
+      "because": "Readers cannot tell what you contributed as product lead."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“To 3,100 students” does not clarify whether they were users or the campus population.",
+      "because": "The ambiguity makes the reach of the launch hard to judge."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The 150% increase is arithmetically wrong; weekly active users rose by 187.5%.",
+      "because": "The increase of 750 users is 187.5% of the starting figure of 400."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The wording claims the reminders caused the increase without isolating their effect.",
+      "because": "The interviews explain why the feature was chosen, not whether it drove the rise in weekly active users."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The fill rate rose by 20 percentage points, not 20%.",
+      "because": "The change from 75% to 95% is 20 percentage points, or about 26.7% relative to the starting rate."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3550,
+    "input_tokens_details": {
+      "cache_write_tokens": 3547,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1194,
+    "output_tokens_details": {
+      "reasoning_tokens": 383
+    },
+    "total_tokens": 4744
+  }
+}

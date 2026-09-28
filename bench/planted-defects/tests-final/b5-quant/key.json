@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Taught weekly recitations for 60 students in graduate probability and writes the problem sets, earning a 4.8/5 teaching rating.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "W5",
+    "category": "wording",
+    "line": "Pioneered a data-driven, research-first approach to volatility modeling that delivered robust, actionable insights.",
+    "defect": "Generic claims with no concrete action, subject or result."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "defect": "Reporting the best of 400 backtests without a multiple-testing or deflated-Sharpe adjustment overstates expected live performance."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "defect": "Using the same seed on every worker makes the parallel runs identical, so the study no longer has 2,000 independent draws."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "May 2020 graduation to Feb 2021",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

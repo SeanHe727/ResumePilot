@@ -1,0 +1,211 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Feb 2021 - Aug 2021",
+    "- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability and writes the problem sets, earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Pioneered a data-driven, research-first approach to volatility modeling that delivered robust, actionable insights.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometrics, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The internship bullets do not put the clearest, defensible results and strongest research impact first.",
+      "because": "The strongest performance evidence is not consistently presented first."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The code link should lead directly to relevant, well-documented work.",
+      "because": "A bare profile link is less persuasive than an accessible portfolio."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The date of birth and nationality should be removed.",
+      "because": "They are not needed to assess research qualifications and disclose personal information that can invite bias."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "The Ph.D. entry could include a relevant dissertation or research focus.",
+      "because": "The degree alone does not show what the doctoral research contributes."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Reconsider whether the B.S. needs to remain.",
+      "because": "It is less important than the Ph.D. work and relevant experience."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% claim needs its metric, baseline, period, and out-of-sample and cost conditions clarified.",
+      "because": "Without that context, the percentage is hard to evaluate."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify how the splits and embargo were selected and whether the final result used an untouched test period.",
+      "because": "The bullet describes safeguards but not the final evaluation design."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Make sure “feature store” accurately describes what was built.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify your contribution if the feature store was shared work.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Distinguish an approved allocation from one that was launched or actually traded.",
+      "because": "Those are different levels of evidence."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The best of 400 backtested configurations is reported as the expected live Sharpe.",
+      "because": "That is not statistically justified by itself and does not account for selection bias."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The order-book signal and Sharpe result are repeated in the Kaggle project.",
+      "because": "Their ownership and context are unclear."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify the basis and evaluation conditions for the Sharpe-improvement claim.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Verify and accurately describe the same-seed setup across parallel workers.",
+      "because": "Identical or correlated random streams could make the run count and uncertainty estimates misleading."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Make sure the log-factor improvement over the previous bound is technically precise and supportable.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The teaching and problem-set verbs have inconsistent tenses for a past role.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Explain what the 4.8/5 rating measures and, if available, how many students responded.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Include the R package name or a direct link.",
+      "because": "A reviewer could then verify and explore it."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The “pioneered” and “robust, actionable insights” bullet is generic and self-promotional.",
+      "because": "It does not say what was tested, what improved, or how the result was measured."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify what “forecast gain” measures.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Identify the two crisis periods if that context matters to the role.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Make the working paper’s status clear.",
+      "because": "A departmental seminar presentation is not publication or external peer review."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Add the competition outcome or the work personally owned.",
+      "because": "The bullet is too generic to show your contribution."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Explain what was leaking and why time-grouped folds addressed it.",
+      "because": "A 0.02 validation-to-leaderboard gap is not by itself proof that leakage was reduced."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The order-book signal and Sharpe result duplicate the Northpeak bullet.",
+      "because": "It is difficult to tell whether this was competition work, internship work, or one result credited twice."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The skills list is short for quant roles and may omit relevant, demonstrable tools.",
+      "because": "Some postings may expect SQL, C++, Git, Linux, or market-data tooling."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "The “Methods” category combines broad areas.",
+      "because": "A reviewer should be able to distinguish statistical, machine-learning, and financial-research capabilities without inferring too much."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4391,
+    "input_tokens_details": {
+      "cache_write_tokens": 4388,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1878,
+    "output_tokens_details": {
+      "reasoning_tokens": 806
+    },
+    "total_tokens": 6269
+  }
+}

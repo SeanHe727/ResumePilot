@@ -1,0 +1,211 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the more relevant Experience section.",
+      "because": "A reader may reach the work and project evidence later than necessary."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% accuracy improvement lacks a measurement basis.",
+      "because": "The reader cannot tell whether it is a relative gain or percentage-point increase, or what it is compared against."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The disagreement reduction comes after the routing-layer description.",
+      "because": "The technical setup makes the result harder to spot while scanning."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The calls and latency reductions come after a long methods phrase.",
+      "because": "The technical setup makes the results harder to spot while scanning."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“The team used to compare” is indirect phrasing.",
+      "because": "It lengthens the sentence without clarifying the harness’s role."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The assistant-only-loss-masking adapter work repeats the first internship bullet without showing a distinct achievement.",
+      "because": "The first bullet already reports the accuracy improvement from fine-tuning the adapter."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The FP32-to-BF16 switch does not by itself support a fourfold reduction in total GPU memory.",
+      "because": "BF16 uses about half the storage per converted value, mixed precision may retain FP32 state, and the measurement conditions are missing."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The load-test evidence comes after the latency result and implementation details.",
+      "because": "Its placement makes the validation easier to miss while scanning."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The CI bullet switches from past-tense “Maintained” to present-tense “adds.”",
+      "because": "The role ended in July 2024, so the tense shift makes the timing unclear."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Maintained the CI pipeline” names an ongoing duty rather than the specific change made.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The three-day release-cycle figure lacks a defined measure and prior comparison.",
+      "because": "The reader cannot tell whether it means cycle duration or release cadence, or how much either changed."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The release-cycle result comes after the CI methods.",
+      "because": "The clearest measure of impact is less visible when scanning."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The migration is credited with clearing nightly backlogs without evidence that queued work could finish before dispatch.",
+      "because": "A queue does not itself increase processing capacity, and retries can add work."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The backlog and dispatch-delay change has no before-and-after measure.",
+      "because": "The count of migrated services shows scope, not the scale of the operational effect."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“AI-first engineering practices” does not identify the practice adopted.",
+      "because": "The reader cannot see what changed or what supported the adoption claim."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The broad adoption claim reads as a separate item beside the concrete runtime improvements.",
+      "because": "Its general benefits lack a checkable result and make the project’s technical focus less clear."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The under-10K-token claim does not define working context or show that complete model input stayed below the threshold.",
+      "because": "Retained conversation state could omit instructions, tool content, summaries, or an oversized turn."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The 100x conversation-growth figure lacks a starting point.",
+      "because": "The reader cannot interpret the scale of the stress test or what the growth represents."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The two runtime changes are said to have removed deadlocks and lost results without establishing that outcome.",
+      "because": "Pool separation and stream completion do not rule out the stated failures."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The 50-way test condition has no validation measure for the claimed removal of failures.",
+      "because": "The reader cannot see what evidence established that the failures were removed."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The two fixes come before the result.",
+      "because": "A reader must reach the end of the bullet to see the claimed impact."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The metrics bullet does not say what the integration changed for the framework or its users.",
+      "because": "Without an enabled capability or user outcome, its value beyond the technical deliverable is hard to judge."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.89 Kendall correlation does not on its own establish that the evaluator tracks degradation, and its comparator is unnamed.",
+      "because": "The degradation order, score direction, ties, repeated variants, and possible differences across reports or removal types affect what it demonstrates."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The correlation result should lead, with a shorter trailing explanation.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The same backlog-reduction achievement appears under two entries with slightly different figures.",
+      "because": "Both describe a triage branch screening 800+ signals, while 68% and two-thirds leave the reported figure uncertain."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The triage-method clause is dense after the backlog result.",
+      "because": "Its technical details slow the reader and make the main point harder to scan."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "The adapter fine-tuning work does not establish that LoRA was used.",
+      "because": "The experience bullets do not identify LoRA, leaving no example to support its place in the skills list."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4438,
+    "input_tokens_details": {
+      "cache_write_tokens": 4435,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1496,
+    "output_tokens_details": {
+      "reasoning_tokens": 257
+    },
+    "total_tokens": 5934
+  }
+}

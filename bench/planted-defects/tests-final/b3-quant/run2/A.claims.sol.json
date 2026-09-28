@@ -1,0 +1,138 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Feb 2021 - Aug 2021",
+    "- Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Standard Diebold-Mariano inference does not validly confirm a forecast gain in a nested-model comparison.",
+      "because": "Standard DM tests can have incorrect size for nested forecasts, and testing 30 indices requires accounting for multiple comparisons."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The line does not give the size of the forecast gain or the outcome of the tests.",
+      "because": "A reader cannot judge the claimed advantage from the test name and index count alone."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "The opening participial phrase dangles instead of clearly connecting the feature-joining actions to building the store.",
+      "because": "“Joining” appears to modify an unstated actor, while “built” introduces a different subject."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The reuse outcome comes after several implementation details.",
+      "because": "A scanning reader may miss the clearest evidence of the feature store’s value."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Multiplying the daily Sharpe ratio by 252 does not correctly annualize it.",
+      "because": "The usual scaling is √252 for sufficiently uncorrelated daily returns; serial correlation requires a different adjustment."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The feature-store, annualization, and onboarding details pull attention from the internship’s signal and trading-cost results.",
+      "because": "Those bullets branch away from the internship’s research narrative."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "“The previous bound” does not identify the comparator or setting for the log-factor improvement.",
+      "because": "Without that context, a reader cannot assess the contribution’s significance."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The package, cluster, teaching, and course duties read as a mixed task list.",
+      "because": "The duties separate the package’s adoption evidence from its release and risk overshadowing the strongest research contribution."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The stated 33% improvement is wrong; the decrease from 0.20 to 0.15 is 25%.",
+      "because": "The decrease of 0.05 is 25% of the original 0.20."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The line does not name the forecast-error metric or say what the 0.20 value represents.",
+      "because": "Without the metric and comparison context, a reader cannot interpret the values or tell what changed."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The hit rate rose by 6 percentage points, not 6% relative to its original value.",
+      "because": "The increase from 52% to 58% is about 11.5% relative to the original rate."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The temporal convolutional model detail repeats information from the first bullet.",
+      "because": "Repeating the model type takes space without distinguishing the contribution."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Finishing in the top 2%” repeats the rank of 41st out of 2,900.",
+      "because": "The rank already communicates the placement."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The gap closing does not establish that validation leakage was reduced or that the fold change caused the closure.",
+      "because": "Other leakage paths may remain, and the gap can change because of sampling variation, distribution shift, or evaluation differences."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The Methods skills line misspells “econometrics.”",
+      "because": "The misspelling can distract a reader from the skills."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3437,
+    "input_tokens_details": {
+      "cache_write_tokens": 3434,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1046,
+    "output_tokens_details": {
+      "reasoning_tokens": 283
+    },
+    "total_tokens": 4483
+  }
+}

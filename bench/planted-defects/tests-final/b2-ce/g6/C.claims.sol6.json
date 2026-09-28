@@ -1,0 +1,229 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the contact link lead directly to current work you want employers to inspect.",
+      "because": "A general or outdated page is less useful."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality for US applications.",
+      "because": "They generally aren’t needed and take space from job-relevant information."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Confirm that “Expected Jun 2026” is still accurate.",
+      "because": ""
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Keep the location detail only if it helps.",
+      "because": ""
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Keep the location detail only if it helps.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify whether 35% is a relative increase or a percentage-point change.",
+      "because": "That makes the headline result credible and interpretable."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Identify the comparison for the accuracy improvement.",
+      "because": "That makes the headline result credible and interpretable."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify what “reviewer disagreement” measures and how it was assessed.",
+      "because": "The reader needs to know why disagreement is the right outcome."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Check that the 18% and 5% reductions come from the same evaluation conditions.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Simplify method detail that isn’t important to the roles you’re targeting.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "If space is tight, prioritize the regressions caught over the checkpoint count.",
+      "because": "The regressions caught are the clearer consequence of the work."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The adapter bullet duplicates the first bullet.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Assistant-only loss masking does not, by itself, explain learning to reproduce tool outputs more faithfully.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify how the triage branch contributed to the backlog reduction if other changes happened during those eight weeks.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Verify the measured memory and support the 4× figure with a before-and-after comparison that accounts for other changes.",
+      "because": "Changing FP32 values to BF16 alone suggests a 2× reduction for those values, not necessarily a 4× reduction in total fine-tuning memory."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify that the load-test threshold is a check you implemented.",
+      "because": "It should not imply that all production traffic stays below 200 ms."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Fix the tense inconsistency between “Maintained” and “adds”.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify whether the regression checks caused the three-day release cycle.",
+      "because": "CI maintenance generally may not have caused it."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Qualify the claim that nightly backlogs were removed if they were not eliminated consistently.",
+      "because": "The outcome should match your evidence."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Substantiate adoption and outcomes or remove the bullet.",
+      "because": "It is much less specific than the two technical bullets beneath it."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Define what the “100x” compares against.",
+      "because": "Otherwise the numbers are difficult to interpret."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain what the stress test represents.",
+      "because": "Otherwise the numbers are difficult to interpret."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Confirm that deadlocks and lost results were observed before the changes and absent in the 50-way test afterward.",
+      "because": "That distinction supports the causal claim."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Identify your contribution boundary if the evaluation module was shared.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "State what the Kendall correlation ranks.",
+      "because": "That lets a reader judge what 0.89 demonstrates."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "If important, explain how the trials were constructed.",
+      "because": "That lets a reader judge what 0.89 demonstrates."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The backlog bullet duplicates the internship result.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The backlog result appears under an unrelated project.",
+      "because": "That could create doubt about where the work happened."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Git is listed as a programming language, but it is a tool.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Consider whether the skills section adds useful technologies not already obvious from the experience bullets.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2118,
+    "input_tokens_details": {
+      "cache_write_tokens": 2115,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1582,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 3700
+  }
+}
