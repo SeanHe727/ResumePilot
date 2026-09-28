@@ -1,0 +1,205 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality should be left off the résumé.",
+      "because": "They are not normally part of a hiring reader’s evaluation and use scarce header space."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The dates leave a 10-month gap between the B.S. and the Junior Software Engineer role.",
+      "because": "A reader may wonder whether the period reflects unemployment, further education, or an omitted role."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% diagnostic-accuracy improvement does not identify its baseline or evaluation set.",
+      "because": "A reader cannot judge the magnitude or reliability of the result."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "The adapter fine-tuning achievement is repeated in another bullet.",
+      "because": "Both bullets describe assistant-only loss masking applied to the same adapter."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Assistant-only loss masking does not by itself make a model reproduce tool outputs more faithfully.",
+      "because": "It normally excludes tool-result tokens from the training loss rather than training their direct reproduction."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The bullet gives the intended training behavior rather than an achieved result.",
+      "because": "A reader cannot tell whether the intervention worked or why it mattered."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The adapter fine-tuning achievement is repeated in another bullet.",
+      "because": "Both bullets describe assistant-only loss masking applied to the same adapter."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The 68% backlog reduction is attributed to the triage branch based only on a post-launch change.",
+      "because": "Changes in inflow, staffing, policy, processes, or the backlog definition could also explain it."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The triage achievement is repeated elsewhere with an inconsistent reduction figure.",
+      "because": "The evaluation-framework project reports the same 800+ sensor-signal result as a two-thirds reduction."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "BF16 mixed precision alone does not support a 4x reduction in total fine-tuning GPU memory.",
+      "because": "Mixed-precision training commonly retains FP32 weights, optimizer states, and other buffers."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The GPU-memory reduction is not connected to what it enabled.",
+      "because": "A reader cannot tell whether it allowed larger models, longer sequences, more examples, or lower cost."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Adds” is in the present tense inside an otherwise past-tense bullet.",
+      "because": "It interrupts the historical framing established by “Maintained” and “shortened.”"
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The release-cycle result gives three days as the endpoint but not the starting point.",
+      "because": "A reader cannot judge whether the improvement was major or marginal."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The removed nightly backlogs and dispatch delay are not quantified.",
+      "because": "A reader cannot judge the scale of the problem or the benefit to morning dispatch."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The platform-wide adoption and delivery and downstream-outcome claims are not established.",
+      "because": "The bullet names no concrete practice, adoption coverage, delivery comparison, or downstream evidence."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The context-size bullet does not identify the bounded context, its measured peak, or the capability it enabled.",
+      "because": "“Working context” is ambiguous, and a reader cannot tell whether needed information was retained or what benefit resulted."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The changes do not by themselves support an unqualified claim that deadlocks and lost tool results were removed.",
+      "because": "Other concurrency and failure mechanisms can still cause problems without bounded test conditions or reliability evidence."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The 50-way fan-out test gives no before-and-after failure rate or other reliability comparison.",
+      "because": "A reader cannot tell whether failures were consistently eliminated or merely observed less often."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Removing lost tool results” is grammatically awkward.",
+      "because": "Results are prevented from being lost, not removed."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The evaluation-module contribution does not say what changed as a result.",
+      "because": "The count of metrics shows scope but not an improvement or adoption outcome."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The integration description does not explain how it was implemented.",
+      "because": "A technical reader cannot identify the interface, abstraction, pipeline, or other mechanism."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "“Showed the evaluator tracks” is grammatically incorrect and overstates the correlation.",
+      "because": "It needs “that,” and the correlation supports an association under tested conditions, not broad evaluator validity."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The correlated measures are unidentified, and “injected degradation” is compressed jargon.",
+      "because": "A reader cannot interpret the 0.89 or readily understand the test design."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The triage achievement repeats the internship result with an inconsistent reduction figure.",
+      "because": "The internship reports the same 800+ sensor-signal result as a 68% reduction."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The industrial-inspection backlog result is misattributed to the evaluation-framework project.",
+      "because": "Nothing in the project entry connects that framework to the sensor workflow or operational backlog."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The final bullet changes subject from evaluation-framework work to the internship’s diagnostics work.",
+      "because": "The unrelated triage bullet breaks the project narrative."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4703,
+    "input_tokens_details": {
+      "cache_write_tokens": 4700,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1665,
+    "output_tokens_details": {
+      "reasoning_tokens": 451
+    },
+    "total_tokens": 6368
+  }
+}

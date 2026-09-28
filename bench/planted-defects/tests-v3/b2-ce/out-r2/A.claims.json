@@ -1,0 +1,262 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Personal details a reader is not meant to weigh should be left off the résumé.",
+      "because": "Date of birth and nationality are not evidence of the candidate's qualifications and can introduce irrelevant screening considerations."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The same triage-branch achievement appears twice with inconsistent reduction figures.",
+      "because": "The Mobility Systems Company bullet and the Research-Agent Evaluation Framework bullet both cite 800+ sensor signals and pending-case backlog reduction, but one says 68% and the other says two-thirds."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé should place EXPERIENCE above EDUCATION and EDUCATION after PROJECTS.",
+      "because": "The software-to-ML progression is the strongest narrative evidence and should lead the page."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "The résumé has an unexplained 10-month gap from Jun 2022 to May 2023.",
+      "because": "A reader may ask what happened between the B.S. and the first listed software role."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The diagnostic-accuracy figure is incomplete because it does not state the baseline or whether 35% is relative improvement or percentage points.",
+      "because": "A hiring reader cannot judge the size of the result precisely or compare it with the starting performance."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The routing bullet has a number-agreement error: 'each' takes the singular possessive 'its,' not 'their.'",
+      "because": "The phrase refers to each specialist agent individually, so the plural possessive is grammatically incorrect."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The routing action is hard to scan because 'limits each ... to their in-scope signals' is indirect.",
+      "because": "The reader has to parse the object restriction before seeing what the router actually does."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The GRPO bullet is grammatically incomplete because it says 'cutting tool calls per case 18%' instead of 'cutting ... by 18%.'",
+      "because": "The missing preposition makes the amount of reduction momentarily unclear and makes the quantified result look unpolished."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The long method chain buries the two performance results and makes the baseline comparison difficult to scan.",
+      "because": "GRPO, grouped rollouts, and the reward design all appear before the reader reaches tool-call and latency outcomes."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The harness bullet states the number of regressions caught but not how catching them benefited the release or users.",
+      "because": "The reader can see that the harness found problems, but not the practical consequence of doing so."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The harness bullet weakens ownership by saying 'the team used to compare' instead of stating what the harness enabled.",
+      "because": "The candidate clearly wrote the harness, but the indirect clause shifts attention to the team rather than the delivered capability."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The claim that assistant-only loss masking makes the model reproduce tool outputs more faithfully overstates what the method does.",
+      "because": "Assistant-only masking changes which tokens contribute to the training loss; it does not by itself supervise or guarantee faithful reproduction of tool outputs."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The phrase describes an intended effect rather than a demonstrated outcome and does not identify which tool outputs were assessed.",
+      "because": "\"Would learn\" signals a goal, not a measured result, while \"the tool outputs\" gives no output type or evaluation basis."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The triage bullet uses a dense modifier and an awkward compound that slow the operational result.",
+      "because": "'With ML-extracted features' does not immediately show whether the features drive screening or merely accompany it, while 'pending-case backlog' is harder to scan than a direct description of pending cases."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The same adapter fine-tuning work is repeated in two bullets, making the achievement appear duplicated.",
+      "because": "Both bullets mention assistant-only loss masking, while the earlier bullet already gives the resulting accuracy improvement."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Switching from FP32 to BF16 mixed precision does not by itself support a 4x reduction in total fine-tuning GPU memory.",
+      "because": "BF16 uses 16-bit values instead of FP32's 32-bit values, so it can roughly halve memory for eligible weights and activations."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The 4x memory reduction is ambiguous because the bullet gives neither a baseline nor what the reduction enabled.",
+      "because": "A reader cannot tell whether 4x means a reduction from one measured memory value to another, a percentage change, or a reduction for only certain tensors."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The load-test clause uses the present tense inside an otherwise past-tense bullet.",
+      "because": "The role ended in Jul 2024, so 'fail' makes the timing of the test safeguard unclear and interrupts the bullet's grammatical consistency."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The bullet mixes past and present tense in a role that has ended.",
+      "because": "'Maintained' is past tense but 'adds' is present tense, so the sentence does not establish a consistent time frame."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The release-cycle improvement is incomplete because the bullet gives the ending duration but not the starting duration.",
+      "because": "Three days could represent a major improvement or a minor change; the comparison is what makes the result credible to a hiring reader."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "'Maintained the CI pipeline' frames the work as a duty instead of leading with the action that produced the result.",
+      "because": "Maintenance is a responsibility, but it does not tell the reader what changed."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The operational result is unmeasured because removing nightly backlogs is not quantified.",
+      "because": "The 30-service count shows contribution scale, not how much the dispatch problem improved."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "'Accelerating delivery and improving outcomes for downstream teams' states generic benefits without identifying what changed.",
+      "because": "A hiring reader cannot tell whether delivery became faster, releases became more frequent, or downstream teams adopted a specific capability."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The bullet contains no figure or comparison for its delivery or downstream-team claims.",
+      "because": "Without a baseline, delta, adoption count, or other checkable anchor, the reader cannot judge the size or credibility of the claimed result."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "'Drove adoption of AI-first engineering practices' does not identify the practices or the work used to drive adoption.",
+      "because": "The phrase could describe anything from tooling and workflow changes to training, so it gives a technical reader little basis for follow-up or assessment."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "'Working context' and 'the raw conversation grew 100x' are undefined, so the reader cannot tell what was bounded or what the comparison baseline was.",
+      "because": "A technical reader may not know whether working context means prompt tokens, retained state, or another resource."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The concurrency and cache controls are not sufficient on their own to claim that nested-pool deadlocks and lost tool results were removed.",
+      "because": "Separate pools do not by themselves prevent deadlock if parent tasks exhaust capacity while waiting for nested work."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "'Under 50-way fan-out' gives test scale but not the measured change in deadlocks or lost tool results.",
+      "because": "A reader cannot tell whether the system previously failed at this load, how frequently it failed, or what evidence shows the fix worked."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "'Under 50-way fan-out' is awkward and does not clearly say whether the system was tested at or supported up to 50 concurrent branches.",
+      "because": "The reader must infer whether 50-way fan-out is a test condition, a capacity limit, or a supported operating point."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "'Integrated 8 citation and faithfulness metrics' does not state what changed because of the integration.",
+      "because": "A reader can see the size of the contribution, but cannot tell whether it expanded evaluation coverage, improved consistency, enabled comparisons, or reduced manual work."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The destination is named, but the bullet does not show how the metric integration was implemented.",
+      "because": "Without one implementation detail, the contribution reads more like a count than evidence of technical ownership."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "'Showed the evaluator tracks' is grammatically incorrect because it needs 'that,' and 'showed' does not specify the validation action.",
+      "because": "The missing 'that' makes the opening ungrammatical, while 'showed' weakens the result by leaving unclear whether the candidate validated, measured, or demonstrated evaluator performance."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The evaluator's scores showed a Kendall correlation with the injected degradation levels; the statistic alone does not establish that it broadly 'tracks' degradation.",
+      "because": "A Kendall correlation of 0.89 supports a strong rank association between evaluator scores and the imposed degradation levels, but it does not by itself show sensitivity, validity, calibration, or causal response."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The Kendall correlation is underspecified because the bullet does not say what it was measured against.",
+      "because": "A reader can recognize 0.89 as meaningful evidence but cannot tell whether it compares evaluator scores with degradation severity, a ranking, or another reference."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The evaluation-framework project is broken by an unrelated triage achievement that duplicates the Mobility Systems Company entry.",
+      "because": "The first two bullets establish a focused evaluation contribution, but the third switches to sensor triage and backlog reduction."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5976,
+    "completion_tokens": 2657,
+    "total_tokens": 8633,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

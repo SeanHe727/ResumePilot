@@ -1,0 +1,172 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The résumé repeats the same onboarding achievement under Harbor Payments and a hospital-network practicum, with conflicting context and result wording.",
+      "because": "A reader would see the 2,300-merchant result as duplicated, while the hospital context conflicts with merchant onboarding."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Projects section is placed too late for the product-management direction to lead the résumé.",
+      "because": "The Campus Food Rescue App and Harbor Payments internship provide the clearest product evidence, but the older logistics role appears first and dominates the experience narrative."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé leaves an eight-month period unexplained between the B.A. and the Operations Analyst role.",
+      "because": "A reader can see that the degree ended in June 2018 and the next listed role began in March 2019, but cannot tell whether the period reflects work, study, travel, or another activity."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% conversion result is presented as a causal, universal improvement without evidence supporting either claim.",
+      "because": "A before-and-after change can also reflect traffic mix, seasonality, device mix, or other concurrent changes."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Comparing merchants who opted into the new flow with merchants who stayed on the old flow does not validly establish the redesign’s effect.",
+      "because": "Opt-in merchants may differ systematically from non-opt-in merchants, so the outcome difference may reflect selection or pre-existing differences rather than the redesign."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The comparison method is stated, but the bullet never says what the onboarding measurement found.",
+      "because": "A reader can see that an evaluation was attempted but cannot tell whether onboarding improved or by how much."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The onboarding result is presented as causal without a control or other basis for causal attribution.",
+      "because": "A before-and-after reduction can also reflect time trends, changes in merchant mix, or concurrent process changes."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The onboarding result omits the repeated unit after the second number and leaves the pilot scope vague.",
+      "because": "\"from 9 days to 4\" is slightly slower to scan than repeating the unit. “Pilot region” also does not show what market or geography the 2,300 merchants represent."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The line incorrectly calls a change in the calculation a reduction in late deliveries.",
+      "because": "Excluding weather-delayed shipments changes the population being measured and can mechanically lower the reported late-delivery rate."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The 30% pick-error reduction is missing “by” and is not supported by a stated comparable measurement basis.",
+      "because": "The grammatical error makes the result less polished, while changes in order volume, product mix, staffing, or error recording could explain a before-and-after difference."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The S&OP bullet states recurring responsibilities but gives no outcome or measurable value.",
+      "because": "A reader can see the cadence and cross-functional scope, but not whether the forecast improved, planning decisions changed, or the pack was used effectively."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Expand “S&OP” to “sales and operations planning (S&OP)” on first use.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The claimed 1,800 annual hours saved is not substantiated by the rollout and training details.",
+      "because": "The line gives no baseline, measurement period, or method for separating tool-related savings from changes in route volume, staffing, or scheduling."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The route-planning rollout does not identify the operational process or capability that changed.",
+      "because": "The reader sees deployment and training, but not the logistics or analytical skill behind the implementation."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The app-launch bullet gives no product or launch responsibility beyond saying that the app was launched.",
+      "because": "The result shows reach and impact, but a reader cannot tell what the Product Lead personally owned."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The scheduling bullet gives only a recurring activity and no resulting change, decision, or deliverable.",
+      "because": "A reader can see that clinic managers were involved, but cannot tell what the sessions produced or why the work mattered to the network."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The intake bullet does not measure how much the form was shortened or what improvement resulted.",
+      "because": "Adoption shows that the change was implemented, while the four-clinic scope shows only rollout scale; neither demonstrates the effect on patients or staff."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding result does not belong in a regional hospital outpatient-scheduling practicum.",
+      "because": "A regional hospital network does not have new merchants or merchant onboarding in the stated project context."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The third practicum bullet is unrelated to the coherent hospital scheduling and intake project described by the first two bullets.",
+      "because": "The first bullets establish a hospital-network project involving clinic scheduling and patient intake, while merchant onboarding belongs to a payments context."
+    },
+    {
+      "line": 3,
+      "kind": "suggestion",
+      "says": "Personal details such as date of birth and nationality are information generally omitted from resumes.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4462,
+    "completion_tokens": 1454,
+    "total_tokens": 5916,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

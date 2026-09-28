@@ -1,0 +1,433 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The operations-to-product narrative is not explicitly framed.",
+      "because": "Recruiters currently have to infer the transition into product management."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The relationship among the Harbor checkout and onboarding bullets is unclear.",
+      "because": "Several bullets appear to describe overlapping initiatives without a clear problem, intervention, evaluation method and result sequence."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Both education entries may not need location details.",
+      "because": "That space could be used for relevant accomplishments."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Meaningful academic distinctions are not included.",
+      "because": "Honors, scholarships, class rank or particularly relevant coursework could add differentiation if available."
+    },
+    {
+      "line": 1,
+      "kind": "suggestion",
+      "says": "The header lacks a clear product-management title or positioning line.",
+      "because": "The current header does not immediately establish the target role."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The portfolio or LinkedIn URL should be verified as valid and professionally complete.",
+      "because": "Links should be included only when they are real and current."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality.",
+      "because": "They are irrelevant to product hiring and can create avoidable bias or compliance concerns."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "The MBA entry lacks substantive product, technology, entrepreneurship, analytics or leadership involvement.",
+      "because": "The MBA should help explain the product transition and differentiate the candidate."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% checkout-conversion result has no measurement period.",
+      "because": "The current wording does not provide enough measurement context."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% checkout-conversion result has no sample size.",
+      "because": "The current wording invites skepticism about the scope of the result."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The checkout bullet does not identify whether the result came from an A/B test, controlled rollout or before-and-after comparison.",
+      "because": "Product hiring managers will want to understand experimentation and attribution."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The bullet does not say whether 35% is a relative or percentage-point improvement.",
+      "because": "The meaning of the reported conversion increase is ambiguous."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The phrase “for all merchants” sounds unusually broad and is not substantiated.",
+      "because": "That scope is difficult to credit for a summer intern project without more detail."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The bullet may overstate that the redesign caused the entire conversion improvement.",
+      "because": "A simple before-and-after comparison would not establish definitive causality."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The ownership boundary for the requirements is unclear.",
+      "because": "The bullet does not distinguish personally owning the requirements from supporting their development."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The meaning of “shipped two weeks ahead of plan” is unclear.",
+      "because": "It could refer to engineering completion, release date or the broader launch."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The bullet lacks a measurable customer or operational outcome after launch.",
+      "because": "Customer impact and product judgment are stronger evidence than delivery speed alone."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "“Analysed” uses British spelling while the résumé otherwise uses American context and terminology.",
+      "because": "The résumé should use one spelling convention consistently."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The currency of the 1.1 million-dollar estimate is unclear.",
+      "because": "The financial estimate needs a defined currency."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The loss estimate is not identified as annualized exposure, actual historical losses or projected savings opportunity.",
+      "because": "Product managers need to distinguish observed losses from projected opportunity."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The connection among the research, business case and roadmap decision is imprecise.",
+      "because": "The bullet should show more clearly how the analysis changed prioritization."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "It is unclear whether Riley personally resolved 140 tickets or coordinated their resolution.",
+      "because": "The current wording does not establish the ownership boundary."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The kinds of onboarding problems represented by the tickets are not stated.",
+      "because": "Connecting them to recurring product problems would strengthen the product relevance."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The ticket volume is too central to the achievement.",
+      "because": "The bullet currently reads more like support operations than product management."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The bullet does not explain why an opt-in comparison was appropriate or acknowledge its limitations.",
+      "because": "Self-selection can weaken the validity of the comparison."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The comparison is not clearly identified as observational rather than randomized.",
+      "because": "An opt-in comparison is not necessarily an A/B test or definitive causal evidence."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The bullet describes a method without stating an outcome.",
+      "because": "It should support the onboarding achievement rather than appear as an unrelated project."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The measurement bullet is separated from the onboarding result it evaluates.",
+      "because": "Placing the bullets together would make their relationship clearer."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The strongest onboarding result is buried late in the Harbor role.",
+      "because": "The compelling 9-to-4-day result should be one of the first bullets."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The bullet does not clarify what Riley personally changed in the onboarding redesign.",
+      "because": "The work could have involved workflow, verification, requirements, rollout or coordination."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The pilot scope and comparison basis are unclear.",
+      "because": "The bullet does not say whether the result was measured against a baseline or control group."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The causal wording may be too definitive if the result came from a nonrandomized opt-in comparison.",
+      "because": "Observational comparisons do not establish definitive causal evidence."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The bullet presents a changed calculation as a reduction in late deliveries.",
+      "because": "Excluding weather-delayed shipments changes the measurement method rather than clearly improving operational performance."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Riley's analytical contribution to the slotting redesign is unclear.",
+      "because": "The bullet does not distinguish Riley's work from the supervisors' and pickers' implementation work."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The bullet does not state whether the 30% error reduction was sustained over a defined period.",
+      "because": "A measurement period would provide context for the result."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The warehouse-error achievement should appear earlier in the role.",
+      "because": "It has a clear intervention and measurable result."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Prepares” is in present tense even though the role is in the past.",
+      "because": "The bullet tense is inconsistent with the employment dates."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Riley's role in the S&OP process is unclear.",
+      "because": "The bullet does not distinguish coordination, analysis, forecasting, presentation or decision support."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The S&OP bullet states responsibilities without a business consequence.",
+      "because": "It does not show what changed because of Riley's work."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The nature of Riley's leadership on the route-planning tool is unclear.",
+      "because": "The bullet does not distinguish implementation, requirements gathering, rollout, training or adoption work."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The 1,800 annual hours are not identified as measured, estimated or projected savings.",
+      "because": "The basis of the savings claim needs clarification."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The bullet gives training volume but no adoption or utilization rate.",
+      "because": "Actual adoption could be more persuasive than training volume alone."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The route-planning achievement should be placed nearer the top of the role.",
+      "because": "It is strong evidence of implementation, change management and technology adoption."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The Campus Food Rescue role is presented too much like a student project.",
+      "because": "It needs to establish substantial product ownership."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Riley's role in the app launch is unclear.",
+      "because": "The bullet does not identify ownership of product definition, research, design, partnerships or operations."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“To 3,100 students” does not distinguish availability, registered users or marketing reach.",
+      "because": "App users need to be separated from total student reach."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The 9-tonne figure is not identified as measured or estimated.",
+      "because": "The basis of the impact figure is unclear."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The weekly-active-user increase is not clearly distinguished as direct feature impact or growth merely observed after launch.",
+      "because": "The bullet has causal ambiguity."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Following term” is an imprecise measurement window.",
+      "because": "A defined time period would make the result clearer."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The feature discovery and iteration process is not fully described.",
+      "because": "This is the clearest discovery-to-feature-to-outcome example and could show more of the product process."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Riley's ownership of the volunteer shift system is unclear.",
+      "because": "The bullet does not distinguish designing the system, implementing it or manually coordinating volunteers."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The reduction from 10 to 2 staff cover shifts is not clearly shown as a direct result of the system.",
+      "because": "The bullet has causal ambiguity."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The bullet is overly operations-focused.",
+      "because": "Its product value should be framed through workflow design, user needs and adoption."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The working sessions do not identify the product or operational problem being addressed.",
+      "because": "The bullet describes activity without establishing its purpose."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The working sessions have no stated output or impact.",
+      "because": "A product résumé should show the requirements, redesign, prioritization, implementation plan or decision that resulted."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The patient-intake work has no quantified improvement.",
+      "because": "Time saved, fields removed, completion rate, staff adoption or error reduction would strengthen the result."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Riley's contribution to mapping and redesigning intake is unclear.",
+      "because": "The bullet does not establish what Riley personally owned."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The bullet does not explain how staff adoption was verified.",
+      "because": "It simply states that the changes were adopted."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding result duplicates the Harbor Payments onboarding bullet.",
+      "because": "It can look like copied content, fabrication or careless editing."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The bullet refers to merchants under a regional hospital project.",
+      "because": "The content is misplaced and makes the practicum appear unreliable."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The skills categories do not distinguish product methods and technical or analytical tools clearly enough.",
+      "because": "The categories should communicate both product methods and tools more clearly."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The A/B testing skill is not fully supported by the experience bullets.",
+      "because": "The résumé shows an opt-in comparison that was not necessarily an A/B test."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Several common APM terms are missing or underrepresented.",
+      "because": "Product discovery, prioritization, product analytics, experiment design, launch management, stakeholder management, feature adoption and product strategy could improve searchability when truthful."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "The tools list is limited and may omit relevant tools used in the projects or internships.",
+      "because": "Additional tools could support the target role when they reflect genuine experience."
+    }
+  ],
+  "usage": {
+    "input_tokens": 5660,
+    "input_tokens_details": {
+      "cache_write_tokens": 5657,
+      "cached_tokens": 0
+    },
+    "output_tokens": 8162,
+    "output_tokens_details": {
+      "reasoning_tokens": 5487
+    },
+    "total_tokens": 13822
+  }
+}

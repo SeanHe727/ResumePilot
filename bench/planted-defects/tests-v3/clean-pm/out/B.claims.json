@@ -1,0 +1,465 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form from 5 pages to 2 without losing required fields.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Use a complete, clickable URL and verify that the page is public and matches the resume. “example.com/in/riley-chen” looks like a placeholder or nonstandard LinkedIn domain.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "If `example.com` is intended as a portfolio, it should contain relevant product work, case studies, or project details. Otherwise, remove it rather than including an empty or generic site.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Clarify whether the MBA is completed or expected. If the resume is being used before June 2025, the date should visibly indicate that it is in progress.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Check chronology. Because the MBA overlaps with the Campus Food Rescue App and consulting practicum, that overlap is reasonable, but the resume should make the student-project context clear.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Consider adding a concentration, honors, or relevant coursework only if directly useful for the role.",
+      "because": ""
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider removing the location of the undergraduate institution only if space is tight.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Six bullets is somewhat long for a three-month internship. Keep the bullets with the strongest product outcomes and cut or combine the least differentiated one if you need space.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify what “single verification step” means if the phrase could be interpreted as eliminating necessary compliance checks.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether the result was measured against a prior baseline or a controlled comparison.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Identify the scale or importance of the region if it is meaningful. Otherwise, the result may seem narrower than the 2,300-merchant figure suggests.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the increase was statistically significant or simply observed.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Make the ownership boundary clear if the decision to ship to all merchants was made by a larger team.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Check whether “all merchants” means all merchants in the pilot region, all merchants using the product, or all merchants in the company. The scope should not be ambiguous.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify your role in the launch or delivery, since the current bullet ends with the team shipping ahead of plan but does not show whether you supported implementation, QA, rollout, or measurement.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Make sure the teams are named consistently throughout the resume. For example, you use “engineering and support” elsewhere and “risk” here.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Use one spelling convention throughout the resume. “Analysed” is British English, while the resume otherwise appears aimed at U.S. employers.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "“1.1 million dollars” is less polished than the currency format used later with `$2.4M`. Standardize currency presentation across the resume.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Confirm that your analysis directly drove the prioritization, rather than merely contributing to it.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Consider whether “annual chargeback losses” means gross losses, recoverable losses, or estimated losses. If the figure is modeled, indicate that appropriately.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Keep it only if you are targeting product operations, platform operations, or highly execution-focused PM roles. Otherwise, it is a candidate for removal.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Make sure both metrics (closing 140 onboarding tickets and reducing the queue by half) add distinct value rather than repeating the same outcome.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you personally resolved the tickets or coordinated their resolution.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify the scale of the funded rollout if possible. “Two more regions” is useful, but the impact would be more persuasive if the regions’ merchant or revenue significance were known.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Confirm that the leadership presentation was the actual basis for funding. Avoid overstating causality.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify your specific contribution to the contract renegotiations. The current wording suggests the scorecards enabled renegotiation, but not whether you participated in negotiations or only supplied analysis.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Confirm that the change in late deliveries can reasonably be attributed to the scorecards rather than other operational changes.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Use either numerals or words consistently for small numbers. You use “6” here and “two” later; choose a consistent style.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the 30% reduction is relative or percentage-point change. Those are materially different claims.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Consider whether “floor supervisors” is understandable to your target audience.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Spell out S&OP the first time unless it is universally understood by your target audience.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether you created the consensus forecast process, implemented it, or facilitated adoption.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Ensure the reduction in forecast error is attributable to the new process and not merely correlated with it.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify whether the 1,800 saved hours are measured or estimated. If estimated, label the figure in a way that preserves credibility.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Consider whether “route-planning tool” should be described as a software implementation, operational system, or internal product depending on the roles you are targeting.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify whether the app is still active. “Present” implies ongoing work, but the bullets refer to its “first year” and a completed term.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether 3,100 students means the target population, registered users, or actual users reached.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Choose a measurement convention for “9 tonnes” that matches your audience and apply it consistently.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Use “that would have been thrown away” only if the food was confirmed to be surplus and otherwise destined for disposal.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“In its first year” may conflict with the project’s “Present” status depending on the current date. Make the timeline internally consistent.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify how weekly active users were measured and whether the increase was attributable to the reminders or accompanied by other changes.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The timing is slightly ambiguous: “over the following term” should correspond clearly to the launch date and measurement period.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify whether reducing staff cover shifts from 10 to 2 per week affected service quality or reliability.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Make sure the denominator for “filling 95% of pickup slots” is clear: scheduled slots, required slots, or available slots.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether the hospital network was a real client or a classroom simulation.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The bullets should show your individual contribution separately from the team’s work where possible.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether the $2.4M is modeled, projected, or realized. Since the client only funded a pilot, it should not read as savings already achieved.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Specify your role in developing or validating the model if you owned that work.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The currency format is cleaner than the “1.1 million dollars” wording elsewhere; standardize to one convention.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify how requirements were validated if that was part of your work.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Make sure the resume distinguishes recommendations from delivered results.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify whether the 90-day pilot was approved as a direct result of your presentation or of the broader project. Avoid overstating causality.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "This bullet overlaps somewhat with the first practicum bullet, since both describe client approval. If space is limited, retain the one that better demonstrates your individual ownership.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Add only skills that are genuinely demonstrated elsewhere in the resume, such as product discovery, experimentation, stakeholder management, process mapping, analytics, or go-to-market/rollout execution.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Make sure the terminology matches the job descriptions you are targeting.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Consider separating product methods from business or analytical skills if you add more items. Avoid a long keyword list without evidence.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Add tools only if you can discuss how you used them, especially analytics, SQL, prototyping, survey, or documentation tools.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "If you used Amplitude for the conversion or user-activity metrics, make that connection evident somewhere in the experience bullets.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Excel is common and may not differentiate you unless you have advanced modeling, automation, or analytics capability. Keep it if the target role expects it; otherwise, use the space for a more distinctive skill.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Do not list tools you used only briefly or at a beginner level.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date formatting throughout. Month-year is fine, but make sure all entries follow the same spacing and dash style.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent number formatting: you currently mix numerals and spelled-out numbers.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "Use consistent currency formatting: the resume mixes `$2.4M` with “1.1 million dollars.”",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "Use consistent spelling: “analysed” should match the English convention used elsewhere and the country where you are applying.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep bullet punctuation consistent. The current bullets omit periods, which is fine; do not add periods to only some bullets.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Remove the line breaks caused by page wrapping in the text version. In the actual document, ensure bullets do not break awkwardly after “to,” “then,” or similar short words.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make sure the resume is one page if you are targeting early-career roles, unless the second page is genuinely necessary.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Avoid graphics, text boxes, columns, icons, or unusual formatting if applying through applicant-tracking systems.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the most relevant material first. For product-management roles, consider whether Experience → Projects → Education better emphasizes your qualifications, especially once the MBA is complete.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "If your MBA is still in progress, Education near the top is reasonable. If it is completed, Experience or Projects may deserve priority.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4757,
+    "completion_tokens": 2945,
+    "total_tokens": 7702,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

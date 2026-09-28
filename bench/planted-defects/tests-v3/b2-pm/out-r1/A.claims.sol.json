@@ -1,0 +1,381 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not presented newest-first because Harbor Payments appears below the older Crestline Logistics role.",
+      "because": "The ordering makes a 2024 product internship look older than a role that ended in 2023 and delays the most relevant product experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The product-management direction is diluted by giving Coastal Marine Services a full multi-bullet entry.",
+      "because": "The unrelated mechanic detail competes with the more relevant internship and project evidence."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the professional experience that should carry the page.",
+      "because": "With five years of professional experience and a completed MBA, leading with education understates the work history."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The product-management project evidence is separated from the relevant internship by the education section.",
+      "because": "The internship and Campus Food Rescue App show the clearest product direction, but their separation weakens that narrative."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The current-role bullet uses past-tense verbs instead of present tense.",
+      "because": "The role is current, so \"Rebuilt\" and \"keeping\" make the ongoing responsibility less clear."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The dry-dock threshold has no baseline, change, or comparison.",
+      "because": "A reader cannot judge whether under five days was faster than the prior process or standard for the work."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The current-role verbs \"Maintained\" and \"logged\" should be present tense.",
+      "because": "Past-tense verbs conflict with the listed Present role and make ongoing work sound historical."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The inspection-purpose phrase gives no resulting outcome from the maintenance or records.",
+      "because": "Preparing for an inspection is a purpose, not an outcome such as passing, avoiding downtime, or meeting compliance requirements."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The carrier scorecard and review responsibility has no stated resulting change or decision.",
+      "because": "The bullet proves ownership of a process rather than its value."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "\"Owned the weekly carrier scorecards\" frames the work as a responsibility rather than an action performed.",
+      "because": "It does not say what the candidate did with the information and sounds administrative rather than analytical or operational."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The monthly review meeting is described passively and does not name the candidate's action.",
+      "because": "A recruiter cannot tell whether the candidate led the review or used it to drive decisions."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The 30% reduction in warehouse pick errors has no baseline error rate or measurement period.",
+      "because": "A reader cannot judge the size or comparability of the result without knowing what it was measured against."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The line does not define what \"forecast error\" measures or the evaluation period.",
+      "because": "Readers cannot tell whether the figures use the same error metric and comparable forecasting windows."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The S&OP bullet repeats its cadence and duration.",
+      "because": "Calling the review quarterly and adding 12 consecutive quarters uses two phrases to establish related timing."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The route-planning tool is not described in terms of the planning capability or operational change it introduced.",
+      "because": "The tool name alone does not show what contribution drove the efficiency gain."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The 1,800 annual driver-hour savings has no stated baseline or calculation basis.",
+      "because": "A reader cannot assess whether it came from a before-and-after comparison, modeled routes, or another basis."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The route-planning bullet uses a long list of methods that obscures the main achievement.",
+      "because": "The reader must work through several process details to find the savings result."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The strongest result appears only after an overlong process description.",
+      "because": "Leading with the savings would make the value of the rollout visible immediately."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "\"Taking over vendor negotiations\" is informal and does not clearly identify the action performed.",
+      "because": "The phrase sounds like a transfer of responsibility rather than a defined negotiation contribution."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The past-tense action sequence is weakened by the gerund \"shipping it.\"",
+      "because": "The shift in construction makes the rollout sound less decisive and less clearly completed."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The checkout experiment and its five-point lift are repeated in two bullets.",
+      "because": "The repetition makes the internship appear to contain less distinct product work and uses space that could show another result."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The RICE Reach score is misused as the number of support tickets each feature would close.",
+      "because": "Support tickets closed are an outcome or impact proxy, not Reach unless the framework was explicitly redefined."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line says the dispute roadmap was prioritized but does not state what the prioritization changed or achieved.",
+      "because": "The framework shows process, but the bullet reads as activity rather than product impact."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "\"RICE\" is unexplained jargon for readers outside product teams.",
+      "because": "A recruiter may not know that it is a prioritization framework."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line gives no evidence that the Reach scoring led to a measurable result.",
+      "because": "Even a correctly applied framework does not show whether it improved a decision or outcome."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The two dispute-roadmap bullets overlap by describing the same prioritization work through different methods.",
+      "because": "Both bullets culminate in roadmap prioritization, making the internship read as repetitive rather than as distinct product decisions."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The roadmap priority is not connected to what it enabled or changed.",
+      "because": "The result remains a planning action rather than a demonstrated product contribution."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "\"Sizing the loss by segment\" does not state the size of the loss or its comparison.",
+      "because": "Without one anchor, the analysis sounds thorough but its decision value cannot be judged."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The roadmap outcome is buried after a long list of research and planning methods.",
+      "because": "The method-heavy ordering reduces the visibility of the product result."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "The two dispute-roadmap bullets overlap by describing the same prioritization work through different methods.",
+      "because": "Both bullets culminate in roadmap prioritization, making the internship read as repetitive rather than as distinct product decisions."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The session-level test result is reported as an effect on merchants' customers.",
+      "because": "Randomization by session estimates conversion differences per session, not automatically effects on individual customers or merchants."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The wording obscures what metric actually improved in the checkout test.",
+      "because": "The phrase makes the lift sound like a general effect on people rather than a measured checkout-conversion result."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The checkout experiment and its five-point lift are repeated in two bullets.",
+      "because": "The repetition makes the internship appear to contain less distinct product work and uses space that could show another result."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The leadership funding and regional rollout do not show the result or comparison behind the decision.",
+      "because": "Regions measure reach rather than what the onboarding work improved."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "\"A follow-up roadmap\" is vague and adds little beyond \"roadmap.\"",
+      "because": "It does not explain what was presented or how it differed from the onboarding results."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The internship reads as two overlapping workstreams with duplicate reporting of the checkout result.",
+      "because": "The repeated experiment result blurs the distinction between the workstreams and may hide the breadth of the product experience."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The line does not say what product or operating work the candidate performed to launch the app.",
+      "because": "The outcome is clear, but the Product Lead's specific skill or contribution is not."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "\"That would have been thrown away\" is passive and adds words without clarifying the result.",
+      "because": "It focuses on a hypothetical disposal event rather than the food rescued."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "\"With two dining halls\" is awkwardly attached and does not clarify the halls' relationship to the launch.",
+      "because": "A recruiter may not know whether the halls were customers, operating sites, or launch partners."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The rise from 400 to 1,150 weekly active users is a 187.5% increase, not a 150% increase.",
+      "because": "The increase is 750 users, and 750 divided by the original 400 equals 187.5%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The 60 interviews do not establish that pickup reminders caused weekly active users to rise.",
+      "because": "Without a controlled experiment or credible comparison, other factors could explain the increase."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line does not state the comparison period or endpoint date for the increase in weekly active users.",
+      "because": "A reader cannot tell how quickly the change occurred or whether both figures were measured on comparable terms."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line does not show what the 60 user interviews revealed.",
+      "because": "The reader cannot see how the research informed the product decision."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The rise from 75% to 95% is 20 percentage points, not a 20% increase.",
+      "because": "The relative increase is approximately 26.7%, while the absolute change is 20 percentage points."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Setting up a volunteer shift system does not by itself establish that the system caused the fill rate to rise.",
+      "because": "The before-and-after change could reflect other concurrent changes without a controlled comparison."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The $2.4M annual saving is not identified as projected, modeled, or realized.",
+      "because": "A reader needs to distinguish an estimate used to justify a pilot from savings already captured."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The line names the scheduling change but not how the candidate produced the estimate.",
+      "because": "The analysis and assumptions behind the figure are not shown."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The consulting bullets repeat the client approval or funding of a scheduling pilot.",
+      "because": "Repeating the same downstream decision makes the practicum appear to have fewer distinct results."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The adopted intake changes have no stated operational or patient result.",
+      "because": "Adoption does not show whether the changes improved intake, reduced effort, or changed the patient experience."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The line does not specify how much the intake form was shortened or what it was measured against.",
+      "because": "Without a field count or completion-time comparison, the scale of the improvement is difficult to assess."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The passive intake sentence hides who performed the mapping and shortening.",
+      "because": "A reader cannot tell what the candidate personally did."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The implementation result is buried in a passive trailing clause.",
+      "because": "The reader reaches staff adoption only after the process description, and the candidate's connection to the result is unclear."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The line says the final recommendation was presented but not how it was developed or supported.",
+      "because": "The presentation audience alone does not show the analytical contribution behind the approved recommendation."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The important pilot-approval result appears only after the presentation method and audience.",
+      "because": "Leading with the approval would make the bullet's impact immediately clear."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The consulting bullets repeat the client approval or funding of a scheduling pilot.",
+      "because": "Repeating the same downstream decision makes the practicum appear to have fewer distinct results."
+    }
+  ],
+  "usage": {
+    "input_tokens": 7011,
+    "input_tokens_details": {
+      "cache_write_tokens": 7008,
+      "cached_tokens": 0
+    },
+    "output_tokens": 6347,
+    "output_tokens_details": {
+      "reasoning_tokens": 3657
+    },
+    "total_tokens": 13358
+  }
+}

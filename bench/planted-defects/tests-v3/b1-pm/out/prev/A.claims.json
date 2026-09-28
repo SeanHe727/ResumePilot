@@ -1,0 +1,165 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "Keep the merchant-onboarding achievement under the correct entry and make its figures and context agree."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Move EXPERIENCE above EDUCATION and use the order EXPERIENCE, PROJECTS, EDUCATION, SKILLS."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove personal details that are not relevant to a hiring decision."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Describe the chargeback figure as an estimate based on six months of data."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Lead with the $1.1M estimate, shorten its format, and state its roadmap relevance directly."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add the measured outcome of the onboarding comparison."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Qualify the onboarding result as an observed pilot change unless a controlled comparison supports causation."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Add the unit to the ending figure."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Describe the late-delivery result as a change in the reporting calculation, not as a reduction in actual late deliveries."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Change Cut warehouse pick errors 30% to Cut warehouse pick errors by 30%."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Do not claim that the slotting redesign cut errors unless comparable pre- and post-intervention measurements support that claim."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Use past tense consistently for both actions in this completed role."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add the business result enabled by the S&OP review and forecast pack."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Show one concrete product or rollout action you owned as Product Lead and clarify the relationship with the two dining halls."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Bring the food-rescue result forward and remove the buried relative clause."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Name the core mechanism of the volunteer process instead of calling it a volunteer shift system."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Remove the repeated weekly cadence from the ending."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Add the result produced by the weekly scheduling sessions."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "Do not claim that front-desk staff adopted the changes without evidence of adoption."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "State how much the intake form was shortened or what result followed."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Use active voice and place the measured outcome directly after the work performed."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "Remove the merchant-onboarding claim from this hospital project or replace it with the actual hospital practicum result."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Remove the merchant-onboarding bullet from the hospital practicum entry."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4457,
+    "completion_tokens": 5967,
+    "total_tokens": 10424,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 5307
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4457
+  }
+}

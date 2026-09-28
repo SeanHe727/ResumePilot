@@ -1,0 +1,147 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "- Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Rebuilt the diagnostics service's monitoring dashboards around per-sensor error budgets, cutting mean time to detect incidents from 40 to 12 minutes.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Raised defect localization on a 120-case benchmark from 82% to 94% by dispatching tasks to role-specialized sub-agents with isolated prompts, toolsets and contexts.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The resume places EXPERIENCE before PROJECTS even though the two projects are the strongest evidence of the target direction.",
+      "because": "A recruiter scanning from the top reaches the internship and earlier software role before seeing Agent Runtime Suite and Research-Agent Evaluation Framework."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The bullet does not state what operational result followed from detecting regressions.",
+      "because": "A hiring reader can see that the harness found two problems but cannot tell whether either action prevented a faulty release or changed on-call handling."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The bullet does not state what operational result followed from reviewers adopting the documentation.",
+      "because": "A hiring reader can see that reviewers adopted the documentation but cannot tell whether it changed on-call handling."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The dashboard rebuild is presented as having cut mean time to detect incidents from 40 to 12 minutes, but the dashboard change does not itself establish that reduction.",
+      "because": "A dashboard can improve visibility while leaving detection time unchanged, or it can change how detection is recorded."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The specific p95 result of 180 ms is not supported by the separate load-test build gate.",
+      "because": "A build that fails when p95 exceeds 200 ms shows only that the tested configuration met a threshold; it does not establish a p95 of 180 ms or show that the result matches production conditions."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The automated regression checks are presented as causing release cycles to fall from 2 weeks to 3 days, but that causal attribution is not established by the method described.",
+      "because": "Regression checks can remove manual validation work, but review, deployment, approvals, and release scope also affect cycle time."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Opening with 'Maintained the CI pipeline' frames the bullet as a responsibility before naming the specific improvement.",
+      "because": "The strongest information in the bullet is the automated regression work and its release impact, while maintenance sounds like routine ownership."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The migration is stated to have removed the nightly backlogs and morning-dispatch delays, but the queue design does not itself establish that outcome.",
+      "because": "Retries and dead-letter handling can improve reliability, but failed work can still accumulate or move into a dead-letter queue."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The increase from 82% to 94% is attributed to the dispatch design without establishing a controlled comparison against a defined baseline.",
+      "because": "Role-specialized sub-agents and isolated prompts describe the implementation, but they do not by themselves show that the design caused the improvement."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The context-control result does not say what keeping the working context under 10K tokens enabled or prevented.",
+      "because": "A reader can see that a resource constraint was controlled but cannot tell why it mattered to the runtime."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The line overstates what the concurrency-pool and cache-write changes establish when it says they removed both deadlocks and lost tool results under 50-way fan-out.",
+      "because": "Separate pools can address a particular nested-pool starvation pattern, while completion gating can prevent premature cache publication, but neither mechanism alone rules out dependency cycles, result mix-ups, concurrent overwrites, or non-atomic commits."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line does not say what the evaluator's tracking or the upstream fixes changed or enabled, and it lacks the method detail behind the metrics and defect tracing.",
+      "because": "A reader can see a correlation, eight contributed metrics, and three fixed defects, but cannot tell what evaluation capability resulted or what engineering work you personally performed to integrate and validate the metrics."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The phrase 'Showed the evaluator tracks' is grammatically incomplete because the subordinate clause needs 'that.'",
+      "because": "The missing conjunction makes the sentence read as a grammatical error rather than a clear evaluation result."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The claim that the evaluator 'tracks injected degradation' is stronger than a Kendall correlation of 0.89 supports.",
+      "because": "Kendall correlation establishes a strong rank association, not that the evaluator measures genuine degradation or responds to degradation rather than artifacts from removing citations, sources, and claims."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The result does not identify what the evaluator's Kendall correlation of 0.89 was calculated against.",
+      "because": "A reader cannot interpret what it proves without knowing whether evaluator scores were correlated with degradation severity, an error rate, or another measure."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The phrases 'citations, sources and claims' and 'stability, sourcing and parameter handling' omit the consistent serial comma.",
+      "because": "The inconsistent list punctuation makes the wording look lightly edited rather than deliberate."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4080,
+    "completion_tokens": 1293,
+    "total_tokens": 5373,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

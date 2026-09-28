@@ -1,31 +1,4 @@
-> Here is my resume: bench/planted-defects/tests-v3/clean-ce/resume.pdf. Please review my resume and tell me what to change.
-hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
-hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
-hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
-hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
-Reviewed:
-
-- **Format/ATS:** clean one-page PDF; no extraction or layout issues.
-- **Content and wording:** all 4 entries with bullets:
-  - Mobility Systems Company
-  - Eastern Robotics Co.
-  - Agent Runtime Suite
-  - Research-Agent Evaluation Framework
-- **Narrative:** reviewed.
-- **Job-description match:** not reviewed because no posting was provided.
-
-Most important changes from the specialists:
-
-1. **Move PROJECTS above EXPERIENCE.** The current agent-runtime and evaluation work best establishes your target direction, followed by the ML internship and earlier robotics role.
-2. **Clarify or substantiate causal claims.** Several bullets attribute operational improvements directly to a technical change—for example, dashboard changes reducing detection time, automated checks shortening release cycles, or concurrency changes eliminating failures. Make the baseline, measurement, or causal link explicit.
-3. **Strengthen the weaker outcome statements.** Explain what changed after regressions were caught, the runbook was adopted, degradation was detected, or defects were fixed upstream.
-4. **Reduce jargon and ambiguity.** Terms such as “working context,” “50-way fan-out,” and “with ML-extracted features” may need clearer phrasing for readers outside the immediate technical area.
-5. **Reorder bullets within the experience entries** so the highest-impact technical results appear first.
-
-The complete combined review is available in **`/report --full`**.
-
-> /report
-# Review: resume.pdf
+# Full review: resume.pdf
 
 **92/100** — format 100 · content 88 · wording 89 · narrative 88
 
@@ -46,6 +19,8 @@ A recruiter scanning from the top reaches the internship and earlier software ro
 **How to change it**
 Move the PROJECTS section above EXPERIENCE, with Agent Runtime Suite and Research-Agent Evaluation Framework immediately after EDUCATION, followed by the ML internship and earlier software engineering role.
 
+*raised by narrative*
+
 ## Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025
 
 > Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.
@@ -60,6 +35,8 @@ A hiring reader can see that the harness found two problems and that reviewers a
 **How to change it**
 Keep the two-regression result and, if accurate, add [preventing those checkpoints from reaching production] or [triggering rollback before release]. After "the team’s runbook," add one resulting change in brackets, such as [reducing reviewer escalation time] or [standardizing abstention decisions], if accurate.
 
+*raised by content*
+
 ## Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024
 
 > Rebuilt the diagnostics service’s monitoring dashboards around per-sensor error budgets, cutting mean time to detect incidents from 40 to 12 minutes.
@@ -73,6 +50,8 @@ A dashboard can improve visibility while leaving detection time unchanged, or it
 **How to change it**
 If comparable incident data supports the reduction, retain the figures and state that the dashboard rebuild was followed by mean time to detect falling from 40 to 12 minutes. Otherwise replace the reduction claim with improved monitoring visibility.
 
+*raised by content*
+
 > Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.
 
 **Problem**
@@ -83,6 +62,8 @@ A build that fails when p95 exceeds 200 ms shows only that the tested configurat
 
 **How to change it**
 Report the 420 ms to 180 ms result with the workload or environment used to measure it, and move the 200 ms limit into a separate regression-guard phrase. Replace "with load tests that fail the build if p95 exceeds 200 ms" with a shorter form such as "enforcing a 200 ms p95 build threshold."
+
+*raised by content*
 
 > Maintained the CI pipeline for the perception team’s model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.
 
@@ -98,6 +79,8 @@ Report the 420 ms to 180 ms result with the workload or environment used to meas
 1. If release records support the attribution, change the causal claim to say the checks contributed to cycles falling from 2 weeks to 3 days. Otherwise state the direct outcome of adding automated regression checks without attributing the full cycle reduction to them.
 2. Move "adding automated regression checks" to the opening and cut or move "Maintained the CI pipeline" after the improvement, so the bullet leads with the change rather than the duty.
 
+*raised by content, wording*
+
 > Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.
 
 **Problem**
@@ -108,6 +91,8 @@ Retries and dead-letter handling can improve reliability, but failed work can st
 
 **How to change it**
 Retain the removal claim only if post-migration queue and dispatch data confirms it, preferably with a measured change. Otherwise describe the migration and its retry and dead-letter behavior without claiming complete removal.
+
+*raised by content*
 
 ## Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present
 
@@ -122,6 +107,8 @@ Role-specialized sub-agents and isolated prompts describe the implementation, bu
 **How to change it**
 If a controlled comparison was run, state the baseline and comparable evaluation conditions. Otherwise say the specialized-agent design achieved 94% localization on the 120-case benchmark, or soften the causal wording.
 
+*raised by content*
+
 > Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.
 
 **Problem**
@@ -133,6 +120,8 @@ A reader can see that a resource constraint was controlled but cannot tell why i
 **How to change it**
 After the token result, add [continued successful operation through the test] or [avoided context-limit failures], if accurate. Clarify "working context" or "budgeted context layers" if a general reader would not recognize those terms.
 
+*raised by content*
+
 > Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.
 
 **Problem**
@@ -143,6 +132,8 @@ Separate pools can address a particular nested-pool starvation pattern, while co
 
 **How to change it**
 If verification covered only a defined workload, say the changes eliminated the observed deadlocks and lost results under the tested 50-way fan-out, and replace that jargon with "50 concurrent branches." Otherwise specify the required correlation, ownership, fan-in, and atomic-commit mechanisms or soften the claim.
+
+*raised by content*
 
 ## Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025
 
@@ -158,6 +149,8 @@ A reader can see a correlation, eight contributed metrics, and three fixed defec
 
 **How to change it**
 Add one compact implementation or validation detail after the metrics outcome, and replace "with layered instrumentation" with [the most telling instrumentation layer or diagnostic signal used to locate the modules]. After "fixed upstream," add [the resulting improvement in stability, sourcing, parameter handling, or framework reliability], and replace "tracks injected degradation" with [the evaluation capability or decision this enabled], if accurate.
+
+*raised by content*
 
 > Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.
 
@@ -176,6 +169,8 @@ Add one compact implementation or validation detail after the metrics outcome, a
 2. Replace the claim with a statement that the evaluator scores showed a Kendall correlation of 0.89 with the injected degradation ordering across 400+ report-level trials. Claim that it tracks degradation only if [the degradation scale was validated and the trials used appropriate controls, replication, and clustered analysis].
 3. Specify the second variable after the correlation, such as [evaluator score against injected-degradation severity], if accurate.
 
+*raised by wording, content*
+
 > Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.
 > Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.
 
@@ -188,6 +183,8 @@ The inconsistent list punctuation makes the wording look lightly edited rather t
 **How to change it**
 Change the first list to "citations, sources, and claims" and the second to "stability, sourcing, and parameter handling."
 
+*raised by wording*
+
 ## Already working
 
 - s2:e0:b1: Presents a clear before-and-after result on a named evaluation set.
@@ -195,9 +192,16 @@ Change the first list to "citations, sources, and claims" and the second to "sta
 
 ## Set aside (13)
 
-13 smaller points were left out; they are in `/report --full`.
-
-
-> /report --full
-Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-8f221a9d.md.
-
+- s2:e1:b3: "removing the nightly backlogs that delayed morning dispatch" describes the outcome without measuring how much the backlog or delay changed.
+- s3:e0:b2: The phrase "under 50-way fan-out" measures concurrency scale, not the claimed removal of "nested-pool deadlocks and lost tool results."
+- s2:e1:b1: The phrase "with load tests that fail the build if p95 exceeds 200 ms" is cumbersome and makes the quality-control action less scannable.
+- s3:e0:b1: "Grew 100x" does not state the conversation's starting size, so the scale of that comparison is difficult to judge.
+- s3:e0:b1: "Working context" and "budgeted context layers" are specialist phrases whose meaning is not immediately clear to a general resume reader.
+- s3:e0:b2: "50-way fan-out" is team-specific jargon and may not be immediately understandable without knowing that it means 50 concurrent branches.
+- s2:e0:b0: "with ML-extracted features" can ambiguously modify either the inspection system or the screening process.
+- s2:e0:b3: "at equal accuracy" arrives at the end and makes the comparison condition harder to scan than the primary results.
+- s2:e0:b4: "the team used to compare" makes the harness's function less direct than a participial construction.
+- s3:e1:b1: "Tracks injected degradation" is less direct than stating what the evaluator detected or measured, making the result harder to scan.
+- s3:e1:b2: "Structural pipeline defects in stability, sourcing and parameter handling" uses abstract category nouns without clearly stating what was defective.
+- s3:e1:b2: "With layered instrumentation" appears after the defect count and module result, so the method is detached from the action it explains.
+- s3:e1:b2: "Each was fixed upstream" is passive and leaves unclear who fixed the defects and what "upstream" refers to.

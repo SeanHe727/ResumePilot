@@ -1,0 +1,375 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form from 5 pages to 2 without losing required fields.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the LinkedIn URL is clickable and remove the protocol/display clutter if your formatting currently includes it.",
+      "because": "Recruiters should be able to reach your profile quickly."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Consider adding a portfolio only if it contains substantive product work.",
+      "because": "An empty or superficial portfolio creates no value."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Confirm that the MBA date reflects completion, since June 2025 has passed.",
+      "because": "An outdated expected-graduation presentation can make the resume appear neglected."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Add relevant honors, leadership, or a concentration only if they are selective or strongly related to product management.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether you personally led the redesign, owned a particular part of it, or worked within a broader team.",
+      "because": "“Redesigned” can overstate ownership unless your exact role is clear."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Identify whether the reduction was measured against a controlled baseline or before-and-after performance.",
+      "because": "The measurement method affects credibility."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Add the test result’s statistical significance or decision threshold if available.",
+      "because": "Experimental rigor would make it even more persuasive."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify your role in experiment design, analysis, and rollout rather than allowing “testing” to imply ownership of all three.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Replace emphasis on writing documents with the product decision or customer/business problem you owned.",
+      "because": "Requirements writing is expected from a product manager."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether the early shipment resulted from your work or was simply a team delivery outcome.",
+      "because": "“Two weeks ahead” is weak unless your contribution to that result is evident."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Use US spelling for “analyzed” if you are applying primarily in the United States.",
+      "because": "The resume currently mixes US context with British spelling."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Standardize the monetary figure using a currency symbol and abbreviated magnitude.",
+      "because": "Consistency looks more polished."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify how the estimate was validated.",
+      "because": "Validation makes the business case more credible."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you personally resolved tickets, coordinated resolution, or improved the triage process.",
+      "because": "Ownership is ambiguous."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Consider removing this bullet if you need space.",
+      "because": "This bullet is less strategic than the others."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify what funding or rollout scope resulted, if you can quantify it.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Consider combining its substance with the first onboarding bullet rather than keeping it separate.",
+      "because": "Combining related material would reduce repetition and preserve space."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Explain your analytical or process contribution beyond rebuilding the reporting format.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Be careful about directly attributing the full late-delivery improvement to the scorecards unless you can support that link.",
+      "because": "A dashboard or scorecard alone rarely produces an operational outcome."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify the measurement period and baseline if available.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the 30% reduction is relative or absolute.",
+      "because": "Percentage reductions can sound larger or smaller depending on the starting point."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Spell out “Sales and Operations Planning” on first use unless the target audience will universally recognize S&OP.",
+      "because": "Product recruiters may not all know the acronym."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether you created the consensus-forecast process or facilitated an existing process.",
+      "because": "The current wording combines two different levels of ownership."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add the business value of the 1,800 saved hours if you can calculate it reliably, such as capacity, service improvement, or verified cost savings.",
+      "because": "Translating it into an operating result would make the impact easier to understand."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify your role in tool selection, implementation, or change management.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Update “Present” if the project is no longer active.",
+      "because": "Stale “Present” dates are a common credibility issue."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Indicate that the leadership role is ongoing only if you still perform it regularly.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "Standardize “tonnes” to US usage if targeting US employers.",
+      "because": "Consistent regional language also matters."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether 3,100 students were registered, eligible, reached, or active users.",
+      "because": "“Launched to” does not reveal adoption, and exposure is not the same as usage."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Consider identifying the timeframe behind the nine-ton figure more precisely.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Avoid implying that reminders alone caused all weekly-active-user growth unless you ran an experiment or have supporting analysis.",
+      "because": "Several factors may have influenced it over a full academic term."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify whether the interviews uncovered missed pickup windows before or after launch.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify the baseline for the 95% fill rate.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Define what “staff cover shifts” means for an external reader.",
+      "because": "The current terminology depends on insider knowledge and lacks context."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Differentiate the nature of your work across the first two bullets without merely changing the verb.",
+      "because": "Repetition makes distinct accomplishments feel less differentiated."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "Correct the grammar around “annual saving”.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Standardize the number of clinics using the same number style applied elsewhere.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "State whether the $2.4M was projected, validated, or realized.",
+      "because": "Distinguishing modeled impact from realized impact protects credibility."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain the analytical principle used to remove fields, such as duplication, regulatory necessity, or workflow relevance.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Be cautious about claiming no required fields were lost unless the client or compliance team verified that conclusion.",
+      "because": "The quality and safety of the recommendation matter in healthcare."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Consider combining this with the first practicum bullet, since both culminate in approval of the same pilot.",
+      "because": "Repeating the pilot approval uses space without adding a separate outcome."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Prioritize harder, demonstrable capabilities and remove broad terms that are already evident from your experience.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Use terminology consistently with the bullets; for example, distinguish experiment design from merely participating in A/B testing.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Add proficiency levels only if they are meaningful and defensible.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Include SQL, data visualization, prototyping, analytics, or project-management tools only if you have actually used them.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Consider specifying advanced Excel capabilities rather than listing Excel generically.",
+      "because": "The current tool list is thin for product roles."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use one date format throughout and choose either an en dash or hyphen consistently.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use one convention for numbers; currently some numbers are spelled out while others use numerals.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Standardize US English if US employers are the target: spelling, units, and currency.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Ensure bullets do not break awkwardly across lines in the final PDF.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent serial commas, especially in lists of functions or stakeholders.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep punctuation consistent across all bullets.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Check that every URL is clickable and that the PDF filename is professional.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Verify that the resume remains legible at normal zoom and fits on one page.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3263,
+    "completion_tokens": 2808,
+    "total_tokens": 6071,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

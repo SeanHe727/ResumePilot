@@ -1,0 +1,241 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé has no email address or phone number in the body.",
+      "because": "A recruiter needs a direct way to contact you from the document."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The extracted consistency fields for unsupported skills and misspellings are empty or malformed.",
+      "because": "They do not provide usable résumé content and may cause a parser to misread the application."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Three lines could not be placed cleanly by the parser.",
+      "because": "Another system may lose or display content out of order."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The eight-month gap between the B.A. and the Operations Analyst role is unexplained.",
+      "because": "A reader cannot tell what happened between June 2018 and March 2019."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "EDUCATION appears before EXPERIENCE.",
+      "because": "The review says four years of professional experience should establish the career direction first."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Harbor Payments should appear before Crestline Logistics within EXPERIENCE.",
+      "because": "The review says the older operations role gets priority over the more recent, product-relevant internship."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% checkout-conversion improvement lacks a baseline, comparison period, and type of percentage change.",
+      "because": "A reader cannot judge its size or credibility without knowing what it was measured against."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The dispute self-service bullet does not show what changed after launch.",
+      "because": "Shipping early and naming success metrics do not establish that the feature succeeded."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The open-ticket queue reduction lacks a starting size or precise period.",
+      "because": "The reader cannot judge the scale of the reduction or pace of resolution."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Comparing opt-in with non-opt-in merchants cannot by itself measure the redesign's effect.",
+      "because": "Selection bias and confounding mean a raw comparison cannot isolate its impact."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The measurement bullet gives neither the metric compared nor its result.",
+      "because": "The reader cannot tell what changed."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The standalone onboarding measurement should sit with the onboarding result or be removed.",
+      "because": "It repeats that story without reporting its result."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The onboarding redesign and 2,300-merchant result conflict with their attribution to the earlier practicum.",
+      "because": "Both entries cannot place the same intervention in their stated timeframes."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Harbor Payments internship lacks one clear product story across its separate workstreams.",
+      "because": "Moving among checkout, disputes, chargebacks, tickets, and onboarding makes the contribution harder to scan."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Excluding weather-delayed shipments does not demonstrate a reduction in total late deliveries.",
+      "because": "Changing the measured population can lower the reported rate without improving performance."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "“Cut warehouse pick errors 30%” is missing “by.”",
+      "because": "A percentage reduction requires that construction."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The 30% pick-error reduction lacks a comparable measurement basis.",
+      "because": "Without an error definition, periods, or comparable denominators, the reader cannot judge the result."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Coordinated ... and prepares” mixes past and present tense.",
+      "because": "The role ended in 2023, so the present tense makes the timeline inconsistent."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The S&OP review and forecast-pack work has no stated outcome.",
+      "because": "The reader cannot see what the recurring process enabled or changed."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“S&OP” is unexplained jargon.",
+      "because": "Readers outside operations may not understand the meeting type."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The 1,800 driver-hours-a-year saving is unsupported by rollout and training alone.",
+      "because": "The figure needs a baseline, calculation, adoption evidence, and attribution."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The claim that all 9 tonnes would have been thrown away is an unsupported counterfactual.",
+      "because": "Pickup totals alone do not establish that the food would otherwise have been discarded."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The launch bullet does not show how the Product Lead enabled the app launch.",
+      "because": "It omits the product decision, launch mechanism, or feature ownership."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The bullet does not establish that the volunteer system caused the drop in staff cover shifts.",
+      "because": "Other changes may explain the before-and-after figures, and no comparison period is identified."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The time unit is repeated as “each week ... a week.”",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The weekly sessions have no resulting change, recommendation, or deliverable.",
+      "because": "The reader cannot tell what the sessions produced."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Working sessions” is generic.",
+      "because": "It makes the activity sound less substantive than it may have been."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The bullet does not establish that front-desk staff adopted the changes.",
+      "because": "Designing the change does not demonstrate verified usage at four clinics."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The shortened form has no stated size or outcome.",
+      "because": "The reader cannot gauge the intervention's impact."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "Merchant onboarding is misplaced under the hospital-network practicum.",
+      "because": "It is unrelated to the surrounding scheduling and patient-intake work."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The 2,300-merchant onboarding achievement duplicates the Harbor Payments result.",
+      "because": "Repeating it in both entries makes ownership unclear."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "Reducing time to first payment from 9 days to 4 is not exactly halving it.",
+      "because": "Four days is a reduction of about 55.6%, not 50%."
+    }
+  ],
+  "usage": {
+    "input_tokens": 5072,
+    "input_tokens_details": {
+      "cache_write_tokens": 5069,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1724,
+    "output_tokens_details": {
+      "reasoning_tokens": 355
+    },
+    "total_tokens": 6796
+  }
+}

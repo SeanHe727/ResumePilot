@@ -1,0 +1,138 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Owned the diagnostics service's monitoring dashboards across two major releases and the on-call rotation that used them.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "- Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.",
+    "- Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
+    "- Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.",
+    "- Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
+    "- Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation, Kubernetes"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed in reverse chronological order.",
+      "because": "Eastern Robotics Co. appears above the more recent Mobility Systems Company role, conflicting with recruiters’ standard scanning pattern and obscuring the current ML transition."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The monitoring-dashboard and on-call ownership has no stated operational result.",
+      "because": "The responsibility and scope do not show whether the work improved detection, response, uptime, or reliability."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The release-cycle measurement does not define what starts or ends the cycle.",
+      "because": "It is unclear whether the comparison covers training, validation, approval, deployment, or the full path to production."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The claim that the combined changes removed the nightly backlogs is not supported by the line.",
+      "because": "The logging, onboarding, and on-call changes do not establish the result, and no measured before-and-after backlog or dispatch-delay figure is given."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The dispatch outcome is buried after several unrelated actions and has an ambiguous “which removed” antecedent.",
+      "because": "The reader may not know which action caused the improvement, and unrelated duties interrupt the technical achievement."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The phrase “removed the nightly backlogs” gives no magnitude or comparison for the improvement.",
+      "because": "The reader cannot tell how frequent or large the backlogs were, while the 30-service count shows scope rather than result size."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Dynamic batching is an unclear basis for a 40% reduction in “single-request” edge-inference p95 latency, and the comparison lacks latency endpoints or workload conditions.",
+      "because": "Dynamic batching benefits concurrent requests and may delay an isolated request, so the reduction cannot be attributed without workload and baseline-to-result details."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The line attributes a 5% end-to-end latency reduction to a GRPO setup whose stated reward does not include latency.",
+      "because": "Call count may affect latency indirectly, but the causal link is not established without evaluation conditions and a measured comparison."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The 5% result is buried after a dense list of process details.",
+      "because": "Leading with several coordinated methods makes the achievement harder to find and obscures which action mattered most."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Sampling exactly one rollout per prompt did not stabilise standard GRPO training as stated.",
+      "because": "Standard GRPO needs multiple same-prompt rollouts, while one rollout produces no useful normalized advantage or causes a numerical failure."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The claim that training was stabilised is vague and has no measurement.",
+      "because": "The reader cannot tell whether stability meant fewer failed updates, more consistent convergence, or improved evaluation quality."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The claim that AI-first practices accelerated delivery and improved downstream outcomes is unsupported and too broad.",
+      "because": "Adoption alone does not demonstrate those results, and the line identifies neither the practices nor a measured outcome or comparison."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The reduction from 900 ms to 600 ms is 33.3%, not 50%.",
+      "because": "The 300 ms decrease is 33.3% of 900 ms, while a 50% reduction would result in 450 ms."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The increase from 71% to 83% is 12 percentage points, not a 12% increase.",
+      "because": "The relative increase is approximately 16.9%, while the absolute change is 12 percentage points."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "A Kendall correlation of 0.89 shows rank association but does not by itself establish that the evaluator tracks injected degradation.",
+      "because": "The evaluator may be responding to confounds, and the line does not identify whether the correlation was against degradation severity or another condition ranking."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3647,
+    "input_tokens_details": {
+      "cache_write_tokens": 3644,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1358,
+    "output_tokens_details": {
+      "reasoning_tokens": 483
+    },
+    "total_tokens": 5005
+  }
+}

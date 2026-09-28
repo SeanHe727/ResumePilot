@@ -1,0 +1,174 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form from 5 pages to 2 without losing required fields.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience should appear before education."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The ending value in 'from 9 days to 4' omits its unit."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The phrase 'then shipping it' shifts into a gerund after past-tense actions."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The line does not state what changed for users or the business beyond the team shipping the feature early."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Six months of chargeback data cannot directly establish an annual 1.1 million dollar loss without a validated annualization method."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The strongest result is buried after the research description."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The phrase '1.1 million dollars' uses a wordier currency format than the rest of the résumé."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The line attributes the reduction in late deliveries directly to rebuilding scorecards, even though scorecards measure performance and support decisions rather than changing operations themselves."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "'Rebuilt weekly carrier scorecards' does not show what changed in the scorecards or what analysis was performed."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The line gives a 30% reduction in pick errors without a baseline or comparison period."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "'S&OP' is unexplained jargon."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The launch line does not explain the candidate's product contribution or how the app achieved its result."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The phrase 'to 3,100 students with two dining halls' makes the app's deployment and audience unclear."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "'Food that would have been thrown away' is a long, indirect description of rescued food."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The line credits pickup reminders with weekly active users growing from 400 to 1,150, but the interviews cannot establish that the reminders caused the growth."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The phrase 'Set up a volunteer shift system' does not show what the system involved or what the candidate personally built or changed."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "'With two dining halls' does not specify how the volunteer system related to the dining halls."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "'Staff cover shifts' is internal-sounding jargon."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "'Each week' and 'a week' redundantly express the same timeframe."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The method behind the $2.4M savings estimate is compressed into 'consolidating outpatient scheduling' and 'the model.'"
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line describes the savings as 'a $2.4M annual saving' rather than as projected annual savings."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line shows the form shrinking from five pages to two but does not show what changed for patients or staff as a result."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The phrase 'the recommended intake form' is indirect."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line identifies a presentation but not the analysis or decision case that produced the recommendation."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The strongest outcome is buried after the presentation details."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4665,
+    "completion_tokens": 5623,
+    "total_tokens": 10288,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 4518
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4665
+  }
+}

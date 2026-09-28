@@ -1,0 +1,663 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometrics, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Clarify scope and ownership of accomplishments.",
+      "because": "Several claims sound larger than what a three-month internship could independently accomplish."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make results more technically precise.",
+      "because": "Define metrics, baselines, time periods, and whether results are yours or the team’s."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Reduce lower-value detail, especially documentation/implementation bullets.",
+      "because": "Some bullets emphasize documentation or implementation without showing enough research impact."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Improve targeting by emphasizing most relevant skills and research interests for the target role.",
+      "because": "For quant research roles, technical skills and research interests should be more prominent; for academic roles, emphasize publications, presentations, teaching, and mathematical/statistical contributions."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add missing context such as dissertation topic/advisor, publications, and possibly relevant coursework.",
+      "because": "You should include dissertation topic/advisor, publications or working papers, and possibly relevant coursework if applying before graduation."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Replace portfolio link with a real, directly relevant portfolio link.",
+      "because": "Make sure it leads to useful public work rather than only a profile page."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Include only links that materially strengthen your application; avoid a long list of weak links.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Specify subfield or research area if relevant to target roles.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Add dissertation topic, advisor, or research interests if they strengthen candidacy.",
+      "because": "Resume shows projects but not central doctoral research."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Add GPA only if exceptional and expected in your target market.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Ensure expected graduation date is current.",
+      "because": "A stale date can make the resume look neglected."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Add relevant concentration, honors, or distinction if applicable.",
+      "because": ""
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Add relevant coursework only if applying to roles where it compensates for limited experience.",
+      "because": "Given the strength of your experience, coursework is probably lower priority."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Add asset class, strategy type, or desk scope if it can be disclosed and helps recruiters understand context.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Distinguish between work you personally implemented, analysis you contributed to, and outcomes achieved by the broader desk or team.",
+      "because": "Because the internship is short, bullets should clarify your role."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "If applying before the internship has ended, change tense consistently and avoid presenting future outcomes as completed.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether Sharpe improvement applies to new signal alone, desk book after incorporating the signal, or a hypothetical portfolio combination.",
+      "because": "'Desk book' currently makes the attribution ambiguous."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Identify the comparison point: prior strategy, prior book, or a version without the signal.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "State whether Sharpe is annualized and whether it is net of all relevant costs, financing, and market-impact assumptions.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Explain the 18-month period and why it is appropriate.",
+      "because": "Readers need to know whether it overlaps with the six years mentioned later."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Avoid implying you alone raised the desk’s live or realized Sharpe unless that is literally defensible.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify what 'daily turnover' means and whether it is measured at the signal, strategy, or portfolio level.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Explain what 'keeping 90% of gross returns' is relative to: the unsmoothed signal, the original strategy, or another benchmark.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "'Lowering estimated slippage by a third' should specify the comparison basis and whether it is modeled or observed.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Consider whether this bullet duplicates the first bullet’s performance discussion.",
+      "because": "If space is limited, prioritize the bullet that better demonstrates your individual contribution and technical sophistication."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Explain what was purged and what the embargo protected against, either here or in an interview.",
+      "because": "Current wording assumes the reader understands specialized terms."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether the six years includes the 18-month evaluation period in the first bullet and how the periods were divided.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "'Every backtest decision used only information available at the time' is a strong claim; retain it only if you can defend it for all aspects, not just train/test split.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Consider adding the number of folds or evaluation windows if space permits and if it demonstrates rigor.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify whether you designed the feature store, implemented it, or contributed to an existing system.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Add the technical environment if relevant and not already covered elsewhere.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "'Reused in two later signal projects' would be stronger if the projects’ importance or the team’s usage were clearer.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Make sure 'point-in-time joins' is accurate and includes corrections for data revisions, corporate actions, symbol changes, and availability timestamps where relevant.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether portfolio managers approved a live allocation because of your analysis or as part of a broader team process.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "'For the next quarter' is somewhat vague; if the allocation actually occurred, include the outcome; if only approved, preserve that distinction.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Keep this bullet only if the role emphasizes research governance, reproducibility, or team enablement.",
+      "because": "This is the weakest Northpeak bullet in terms of space efficiency."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Emphasize the value of the documentation: reproducibility, reviewability, compliance, or reduced ramp-up time.",
+      "because": "Do not include all of these unless true."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Consider whether 'Research Assistant' understates your work if you had substantial independent research responsibility.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Add the faculty supervisor or lab name only if it is recognizable and useful.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "If the lab work resulted in publications, presentations, or software used outside the lab, connect those outputs more explicitly.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the computing environment if it matters: cluster type, parallelization framework, or scheduler.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Add whether the study produced the same statistical output or whether the speedup came from changed methodology.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Make sure 'every run reproducible from its seed and configuration file' also covers package versions, data versions, and environment specification if you intend it to mean fully reproducible.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Consider whether the 2,000-run study was yours or the lab’s; make ownership clear.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify what 'tightens the previous bound by a log factor' means mathematically if the target audience is technical.",
+      "because": "As written, it is impressive but somewhat opaque."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Identify your authorship status and the paper’s status more clearly elsewhere in the resume.",
+      "because": "A paper should not be buried under an assistantship if it is a significant research output."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Avoid overstating the result if the improvement depends on additional assumptions or a narrower setting than the prior bound.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether the 4.8/5 rating came from a formal university evaluation and indicate the response count if available and meaningful.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Teaching responsibilities should be framed around scope and quality rather than only quantity.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add a repository or package link if the package is public and maintained.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify whether the download count is from CRAN, GitHub, or another source, and whether it includes automated downloads if that matters.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Explain your role in design, implementation, maintenance, or documentation.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Consider whether 'Independent Research' is the best label if it is also part of your dissertation or supervised work; be consistent about ownership.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Indicate the current status accurately: working paper, manuscript, public code, or ongoing analysis.",
+      "because": "Since it has been ongoing for a long time."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Add the data frequency, forecast horizon, and evaluation period somewhere in the project section.",
+      "because": "Without them, the result is difficult to assess."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Avoid presenting this as fully complete if the study is still changing.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether the 7% is an average, median, pooled, or aggregate improvement across the 30 indices.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "State the out-of-sample period and forecast horizon.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain whether the model comparison used the same information set, tuning budget, and data treatment.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Specify whether the 30 equity indices are country indices, broad-market indices, or another universe if that affects interpretation.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Mention computational or modeling techniques only if they distinguish the work from ordinary deep-learning experimentation.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify how the 24-of-30 result relates to the 7% aggregate improvement.",
+      "because": "Readers may otherwise interpret it as a separate success metric."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "State whether the crisis periods were pre-specified and identify them if relevant.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Be precise about the testing setup: one-sided or two-sided tests, loss differential definition, and treatment of dependence.",
+      "because": "The listed claim should be defensible."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "'Held at the 5% level' should be used only if the multiple-testing procedure and test direction support that wording.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Add a link if the paper or presentation materials are public.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The page count is less important than the paper’s status and audience; prioritize whether it is a working paper, submitted paper, or publicly available research.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Make sure the paper’s authorship and supervision are clear if it was not solely yours.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Add the competition name and organizer if it is recognizable and publicly verifiable.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Identify your individual contribution more clearly, since 'Team of 3' means the results cannot automatically be attributed to you.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "If the competition data or target is unrelated to finance, explain its relevance through the methods rather than relying on the title.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Confirm that 'private leaderboard' and 'top 2%' are consistent; use one primary measure if space is limited.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether the final rank was based on a single submission or a team submission.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "'300 engineered features' is less valuable than the modeling choices, validation design, or your specific contribution; keep it only if feature construction was a meaningful part of your work.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Avoid making this look like a stronger signal of production readiness than it is; competition performance is not the same as deployable research.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify whether the 0.02 gap was an absolute score difference and whether closing the gap improved the final result or only made validation more realistic.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain what was grouped by time and why the original folds were inappropriate.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Be careful with the phrase 'validation leakage.' If the original setup was merely misaligned with the competition structure rather than truly leaking future information, use technically accurate terminology.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify whether permutation importance was computed in a leakage-safe way and on which validation scheme.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Explain why reducing features mattered: speed, stability, interpretability, or generalization.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "'Without losing validation score' is a weak outcome by itself and may invite concern about overfitting to validation; pair it with evidence from the leaderboard or repeated time splits if available.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Make sure the number of candidates is consistent with the preceding bullet and that the reduction was not performed using information unavailable during the competition.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Add important tools that are genuinely relevant to your target roles, such as SQL, C++, Git, Linux, distributed computing, or specific numerical libraries.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Separate programming languages from frameworks and tools if you have enough items to justify the distinction.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Include proficiency levels only if they are meaningful and defensible; avoid vague labels such as 'advanced.'",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "For quant roles, omitting SQL or C++ can be noticeable if you use them or are expected to use them.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Organize methods around the roles you are targeting.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Add methods clearly demonstrated elsewhere in the resume, such as market microstructure, volatility modeling, statistical learning theory, purged cross-validation, or transaction-cost modeling.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Avoid listing methods that appear nowhere in your experience or projects.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "'Gradient boosting' is a model family, while the other items are broader research areas; consider making the categories more consistent.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Add relevant mathematical foundations only if you have space and can support them through coursework or research.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add a publications and working papers section, especially because you have a paper under review and a substantial volatility study.",
+      "because": "Include publication status accurately and distinguish published, submitted, under review, and unpublished work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add a presentations section or incorporate presentations into relevant entries if you have multiple talks, conference presentations, or seminars.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add a dissertation or research interests section to explain the connection among your research areas.",
+      "because": "This would help explain the connection among high-dimensional statistics, volatility forecasting, and quantitative research."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider adding relevant tools, databases, cloud platforms, numerical methods, or programming languages that are currently absent.",
+      "because": "Only include technologies you could discuss in detail."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep the resume to one page only if you are applying primarily to industry roles and can preserve the strongest evidence; a two-page resume is reasonable for a Ph.D. candidate with this amount of relevant research.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent punctuation across bullets.",
+      "because": "Currently, most bullets end with periods; preserve that consistently."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Avoid line breaks that split a metric or technical phrase awkwardly.",
+      "because": "This is mostly a layout issue, but it affects readability."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use standard date formatting throughout.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make section hierarchy visually clear without excessive design.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put technical skills somewhere recruiters will see quickly, but do not let the skills section replace evidence from your experience.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Ensure every metric is defensible, defined, and attributable to you.",
+      "because": "The resume’s sophistication will cause technical interviewers to probe the backtest methodology closely."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5195,
+    "completion_tokens": 4218,
+    "total_tokens": 9413,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

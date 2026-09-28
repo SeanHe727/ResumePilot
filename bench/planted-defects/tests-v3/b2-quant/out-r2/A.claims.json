@@ -1,0 +1,294 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The order-book imbalance result appears duplicated under Northpeak Capital and the Kaggle competition.",
+      "because": "A reader may question whether the work was duplicated or whether the candidate's ownership and project scope are unclear."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "The 35% risk-adjusted-return result is not labeled consistently with the selected backtest estimate in the same role.",
+      "because": "The reader cannot tell whether the 35% improvement is an achieved out-of-sample result or a selected backtest estimate."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Sunrise Bakery currently receives top billing as the newest role even though the target profile is quantitative research.",
+      "because": "Its chronological placement makes the résumé appear to be moving away from quantitative work."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The phrase 'within its weekly labour budget' does not show how far under or at budget the store finished.",
+      "because": "The reader can see the budget target but not the scale of the result."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The bullets use broad or imprecise verbs for managing shifts, a team, and supplier orders.",
+      "because": "The reader gets less evidence of operational ownership than the work may warrant."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The inventory practices are presented as causing the reduction in unsold bread without establishing that causal link.",
+      "because": "Without comparable records or controls for those factors, the figures support an association rather than causal attribution."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The 35% improvement does not identify the risk-adjusted metric or its baseline.",
+      "because": "A hiring manager cannot tell what the figure represents or reproduce the comparison from the line."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Purged walk-forward splits and an embargo do not establish that every backtest decision used only information available at the time.",
+      "because": "These methods reduce leakage but do not guarantee point-in-time validity for all sources of leakage."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The validation method is described without stating what the validation showed.",
+      "because": "Methodological rigor needs a concise outcome to demonstrate research value."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The feature-store adoption result is buried at the end of the bullet.",
+      "because": "The team's reuse is the clearest evidence that the artifact mattered."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The phrase 'small live allocation' leaves the scale of the approved deployment vague.",
+      "because": "A reader cannot distinguish a meaningful deployment decision from a token test."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The bullet delays the live-allocation outcome and uses a vague size qualifier.",
+      "because": "The approval is the most important result, but it appears after the presentation details."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Reporting the best Sharpe from 400 backtested configurations as the expected live Sharpe is statistically invalid.",
+      "because": "Selecting the maximum result across 400 configurations introduces multiple-testing and selection bias."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The line gives neither the selected Sharpe value nor its comparison.",
+      "because": "Calling a configuration best is not enough to assess the result."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The parameter-selection bullet does not say what the work changed or enabled.",
+      "because": "It reads as an internal research step rather than a contribution with a consequence."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The phrase 'the best one’s Sharpe as the expected live Sharpe' is ambiguous about both the configuration and the estimate.",
+      "because": "The reader cannot tell what was measured or how it should be interpreted."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The bullet foregrounds the 400-configuration search before stating the result.",
+      "because": "Leading with the configuration count makes the achievement harder to scan."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The entry's clearest quantified result appears after several implementation and validation bullets.",
+      "because": "A scanner may not reach it; leading with the result would communicate value earlier."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Using the same random seed on every worker does not produce appropriately independent Monte Carlo replicates.",
+      "because": "Workers generally replay identical pseudorandom sequences, which can invalidate Monte Carlo uncertainty estimates."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The phrase 'running the runs in parallel' repeats the same word and obscures the actual action.",
+      "because": "The repetition makes the performance improvement harder to scan."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "The phrase 'my proof' uses a first-person pronoun, which does not belong in a résumé bullet.",
+      "because": "First-person wording breaks the résumé's otherwise phrase-based style."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The phrase 'by a log factor' does not identify the specific bound or term that changed.",
+      "because": "Naming the prior and new terms would make the mathematical result assessable."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The publication-status clause delays the main mathematical result and makes the ending dense.",
+      "because": "Reordering the result and publication status would make the achievement easier to scan."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The forecasting setup does not identify the prediction horizon or target.",
+      "because": "The reader cannot tell what was forecast."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The claim that the gain held at the 5% level in both crisis periods is not established by the described tests across 30 indices.",
+      "because": "Full-sample Diebold-Mariano significance does not imply significance within separate crisis-period subsets."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The phrase 'in both crisis periods' does not identify the periods tested.",
+      "because": "A reader cannot judge the economic relevance or reproduce the crisis-period result."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The significance-testing wording is redundant, and the relationship between the 24-index result and the crisis-period result is unclear.",
+      "because": "The ending can be read as saying either that all 24 indices held in both crises or that the crisis result is a separate claim."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line describes authoring a paper without identifying the specific method or robustness work carried out.",
+      "because": "A scanning reader sees documentation rather than analytical work."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The bullet uses informal wording and passive voice for the paper and seminar presentation.",
+      "because": "The result is less direct and less evidence of ownership than it could be."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The competition project gives no result for the feature engineering and gradient-boosting work.",
+      "because": "A hiring reader cannot see whether the models were competitive or produced a meaningful improvement."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The competition bullet repeats its setting and gives no measurable outcome.",
+      "because": "The heading already identifies the project as a market prediction competition."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The bullet names broad methods without showing the concrete feature or modeling decision that demonstrates skill.",
+      "because": "A specific representative detail would make the technical contribution more memorable."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Switching to time-grouped folds does not by itself establish that leakage was reduced or that the 0.02 gap was closed because of the switch.",
+      "because": "Leakage can remain through other means, and the gap could reflect leaderboard noise or distribution shift."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The 0.02 validation-to-leaderboard gap does not identify the competition metric or what the number represents.",
+      "because": "A reader cannot tell whether 0.02 means score points, percentage points, log loss, Sharpe, or another measure."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The result is buried in a subordinate clause after the method.",
+      "because": "The 0.02 gap change is the bullet's measurable achievement, but a scanner may focus on the fold change and miss it."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The 0.4 Sharpe increase does not identify the starting Sharpe or the comparison baseline.",
+      "because": "A reader cannot tell whether the change was relative to an existing strategy, a benchmark, or a no-signal version."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "'Added 0.4 to the Sharpe ratio' is less idiomatic and less precise than describing an increase by 0.4.",
+      "because": "More direct language would make the quantitative result easier to scan."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The Kaggle entry starts as a competition project but ends with an order-book signal result that duplicates the Northpeak achievement, making the project's scope and ownership unclear.",
+      "because": "The competition methods and the futures-book Sharpe result do not visibly belong to the same project."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "The Methods skills list misspells econometrics.",
+      "because": "The misspelling is immediately visible in a technical skills section."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Kafka is listed under Programming without evidence of Kafka use elsewhere in the résumé.",
+      "because": "A recruiter cannot verify whether Kafka is a genuine working skill or an unsupported keyword."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 6651,
+    "completion_tokens": 2587,
+    "total_tokens": 9238,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}
