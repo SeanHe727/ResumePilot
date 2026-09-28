@@ -1,0 +1,245 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The portfolio link appears to use a placeholder domain.",
+      "because": "A dead or generic link undermines the resume."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the experience entries in reverse chronological order.",
+      "because": "Voltline is the more recent role, and listing Clearwater first makes the timeline harder to scan."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make date and location formatting consistent and distinguish project dates from employment dates.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Clarify the gap between graduation and the first listed role if relevant.",
+      "because": "The dates show a gap from May 2021 to April 2022."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Consider adding relevant coursework or academic projects.",
+      "because": "They may help an early-career application if they add evidence not shown elsewhere."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify what “test time per unit” measures and whether the comparison covers the same test scope.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Make clear that 20,000 units a month is volume processed, not a performance result.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify the basis for attributing the failures to the solder-paste change.",
+      "because": "Otherwise, the reduction may sound more conclusive than the evidence supports."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Define the return-rate measurement period or denominator.",
+      "because": "Otherwise, the reduction may sound more conclusive than the evidence supports."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Define a “drift complaint” and the period used to compare the counts.",
+      "because": "Complaint counts can be affected by production volume or reporting practices."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether the throughput figures are measured production results or station capacity.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether the throughput figures refer to boards or finished units.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Say whether quality or retest rates changed.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Specify what “update speed” measures and the conditions of the comparison.",
+      "because": "“Speed” could mean elapsed time, transfer rate, or completion rate."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain what the 400 tests cover and what running on every build means in practice.",
+      "because": "Test count alone does not indicate coverage or reliability."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify how much of the test process you owned.",
+      "because": "Test count alone does not show ownership."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify what sensor data the logger captured and how it isolated the five failures.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Be ready to explain how data was buffered and written to flash without affecting the system.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The 5 kHz-at-8 kHz sampling claim needs correction or substantiation.",
+      "because": "Sampling a 5 kHz component at 8 kHz does not satisfy the Nyquist criterion."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Declaring the shared counter `volatile` does not by itself fix a race condition.",
+      "because": "It does not make access atomic."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Substantiate your role, the rewrite’s scope, and the jitter and fault measurements.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The firmware-rewrite result appears again in the Formula Student section.",
+      "because": "The duplication creates a serious credibility problem."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add defensible hardware, firmware, and power-measurement specifics to the weather-station project.",
+      "because": "Readers otherwise have little beyond the headline result to assess the work."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Remove the “next-generation” and “redefines” promotional claim.",
+      "because": "It sounds like marketing and does not establish what you built."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Document the current-measurement conditions and what changed between readings.",
+      "because": "Battery, radio activity, sampling frequency, and measurement method can affect average current."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Make the published repository or documentation accessible from the header link.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Verify the extent of the school’s use without implying broader adoption.",
+      "because": "The stated evidence supports two builds."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Ensure the project bullets support the “Electronics Lead” role and fit the Formula Student scope.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The robot-fleet description appears inconsistent with the Formula Student car project.",
+      "because": "It may have been carried over from the Voltline role."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify your individual contribution to the dashboard CAN work.",
+      "because": "The passive phrasing does not show what you implemented, tested, or owned."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The 300-robot firmware claim duplicates the Voltline accomplishment and conflicts with this project’s context.",
+      "because": "The Formula Student car project has earlier dates and is not described as a robot fleet."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Expand the sparse skills section selectively with relevant, demonstrable technical skills.",
+      "because": "It is sparse compared with the experience claimed."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Replace broad areas such as “firmware” and “low-power design” with more concrete skills.",
+      "because": "They repeat areas of experience rather than making the technical toolkit easy to scan."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2487,
+    "input_tokens_details": {
+      "cache_write_tokens": 2484,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1957,
+    "output_tokens_details": {
+      "reasoning_tokens": 675
+    },
+    "total_tokens": 4444
+  }
+}
