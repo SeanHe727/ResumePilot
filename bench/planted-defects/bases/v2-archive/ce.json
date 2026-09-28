@@ -16,7 +16,7 @@
       "bullets": [
         {
           "slot": "anchor12",
-          "clean": "Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch."
+          "clean": "Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the first quarter after launch."
         },
         {
           "slot": "D2",
@@ -26,17 +26,17 @@
         },
         {
           "slot": "anchor4",
-          "clean": "Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%."
+          "clean": "Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, keeping every finding traceable to its source data."
         },
         {
           "slot": "D4",
-          "clean": "Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+          "clean": "Applied GRPO with grouped tool-use rollouts and a composite reward, cutting end-to-end latency 5% versus the SFT baseline with no loss in diagnostic accuracy.",
           "defect": "Created a routing component that restricts the specialist agents and the reviewer to the signals relevant to them, so that every finding can be traced back to its source data.",
           "subtle": "Built the routing layer that keeps each specialist agent and the independent reviewer on its own signals, so findings stay traceable to source data."
         },
         {
           "slot": "D3",
-          "clean": "Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+          "clean": "Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency before each release.",
           "defect": "Single-handedly built the company's entire ML platform, which is now used by every team across engineering, operations and research.",
           "subtle": "Architected the company's ML platform, now used across three business units for model training, evaluation and release."
         },
@@ -61,7 +61,7 @@
         },
         {
           "slot": "D6",
-          "clean": "Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+          "clean": "Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, and added load tests to keep it there.",
           "defect": "I worked on improving the latency of our API and I also wrote tests for it, which I think made the service a lot faster for users.",
           "subtle": "Reduced p95 API latency from 420 ms to 180 ms; my changes added a request cache and batched sensor reads, with load tests to keep it there."
         },
@@ -88,7 +88,7 @@
       "bullets": [
         {
           "slot": "D5",
-          "clean": "Raised defect localization on a 120-case benchmark from 82% to 94% by dispatching tasks to role-specialized sub-agents with isolated prompts, toolsets and contexts.",
+          "clean": "Raised planted-defect localization from 82% to 94% by dispatching tasks to role-specialized sub-agents with isolated prompts, toolsets and contexts.",
           "defect": "Leveraged cutting-edge AI synergies and next-generation agentic paradigms to drive innovation and unlock value across the organization.",
           "subtle": "Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams."
         },
@@ -100,7 +100,7 @@
         },
         {
           "slot": "D18",
-          "clean": "Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+          "clean": "Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under fan-out load.",
           "defect": "Led the Project Falcon migration to NGX on the KRT stack, coordinating the cutover of the Orion and Vega pipelines.",
           "subtle": "Moved the runtime's evaluation jobs onto the KRT deployment stack, cutting the time to rerun a full benchmark from 40 to 12 minutes."
         }
@@ -134,19 +134,19 @@
     }
   ],
   "skills": [
-    "Programming: Python, TypeScript, Git",
-    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+    "Programming: Python, TypeScript, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation"
   ],
   "skillsD20": [
-    "Programming: Pyhton, TypeScirpt, Git",
-    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+    "Programming: Pyhton, TypeScirpt, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGraph, RAG, agent evaluation"
   ],
   "skillsD8": "Infrastructure: Rust, Kubernetes, Apache Spark",
   "unevidenced": "Rust, Kubernetes, Apache Spark",
   "personalSubtle": "Date of birth: 14 Mar 1999 | Nationality: Canadian",
   "skillsD20Subtle": [
-    "Programming: Python, TypeScript, Git",
-    "ML & Agents: PyTorch, LoRA, GRPO, agent evalution"
+    "Programming: Python, TypeScript, SQL, Bash, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, LangGrpah, RAG, agent evaluation"
   ],
   "skillsD8Subtle": [
     1,

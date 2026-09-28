@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const [arm, test] = process.argv.slice(2);
-const resume = readFileSync(`bench/planted-defects/tests/${test}/resume.txt`, 'utf8');
+const resume = readFileSync(`bench/planted-defects/${process.env.TESTS ?? 'tests'}/${test}/resume.txt`, 'utf8');
 // No rewritten lines or example rewrites: ResumePilot gives none, and a judge
 // comparing reviews should compare what each found and explained, not one
 // side's sample sentences against the other's silence.
@@ -26,7 +26,7 @@ const res = await client.responses.create({
   // rather than in how hard each model is allowed to think.
   reasoning: { effort: 'medium' },
 });
-const dir = `bench/planted-defects/tests/${test}/out`;
+const dir = `bench/planted-defects/${process.env.TESTS ?? 'tests'}/${test}/out`;
 mkdirSync(dir, { recursive: true });
 writeFileSync(`${dir}/${arm}.md`, res.output_text);
 writeFileSync(

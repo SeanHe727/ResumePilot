@@ -11,9 +11,11 @@ Every defect replaces one line of a clean base resume (or reorders, redates,
 or adds a line or an entry), from a fixed seed, and the answer key is written
 alongside. Writes tests/<id>/resume.pdf, source.txt and key.json.
 """
-import json, pathlib, random, re, textwrap
+import json, os, pathlib, random, re, textwrap
 
 HERE = pathlib.Path(__file__).parent
+# Where the built tests go; `tests` unless TESTS names another folder.
+TESTS = os.environ.get('TESTS', 'tests')
 exec(re.search(r"def pdf\(.*?\n    return bytes\(out\)\n",
                (HERE / '../../tests/fixtures/make-pdfs.py').read_text(), re.S).group(0))
 
@@ -193,7 +195,7 @@ def main():
         lines, key = build(bases[base_id], set(defects))
         assert sorted(k['id'] for k in key) == sorted(defects), (tid, defects, [k['id'] for k in key])
         pdf_bytes, text, bottom = render(lines)
-        out = HERE / 'tests' / tid
+        out = HERE / TESTS / tid
         out.mkdir(parents=True, exist_ok=True)
         (out / 'resume.pdf').write_bytes(pdf_bytes)
         (out / 'source.txt').write_text(text)
@@ -202,11 +204,11 @@ def main():
     for base_id, base in bases.items():
         lines, _ = build(base, set())
         pdf_bytes, text, _ = render(lines)
-        out = HERE / 'tests' / f'clean-{base_id}'
+        out = HERE / TESTS / f'clean-{base_id}'
         out.mkdir(parents=True, exist_ok=True)
         (out / 'resume.pdf').write_bytes(pdf_bytes)
         (out / 'source.txt').write_text(text)
-    (HERE / 'tests' / 'manifest.json').write_text(json.dumps(manifest, indent=2))
+    (HERE / TESTS / 'manifest.json').write_text(json.dumps(manifest, indent=2))
     for m in manifest:
         print(m)
 
