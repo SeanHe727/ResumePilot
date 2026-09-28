@@ -1,10 +1,11 @@
 """Packs a blind-review bundle: each test resume and the four groups' reviews,
 with anything that names the system stripped and the order shuffled.
 
-Usage: python3 bench/planted-defects/pack.py b1-ce b1-pm b1-quant
+Usage: TESTS=tests-v3 python3 bench/planted-defects/pack.py b1-ce b2-ce:out-r1 ...
+(a test, or test:outdir for a run kept in another folder)
 Writes blind/bundle/ (for the judge) and blind/mapping.json (kept back).
 """
-import json, pathlib, random, re, sys
+import json, os, pathlib, random, re, sys
 
 HERE = pathlib.Path(__file__).parent
 OUT = HERE / 'blind'
@@ -82,16 +83,15 @@ wrote them. Every reviewer was asked not to rewrite lines for the candidate.
 
 ## Score each review from 1 to 10 on
 
-1. Accuracy: is what it says about the résumé true? Invented figures, results,
-   scope or methods presented as the candidate's count against it (a word
-   offered for the candidate to choose, or a bracketed placeholder to fill, is
-   not invention).
-2. Problems found: does it catch what actually weakens this résumé? An error a
-   practitioner in the field would catch outweighs a wording issue; a review
-   that misses one, or praises or keeps it, has missed what matters most.
-3. Actionability: could the candidate make each change today? Saying which
+Accuracy and which problems each review found are scored separately, by code,
+against the list of problems planted. **Judge only these two, and only on what
+each review says:** never lower a score because a review missed a problem,
+or raise it because it found one. Whether it missed something is not part of
+either score.
+
+1. Actionability: could the candidate make each change today? Saying which
    words to change is enough; a rewritten line earns nothing extra.
-4. Readability: can the candidate understand the review and work through it?
+2. Readability: can the candidate understand the review and work through it?
    Each problem's reason is explained; the review is organised and clearly
    worded; the key problems stand out rather than sitting among small ones.
 
@@ -100,8 +100,8 @@ decided it.
 
 ## What to pay attention to
 
-- Check: verify what a review claims against the résumé yourself (the
-  arithmetic, the dates, what a line actually says).
+- A change that would make the résumé worse or untrue is not actionable,
+  however clearly it is put.
 - The whole review: the candidate will read and act on all of it, not only the
   first few points.
 - Length: length is not quality. Extra material counts only if it is correct
@@ -115,10 +115,9 @@ Reply with JSON for each case:
 {
   "case": "<case id>",
   "scores": {
-    "Reviewer 1": {"accuracy": 0, "problems": 0, "actionability": 0, "readability": 0},
+    "Reviewer 1": {"actionability": 0, "readability": 0},
     "Reviewer 2": {...}, "Reviewer 3": {...}, "Reviewer 4": {...}
   },
-  "invented": {"Reviewer 1": ["each invented fact, figure or method, quoted"], "Reviewer 2": [], ...},
   "ranking": ["Reviewer 2", "Reviewer 4", "Reviewer 1", "Reviewer 3"],
   "why": "two or three sentences"
 }
@@ -131,18 +130,20 @@ def main(tests):
         tests = tests[1:]
     BUNDLE.mkdir(parents=True, exist_ok=True)
     mapping = {}
-    for t in tests:
-        d = HERE / 'tests' / t
+    for spec in tests:
+        t, _, outdir = spec.partition(':')
+        d = HERE / os.environ.get('TESTS', 'tests') / t
+        o = d / (outdir or 'out')
         reviews = {
-            'A': resumepilot_report((d / 'out' / 'A.md').read_text(), json.loads((d / 'ids.json').read_text())),
-            'B': plain((d / 'out' / 'B.md').read_text()),
-            'C': plain((d / 'out' / 'C.md').read_text()),
-            'D': plain((d / 'out' / 'D.md').read_text()),
+            'A': resumepilot_report((o / 'A.md').read_text(), json.loads((o / 'ids.json').read_text())),
+            'B': plain((o / 'B.md').read_text()),
+            'C': plain((o / 'C.md').read_text()),
+            'D': plain((o / 'D.md').read_text()),
         }
         order = list(reviews)
         rng.shuffle(order)
         case = f'case-{len(mapping) + 1}'
-        mapping[case] = {'test': t, 'reviewers': {f'Reviewer {i + 1}': arm for i, arm in enumerate(order)}}
+        mapping[case] = {'test': spec, 'reviewers': {f'Reviewer {i + 1}': arm for i, arm in enumerate(order)}}
         parts = [f'# {case}\n', '## Résumé\n', '```\n' + (d / 'resume.txt').read_text().strip() + '\n```\n']
         for i, arm in enumerate(order):
             parts.append(f'## Reviewer {i + 1}\n\n{reviews[arm]}')

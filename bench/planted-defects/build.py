@@ -186,7 +186,8 @@ def render(lines):
 def main():
     rng = random.Random(20260926)
     bases = {k: json.loads((HERE / 'bases' / f'{k}.json').read_text()) for k in ('ce', 'pm', 'quant')}
-    sets = pick(9, rng)
+    # Three resumes per batch; SETS=15 gives five batches, the first three as before.
+    sets = pick(int(os.environ.get('SETS', 9)), rng)
     manifest = []
     for i, defects in enumerate(sets):
         batch = i // 3 + 1

@@ -11,9 +11,9 @@ const ask =
   `Please review my resume and tell me what to change. Don't rewrite my lines or give example ` +
   `rewrites — tell me what to change in each and why.\n\n${resume}`;
 const ARMS: Record<string, { model: string; instructions?: string }> = {
-  B: { model: 'gpt-5.6-luna' },
-  C: { model: 'gpt-5.6-sol' },
-  D: { model: 'gpt-5.6-luna', instructions: readFileSync('bench/planted-defects/skill-critique-framework.md', 'utf8') },
+  B: { model: 'gpt-6-luna' },
+  C: { model: 'gpt-6-sol' },
+  D: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-critique-framework.md', 'utf8') },
 };
 const cfg = ARMS[arm!]!;
 const client = new OpenAI();
@@ -26,7 +26,7 @@ const res = await client.responses.create({
   // rather than in how hard each model is allowed to think.
   reasoning: { effort: 'medium' },
 });
-const dir = `bench/planted-defects/${process.env.TESTS ?? 'tests'}/${test}/out`;
+const dir = `bench/planted-defects/${process.env.TESTS ?? 'tests'}/${test}/${process.env.OUT ?? 'out'}`;
 mkdirSync(dir, { recursive: true });
 writeFileSync(`${dir}/${arm}.md`, res.output_text);
 writeFileSync(
