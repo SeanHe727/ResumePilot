@@ -46,6 +46,9 @@ is rarely not knowing the field; it is not noticing.
    definitions and statistics count as fields too. Skip what the line plainly
    shows.
 2. Make each a standalone question: no names, no employer, nothing quoted.
+   One method per question: a line that credits a result to two methods gets a
+   question for each. Measured: two methods asked about together came back
+   "depends" on the one that works, and the one that cannot was never reported.
 3. **Keep every qualifier:** ask about the claim exactly as the line makes it.
    Keep every word that could change the answer (the qualifier on the method,
    the condition, the kind of comparison, the unit). A question without the
@@ -89,13 +92,13 @@ is rarely not knowing the field; it is not noticing.
   has goes in [brackets]. A fix needing a method or test the candidate may not
   have run is conditional (if they ran it, name it; if not, remove or soften
   the claim).
-- Certain or possible: mark certain when the line is false as written
-  (arithmetic, a unit misused, a method that cannot do it, a contradiction with
-  the page). Mark it possible when it may overreach but a reader could
-  reasonably dispute it (a causal claim without evidence, a judgement call).
-- **Not established is possible:** a finding that the line does not prove,
-  guarantee or establish what it claims is possible, however likely; certain
-  needs the line to be false as written.
+- **Errors only:** report a claim when the line is false as written: figures
+  that do not add up, a unit misused, a method that cannot do what is credited
+  to it, a test the line itself describes that cannot support its conclusion,
+  a contradiction with the page. A result the line does not prove it caused is
+  not an error: saying what evidence is missing is the content reader's job.
+  Measured: kept as a lesser category, errors the check had confirmed reached
+  the candidate as suggestions.
 - **No invented facts:** never a figure, method or fact the resume does not
   contain.
 - Nothing wrong: return an empty list. An entry that holds up is a finding.
@@ -111,8 +114,7 @@ JSON only:
       "axis": "impact | measurement | method",
       "what": "what is wrong, in your own words, quoting the words it turns on",
       "why": "why a practitioner would catch it, two or three sentences",
-      "fix": "what a correct version says, or what to go and find in [brackets]",
-      "certain": true
+      "fix": "what a correct version says, or what to go and find in [brackets]"
     }
   ]
 }`;

@@ -28,10 +28,16 @@ why.
 
 ## Structure
 
-- **One point per group:** write one point for each group, in the order given,
-  and do not merge groups. The report places each point under the line it is
-  about, in the résumé's order, and orders them by the selection's scores.
-- Sections: one per entry, plus one for what runs across the whole resume.
+- **Line by line:** the findings come under the line they are about. Within a
+  line, findings from different readers that name the same problem are one
+  point; different problems stay separate points, even of the same type.
+- **Never across lines:** a point is about one line. Measured: a point merged
+  across lines borrowed one line's figure into another's explanation.
+- **Nothing twice:** a finding under the entry or the whole resume that names a
+  problem already written under a line is cited in that line's point, not
+  written again.
+- Sections: one per entry, plus one for what runs across the whole resume. The
+  report orders the points itself, by line and by the filter's scores.
 
 ## Rules
 
@@ -40,7 +46,7 @@ why.
 - Why from the findings: build it from what the readers said and the words on
   the page, not general advice. Every point rests on a finding and a quote; if
   you cannot quote it, drop it.
-- **Errors said as errors:** where any finding in a group is marked wrong, the
+- **Errors said as errors:** where any finding in a point is marked wrong, the
   problem sentence states the error plainly and first, without softening words
   (may, usually, could).
 - Technical errors: name the error, give the reason in the field's own terms,

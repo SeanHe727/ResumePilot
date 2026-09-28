@@ -36,28 +36,41 @@ export async function writeFullReport(
   const plan = report.improvementPlan;
   const shortOf = new Map(aliasFindings(findings).named.map(({ short, finding }) => [finding.id, short]));
   const label = { immediate: 'fix now', shortTerm: 'needs a figure', longTerm: 'needs new work' } as const;
-  // Each group with its findings as the readers wrote them, so the writing
-  // explains what they said about the lines they said it about, rather than
-  // expanding a summary of it.
-  const chosen = plan.groups
-    ? plan.groups.map((group, i) =>
-        `- group ${i + 1} (${label[group.kind]}), about ${group.targets.join(', ')}:\n` +
-        group.findingIds
-          .map((id) => findings.find((f) => f.id === id))
-          .filter((f): f is SourceFinding => f !== undefined)
-          .map(
-            (f) =>
-              `    ${shortOf.get(f.id)} [${f.target}${f.kind ? `, ${f.kind}` : ''}] ${f.what}` +
-              (f.why ? `\n      why: ${f.why}` : '') +
-              (f.fix ? `\n      fix: ${f.fix}` : ''),
-          )
-          .join('\n'),
-      )
-    : [
-        ...plan.immediate.map((what) => `- [fix now] ${what}`),
-        ...plan.shortTerm.map((what) => `- [needs a figure] ${what}`),
-        ...plan.longTerm.map((what) => `- [needs new work] ${what}`),
+  // What was kept, under the line it is about, so the writer merges what
+  // repeats on one line and never across lines. It was one block per group,
+  // and a group could span lines: code then split groups by line, and one
+  // duplicate came out as two or three points about the same bullet.
+  const kept = (plan.groups ?? []).flatMap((group) =>
+    group.findingIds.flatMap((id) => {
+      const finding = findings.find((f) => f.id === id);
+      return finding ? [{ finding, group }] : [];
+    }),
+  );
+  const describe = ({ finding: f, group }: (typeof kept)[number]) =>
+    `      ${shortOf.get(f.id)} [${f.role}${f.kind ? `, ${f.kind}` : ''}, ${label[group.kind]}, score ${group.score ?? '?'}] ${f.what}` +
+    (f.why ? `\n        why: ${f.why}` : '') +
+    (f.fix ? `\n        fix: ${f.fix}` : '');
+  const on = (target: string) => kept.filter((k) => lineOf(k.finding) === target);
+  const placedIds = new Set<string>();
+  const block = (heading: string, items: typeof kept): string[] => {
+    items.forEach((k) => placedIds.add(k.finding.id));
+    return items.length > 0 ? [heading, ...items.map(describe)] : [];
+  };
+  const chosen = plan.groups ? [
+    ...[...entriesOf(state)].flatMap((entry) => {
+      const lines = [
+        ...block('  - the entry as a whole:', on(entry.id)),
+        ...entry.bullets.flatMap((bullet) => block(`  - [${bullet.id}] ${bullet.text}`, on(bullet.id))),
       ];
+      return lines.length > 0 ? [`[${entry.id}] ${withoutContactDetails(entry.headerLines.join(' | '))}`, ...lines] : [];
+    }),
+    ...block('The whole résumé:', kept.filter((k) => !placedIds.has(k.finding.id))),
+  ] : [
+    // A plan from before findings were kept one by one: its lists, as they are.
+    ...plan.immediate.map((what) => `- [fix now] ${what}`),
+    ...plan.shortTerm.map((what) => `- [needs a figure] ${what}`),
+    ...plan.longTerm.map((what) => `- [needs new work] ${what}`),
+  ];
   if (chosen.length === 0) return null;
 
   // The readings themselves, so the write-up can quote what they said rather
@@ -147,10 +160,12 @@ export async function writeFullReport(
         role: 'user',
         content:
           `The résumé:\n${state.resume ? renderForQuoting(state) : ''}\n\n` +
-          `What was chosen, as groups of findings:\n${chosen.join('\n')}\n\n` +
-          `Write one point per group, in the order given; do not merge groups. Its "from" is the ids listed under that group, and it is about ` +
-          `the lines those findings are about and no others: check it against those lines' text and ` +
-          `against what the readers said, and leave out anything that is not true of a line.\n\n` +
+          `What was kept, under the line each finding is about:\n${chosen.join('\n')}\n\n` +
+          `Write the review line by line. Within one line, findings that name the same problem are one point whose "from" ` +
+          `lists them all; different problems are different points. A point cites only findings listed under its own line, ` +
+          `except that a finding under the entry as a whole or the whole résumé that names a problem already written under a ` +
+          `line is cited in that line's point rather than written again. Cite every finding listed above. Check each point ` +
+          `against its line's text and against what the readers said, and leave out anything that is not true of the line.\n\n` +
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
           `The findings, by id:\n${offered}\n\n` +
           `The entries a point can be filed under:\n${targets}\n\n` +
@@ -233,19 +248,19 @@ export async function writeFullReport(
       .filter(({ names }) => !names.some((name) => cited.has(name)));
     const coverNote =
       uncovered.length > 0
-        ? `These groups have no point: ${uncovered.map(({ i }) => `group ${i}`).join(', ')}. Write one ` +
-          `point for each, citing its findings in "from", and keep every point you wrote. `
+        ? `These findings are cited by no point: ${uncovered.flatMap(({ names }) => names).join(', ')}. ` +
+          `Cite each in a point under its line, in "from", and keep every point you wrote. `
         : '';
     // Words, not points: the selection decided what goes in, so fitting to the
     // page shortens points and never drops a group.
     const fitNote =
       first > room * 1.1
         ? `What you wrote adds about ${first} words and the page has about ${room}. Shorten the ` +
-          `points to fit; keep one point for every group. Same JSON shape.`
+          `points to fit; keep every finding cited. Same JSON shape.`
         : first < room * 0.6 && room > 20 && count < 12
           ? `What you wrote adds about ${first} words and the page has about ${room}. There is room to ` +
             `say more: give the points that matter most their fuller fix, and split a point that bundles ` +
-            `two different fixes. Do not add anything the groups do not support. Same JSON shape.`
+            `two different fixes. Do not add anything the findings do not support. Same JSON shape.`
           : null;
     const note =
       fitNote || quoteNote || coverNote ? `${coverNote}${quoteNote}${fitNote ?? 'Same JSON shape.'}` : null;
@@ -607,4 +622,14 @@ function renderForQuoting(state: ResumeSessionState): string {
     .join('\n\n');
 
   return withoutContactDetails(body);
+}
+
+/** The line a finding is about, without the reader's suffix. */
+function lineOf(finding: SourceFinding): string {
+  return finding.target.replace(/, wording$/, '');
+}
+
+/** The résumé's entries, in its own order. */
+function entriesOf(state: ResumeSessionState) {
+  return (state.resume?.sections ?? []).flatMap((section) => section.entries);
 }

@@ -612,7 +612,7 @@ describe('generate_report: the improvement plan', () => {
     }],
   }];
 
-  const PLAN = JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], why: 'drop "Responsible for"' }] });
+  const PLAN = JSON.stringify({ decisions: [{ finding: 'c1', keep: true, fix: 'immediate', why: 'drop "Responsible for"' }] });
 
   /** Replies in the order given, so a test can script a retry. */
   function scriptedCtx(replies: ParsedResponse[]) {
@@ -851,8 +851,7 @@ describe('generate_report: the improvement plan', () => {
     const withSetAside: ParsedResponse = {
       ...answered,
       content: JSON.stringify({
-        chosen: [],
-        setAside: [{ findings: ['c1'], because: 'the page has no room left' }],
+        decisions: [{ finding: 'c1', keep: false, why: 'the page has no room left' }],
       }),
     };
     const { ctx } = scriptedCtx([withSetAside]);

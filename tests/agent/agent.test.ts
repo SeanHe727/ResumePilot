@@ -556,7 +556,8 @@ describe('DefaultOrchestrator', () => {
       errors: [
         { bulletId: `[${entry.bullets[0]!.id}]`, axis: 'measurement', what: 'the percentage does not match its figures', why: 'w', fix: 'f' },
         { bulletId: 'elsewhere:0', what: 'not this entry' },
-        { bulletId: `${entry.bullets[0]!.id}`, what: 'may overreach', certain: false },
+        // An older reply's grade is ignored: everything this reader reports is an error.
+        { bulletId: `${entry.bullets[0]!.id}`, what: 'the method cannot do this', certain: false },
       ],
     });
     const engine: QueryEngine = {
@@ -571,8 +572,7 @@ describe('DefaultOrchestrator', () => {
 
     expect(verdict.substance?.bullets[0]?.issues).toEqual([
       { what: 'the percentage does not match its figures', costWords: 0, kind: 'wrong', axis: 'measurement', why: 'w', fix: 'f' },
-      // A possible error is not ranked as an error.
-      { what: 'may overreach', costWords: 0, kind: 'unclear' },
+      { what: 'the method cannot do this', costWords: 0, kind: 'wrong' },
       { what: 'no measurable outcome', costWords: 4 },
     ]);
   });

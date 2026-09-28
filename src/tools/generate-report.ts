@@ -314,19 +314,22 @@ function lineOf(finding: SourceFinding): string {
 const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
 
 /**
- * The selection's marks, checked and turned into a plan.
+ * The filter's decisions, checked and turned into a plan.
  *
- * The selection chooses; it does not say anything the readers did not. Its
- * answer is finding names in groups, and every word that reaches the writer or
- * the candidate is a reader's own. The one-line reasons it gives go to the
- * trace and nowhere else: a note written alongside a group was measured
- * reaching the report as advice — "so the review outcome leads the bullet",
- * about a line the wording reader had called outcome-first.
+ * The filter keeps or removes each finding and scores what it keeps; it does
+ * not group. Grouping moved to the writer, which sees each line with every
+ * finding on it: the filter grouped across lines, and code then had to split
+ * its groups again by line, which turned one duplicate into two or three
+ * points about the same bullet.
  *
- * Each finding is placed once — the first mark wins — and a name that was not
- * offered is dropped. A finding the selection did not mark at all is set aside,
- * because nothing is meant to disappear. The lines a group is about come from
- * its findings.
+ * Its answer is finding names, and every word that reaches the writer or the
+ * candidate is a reader's own. The one-line reasons go to the trace and
+ * nowhere else: a note written alongside a decision was measured reaching the
+ * report as advice.
+ *
+ * Each finding is decided once (the first decision wins) and a name that was
+ * not offered is dropped. A finding the filter did not decide is set aside,
+ * because nothing is meant to disappear. Each kept finding is a group of one.
  */
 export function planFromMarks(
   parsed: Record<string, unknown> | null,
@@ -342,86 +345,61 @@ export function planFromMarks(
   const placed = new Set<string>();
   const unknown: string[] = [];
   const reasons: Array<{ findingIds: string[]; chosen: boolean; reason: string }> = [];
-  const take = (raw: unknown): SourceFinding[] =>
-    (Array.isArray(raw) ? raw : []).flatMap((name) => {
-      const finding = typeof name === 'string' ? alias.get(name.trim()) : undefined;
-      if (!finding) {
-        unknown.push(String(name));
-        return [];
-      }
-      if (placed.has(finding.id)) return [];
-      placed.add(finding.id);
-      return [finding];
-    });
-  const targetsOf = (group: SourceFinding[]): string[] => [...new Set(group.map(lineOf))];
-  const reasonOf = (mark: Record<string, unknown> | null, key: string): string =>
-    typeof mark?.[key] === 'string' ? (mark[key] as string).trim() : '';
+  const kept: PlanGroup[] = [];
+  const removed: SourceFinding[] = [];
 
-  const chosen: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
+  for (const raw of Array.isArray(parsed?.decisions) ? parsed.decisions : []) {
     const mark = raw as Record<string, unknown> | null;
-    const kind = KINDS.find((k) => k === mark?.kind);
-    const members = take(mark?.findings);
-    if (!kind || members.length === 0) return [];
-    reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
+    const name = typeof mark?.finding === 'string' ? mark.finding.trim() : '';
+    const finding = alias.get(name);
+    if (!finding) {
+      unknown.push(String(mark?.finding));
+      continue;
+    }
+    if (placed.has(finding.id)) continue;
+    placed.add(finding.id);
+    const reason = typeof mark?.why === 'string' ? mark.why.trim() : '';
+    reasons.push({ findingIds: [finding.id], chosen: mark?.keep !== false, reason });
+    if (mark?.keep === false) {
+      removed.push(finding);
+      continue;
+    }
+    const error = finding.kind === 'wrong';
     const scored = Number(mark?.score);
-    const score = Number.isFinite(scored) ? Math.min(10, Math.max(1, Math.round(scored))) : undefined;
-    // Errors on different lines are different errors, whatever the selection
-    // made of them. Measured: four unrelated errors merged into one point
-    // borrowed a figure from one line into another's explanation, and filed a
-    // project's line under the entry above it.
-    const make = (part: SourceFinding[]): PlanGroup => {
-      const error = part.some((f) => f.kind === 'wrong');
-      // Unscored, an error is taken as mattering a great deal and anything
-      // else as polish: the order then falls back to errors first.
-      const s = score ?? (error ? 8 : 3);
-      return {
-        kind,
-        findingIds: part.map((f) => f.id),
-        targets: targetsOf(part),
-        score: s,
-        tag: error ? 'error' : s >= 5 ? 'important' : 'polish',
-      };
-    };
-    const erroneous = new Set(members.filter((f) => f.kind === 'wrong').map(lineOf));
-    if (erroneous.size < 2) return [make(members)];
-    const byLine = new Map<string, SourceFinding[]>();
-    for (const f of members) byLine.set(lineOf(f), [...(byLine.get(lineOf(f)) ?? []), f]);
-    return [...byLine.values()].map(make);
-  });
-  // By score, highest first; the selection's own order breaks ties. Scored
+    // Unscored, an error is taken as mattering a great deal and anything else
+    // as polish: the order then falls back to errors first.
+    const score = Number.isFinite(scored) ? Math.min(10, Math.max(1, Math.round(scored))) : error ? 8 : 3;
+    kept.push({
+      // Kept without a fix type is still kept: the type labels the point, it
+      // does not decide whether the candidate sees it.
+      kind: KINDS.find((k) => k === mark?.fix) ?? 'immediate',
+      findingIds: [finding.id],
+      targets: [lineOf(finding)],
+      score,
+      tag: error ? 'error' : score >= 5 ? 'important' : 'polish',
+    });
+  }
+  // By score, highest first; the filter's own order breaks ties. Scored
   // rather than listed in order: listed, errors came out in the order they
   // sit on the page, a small one first and the worst fourth.
-  const groups = chosen
+  const groups = kept
     .map((group, i) => ({ group, i }))
     .sort((a, b) => (b.group.score ?? 0) - (a.group.score ?? 0) || a.i - b.i)
     .map(({ group }) => group);
 
-  const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
-    const mark = raw as Record<string, unknown> | null;
-    const members = take(mark?.findings);
-    if (members.length === 0) return [];
-    reasons.push({ findingIds: members.map((f) => f.id), chosen: false, reason: reasonOf(mark, 'because') });
-    return [members];
-  });
   const unmarked = findings.filter((f) => !placed.has(f.id));
-
-  // In the reader's words: the finding first in the group, and a count of the
-  // rest, which the full report carries in full.
-  const say = (members: SourceFinding[]): string =>
-    `${targetsOf(members).join(', ')}: ${members[0]!.what}` +
-    (members.length > 1 ? ` (and ${members.length - 1} more like it)` : '');
   const byId = new Map(findings.map((f) => [f.id, f] as const));
-  const membersOf = (group: PlanGroup): SourceFinding[] => group.findingIds.map((id) => byId.get(id)!);
-  const setAside = [...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({
-    what: say(members),
-  }));
+  // In the reader's words, about the line it named.
+  const say = (finding: SourceFinding): string => `${lineOf(finding)}: ${finding.what}`;
+  const sayGroup = (group: PlanGroup): string => say(byId.get(group.findingIds[0]!)!);
+  const setAside = [...removed, ...unmarked].map((finding) => ({ what: say(finding) }));
 
   return {
     plan: {
       groups,
-      immediate: groups.filter((g) => g.kind === 'immediate').map((g) => say(membersOf(g))),
-      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map((g) => say(membersOf(g))),
-      longTerm: groups.filter((g) => g.kind === 'longTerm').map((g) => say(membersOf(g))),
+      immediate: groups.filter((g) => g.kind === 'immediate').map(sayGroup),
+      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map(sayGroup),
+      longTerm: groups.filter((g) => g.kind === 'longTerm').map(sayGroup),
       ...(setAside.length > 0 ? { setAside } : {}),
     },
     unknown,
@@ -463,13 +441,13 @@ async function buildImprovementPlan(
           .named.map(({ short, finding }) => asLine(short, finding))
           .join('\n')}
 
-Name findings only by the short names above. Return JSON of exactly this shape:
+Name findings only by the short names above. Decide every one of them, once. Return JSON of exactly this shape:
 
 {
-  "chosen": [
-    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "score": 7, "why": "one line on why these, for the developers only" }
-  ],
-  "setAside": [{ "findings": ["c7"], "because": "one line on why, for the developers only" }]
+  "decisions": [
+    { "finding": "c3", "keep": true, "score": 7, "fix": "immediate | shortTerm | longTerm", "why": "one line, for the developers only" },
+    { "finding": "c7", "keep": false, "why": "one line, for the developers only" }
+  ]
 }`,
       },
     ],

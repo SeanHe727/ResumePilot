@@ -509,9 +509,10 @@ function readClaims(
         issue: {
           what,
           costWords: 0,
-          // A possible error ranks with the refinements; only a line false as
-          // written leads the report.
-          kind: record?.certain === false ? ('unclear' as const) : ('wrong' as const),
+          // This reader reports only lines false as written, so every one is an
+          // error. It used to grade them certain or possible, and the possible
+          // ones, confirmed by its own check, reached the candidate as suggestions.
+          kind: 'wrong' as const,
           ...(axis ? { axis } : {}),
           ...(text('why') ? { why: text('why') } : {}),
           ...(text('fix') ? { fix: text('fix') } : {}),

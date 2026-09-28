@@ -20,37 +20,42 @@ const FINDINGS = [
 ];
 
 describe('planFromMarks', () => {
-  it('works out the lines a group is about from its findings', () => {
-    const { plan } = planFromMarks(
-      { chosen: [{ kind: 'immediate', findings: ['w1', 'w2'], why: 'lead with the result' }] },
-      FINDINGS,
-    );
+  const keep = (finding: string, extra: Record<string, unknown> = {}) => ({ finding, keep: true, fix: 'immediate', ...extra });
+
+  it('keeps each finding as its own group, about its own line, in the reader\'s words', () => {
+    // The filter does not group: grouping across lines is what turned one
+    // duplicate into several points once code split the groups again.
+    const { plan } = planFromMarks({ decisions: [keep('w1', { why: 'lead with the result' }), keep('w2')] }, FINDINGS);
 
     expect(plan.groups).toEqual([
-      { kind: 'immediate', findingIds: ['x3', 'x4'], targets: ['s2:e0:b3', 's2:e0:b2'], score: 3, tag: 'polish' },
+      { kind: 'immediate', findingIds: ['x3'], targets: ['s2:e0:b3'], score: 3, tag: 'polish' },
+      { kind: 'immediate', findingIds: ['x4'], targets: ['s2:e0:b2'], score: 3, tag: 'polish' },
     ]);
-    // Not b0: nothing in the group was about it. And in the reader's words.
-    expect(plan.immediate).toEqual(['s2:e0:b3, s2:e0:b2: method before result (and 1 more like it)']);
+    expect(plan.immediate).toEqual(['s2:e0:b3: method before result', 's2:e0:b2: method before result']);
+    // The filter's own words stay in the trace.
     expect(JSON.stringify(plan)).not.toContain('lead with the result');
   });
 
-  it('drops names that were not offered and places each finding once', () => {
+  it('drops names that were not offered and decides each finding once', () => {
     const { plan, unknown, reasons, unmarked } = planFromMarks(
       {
-        chosen: [
-          { kind: 'shortTerm', findings: ['c1', 'c9'], why: 'give the baseline' },
-          { kind: 'immediate', findings: ['c1', 'c2'], why: 'say which it is' },
+        decisions: [
+          keep('c1', { fix: 'shortTerm', why: 'give the baseline' }),
+          keep('c9'),
+          { finding: 'c1', keep: false, why: 'changed its mind' },
+          keep('c2'),
+          { finding: 'w1', keep: false, why: 'no room' },
         ],
-        setAside: [{ findings: ['w1'], because: 'no room' }],
       },
       FINDINGS,
     );
 
     expect(unknown).toEqual(['c9']);
     expect(plan.groups!.map((g) => g.findingIds)).toEqual([['x1'], ['x2']]);
+    expect(plan.groups![0]!.kind).toBe('shortTerm');
     expect(plan.setAside).toEqual([
       { what: 's2:e0:b3: method before result' },
-      // Marked by nobody, and kept.
+      // Decided by nobody, and kept on the record rather than dropped.
       { what: 's2:e0:b2: method before result' },
     ]);
     // The reasons are for the trace.
@@ -58,12 +63,10 @@ describe('planFromMarks', () => {
     expect(unmarked).toEqual(['x4']);
   });
 
-  it('keeps no group without a kind or a finding', () => {
-    const { plan } = planFromMarks(
-      { chosen: [{ kind: 'soon', findings: ['c1'] }, { kind: 'immediate', findings: [] }] },
-      FINDINGS,
-    );
-    expect(plan.groups).toEqual([]);
+  it('keeps a finding kept without a fix type, labelled fix now', () => {
+    // The type labels the point; it does not decide whether the candidate sees it.
+    const { plan } = planFromMarks({ decisions: [{ finding: 'c1', keep: true, fix: 'soon' }] }, FINDINGS);
+    expect(plan.groups!.map((g) => [g.findingIds, g.kind])).toEqual([[['x1'], 'immediate']]);
   });
 });
 
@@ -115,12 +118,18 @@ describe('what the selection does to the page is measured, not cut', () => {
       { ...f('b', 'content', 's2:e0:b1', 'needs a baseline'), costWords: 20 },
       { ...f('c', 'wording', 's2:e0:b2, wording', 'cut the filler'), costWords: -12 },
     ];
-    const marks = { chosen: [{ kind: 'shortTerm', findings: ['c1', 'c2'] }, { kind: 'immediate', findings: ['w1'] }] };
+    const marks = {
+      decisions: [
+        { finding: 'c1', keep: true, fix: 'shortTerm' },
+        { finding: 'c2', keep: true, fix: 'shortTerm' },
+        { finding: 'w1', keep: true, fix: 'immediate' },
+      ],
+    };
 
     // The same demand on two lines is answered on both.
     expect(pageEffect(marks, priced)).toEqual({ adds: 50, saves: 12, net: 38 });
     // Nothing is set aside for the room: that is the selection's call.
-    expect(planFromMarks(marks, priced).plan.groups).toHaveLength(2);
+    expect(planFromMarks(marks, priced).plan.groups).toHaveLength(3);
   });
 });
 
@@ -191,9 +200,9 @@ describe('the write-up is fitted to the page', () => {
       },
       abortSignal: new AbortController().signal,
     } as never;
-    const report = { format: { overallScore: 90, issues: [] }, improvementPlan: { groups: [{ kind: 'immediate', findingIds: [], targets: [] }], immediate: ['x'], shortTerm: [], longTerm: [] } } as never;
+    const report = { format: { overallScore: 90, issues: [] }, improvementPlan: { groups: [{ kind: 'immediate', findingIds: ['a'], targets: [] }], immediate: ['x'], shortTerm: [], longTerm: [] } } as never;
 
-    const full = await writeFullReport(report, { resume: { sections: [] } } as never, [], ctx, 25);
+    const full = await writeFullReport(report, { resume: { sections: [] } } as never, [f('a', 'format', 'format', 'x')], ctx, 25);
 
     expect(asked).toHaveLength(2);
     expect(asked[1]!.at(-1)!.content).toContain('adds about 80 words and the page has about 25');
@@ -202,7 +211,7 @@ describe('the write-up is fitted to the page', () => {
 });
 
 describe('the write-up is fitted in points too', () => {
-  it('asks for the groups the write-up left out, and never trims by count', async () => {
+  it('asks for the findings the write-up left out, and never trims by count', async () => {
     const { writeFullReport } = await import('../../src/tools/write-report.js');
     const F = [f('a', 'content', 's1:e0:b0', 'first'), f('b', 'content', 's1:e0:b1', 'second')];
     const onlyFirst = JSON.stringify({ sections: [{ about: { type: 'resume' }, points: Array.from({ length: 25 }, () => ({ what: 'p', why: '', from: ['c1'], cost: 'no words' })) }] });
@@ -224,7 +233,7 @@ describe('the write-up is fitted in points too', () => {
 
     expect(asked).toHaveLength(2);
     const note = asked[1]!.at(-1)!.content;
-    expect(note).toContain('These groups have no point: group 2');
+    expect(note).toContain('These findings are cited by no point: c2');
     // Twenty-five points is no reason on its own to cut any.
     expect(note).not.toMatch(/Bring it down/);
   });
@@ -245,19 +254,13 @@ describe('errors in the plan', () => {
   });
   const ERRS = [e('a', 's1:e0:b0', 'wrong'), e('b', 's1:e1:b2', 'wrong'), e('c', 's1:e1:b2'), e('d', 's2:e0:b1', 'unclear')];
 
-  it('splits a group holding errors on different lines into one group per line', () => {
-    const { plan } = planFromMarks({ chosen: [{ kind: 'immediate', findings: ['c1', 'c2', 'c3'] }] }, ERRS);
-
-    expect(plan.groups?.map((g) => g.findingIds)).toEqual([['a'], ['b', 'c']]);
-  });
-
-  it('puts groups with an error ahead of the rest, keeping their order otherwise', () => {
+  it('tags an error as one, and ranks an unscored error ahead of an unscored refinement', () => {
     const { plan } = planFromMarks(
-      { chosen: [{ kind: 'immediate', findings: ['c4'] }, { kind: 'immediate', findings: ['c2'] }] },
+      { decisions: [{ finding: 'c4', keep: true, fix: 'immediate' }, { finding: 'c2', keep: true, fix: 'immediate' }] },
       ERRS,
     );
 
-    expect(plan.groups?.map((g) => g.findingIds)).toEqual([['b'], ['d']]);
+    expect(plan.groups?.map((g) => [g.findingIds[0], g.tag])).toEqual([['b', 'error'], ['d', 'polish']]);
   });
 });
 
@@ -269,10 +272,10 @@ describe('the selection scores, the code orders', () => {
       { id: 'c', role: 'content', target: 's1:e0:b2', what: 'important' },
     ] as SourceFinding[];
     const { plan } = planFromMarks(
-      { chosen: [
-        { kind: 'immediate', findings: ['c1'], score: 2 },
-        { kind: 'immediate', findings: ['c2'], score: 9 },
-        { kind: 'immediate', findings: ['c3'], score: 6 },
+      { decisions: [
+        { finding: 'c1', keep: true, fix: 'immediate', score: 2 },
+        { finding: 'c2', keep: true, fix: 'immediate', score: 9 },
+        { finding: 'c3', keep: true, fix: 'immediate', score: 6 },
       ] },
       F,
     );
