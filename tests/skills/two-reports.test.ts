@@ -91,6 +91,12 @@ describe('the brief and the full review', () => {
     expect(brief).toContain('**How to change it**\nlead with the result');
   });
 
+  it('keeps the word cost out of the brief and in the full one', async () => {
+    // Measured: blind judges read the cost in the brief as leftover notes.
+    expect(renderBrief(REPORT, 'cv.pdf')).not.toContain('about 6 words');
+    expect(renderFull(REPORT, 'cv.pdf')).toContain('*(about 6 words)*');
+  });
+
   it('carries all of it in the full one', async () => {
     const full = renderFull(REPORT, 'cv.pdf');
     const point = REPORT.full!.sections[0]!.points[0]!;

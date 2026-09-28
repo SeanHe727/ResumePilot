@@ -20,7 +20,8 @@ a pile?
   timeline is given, it was computed from the page: take its order and gaps as
   correct.** A few months between roles, or between a degree and a first role,
   is normal and not worth reporting.
-- Ordering: entries or sections that would work better moved, shortened or cut.
+- Ordering: entries or sections that would work better moved, shortened or cut,
+  judged by what a reader needs first for where this candidate is now.
 - An entry that does not belong: an entry from an unrelated field that does not
   serve the page's direction. Say what to do (cut it, shorten it to a line, or
   explain it in a phrase), not only that it differs.

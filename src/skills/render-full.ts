@@ -92,7 +92,9 @@ function block(points: FullReportPoint[], lineText: Map<string, string>, full: b
   out.push(
     '**Problem**',
     ...points.map((p, i) =>
-      numbered(i, `${p.tag ? `[${TAG[p.tag]}] ` : ''}${p.what}${p.cost ? ` *(${p.cost})*` : ''}`),
+      // The word cost is for the full review only. Measured: blind judges read it
+      // in the brief as leftover notes, not as advice.
+      numbered(i, `${p.tag ? `[${TAG[p.tag]}] ` : ''}${p.what}${full && p.cost ? ` *(${p.cost})*` : ''}`),
     ),
     '',
   );
