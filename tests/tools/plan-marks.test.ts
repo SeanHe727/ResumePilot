@@ -89,11 +89,11 @@ describe('the report in the résumé order, with the key problems marked', () =>
   it('puts the line first, then its problems, reasons and changes numbered alike', async () => {
     const { renderBrief } = await import('../../src/skills/render-full.js');
     const text = renderBrief(
-      reportWith([point('p1', 'maths wrong', { tag: 'error', lines: ['e:b0'] }), point('p2', 'vague', { tag: 'polish', lines: ['e:b0'] })]),
+      reportWith([point('p1', 'maths wrong', { tag: 'error', lines: ['e:b0'] }), point('p2', 'vague', { tag: 'important', lines: ['e:b0'] })]),
       'r.pdf',
     );
 
-    expect(text).toContain('> The line as written\n\n**Problem**\n1. [Error] maths wrong\n2. [Polish] vague');
+    expect(text).toContain('> The line as written\n\n**Problem**\n1. [Error] maths wrong\n2. [Important] vague');
     expect(text).toContain('**Why**\n1. why p1\n2. why p2');
     expect(text).toContain('**How to change it**\n1. fix p1\n2. fix p2');
     expect(text.match(/The line as written/g)).toHaveLength(1);

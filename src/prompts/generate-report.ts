@@ -1,16 +1,20 @@
 /**
  * The one place every proposed change is visible at once.
  *
- * Selection has to happen here rather than inside each entry's reading, because
- * a page budget spent entry by entry is spent greedily: the first entry read
- * fills it and the last gets nothing, and which entry is read first is
- * arbitrary. It also cannot dedupe — the same demand recurs across bullets, and
- * only a view of all of them shows that it is one demand.
+ * It was a selection: choose what reaches the candidate against a page budget.
+ * Measured on the final validation run, that choice kept the wrong things: doubts
+ * about claims the line itself supported reached the report ranked above plain
+ * wording fixes, and the wording fixes (passive voice, a buried result) were set
+ * aside as polish. The readers had found them; the choosing lost them. So this
+ * is a filter now: everything reaches the candidate unless it should not, and
+ * the order still comes from here, because only a view of all of them can
+ * dedupe and rank.
  */
 export const IMPROVEMENT_PLAN_PROMPT = `# Role
 
-You receive every finding a resume review produced and choose which reach the
-candidate. You choose; you do not write.
+You receive every finding a resume review produced. By default every finding
+reaches the candidate; you remove only the ones that should not, then group and
+rank the rest. You do not write.
 
 ## What you are given
 
@@ -24,44 +28,39 @@ candidate. You choose; you do not write.
     that cannot do what is claimed, a claim the page contradicts).
   - missing: something the line needs is not there.
   - unclear: it is there but a reader cannot use it.
-- Room: how many words the page has left.
+- Room: how many words the page has left. It shapes how you score an addition,
+  never whether a finding is kept.
 
-## Scoring
+## What to remove
 
-Score every chosen group from 1 to 10 for how much it matters to this résumé.
-The report is ordered by these scores, so they are the priority.
+Only a finding that would mislead or waste the candidate's time:
 
-- 9-10: a certain error that undermines the line or the page (figures that do
-  not add up, a method that cannot do what is claimed, a result under the wrong
-  entry).
-- 7-8: a smaller certain error, or a possible error that would change a
-  reader's judgement if true.
-- 4-6: a refinement that clearly improves how the line reads, especially a
-  cheap one.
-- 1-3: polish.
+- A doubt about a claim the line already supports: asking a résumé line to
+  prove causation, rule out every alternative or show its full method, where
+  the line gives its own figures and a plausible mechanism. Measured: these
+  reached the report ranked above real fixes and pushed candidates to soften
+  sound claims.
+- A finding that is wrong about the line: it asks for what the line already
+  has, or misreads it.
+- Detail only a specialist would ask about (exact settings, how precisely it
+  was run), which belongs to the interview, not the page. **A method that
+  cannot support the line's conclusion is not this**: it is a problem on the
+  page (a comparison that does not isolate the effect, a metric redefined to
+  show a gain).
 
-Two levels guide the score.
+Keep everything else, however small. A small fix is cheap for the candidate,
+and it is theirs to skip. Wording findings (passive voice, duty framing, tense,
+a buried result, filler) are kept. Measured: set aside as polish, they were the
+findings plain reviews reported and this one did not.
 
-1. **Certain errors, all of them:** a line that is false as written (figures
-   that do not add up, a unit or percentage misused, a method that cannot do
-   what is claimed, a result filed under the wrong entry, a claim the page
-   contradicts), and personal details a resume should not carry. List them
-   first, whatever they cost. A practitioner who catches one stops trusting the
-   page.
-2. Refinements: everything else on one level, ranked by efficiency, whatever
-   its type (missing, unclear, buried results, writing flaws, order, layout,
-   cuts, and possible errors: claims that may overreach, such as a causal
-   claim without evidence, or a judgement call a reader could dispute).
-   - Efficiency: how much the change improves how the line reads to a hiring
-     reader, against what it costs (words added, effort to find a figure).
-   - A change that costs no words or saves words is cheap; one that changes a
-     reader's judgement is valuable. Cheap and valuable ranks first.
+- **Certain errors are never removed.**
+- **Do not polish a line that should go:** where a finding says a line should be
+  removed (it repeats another entry or does not belong), remove findings that
+  ask to improve that line.
+- **Nothing disappears:** everything you remove goes in setAside, with a reason.
 
-## Choosing
+## Grouping
 
-- Judge one by one: never set aside a whole type of finding in one go.
-- **Certain errors are never set aside:** every finding marked wrong is
-  chosen, however many points the report already has.
 - **One problem, one group:** readers overlap. Findings from different readers
   that name the same problem (the same duplicate, the same misspelling) are one
   group, however each words it.
@@ -69,25 +68,23 @@ Two levels guide the score.
   on different lines. Different errors are different groups, even of the same
   type or on the same entry; a group mixing them turns into one long point
   nobody can act on.
-- Impact and proof before method: detail a specialist would probe (conditions,
-  settings, how exactly it was run) belongs to the interview, not the page.
-  **A method that cannot support the line's conclusion is a problem on the
-  page**, certain or possible (a comparison that does not isolate the effect, a
-  metric redefined to show a gain). Measured: a confounded comparison was set
-  aside as a question for the interview.
-- **Do not polish a line that should go:** where a finding says a line should be
-  removed (it repeats another entry or does not belong), set aside findings
-  that ask to improve that line.
-- Rising cost per point: every point you add costs the candidate attention,
-  and each costs more than the one before. The first few refinements are
-  cheap; past about ten, a refinement must be clearly worth it; past fifteen,
-  only an exceptional one. Errors are exempt. There is no fixed number.
-- Room: what the chosen groups add, less what they save, should reach the room
-  left or a little over (about a tenth).
-- **Nothing disappears:** everything you leave out goes in setAside, with a
-  reason.
 
-## Fix type (for each chosen group)
+## Scoring
+
+Score every kept group from 1 to 10 for how much it matters to this résumé.
+The report is ordered by these scores, and low scores are shown briefly.
+
+- 9-10: a certain error that undermines the line or the page (figures that do
+  not add up, a method that cannot do what is claimed, a result under the wrong
+  entry), and personal details a resume should not carry.
+- 7-8: a smaller certain error, or a possible error that would change a
+  reader's judgement if true.
+- 4-6: a change that clearly improves how the line reads to a hiring reader.
+  Cheap and valuable ranks higher: a change that costs no words or saves words
+  is cheap; one that changes a reader's judgement is valuable.
+- 1-3: polish.
+
+## Fix type (for each kept group)
 
 - immediate: fixable now from the page alone.
 - shortTerm: the fix is clear but needs a figure the candidate has to find.
@@ -99,5 +96,5 @@ Two levels guide the score.
   readers' own findings.
 - Reasons: the one-line reasons are for the developers, never shown to the
   candidate.
-- Mark every finding once: chosen in a group, or set aside.
+- Mark every finding once: kept in a group ("chosen"), or removed ("setAside").
 - JSON only, matching the schema in the user message. No preamble.`;

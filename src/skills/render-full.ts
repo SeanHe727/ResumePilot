@@ -32,7 +32,7 @@ export function renderBrief(report: DiagnosisReport, sourcePath: string): string
     lines.push(
       `## Set aside (${setAside.length})`,
       '',
-      `${setAside.length} smaller points were left out; they are in \`/report --full\`.`,
+      `${setAside.length} findings were left out as not worth acting on; they are in \`/report --full\`.`,
       '',
     );
   }
@@ -96,10 +96,18 @@ function block(points: FullReportPoint[], lineText: Map<string, string>, full: b
     ),
     '',
   );
-  const whys = points.filter((p) => p.why);
-  if (whys.length > 0) out.push('**Why**', ...points.map((p, i) => numbered(i, p.why || '—')), '');
-  const fixes = points.filter((p) => p.fix);
-  if (fixes.length > 0) out.push('**How to change it**', ...points.map((p, i) => numbered(i, p.fix || '—')), '');
+  // Polish is kept in the brief as its problem line alone. Everything reaches
+  // the candidate now, and a small fix explained at full length is what makes
+  // a long report read as a long report.
+  const explained = (p: FullReportPoint) => full || p.tag !== 'polish';
+  const whys = points.filter((p) => p.why && explained(p));
+  if (whys.length > 0) {
+    out.push('**Why**', ...points.flatMap((p, i) => (explained(p) ? [numbered(i, p.why || '—')] : [])), '');
+  }
+  const fixes = points.filter((p) => p.fix && explained(p));
+  if (fixes.length > 0) {
+    out.push('**How to change it**', ...points.flatMap((p, i) => (explained(p) ? [numbered(i, p.fix || '—')] : [])), '');
+  }
   if (full) {
     const from = [...new Set(points.flatMap((p) => p.from))];
     if (from.length > 0) out.push(`*raised by ${from.join(', ')}*`, '');

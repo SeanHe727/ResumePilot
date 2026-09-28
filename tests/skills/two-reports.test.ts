@@ -108,6 +108,29 @@ describe('the brief and the full review', () => {
     }
   });
 
+  it('keeps polish in the brief as its problem line, and explains it only in the full one', async () => {
+    const polish = {
+      what: 'Two words repeat the cadence.',
+      why: 'They add length without meaning.',
+      fix: 'cut "each week"',
+      from: ['wording'],
+      tag: 'polish' as const,
+    };
+    const report = {
+      ...REPORT,
+      full: { sections: [{ heading: 'NIO Inc.', points: [polish] }] },
+    } as unknown as DiagnosisReport;
+
+    const brief = renderBrief(report, 'cv.pdf');
+    expect(brief).toContain('[Polish] Two words repeat the cadence.');
+    expect(brief).not.toContain(polish.why);
+    expect(brief).not.toContain(polish.fix);
+
+    const full = renderFull(report, 'cv.pdf');
+    expect(full).toContain(polish.why);
+    expect(full).toContain(polish.fix);
+  });
+
   it('says how much was set aside in the brief, and lists it in the full one', async () => {
     // A list nobody can see was trimmed reads as a short list; the list itself,
     // merged across lines, read to judges as a garbled second report.
