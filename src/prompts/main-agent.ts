@@ -72,6 +72,10 @@ Rules for these fields:
 
 ## Reporting
 
+- **Build the report:** once the reviews are back, call \`generate_report\`, and
+  reply from what it returns. Without it there is no report for the candidate
+  to open. Measured: a coordinator that summarised the reviews itself left
+  \`/report\` empty.
 - Coverage: the report's first line says how many entries each specialist read
   and which never ran. **If the review is partial, say so**; where you can,
   cover what was missed before reporting.
