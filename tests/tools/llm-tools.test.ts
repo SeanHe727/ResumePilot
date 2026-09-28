@@ -612,7 +612,12 @@ describe('generate_report: the improvement plan', () => {
     }],
   }];
 
-  const PLAN = JSON.stringify({ decisions: [{ finding: 'c1', keep: true, fix: 'immediate', why: 'drop "Responsible for"' }] });
+  const PLAN = JSON.stringify({
+    decisions: [
+      { finding: 'c1', keep: true, fix: 'immediate', why: 'drop "Responsible for"' },
+      { finding: 'f1', keep: false, why: 'the same duty opener' },
+    ],
+  });
 
   /** Replies in the order given, so a test can script a retry. */
   function scriptedCtx(replies: ParsedResponse[]) {
@@ -854,16 +859,31 @@ describe('generate_report: the improvement plan', () => {
         decisions: [{ finding: 'c1', keep: false, why: 'the page has no room left' }],
       }),
     };
-    const { ctx } = scriptedCtx([withSetAside]);
+    // Asked again for the one it did not decide, it still says nothing about it.
+    const { ctx, seen } = scriptedCtx([withSetAside, { ...answered, content: '{"decisions": []}' }]);
 
     const result = await generateReportTool.execute({} as never, ctx);
 
     expect(result.data?.improvementPlan.setAside).toEqual([
       // In the reader's own words, about the line it named.
       { what: 's1:e0:b0: "Responsible for" states a duty, not an outcome' },
-      // Not marked at all, and kept rather than dropped.
-      { what: expect.stringContaining('opens with a duty') },
     ]);
+    // Undecided twice, and kept rather than dropped.
+    expect(result.data?.improvementPlan.immediate).toEqual([expect.stringContaining('opens with a duty')]);
+    expect(seen[1]?.messages.at(-1)?.content).toMatch(/You did not decide these: f1\./);
+  });
+
+  it('asks once for the findings the filter left undecided, and takes its answer', async () => {
+    const first: ParsedResponse = { ...answered, content: JSON.stringify({ decisions: [{ finding: 'c1', keep: true, fix: 'immediate', score: 6 }] }) };
+    const second: ParsedResponse = { ...answered, content: JSON.stringify({ decisions: [{ finding: 'f1', keep: false, why: 'repeats c1' }] }) };
+    const { ctx, calls } = scriptedCtx([first, second, answered]);
+
+    const result = await generateReportTool.execute({} as never, ctx);
+
+    expect(result.data?.improvementPlan.setAside).toEqual([{ what: expect.stringContaining('opens with a duty') }]);
+    expect(result.data?.improvementPlan.immediate).toEqual([expect.stringContaining('Responsible for')]);
+    // The filter, its follow-up, then the writer.
+    expect(calls()).toBe(3);
   });
 
   it('retries when the model reasoned past writing an answer', async () => {

@@ -328,8 +328,8 @@ const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
  * report as advice.
  *
  * Each finding is decided once (the first decision wins) and a name that was
- * not offered is dropped. A finding the filter did not decide is set aside,
- * because nothing is meant to disappear. Each kept finding is a group of one.
+ * not offered is dropped. A finding the filter did not decide is kept. Each
+ * kept finding is a group of one.
  */
 export function planFromMarks(
   parsed: Record<string, unknown> | null,
@@ -379,6 +379,20 @@ export function planFromMarks(
       tag: error ? 'error' : score >= 5 ? 'important' : 'polish',
     });
   }
+  // Undecided is kept, not set aside: the filter is meant to remove only what
+  // should not reach the candidate, and a finding it never looked at was not
+  // judged to be that.
+  const unmarked = findings.filter((f) => !placed.has(f.id));
+  for (const finding of unmarked) {
+    const error = finding.kind === 'wrong';
+    kept.push({
+      kind: 'immediate',
+      findingIds: [finding.id],
+      targets: [lineOf(finding)],
+      score: error ? 8 : 3,
+      tag: error ? 'error' : 'polish',
+    });
+  }
   // By score, highest first; the filter's own order breaks ties. Scored
   // rather than listed in order: listed, errors came out in the order they
   // sit on the page, a small one first and the worst fourth.
@@ -387,12 +401,11 @@ export function planFromMarks(
     .sort((a, b) => (b.group.score ?? 0) - (a.group.score ?? 0) || a.i - b.i)
     .map(({ group }) => group);
 
-  const unmarked = findings.filter((f) => !placed.has(f.id));
   const byId = new Map(findings.map((f) => [f.id, f] as const));
   // In the reader's words, about the line it named.
   const say = (finding: SourceFinding): string => `${lineOf(finding)}: ${finding.what}`;
   const sayGroup = (group: PlanGroup): string => say(byId.get(group.findingIds[0]!)!);
-  const setAside = [...removed, ...unmarked].map((finding) => ({ what: say(finding) }));
+  const setAside = removed.map((finding) => ({ what: say(finding) }));
 
   return {
     plan: {
@@ -431,7 +444,7 @@ async function buildImprovementPlan(
       ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${roomWords(input)} words of room.`
       : `The resume runs ${length.wordCount} words over ${length.pageCount} pages. It is already long, so anything added has to displace something.`;
 
-  const ask = () => ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => ctx.queryEngine.query({
     task: 'generate_report',
     systemPrompt: IMPROVEMENT_PLAN_PROMPT,
     messages: [
@@ -450,6 +463,12 @@ Name findings only by the short names above. Decide every one of them, once. Ret
   ]
 }`,
       },
+      ...(followUp
+        ? [
+            { role: 'assistant' as const, content: followUp.previous },
+            { role: 'user' as const, content: followUp.note },
+          ]
+        : []),
     ],
     ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
   });
@@ -465,7 +484,23 @@ Name findings only by the short names above. Decide every one of them, once. Ret
     response = await ask();
   }
 
-  const parsed = parseJsonObject(response.content ?? '');
+  let parsed = parseJsonObject(response.content ?? '');
+
+  // Every finding decided. Measured: the filter left a certain error unmarked,
+  // and an unmarked finding never reached the candidate. Asked once for the
+  // ones it missed; what it still misses is kept (see planFromMarks).
+  const missed = planFromMarks(parsed, findings).unmarked;
+  if (parsed && missed.length > 0) {
+    const shortOf = new Map(aliasFindings(findings).named.map(({ short, finding }) => [finding.id, short]));
+    const names = missed.map((id) => shortOf.get(id)!);
+    const again = await ask({
+      previous: response.content ?? '',
+      note: `You did not decide these: ${names.join(', ')}. Decide each of them, and only them, in the same JSON shape.`,
+    });
+    const more = parseJsonObject(again.content ?? '');
+    const decisions = (raw: Record<string, unknown> | null) => (Array.isArray(raw?.decisions) ? raw.decisions : []);
+    parsed = { decisions: [...decisions(parsed), ...decisions(more)] };
+  }
 
   // Room is the selection's to weigh, not the code's to enforce: it is told how
   // much the page has left and chooses by what each change is worth per word.

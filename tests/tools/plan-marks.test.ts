@@ -25,7 +25,10 @@ describe('planFromMarks', () => {
   it('keeps each finding as its own group, about its own line, in the reader\'s words', () => {
     // The filter does not group: grouping across lines is what turned one
     // duplicate into several points once code split the groups again.
-    const { plan } = planFromMarks({ decisions: [keep('w1', { why: 'lead with the result' }), keep('w2')] }, FINDINGS);
+    const { plan } = planFromMarks(
+      { decisions: [{ finding: 'c1', keep: false }, { finding: 'c2', keep: false }, keep('w1', { why: 'lead with the result' }), keep('w2')] },
+      FINDINGS,
+    );
 
     expect(plan.groups).toEqual([
       { kind: 'immediate', findingIds: ['x3'], targets: ['s2:e0:b3'], score: 3, tag: 'polish' },
@@ -51,13 +54,10 @@ describe('planFromMarks', () => {
     );
 
     expect(unknown).toEqual(['c9']);
-    expect(plan.groups!.map((g) => g.findingIds)).toEqual([['x1'], ['x2']]);
+    // Decided by nobody is kept: only a removal takes a finding out.
+    expect(plan.groups!.map((g) => g.findingIds)).toEqual([['x1'], ['x2'], ['x4']]);
     expect(plan.groups![0]!.kind).toBe('shortTerm');
-    expect(plan.setAside).toEqual([
-      { what: 's2:e0:b3: method before result' },
-      // Decided by nobody, and kept on the record rather than dropped.
-      { what: 's2:e0:b2: method before result' },
-    ]);
+    expect(plan.setAside).toEqual([{ what: 's2:e0:b3: method before result' }]);
     // The reasons are for the trace.
     expect(reasons).toContainEqual({ findingIds: ['x3'], chosen: false, reason: 'no room' });
     expect(unmarked).toEqual(['x4']);
@@ -65,7 +65,10 @@ describe('planFromMarks', () => {
 
   it('keeps a finding kept without a fix type, labelled fix now', () => {
     // The type labels the point; it does not decide whether the candidate sees it.
-    const { plan } = planFromMarks({ decisions: [{ finding: 'c1', keep: true, fix: 'soon' }] }, FINDINGS);
+    const { plan } = planFromMarks(
+      { decisions: [{ finding: 'c1', keep: true, fix: 'soon' }, ...['c2', 'w1', 'w2'].map((finding) => ({ finding, keep: false }))] },
+      FINDINGS,
+    );
     expect(plan.groups!.map((g) => [g.findingIds, g.kind])).toEqual([[['x1'], 'immediate']]);
   });
 });
@@ -256,7 +259,12 @@ describe('errors in the plan', () => {
 
   it('tags an error as one, and ranks an unscored error ahead of an unscored refinement', () => {
     const { plan } = planFromMarks(
-      { decisions: [{ finding: 'c4', keep: true, fix: 'immediate' }, { finding: 'c2', keep: true, fix: 'immediate' }] },
+      { decisions: [
+        { finding: 'c4', keep: true, fix: 'immediate' },
+        { finding: 'c2', keep: true, fix: 'immediate' },
+        { finding: 'c1', keep: false },
+        { finding: 'c3', keep: false },
+      ] },
       ERRS,
     );
 

@@ -212,7 +212,12 @@ describe('through the tool that actually runs it', () => {
           if (asked.length === 1) {
             return {
               type: 'text',
-              content: JSON.stringify({ decisions: [{ finding: 'c1', keep: true, fix: 'immediate', why: 'name the figure' }] }),
+              // Decides everything it was shown: c1 kept, the rest removed.
+              content: JSON.stringify({
+                decisions: [...asked[0]!.matchAll(/^- (\w\d+) \[/gm)].map(([, name]) =>
+                  name === 'c1' ? { finding: 'c1', keep: true, fix: 'immediate', why: 'name the figure' } : { finding: name, keep: false },
+                ),
+              }),
               usage: { inputTokens: 0, outputTokens: 0 },
               stopReason: 'end_turn',
             };
