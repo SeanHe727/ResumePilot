@@ -349,7 +349,7 @@ function collectSkillsIssues(resume: ResumeDocument, issues: string[]): void {
  * that reports what the classifier thinks rather than what the resume says.
  */
 function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
-  const text = resume.sections.flatMap(sectionText).join(' ');
+  const text = [...resume.sections.flatMap(sectionText), ...unplacedLines(resume)].join(' ');
 
   const hasEmail = EMAIL.test(text);
   const hasPhone = PHONE.test(text);
@@ -366,7 +366,7 @@ function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
  * can appear in a section this analysis does not otherwise model.
  */
 function collectConventionIssues(resume: ResumeDocument, issues: string[]): void {
-  const lines = resume.sections.flatMap(sectionText);
+  const lines = [...resume.sections.flatMap(sectionText), ...unplacedLines(resume)];
 
   for (const line of lines) {
     if (mentionsReferences(line)) issues.push(describe('harvard.no-references', line));
@@ -374,6 +374,24 @@ function collectConventionIssues(resume: ResumeDocument, issues: string[]): void
     const detail = personalDetail(line);
     if (detail) issues.push(describe('harvard.no-personal-details', line));
   }
+}
+
+/**
+ * Lines of the file the parse left out of every section.
+ *
+ * A row the parser could not place is still on the page, and a reader still
+ * sees it. Measured: a date of birth the parse dropped went
+ * unreported in two runs, while every run that placed it reported it.
+ * A line a revision has since rewritten also lands here, which only matters if
+ * the old wording carried a contact detail or a personal one.
+ */
+function unplacedLines(resume: ResumeDocument): string[] {
+  const squash = (t: string) => t.toLowerCase().replace(/\s+/g, '');
+  const placed = squash(resume.sections.flatMap(sectionText).join(' '));
+  return (resume.rawText ?? '')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line && !placed.includes(squash(line)));
 }
 
 /** Convenience for the report layer: the same score, but explained. */

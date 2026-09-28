@@ -305,6 +305,30 @@ describe('analyzeFormat scoring', () => {
     expect(d.metrics.atsParsability.score).toBeLessThan(100);
   });
 
+  it('reads a personal detail the parse left out of every section', () => {
+    // The parse can drop a row; the page still carries it. Measured: a date of
+    // birth the parse did not place went unreported.
+    const dropped: ResumeDocument = {
+      sourcePath: 'dropped.pdf',
+      format: 'pdf',
+      rawText: 'Jordan Lee\njordan.lee@example.com | +1 (555) 010-2468\nDate of birth: 2 Nov 1996 | Nationality: American',
+      sections: [
+        {
+          id: 's0',
+          kind: 'contact',
+          heading: '',
+          looseLines: ['Jordan Lee', 'jordan.lee@example.com | +1 (555) 010-2468'],
+          infoLines: [],
+          entries: [],
+          span: { start: 0, end: 1 },
+        },
+      ],
+      meta: { wordCount: 20, quality: 'clean', layoutWarnings: [] },
+    };
+
+    expect(mentions(analyzeFormat(dropped), 'personal details')).toBe(true);
+  });
+
   it('survives a document with no bullets at all', () => {
     const empty: ResumeDocument = {
       sourcePath: 'empty.md',
