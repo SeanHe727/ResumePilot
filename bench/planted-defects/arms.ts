@@ -14,6 +14,10 @@ const ARMS: Record<string, { model: string; instructions?: string }> = {
   B: { model: 'gpt-6-luna' },
   C: { model: 'gpt-6-sol' },
   D: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-critique-framework.md', 'utf8') },
+  // Three published résumé skills, each on luna as its system prompt.
+  E: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-cyber-resume-reviewer.md', 'utf8') },
+  F: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-resumeskills-tech-optimizer.md', 'utf8') },
+  G: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-llm-intern.md', 'utf8') },
 };
 const cfg = ARMS[arm!]!;
 const client = new OpenAI();
