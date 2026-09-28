@@ -1,6 +1,6 @@
 {
   "file": "bench/planted-defects/tests/b1-ce/out/A.md",
-  "recall": 10,
+  "recall": 8,
   "found": [
     "W1",
     "W5",
@@ -9,87 +9,85 @@
     "S1",
     "S3",
     "T1",
-    "T3",
-    "N2",
-    "N4"
+    "N2"
   ],
   "coverage": true,
-  "suggestions": 13,
-  "words": 1795,
-  "quotes": 4,
-  "grounded": 3,
+  "suggestions": 17,
+  "words": 1650,
+  "quotes": 7,
+  "grounded": 1,
   "rewrites": 0,
   "inventedNumbers": [],
   "falsePositives": [],
   "total": 10,
   "judgeUsage": {
-    "prompt_tokens": 4351,
-    "completion_tokens": 8835,
-    "total_tokens": 13186,
+    "prompt_tokens": 4276,
+    "completion_tokens": 6599,
+    "total_tokens": 10875,
     "prompt_tokens_details": {
       "cached_tokens": 1792
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 8458
+      "reasoning_tokens": 6209
     },
     "prompt_cache_hit_tokens": 1792,
-    "prompt_cache_miss_tokens": 2559
+    "prompt_cache_miss_tokens": 2484
   },
   "verdict": {
     "defects": [
       {
         "id": "W1",
         "found": true,
-        "evidence": "The dashboard and on-call ownership shows responsibility but not the resulting operational change."
+        "evidence": "The dashboard ownership line gives neither an outcome nor a concrete operating method."
       },
       {
         "id": "W5",
         "found": true,
-        "evidence": "The adoption and delivery claim is vague and has no measurable scale."
+        "evidence": "The delivery benefits are generic, unmeasured, and jargon-heavy."
       },
       {
         "id": "A2",
         "found": true,
-        "evidence": "The task-completion increase is 12 percentage points, not 12% as written."
+        "evidence": "Raising task completion from 71% to 83% is a 12-percentage-point increase, not simply '12%'."
       },
       {
         "id": "A3",
         "found": true,
-        "evidence": "The latency reduction is 33.3%, not 50%."
+        "evidence": "The 50% latency reduction is arithmetically incorrect."
       },
       {
         "id": "S1",
         "found": true,
-        "evidence": "The latency result is buried after a long method list and gives insufficient context for attribution."
+        "evidence": "The end-to-end latency result is buried after methods"
       },
       {
         "id": "S3",
         "found": true,
-        "evidence": "The result is also buried after several unrelated actions."
+        "evidence": "The migration bullet crowds the technical result with unrelated duties"
       },
       {
         "id": "T1",
         "found": true,
-        "evidence": "Sampling exactly one rollout per prompt does not stabilize standard GRPO as stated."
+        "evidence": "Standard GRPO needs multiple completions for within-prompt relative rewards; one rollout makes that signal degenerate or unavailable."
       },
       {
         "id": "T3",
-        "found": true,
-        "evidence": "Dynamic batching can add batching-wait overhead when no concurrent requests are available, so it does not generally reduce the latency of an isolated request."
+        "found": false,
+        "evidence": ""
       },
       {
         "id": "N2",
         "found": true,
-        "evidence": "Experience is not listed in reverse chronological order."
+        "evidence": "Experience is not ordered newest-first."
       },
       {
         "id": "N4",
-        "found": true,
-        "evidence": "no supporting resume entries for LangGraph, RAG, or Kubernetes."
+        "found": false,
+        "evidence": ""
       }
     ],
     "coverage": true,
-    "suggestions": 13,
+    "suggestions": 17,
     "rewrites": [],
     "falsePositives": []
   }

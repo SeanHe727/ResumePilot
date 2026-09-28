@@ -1,236 +1,257 @@
 # Full review: resume.pdf
 
-**83/100** — format 100 · content 75 · wording 80 · narrative 64
+**83/100** — format 100 · content 72 · wording 80 · narrative 76
 
 Read 4 of 4 entries for content, 4 for wording. Career reading done, posting comparison no-posting.
 
-## Start here
-
-1. **Remove personal details conventionally left off résumés.**
-   > Date of birth: 2 Nov 1996
-   Date of birth and nationality do not help a recruiter weigh these qualifications and use attention on irrelevant information.
-   **How to change it:** Delete the date-of-birth and nationality details.
-2. **The late-delivery reduction is not demonstrated because weather-delayed shipments were excluded from the denominator.**
-   > Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
-   The changed calculation makes 11% and 7% potentially non-comparable, so it does not establish that actual late deliveries fell.
-   **How to change it:** State that the reported rate changed after applying the exclusion rule, or report the all-shipments late-delivery rate.
-3. **The S&OP bullet uses inconsistent tense and gives no resulting business outcome.**
-   > Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.
-   "Coordinated" and "prepares" are not parallel in an ended role. Coordination and forecast preparation show activity, but not what changed as a result.
-   **How to change it:** Change "prepares" to "prepared," expand the first use to "Sales and Operations Planning (S&OP)," and add [the measured planning or operating outcome].
-
-## Already working
-
-- s2:e0:b0: Leads with a strong product outcome rather than a task.
-- s2:e0:b5: Connects a specific onboarding change to a meaningful payment-start outcome.
-- s2:e1:b3: Puts a quantified efficiency outcome alongside clear implementation ownership.
-
-## Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
-
-### The onboarding comparison cannot establish a causal effect, and it reports no finding.
-
-> opted into the new flow
-
-Opt-in merchants may differ systematically from those who stayed on the old flow, so the comparison shows association rather than causation. It also ends with method instead of the outcome found.
-
-**How to change it:** State the comparison without causal language and combine it with the quantified result; if causal evaluation was performed, specify [the randomization or adjustment method].
-
-*raised by content, wording, narrative · costs saves about 16 words if removed*
-
-### The checkout-conversion claim lacks a baseline or comparison.
-
-> Improved checkout conversion by 35%
-
-A reader cannot judge the size of a 35% improvement or whether the calculation used a controlled comparison.
-
-**How to change it:** Add [the conversion rate before and after] or [the old-flow and new-flow rates].
-
-*raised by content · costs about 6 words to add*
-
-### The dispute-self-service bullet shows delivery speed but not product impact.
-
-> two weeks ahead of plan
-
-Shipping early demonstrates execution, not whether self-service reduced support demand, improved resolution, or benefited merchants.
-
-**How to change it:** Add [the post-launch user or business outcome]; retain the schedule comparison only if space allows.
-
-*raised by content · costs about 5 words to add*
-
-### The interviews did not by themselves size the chargeback problem or show why it deserved priority.
-
-> size the chargeback problem
-
-Twenty-five potentially non-representative interviews support qualitative discovery, not population-level quantification. The reader also lacks the evidence behind the roadmap decision.
-
-**How to change it:** Use language about identifying pain points and informing the business case; add [the quantitative source and estimate] or [a frequency, cost, or affected-share finding].
-
-*raised by content, wording · costs about 5 words to add*
-
-### Repeat the unit at the end of the onboarding result.
-
-> from 9 days to 4
-
-A scanning reader should not have to infer that 4 means days.
-
-**How to change it:** Change it to "from 9 days to 4 days."
-
-*raised by wording · costs adds 1 word*
-
-## Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
-
-### The late-delivery reduction is not demonstrated because weather-delayed shipments were excluded from the denominator.
-
-> excluding weather-delayed shipments
-
-The changed calculation makes 11% and 7% potentially non-comparable, so it does not establish that actual late deliveries fell.
-
-**How to change it:** State that the reported rate changed after applying the exclusion rule, or report the all-shipments late-delivery rate.
-
-*raised by content · costs about 5 words to add*
-
-### The pick-error bullet is grammatically incomplete and lacks the underlying error-rate comparison.
-
-> pick errors 30%
-
-"By" is required to express the reduction, and the relative figure alone does not show whether the improvement was substantial or small.
-
-**How to change it:** Change it to "pick errors by 30%" and add [the starting and ending error rates] over a comparable period.
-
-*raised by content, wording · costs about 6 words to add*
-
-### The S&OP bullet uses inconsistent tense and gives no resulting business outcome.
-
-> Coordinated the quarterly S&OP
-
-"Coordinated" and "prepares" are not parallel in an ended role. Coordination and forecast preparation show activity, but not what changed as a result.
-
-**How to change it:** Change "prepares" to "prepared," expand the first use to "Sales and Operations Planning (S&OP)," and add [the measured planning or operating outcome].
-
-*raised by content, wording · costs about 8 words to add*
-
-### The route-planning result is buried after the methods.
-
-> saving 1,800 driver hours a year
-
-The 1,800-hour saving is the strongest evidence of value but appears only after the rollout and training details.
-
-**How to change it:** Move the saving immediately after "to 3 depots."
-
-*raised by wording · costs no words*
-
-## Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
-
-### The 9-tonne claim overstates what the line establishes, and the result is buried.
-
-> would have been thrown away
-
-The quantity does not prove every batch would otherwise have been discarded without disposal records. Its late position also weakens impact for a scanning reader.
-
-**How to change it:** Use "redistributing 9 tonnes of surplus food" unless records verify the counterfactual, and move the quantified result earlier in the bullet.
-
-*raised by content, wording · costs saves about 5 words*
-
-### The user-growth bullet attributes the entire increase to reminders without a causal test.
-
-> by adding pickup reminders
-
-The interviews explain why reminders were chosen, but not whether they caused the 750-user increase; other changes or seasonality could explain it.
-
-**How to change it:** Say users rose after reminders were added, informed by 60 interviews; retain causal wording only with [an experiment or comparable cohort analysis].
-
-*raised by content, wording · costs about 2 words to add*
-
-### A 95% fill rate does not establish that staff coverage gaps disappeared, and the mechanism is too vague.
-
-> volunteer shift system
-
-Approximately 5% of slots remained unfilled, and the reader cannot tell what the candidate built to achieve the result.
-
-**How to change it:** Remove the staff-coverage claim unless records support it, and replace the general system description with [the key mechanism created].
-
-*raised by content, wording · costs saves about 9 words*
-
-## MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
-
-### The practicum's merchant-onboarding bullet is unrelated to the hospital project and should be removed or replaced.
-
-> 2,300 merchants
-
-It conflicts with the entry's scheduling and patient-intake narrative and repeats Harbor Payments' result. Its relative metric, merchant scope, and unspecified intervention further make it look copied.
-
-**How to change it:** Remove it, or replace it with the hospital project's actual [measured outcome] and specific intervention.
-
-*raised by content, narrative, wording · costs saves about 20 words if removed*
-
-### The scheduling and intake bullets describe activity and adoption but not outcomes.
-
-> Held weekly working sessions
-
-Working sessions and front-desk adoption show engagement and implementation, but not whether access, capacity, intake time, errors, or completion improved. Passive wording also obscures who performed the work.
-
-**How to change it:** Use active wording, replace vague scope with [the specific scope], and add [the resulting scheduling or intake outcome]. Write "four clinics" if numerals are not used consistently.
-
-*raised by content, wording · costs about 6 words to add*
+9 errors, 9 important, 0 polish. Errors are marked [Error]; fix those first.
 
 ## Across the whole résumé
 
-### Remove personal details conventionally left off résumés.
-
 > Date of birth: 2 Nov 1996
 
-Date of birth and nationality do not help a recruiter weigh these qualifications and use attention on irrelevant information.
+**Problem**
+[Error] Remove personal details that are not relevant to hiring. *(saves about 9 words)*
 
-**How to change it:** Delete the date-of-birth and nationality details.
+**Why**
+A reader is not meant to weigh date of birth or nationality. They use space without strengthening your candidacy.
 
-*raised by file · costs saves about 8 words*
+**How to change it**
+Delete the date-of-birth and nationality details.
 
-### The résumé assigns the same merchant-onboarding achievement to both Harbor Payments and the hospital practicum.
+*raised by file*
 
-> new merchant to receive a first payment
+> across 2,300 merchants
 
-The practicum concerns hospital scheduling, so the duplicate looks copied and weakens confidence in the résumé's accuracy.
+**Problem**
+[Error] The merchant-onboarding result is assigned to two projects, and 9 days to 4 days is not exactly a halving. *(no words)*
 
-**How to change it:** Assign the achievement to the correct entry and remove or replace the duplicate with the actual [project outcome].
+**Why**
+The practicum predates Harbor Payments and concerns a hospital network. The conflict makes ownership and accuracy unclear.
 
-*raised by narrative · costs saves about 18 words*
+**How to change it**
+Keep the achievement under the correct role, remove the duplicate, and use the consistent median-time metric.
 
-### Lead with EXPERIENCE, then PROJECTS, then EDUCATION.
-
-> Northfield School of Management | MBA
-
-With more than four years of pre-MBA work, leading with education makes the MBA look like the primary qualification rather than a product-management transition. The food-rescue project is the stronger product thread and should precede the practicum.
-
-**How to change it:** Move EXPERIENCE above EDUCATION; place PROJECTS between them, with Campus Food Rescue App before MBA Consulting Practicum.
-
-*raised by narrative · costs no words*
-
-### The timeline leaves June 2018 to March 2019 unexplained.
+*raised by narrative*
 
 > Jun 2018
 
-A recruiter can see the gap but cannot tell whether it reflects work, study, travel, or another activity.
+**Problem**
+[Important] Explain the eight-month gap and move EXPERIENCE above EDUCATION. *(about 3–8 words to add)*
 
-**How to change it:** Add the missing activity or a concise explanation: [the candidate's actual activity].
+**Why**
+The dates leave a reader wondering what happened after June 2018. Five years of work should carry more visual weight than the degrees.
 
-*raised by narrative · costs about 3 words to add*
+**How to change it**
+Add [the activity occupying Aug 2018–Feb 2019], and move EXPERIENCE above EDUCATION.
 
-## Set aside (17)
+*raised by narrative*
 
-- s2:e0:b0: “Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.”
-- s2:e0:b5: “Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.”
-- s3:e1:b0: "weekly" shows meeting cadence, but the line has no figure proving the result of the scheduling work.
-- s3:e1:b0: "working sessions" does not show what the candidate actually did during them.
-- s3:e1:b1: "at 4 clinics" measures the project scope rather than the effect of shortening the form.
-- s3:e1:b2: "Halved the time" gives a relative result, while "across 2,300 merchants" gives scope but not the starting and ending time. (and 1 more like it)
-- s2:e0:b4: "Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one" contains no finding from the comparison. (and 2 more like it)
-- s3:e1:b0: "Held weekly working sessions" describes activity without stating what the sessions produced or changed.
-- s3:e1:b0: "Across the network" is vague and can be replaced by a more specific scope if the number of clinics or managers is known.
-- s3:e1:b1: "Patient intake at 4 clinics was mapped and the intake form was shortened" obscures who performed both actions. (and 1 more like it)
-- s3:e1:b2: "New merchant" and "2,300 merchants" conflict with the hospital-network context and make the bullet appear copied from another project. (and 2 more like it)
-- s3:e0:b0: "that would have been thrown away" is an awkward passive construction and makes the claim sound hypothetical rather than clearly stating the waste prevented.
-- s3:e0:b1: "chosen after 60 user interviews" creates a dangling modifier because it is unclear whether the reminders or the candidate made the choice.
-- s3:e0:b2: "removing the need for staff to cover gaps" is broad and slightly indirect, so the operational result is less crisp than the 95% figure.
-- s2:e0:b2: "Size the chargeback problem" uses internal-sounding jargon that may be less immediately clear to readers outside payments.
-- whole resume, order: Within EXPERIENCE, keep Harbor Payments before Crestline Logistics; this correctly foregrounds the most recent and most relevant product role.
-- s3:e1: The first two bullets establish a hospital scheduling project, while s3:e1:b2 is an unrelated merchant-onboarding achievement that should be removed from this entry rather than reordered.
+> Campus Food Rescue App
+
+**Problem**
+[Important] Keep Campus Food Rescue App before MBA Consulting Practicum. *(no words)*
+
+**Why**
+The ongoing project is the stronger product story and should open PROJECTS.
+
+**How to change it**
+Move Campus Food Rescue App before the practicum.
+
+*raised by narrative*
+
+## Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
+
+> Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.
+
+**Problem**
+[Important] The checkout claim lacks a baseline and does not establish causation or universal scope. *(about 4–10 words to add)*
+
+**Why**
+Other changes could explain the 35% increase, and a subset cannot represent all merchants without evidence. The reader cannot tell whether 35% is relative or percentage-point change.
+
+**How to change it**
+Add [the baseline and comparison], report the measured population, and remove causal or universal wording unless supported.
+
+*raised by content*
+
+> Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.
+
+**Problem**
+[Important] The dispute-self-service bullet gives no post-launch result and obscures your delivery role. *(about 5–10 words to add)*
+
+**Why**
+The reader sees requirements and alignment but cannot judge feature value. "The team shipped it" hides your connection to delivery.
+
+**How to change it**
+Use an active delivery phrase and add [the change in the key success metric].
+
+*raised by content, wording*
+
+> Interviewed 25 merchants to size the chargeback problem and turned the findings into the business case that set the next quarter’s roadmap priority.
+
+**Problem**
+[Important] Interviews alone cannot size the chargeback problem, and the bullet gives no finding. *(about 4–10 words to add)*
+
+**Why**
+Twenty-five interviews show experience and perceptions, not prevalence or financial magnitude. Without a quantified result, the roadmap priority is unsupported.
+
+**How to change it**
+Call the work directional, and add [representative data] and [the quantified finding] if available.
+
+*raised by content*
+
+> Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.
+
+**Problem**
+1. [Error] The opt-in comparison is descriptive, not a valid causal measurement. *(about 2 words to add)*
+2. [Important] The onboarding-evaluation bullet gives a method but no result or decision. *(about 5–12 words to add)*
+
+**Why**
+1. Opt-in merchants may differ systematically from those who stayed on the old flow. Their outcomes cannot establish the redesign's effect without randomization or credible adjustment.
+2. The reader cannot tell whether the new flow improved performance or changed the product.
+
+**How to change it**
+1. Call it a descriptive comparison, or add a valid randomized or quasi-experimental method.
+2. Add [the measured difference] or [the decision informed].
+
+*raised by content, wording*
+
+> Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
+
+**Problem**
+[Error] The onboarding result cannot be attributed to this internship as written. *(no words)*
+
+**Why**
+The same result is assigned to an earlier practicum. A reader cannot tell which role produced it.
+
+**How to change it**
+Correct the dates and attribution, or remove the result from this entry.
+
+*raised by content*
+
+## Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023
+
+> Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.
+
+**Problem**
+[Error] Excluding weather-delayed shipments changes the calculation; it does not prove overall late deliveries fell. *(about 4–8 words to add)*
+
+**Why**
+The denominator changes, so the reported rate may fall without fewer late deliveries. The periods and shipment population are also unspecified.
+
+**How to change it**
+Report the non-weather rate explicitly, add [comparison periods], and report any overall reduction separately.
+
+*raised by content, wording*
+
+> Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.
+
+**Problem**
+[Error] The bullet must say “cut warehouse pick errors by 30%.” *(about 1–7 words to add)*
+
+**Why**
+The percentage needs the preposition “by.” The baseline and measurement window are also missing.
+
+**How to change it**
+Insert “by” and add [error rate before], [error rate after], and [comparison period] if available.
+
+*raised by content, wording*
+
+> Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.
+
+**Problem**
+[Error] The S&OP bullet reports activities without an outcome and mixes tense. *(about 4–8 words to add)*
+
+**Why**
+A reader cannot see whether planning improved. “S&OP” is also unexplained jargon, and “prepares” is present tense for a completed role.
+
+**How to change it**
+Change “prepares” to “prepared,” explain S&OP, and add [the strongest measured outcome].
+
+*raised by content, wording*
+
+## Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
+
+> Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.
+> Raised weekly active users from 400 to 1,150 by adding pickup reminders, chosen after 60 user interviews showed students missed pickup windows.
+> Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and removing the need for staff to cover gaps.
+
+**Problem**
+[Error] The project bullets do not clearly show ownership, scope, timing, or valid causation. *(about 5–15 words to add)*
+
+**Why**
+The launch does not identify your contribution; “with two dining halls” is ambiguous; and user growth is attributed to reminders without a control or timeframe. The 95% fill rate also contradicts removing every staff gap.
+
+**How to change it**
+Add [your owned responsibility], clarify the dining-hall relationship, add [the growth period], state that users rose after reminders unless causation is proven, and say staff coverage was reduced rather than eliminated.
+
+*raised by content, wording*
+
+## MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
+
+> Held weekly working sessions with clinic managers on outpatient scheduling across the network.
+
+**Problem**
+[Important] The scheduling bullet describes meetings rather than your work or its result. *(about 3–10 words to add)*
+
+**Why**
+“Working sessions” does not show analysis, advice, or process design. Without an outcome, the reader cannot judge your contribution as team lead.
+
+**How to change it**
+Replace the phrase with [the specific analysis or recommendation adopted], using “Advised” or “Led” if accurate.
+
+*raised by content, wording*
+
+> Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.
+
+**Problem**
+[Important] The intake bullet hides ownership and does not quantify the shortened form. *(about 4–10 words to add)*
+
+**Why**
+Passive wording obscures who performed the work, while adoption is buried. Four clinics show scope, not the size of improvement.
+
+**How to change it**
+Use active wording, bring adoption forward, and add [fields or steps removed] or [the change in intake time or completion rate].
+
+*raised by content, wording*
+
+> Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.
+
+**Problem**
+[Error] The merchant-onboarding bullet is wrong for this hospital practicum. *(about 2–10 words to add)*
+
+**Why**
+The surrounding work concerns scheduling and intake, not payments. It duplicates Harbor Payments and makes the project look misattributed.
+
+**How to change it**
+Remove it and replace it with [the actual measured hospital-project outcome].
+
+*raised by content*
+
+> first payment
+
+**Problem**
+[Important] Remove the merchant-onboarding bullet from the hospital practicum or move it to Harbor Payments. *(saves about 17 words)*
+
+**Why**
+It is unrelated to the surrounding hospital work and duplicates another entry. The project otherwise concerns scheduling and intake.
+
+**How to change it**
+Delete the bullet from the practicum and retain it only under the correct role.
+
+*raised by narrative*
+
+## Already working
+
+- s2:e1:b3: Combines ownership of a rollout with a quantified annual benefit.
+
+## Set aside (7)
+
+- s3:e0:b2: The phrase "Set up a volunteer shift system" identifies an initiative but not the mechanism or ownership behind it.
+- s3:e1:b2: The phrase "by redesigning onboarding" does not show what the redesign involved.
+- s2:e0:b3: "Over the summer" is redundant with the internship dates and adds no useful scope.
+- s3:e1:b2: "The time it takes a new merchant to receive a first payment" uses present tense for completed work and is unnecessarily long; change it to "the time for new merchants to receive their first payment."
+- s3:e0:b0: The phrase "that would have been thrown away" is longer than necessary and weakens the impact of the food-rescue result.
+- s3:e0:b2: The phrase "removing the need for staff to cover gaps" is indirect and less concise than stating that it eliminated staff gap coverage.
+- s2:e1:b2: "S&OP" is unexplained jargon for readers outside supply-chain operations.
