@@ -117,6 +117,27 @@ export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
     reasoningEffort: true,
     responsesApi: true,
   },
+  'gpt-6-luna': {
+    id: 'gpt-6-luna',
+    provider: 'openai',
+    // Not yet confirmed against the price list: the 5.6 rates, which it is
+    // said to undercut, so the budget errs high rather than low.
+    pricing: { inputPerMTok: 0.2, outputPerMTok: 1.2, cachedInputPerMTok: 0.02 },
+    contextWindow: 400_000,
+    usesMaxCompletionTokens: true,
+    reasoningEffort: true,
+    responsesApi: true,
+  },
+  'gpt-6-sol': {
+    id: 'gpt-6-sol',
+    provider: 'openai',
+    // Published rates ($2 in, $10 out); cached input assumed a tenth, as for luna.
+    pricing: { inputPerMTok: 2.0, outputPerMTok: 10.0, cachedInputPerMTok: 0.2 },
+    contextWindow: 400_000,
+    usesMaxCompletionTokens: true,
+    reasoningEffort: true,
+    responsesApi: true,
+  },
   'text-embedding-3-small': {
     id: 'text-embedding-3-small',
     provider: 'openai',
