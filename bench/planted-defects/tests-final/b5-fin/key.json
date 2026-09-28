@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the credit reviews for the small-business loan book and the watch list the lending officers used.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Methods: financial modeling, DCF valuaton, forecasting, credit analysis",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Supported the FP&A team with financial reporting and analysis.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "defect": "Free cash flow to equity must be discounted at the cost of equity; WACC is for free cash flow to the firm."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "defect": "Margins cannot be added across units; the group margin is total EBITDA over total revenue."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Tools: Excel, Bloomberg Terminal",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Bloomberg Terminal)"
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

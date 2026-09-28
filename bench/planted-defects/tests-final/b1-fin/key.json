@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised the model's forecast accuracy by 12% across 10 years, from 70% to 82%, by adding rate-case timing.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Showed the share value fell from USD 50 to USD 40, a 25% drop, when the discount rate rose by 1 point.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Mapping 600 general-ledger accounts to a new chart of accounts, rebuilding the allocation rules and testing them against two prior closes, cut manual journal entries from 350 to 90 a month.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Supported the FP&A team with financial reporting and analysis.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "defect": "Free cash flow to equity must be discounted at the cost of equity; WACC is for free cash flow to the firm."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Hedged the bank's interest-rate risk on its fixed-rate bond holdings by buying more fixed-rate bonds of the same duration.",
+    "defect": "Buying more bonds of the same duration adds interest-rate exposure; a hedge needs an offsetting position, such as shorting duration or paying fixed on a swap."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

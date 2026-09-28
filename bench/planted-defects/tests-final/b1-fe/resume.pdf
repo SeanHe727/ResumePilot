@@ -1,0 +1,75 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 4542>>
+stream
+BT /F1 16 Tf 72 752 Td (Taylor Nguyen) Tj ET
+BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen) Tj ET
+BT /F1 12 Tf 72 715.5 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 72 701.5 Td (Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026) Tj ET
+BT /F1 10 Tf 72 689.0 Td (Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023) Tj ET
+BT /F1 12 Tf 72 671.5 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 72 657.5 Td (Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025) Tj ET
+BT /F1 10 Tf 80 645.0 Td (- Rebuilt the hotel search results page in React with server-side rendering, cutting median) Tj ET
+BT /F1 10 Tf 86 633.2 Td (load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.) Tj ET
+BT /F1 10 Tf 80 621.4000000000001 Td (- Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and) Tj ET
+BT /F1 10 Tf 86 609.6000000000001 Td (map widgets.) Tj ET
+BT /F1 10 Tf 80 597.8000000000002 Td (- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14) Tj ET
+BT /F1 10 Tf 86 586.0000000000002 Td (accessibility issues flagged in the audit.) Tj ET
+BT /F1 10 Tf 80 574.2000000000003 Td (- Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and) Tj ET
+BT /F1 10 Tf 86 562.4000000000003 Td (deferring the analytics script, raised the checkout page's Lighthouse performance score from) Tj ET
+BT /F1 10 Tf 86 550.6000000000004 Td (52 to 91.) Tj ET
+BT /F1 10 Tf 80 538.8000000000004 Td (- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading="lazy") Tj ET
+BT /F1 10 Tf 86 527.0000000000005 Td (to the hero image.) Tj ET
+BT /F1 10 Tf 80 515.2000000000005 Td (- Documented the design-system tokens in Storybook so designers could check spacing and color) Tj ET
+BT /F1 10 Tf 86 503.4000000000005 Td (values without asking engineers.) Tj ET
+BT /F1 10 Tf 72 491.6000000000005 Td (Westfield State University | Web Developer, IT Services | Metro City, USA | Apr 2024 - Aug 2024) Tj ET
+BT /F1 10 Tf 80 479.1000000000005 Td (- Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.) Tj ET
+BT /F1 10 Tf 80 467.30000000000047 Td (- Interviewed 8 department editors about publishing; the findings led to a preview mode that) Tj ET
+BT /F1 10 Tf 86 455.50000000000045 Td (cut broken pages reported by students from 30 to 6 a month.) Tj ET
+BT /F1 10 Tf 80 443.70000000000044 Td (- Writes the accessibility checklist for all university web pages, reducing failed audits from) Tj ET
+BT /F1 10 Tf 86 431.90000000000043 Td (12 to 2 a semester.) Tj ET
+BT /F1 10 Tf 80 420.1000000000004 Td (- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4) Tj ET
+BT /F1 10 Tf 86 408.3000000000004 Td (seconds to under 1.) Tj ET
+BT /F1 12 Tf 72 391.5000000000004 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 377.5000000000004 Td (Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present) Tj ET
+BT /F1 10 Tf 80 365.0000000000004 Td (- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900) Tj ET
+BT /F1 10 Tf 86 353.2000000000004 Td (riders a week.) Tj ET
+BT /F1 10 Tf 80 341.4000000000004 Td (- Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop) Tj ET
+BT /F1 10 Tf 86 329.60000000000036 Td (list offline.) Tj ET
+BT /F1 10 Tf 80 317.80000000000035 Td (- Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved) Tj ET
+BT /F1 10 Tf 86 306.00000000000034 Td (stops.) Tj ET
+BT /F1 10 Tf 72 294.20000000000033 Td (Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024) Tj ET
+BT /F1 10 Tf 80 281.70000000000033 Td (- Worked on the frontend of the booking flow using React and TypeScript.) Tj ET
+BT /F1 10 Tf 80 269.9000000000003 Td (- Wrote the booking calendar component and its tests, handling overlapping bookings and time-) Tj ET
+BT /F1 10 Tf 86 258.1000000000003 Td (zone changes.) Tj ET
+BT /F1 10 Tf 80 246.3000000000003 Td (- Presented the demo to the library staff and handed over the code with setup notes.) Tj ET
+BT /F1 12 Tf 72 229.50000000000028 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 215.50000000000028 Td (Tools: TypeScript, React, Vue, Storybok, Angular) Tj ET
+BT /F1 10 Tf 72 203.00000000000028 Td (Methods: server-side rendering, accessibility, component testing) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+4872
+%%EOF

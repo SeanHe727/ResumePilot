@@ -1,0 +1,44 @@
+Riley Chen
++1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen
+Date of birth: 5 Feb 1998 | Nationality: Singaporean
+EDUCATION
+Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020
+EXPERIENCE
+Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022
+- Hedged the bank’s interest-rate risk on its fixed-rate bond holdings by buying more fixed-
+rate bonds of the same duration.
+- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and
+raised approvals from 41% to 48% with no rise in early defaults.
+- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests
+from 7 to 1 a year.
+- Built a spreading template for borrower financials that cut each credit memo from 6 hours to
+3.
+Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025
+- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly
+forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.
+- Cut the monthly close from 8 working days to 5 by automating 30 reconciliations and
+intercompany eliminations.
+- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request
+used the same discount rate and payback rules.
+- Mapping 600 general-ledger accounts to a new chart of accounts, rebuilding the allocation
+rules and testing them against two prior closes, cut manual journal entries from 350 to 90 a
+month.
+- Valued the acquisition target by discounting its free cash flow to equity at the company’s
+weighted average cost of capital.
+- Trained 5 plant controllers on the new budgeting template and wrote its user guide.
+PROJECTS
+Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present
+- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing
+within 6% of the market price.
+- Showed the share value fell from USD 50 to USD 40, a 25% drop, when the discount rate rose
+by 1 point.
+- Raised the model’s forecast accuracy by 12% across 10 years, from 70% to 82%, by adding
+rate-case timing.
+Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019
+- Supported the FP&A team with financial reporting and analysis.
+- Rebuilt the fund’s performance report to show returns against its benchmark, which the
+committee used at every meeting.
+- Wrote onboarding notes on the fund’s models for new analysts.
+SKILLS
+Tools: Excel
+Methods: financial modeling, DCF valuation, forecasting, credit analysis

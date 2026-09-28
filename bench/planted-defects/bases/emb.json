@@ -1,0 +1,150 @@
+{
+  "id": "emb",
+  "job": "embedded systems / hardware",
+  "name": "Morgan Kim",
+  "contact": "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+  "personal": "Age: 27 | Marital status: Single | Hobbies: watching TV, sleeping in",
+  "education": [
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021"
+  ],
+  "graduated": "May 2021",
+  "exp": [
+    {
+      "head": "Voltline Robotics | Embedded Software Engineer | Metro City, USA",
+      "dates": "Mar 2023 - Jun 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%."
+        },
+        {
+          "slot": "D2",
+          "clean": "Cut firmware update time over the air from 11 minutes to 4 by compressing images and resuming interrupted downloads.",
+          "subtle": "Improved update speed by 60% by compressing firmware images and resuming interrupted downloads."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build."
+        },
+        {
+          "slot": "D4",
+          "clean": "Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures."
+        },
+        {
+          "slot": "D3",
+          "clean": "Presented the firmware roadmap to the hardware and product teams each quarter, and two board revisions followed its recommendations."
+        },
+        {
+          "slot": "D13",
+          "clean": "Documented the bootloader and flashing process, so new engineers could flash a board on their first day."
+        }
+      ]
+    },
+    {
+      "head": "Clearwater Sensors | Hardware Test Engineer | Metro City, USA",
+      "dates": "Jul 2021 - Feb 2023",
+      "datesD10Subtle": "Apr 2022 - Feb 2023",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+          "subtle": "Owned the end-of-line test station for the humidity sensor and the yield reports the line leads used."
+        },
+        {
+          "slot": "D6",
+          "clean": "Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+          "subtle": "Traced a batch of early field failures to a solder-paste change; my findings updated the reflow profile and cut returns from 2.1% to 0.4%."
+        },
+        {
+          "slot": "D9",
+          "clean": "Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+          "subtle": "Writes the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter."
+        },
+        {
+          "slot": "D17",
+          "clean": "Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+          "subtle": "Designed a test fixture that checked 8 boards at once while also ordering lab parts, maintaining the ESD program, training line operators and running the monthly safety walk, which raised station throughput from 40 to 150 boards an hour."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Low-Power Weather Station | Independent Project | C, STM32",
+      "dates": "Jan 2025 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and runs 9 days without sun.",
+          "subtle": "Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing."
+        },
+        {
+          "slot": "D11",
+          "clean": "Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+          "subtle": "Cut average current from 4 mA to 1 mA, a 300% reduction, by sleeping between readings and batching radio transmissions."
+        },
+        {
+          "slot": "D18",
+          "clean": "Published the schematics and firmware openly, and a local school built two stations from them."
+        }
+      ]
+    },
+    {
+      "head": "Formula Student Electric Car | Electronics Lead, Team of 12 | C",
+      "dates": "Sep 2019 - May 2021",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Designed the battery-monitoring board for the team's electric car, which passed technical inspection on the first attempt."
+        },
+        {
+          "slot": "D16",
+          "clean": "Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller before each race.",
+          "subtle": "The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race."
+        },
+        {
+          "slot": "D12",
+          "clean": "Mentored 4 first-year members on soldering and board bring-up.",
+          "subtle": "Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "skillsD20Subtle": [
+    "Tools: C, C++, STM32, osciloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "skillsD8Subtle": [
+    0,
+    "FPGA"
+  ],
+  "unevidencedSubtle": "FPGA",
+  "personalSubtle": "Date of birth: 30 Jun 1999 | Nationality: Korean",
+  "v2": {
+    "S1": "Profiling the interrupt load, moving sensor reads to DMA, splitting the control loop into fixed-priority tasks and pinning the scheduler tick, raised the controller's spare CPU from 8% to 35%.",
+    "S2": "Worked on firmware and testing for the robot fleet's motor controllers.",
+    "T1": "Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "T2": "Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "T3": "Debounced the robot's emergency-stop input with a single 10 kOhm pull-up resistor.",
+    "T4": "Made the sensor line's UART link to the test PC more reliable by raising its baud rate from 115200 to 921600.",
+    "N1": {
+      "head": "Northside Bakery | Delivery Driver | Metro City, USA",
+      "dates": "Aug 2025 - Present",
+      "bullets": [
+        "Delivered morning wholesale orders to about 20 cafés and collected signed invoices.",
+        "Loaded the van and checked each order against the dispatch list before leaving."
+      ]
+    },
+    "A2": "Raised packet delivery by 15% over LoRa, from 80% to 95% of readings, by retrying failed transmissions.",
+    "desc": {
+      "T1": "By the Nyquist criterion a 5 kHz signal needs sampling above 10 kHz; at 8 kHz it aliases.",
+      "T2": "volatile stops the compiler caching the value but does not make updates atomic; a shared counter needs interrupts disabled or an atomic operation.",
+      "T3": "A pull-up resistor alone sets the idle level but does not debounce; debouncing needs an RC filter, a Schmitt trigger or software filtering.",
+      "T4": "A higher baud rate shrinks timing margins and raises bit-error rates; it cannot make the link more reliable."
+    }
+  }
+}

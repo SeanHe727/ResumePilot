@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Traced a batch of early field failures to a solder-paste change; my findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Writes the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised packet delivery by 15% over LoRa, from 80% to 95% of readings, by retrying failed transmissions.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut average current from 4 mA to 1 mA, a 300% reduction, by sleeping between readings and batching radio transmissions.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Profiling the interrupt load, moving sensor reads to DMA, splitting the control loop into fixed-priority tasks and pinning the scheduler tick, raised the controller's spare CPU from 8% to 35%.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Designed a test fixture that checked 8 boards at once while also ordering lab parts, maintaining the ESD program, training line operators and running the monthly safety walk, which raised station throughput from 40 to 150 boards an hour.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Debounced the robot's emergency-stop input with a single 10 kOhm pull-up resistor.",
+    "defect": "A pull-up resistor alone sets the idle level but does not debounce; debouncing needs an RC filter, a Schmitt trigger or software filtering."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Made the sensor line's UART link to the test PC more reliable by raising its baud rate from 115200 to 921600.",
+    "defect": "A higher baud rate shrinks timing margins and raises bit-error rates; it cannot make the link more reliable."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the end-of-line test station for the humidity sensor and the yield reports the line leads used.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Tools: C, C++, STM32, osciloscopes",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Worked on firmware and testing for the robot fleet's motor controllers.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "defect": "By the Nyquist criterion a 5 kHz signal needs sampling above 10 kHz; at 8 kHz it aliases."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "defect": "volatile stops the compiler caching the value but does not make updates atomic; a shared counter needs interrupts disabled or an atomic operation."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  }
+]

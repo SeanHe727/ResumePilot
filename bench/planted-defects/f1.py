@@ -55,6 +55,27 @@ T = {  # technical: both patterns must match, and the item must call it an error
     ('b1-ops', 'T2'): [r"little|\bwip\b|work[- ]in[- ](process|progress)", r"lead time|throughput|cannot|can.t|contradict|inconsistent|double|halve|increase"],
     ('b1-ops', 'T3'): [r"\beoq\b|economic order", r"safety stock|order quantity|variab|service level|not (set|determin|meant)|cannot|can.t|does not|doesn.t"],
     ('b1-ops', 'T4'): [r"mape|forecast accuracy", r"exclud|only|intermittent|subset|redefin|definition|denominator|metric|not .{0,20}(improv|accura)|gam"],
+    # The last five bases, written before any review of them was read.
+    ('b1-da', 'T1'): [r"correlat", r"caus|confound|self-select|engag|does not (show|prove|establish)|not (prove|show|establish)|cannot|can.t"],
+    ('b1-da', 'T2'): [r"average|mean", r"weight|traffic|volume|simpson|not the (national|overall)"],
+    ('b1-da', 'T3'): [r"join", r"no orders|only (customers|rows)|anti|start from|wrong (direction|side)|revers|never|not find|miss|cannot|can.t"],
+    ('b1-da', 'T4'): [r"peek|daily|every day|stopp|optional stopping", r"false[- ]positive|inflat|type i|invalid|not valid|multiple|sequential"],
+    ('b1-fe', 'T1'): [r"lazy", r"\blcp\b|largest contentful|delay|slow|hurt|worse|opposite|above the fold|hero|cannot|can.t"],
+    ('b1-fe', 'T2'): [r"dangerouslysetinnerhtml|\bxss\b|cross-site", r"sanitiz|escap|bypass|does not (prevent|protect)|not (safe|prevent)|vulnerab|enable|cannot|can.t"],
+    ('b1-fe', 'T3'): [r"placeholder", r"label|screen[- ]reader|accessib|disappear|substitut|worse|cannot|can.t"],
+    ('b1-fe', 'T4'): [r"webp|png|image", r"bundle|javascript|not part|unrelated|does not|doesn.t|cannot|can.t"],
+    ('b1-clin', 'T1'): [r"intention[- ]to[- ]treat|\bitt\b", r"per[- ]protocol|exclud|all (randomi|patients)|drop|not (an )?(itt|intention)"],
+    ('b1-clin', 'T2'): [r"equivalen|non-?inferior", r"not significant|absence|margin|does not (show|establish|prove|imply)|not (show|establish|evidence)|cannot|can.t"],
+    ('b1-clin', 'T3'): [r"survival|censor", r"kaplan|censor|bias|exclud|not (valid|correct)|incorrect|wrong|cannot|can.t"],
+    ('b1-clin', 'T4'): [r"random|odd|even|alternat", r"not random|alternat|predictab|conceal|quasi|systematic|bias|cannot|can.t"],
+    ('b1-fin', 'T1'): [r"wacc|weighted average cost", r"cost of equity|fcff|free cash flow to the firm|mismatch|inconsistent|should be|wrong|incorrect|cannot|can.t"],
+    ('b1-fin', 'T2'): [r"margin", r"\badd|sum|not additive|total (ebitda|revenue)|weight|incorrect|wrong|cannot|can.t"],
+    ('b1-fin', 'T3'): [r"growth|terminal|gordon", r"exceed|above|greater|higher than|less than|below|negative|undefined|invalid|must be|cannot|can.t"],
+    ('b1-fin', 'T4'): [r"hedg|duration", r"increas|\badd|double|more exposure|offset|short|opposite|not (a )?hedge|swap|cannot|can.t"],
+    ('b1-emb', 'T1'): [r"nyquist|alias|sampl", r"10 ?khz|twice|double|too low|insufficient|not enough|below|cannot|can.t"],
+    ('b1-emb', 'T2'): [r"volatile", r"atomic|disabl|critical section|does not|doesn.t|not (make|prevent|fix)|insufficient|cannot|can.t"],
+    ('b1-emb', 'T3'): [r"debounc|pull[- ]?up", r"\brc\b|capacitor|schmitt|software|filter|alone|does not|doesn.t|not (debounce|enough)|cannot|can.t"],
+    ('b1-emb', 'T4'): [r"baud", r"less reliable|error|margin|timing|noise|opposite|worse|does not|doesn.t|not (improve|more reliable)|cannot|can.t"],
 }
 WEIGHT = {'technical': 2, 'data': 2}
 
