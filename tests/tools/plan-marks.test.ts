@@ -202,12 +202,13 @@ describe('the write-up is fitted to the page', () => {
 });
 
 describe('the write-up is fitted in points too', () => {
-  it('asks to merge when there are far more points than a report should hold', async () => {
+  it('asks for the groups the write-up left out, and never trims by count', async () => {
     const { writeFullReport } = await import('../../src/tools/write-report.js');
-    const many = JSON.stringify({ sections: [{ about: { type: 'resume' }, points: Array.from({ length: 25 }, (_, i) => ({ what: `p${i}`, why: '', from: [], cost: 'saves about 2 words' })) }] });
-    const merged = JSON.stringify({ sections: [{ about: { type: 'resume' }, points: [{ what: 'merged', why: '', from: [], cost: 'no words' }] }] });
+    const F = [f('a', 'content', 's1:e0:b0', 'first'), f('b', 'content', 's1:e0:b1', 'second')];
+    const onlyFirst = JSON.stringify({ sections: [{ about: { type: 'resume' }, points: Array.from({ length: 25 }, () => ({ what: 'p', why: '', from: ['c1'], cost: 'no words' })) }] });
+    const both = JSON.stringify({ sections: [{ about: { type: 'resume' }, points: [{ what: 'a', why: '', from: ['c1'], cost: 'no words' }, { what: 'b', why: '', from: ['c2'], cost: 'no words' }] }] });
     const asked: Array<Array<{ role: string; content: string }>> = [];
-    const replies = [many, merged];
+    const replies = [onlyFirst, both];
     const ctx = {
       queryEngine: { async query(p: { messages: Array<{ role: string; content: string }> }) {
         asked.push(p.messages);
@@ -215,14 +216,17 @@ describe('the write-up is fitted in points too', () => {
       } },
       abortSignal: new AbortController().signal,
     } as never;
-    const report = { format: { overallScore: 90, issues: [] }, improvementPlan: { groups: [{ kind: 'immediate', findingIds: [], targets: [] }], immediate: ['x'], shortTerm: [], longTerm: [] } } as never;
+    const report = { format: { overallScore: 90, issues: [] }, improvementPlan: {
+      groups: [{ kind: 'immediate', findingIds: ['a'], targets: [] }, { kind: 'immediate', findingIds: ['b'], targets: [] }],
+      immediate: ['x'], shortTerm: [], longTerm: [] } } as never;
 
-    await writeFullReport(report, { resume: { sections: [] } } as never, [], ctx, 100);
+    await writeFullReport(report, { resume: { sections: [] } } as never, F, ctx, 100);
 
     expect(asked).toHaveLength(2);
-    expect(asked[1]!.at(-1)!.content).toContain('has 25 points. Bring it down to about eighteen');
-    // Trimming never costs an error.
-    expect(asked[1]!.at(-1)!.content).toContain('Keep every error');
+    const note = asked[1]!.at(-1)!.content;
+    expect(note).toContain('These groups have no point: group 2');
+    // Twenty-five points is no reason on its own to cut any.
+    expect(note).not.toMatch(/Bring it down/);
   });
 });
 

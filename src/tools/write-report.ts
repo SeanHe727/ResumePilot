@@ -220,30 +220,41 @@ export async function writeFullReport(
           `words exactly as the résumé has them, or drop the point if it is not about anything the ` +
           `résumé says. `
         : '';
-    // Points as well as words. Cuts count against the words, so a write-up
-    // full of small cuts could read as short and be asked to say more.
-    // Measured: 27 words under at 31 points, asked to expand, came back at 39.
+    // Every chosen group gets its point. Measured: asked for one point per
+    // group, a write-up covered twelve of twenty-one and left out a certain
+    // error the selection had scored among the highest.
+    const cited = new Set(
+      ((firstParsed.sections ?? []) as Array<{ points?: Array<{ from?: unknown }> }>).flatMap((sec) =>
+        (sec.points ?? []).flatMap((pt) => (Array.isArray(pt.from) ? pt.from.map(String) : [])),
+      ),
+    );
+    const uncovered = (plan.groups ?? [])
+      .map((group, i) => ({ i: i + 1, names: group.findingIds.map((id) => shortOf.get(id) ?? id) }))
+      .filter(({ names }) => !names.some((name) => cited.has(name)));
+    const coverNote =
+      uncovered.length > 0
+        ? `These groups have no point: ${uncovered.map(({ i }) => `group ${i}`).join(', ')}. Write one ` +
+          `point for each, citing its findings in "from", and keep every point you wrote. `
+        : '';
+    // Words, not points: the selection decided what goes in, so fitting to the
+    // page shortens points and never drops a group.
     const fitNote =
-      count > 20
-        ? `What you wrote has ${count} points. Bring it down to about eighteen: merge points that ask ` +
-          `the same of a line, and drop the least efficient refinements. Keep every error; do not merge ` +
-          `or drop one. Keep the room in view: about ${room} words. Same JSON shape.`
-        : first > room * 1.1
-        ? `What you wrote adds about ${first} words and the page has about ${room}. Rewrite it to fit: ` +
-          `shorten points, merge the ones that ask the same of a line, and drop the least valuable. ` +
-          `Same JSON shape.`
+      first > room * 1.1
+        ? `What you wrote adds about ${first} words and the page has about ${room}. Shorten the ` +
+          `points to fit; keep one point for every group. Same JSON shape.`
         : first < room * 0.6 && room > 20 && count < 12
           ? `What you wrote adds about ${first} words and the page has about ${room}. There is room to ` +
             `say more: give the points that matter most their fuller fix, and split a point that bundles ` +
             `two different fixes. Do not add anything the groups do not support. Same JSON shape.`
           : null;
-    const note = fitNote || quoteNote ? `${quoteNote}${fitNote ?? 'Same JSON shape.'}` : null;
+    const note =
+      fitNote || quoteNote || coverNote ? `${coverNote}${quoteNote}${fitNote ?? 'Same JSON shape.'}` : null;
     if (note) {
       const second = await ask({ previous: response.content ?? '', note });
       ctx.trace?.event(() => ({
         phase: 'decision',
         purpose: 'report fitted to the page',
-        input: { room, wordsBefore: first, pointsBefore: count, notQuoted: missing },
+        input: { room, wordsBefore: first, pointsBefore: count, notQuoted: missing, uncovered: uncovered.map((u) => u.i) },
         output: {
           wordsAfter: pageWords(parseJsonObject(second.content ?? '')),
           pointsAfter: pointCount(parseJsonObject(second.content ?? '')),
