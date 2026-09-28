@@ -1,0 +1,186 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.",
+    "- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Apr 2020 - Feb 2022",
+    "- Ran the monthly patient survey and rebuilt its reporting dashboard, cutting the time from survey close to published findings from 3 weeks to 4 days.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality, personal details conventionally left off a résumé.",
+      "because": "They are unrelated to qualifications and take space from relevant information."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the established UX research experience.",
+      "because": "The degree appears before the roles that demonstrate the candidate’s experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The timeline leaves 10 months unaccounted for between the degree and the first listed UX research role.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The release-coverage clause gives no research finding or decision resulting from the sessions.",
+      "because": "The session cadence and panel show scope, but not how the research informed a release or improved the product."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The release-coverage clause is wordy and adds little beyond the sessions and customer panel.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The result is buried after several research sources and methods.",
+      "because": "A scanning reader may move on before reaching the 23% reduction."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "The reported SUS score of 104 exceeds the standard scale’s 100-point maximum.",
+      "because": "Standard SUS scores range from 0 to 100."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Moderated testing” is redundant after the line has stated the testing context.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "An open card sort does not directly test findability in the redesigned navigation.",
+      "because": "It shows how participants group and label content, not whether users can find items in a specific navigation design."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The card-sort claim gives no finding or design decision that resulted from the research.",
+      "because": "The participant count shows the study’s reach, but not what changed or what the research demonstrated."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Before it shipped” adds timing detail that does not clarify the card-sort result.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The strongest result comes after the research setup instead of opening the bullet.",
+      "because": "A scanning reader reaches the research lead-in before the completed sign-up improvement."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The strongest result comes after the interview setup instead of opening the bullet.",
+      "because": "A scanning reader reaches the interview count before the reduction in missed appointments."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The 30% reduction lacks a comparison period or baseline.",
+      "because": "A reader cannot tell what the percentage is measured against."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The approach is described broadly rather than through a specific design action.",
+      "because": "A reader cannot picture a concrete design decision or skill."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The claim of meaningful outcomes does not say what changed for users or provide evidence of the result.",
+      "because": "A reader cannot tell what value the project created from the general claim."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The stated 50% improvement is wrong for the reduction from 90 to 60 seconds.",
+      "because": "The time fell by 30 seconds from a 90-second baseline, a 33.3% reduction."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The stated 20% increase misstates the change from 65% to 85%.",
+      "because": "It is an increase of 20 percentage points, or about 30.8% relative to 65%."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The repeated method uses space without describing a distinct contribution.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The redesign claim does not say what design change was made.",
+      "because": "A reader cannot picture the UX decision behind the booking-step reduction and change in phone bookings."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The claim that the issues stopped first-time users generally from completing bookings overstates what the testing establishes.",
+      "because": "Hallway testing with 10 patients does not establish that first-time users more broadly were prevented from completing bookings."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line gives no resulting change in booking completion after the issues were fixed.",
+      "because": "A reader cannot tell whether the fixes improved successful bookings or how much they helped."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The Skills, Methods line misspells “interviews.”",
+      "because": "The visible typo may distract a reader and raise a question about attention to detail."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3782,
+    "input_tokens_details": {
+      "cache_write_tokens": 3779,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1189,
+    "output_tokens_details": {
+      "reasoning_tokens": 184
+    },
+    "total_tokens": 4971
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Owned the pick-path layouts for the fast-moving zone and the labor reports the shift leads used.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not in reverse chronological order; Crestway should come before Lakeview.",
+      "because": "Greenleaf can remain first because it is the current role."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Replace any placeholder phone number, email, or profile URL before applying.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the profile supports the résumé’s dates and claims.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Add a service or reliability measure if available.",
+      "because": "Delivery count alone shows workload, not performance."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Include the payment responsibility only if it matters to the target jobs.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify the scale or operational importance of the wedding-order and cooler work.",
+      "because": "As written, it describes duties without showing what the contribution improved."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Say what changed because of the pick-path layouts or labor reports.",
+      "because": "“Owned” establishes responsibility, but the reader cannot assess the result."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Label the returns-time measure as total elapsed time or hands-on processing time.",
+      "because": "The before-and-after figure does not say which it measures."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Ensure the trailer-wait comparison uses the same definition and measurement period.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Split or sharply narrow the cycle-counting bullet.",
+      "because": "Unrelated supervision, training, hiring, and certification duties obscure the inventory result."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify how much of the accuracy gain is attributable to cycle counting.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Verify that the stockout and inventory results cover comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Verify that the forecast model materially contributed to both results.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Add the cost basis or period for the 15% freight reduction.",
+      "because": "Readers need to know what it was measured against."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify the outcome or decision enabled by the reorder points.",
+      "because": "The data and method are specific, but the result is missing."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "State what changed after buyers renegotiated delivery windows, if measured.",
+      "because": "Otherwise, the claim should stop at the scorecard and its use."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "The ending OEE figure of 112% is invalid.",
+      "because": "OEE is capped at 100%."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Verify the starting and ending OEE figures against the underlying calculation.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The lead-time, throughput, and WIP figures appear internally inconsistent.",
+      "because": "For the same process and period, halving lead time at constant throughput conflicts with doubling average WIP."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify whether the 18% route-mile reduction is modeled or achieved.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Account for any operational constraints included in the routing comparison.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify what drive times were compared and whether the comparison validates the proposed routes.",
+      "because": "Predicted times for proposed routes cannot be directly validated against actual times on different historical routes without an appropriate comparison."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add the pilot’s observed outcome if available.",
+      "because": "Otherwise, the claim should end at the pilot rather than imply modeled savings were realized."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Narrow the operations-analysis bullet to the specific problem addressed.",
+      "because": "It adds little beside the more concrete bullets."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "State your role in mapping the intake process and removing steps directly.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Verify how the one-day improvement was measured.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The food-bank forecast appears to duplicate the Crestway achievement.",
+      "because": "The product and warehouse counts, stockout improvement, and inventory reduction closely match."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "If the forecast is separate work, distinguish the organizations, periods, contributions, and verified figures.",
+      "because": "Its figures closely match the Crestway bullet."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Substantiate the level of Excel and Python skill implied by the project bullets.",
+      "because": "“Excel” and “Python” are broad."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2143,
+    "input_tokens_details": {
+      "cache_write_tokens": 2140,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2090,
+    "output_tokens_details": {
+      "reasoning_tokens": 1027
+    },
+    "total_tokens": 4233
+  }
+}

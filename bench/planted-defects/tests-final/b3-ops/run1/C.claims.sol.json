@@ -1,0 +1,185 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set safety stock for all 1,400 SKUs with the economic order quantity (EOQ) formula, balancing ordering and holding costs.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Led the monthly sales and operations planning meeting, reconciling the sales forecast with plant capacity for the finance and production teams.",
+    "- Trained 6 planners on the new forecasting workflow and wrote its exception-handling guide, which the team still uses for promotions.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | May 2019 - Jan 2021",
+    "- Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only SKUs that sold every week.",
+    "- Ran a time study of the returns desk; my findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Writes the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- Mapped the donation intake process with the warehouse lead and removed two duplicate data-entry steps, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python, SAP",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Specify the period over which stockouts and inventory changed.",
+      "because": "The unusually strong result would be easier to assess."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify whether $1.9M is a reduction in inventory value.",
+      "because": "The unusually strong result would be easier to assess."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Define whether the 15% covers affected lanes or total freight spend.",
+      "because": "The scale of the saving is unclear."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Give the comparison period for the 15% saving.",
+      "because": "The scale of the saving is unclear."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "EOQ does not, by itself, set safety stock.",
+      "because": "EOQ determines an order quantity by balancing ordering and holding costs."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Add an outcome of the renegotiated delivery windows if available.",
+      "because": "The bullet does not show whether supplier performance improved."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Identify a decision or result from the S&OP meetings.",
+      "because": "Showing how the meetings changed a plan is more compelling than leading them."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "If space is tight, prioritize the training and continuing use over writing the guide.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The 70%-to-85% comparison does not establish that forecasts improved.",
+      "because": "Excluding intermittently selling SKUs from MAPE changes what is measured."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify whether “3 days to 1” is an average or another measure.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Change “Writes” to past tense.",
+      "because": "The role is completed."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether you created or maintained the scheduling rules.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Separate or cut the unrelated night-shift, training, hiring, and certification duties.",
+      "because": "They obscure the cycle-counting work and make it unclear which action raised record accuracy."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Replace “Present” with an end date if the project is no longer active.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify that the 18% reduction is modeled unless the pilot confirmed it.",
+      "because": "Planned savings and realized savings are different claims."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Specify whether “within 5%” compares overall totals or route-level times.",
+      "because": "That would make the figure interpretable."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Add the pilot’s outcome if known.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Remove the general analysis bullet or replace it with distinct, specific work.",
+      "because": "The next bullet already demonstrates what you analyzed and changed."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify how “a day sooner” was measured if possible.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The forecast result closely duplicates the Crestway bullet.",
+      "because": "The product count, facility count, stockout reduction, and inventory reduction closely mirror it."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "If this is separate work, explain the distinction.",
+      "because": "Its results closely mirror the Crestway bullet."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Substantiate the figures if this is separate work.",
+      "because": "Its results closely mirror the Crestway bullet."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "If SAP matters to the target roles, specify the module or work you used it for.",
+      "because": "“SAP” alone is broad."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1867,
+    "input_tokens_details": {
+      "cache_write_tokens": 1864,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1237,
+    "output_tokens_details": {
+      "reasoning_tokens": 388
+    },
+    "total_tokens": 3104
+  }
+}

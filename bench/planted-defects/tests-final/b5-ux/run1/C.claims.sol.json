@@ -1,0 +1,216 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022",
+    "- Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "- Interviewed 40 patients about appointment reminders; my findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "- Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Conducted user interviews and created wireframes for a free clinic's online booking flow.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the portfolio link works and opens directly to relevant work.",
+      "because": "The projects shown should support the claims on the résumé."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality unless an application requests them.",
+      "because": "They generally do not help assess UX research qualifications."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider moving education below experience.",
+      "because": "Professional work is now the stronger evidence of fit."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add the survey’s scale or a concrete decision the reporting informed.",
+      "because": "“Owned” establishes responsibility but not its value."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the 14% and 9% figures cover comparable periods or patient groups.",
+      "because": "That would make the impact credible."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Explain how the reduction from two weeks to three days was established.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify the period used to measure the 30% drop in support calls.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Check that the before-and-after sign-up rates are comparable.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain how research influenced the shipped design.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Distinguish your research contribution from the design or implementation work.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Specify whether 40% is a relative increase or a change in percentage points.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Verify that every major release was tested.",
+      "because": "The claim is broader than the evidence given."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Fix the opening grammar.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify the chain from synthesis to product changes to the 23% reduction.",
+      "because": "As written, it attributes the support-call result to synthesis alone."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Correct the SUS score of 104 against the source data.",
+      "because": "A System Usability Scale score cannot exceed 100."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Verify comparable testing conditions or remove the metric.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add the decision the card sort informed or what changed as a result.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Qualify “validated.”",
+      "because": "An open card sort alone may not support such a conclusive claim."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify what participants tested and how the screen-reader experience worked.",
+      "because": "The project was Figma-based."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Correct the 50% improvement figure to a 33% reduction in time.",
+      "because": "Route-finding time fell from 90 to 60 seconds."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Check whether audio landmarks and color changes were tested together.",
+      "because": "If they were, the improvement should not be assigned to either feature individually."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add the number of interviews or the insight that shaped the wireframes.",
+      "because": "This bullet is less specific than the others."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain how you determined that the six issues prevented completion.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify whether a later test confirmed the issues were resolved.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Substantiate the handbook’s use by the later volunteer teams.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Keep A/B testing only if you can point to an example you personally worked on.",
+      "because": "None is visible in the experience bullets."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the most relevant methods and outcomes first for each application.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Be prepared to account for the period after June 2025 if applying now.",
+      "because": "The experience entries end in June 2025."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1875,
+    "input_tokens_details": {
+      "cache_write_tokens": 1872,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1415,
+    "output_tokens_details": {
+      "reasoning_tokens": 468
+    },
+    "total_tokens": 3290
+  }
+}
