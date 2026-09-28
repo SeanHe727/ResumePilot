@@ -703,7 +703,8 @@ describe('generate_report: the improvement plan', () => {
           entryId: 's1:e0',
           redundantPairs: [{ bulletA: 's1:e0:b0', bulletB: 's1:e0:b1', note: 'same result twice' }],
           coherence: { score: 40, detail: 'reads as an unordered task list' },
-          weakLead: true,
+          // The reader would open with the second line: that is a finding.
+          suggestedOrder: ['s1:e0:b1', 's1:e0:b0'],
         },
       ],
     };

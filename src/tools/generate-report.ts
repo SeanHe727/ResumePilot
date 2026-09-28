@@ -716,16 +716,19 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
             ...(entry.coherence.score < 70 && entry.coherence.detail
               ? [at('narrative', entry.entryId, undefined, entry.coherence.detail)]
               : []),
-            ...(entry.weakLead
-              ? [
-                  at(
-                    'narrative',
-                    entry.entryId,
-                    undefined,
-                    'the strongest line is not the opening one',
-                  ),
-                ]
-              : []),
+            // The career reader's order, where it would open the entry with a
+            // different line. It was parsed and never became a finding: measured,
+            // the reader put an entry's strongest line first in most runs and no
+            // report ever said so. Only the opening line: the rest of the order
+            // is a preference, the lead is what a scanning reader sees.
+            ...leadFinding(entry, input.resume).map((lead) =>
+              at(
+                'narrative',
+                lead.bulletId,
+                undefined,
+                `the strongest line is not the opening one: “${lead.text}” would land harder first`,
+              ),
+            ),
           ]),
         ]
       : []),
@@ -744,4 +747,20 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
         ]
       : []),
   ];
+}
+
+/**
+ * The line the career reader would open an entry with, when it is not the one
+ * that opens it now. Ids come back checked against the document, so an order
+ * naming a line the entry does not have says nothing.
+ */
+function leadFinding(
+  read: { entryId: string; suggestedOrder?: string[] },
+  resume: ResumeDocument,
+): Array<{ bulletId: string; text: string }> {
+  const suggested = read.suggestedOrder?.[0];
+  const entry = resume.sections.flatMap((s) => s.entries).find((e) => e.id === read.entryId);
+  if (!suggested || !entry || entry.bullets.length < 2 || entry.bullets[0]!.id === suggested) return [];
+  const bullet = entry.bullets.find((b) => b.id === suggested);
+  return bullet ? [{ bulletId: bullet.id, text: bullet.text }] : [];
 }
