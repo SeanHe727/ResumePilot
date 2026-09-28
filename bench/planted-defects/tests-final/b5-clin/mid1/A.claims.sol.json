@@ -1,0 +1,197 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Apr 2022 - Aug 2022",
+    "- Randomized patients by assigning those admitted on odd-numbered days to the program and even-numbered days to usual care.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "- Cut data-entry errors in the trial database from 6.1% to 1.8% of fields by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-checking them against pharmacy records each week, cut unresolved safety queries from 45 to 6.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Trained 9 site nurses on the consent process and outcome forms, and no consent deviations were found at the final audit.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting for age and insurance.",
+    "- Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited residents.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Wrote the survey's data codebook, which the clinic used for its follow-up survey the next year.",
+    "SKILLS",
+    "Tools: R, REDCap",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed newest-first.",
+      "because": "The older Northgate role appears above the newer Meridian role, making the chronology harder to scan."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience despite several years of work after the MPH.",
+      "because": "Experience is now the more relevant opening section."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The listed dates leave 10 months without study or work shown.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "error",
+      "says": "The odd/even admission-date rule is not randomization.",
+      "because": "Calendar dates follow a fixed, predictable rule that can align with calendar effects."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The bullet gives no study finding.",
+      "because": "A reader cannot see what the research found or contributed."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The no-show reduction is buried after the interview method.",
+      "because": "A scanning reader may miss the outcome."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The reuse result follows the data-dictionary description instead of leading the bullet.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The long list of administrative duties obscures the data contribution and separates it from the identifier result.",
+      "because": "The entry reads like a task list, and the accomplishment is hard to find."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The bullet does not make clear which work resolved the 1,200 mismatched identifiers.",
+      "because": "Data work and administrative duties are all presented before the result."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The trial-coordination claim does not specify what coordination work was owned.",
+      "because": "The reader cannot assess the clinical-research skill or action behind the results."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Averaging only observed death times does not estimate median survival.",
+      "because": "It excludes censored patients and averages death times rather than estimating the median."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The bullet gives no survival estimate or between-arm comparison.",
+      "because": "A reader cannot see what the analysis produced or contributed."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The bullet has no main verb and uses a present-progressive opening for an ended role.",
+      "because": "“Reconciling” leaves the action without a finite verb and conflicts with the completed role."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The reduction in unresolved safety queries is buried after a long list of methods.",
+      "because": "A scanning reader may miss the quantified outcome."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The bullet does not say what the reports helped the committee decide or do.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The review outcome comes after the presentation detail instead of leading the bullet.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The opening claim names neither the analysis nor a specific, supported finding.",
+      "because": "The promotional claims do not show what the project did or found."
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "The reduction from 12% to 8% is not 50%.",
+      "because": "It is 4 percentage points, or about a 33% relative reduction."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The readmission result is not the opening bullet in the project entry.",
+      "because": "A scanning reader may not reach the entry’s clearest quantified result."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The adjustment variables are named, but the analytical approach is not.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The change from 35% to 55% is not 20%.",
+      "because": "It is 20 percentage points, or about a 57% relative increase."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The survey-response result is not connected to the readmission analysis.",
+      "because": "A reader may not know whether the survey informed the analysis or was a separate outcome."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The response count does not show how well responses represent residents across neighborhoods.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The translation and pilot bullet gives no outcome from the pilot.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The passive wording leaves unclear who translated and piloted the survey.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3447,
+    "input_tokens_details": {
+      "cache_write_tokens": 3444,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1462,
+    "output_tokens_details": {
+      "reasoning_tokens": 495
+    },
+    "total_tokens": 4909
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes, FPGA",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code link lead directly to work an employer should inspect.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Use a complete, working URL if this is a real résumé.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify what “update speed” measures.",
+      "because": "Compression and download resumption may improve different measures."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "State the test rig’s effect beyond the number of tests, if it can be substantiated.",
+      "because": "The line establishes scale but not the result."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Say that the logged data helped diagnose the five failures.",
+      "because": "A logger alone does not find root causes."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz does not by itself prevent aliasing.",
+      "because": "The Nyquist rate would be greater than 10 kHz."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Declaring the shared counter volatile does not by itself fix the race.",
+      "because": "Volatile does not make access atomic or resolve a race between an interrupt and the main loop."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Move the motor-controller rewrite bullet near the top.",
+      "because": "Its fleet scale and outcomes make it one of the strongest bullets."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the complaint counts compare equivalent quarterly periods.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the decline in complaints can reasonably be attributed to the procedure.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Be prepared to explain why the eight-board fixture raised throughput from 40 to 150 boards an hour rather than more.",
+      "because": "Other bottlenecks may make that increase reasonable."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Remove the promotional language.",
+      "because": "It says little about what was built and clashes with the concrete engineering detail elsewhere."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Specify the operating conditions behind the average-current comparison if they matter.",
+      "because": "They may affect how the comparison is interpreted."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Check that the published work is accessible through the code link.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The warehouse robot fleet appears to belong to the robotics job, not the Formula Student project.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Make your own contribution to the CAN-bus firmware clear.",
+      "because": "The passive wording obscures what you did."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Make the testing outcome clear.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The robot-fleet achievement duplicates the Voltline bullet with slightly different figures under a 2019–2021 project.",
+      "because": "The discrepancy could undermine confidence in the whole résumé."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Separate languages, hardware and platforms, tools, and methods more accurately.",
+      "because": "STM32 is a platform, while FPGA is not a tool in the same sense as an oscilloscope."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Include FPGA only if you can discuss relevant hands-on work.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Reflect any relevant work or projects since the Voltline role ended in June 2025.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 1838,
+    "input_tokens_details": {
+      "cache_write_tokens": 1835,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1224,
+    "output_tokens_details": {
+      "reasoning_tokens": 448
+    },
+    "total_tokens": 3062
+  }
+}

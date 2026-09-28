@@ -1,0 +1,231 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present",
+    "- Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.",
+    "- Opened the café three days a week and handled the daily cash count.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Owned the department websites and the shared component library other developers relied on.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The same server-rendered search-page achievement is attributed to two entries a year apart.",
+      "because": "The Lumen and Library Room Booking descriptions claim similar load-time and bookings results, making it unclear which entry owns the achievement."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "EDUCATION appears before EXPERIENCE.",
+      "because": "It delays the development work most relevant to a frontend engineering reader."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Barista entry takes space from development experience with routine duties.",
+      "because": "Its two responsibility-focused bullets show no outcomes."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The drinks and stocking duties have no stated outcome.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Prepared” is past tense in a current role.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "“cafØ” contains a corrupted character instead of “café.”",
+      "because": "The corrupted character can make the résumé look unproofread."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The opening and cash-count responsibilities have no stated outcome.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Opened” and “handled” are past tense in a current role.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Page performance” does not identify the measure or comparison point behind the 35% improvement.",
+      "because": "A reader cannot tell what changed or judge the starting point."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The tests’ result is framed as an aside rather than their outcome.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Storing user input in React state does not prevent cross-site scripting when it is rendered with dangerouslySetInnerHTML.",
+      "because": "That rendering method bypasses React’s normal text escaping, and state does not sanitize the content."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The claim that cross-site scripting was prevented has no stated verification.",
+      "because": "A reader cannot see what supports the prevention claim."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The hotel-search bullet does not lead with its strongest results.",
+      "because": "The load-time and bookings results follow the rebuild description, making them harder to notice."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Owned” does not say what action was taken with the websites and library.",
+      "because": "The reader can see the scope of responsibility but not the work performed."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The websites and library responsibility has no stated outcome.",
+      "because": "The line shows scope without showing what the work made better."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The reduction in broken-page reports comes after the process details.",
+      "because": "The reader must get through the interview and preview-mode description before seeing the key result."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The reduction in failed audits follows the checklist description.",
+      "because": "The clearest evidence of impact is less immediate."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The reduction in search time comes after the rebuild and filtering details.",
+      "because": "The reader sees the implementation before the main result."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The live-arrivals bullet does not say how live data reached the app.",
+      "because": "The feature and its reach are clear, but the technical contribution is not."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Against 2.9s before” makes the previous load time awkward to parse.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The comma and “and” make the agency link’s connection to open-sourcing less direct.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The booking-flow bullet names React and TypeScript, while the project heading names Vue.",
+      "because": "A reader cannot tell which frontend stack the project used."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Worked on” is vague, and the bullet gives no outcome of the frontend work.",
+      "because": "It does not show the specific contribution or why it mattered."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Using React and TypeScript” names tools without showing how they built the booking flow.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The calendar component and tests have no stated outcome.",
+      "because": "The edge cases show scope, but not what benefit the work delivered."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The calendar-component bullet should come before the booking-flow bullet.",
+      "because": "It is the more specific contribution and would clarify the project work sooner."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "“Lifting bookings by about a tenth” does not specify a relative change or percentage-point change, or the measurement period.",
+      "because": "A reader cannot interpret the size or period of the bookings result."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The travel-search and bookings bullet reads as unrelated to the Library Room Booking project.",
+      "because": "Unlike the booking-flow and calendar bullets, it makes the attribution of project details questionable."
+    },
+    {
+      "line": 32,
+      "kind": "error",
+      "says": "“Storybok” is misspelled; the tool name is “Storybook.”",
+      "because": "The incorrect name can look like a proofreading error."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "“Angular” is listed without corresponding experience or a project that plausibly used it.",
+      "because": "A reader cannot connect the tool to described work."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3929,
+    "input_tokens_details": {
+      "cache_write_tokens": 3926,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1855,
+    "output_tokens_details": {
+      "reasoning_tokens": 648
+    },
+    "total_tokens": 5784
+  }
+}

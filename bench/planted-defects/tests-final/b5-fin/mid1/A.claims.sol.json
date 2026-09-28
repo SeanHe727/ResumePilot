@@ -1,0 +1,174 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Owned the credit reviews for the small-business loan book and the watch list the lending officers used.",
+    "- Reviewed 3 years of declined applications; the findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Wrote the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+    "- Shared the model and a two-page note with the university investment club, which used it in its spring pitch.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "SKILLS",
+    "Tools: Excel, Bloomberg Terminal",
+    "Methods: financial modeling, DCF valuaton, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The date of birth and nationality are personal details that should not appear on the résumé.",
+      "because": "They are not evidence of qualifications and use space without helping readers assess experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "EDUCATION appears before professional experience.",
+      "because": "Several years of experience make the career context more important to show first."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The 40% close-efficiency improvement has no defined measure or comparison period.",
+      "because": "Readers cannot tell what became more efficient or how the change was measured."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The explanation of the template’s standardization purpose is wordy.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The variance-commentary line repeats the idea of explaining results and omits what the commentary enabled.",
+      "because": "The 5% threshold describes the work’s scope, not its value to the board or business."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Free cash flow to equity is discounted at WACC rather than the cost of equity.",
+      "because": "Using WACC with free cash flow to equity describes an inconsistent valuation method."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The valuation result and how it was used are unstated.",
+      "because": "The method alone does not show the analysis’s scale or significance."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Adding business-unit EBITDA margins does not calculate a group EBITDA margin.",
+      "because": "The group margin requires total EBITDA divided by total revenue, so the stated calculation does not support 45%."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The calculation clause delays the 45% figure, which lacks a reporting period and stated use.",
+      "because": "Without a period or business use, the figure is hard to interpret and its value to leadership is unclear."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The forecast-error figure lacks a measure and evaluation period.",
+      "because": "Forecast error can be calculated in different ways, and readers cannot tell how long it stayed under 4%."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The debt reduction is phrased as an indirect consequence and does not lead the line.",
+      "because": "Opening with the forecast and accuracy delays the clearest business outcome."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The credit-review line describes responsibilities without assessment inputs, actions, or a result.",
+      "because": "Readers cannot judge the assessments or tell what changed because of the reviews."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The early-default comparison has no stated period or baseline.",
+      "because": "Readers cannot tell what “no rise” is compared against."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The strongest outcome does not lead the sentence.",
+      "because": "Leading with the review process delays the threshold changes and approval increase on a quick scan."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The sensitivity line omits the direction and unit of the discount-rate change.",
+      "because": "Readers cannot tell what the share-value movement represents or whether “1-point” means one percentage point."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Which used it” does not identify whether the club used the model, the note, or both.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The FP&A line does not identify the specific work or its outcome.",
+      "because": "Readers cannot tell what was prepared or analyzed, what changed, or how the activity connects to the fund."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The committee’s use of the report is delayed instead of leading the line.",
+      "because": "Burying the clearest evidence of the report’s value makes it less visible on a quick scan."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The cash-forecast achievement appears under two roles, while its error measure and construction are unclear.",
+      "because": "An almost identical forecast and outcome appears under Stonebridge years later, and the line does not define the error comparison or explain how the forecast was built."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Student Investment Fund entry is difficult to place in the career story.",
+      "because": "Its generic FP&A description and repeated cash-forecast claim make the older entry compete with more relevant experience."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "“Valuaton” misspells “valuation.”",
+      "because": "The misspelling in a skills term makes the line look unchecked."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3659,
+    "input_tokens_details": {
+      "cache_write_tokens": 3656,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1486,
+    "output_tokens_details": {
+      "reasoning_tokens": 513
+    },
+    "total_tokens": 5145
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Lakeside Golf Club | Caddie | Metro City, USA | Aug 2025 - Present",
+    "- Caddied about 5 rounds a week, carrying bags and reading greens for members.",
+    "- Helped the pro shop run the weekend junior tournament.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Underwrote 60 small-business loans worth USD 45M, and none of the approved loans defaulted in their first two years.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+    "- Shared the model and a two-page note with the university investment club, which used it in its spring pitch.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "SKILLS",
+    "Tools: Excel",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality should be removed.",
+      "because": "They are generally unnecessary for a typical U.S. finance application."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Use a tense consistent with a current role.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Give the caddying bullet less space than the finance experience.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify your responsibility or the tournament’s scale.",
+      "because": "“Helped” does not show what you contributed."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Define what the 40% improvement measures.",
+      "because": "It is unclear whether close time, hours spent, or another measure improved."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Check that the 40% figure is supportable.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify your contribution to the investment decisions.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Check whether one discount rate was appropriate for every project.",
+      "because": "The projects may have differed in risk."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Say whether the analysis identified causes or prompted decisions.",
+      "because": "The bullet says only which variances met the 5% threshold."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Discounting free cash flow to equity at weighted average cost of capital mixes valuation approaches.",
+      "because": "The cash flow and discount rate belong to equity and enterprise valuation approaches, respectively."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Adding business-unit EBITDA margins cannot produce a group margin.",
+      "because": "A group margin requires consolidated EBITDA and revenue, accounting for eliminations."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Define how the under-4% forecast error was measured.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make the link between the forecast and the USD 40M early repayment defensible.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Check the two-year default claim against each loan’s seasoning.",
+      "because": "The claim is supportable only for loans that have completed two years."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Distinguish your underwriting work from final approval authority.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Substantiate the approval-rate comparison.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Substantiate the period used to assess early defaults.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "“Writes” uses present tense for a role that ended in 2022.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify whether you created, maintained, or introduced the checklist.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Specify how the 6-to-3-hour reduction was measured, if known.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Do not present proximity to market price as proof the valuation was accurate.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "State which direction the discount-rate change went.",
+      "because": "The current comparison is ambiguous."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Explain what the USD 52 and USD 44 figures represent.",
+      "because": "The current comparison is ambiguous."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Check that the spring pitch date fits the project timeline.",
+      "because": "The project is listed as ongoing."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Remove the FP&A bullet unless it was genuinely an FP&A assignment.",
+      "because": "It does not fit the stated fund role."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The FP&A bullet is generic.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The cash-forecast achievement repeats the Stonebridge bullet despite being dated years earlier.",
+      "because": "Both cite a USD 600M business, roughly 4% error, and USD 40M debt repayment."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Listing only Excel may undersell your capabilities.",
+      "because": "You may have used other relevant systems."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2050,
+    "input_tokens_details": {
+      "cache_write_tokens": 2047,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1450,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 3500
+  }
+}

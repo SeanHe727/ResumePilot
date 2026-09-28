@@ -1,0 +1,228 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Owned the department websites and the shared component library other developers relied on.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not in newest-first order.",
+      "because": "The 2023–2024 Westfield role appears above the 2025 Lumen role, making the chronology harder to scan."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience should appear before Education.",
+      "because": "Placing Education first delays the strongest evidence of development work."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The opening bullet describes responsibility rather than a concrete action.",
+      "because": "It does not show what you did to develop or maintain the websites."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The shared library’s value to other developers is not stated.",
+      "because": "It does not say what improved as a result of their using it."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The editor-interview and preview-mode result should lead the entry.",
+      "because": "It connects user research to a measurable reduction in broken pages."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The accessibility checklist does not identify the standard or checks behind it.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The method appears before the measurable result.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The 35% performance improvement does not name the metric measured.",
+      "because": "Readers cannot tell whether it refers to load time, bundle size, or another measure."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The repeated “by” blurs the result and the method.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The test result is presented as an aside rather than a direct outcome.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The claim that lazy-loading the hero image cut LCP is technically unsupported.",
+      "because": "Lazy-loading the LCP element can delay its fetch and worsen LCP."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The loading-attribute detail comes after the full result.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "React state does not sanitize input, and dangerouslySetInnerHTML still interprets it as HTML.",
+      "because": "The described approach does not prevent XSS."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The XSS-prevention outcome has no stated supporting check.",
+      "because": "The bullet does not show how the security outcome was assessed."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The long implementation clause buries the outcome and uses a dense technical expression.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The hotel-search result should lead the internship entry.",
+      "because": "It pairs a specific load-time reduction with a booking increase in an A/B test."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The live-arrivals bullet does not say how the app obtains or presents arrival data.",
+      "because": "The technical work behind the live-data feature is unclear."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The weekly rider count could be read as describing the stops rather than the app.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Against 2.9s before” is an indirect way to state the baseline.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The open-source bullet does not identify a technical or release contribution.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The open-source phrase is awkwardly joined to a full clause.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The booking-flow bullet names React while the project heading names Vue.",
+      "because": "The conflicting framework labels make it unclear which stack was used."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The booking-flow bullet does not name a concrete contribution or result.",
+      "because": "It does not show what changed for users or how the work can be checked."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The calendar bullet should lead the hackathon entry.",
+      "because": "It gives a clearer account of the contribution than the general booking-flow bullet."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The calendar component and its tests do not state what they enabled or verified.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The travel-search bullet does not fit the Library Room Booking entry and appears to duplicate the Lumen Travel achievement.",
+      "because": "It attributes travel-search work to a library project while the internship describes a similar result."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The booking increase has no stated comparison or time period.",
+      "because": "Readers cannot tell what the increase is measured against or when it occurred."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The implementation detail comes before the performance and booking results.",
+      "because": "A scanning reader reaches the outcomes only after the rebuild and rendering details."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "“Storybok” is misspelled.",
+      "because": "The misspelling makes the tool harder to recognize and may raise doubts about care taken with the skills list."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Angular is listed without supporting experience in the résumé.",
+      "because": "Readers cannot see where you used it or what work demonstrates the skill."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3530,
+    "input_tokens_details": {
+      "cache_write_tokens": 3527,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1542,
+    "output_tokens_details": {
+      "reasoning_tokens": 404
+    },
+    "total_tokens": 5072
+  }
+}

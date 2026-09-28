@@ -1,0 +1,201 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present",
+    "- Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.",
+    "- Opened the café three days a week and handled the daily cash count.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Owned the department websites and the shared component library other developers relied on.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Use a working, specific portfolio or code link rather than a placeholder.",
+      "because": "It should go directly to work you want employers to see."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Confirm that the M.S. expected graduation date is still accurate.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider placing relevant experience before education for frontend applications.",
+      "because": "Your recent work is a stronger opening than degree dates."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep the Harbor Coffee Roasters role brief.",
+      "because": "It should not crowd out engineering work."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether 200 orders was the café’s morning volume or orders you personally prepared.",
+      "because": "The current attribution could be read as the latter."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "Fix the character-encoding error the review identifies as “cafØ.”",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Define what the 35% performance improvement measures and how it was measured.",
+      "because": "“Page performance” is too broad to evaluate."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Confirm that “all 14” accessibility issues were within your scope and that the audit result is supportable.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Verify the 60 tests and 3 regressions and distinguish tests you wrote from an existing suite.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The claimed LCP improvement conflicts with lazy-loading the hero image.",
+      "because": "Lazy-loading a hero image can delay largest contentful paint."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Storing user input in React state does not prevent XSS when rendering with dangerouslySetInnerHTML.",
+      "because": "State is not a sanitizer."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Be able to explain the hotel-search baseline, measurement, and A/B-test attribution.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the hotel-search and defensible performance work before narrower implementation bullets.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Specify the scale or responsibility behind “owned” and “relied on.”",
+      "because": "Those phrases leave your scope vague."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Explain how the before-and-after count was tracked and what part of the improvement you drove.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Explain how the before-and-after count was tracked and what part of the improvement you drove.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Define what “search time” measures.",
+      "because": "The four-second-to-under-one-second claim needs to be clear."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify how 900 weekly riders was measured.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Avoid calling users “riders” if the data only shows visits.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Check that the 0.8s-versus-2.9s comparison uses the same device and network conditions and a defined start point.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The heading lists Vue, which conflicts with the first bullet’s React and TypeScript.",
+      "because": "The technologies listed for the project should match those actually used."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify what the two-month hackathon span describes.",
+      "because": "It could refer to the event, later development, or something else."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The React and TypeScript claim conflicts with the heading’s Vue listing.",
+      "because": "The technologies listed for the project should match those actually used."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Remove the travel-search result from the library project.",
+      "because": "It closely duplicates the Lumen internship result and makes the project’s scope unclear."
+    },
+    {
+      "line": 32,
+      "kind": "error",
+      "says": "Correct “Storybok” if you mean Storybook.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2022,
+    "input_tokens_details": {
+      "cache_write_tokens": 2019,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1586,
+    "output_tokens_details": {
+      "reasoning_tokens": 673
+    },
+    "total_tokens": 3608
+  }
+}

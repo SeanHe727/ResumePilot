@@ -1,0 +1,197 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes, FPGA",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The current project does not lead the Projects section.",
+      "because": "Leading with the current project would make the most recent work easier to find."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience appears after Education despite several years of work history.",
+      "because": "The more recent, relevant work is harder to find."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "There is an unexplained 10-month gap between the degree and the first listed role.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The 60% update-speed improvement has no baseline or comparison.",
+      "because": "A reader cannot judge the practical size of the improvement."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The test-rig line gives its activity and cadence but no effect.",
+      "because": "It does not show whether the rig caught regressions, reduced manual effort, or improved releases."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The wording makes the logger sound as though it found the root cause by itself.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz cannot capture it without aliasing.",
+      "because": "The Nyquist frequency is 4 kHz, so the 5 kHz component aliases."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Declaring the shared counter volatile does not fix a race condition.",
+      "because": "Volatile does not make accesses atomic or synchronize the interrupt handler with the main loop."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The claimed race-condition fix has no verification or observable result.",
+      "because": "A reader has no evidence that the problem stopped occurring."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The counter is named repeatedly in the description of the race.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The review says the jitter figures show an 87.5% reduction, not a 60% reduction.",
+      "because": "The change from 120 to 15 microseconds is an 87.5% reduction."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The key results appear after the rewrite and fleet context.",
+      "because": "A scanning reader has to reach the end of the line to see the improvements."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The fleet description can be shorter without losing its size.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The automated-test line does not show how the tests ran or what they measured.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The wording gives the findings, rather than you, agency for changing the reflow profile.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The line does not reveal what technical practice the calibration procedure established.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The opening project line uses broad promotional claims without specifying the work or a checkable outcome.",
+      "because": "A reader cannot tell what the project achieved, how it was implemented, or who benefited."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The strongest project result is not the opening line.",
+      "because": "A reader scanning the project should see the measurable current reduction first."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The opening bullet describes participation without saying what you changed or achieved.",
+      "because": "It gives no concrete evidence of your technical work or the value you added."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The dashboard-firmware bullet does not state what the firmware enabled or what testing established.",
+      "because": "A reader cannot tell whether the work improved dashboard operation or resolved a specific problem."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Passive wording hides your role in writing and testing the dashboard firmware.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The race-timing detail adds length without clarifying the result.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "This project duplicates the later Voltline claim of a 300-unit firmware rewrite and the same motor-control improvements.",
+      "because": "The project predates the Voltline role, so a reader may question which role and dates are correct."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Rewrote motor-control firmware” does not identify the technical change made.",
+      "because": "The scale and results are stated, but what the rewrite changed technically is not."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The strongest claim is not the opening bullet in this project.",
+      "because": "A reader scanning the project may not reach its largest stated result."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3387,
+    "input_tokens_details": {
+      "cache_write_tokens": 3384,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1233,
+    "output_tokens_details": {
+      "reasoning_tokens": 226
+    },
+    "total_tokens": 4620
+  }
+}

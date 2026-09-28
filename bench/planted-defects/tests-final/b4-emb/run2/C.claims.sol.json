@@ -1,0 +1,218 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present",
+    "- Delivered morning wholesale orders to about 20 cafés and collected signed invoices.",
+    "- Loaded the van and checked each order against the dispatch list before leaving.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Jul 2021 - Feb 2023",
+    "- Owned the end-of-line test station for the humidity sensor and the yield reports the line leads used.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and runs 9 days without sun.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, osciloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the phone number and code URL are your intended public contact details.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the code URL opens directly to work you want an employer to see.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put Voltline before Clearwater and Northside.",
+      "because": "Work experience should be in reverse chronological order."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider placing the current delivery job below the engineering roles or in Additional Experience.",
+      "because": "It should not lead the technical case for an embedded role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider moving Education below Experience.",
+      "because": "Your professional results are now stronger evidence than the degree."
+    },
+    {
+      "line": 7,
+      "kind": "error",
+      "says": "Fix the corrupted character the review identifies in “cafØs.”",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add a result or shorten the loading and checking bullet.",
+      "because": "It describes a duty rather than an outcome."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify what you controlled or improved at the test station.",
+      "because": "“Owned” and “yield reports” establish responsibility but not the effect of your work."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify the period or population behind the return rates.",
+      "because": "The comparison needs to be credible."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether “15 to 2 a quarter” counts customer complaints in comparable quarters.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Check that the before-and-after throughput was measured on a comparable basis.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify what was 60% faster and how it was measured.",
+      "because": "“Speed” is ambiguous."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the 400 tests ran automatically on every build and what coverage or failures the rig added.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether the logger helped diagnose five failures or led to fixes.",
+      "because": "“Found the root cause” may overstate what the logger alone did."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Correct or remove the claim that sampling an unfiltered 5 kHz signal at 8 kHz avoids aliasing.",
+      "because": "The Nyquist rate would need to exceed 10 kHz unless another technique made the approach valid."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "Correct or remove the claim that declaring the counter volatile fixed a race condition.",
+      "because": "Volatile does not by itself fix a race condition or make access atomic."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Move the motor-controller rewrite near the top of the Voltline bullets.",
+      "because": "It is an excellent lead bullet."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Verify that the 300-unit scope and both improvements are attributable to this work.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify the test conditions for “9 days without sun.”",
+      "because": "The figure may depend materially on battery size, weather, or reporting interval."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Check that the current figures were measured under comparable operating conditions.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add a direct project link if the designs are public.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify whether you led the full 12-person team or its electronics work.",
+      "because": "“Electronics Lead, Team of 12” can mean either."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "Remove the robot-fleet firmware bullet or replace it with work done on the car.",
+      "because": "It conflicts with the Formula Student project context."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Specify your contribution or a test result for the dashboard CAN work if you have room.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "Remove the 300-robot motor-control bullet.",
+      "because": "It appears to duplicate the Voltline achievement and does not belong under Formula Student."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "Correct the spelling of “osciloscopes.”",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Consider separating languages, hardware or platforms, and instruments.",
+      "because": "It could make the list easier to scan."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Consider naming specific embedded techniques you used instead of the broad term “firmware.”",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2084,
+    "input_tokens_details": {
+      "cache_write_tokens": 2081,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1393,
+    "output_tokens_details": {
+      "reasoning_tokens": 369
+    },
+    "total_tokens": 3477
+  }
+}

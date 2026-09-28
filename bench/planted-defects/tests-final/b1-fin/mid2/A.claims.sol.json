@@ -1,0 +1,186 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Hedged the bank's interest-rate risk on its fixed-rate bond holdings by buying more fixed-rate bonds of the same duration.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "- Cut the monthly close from 8 working days to 5 by automating 30 reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Mapping 600 general-ledger accounts to a new chart of accounts, rebuilding the allocation rules and testing them against two prior closes, cut manual journal entries from 350 to 90 a month.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Trained 5 plant controllers on the new budgeting template and wrote its user guide.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Showed the share value fell from USD 50 to USD 40, a 25% drop, when the discount rate rose by 1 point.",
+    "- Raised the model's forecast accuracy by 12% across 10 years, from 70% to 82%, by adding rate-case timing.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Wrote onboarding notes on the fund's models for new analysts.",
+    "SKILLS",
+    "Tools: Excel",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes personal details that convention leaves off.",
+      "because": "Date of birth and nationality take attention from evidence relevant to the role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience entries are not in newest-first order.",
+      "because": "Crescent Bank appears above the more recent Stonebridge Manufacturing role, making the chronology harder to scan."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience appears below Education.",
+      "because": "That order delays the professional roles that best show the candidate’s current work."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "Buying more fixed-rate bonds of the same duration does not hedge the existing holdings’ interest-rate risk.",
+      "because": "The new bonds add exposure in the same direction rather than offsetting price sensitivity."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The hedge claim gives no measure of how much the bank’s interest-rate risk changed.",
+      "because": "Without a before-and-after measure of interest-rate sensitivity, the result is hard to assess."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The bond-risk bullet sits apart from the entry’s other work.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Two ratio thresholds” does not identify which credit ratios changed.",
+      "because": "A credit analyst cannot tell what the analysis examined or what judgment the findings informed."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“With no rise in early defaults” does not state a comparison period or rate.",
+      "because": "A reader cannot assess what supports the claim that credit quality did not worsen."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The declined-application analysis is the entry’s strongest line but is not the opening bullet.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“My findings” uses a personal pronoun in a résumé bullet.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The shared NPV rules show consistency but not what changed in capital planning.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The line mismatches free cash flow to equity with WACC.",
+      "because": "Free cash flow to equity should be discounted at the cost of equity; WACC discounts free cash flow to the firm."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Valued the acquisition target” states the task but not what the valuation showed or how it was used.",
+      "because": "Without a conclusion, the bullet reads as a method without an outcome."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line does not say whether the training or user guide changed budgeting work.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The stated 25% drop from USD 50 to USD 40 is wrong.",
+      "because": "The USD 10 decrease is 20% of the starting USD 50 value."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The change from 70% to 82% is 12 percentage points, not a 12% relative increase.",
+      "because": "Relative to the starting 70%, the increase is about 17.1%."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The accuracy figures do not say what was forecast or how accuracy was assessed.",
+      "because": "A reader cannot tell what improved or what the 70% and 82% compare."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Financial reporting and analysis” does not identify specific work or connect the support claim to the fund’s other work.",
+      "because": "The phrase could describe many tasks, so a reader cannot see the candidate’s contribution or skill."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The FP&A support line does not state an outcome.",
+      "because": "A reader cannot tell what the reporting or analysis enabled or improved."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The benchmark-reporting bullet is the entry’s strongest line but is not the opening bullet.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line does not say what changed in the performance report to show benchmark returns.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line does not say what the onboarding notes helped new analysts do.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“The fund’s models” does not identify which model or modeling task the notes covered.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3161,
+    "input_tokens_details": {
+      "cache_write_tokens": 3158,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1073,
+    "output_tokens_details": {
+      "reasoning_tokens": 115
+    },
+    "total_tokens": 4234
+  }
+}

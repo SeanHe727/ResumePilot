@@ -1,0 +1,266 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Lakeside Golf Club | Caddie | Metro City, USA | Aug 2025 - Present",
+    "- Caddied about 5 rounds a week, carrying bags and reading greens for members.",
+    "- Helped the pro shop run the weekend junior tournament.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Underwrote 60 small-business loans worth USD 45M, and none of the approved loans defaulted in their first two years.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+    "- Shared the model and a two-page note with the university investment club, which used it in its spring pitch.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "SKILLS",
+    "Tools: Excel, Bloomberg Terminal",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the LinkedIn URL works and leads to a current profile.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Add a location if it is relevant to the jobs you are targeting.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put experience ahead of education if space is tight.",
+      "because": "At this career stage, experience should lead."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Change “Caddied” to present tense if you still do this work.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Consider whether the number of rounds adds value.",
+      "because": "You are targeting finance jobs."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Specify the scope of your tournament help if it was substantial.",
+      "because": "A reader cannot tell what you were responsible for."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Define what improved by 40% and make sure the measure is supportable.",
+      "because": "“Efficiency” alone is vague."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify your analytical contribution beyond using a common template.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Distinguish NPV assumptions from payback rules.",
+      "because": "They are different decision measures."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Define the 5% threshold and whether it applied to every line item.",
+      "because": "Readers need to know whether it was a materiality threshold."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you explained causes, not just variances.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Free cash flow to equity should not be discounted at WACC.",
+      "because": "WACC is used with free cash flow to the firm."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Adding business-unit EBITDA margins does not produce a group margin.",
+      "because": "Group margin must use group EBITDA and revenue or an appropriately revenue-weighted calculation."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify a consistent measure for “forecast error under 4%. ”",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Verify that the forecast genuinely enabled the early debt repayment.",
+      "because": "The two may have merely coincided."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify the observation period for the two-year no-default claim.",
+      "because": "Loans approved near the end of your tenure may not have a substantiated full two-year period."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Explain how findings from declined applications supported changing the thresholds.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Check that the approval-rate and early-default comparisons use comparable periods and cohorts.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Change “Writes” to past tense if the checklist was completed in your former role.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify whether the drop from seven missed tests to one was measured across comparable years.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Specify whether the time saving covered the entire credit memo or only financial spreading.",
+      "because": "The line may overattribute the time saved."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Reassess “Present” if the project is complete.",
+      "because": "An open-ended date makes its status unclear."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Do not imply that being within 6% of market price validates the valuation.",
+      "because": "Price is a comparison point, not proof of accuracy."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain what the comparable-company check contributed.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "State the direction of the discount-rate change and its starting point.",
+      "because": "The USD 52-to-USD 44 range is otherwise hard to interpret."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Check that “spring pitch” aligns with the project dates.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Describe the club’s use without implying the pitch was yours if it was not.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Make your role and the fund context clearer.",
+      "because": "“Team of 6” is less useful than relevant responsibility if space is limited."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Remove the FP&A line unless it genuinely describes Student Investment Fund work.",
+      "because": "It sounds like corporate experience."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Make your contribution more specific.",
+      "because": "The line is too general to establish it."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Specify the benchmark or reporting improvement if it matters to your target roles.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The USD 600M cash-forecast claim closely duplicates the Stonebridge bullet.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The cash forecast is implausibly attributed to a 2018–19 student-fund role.",
+      "because": "If it was separate work, its figures, organization and dates need verification."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "List only tools you can discuss confidently and consider adding specific tools used in the work above.",
+      "because": "The current list is broad compared with the experience bullets."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "List only methods you can discuss confidently.",
+      "because": "The current list is broad compared with the experience bullets."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Lead with relevant finance experience and give the caddie job less space than the analyst roles if necessary.",
+      "because": "The résumé may need to fit one page."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2157,
+    "input_tokens_details": {
+      "cache_write_tokens": 2154,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1740,
+    "output_tokens_details": {
+      "reasoning_tokens": 466
+    },
+    "total_tokens": 3897
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Summit Climbing Gym | Front Desk Staff | Metro City, USA | Sep 2025 - Present",
+    "- Checked in about 150 climbers a shift and sold day passes and memberships.",
+    "- Ran the weekend rental desk and logged gear inspections for the manager.",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Reduced data-entry errors by 70% by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Built the enrollment tracker the three sites reviewed each week, flagging sites more than 10% behind target.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Established that the program was equivalent to usual care because the superiority test on readmission was not significant (p = 0.41).",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Jul 2021 - Aug 2022",
+    "- Screened 2,300 medical records for a diabetes cohort study, confirming eligibility for 410 patients against the protocol criteria.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that follow-up within 7 days was linked to lower readmission: 8.2% against 11.9% without it, after adjusting for age and insurance.",
+    "- Presented the analysis at the state public-health conference poster session.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Ran a randomized discharge study of more than 600 heart-failure patients that completed enrollment months ahead of schedule.",
+    "SKILLS",
+    "Tools: R, REDCap, SAS",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the profile link works and points to the professional profile you want employers to see.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify your responsibility or a substantiated result from logging gear inspections, or condense the gym entry.",
+      "because": "One concise gym bullet may be enough."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify how the 70% reduction in data-entry errors was measured.",
+      "because": "That would make the strong number credible."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Averaging follow-up time among patients who died does not estimate median survival.",
+      "because": "It mishandles censored observations."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Make clear whether you maintained the enrollment tracker as well as built it.",
+      "because": "That distinguishes your contribution from the sites’ use of it."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify what “reviews passed” means.",
+      "because": "A monitoring committee review without a protocol change is not necessarily a pass or evidence of safety."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "A nonsignificant superiority test does not establish equivalence.",
+      "because": "Equivalence requires a properly designed analysis with a prespecified margin."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Move the trial-coordination bullet near the top of the job.",
+      "because": "It establishes the study’s scope and your results before the specialized bullets."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify your role in recommending or implementing the reminders.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Avoid saying the reminders “cut” no-shows unless the evaluation supports that attribution.",
+      "because": "The change should not be attributed to the reminders without supporting evaluation."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Split or sharply trim the lab-data merge bullet.",
+      "because": "The list of administrative tasks buries the valuable identifier-resolution result."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify how resolving 1,200 identifiers relates to the merge.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Remove the “cutting-edge analytics” bullet.",
+      "because": "It gives no method, result, or evidence an employer can assess."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Identify the adjustment method, if accurate.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Avoid implying that follow-up caused the difference in readmission.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether the percentages and adjusted claim describe the same analysis.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add the conference’s name if it is recognizable and space permits.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Distinguish your work from the five-person team’s work.",
+      "because": "That would make your contribution clear."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "State your role in translation and piloting rather than using passive voice, if you participated.",
+      "because": "Otherwise, the work should appear only as project context."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The randomized discharge study is placed under the wrong project.",
+      "because": "It duplicates the Meridian trial and conflicts with the Community Health Survey’s 2020 dates."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Check that you could discuss or use each listed tool in an interview.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Consider indicating proficiency if it varies substantially across tools.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Check that you can explain work using each listed method, especially mixed-effects models.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 1946,
+    "input_tokens_details": {
+      "cache_write_tokens": 1943,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1390,
+    "output_tokens_details": {
+      "reasoning_tokens": 560
+    },
+    "total_tokens": 3336
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Owned the credit reviews for the small-business loan book and the watch list the lending officers used.",
+    "- Reviewed 3 years of declined applications; the findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Wrote the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+    "- Shared the model and a two-page note with the university investment club, which used it in its spring pitch.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "SKILLS",
+    "Tools: Excel, Bloomberg Terminal",
+    "Methods: financial modeling, DCF valuaton, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the LinkedIn URL works.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the email and phone number are ones you actively monitor.",
+      "because": ""
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality for most US job applications.",
+      "because": "They are generally unnecessary and can introduce bias."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Specify how the 40% close-efficiency improvement was measured.",
+      "because": "“Efficiency” is otherwise hard to assess."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify your contribution to decisions beyond standardizing the capital-plan template.",
+      "because": "The bullet currently stops at process."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Describe the significance of the board-pack commentary or the decisions it supported.",
+      "because": "Explaining lines more than 5% off budget reads primarily as a task."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Correct the mismatch between free cash flow to equity and WACC.",
+      "because": "Free cash flow to equity is ordinarily discounted at the cost of equity, not WACC."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Recalculate the group EBITDA margin rather than adding business-unit margins.",
+      "because": "A group margin needs to use consolidated EBITDA and revenue, with relevant eliminations."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Verify that the forecast error and USD 40M debt repayment are documented.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Distinguish the forecast’s contribution to the debt-repayment decision from sole causation.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Add the scope of the credit reviews and watch list, such as portfolio size or review volume.",
+      "because": "That would make “owned” more concrete."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Check that the approval-rate comparison uses comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Check that “no rise in early defaults” has an adequate observation window.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "State the period used for the before-and-after covenant-test figures consistently.",
+      "because": "That makes the reduction easier to trust."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify whether 6 to 3 hours covers total memo preparation or just spreading, and whether it is typical or measured.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Do not treat proximity to market price as proof the valuation was accurate.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Make the valuation date, market-price comparison, and independent assumptions clear in the underlying project.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Specify the direction of the discount-rate change and whether “1-point” means one percentage point.",
+      "because": "Readers should be able to reconcile the USD 52 and USD 44 values."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Identify which spring pitch the investment club used the model in.",
+      "because": "The project dates may make that unclear."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Verify that the fund had an FP&A team and that the bullet describes your role.",
+      "because": "It does not fit naturally with the other fund bullets."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Add a measurable benefit to the performance-report bullet if one exists.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "Remove the cash-forecast bullet from the student-fund section unless it was a separate project.",
+      "because": "It closely duplicates the Stonebridge forecast and is implausibly placed in a 2018–19 student-fund role."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Correct the typo in “valuaton.”",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Keep only methods you can confidently explain.",
+      "because": "The valuation bullets need checking."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Be ready to account for the period after Stonebridge ended in June 2025.",
+      "because": "The résumé need not explain every gap, but the dates should be accurate."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1964,
+    "input_tokens_details": {
+      "cache_write_tokens": 1961,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1447,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 3411
+  }
+}

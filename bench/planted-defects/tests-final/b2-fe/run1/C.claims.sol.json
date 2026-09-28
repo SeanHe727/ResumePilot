@@ -1,0 +1,180 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Owned the department websites and the shared component library other developers relied on.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the code link is public and goes directly to work you want an employer to see.",
+      "because": "It is your only portfolio link."
+    },
+    {
+      "line": 4,
+      "kind": "error",
+      "says": "“Expected Jun 2026” is out of date.",
+      "because": "That date has passed."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the 2025 internship above the 2023–24 role if the experience section uses reverse chronological order.",
+      "because": "The entries are not ordered by end date."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify how many sites or developers the component-library work covered.",
+      "because": "The scope would show that “owned” means responsibility rather than participation."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Check whether the six-per-month result is attributable to preview mode.",
+      "because": "The line implies a direct causal link."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether the checklist covered the whole university or only sites your team managed.",
+      "because": "“All university web pages” is a large claim."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify what “search time” measures.",
+      "because": "That would make the improvement credible and comparable."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Identify the metric behind the 35% page-performance improvement.",
+      "because": "A percentage without a measure is hard to assess."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Confirm that all 14 audit issues were in the date picker.",
+      "because": "They might instead refer to the whole product."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The hero-image implementation and its claimed LCP improvement need correction.",
+      "because": "Lazy-loading a hero image commonly worsens largest contentful paint."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Storing input in React state does not prevent XSS when rendering it with dangerouslySetInnerHTML.",
+      "because": "That rendering path requires sanitization or a safer alternative."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Verify that server-side rendering was part of your work.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Verify that the A/B test supports the 9% bookings-per-search claim.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Check whether “Present” is still accurate.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Ensure the weekly rider figure comes from a reliable measure.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify how the slow-3G speed comparison was measured.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Make the causal connection between offline caching and opening speed defensible.",
+      "because": "The two are related, but the stated connection needs support."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The React and TypeScript contribution contradicts the project's Vue technology listing.",
+      "because": "The technologies actually used are unclear."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The travel-search bullet belongs to a different product, not this project.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The travel-search result appears to duplicate the Lumen Travel result.",
+      "because": "That makes both entries less trustworthy."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "“Storybok” is misspelled if the intended tool is Storybook.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Keep Angular only if you have hands-on experience you can discuss.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 1860,
+    "input_tokens_details": {
+      "cache_write_tokens": 1857,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1560,
+    "output_tokens_details": {
+      "reasoning_tokens": 778
+    },
+    "total_tokens": 3420
+  }
+}

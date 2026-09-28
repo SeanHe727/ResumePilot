@@ -1,0 +1,206 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present",
+    "- Delivered morning wholesale orders to about 20 cafés and collected signed invoices.",
+    "- Loaded the van and checked each order against the dispatch list before leaving.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Jul 2021 - Feb 2023",
+    "- Owned the end-of-line test station for the humidity sensor and the yield reports the line leads used.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and runs 9 days without sun.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, osciloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code link point directly to work an employer should see.",
+      "because": "A generic link adds little."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the code link is clickable in the submitted PDF.",
+      "because": "A broken link adds little."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Move Voltline Robotics above Clearwater Sensors.",
+      "because": "The roles should continue in reverse chronological order after Northside Bakery."
+    },
+    {
+      "line": 7,
+      "kind": "error",
+      "says": "Fix the character-encoding error in “cafØs.”",
+      "because": "It looks like a PDF or text-export problem."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify the scale or outcome of the yield reporting.",
+      "because": "“Owned” describes responsibility, but the reader cannot gauge its impact."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify the period over which returns fell.",
+      "because": "It would make the result easier to assess."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify your role in confirming the solder-paste cause.",
+      "because": "It would make the result easier to assess."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Define what counted as a drift complaint.",
+      "because": "Otherwise, the reduction may look imprecise."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Give the comparison periods for the drift complaints, if possible.",
+      "because": "Otherwise, the reduction may look imprecise."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Say whether “update speed” means download time, installation time, or end-to-end completion.",
+      "because": "The percentage is ambiguous without that measure."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Add a reliability or release benefit if you have a defensible measure.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Say the crash logger helped identify the causes of five failures, rather than found them itself.",
+      "because": "That distinction makes your contribution more precise."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz does not, by itself, capture it without aliasing.",
+      "because": "The Nyquist rate would be above 10 kHz."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "Declaring the shared counter `volatile` does not, by itself, fix a race condition.",
+      "because": "It does not make access atomic."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Check that the 60% reduction refers specifically to motor faults.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Check that the comparison period supports the fault-reduction claim.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify the conditions behind “9 days without sun,” such as battery size or test setup.",
+      "because": "That would make the endurance claim credible."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Check that “Electronics Lead” accurately describes your role.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make your Formula Student leadership contribution visible in the bullets if you were Electronics Lead.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "Remove or replace the robot-fleet firmware bullet.",
+      "because": "It appears unrelated to a student electric car and overlaps with the Voltline role."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Add a test result if you have one.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "Remove the 300-robot-fleet achievement from the Formula Student project.",
+      "because": "It duplicates the Voltline achievement with different figures, creating a serious credibility concern."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "Correct the misspelling “osciloscopes.”",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Separate programming languages, platforms, and instruments.",
+      "because": "They are currently grouped under one label."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "List only methods you can discuss in depth.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Consider using the space for specific embedded tools or protocols not named elsewhere.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2024,
+    "input_tokens_details": {
+      "cache_write_tokens": 2021,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1586,
+    "output_tokens_details": {
+      "reasoning_tokens": 668
+    },
+    "total_tokens": 3610
+  }
+}
