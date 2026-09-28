@@ -1,0 +1,90 @@
+{
+  "file": "bench/planted-defects/tests/b2-quant/out/D.md",
+  "recall": 7,
+  "found": [
+    "W6",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N1"
+  ],
+  "coverage": true,
+  "suggestions": 59,
+  "words": 3570,
+  "quotes": 22,
+  "grounded": 21,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 6565,
+    "completion_tokens": 7771,
+    "total_tokens": 14336,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7489
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 6565
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": false
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct the spelling of “time-series econometrics.”"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Define the exact metric behind “risk-adjusted returns,” the comparison baseline, and whether the result is in-sample, validation, or out-of-sample."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "The order-book imbalance result appears in both the Northpeak internship and the Kaggle project, almost identically."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Add the competition result, ranking, or measurable outcome if one exists."
+      },
+      {
+        "id": "S4",
+        "found": false
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "Selecting the best configuration from 400 backtests and calling its Sharpe the expected live Sharpe is classic multiple-testing or backtest-overfitting risk."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Using the identical seed on every worker may create correlated or duplicate random streams depending on the implementation."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "It demonstrates operations management and responsibility, but it is not directly relevant to quantitative research."
+      },
+      {
+        "id": "N4",
+        "found": false
+      }
+    ],
+    "coverage": true,
+    "suggestions": 59,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

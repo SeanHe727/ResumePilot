@@ -1,0 +1,106 @@
+{
+  "file": "bench/planted-defects/tests/b2-ce/out/A.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "W5",
+    "A1",
+    "A4",
+    "S2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 36,
+  "words": 3981,
+  "quotes": 20,
+  "grounded": 13,
+  "rewrites": 7,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "The routing bullet is unclear about whether the independent reviewer is also restricted — but the resume line explicitly includes the independent reviewer in the restriction."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 7326,
+    "completion_tokens": 15018,
+    "total_tokens": 22344,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14542
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 7326
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "The past-tense opening conflicts with the present-tense verb in an ended role."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The AI-first adoption claim does not identify the practices introduced or a concrete result."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "The diagnostic-accuracy improvement has no baseline or evaluation context."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "The diagnostics triage achievement is repeated with inconsistent backlog-reduction figures."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "The metrics integration has no stated outcome or capability enabled."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "The claimed 4x total fine-tuning-memory reduction from switching FP32 to BF16 is incorrect."
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "leaves a ten-month period unexplained between the B.S. and the first listed job."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Personal details that are not relevant to hiring are included and should be removed."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 36,
+    "rewrites": [
+      "from [baseline accuracy] to [post-tuning accuracy] on [evaluation set]",
+      "while maintaining diagnostic accuracy relative to the SFT baseline.",
+      "accuracy, citation quality, and latency",
+      "backlog of pending cases",
+      "Reduced nested-pool deadlocks and lost tool results under fan-out load by separating concurrency pools and gating cache writes on successful stream completion",
+      "Showed that the evaluator tracked",
+      "added"
+    ],
+    "falsePositives": [
+      "The routing bullet is unclear about whether the independent reviewer is also restricted — but the resume line explicitly includes the independent reviewer in the restriction."
+    ]
+  }
+}

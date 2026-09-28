@@ -1,0 +1,98 @@
+{
+  "file": "bench/planted-defects/tests/b2-quant/out/B.md",
+  "recall": 8,
+  "found": [
+    "W6",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N1",
+    "N4"
+  ],
+  "coverage": false,
+  "suggestions": 69,
+  "words": 2269,
+  "quotes": 22,
+  "grounded": 22,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Add a timeframe or operating scale if available. The budget result is more persuasive if the reader knows whether it applied weekly, monthly, or across a particular period."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4739,
+    "completion_tokens": 12058,
+    "total_tokens": 16797,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11542
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4739
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct the spelling of “econometrics.”"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Clarify the baseline and whether the improvement was in-sample, validation, or out-of-sample. Without that context, the 35% figure is difficult to evaluate."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Same signal, same 18-month period, and same 0.4 Sharpe improvement appearing in two places looks like double counting or accidental duplication."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Replace this with a concrete competition result or remove it. As written, it is a generic activity description and does not show the outcome, ranking, score, or scale of the work."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "Selecting the best configuration from 400 backtests and then calling its Sharpe the “expected live Sharpe” is a serious selection-bias problem."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Using the same random seed on every worker can produce identical or correlated random streams, compromising the independence of simulations."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "This role is unrelated to the rest of the resume, but because it is current, leaving it out could create an unexplained employment gap."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "SQL, C++, and Kafka do not appear in the experience bullets, so the reader has no evidence of proficiency."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 69,
+    "rewrites": [],
+    "falsePositives": [
+      "Add a timeframe or operating scale if available. The budget result is more persuasive if the reader knows whether it applied weekly, monthly, or across a particular period."
+    ]
+  }
+}

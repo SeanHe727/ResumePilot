@@ -1,0 +1,91 @@
+{
+  "file": "bench/planted-defects/tests/b2-ce/out/D.md",
+  "recall": 5,
+  "found": [
+    "W3",
+    "W5",
+    "A1",
+    "A4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 30,
+  "words": 3596,
+  "quotes": 2,
+  "grounded": 2,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 6343,
+    "completion_tokens": 5923,
+    "total_tokens": 12266,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 5675
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 6343
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Fix the tense and grammar: the subject is past-tense, so 'adds' is inconsistent."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "This is the weakest bullet in the resume. 'AI-first,' 'accelerating delivery,' and 'improving outcomes' are broad claims without evidence."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "whether the 35% is relative or absolute improvement"
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "The duplication is especially serious because the triage work appears under: Mobility Systems Company and Research-Agent Evaluation Framework."
+      },
+      {
+        "id": "S2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove: - Date of birth - Nationality"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 30,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}
