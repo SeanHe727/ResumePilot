@@ -217,6 +217,8 @@ export interface Orchestrator {
    * agent in one context. Optional, since only the default orchestrator has it.
    */
   reviewWhole?(resume: ResumeDocument, briefing?: Briefing, flat?: boolean): Promise<WholeReview>;
+  /** Splits a combined answer the coordinator wrote itself, for the `one` ablation. */
+  readWhole?(resume: ResumeDocument, whole: Record<string, unknown> | null, stat: AgentRunStat): WholeReview;
   parallel(tasks: SubAgentTask[]): Promise<SubAgentResult[]>;
 }
 

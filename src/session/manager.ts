@@ -1,3 +1,4 @@
+import { sessionContextConfig } from '../config.js';
 import { randomUUID } from 'node:crypto';
 
 import Database from 'better-sqlite3';
@@ -98,7 +99,7 @@ export class SqliteSessionManager implements SessionManager {
       config: { ...DEFAULT_SESSION_CONFIG, ...config },
       progress: { total: 0, done: 0, current: 0, phase: 'created' },
       state: {},
-      contextManager: new LayeredContextManager(),
+      contextManager: new LayeredContextManager(sessionContextConfig()),
       abortController: new AbortController(),
       createdAt: now,
       updatedAt: now,
@@ -249,7 +250,7 @@ export class SqliteSessionManager implements SessionManager {
       config: JSON.parse(row.config) as SessionConfig,
       progress: JSON.parse(row.progress) as Session['progress'],
       state: JSON.parse(row.state) as SessionState,
-      contextManager: new LayeredContextManager(),
+      contextManager: new LayeredContextManager(sessionContextConfig()),
       abortController: new AbortController(),
       createdAt: row.created_at,
       updatedAt: row.updated_at,

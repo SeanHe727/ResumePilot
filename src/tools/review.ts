@@ -1,7 +1,8 @@
-import type { Briefing, EntryVerdict } from '../agent/types.js';
+import type { Briefing, EntryVerdict, WholeReview } from '../agent/types.js';
 import type {
   Bullet,
   EntryDiagnosis,
+  ResumeDocument,
   ResumeEntry,
   ResumeSessionState,
   WordingDiagnosis,
@@ -11,6 +12,7 @@ import { renderResume } from '../document/index.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { entryTextHash, fileReading } from './versions.js';
 import { singleAgentVariant } from '../config.js';
+import { readJson } from './verify.js';
 
 /**
  * One tool per specialist, and that is the dispatch mechanism.
@@ -499,28 +501,7 @@ export const reviewResumeTool: Tool<WithBriefing, unknown> = {
         ),
         singleAgentVariant() === 'flat',
       );
-      const entries = resume.sections.flatMap((s) => s.entries);
-      const readAt = new Date().toISOString();
-
-      for (const verdict of review.verdicts) {
-        const entry = entries.find((e) => e.id === verdict.entryId);
-        if (!entry || entry.bullets.length === 0) continue;
-        for (const role of ['content', 'wording'] as const) {
-          const found = VERDICT_FOR[role].read(verdict);
-          if (!found) {
-            const reason = ctx.orchestrator.failures.get(`${role}:${entry.id}`) ?? 'the reader returned nothing';
-            attempted(ctx, role, entry.id, 'failed', reason);
-            continue;
-          }
-          const stamped = { ...found, readHash: entryTextHash(entry), readAt };
-          remember(ctx, (state) => VERDICT_FOR[role].store(state, stamped as never));
-        }
-      }
-      if (review.narrative) {
-        remember(ctx, (state) => { state.narrative = review.narrative!; });
-      } else {
-        attempted(ctx, 'narrative', 'resume', 'failed', ctx.orchestrator.failures.get('narrative') ?? 'the reader returned nothing');
-      }
+      fileWholeReview(ctx, resume, review);
 
       if (!review.stat.success) {
         return {
@@ -528,18 +509,7 @@ export const reviewResumeTool: Tool<WithBriefing, unknown> = {
           error: { code: 'service_error', message: `review failed: ${ctx.orchestrator.failures.get('single') ?? 'unknown'}` },
         };
       }
-      return {
-        success: true,
-        data: {
-          entries: review.verdicts
-            .filter((v) => v.substance || v.wording)
-            .map((v) => ({
-              ...(v.substance ? { content: briefly(v.substance) } : {}),
-              ...(v.wording ? { wording: briefly(v.wording) } : {}),
-            })),
-          ...(review.narrative ? { narrative: review.narrative } : {}),
-        },
-      };
+      return { success: true, data: wholeSummary(review) };
     } catch (err) {
       attempted(ctx, 'single', 'resume', 'failed', err instanceof Error ? err.message : String(err));
       return {
@@ -547,5 +517,85 @@ export const reviewResumeTool: Tool<WithBriefing, unknown> = {
         error: { code: 'service_error', message: `review failed: ${err instanceof Error ? err.message : String(err)}` },
       };
     }
+  },
+};
+
+/** Where the specialists' readings go, filed from one combined answer. */
+function fileWholeReview(ctx: ToolContext, resume: ResumeDocument, review: WholeReview): void {
+  const failures = ctx.orchestrator?.failures;
+  const entries = resume.sections.flatMap((s) => s.entries);
+  const readAt = new Date().toISOString();
+
+  for (const verdict of review.verdicts) {
+    const entry = entries.find((e) => e.id === verdict.entryId);
+    if (!entry || entry.bullets.length === 0) continue;
+    for (const role of ['content', 'wording'] as const) {
+      const found = VERDICT_FOR[role].read(verdict);
+      if (!found) {
+        const reason = failures?.get(`${role}:${entry.id}`) ?? 'the reader returned nothing';
+        attempted(ctx, role, entry.id, 'failed', reason);
+        continue;
+      }
+      const stamped = { ...found, readHash: entryTextHash(entry), readAt };
+      remember(ctx, (state) => VERDICT_FOR[role].store(state, stamped as never));
+    }
+  }
+  if (review.narrative) {
+    remember(ctx, (state) => { state.narrative = review.narrative!; });
+  } else {
+    attempted(ctx, 'narrative', 'resume', 'failed', failures?.get('narrative') ?? 'the reader returned nothing');
+  }
+
+}
+
+/** What the coordinator reads back: each line's points, and the page's. */
+function wholeSummary(review: WholeReview): unknown {
+  return {
+    entries: review.verdicts
+      .filter((v) => v.substance || v.wording)
+      .map((v) => ({
+        ...(v.substance ? { content: briefly(v.substance) } : {}),
+        ...(v.wording ? { wording: briefly(v.wording) } : {}),
+      })),
+    ...(review.narrative ? { narrative: review.narrative } : {}),
+  };
+}
+
+/**
+ * The `one` ablation's hand-in: the coordinator did every reading itself and
+ * gives the combined answer here, as one JSON string. Split and filed exactly
+ * as `review_resume` files the single agent's, so the report reads the same.
+ */
+export const submitReviewTool: Tool<{ review: string }, unknown> = {
+  name: 'submit_review',
+  description:
+    'Hand in your whole review: every entry\'s content, claims and wording readings, the narrative ' +
+    'and the consistency check, as one JSON string in the shape your instructions give. Once.',
+  parameters: {
+    type: 'object',
+    properties: { review: { type: 'string', description: 'The whole review, as one JSON object serialised to a string' } },
+    required: ['review'],
+    additionalProperties: false,
+  },
+
+  async execute(input, ctx): Promise<ToolResult<unknown>> {
+    if (!ctx.orchestrator?.readWhole) return noOrchestrator();
+    const resume = resumeFrom(ctx);
+    if (!resume) return noResume();
+
+    const { value, error } = readJson(input?.review ?? '');
+    const whole = value && typeof value === 'object' ? (value as Record<string, unknown>) : null;
+    if (!whole) {
+      return {
+        success: false,
+        error: { code: 'input_error', message: `the review would not parse as a JSON object${error ? ` — ${error}` : ''}` },
+      };
+    }
+
+    const review = ctx.orchestrator.readWhole(resume, whole, {
+      name: 'Coordinator', success: true, turns: 0, compactions: 0, durationMs: 0, tokens: 0,
+    });
+    fileWholeReview(ctx, resume, review);
+    return { success: true, data: wholeSummary(review) };
   },
 };

@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest';
 
 import type { ResumeDocument, ResumeEntry } from '../../src/domain.js';
 import { DefaultOrchestrator, FLAT_AGENT, SINGLE_AGENT, SubAgentRuntime } from '../../src/agent/index.js';
-import { singleAgentVariant } from '../../src/config.js';
+import { sessionContextConfig, singleAgentVariant } from '../../src/config.js';
+import { ONE_AGENT_PROMPT } from '../../src/prompts/index.js';
+import { submitReviewTool } from '../../src/tools/index.js';
 import { SUB_AGENT_CONTEXT } from '../../src/agent/sub-agent.js';
 import { coordinatorTools, singleAgentMode } from '../../src/agent/loop.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
@@ -153,5 +155,37 @@ describe('single-agent ablation', () => {
     expect(seen[0]!.systemPrompt).toContain('Checking without helpers');
     expect(review.stat.name).toBe('Flat Reviewer');
     expect(review.verdicts.find((v) => v.entryId === 'experience:0')?.substance?.bullets).toHaveLength(2);
+  });
+
+  it('puts every reading in the coordinator under `one`, with nothing beneath it', () => {
+    const env = { RESUMEPILOT_SINGLE_AGENT: 'one' };
+    expect(singleAgentVariant(env)).toBe('one');
+    const tools = coordinatorTools(env);
+    expect(tools).toEqual(expect.arrayContaining(['submit_review', 'query_knowledge_base', 'generate_report', 'review_format']));
+    for (const nested of ['review_resume', 'review_content', 'review_narrative', 'review_jd_match', 'verify_claims', 'examine_technical_depth']) {
+      expect(tools).not.toContain(nested);
+    }
+    // One context for the whole session: nothing evicted or truncated.
+    const window = sessionContextConfig(env);
+    expect(window.maxTotalTokens).toBeGreaterThanOrEqual(200_000);
+    expect(estimateTokens(ONE_AGENT_PROMPT)).toBeLessThan(window.systemPromptBudget!);
+    expect(sessionContextConfig({})).toEqual({});
+  });
+
+  it('files a submitted review where the specialists\' readings go', async () => {
+    const { orchestrator } = orchestratorReplying(text('{}'));
+    const session = new SqliteSessionManager().create({ sourcePath: 'r.md' });
+    session.state = { resume } as never;
+
+    const result = await submitReviewTool.execute({ review: JSON.stringify(ANSWER) }, { session, orchestrator } as never);
+
+    expect(result.success).toBe(true);
+    const state = session.state as { entryDiagnoses?: Array<{ entryId: string }>; wordingDiagnoses?: unknown[]; narrative?: { arc: string } };
+    expect(state.entryDiagnoses?.map((d) => d.entryId)).toEqual(['experience:0']);
+    expect(state.wordingDiagnoses).toHaveLength(1);
+    expect(state.narrative?.arc).toBe('one career');
+
+    const bad = await submitReviewTool.execute({ review: 'not json' }, { session, orchestrator } as never);
+    expect(bad.success).toBe(false);
   });
 });

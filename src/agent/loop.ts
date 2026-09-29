@@ -1,5 +1,5 @@
 import { singleAgentVariant } from '../config.js';
-import { MAIN_AGENT_PROMPT } from '../prompts/index.js';
+import { MAIN_AGENT_PROMPT, ONE_AGENT_PROMPT } from '../prompts/index.js';
 import type { CommandParser } from '../command/types.js';
 import { renderResume } from '../document/index.js';
 import { grantPathsIn } from '../session/granted-paths.js';
@@ -64,6 +64,8 @@ export interface LoopDeps {
  * until the budget is gone, and the budget is measured in dollars.
  */
 const MAX_TURNS = 12;
+/** The single-agent `one` ablation: every lookup of every reader, in this loop. */
+const MAX_TURNS_ONE = 30;
 
 /**
  * What the coordinator can reach. Everything that forms a judgement is absent.
@@ -100,6 +102,16 @@ const SPLIT_REVIEWS: ReadonlySet<string> = new Set(['review_content', 'review_wo
  */
 export function coordinatorTools(env: NodeJS.ProcessEnv = process.env): string[] {
   if (!singleAgentMode(env)) return [...MAIN_AGENT_TOOLS];
+  // Every reading is the coordinator's own: lookups that run no model, and a
+  // tool to hand the review in. No review tool, so nothing runs beneath it.
+  if (singleAgentVariant(env) === 'one') {
+    return [
+      'query_knowledge_base',
+      'web_search',
+      'submit_review',
+      ...MAIN_AGENT_TOOLS.filter((name) => !SPLIT_REVIEWS.has(name) && name !== 'review_jd_match'),
+    ];
+  }
   return ['review_resume', ...MAIN_AGENT_TOOLS.filter((name) => !SPLIT_REVIEWS.has(name))];
 }
 
@@ -214,14 +226,17 @@ async function runTurn(
   // Counted from the phase already recorded rather than from a field of its
   // own, so it survives a restart the same way the rest of the session does.
   let exchanges = exchangesSoFar(session);
-  context.setSystemPrompt(MAIN_AGENT_PROMPT);
+  const one = singleAgentVariant() === 'one';
+  context.setSystemPrompt(one ? ONE_AGENT_PROMPT : MAIN_AGENT_PROMPT);
   setResumeContext(context, session);
   // Anything that looks like a path in what they just said is theirs to open.
   // Granted before the model gets a turn, so the model cannot grant its own.
   grantPathsIn(input, session);
   context.addMessage({ role: 'user', content: input });
 
-  for (let turn = 0; turn < MAX_TURNS; turn++) {
+  // The `one` ablation does its own lookups where a coordinator dispatched.
+  const maxTurns = one ? MAX_TURNS_ONE : MAX_TURNS;
+  for (let turn = 0; turn < maxTurns; turn++) {
     const window = context.build();
     const response = await deps.queryEngine.query({
       systemPrompt: window.systemPrompt,
@@ -231,6 +246,8 @@ async function runTurn(
       // coordinator dispatches and relays; it judges nothing, and its
       // reasoning was a fifth of a review's cost.
       effort: 'medium',
+      // The hand-in carries every entry's readings as one tool argument.
+      ...(one ? { maxTokens: 64_000 } : {}),
       abortSignal: session.abortController.signal,
     });
 
@@ -289,7 +306,7 @@ async function runTurn(
 
   // Out of turns. Said plainly rather than silently returning nothing, because
   // from the outside a stuck loop and a finished one look identical.
-  deps.print(`Stopped after ${MAX_TURNS} tool rounds without an answer. Try /status, or ask again more narrowly.`);
+  deps.print(`Stopped after ${maxTurns} tool rounds without an answer. Try /status, or ask again more narrowly.`);
   deps.sessions.save(session);
 }
 

@@ -77,6 +77,14 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
     reason: 'Hands one entry or the document to a specialist and reads back what it found.',
   },
   {
+    id: 'allow-submit-review',
+    name: 'Submitted review',
+    match: { type: 'tool_name', pattern: 'submit_review' },
+    level: 'low',
+    action: 'allow',
+    reason: 'Files a review the coordinator wrote itself (the single-agent ablation); writes session state only.',
+  },
+  {
     id: 'allow-parse-resume',
     name: 'Read a resume file',
     match: { type: 'tool_name', pattern: 'parse_resume' },

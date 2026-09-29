@@ -1,3 +1,4 @@
+import type { ContextConfig } from './context/types.js';
 /**
  * Configuration and the model registry.
  *
@@ -252,12 +253,31 @@ export function estimateCostUsd(
 /**
  * Which single-agent ablation is on, if any. `RESUMEPILOT_SINGLE_AGENT`:
  * unset for the product; `1` for one agent with the specialists' tools, nested
- * research included; `flat` for one agent with no sub-agent of any kind.
+ * research included; `flat` for one agent with no sub-agent of any kind; `one`
+ * for the coordinator itself doing every reading, in the one context the whole
+ * session shares.
  */
-export type SingleAgentVariant = 'off' | 'merged' | 'flat';
+export type SingleAgentVariant = 'off' | 'merged' | 'flat' | 'one';
 
 export function singleAgentVariant(env: NodeJS.ProcessEnv = process.env): SingleAgentVariant {
   const raw = (env.RESUMEPILOT_SINGLE_AGENT ?? '').trim().toLowerCase();
-  if (raw === 'flat') return 'flat';
+  if (raw === 'flat' || raw === 'one') return raw;
   return /^(1|true|yes)$/.test(raw) ? 'merged' : 'off';
+}
+
+/**
+ * The session's window. The product's, except under the `one` ablation, where
+ * the coordinator's context holds the whole review and must keep all of it:
+ * nothing evicted, compressed or truncated.
+ */
+export function sessionContextConfig(env: NodeJS.ProcessEnv = process.env): Partial<ContextConfig> {
+  if (singleAgentVariant(env) !== 'one') return {};
+  return {
+    maxTotalTokens: 400_000,
+    systemPromptBudget: 40_000,
+    taskBudget: 20_000,
+    recentBudget: 360_000,
+    toolResultBudget: 100_000,
+    outputReserve: 64_000,
+  };
 }

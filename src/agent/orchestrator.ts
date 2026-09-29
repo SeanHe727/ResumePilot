@@ -10,6 +10,7 @@ import type {
   WordingDiagnosis,
 } from '../domain.js';
 import { renderResume } from '../document/index.js';
+import { SINGLE_AGENT_SCHEMA } from '../prompts/index.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 import { buildClaimsMessage, buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
 import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
@@ -234,7 +235,17 @@ export class DefaultOrchestrator {
       tokens: (result?.usage.inputTokens ?? 0) + (result?.usage.outputTokens ?? 0),
     };
 
-    const whole = this.readWholeDocument('single', result);
+    return this.readWhole(resume, this.readWholeDocument('single', result), stat);
+  }
+
+  /**
+   * One combined answer, split into what each specialist would have returned.
+   *
+   * Public for the `one` ablation, where the answer arrives through a tool call
+   * of the coordinator's own rather than from an agent run here.
+   */
+  readWhole(resume: ResumeDocument, whole: Record<string, unknown> | null, stat: AgentRunStat): WholeReview {
+    const entries = resume.sections.flatMap((section) => section.entries);
     const items = Array.isArray(whole?.entries) ? whole.entries : [];
     const byId = new Map(
       items.flatMap((item) => {
@@ -434,93 +445,7 @@ export function buildSingleAgentMessage(resume: ResumeDocument, readable: Resume
 Entries to read one by one (every per-entry reading covers each of these):
 ${readable.map((entry) => `- [${entry.id}]`).join('\n')}
 
-Every score is a whole number from 0 to 100; the zeros below are placeholders.
-Ids are given back verbatim, without brackets.
-
-Return JSON of exactly this shape:
-
-{
-  "entries": [
-    {
-      "entryId": "<an entry id from the list above>",
-      "content": {
-        "bullets": [
-          {
-            "bulletId": "<a line id in this entry>",
-            "overallScore": 0,
-            "dimensions": {
-              "impact":      { "score": 0, "detail": "one sentence" },
-              "measurement": { "score": 0, "detail": "one sentence" },
-              "method":      { "score": 0, "detail": "one sentence" }
-            },
-            "issues": [
-              {
-                "axis": "impact | measurement | method",
-                "kind": "missing | unclear",
-                "what": "the problem, one sentence, quoting the line's words",
-                "why": "why it is a problem for a reader, one or two sentences",
-                "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets] — nothing the resume does not contain",
-                "costWords": 0
-              }
-            ],
-            "strengths": ["..."],
-            "claimsToVerify": [
-              {
-                "kind": "technology|figure|method",
-                "claim": "what you checked, quoted from the bullet where possible",
-                "basis": "the technology, figure source or approach it rests on",
-                "finding": "what the check showed, or what came back empty"
-              }
-            ]
-          }
-        ]
-      },
-      "claims": {
-        "errors": [
-          {
-            "bulletId": "<a line id in this entry>",
-            "axis": "impact | measurement | method",
-            "what": "what is wrong, in your own words, quoting the words it turns on",
-            "why": "why a practitioner would catch it, two or three sentences",
-            "fix": "what a correct version says, or what to go and find in [brackets]"
-          }
-        ]
-      },
-      "wording": {
-        "perBullet": [
-          {
-            "bulletId": "<a line id in this entry>",
-            "verbStrength": { "score": 0, "detail": "one sentence" },
-            "concision":    { "score": 0, "detail": "one sentence" },
-            "issues": [{ "kind": "wrong | missing | unclear", "what": "what is wrong with the wording, one sentence", "savesWords": 0 }]
-          }
-        ]
-      }
-    }
-  ],
-  "narrative": {
-    "overallScore": 0,
-    "arc": "one or two sentences",
-    "gaps": ["what the dates show, one per item"],
-    "orderingNotes": ["entries or sections to move, and why; not individual bullets"],
-    "withinEntries": [
-      {
-        "entryId": "<the entry id>",
-        "redundantPairs": [{ "bulletA": "<id>", "bulletB": "<id>", "note": "what repeats" }],
-        "coherence": { "score": 0, "detail": "one sentence" },
-        "suggestedOrder": ["<id>", "<id>"]
-      }
-    ]
-  },
-  "consistency": {
-    "conflicts": ["two or more places that cannot all be true, naming each, why a reader would notice, and how to make them agree"],
-    "unsupportedSkills": ["a listed skill no entry could plausibly have used, and where a reader would have expected to see it"],
-    "misspellings": ["the misspelled word as written, where it is, and the correct spelling"]
-  }
-}
-
-"savesWords" is roughly how many words fixing that wording issue would take off
-the line — 0 where the fix changes words without removing any.`;
+${SINGLE_AGENT_SCHEMA}`;
 }
 
 function asObject(output: unknown): Record<string, unknown> | null {
