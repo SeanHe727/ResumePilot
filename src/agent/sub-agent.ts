@@ -176,7 +176,7 @@ export class SubAgentRuntime {
     const usage = { inputTokens: 0, outputTokens: 0 };
     let turns = 0;
 
-    const context = new LayeredContextManager(SUB_AGENT_CONTEXT);
+    const context = new LayeredContextManager({ ...SUB_AGENT_CONTEXT, ...config.context });
     // Set below, once it is known whether the optional tools resolved.
     context.setTaskContext(buildTaskBlock(config, task.context));
     context.addMessage({ role: 'user', content: task.input });
@@ -237,6 +237,7 @@ export class SubAgentRuntime {
         // while tools are on the table, so a turn that should be a lookup is
         // not pushed into answering early.
         ...(mustAnswer ? { jsonMode: true } : {}),
+        ...(config.maxTokens ? { maxTokens: config.maxTokens } : {}),
         abortSignal: deadline,
       });
 

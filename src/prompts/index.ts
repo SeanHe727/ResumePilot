@@ -20,3 +20,4 @@ export * from './internal.js';
 export * from './verify-claims.js';
 export * from './claims.js';
 export * from './consistency.js';
+export * from './single-agent.js';

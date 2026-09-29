@@ -88,6 +88,24 @@ const MAIN_AGENT_TOOLS = [
   'revert_revision',
 ] as const;
 
+/** The per-entry and whole-page reviews the single-agent ablation replaces. */
+const SPLIT_REVIEWS: ReadonlySet<string> = new Set(['review_content', 'review_wording', 'review_narrative']);
+
+/**
+ * The coordinator's tools, or, with `RESUMEPILOT_SINGLE_AGENT` set, the same
+ * list with the split reviews swapped for `review_resume`: one agent doing
+ * every reading in one context. An ablation for measuring what the
+ * specialists buy; off by default, and the product path never sees it.
+ */
+export function coordinatorTools(env: NodeJS.ProcessEnv = process.env): string[] {
+  if (!singleAgentMode(env)) return [...MAIN_AGENT_TOOLS];
+  return ['review_resume', ...MAIN_AGENT_TOOLS.filter((name) => !SPLIT_REVIEWS.has(name))];
+}
+
+export function singleAgentMode(env: NodeJS.ProcessEnv = process.env): boolean {
+  return /^(1|true|yes)$/i.test(env.RESUMEPILOT_SINGLE_AGENT ?? '');
+}
+
 /**
  * Two ways in.
  *
@@ -207,7 +225,7 @@ async function runTurn(
     const response = await deps.queryEngine.query({
       systemPrompt: window.systemPrompt,
       messages: window.messages,
-      tools: deps.tools.getSchemasFor(MAIN_AGENT_TOOLS.filter((n) => deps.tools.has(n))),
+      tools: deps.tools.getSchemasFor(coordinatorTools().filter((n) => deps.tools.has(n))),
       // Medium, not the high every untasked call fell through to. The
       // coordinator dispatches and relays; it judges nothing, and its
       // reasoning was a fifth of a review's cost.
@@ -357,6 +375,7 @@ function setResumeContext(context: ContextManager, session: Session): void {
  * between, and stays out.
  */
 const RUN_TOGETHER: ReadonlySet<string> = new Set([
+  'review_resume',
   'review_content',
   'review_wording',
   'review_narrative',

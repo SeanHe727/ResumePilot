@@ -466,3 +466,81 @@ export const reviewFormatTool: Tool<Record<string, never>, unknown> = {
     return { success: true, data: diagnosis };
   },
 };
+
+/**
+ * The single-agent ablation's one review: every entry and the whole page, by
+ * one agent in one context.
+ *
+ * Offered to the coordinator only when `RESUMEPILOT_SINGLE_AGENT` is set, in
+ * place of `review_content`, `review_wording` and `review_narrative`. It files
+ * its readings where theirs go, so the report cannot tell which path ran.
+ */
+export const reviewResumeTool: Tool<WithBriefing, unknown> = {
+  name: 'review_resume',
+  description:
+    'Have one reviewer read the whole resume: every entry\'s content, claims and wording, the ' +
+    'career narrative, and whether the page agrees with itself. One call covers everything.',
+  parameters: { type: 'object', properties: { ...BRIEFING_PROPS }, additionalProperties: false },
+
+  async execute(input, ctx): Promise<ToolResult<unknown>> {
+    if (!ctx.orchestrator?.reviewWhole) return noOrchestrator();
+    const resume = resumeFrom(ctx);
+    if (!resume) return noResume();
+
+    try {
+      const review = await ctx.orchestrator.reviewWhole(resume, briefingFrom(
+          input,
+          // Every fact: this reader reads every entry.
+          ((ctx.session?.state as ResumeSessionState | undefined)?.suppliedFacts ?? []).map((f) => `"${f.fact}"`),
+          pageRoom(ctx),
+        ));
+      const entries = resume.sections.flatMap((s) => s.entries);
+      const readAt = new Date().toISOString();
+
+      for (const verdict of review.verdicts) {
+        const entry = entries.find((e) => e.id === verdict.entryId);
+        if (!entry || entry.bullets.length === 0) continue;
+        for (const role of ['content', 'wording'] as const) {
+          const found = VERDICT_FOR[role].read(verdict);
+          if (!found) {
+            const reason = ctx.orchestrator.failures.get(`${role}:${entry.id}`) ?? 'the reader returned nothing';
+            attempted(ctx, role, entry.id, 'failed', reason);
+            continue;
+          }
+          const stamped = { ...found, readHash: entryTextHash(entry), readAt };
+          remember(ctx, (state) => VERDICT_FOR[role].store(state, stamped as never));
+        }
+      }
+      if (review.narrative) {
+        remember(ctx, (state) => { state.narrative = review.narrative!; });
+      } else {
+        attempted(ctx, 'narrative', 'resume', 'failed', ctx.orchestrator.failures.get('narrative') ?? 'the reader returned nothing');
+      }
+
+      if (!review.stat.success) {
+        return {
+          success: false,
+          error: { code: 'service_error', message: `review failed: ${ctx.orchestrator.failures.get('single') ?? 'unknown'}` },
+        };
+      }
+      return {
+        success: true,
+        data: {
+          entries: review.verdicts
+            .filter((v) => v.substance || v.wording)
+            .map((v) => ({
+              ...(v.substance ? { content: briefly(v.substance) } : {}),
+              ...(v.wording ? { wording: briefly(v.wording) } : {}),
+            })),
+          ...(review.narrative ? { narrative: review.narrative } : {}),
+        },
+      };
+    } catch (err) {
+      attempted(ctx, 'single', 'resume', 'failed', err instanceof Error ? err.message : String(err));
+      return {
+        success: false,
+        error: { code: 'service_error', message: `review failed: ${err instanceof Error ? err.message : String(err)}` },
+      };
+    }
+  },
+};

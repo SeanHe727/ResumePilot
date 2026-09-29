@@ -15,7 +15,7 @@ import { buildClaimsMessage, buildEntryMessage, normaliseEntryDiagnosis } from '
 import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
 import { buildTimeline, renderTimeline } from '../document/timeline.js';
 import { SemaphorePool } from './pool.js';
-import { CLAIMS_AGENT, CONSISTENCY_AGENT, ROLES } from './roles.js';
+import { CLAIMS_AGENT, CONSISTENCY_AGENT, ROLES, SINGLE_AGENT } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
 import type {
   AgentRunStat,
@@ -27,6 +27,7 @@ import type {
   RoleSelection,
   SubAgentResult,
   SubAgentTask,
+  WholeReview,
 } from './types.js';
 
 const DEFAULTS: OrchestratorConfig = {
@@ -201,15 +202,84 @@ export class DefaultOrchestrator {
     if (!raw) return null;
     const checked = this.readWholeDocument('consistency', check) ?? {};
 
+    return composeNarrative(resume, raw, checked);
+  }
+
+  /**
+   * The single-agent ablation: one agent, one context, every reading.
+   *
+   * Its one answer is split into what each specialist would have returned and
+   * read by the same code, so everything after this point (the filter, the
+   * report) sees the same shapes as on the multi-agent path.
+   */
+  async reviewWhole(resume: ResumeDocument, briefing?: Briefing): Promise<WholeReview> {
+    const entries = resume.sections.flatMap((section) => section.entries);
+    const readable = entries.filter((entry) => entry.bullets.length > 0);
+    const timeline = renderTimeline(buildTimeline(resume));
+
+    const [result] = await this.parallel([
+      {
+        agentConfig: SINGLE_AGENT,
+        input: buildSingleAgentMessage(resume, readable),
+        context: { ...(timeline ? { timeline } : {}), ...briefingContext(briefing) },
+      },
+    ]);
+    const stat: AgentRunStat = {
+      name: SINGLE_AGENT.name,
+      success: Boolean(result?.success),
+      turns: result?.turns ?? 0,
+      compactions: result?.compactions ?? 0,
+      durationMs: result?.durationMs ?? 0,
+      tokens: (result?.usage.inputTokens ?? 0) + (result?.usage.outputTokens ?? 0),
+    };
+
+    const whole = this.readWholeDocument('single', result);
+    const items = Array.isArray(whole?.entries) ? whole.entries : [];
+    const byId = new Map(
+      items.flatMap((item) => {
+        const record = asObject(item);
+        return record ? [[bareId(record.entryId), record] as const] : [];
+      }),
+    );
+
+    // Each part posed as the result of the role that would have produced it,
+    // so `aggregate` reads it exactly as it reads theirs.
+    const part = (id: string, name: string, output: unknown): SubAgentResult => {
+      const present = asObject(output) !== null;
+      return {
+        agentId: id,
+        agentName: name,
+        success: present,
+        ...(present ? { output } : { error: whole ? `the single agent gave no ${id} reading` : this.failures.get('single') ?? 'the single agent failed' }),
+        usage: { inputTokens: 0, outputTokens: 0 },
+        turns: 0,
+        compactions: 0,
+        durationMs: 0,
+      };
+    };
+    const verdicts = entries.map((entry): EntryVerdict => {
+      if (entry.bullets.length === 0) {
+        return { entryId: entry.id, substance: null, wording: null, overallScore: 0, agentStats: [] };
+      }
+      const record = byId.get(entry.id);
+      const verdict = aggregate(
+        entry,
+        [
+          part('content', ROLES['content']!.name, record?.content),
+          part('claims', CLAIMS_AGENT.name, record?.claims),
+          part('wording', ROLES['wording']!.name, record?.wording),
+        ],
+        this.failures,
+      );
+      return { ...verdict, agentStats: [stat] };
+    });
+
+    const narrative = asObject(whole?.narrative);
+    if (whole && !narrative) this.failures.set('narrative', 'the single agent gave no narrative reading');
     return {
-      overallScore: numeric(raw.overallScore),
-      arc: typeof raw.arc === 'string' ? raw.arc : '',
-      gaps: strings(raw.gaps),
-      orderingNotes: strings(raw.orderingNotes).filter((note) => !confirmsOrder(note)),
-      unsupportedSkills: strings(checked.unsupportedSkills),
-      conflicts: strings(checked.conflicts),
-      misspellings: strings(checked.misspellings),
-      withinEntries: readEntryReads(resume, raw.withinEntries),
+      verdicts,
+      narrative: narrative ? composeNarrative(resume, narrative, asObject(whole?.consistency) ?? {}) : null,
+      stat,
     };
   }
 
@@ -331,6 +401,125 @@ export class DefaultOrchestrator {
       return result;
     }
   }
+}
+
+function composeNarrative(
+  resume: ResumeDocument,
+  raw: Record<string, unknown>,
+  checked: Record<string, unknown>,
+): NarrativeAssessment {
+  return {
+    overallScore: numeric(raw.overallScore),
+    arc: typeof raw.arc === 'string' ? raw.arc : '',
+    gaps: strings(raw.gaps),
+    orderingNotes: strings(raw.orderingNotes).filter((note) => !confirmsOrder(note)),
+    unsupportedSkills: strings(checked.unsupportedSkills),
+    conflicts: strings(checked.conflicts),
+    misspellings: strings(checked.misspellings),
+    withinEntries: readEntryReads(resume, raw.withinEntries),
+  };
+}
+
+/**
+ * The single agent's task: the whole résumé, which entries to read one by one,
+ * and one answer holding what the five readers would each have returned.
+ *
+ * The per-reading shapes are the specialists' own, field for field, so the
+ * same readers parse them.
+ */
+export function buildSingleAgentMessage(resume: ResumeDocument, readable: ResumeEntry[]): string {
+  return `${renderResume(resume)}
+
+Entries to read one by one (every per-entry reading covers each of these):
+${readable.map((entry) => `- [${entry.id}]`).join('\n')}
+
+Every score is a whole number from 0 to 100; the zeros below are placeholders.
+Ids are given back verbatim, without brackets.
+
+Return JSON of exactly this shape:
+
+{
+  "entries": [
+    {
+      "entryId": "<an entry id from the list above>",
+      "content": {
+        "bullets": [
+          {
+            "bulletId": "<a line id in this entry>",
+            "overallScore": 0,
+            "dimensions": {
+              "impact":      { "score": 0, "detail": "one sentence" },
+              "measurement": { "score": 0, "detail": "one sentence" },
+              "method":      { "score": 0, "detail": "one sentence" }
+            },
+            "issues": [
+              {
+                "axis": "impact | measurement | method",
+                "kind": "missing | unclear",
+                "what": "the problem, one sentence, quoting the line's words",
+                "why": "why it is a problem for a reader, one or two sentences",
+                "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets] — nothing the resume does not contain",
+                "costWords": 0
+              }
+            ],
+            "strengths": ["..."],
+            "claimsToVerify": [
+              {
+                "kind": "technology|figure|method",
+                "claim": "what you checked, quoted from the bullet where possible",
+                "basis": "the technology, figure source or approach it rests on",
+                "finding": "what the check showed, or what came back empty"
+              }
+            ]
+          }
+        ]
+      },
+      "claims": {
+        "errors": [
+          {
+            "bulletId": "<a line id in this entry>",
+            "axis": "impact | measurement | method",
+            "what": "what is wrong, in your own words, quoting the words it turns on",
+            "why": "why a practitioner would catch it, two or three sentences",
+            "fix": "what a correct version says, or what to go and find in [brackets]"
+          }
+        ]
+      },
+      "wording": {
+        "perBullet": [
+          {
+            "bulletId": "<a line id in this entry>",
+            "verbStrength": { "score": 0, "detail": "one sentence" },
+            "concision":    { "score": 0, "detail": "one sentence" },
+            "issues": [{ "kind": "wrong | missing | unclear", "what": "what is wrong with the wording, one sentence", "savesWords": 0 }]
+          }
+        ]
+      }
+    }
+  ],
+  "narrative": {
+    "overallScore": 0,
+    "arc": "one or two sentences",
+    "gaps": ["what the dates show, one per item"],
+    "orderingNotes": ["entries or sections to move, and why; not individual bullets"],
+    "withinEntries": [
+      {
+        "entryId": "<the entry id>",
+        "redundantPairs": [{ "bulletA": "<id>", "bulletB": "<id>", "note": "what repeats" }],
+        "coherence": { "score": 0, "detail": "one sentence" },
+        "suggestedOrder": ["<id>", "<id>"]
+      }
+    ]
+  },
+  "consistency": {
+    "conflicts": ["two or more places that cannot all be true, naming each, why a reader would notice, and how to make them agree"],
+    "unsupportedSkills": ["a listed skill no entry could plausibly have used, and where a reader would have expected to see it"],
+    "misspellings": ["the misspelled word as written, where it is, and the correct spelling"]
+  }
+}
+
+"savesWords" is roughly how many words fixing that wording issue would take off
+the line — 0 where the fix changes words without removing any.`;
 }
 
 function asObject(output: unknown): Record<string, unknown> | null {

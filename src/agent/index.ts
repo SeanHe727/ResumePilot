@@ -11,5 +11,6 @@ export {
   WORDING_AGENT,
   NARRATIVE_AGENT,
   JD_MATCH_AGENT,
+  SINGLE_AGENT,
 } from './roles.js';
 export * from './types.js';

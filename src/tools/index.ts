@@ -12,6 +12,7 @@ import {
   reviewFormatTool,
   reviewJdMatchTool,
   reviewNarrativeTool,
+  reviewResumeTool,
   reviewWordingTool,
 } from './review.js';
 import { applyRevisionTool, recordFactTool, revertRevisionTool } from './working-state.js';
@@ -36,6 +37,7 @@ export {
   reviewFormatTool,
   reviewJdMatchTool,
   reviewNarrativeTool,
+  reviewResumeTool,
   reviewWordingTool,
 } from './review.js';
 export { applyRevisionTool, recordFactTool, revertRevisionTool } from './working-state.js';
@@ -82,6 +84,8 @@ export function createToolRegistry(
     registry.register(reviewNarrativeTool as never);
     registry.register(reviewJdMatchTool as never);
     registry.register(reviewFormatTool as never);
+    // Only offered to the coordinator in the single-agent ablation.
+    registry.register(reviewResumeTool as never);
     // The two writes. A fixed pipeline has nobody to take a fact from and no
     // wording to settle on, so they belong to the conversation or nowhere.
     registry.register(recordFactTool as never);

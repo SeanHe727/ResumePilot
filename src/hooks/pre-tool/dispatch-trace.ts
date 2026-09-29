@@ -22,7 +22,7 @@ export function createDispatchTraceHook(write: (line: string) => void): Hook {
     name: 'dispatch-trace',
     timing: 'pre-tool',
     priority: 50,
-    watches: ['review_content', 'review_wording', 'review_narrative', 'review_jd_match'],
+    watches: ['review_content', 'review_wording', 'review_narrative', 'review_jd_match', 'review_resume'],
     enabled: false,
 
     async execute(ctx: HookContext): Promise<HookOutcome> {

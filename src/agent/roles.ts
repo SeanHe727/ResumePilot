@@ -12,6 +12,8 @@ import {
   RETRIEVAL_ADDENDUM,
   CONTENT_SEARCH_TRIGGERS,
   WEB_SEARCH_CORE,
+  SINGLE_AGENT_PROMPT,
+  SINGLE_AGENT_SEARCH,
 } from '../prompts/index.js';
 import type { SubAgentConfig } from './types.js';
 
@@ -185,6 +187,42 @@ export const CONSISTENCY_AGENT: SubAgentConfig = {
   maxTurns: 1,
   timeoutMs: 180_000,
   contextBoundary: ['entries', 'timeline'],
+};
+
+/**
+ * The single-agent ablation: content, claims, wording, narrative and
+ * consistency in one agent and one context, with the union of their tools.
+ *
+ * Not in `ROLES`, and reached only through `review_resume`, which the
+ * coordinator is offered only when `RESUMEPILOT_SINGLE_AGENT` is set. It exists
+ * to measure what the split into specialists buys, not to be used.
+ */
+export const SINGLE_AGENT: SubAgentConfig = {
+  id: 'single',
+  // The content reader's route, so the model and effort match the heaviest role.
+  task: 'diagnose_bullet',
+  name: 'Single Reviewer',
+  description: 'Every per-entry and whole-page reading, in one context',
+  systemPrompt: SINGLE_AGENT_PROMPT,
+  tools: ['query_knowledge_base', 'verify_claims', 'examine_technical_depth'],
+  optionalTools: ['web_search'],
+  optionalPrompt: SINGLE_AGENT_SEARCH,
+  // Roughly what the specialists take for two entries between them; the
+  // lookups for a whole resume are shared rather than repeated per entry.
+  maxTurns: 20,
+  timeoutMs: 1_200_000,
+  contextBoundary: ['briefing', 'timeline'],
+  // One window for everything five readers held apart. The system prompt is
+  // the five prompts together and must not be truncated.
+  context: {
+    maxTotalTokens: 200_000,
+    recentBudget: 180_000,
+    taskBudget: 8_000,
+    systemPromptBudget: 24_000,
+    outputReserve: 16_000,
+  },
+  // The answer carries every entry's three readings at once.
+  maxTokens: 64_000,
 };
 
 export const ROLES: Readonly<Record<string, SubAgentConfig>> = {
