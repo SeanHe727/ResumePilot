@@ -1,0 +1,224 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Summit Climbing Gym | Front Desk Staff | Metro City, USA | Sep 2025 - Present",
+    "- Checked in about 150 climbers a shift and sold day passes and memberships.",
+    "- Ran the weekend rental desk and logged gear inspections for the manager.",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Reduced data-entry errors by 70% by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Built the enrollment tracker the three sites reviewed each week, flagging sites more than 10% behind target.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Established that the program was equivalent to usual care because the superiority test on readmission was not significant (p = 0.41).",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Jul 2021 - Aug 2022",
+    "- Screened 2,300 medical records for a diabetes cohort study, confirming eligibility for 410 patients against the protocol criteria.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that follow-up within 7 days was linked to lower readmission: 8.2% against 11.9% without it, after adjusting for age and insurance.",
+    "- Presented the analysis at the state public-health conference poster session.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Ran a randomized discharge study of more than 600 heart-failure patients that completed enrollment months ahead of schedule.",
+    "SKILLS",
+    "Tools: R, REDCap, SAS",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The front-desk role leads EXPERIENCE instead of the clinical research roles.",
+      "because": "A reader looking for clinical research work should encounter Meridian and Northgate University Hospital first."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "EDUCATION appears before the clinical research experience and ongoing health-analysis project.",
+      "because": "Readers reach the M.P.H. before the work that most directly demonstrates recent research experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé shows no research position after the July 2025 clinical research role.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The sales duty has no stated result.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The verbs are in past tense for a role marked Present.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The inspection wording does not say whether you inspected gear or recorded someone else’s inspections.",
+      "because": "A reader cannot judge your hands-on responsibility for the gear."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The rental-desk duty has no stated result.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The verbs are in past tense for a role marked Present.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The 70% reduction lacks the starting error rate.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Averaging follow-up time among patients who died while excluding censored patients does not estimate median survival in each arm.",
+      "because": "It gives a mean for a selected subset, while estimating survival requires accounting for censored observations."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The line gives no survival estimate for either arm.",
+      "because": "Without the findings, a research reader cannot tell what the analysis showed."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The tracker line stops at flagging sites and does not say what happened next.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The reports line does not show whether you worked on the safety data or only presented it.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The line does not identify what, if anything, passed the four reviews.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "A nonsignificant superiority test does not establish that the program was equivalent to usual care.",
+      "because": "Equivalence requires a prespecified margin and an analysis showing the result falls within it."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“Coordinated” does not identify which part of trial delivery you managed.",
+      "because": "The broad verb leaves your contribution to early enrollment and completed follow-up visits unclear."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The strongest trial results are buried after the scope, and the bullet appears too late in the entry.",
+      "because": "A scanning reader reaches the enrollment and follow-up results only at the end of this line, after several earlier bullets."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The patient-interview result is not the opening bullet.",
+      "because": "Placing the interviews and no-show reduction first would make the role’s impact visible sooner."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The sentence assigns the decision to add reminders to the findings themselves.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "An administrative-duty list separates the data work from its identifier-reconciliation result.",
+      "because": "A reader may miss the 1,200 resolved identifiers or mistakenly connect that result to scheduling and front-desk work."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The data-work description does not explain how you reconciled the mismatched identifiers.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The readmission finding appears after the generic opening rather than leading the project.",
+      "because": "The 8.2% versus 11.9% comparison is evidence a reader can assess immediately."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The line names the adjustment variables but not the adjustment method.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Against” makes the percentage comparison awkward to read.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The poster line does not name the conference.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The generic opening delays the project’s concrete finding.",
+      "because": "A broad claim makes a reader work past it to discover what the analysis found."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The passive wording hides which translation or pilot work you personally did.",
+      "because": "In a team project, readers cannot distinguish your contribution or judge the credit you can claim."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The pilot’s size is stated, but its effect on the survey is not.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The discharge-trial and early-enrollment claim is incorrectly placed under the 2020 Community Health Survey entry.",
+      "because": "A closely matching trial appears under the 2022–2025 Meridian role, calling the dates and ownership of the work into question."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3508,
+    "input_tokens_details": {
+      "cache_write_tokens": 3505,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1327,
+    "output_tokens_details": {
+      "reasoning_tokens": 191
+    },
+    "total_tokens": 4835
+  }
+}
