@@ -1,0 +1,261 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Leading experience with Sunrise Bakery makes the page initially read as a retail-management résumé.",
+      "because": "The first role delays the stronger evidence of quantitative fit."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé does not explain the immediate pivot from a quantitative internship to bakery management.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The line does not show how staffing was managed to keep labour within budget.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Managed” uses the wrong tense for a current role.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The routine tasks do not explain how stock information was used to reduce unsold bread.",
+      "because": "The ordering decision that produced the 12% to 7% result is missing."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Ran daily stock counts and supplier orders” uses the wrong tense and applies “Ran” awkwardly to orders.",
+      "because": "A current role calls for present tense, and orders are normally placed rather than run."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "“Over 18 months of out-of-sample backtest” is grammatically incorrect.",
+      "because": "The duration modifies a singular backtest and needs an article and a compound adjective."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Cost-aware position smoother” does not identify the mechanism used to reduce turnover.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Standard Diebold-Mariano tests do not validly confirm forecast gains against a nested HAR-RV baseline.",
+      "because": "The test can be miscalibrated for nested estimated models, and testing 30 indices requires treatment of dependence and multiple comparisons."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Confirmed the forecast gain” gives neither the size of the gain nor the result across the 30 indices.",
+      "because": "A reader cannot judge the economic or statistical importance of the result."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Standard” is filler because it does not distinguish or explain the tests.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The reusable feature-store result is buried after three substantial implementation details.",
+      "because": "A scanning reader may miss the evidence that the deliverable created continuing team value."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Multiplying a daily Sharpe ratio by 252 is the wrong annualization.",
+      "because": "Daily Sharpe is conventionally multiplied by √252, not 252."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The line reports a calculation without showing any resulting value or decision.",
+      "because": "Routine metric preparation is weaker than the surrounding results unless it informed a concrete decision."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "“Used to onboard in their first week” shows adoption but not an improved onboarding outcome.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "A seed and configuration file alone do not guarantee that every cluster run is reproducible.",
+      "because": "Reproduction also depends on inputs, software, the execution environment and potentially nondeterministic parallel scheduling."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“A sparse regression estimator” does not identify the estimator or the setting in which the bound applies.",
+      "because": "A statistical-learning reader cannot determine the problem class or formulate a meaningful technical follow-up."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“Tightens the previous bound by a log factor” does not state which factor or asymptotic bound changed.",
+      "because": "A specialist cannot determine the precise theoretical advance."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The entry’s strongest research result is not placed first.",
+      "because": "Putting the JASA submission and improved bound second reduces their impact during a rapid scan."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“My proof” uses a personal pronoun inconsistent with résumé-style phrases.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "Unrelated duties separate the package from its download result and make “which was downloaded” appear to modify “two courses.”",
+      "because": "The interruption obscures which work produced the downloads and creates an illogical reading."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The package description gives no technical detail about implementation or validation.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The research-assistant entry reads as a mixed inventory rather than a coherent story.",
+      "because": "Research, computing, teaching, package development and service duties compete for attention, obscuring the central research contribution."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Out-of-sample QLIKE loss” does not state the forecast horizon.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Realized-volatility features” describes the model inputs too broadly.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“HAR-RV” and “QLIKE” are unexplained specialist abbreviations.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The claimed 33% improvement from reducing error from 0.20 to 0.15 is arithmetically incorrect.",
+      "because": "A reduction of 0.05 is 25% of the original 0.20 value."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Forecast error” does not name the metric represented by 0.20 and 0.15.",
+      "because": "The values cannot be interpreted or compared without the metric."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Realized-volatility features and an asymmetric loss” leaves both model changes generic.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "“By 6%” incorrectly describes the hit-rate change from 52% to 58%.",
+      "because": "The change is 6 percentage points, or approximately 11.5% relative to 52%."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Directional hit rate” does not specify the predicted direction or forecast horizon.",
+      "because": "Both details are needed to understand what the result measures and how demanding the task was."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“With a temporal convolutional model” names the model class but not the relevant implementation choice.",
+      "because": "The model family appears elsewhere in the project, so repeating it adds little evidence of technical ownership."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Finishing in the top 2%” duplicates the more precise placement of 41st among 2,900 teams.",
+      "because": "The exact rank already establishes the percentile and is stronger evidence."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The 0.02 validation-to-leaderboard gap does not identify the scoring metric.",
+      "because": "Without the metric or its scale, a reader cannot judge how meaningful the gap was."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled.",
+      "because": "A typo in a compact Methods skills list can make a reader question proofreading care."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4609,
+    "input_tokens_details": {
+      "cache_write_tokens": 4606,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1937,
+    "output_tokens_details": {
+      "reasoning_tokens": 401
+    },
+    "total_tokens": 6546
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "Date of birth: 22 May 1997 | Nationality: Chilean",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "- Cut data-entry errors in the trial database from 6.1% to 1.8% of fields by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-checking them against pharmacy records each week, cut unresolved safety queries from 45 to 6.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Trained 9 site nurses on the consent process and outcome forms, and no consent deviations were found at the final audit.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Apr 2022 - Aug 2022",
+    "- Randomized patients by assigning those admitted on odd-numbered days to the program and even-numbered days to usual care.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting for age and insurance.",
+    "- Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited residents.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Wrote the survey's data codebook, which the clinic used for its follow-up survey the next year.",
+    "SKILLS",
+    "Tools: R, REDCap",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality, personal details readers are not meant to weigh.",
+      "because": "They are unrelated to qualifications and can create avoidable bias concerns."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The timeline leaves 10 months unaccounted for between the M.P.H. and the Research Assistant role.",
+      "because": "A recruiter may wonder whether relevant work, training, or another activity is missing."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears too early in the section order.",
+      "because": "Leading with it delays stronger evidence of current professional and technical fit."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The line does not identify the coordination practice behind the enrollment and follow-up results.",
+      "because": "A reader cannot distinguish your contribution from the broader study team's work."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Averaging follow-up times only for patients who died does not estimate median survival.",
+      "because": "It produces a mean for selected patients and discards censored observations needed for valid survival analysis."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The line does not say what the survival analysis found or enabled.",
+      "because": "Without a finding or useful output, it sounds like an isolated task."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The reduction in unresolved safety queries is buried behind method details.",
+      "because": "A scanning reader may miss the strongest evidence of the work's value."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“three sites” is inconsistent with the entry's numeral style.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“each week” is unnecessarily long.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“all 4 reviews passed” makes the reviews sound like the things being evaluated.",
+      "because": "A committee review ordinarily reaches a conclusion rather than passing itself."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The line names the safety reports but not the substantive safety work behind them.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Calling odd/even admission-day assignment “randomized” is incorrect.",
+      "because": "The rule is deterministic and predictable, and admission patterns may differ by day."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The allocation line gives no study milestone or result that the work enabled.",
+      "because": "Without a scale and outcome, it reads as process rather than an accomplishment."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The admission-day rule is described at unnecessary length.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "“The findings added text reminders” gives findings an action they cannot perform.",
+      "because": "Findings can lead to a decision but cannot implement reminders themselves."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The entry does not open with this strongest result.",
+      "because": "Putting the interview and no-show result first would establish impact before the weaker allocation-process line."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Which” appears to refer to the 180 variables rather than the data dictionary.",
+      "because": "A reader may initially misunderstand what the later studies reused."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The administrative duty list separates the lab-data work from its result.",
+      "because": "Readers may associate the resolved identifiers with unrelated duties, weakening the research narrative."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line does not explain how the records or patient identifiers were reconciled.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Harnessed cutting-edge analytics” is vague jargon that does not identify the technique.",
+      "because": "A hiring manager cannot tell what substantive analytical work the R project involved."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Transformative, patient-centered insights” does not state what the project learned or enabled.",
+      "because": "The insight and its intended use are unidentified, leaving no concrete finding to judge."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The change from 12% to 8% is not a 50% reduction.",
+      "because": "It is a 4-percentage-point decrease, or approximately a 33% relative reduction."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Cut readmission” does not identify the measured outcome as a rate.",
+      "because": "The figures are proportions, so the statistical statement needs a more precise noun."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The rates do not define the readmission window or patient cohort.",
+      "because": "Without that context, readers cannot interpret or compare the rates."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The project does not open with this strongest analytical result.",
+      "because": "The rates, adjustment, and substantive result establish its value better than the current vague opening."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The line names adjustment covariates but not the statistical method.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The increase from 35% to 55% is not an increase “by 20%.”",
+      "because": "It is 20 percentage points, or approximately a 57% relative increase."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The line does not identify a design or analysis supporting attribution to SMS reminders.",
+      "because": "Before-and-after rates alone do not show that reminders caused the change."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The survey-response bullet does not belong in the asthma readmission project as presented.",
+      "because": "Its unexplained change of subject makes the project look assembled from unrelated work."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line does not say how the 1,100 respondents were selected or recruited.",
+      "because": "Readers cannot judge whom the responses represent or the basis of the neighborhood estimate."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Passive wording hides which translation and pilot work you personally performed.",
+      "because": "In a five-person team, readers cannot distinguish your contribution from general team activity."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line does not state what changed because of the 20-resident pilot.",
+      "because": "Without a resulting improvement, piloting reads as process rather than an accomplishment."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The codebook line does not show the data-management skill required to create it.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 4432,
+    "input_tokens_details": {
+      "cache_write_tokens": 4429,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1747,
+    "output_tokens_details": {
+      "reasoning_tokens": 365
+    },
+    "total_tokens": 6179
+  }
+}

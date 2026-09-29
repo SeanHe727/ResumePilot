@@ -1,0 +1,300 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Hedged the bank's interest-rate risk on its fixed-rate bond holdings by buying more fixed-rate bonds of the same duration.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "- Cut the monthly close from 8 working days to 5 by automating 30 reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Mapping 600 general-ledger accounts to a new chart of accounts, rebuilding the allocation rules and testing them against two prior closes, cut manual journal entries from 350 to 90 a month.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Trained 5 plant controllers on the new budgeting template and wrote its user guide.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Showed the share value fell from USD 50 to USD 40, a 25% drop, when the discount rate rose by 1 point.",
+    "- Raised the model's forecast accuracy by 12% across 10 years, from 70% to 82%, by adding rate-case timing.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Wrote onboarding notes on the fund's models for new analysts.",
+    "SKILLS",
+    "Tools: Excel",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes a date of birth and nationality.",
+      "because": "These details are unrelated to job performance and can introduce protected personal information."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education leads the résumé despite five years of professional experience.",
+      "because": "Recent finance roles provide stronger evidence, so the current order delays the material hiring managers are most likely to weigh."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience section is not in reverse chronological order.",
+      "because": "Crescent Bank ended before Stonebridge, so listing it first delays the most recent experience."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "Buying more fixed-rate bonds of the same duration does not hedge the existing holdings’ interest-rate risk.",
+      "because": "It increases same-direction duration exposure rather than providing an offsetting position."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The hedging claim does not quantify how much the exposure changed.",
+      "because": "Without a before-and-after risk measure, the reader cannot judge its effectiveness or materiality."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The strongest underwriting result is not first in the Crescent Bank entry.",
+      "because": "Burying the approval-rate result makes the entry scan as unrelated tasks rather than coherent credit analysis."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“No rise in early defaults” omits the default rate and measurement period.",
+      "because": "The reader cannot tell how much credit performance was observed or whether the approvals had time to season."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Reviewed 3 years of declined applications” does not identify what was analyzed.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“My findings” unnecessarily shifts the résumé into first person.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "“Writes” presents completed work as current despite the role ending in December 2022.",
+      "because": "The present tense conflicts with the employment dates and past tense elsewhere in the entry."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Covenant-monitoring checklist” does not identify the control that prevented missed tests.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Spreading template for borrower financials” does not show what it automated or standardized.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Cut each credit memo from 6 hours to 3” treats the memo itself as a duration.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Letting treasury pay down” is informal and states the causal relationship imprecisely.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The bullet does not explain how the reconciliations and eliminations were automated.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Using the same discount rate and payback rules shows consistency without stating what it improved.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“So every request used” describes the standardization conversationally and loosely.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The reduction in manual journal entries is buried behind a long description of the method.",
+      "because": "A scanning reader must pass through the method before reaching the strongest evidence of value."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "“Them” does not make clear whether the accounts or allocation rules were tested.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The valuation discounts free cash flow to equity at weighted average cost of capital.",
+      "because": "FCFE requires a cost of equity; WACC applies to unlevered free cash flow to the firm."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“The company’s” does not identify whether the discount rate belongs to Stonebridge or the target.",
+      "because": "The relevant entity affects the appropriate valuation inputs and makes the method harder to assess."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The valuation does not state what decision or deal action it informed.",
+      "because": "Without a consequence, it reads as a deliverable rather than demonstrated business influence."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The training and user-guide bullet does not state whether the work improved adoption, accuracy, rework, or cycle time.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Within 6% of the market price” omits the direction of the difference and the benchmark date.",
+      "because": "The reader needs to know whether the model indicated upside or downside and which market price was compared."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Valued” is inconsistent with a project dated through “Present.”",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The stated 25% drop from USD 50 to USD 40 is mathematically incorrect.",
+      "because": "The USD 10 decline is 20% of the original USD 50 value."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Discount rate” does not identify whether the model used WACC, cost of equity, or another rate.",
+      "because": "The rate depends on the modeled cash flow and is central to checking the DCF mechanics."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Rose by 1 point” leaves the unit of the rate change ambiguous.",
+      "because": "One percentage point differs materially from one basis point."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Showed” is inconsistent with a project dated through “Present.”",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "“Accuracy by 12%” misstates the increase from 70% to 82%.",
+      "because": "The change is 12 percentage points, or approximately 17.1% relative to the original value."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Forecast accuracy” and “across 10 years” do not define the metric, comparison data, or evaluation design.",
+      "because": "The reader cannot interpret or reproduce the improvement or tell whether the period was a historical back-test."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Adding rate-case timing” does not explain how that input changed the forecast.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Raised” is inconsistent with a project dated through “Present.”",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Financial reporting and analysis” does not identify the deliverable or analytical work performed.",
+      "because": "The reader cannot tell what task was done or what skill the line demonstrates."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Supported the FP&A team” does not state what the work enabled or improved.",
+      "because": "Without an outcome, the line remains a duty rather than evidence of contribution."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The strongest line in the Student Investment Fund entry is not first.",
+      "because": "The benchmark report shows a defined output and repeated committee use, unlike the generic opening line."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Its benchmark” does not identify the index or benchmark used.",
+      "because": "The benchmark determines whether the comparison was appropriate for the fund’s mandate."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Rebuilt the fund’s performance report” does not show what changed technically or analytically.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Which” could refer to the benchmark rather than the performance report.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“The fund’s models” does not identify which models or components were documented.",
+      "because": "The generic reference gives little evidence of the financial knowledge transferred."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line identifies the notes’ audience but not their effect.",
+      "because": "The reader cannot tell whether they shortened onboarding, reduced errors, or improved independent model use."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Student Investment Fund entry is padded by generic support and onboarding duties.",
+      "because": "Those lines lack the benchmark report’s specificity and take space from more current finance and valuation evidence."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4529,
+    "input_tokens_details": {
+      "cache_write_tokens": 4526,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1908,
+    "output_tokens_details": {
+      "reasoning_tokens": 140
+    },
+    "total_tokens": 6437
+  }
+}

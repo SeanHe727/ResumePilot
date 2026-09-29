@@ -1,0 +1,296 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Summit Climbing Gym | Front Desk Staff | Metro City, USA | Sep 2025 - Present",
+    "- Checked in about 150 climbers a shift and sold day passes and memberships.",
+    "- Ran the weekend rental desk and logged gear inspections for the manager.",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Reduced data-entry errors by 70% by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Built the enrollment tracker the three sites reviewed each week, flagging sites more than 10% behind target.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Established that the program was equivalent to usual care because the superiority test on readmission was not significant (p = 0.41).",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Jul 2021 - Aug 2022",
+    "- Screened 2,300 medical records for a diabetes cohort study, confirming eligibility for 410 patients against the protocol criteria.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that follow-up within 7 days was linked to lower readmission: 8.2% against 11.9% without it, after adjusting for age and insurance.",
+    "- Presented the analysis at the state public-health conference poster session.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Ran a randomized discharge study of more than 600 heart-failure patients that completed enrollment months ahead of schedule.",
+    "SKILLS",
+    "Tools: R, REDCap, SAS",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The current front-desk role prominently frames the résumé as a step backward from clinical research.",
+      "because": "Without context, the transition may look like a retreat from the health-research direction."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the more persuasive experience and current project evidence.",
+      "because": "Leading with the older degree delays the professional record and current analytical work."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The line gives workload and responsibilities without a service or sales result.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The verbs use past tense even though the role is current.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The line does not clarify whether you conducted the gear inspections or merely recorded their results.",
+      "because": "That distinction changes the safety responsibility and equipment knowledge the line demonstrates."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The rental-desk responsibility lacks an operational or customer result.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The verbs use past tense even though the role is current.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The 70% reduction does not identify what was measured or its denominator.",
+      "because": "A reader cannot interpret or compare the result without knowing the denominator."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Double entry” does not unambiguously name the data-quality method.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Averaging follow-up among patients who died while excluding censored patients does not estimate median survival.",
+      "because": "It produces an average observed time among deaths and discards information from censored patients."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The line gives an analysis method without its result, arm comparison, or use.",
+      "because": "A reader cannot tell what the analysis found or why it mattered to the trial."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Data monitoring committee reviews do not technically “pass,” and the actual disposition is unstated.",
+      "because": "Committees generally recommend continuing, modifying, pausing, or terminating a study rather than assigning a pass/fail result."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "A nonsignificant superiority test with p = 0.41 does not establish equivalence.",
+      "because": "Failure to demonstrate superiority can reflect imprecision or insufficient power; equivalence requires an appropriate prespecified analysis."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The p-value does not show the size or precision of the readmission difference.",
+      "because": "An effect estimate and confidence interval would show the observed difference and its uncertainty."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The disease name “heart failure” is incorrectly hyphenated.",
+      "because": "It is an open compound when naming the disease in “heart failure patients.”"
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“Coordinated a 3-site randomized trial” does not define your specific operational ownership.",
+      "because": "A hiring manager cannot tell which central trial functions you managed."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The Meridian entry does not lead with its strongest trial-scale and delivery result.",
+      "because": "The 640-patient trial, early enrollment, and 94% follow-up are its clearest evidence of scope and execution."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The line does not say whether the 410 eligible patients formed an enrollment pool or the final cohort.",
+      "because": "That distinction clarifies what the screening work directly enabled."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The no-show comparison lacks evaluation periods and a patient population.",
+      "because": "Those details show what was compared and how the reduction was measured."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The hospital entry does not lead with its strongest outcome-focused accomplishment.",
+      "because": "The interviews connect patient research to a measurable reduction in no-shows."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The wording incorrectly assigns the introduction of text reminders to the findings themselves.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The data-dictionary line does not identify what it defined or standardized.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The support-duty list buries the identifier result and makes all the duties appear responsible for it.",
+      "because": "A reader may miss the accomplishment, and “which resolved” falsely links the administrative tasks to the mismatches."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The line does not explain how the mismatched identifiers were matched or validated.",
+      "because": "Without the matching or verification basis, a research-data reader cannot assess the work’s rigor."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The opening bullet makes an unsupported generic claim that repeats the next bullet’s specific finding.",
+      "because": "It says neither what changed nor what the analysis found, while occupying the finding’s narrative slot."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Cutting-edge analytics” does not identify the analytical method used.",
+      "because": "The promotional label gives a technical reader no way to assess the work or your statistical skill."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The adjustment claim does not identify the statistical model or method.",
+      "because": "A reader cannot tell how the adjusted comparison was produced."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The project does not open with its strongest specific analytical finding.",
+      "because": "The adjusted percentage comparison would make the project’s value clear at once."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The outcome is imprecisely named “lower readmission” rather than a lower rate.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The percentage comparison uses an awkward preposition and an unclear pronoun.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "“Public health” is incorrectly hyphenated.",
+      "because": "It is an established open compound in “public health conference.”"
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The conference description is too generic to establish the presentation’s significance.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The poster description is less direct than it needs to be.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The response count does not explain how participants were sampled or recruited.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The passive translation wording hides your contribution and does not say whether the Spanish version was validated.",
+      "because": "A hiring manager cannot distinguish your role or assess the quality-control process."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The pilot count does not say what the pilot changed or demonstrated.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The randomized heart failure trial is duplicated under an incompatible community-survey entry and date range.",
+      "because": "It appears to repeat the Meridian accomplishment and does not describe community-survey work, undermining confidence in dates and attribution."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Months ahead of schedule” does not quantify the improvement or identify its comparison point.",
+      "because": "The reader cannot tell how early enrollment finished or whether it was measured against the original plan."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The grammar makes the patients the subject that completed enrollment.",
+      "because": "The relative clause attaches to the patients rather than the study or your work."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "SAS is listed without an entry showing where it was used.",
+      "because": "A recruiter cannot connect the tool to a study, analysis, or deliverable."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Mixed-effects models is listed without an entry demonstrating its use.",
+      "because": "The résumé gives no project or study context for assessing how the method was applied."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4893,
+    "input_tokens_details": {
+      "cache_write_tokens": 4890,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2205,
+    "output_tokens_details": {
+      "reasoning_tokens": 504
+    },
+    "total_tokens": 7098
+  }
+}

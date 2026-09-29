@@ -1,0 +1,289 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality should be omitted from the résumé.",
+      "because": "They create unnecessary exposure to bias without supporting your qualifications."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears ahead of the stronger professional and product trajectory.",
+      "because": "Recruiters should encounter the professional experience and relevant product internship before academic credentials."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The timeline has an unexplained eight-month gap between the B.A. and the Operations Analyst role.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“By 35%” does not clarify whether the gain was relative or in percentage points, or give a measurement window.",
+      "because": "The interpretations represent materially different gains, and the comparison period is needed to judge the figure."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Shipping two weeks ahead of plan shows delivery performance but not the feature’s post-launch value.",
+      "because": "Without an adoption, resolution-time or support-demand outcome, the line shows delivery more clearly than product impact."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The $1.1 million finding and roadmap effect are buried behind the research methods.",
+      "because": "A scanning reader reaches the strongest evidence late."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“1.1 million dollars” is less scannable than standard résumé notation.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Over the summer” repeats the internship dates in the heading.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The opt-in comparison cannot validly measure the redesign’s causal effect as written.",
+      "because": "Merchants who chose the new flow may differ systematically from those who stayed on the old flow."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The comparison method is given without the outcome it found.",
+      "because": "A study design alone does not show whether the flow performed better or informed a decision."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The opt-in comparison does not support the separate claim of A/B-testing experience.",
+      "because": "An A/B test randomly assigns participants, whereas these merchants chose whether to opt in."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The same onboarding result across 2,300 merchants is attributed to both this internship and the hospital practicum.",
+      "because": "The unrelated practicum ended before the internship began and otherwise concerns clinics and patient intake."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "“Cut late deliveries” is false because excluding weather-delayed shipments changes only the reported calculation.",
+      "because": "It does not change whether any shipment arrived late."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The business purpose of the revised late-delivery measure is unstated.",
+      "because": "The line does not say what planning, accountability or service decision it enabled."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“30%” does not specify whether the reduction was relative or when it was measured.",
+      "because": "Without those anchors, a reader cannot interpret its exact size or durability."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Two sites” is inconsistent with the entry’s numeral formatting.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Prepares” is the wrong tense for a role that ended in August 2023.",
+      "because": "It describes an ongoing responsibility and conflicts with “Coordinated” in the same sentence."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The S&OP activities have no stated business result.",
+      "because": "The line reads as a responsibility rather than showing a decision or improvement the work enabled."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Prepares the forecast pack” does not reveal the analytical work personally performed.",
+      "because": "It could mean document assembly or substantive forecasting, which imply different levels of skill."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“S&OP” is not expanded for readers outside the function.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“Led the rollout” does not clarify the substantive configuration or analytical contribution.",
+      "because": "A reader cannot tell whether the work involved routing logic, constraints or data, or mainly deployment coordination."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The route-planning result is the entry’s strongest bullet but appears last.",
+      "because": "Its scale and time savings would give a scanning recruiter a stronger first impression."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“To 3,100 students” does not distinguish users from students merely eligible for access.",
+      "because": "Registrations, active users and an addressable audience indicate different levels of adoption."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Launched a surplus-food pickup app” does not show the product or launch decision personally driven.",
+      "because": "A concrete decision or mechanism would make product-lead ownership visible."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“That would have been thrown away” is unnecessarily wordy.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Its” has an unclear referent.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Volunteer shift system” does not explain what changed in scheduling or coverage management.",
+      "because": "A specific mechanism would connect the action to the coverage improvement."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Each week” and “a week” repeat the same timeframe.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Staff cover shifts” is unclear to readers outside the operation.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line gives no decision, recommendation, implementation or scheduling improvement.",
+      "because": "Meeting cadence alone does not establish that the consulting work produced value."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Held weekly working sessions” weakly and vaguely describes the contribution.",
+      "because": "It does not show whether you directed the sessions or what diagnostic work occurred."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The passive construction hides ownership of the intake work.",
+      "because": "It makes the process the grammatical actor and weakens the action-to-result flow."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“The intake form was shortened” has no before-and-after measure.",
+      "because": "A reader cannot tell whether the redesign was minor or substantial."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Front-desk adoption does not state what the changes improved.",
+      "because": "Adoption shows implementation but not a patient or operational benefit."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line does not explain how the intake problems or unnecessary fields were found.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The strongest hospital-related bullet is not placed first.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding bullet is assigned to the wrong entry.",
+      "because": "Merchants and first payments do not fit the hospital engagement, and the achievement also appears under Harbor Payments."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "“Halved the time” is mathematically inconsistent with a reduction from 9 days to 4.",
+      "because": "Half of 9 is 4.5; the stated reduction is approximately 56%."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“By redesigning onboarding” is too broad to show what changed.",
+      "because": "Without the specific intervention, a reader cannot connect the work to the time reduction."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The result wording is wordy and the cohort placement interrupts it.",
+      "because": "“The time it takes” delays the metric, while the commas slow scanning of the result and method."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4901,
+    "input_tokens_details": {
+      "cache_write_tokens": 4898,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1876,
+    "output_tokens_details": {
+      "reasoning_tokens": 199
+    },
+    "total_tokens": 6777
+  }
+}
