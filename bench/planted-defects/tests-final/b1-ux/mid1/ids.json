@@ -1,0 +1,23 @@
+{
+  "s2:e0": "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+  "s2:e0:b0": "Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+  "s2:e0:b1": "Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+  "s2:e0:b2": "Built a research repository of 250 tagged session clips that product managers searched before writing new requirements.",
+  "s2:e0:b3": "Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.",
+  "s2:e0:b4": "Validated the redesigned app navigation’s findability with an open card sort of 30 customers before it shipped.",
+  "s2:e0:b5": "Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+  "s2:e1": "Northwind Health | UX Research Associate | Metro City, USA | Apr 2020 - Feb 2022",
+  "s2:e1:b0": "Owned the monthly patient survey and the reporting dashboard the care teams used.",
+  "s2:e1:b1": "Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+  "s2:e1:b2": "Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+  "s2:e1:b3": "Tested the telehealth waiting-room screens with 16 older patients while also running the team’s recruiting calendar, updating the style guide, onboarding two interns and taking notes for the accessibility working group, which cut support calls about joining a video visit by 30%.",
+  "s3:e0": "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+  "s3:e0:b0": "Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+  "s3:e0:b1": "Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds and errors from 11 to 3 across the 12 sessions.",
+  "s3:e0:b2": "Published the design files and test protocol openly, and the city’s transit agency invited the project to its spring accessibility review.",
+  "s3:e1": "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+  "s3:e1:b0": "Redesigned a free clinic’s online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+  "s3:e1:b1": "Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+  "s3:e1:b2": "Tested three onboarding prototypes with 24 new customers and shipped the design that lifted completed sign-ups by 41% in its first quarter.",
+  "s1:e0": "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019"
+}

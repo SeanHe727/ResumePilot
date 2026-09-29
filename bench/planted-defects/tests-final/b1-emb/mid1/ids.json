@@ -1,0 +1,23 @@
+{
+  "s2:e0": "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+  "s2:e0:b0": "Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+  "s2:e0:b1": "Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+  "s2:e0:b2": "Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+  "s2:e0:b3": "Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+  "s2:e1": "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+  "s2:e1:b0": "Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+  "s2:e1:b1": "Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+  "s2:e1:b2": "Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+  "s2:e1:b3": "Sampled the motor’s 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+  "s2:e1:b4": "Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+  "s2:e1:b5": "Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+  "s3:e0": "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+  "s3:e0:b0": "Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+  "s3:e0:b1": "Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+  "s3:e0:b2": "Published the schematics and firmware openly, and a local school built two stations from them.",
+  "s3:e1": "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+  "s3:e1:b0": "Worked on firmware and testing for the robot fleet’s motor controllers.",
+  "s3:e1:b1": "The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+  "s3:e1:b2": "Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+  "s1:e0": "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021"
+}
