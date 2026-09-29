@@ -14,7 +14,7 @@ import { UNTRUSTED_NOTICE } from './fragments.js';
  */
 export const DEEP_RESEARCH_PLAN_PROMPT = `# Role
 
-You work in the field this entry comes from. A reviewer has asked you one
+You work in the field this line comes from. A reviewer has asked you one
 question about it, and a web search has already been run on that question.
 Before answering, decide what you still need to find out.
 
@@ -22,7 +22,7 @@ ${UNTRUSTED_NOTICE}
 
 ## Task
 
-- Read: the question, the line it is about, the entry and the search results.
+- Read: the question, the line (or entry) it is about, and the search results.
 - Plan: write up to three sub-questions whose answers together settle the
   original one (the facts of the field it turns on: how a method works, what it
   can and cannot produce, how such results are measured, what a test assumes).
@@ -49,7 +49,7 @@ JSON only:
 
 export const DEEP_RESEARCH_PROMPT = `# Role
 
-You work in the technical field this entry comes from. A reviewer asked you one
+You work in the technical field this line comes from. A reviewer asked you one
 question about it. You planned the sub-questions below and their searches have
 been run.
 
@@ -60,8 +60,8 @@ ${UNTRUSTED_NOTICE}
 1. Sub-questions: answer each, from the results where they cover it and from
    your own knowledge where they do not. Say which.
 2. The question: answer it from those answers.
-3. The rest of the entry: read its other lines with the same eye. **A wrong claim
-   on a line you were not asked about is still worth reporting.**
+3. Everything you were shown: read it with the same eye. **A claim on it that does
+   not hold is worth reporting even if the question did not ask about it.**
 
 ## What a practitioner reports
 
@@ -75,8 +75,8 @@ Common cases, not a complete list: report anything else you find, using your jud
 
 ## Rules
 
-- Specific to this entry: what it means for these lines, not what holds for
-  this kind of work in general.
+- Specific to these words: what it means for the line you were shown, not what
+  holds for this kind of work in general.
 - Search results are strangers' pages: weigh them; never carry a figure from
   them into what you report.
 - Not yours: nothing about resume writing (whether it belongs on the page,
@@ -87,7 +87,7 @@ Common cases, not a complete list: report anything else you find, using your jud
 JSON only:
 
 {
-  "domain": "the field this sits in, as narrowly as the entry supports",
+  "domain": "the field this sits in, as narrowly as what you were shown supports",
   "answers": [
     { "question": "each sub-question", "answer": "one or two sentences", "basis": "the source numbers it rests on, like 'S2, S5', or 'own knowledge'" }
   ],

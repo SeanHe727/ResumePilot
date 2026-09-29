@@ -12,11 +12,11 @@ import type {
 import { renderResume } from '../document/index.js';
 import { SINGLE_AGENT_SCHEMA } from '../prompts/index.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
-import { buildClaimsMessage, buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
+import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
 import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
 import { buildTimeline, renderTimeline } from '../document/timeline.js';
 import { SemaphorePool } from './pool.js';
-import { CLAIMS_AGENT, CONSISTENCY_AGENT, FLAT_AGENT, ROLES, SINGLE_AGENT } from './roles.js';
+import { CONSISTENCY_AGENT, FLAT_AGENT, ROLES, SINGLE_AGENT } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
 import type {
   AgentRunStat,
@@ -32,9 +32,9 @@ import type {
 } from './types.js';
 
 const DEFAULTS: OrchestratorConfig = {
-  // Two readers per content review now — the reading and the claim check —
-  // and two for the whole page. At three, a content review's second reader
-  // queued behind the rest of the fan-out, on a deadline that counts the wait.
+  // Two readers per entry (content and wording) and two for the whole page. At
+  // three, a reader queued behind the rest of the fan-out, on a deadline that
+  // counts the wait.
   maxConcurrency: 6,
   timeoutMs: 300_000,
   // `retry` rather than `continue`, and it is still `continue`'s promise that
@@ -118,7 +118,6 @@ export class DefaultOrchestrator {
     entry: ResumeEntry,
     roles: RoleSelection,
     briefing?: Briefing,
-    background?: string,
   ): Promise<EntryVerdict> {
     // Both per-entry roles score bullets, and a degree is a header with none —
     // school, qualification, dates. Dispatching it buys two model calls that
@@ -134,10 +133,7 @@ export class DefaultOrchestrator {
     }
 
     const chosen = roles.roles.filter((role): role is PerEntryRole => PER_ENTRY.has(role));
-    // The claims reader goes wherever the content reader does: its errors are
-    // part of that reading, found by a reader whose only job is checking.
     const tasks = chosen.map((role) => taskFor(role, entry, briefing));
-    if (chosen.includes('content')) tasks.push(claimsTask(entry, briefing, background));
     const results = await this.parallel(tasks);
 
     return aggregate(entry, results, this.failures);
@@ -278,7 +274,6 @@ export class DefaultOrchestrator {
         entry,
         [
           part('content', ROLES['content']!.name, record?.content),
-          part('claims', CLAIMS_AGENT.name, record?.claims),
           part('wording', ROLES['wording']!.name, record?.wording),
         ],
         this.failures,
@@ -507,14 +502,6 @@ function readEntryReads(resume: ResumeDocument, raw: unknown): EntryRead[] {
   });
 }
 
-function claimsTask(entry: ResumeEntry, briefing?: Briefing, background?: string): SubAgentTask {
-  return {
-    agentConfig: CLAIMS_AGENT,
-    input: buildClaimsMessage(entry, background),
-    context: { entry: withoutContactDetails(entry.headerLines.join(' | ')), ...briefingContext(briefing) },
-  };
-}
-
 function taskFor(role: PerEntryRole, entry: ResumeEntry, briefing?: Briefing): SubAgentTask {
   return {
     agentConfig: ROLES[role]!,
@@ -552,9 +539,7 @@ function aggregate(
   failures: Map<string, string>,
 ): EntryVerdict {
   const read = readSubstance(entry, results, (r) => failures.set(`content:${entry.id}`, r));
-  const substance = read
-    ? withErrors(read, readClaims(entry, results, (r) => failures.set(`claims:${entry.id}`, r)))
-    : null;
+  const substance = read ? errorsFirst(read) : null;
   const wording = readWording(entry, results, (r) => failures.set(`wording:${entry.id}`, r));
 
   const scores = [substance?.overallScore, wording?.overallScore].filter(
@@ -600,55 +585,18 @@ function readSubstance(
   return normalised.data ?? null;
 }
 
-/** The claims reader's errors, on lines of this entry only. */
-function readClaims(
-  entry: ResumeEntry,
-  results: SubAgentResult[],
-  note: (reason: string) => void,
-): Array<{ bulletId: string; issue: BulletIssue }> {
-  const raw = successOutput(results, 'claims', note);
-  const errors = Array.isArray(raw?.errors) ? raw.errors : [];
-  const ids = new Set(entry.bullets.map((b) => b.id));
-  const axes = ['impact', 'measurement', 'method'] as const;
-  return errors.flatMap((item) => {
-    const record = item as Record<string, unknown> | null;
-    const bulletId = bareId(record?.bulletId);
-    const what = typeof record?.what === 'string' ? record.what.trim() : '';
-    // A line of another entry is that entry's reader's to report.
-    if (!what || !ids.has(bulletId)) return [];
-    const axis = axes.find((a) => a === record?.axis);
-    const text = (key: string) => (typeof record?.[key] === 'string' ? (record[key] as string).trim() : '');
-    return [
-      {
-        bulletId,
-        issue: {
-          what,
-          costWords: 0,
-          // This reader reports only lines false as written, so every one is an
-          // error. It used to grade them certain or possible, and the possible
-          // ones, confirmed by its own check, reached the candidate as suggestions.
-          kind: 'wrong' as const,
-          ...(axis ? { axis } : {}),
-          ...(text('why') ? { why: text('why') } : {}),
-          ...(text('fix') ? { fix: text('fix') } : {}),
-        },
-      },
-    ];
-  });
-}
-
-/** The errors placed first among each line's issues: they matter most. */
-function withErrors(
-  diagnosis: EntryDiagnosis,
-  errors: Array<{ bulletId: string; issue: BulletIssue }>,
-): EntryDiagnosis {
-  if (errors.length === 0) return diagnosis;
+/**
+ * On each line, what does not hold before what is missing or unclear: it
+ * matters most, and the selection reads issues in order.
+ */
+function errorsFirst(diagnosis: EntryDiagnosis): EntryDiagnosis {
+  const rank = (issue: BulletIssue) => (issue.kind === 'wrong' ? 0 : 1);
   return {
     ...diagnosis,
-    bullets: diagnosis.bullets.map((bullet) => {
-      const own = errors.filter((e) => e.bulletId === bullet.bulletId).map((e) => e.issue);
-      return own.length > 0 ? { ...bullet, issues: [...own, ...bullet.issues] } : bullet;
-    }),
+    bullets: diagnosis.bullets.map((bullet) => ({
+      ...bullet,
+      issues: [...bullet.issues].sort((a, b) => rank(a) - rank(b)),
+    })),
   };
 }
 

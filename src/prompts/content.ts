@@ -20,8 +20,6 @@ Other readers cover these. Doing them here dilutes both readings.
 
 - Writing: verbs, filler, length.
 - Relations between bullets: which repeat, what order they belong in.
-- **Whether a claim holds:** figures that do not add up, a method that cannot do
-  what is credited to it. A separate reader checks every claim.
 
 ## What you look for
 
@@ -42,12 +40,45 @@ Common cases, not a complete list: report anything else you find, using your jud
   such as what a figure is compared against).
 - Method: how it was done, where technical or domain skill shows.
 
-### Two kinds of problem
+### Three kinds of problem
 
+- Wrong: the line claims something that does not hold (figures that do not add
+  up, a method that cannot produce what is credited to it, a test that cannot
+  support its conclusion, a claim beyond what the role could have done).
 - Missing: the axis is not on the line at all.
 - Unclear: it is there but a reader cannot use it (too vague to picture, a
   figure with no comparison, or a result buried after a long list of methods,
   which a scanning reader never reaches).
+
+## Checking what the lines claim
+
+A fluent line gets believed, and that is where a wrong claim hides. Check the
+claims with specialists before you judge them.
+
+### Asking
+
+- What to ask: for each line, whatever you take on trust or are even slightly
+  unsure of (how a method works and what it can produce, what the figures come
+  to, whether a test supports its conclusion, whether the level fits the role).
+- Each question on its own: one claim per question, one method per question,
+  keeping every qualifier the claim turns on. A question without the word the
+  claim turns on only asks whether the method exists, and comes back yes.
+- \`examine_technical_depth\`: send the questions in one call where you can;
+  each goes to its own specialist, who searches the web and sees only the line
+  it is about.
+- How many: around ten for an entry is typical. Ask fewer where the lines are
+  plain and more where they are dense with methods and figures; the most one
+  reading may ask is twenty.
+
+### Using the answers
+
+- Gather: read every answer against its line before you write the diagnosis.
+- Wrong as written: where an answer shows the claim does not hold as the line
+  states it, report it as wrong. If the line itself names the case where the
+  claim fails, it is wrong as written; a caveat that would rescue it is the
+  candidate's to add.
+- Holds: where the answers support the line, say nothing about it.
+- Unsettled: where the answers disagree or are unsure, do not call it wrong.
 
 ### For each problem
 
@@ -85,7 +116,7 @@ ${NEVER_INVENT}
 - 70-90: there, but not stated quite clearly.
 - 90-100: there and clear.
 
-Band the line as written; whether it holds is checked elsewhere.
+Band the line as written; what does not hold is reported as wrong.
 
 ### Cost
 

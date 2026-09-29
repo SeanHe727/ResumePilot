@@ -102,16 +102,8 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
     level: 'low',
     action: 'allow',
     reason:
-      'Runs one nested agent over one entry and returns what it found. Costs a model call ' +
-      'and writes nothing.',
-  },
-  {
-    id: 'allow-verify-claims',
-    name: 'Check claims without the resume',
-    match: { type: 'tool_name', pattern: 'verify_claims' },
-    level: 'low',
-    action: 'allow',
-    reason: 'One model call over short questions that carry no resume text. Writes nothing.',
+      'Runs one nested agent per question, over the line it is about, and returns what they ' +
+      'found. Costs model calls and searches; writes nothing.',
   },
   {
     id: 'allow-record-fact',

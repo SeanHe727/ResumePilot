@@ -74,17 +74,6 @@ export const analyzeEntryTool: Tool<AnalyzeEntryInput, EntryDiagnosis> = {
   },
 };
 
-/** The claims reader's message: the page for reference, then the entry to check. */
-export function buildClaimsMessage(entry: ResumeEntry, background?: string): string {
-  return (
-    (background
-      ? `The whole résumé, for reference only — check the entry after it, and nothing else:\n\n${background}\n\n`
-      : '') +
-    `The entry to check:\n<resume_content>\n${renderEntry(entry)}\n</resume_content>\n\n` +
-    `Reply with JSON only, in the shape your instructions give.`
-  );
-}
-
 /** Exported so a sub-agent asks for the same shape this tool does. */
 export function buildEntryMessage(input: AnalyzeEntryInput): string {
   const { entry, references } = input;
@@ -120,7 +109,7 @@ Return JSON of exactly this shape:
       "issues": [
         {
           "axis": "impact | measurement | method",
-          "kind": "missing | unclear",
+          "kind": "wrong | missing | unclear",
           "what": "the problem, one sentence, quoting the line's words",
           "why": "why it is a problem for a reader, one or two sentences",
           "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets] — nothing the resume does not contain",

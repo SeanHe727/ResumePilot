@@ -134,10 +134,10 @@ describe('a specialist on the record', () => {
 
     expect(of(events, 'dispatch')[0]?.input).toMatchObject({
       role: 'content',
-      tools: ['query_knowledge_base'],
+      tools: ['query_knowledge_base', 'examine_technical_depth'],
       contextKeys: ['entry', 'briefing'],
       allowedContextKeys: ['briefing', 'entry', 'previousFindings'],
-      maxTurns: 7,
+      maxTurns: 8,
     });
   });
 

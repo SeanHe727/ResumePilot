@@ -12,7 +12,7 @@ import {
 } from '../../src/agent/index.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
 import { SqliteSessionManager } from '../../src/session/index.js';
-import { MapToolRegistry, createToolRegistry, examineDepthTool, verifyClaimsTool } from '../../src/tools/index.js';
+import { MapToolRegistry, createToolRegistry, examineDepthTool } from '../../src/tools/index.js';
 import type { SearchProvider } from '../../src/tools/search-provider.js';
 import type { ToolRegistry } from '../../src/tools/types.js';
 
@@ -259,7 +259,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base']);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'examine_technical_depth']);
   });
 
   it('offers an optional tool once something is behind it', async () => {
@@ -269,7 +269,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'web_search']);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'examine_technical_depth', 'web_search']);
   });
 
   it('sends a role its whole prompt, however long it has grown', async () => {
@@ -360,7 +360,6 @@ describe('SubAgentRuntime', () => {
     // registry does not hold — a bare registry has to carry every tool the role
     // names, not only the one the test exercises.
     registry.register(examineDepthTool as never);
-    registry.register(verifyClaimsTool as never);
     registry.register({
       name: 'query_knowledge_base',
       description: 'stand-in that returns more than a window can hold',
@@ -382,7 +381,9 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine, [], registry);
 
-    await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
+    // On the shared sub-agent window: the content reader's own is sized to
+    // hold its research answers whole and would not fill here.
+    await runtime.run({ agentConfig: { ...CONTENT_AGENT, context: {} }, input: 'diagnose' });
 
     // Asserted on the window rather than on which rung was reached: level 1
     // re-compresses tool output for free and usually settles it there, and a
@@ -541,40 +542,36 @@ describe('DefaultOrchestrator', () => {
 
     const verdict = await orchestrator(engine).diagnoseEntry(entry, bothRoles);
 
-    // Content, wording, and the claim check beside the content reader.
-    expect(call).toBe(3);
+    // Content and wording.
+    expect(call).toBe(2);
     expect(verdict.substance?.bullets[0]?.issues).toEqual([
       { what: 'no measurable outcome', costWords: 4 },
     ]);
     expect(verdict.wording?.perBullet[0]?.verbStrength.score).toBe(20);
     expect(verdict.overallScore).toBe(30);
-    expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Claim Check', 'Entry Substance', 'Entry Wording']);
+    expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Entry Substance', 'Entry Wording']);
   });
 
-  it('puts the claim check\'s errors first on their lines, and only on this entry\'s lines', async () => {
-    const errors = JSON.stringify({
-      errors: [
-        { bulletId: `[${entry.bullets[0]!.id}]`, axis: 'measurement', what: 'the percentage does not match its figures', why: 'w', fix: 'f' },
-        { bulletId: 'elsewhere:0', what: 'not this entry' },
-        // An older reply's grade is ignored: everything this reader reports is an error.
-        { bulletId: `${entry.bullets[0]!.id}`, what: 'the method cannot do this', certain: false },
+  it('puts what does not hold first on each line', async () => {
+    const withError = JSON.stringify({
+      bullets: [
+        {
+          bulletId: entry.bullets[0]!.id,
+          overallScore: 20,
+          dimensions: { impact: { score: 20, detail: '' }, measurement: { score: 0, detail: '' }, method: { score: 10, detail: '' } },
+          issues: [
+            { what: 'no measurable outcome', costWords: 4, kind: 'missing' },
+            { what: 'the percentage does not match its figures', costWords: 0, kind: 'wrong', axis: 'measurement' },
+          ],
+          strengths: [],
+        },
       ],
     });
-    const engine: QueryEngine = {
-      async query(params) {
-        return text(params.systemPrompt?.includes('Chain of verification') ? errors : SUBSTANCE_JSON);
-      },
-      getUsageSummary: () => '',
-      checkBudget: () => ({ ok: true }),
-    };
+    const { engine } = scriptedEngine(text(withError));
 
     const verdict = await orchestrator(engine).diagnoseEntry(entry, { roles: ['content'], reasons: {} });
 
-    expect(verdict.substance?.bullets[0]?.issues).toEqual([
-      { what: 'the percentage does not match its figures', costWords: 0, kind: 'wrong', axis: 'measurement', why: 'w', fix: 'f' },
-      { what: 'the method cannot do this', costWords: 0, kind: 'wrong' },
-      { what: 'no measurable outcome', costWords: 4 },
-    ]);
+    expect(verdict.substance?.bullets[0]?.issues.map((i) => i.kind)).toEqual(['wrong', 'missing']);
   });
 
   it('takes the brackets off the ids the wording reader hands back', async () => {
@@ -663,8 +660,8 @@ describe('DefaultOrchestrator', () => {
       { roles: ['content'], reasons: {} },
     );
 
-    // The first of the two readers fails once and is tried again.
-    expect(attempts).toBe(3);
+    // The reader fails once and is tried again.
+    expect(attempts).toBe(2);
     expect(verdict.substance).not.toBeNull();
   });
 

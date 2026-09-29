@@ -19,7 +19,7 @@ every finding on it and merges what repeats.
 
 ## What you are given
 
-- Findings: from the readers of each line (content, claim check, wording), the
+- Findings: from the readers of each line (content, with its checked claims, and wording), the
   whole-page readers (career story, consistency), the file check and, where
   there is one, the job-posting comparison.
 - Each finding: its source, and where known its page cost (words added or

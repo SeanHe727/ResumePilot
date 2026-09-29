@@ -42,10 +42,9 @@ const ANSWER = {
       content: {
         bullets: [
           { bulletId: 'experience:0:0', overallScore: 40, dimensions: {}, issues: [{ axis: 'impact', kind: 'missing', what: 'no result', why: 'w', fix: 'f', costWords: 3 }], strengths: [] },
-          { bulletId: 'experience:0:1', overallScore: 60, dimensions: {}, issues: [], strengths: [] },
+          { bulletId: 'experience:0:1', overallScore: 60, dimensions: {}, issues: [{ axis: 'measurement', kind: 'unclear', what: 'vague', why: 'w', fix: 'f', costWords: 1 }, { axis: 'measurement', kind: 'wrong', what: 'does not add up', why: 'w', fix: 'f', costWords: 0 }], strengths: [] },
         ],
       },
-      claims: { errors: [{ bulletId: 'experience:0:1', axis: 'measurement', what: 'does not add up', why: 'w', fix: 'f' }] },
       wording: { perBullet: [{ bulletId: '[experience:0:0]', verbStrength: { score: 50, detail: '' }, concision: { score: 70, detail: '' }, issues: [] }] },
     },
   ],
@@ -90,7 +89,7 @@ describe('single-agent ablation', () => {
     // Truncation reports nothing, and what falls off is the answer section.
     const budget = SINGLE_AGENT.context?.systemPromptBudget ?? SUB_AGENT_CONTEXT.systemPromptBudget;
     expect(estimateTokens(`${SINGLE_AGENT.systemPrompt}\n\n${SINGLE_AGENT.optionalPrompt}`)).toBeLessThan(budget);
-    expect(SINGLE_AGENT.tools).toEqual(expect.arrayContaining(['query_knowledge_base', 'verify_claims', 'examine_technical_depth']));
+    expect(SINGLE_AGENT.tools).toEqual(['query_knowledge_base', 'examine_technical_depth']);
   });
 
   it('splits one answer into what each specialist would have returned', async () => {
@@ -107,7 +106,7 @@ describe('single-agent ablation', () => {
 
     const verdict = review.verdicts.find((v) => v.entryId === 'experience:0')!;
     expect(verdict.substance?.bullets).toHaveLength(2);
-    // The claim error joins the content reading, first among its issues.
+    // What does not hold comes first among a line's issues.
     const second = verdict.substance?.bullets.find((b) => b.bulletId === 'experience:0:1');
     expect(second?.issues[0]).toMatchObject({ what: 'does not add up', kind: 'wrong' });
     expect(verdict.wording?.perBullet[0]?.bulletId).toBe('experience:0:0');
@@ -189,7 +188,7 @@ describe('single-agent ablation', () => {
     expect(bad.success).toBe(false);
 
     // A hand-in that read no line is refused rather than filed as a clean page.
-    const empty = { ...ANSWER, entries: [{ entryId: 'experience:0', content: { bullets: [] }, claims: { errors: [] }, wording: { perBullet: [] } }] };
+    const empty = { ...ANSWER, entries: [{ entryId: 'experience:0', content: { bullets: [] }, wording: { perBullet: [] } }] };
     const refused = await submitReviewTool.execute({ review: JSON.stringify(empty) }, { session, orchestrator } as never);
     expect(refused.success).toBe(false);
   });

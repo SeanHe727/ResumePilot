@@ -146,10 +146,10 @@ describe('what the caller is allowed to name', () => {
 
     expect(result.success).toBe(true);
     expect(ran?.agentConfig.id).toBe('deep-research');
-    // Named on its own, not merely present inside the rendered entry: the
-    // researcher's findings come back keyed by bullet, and a question about one
-    // line reads differently from a question about the entry holding it.
-    expect(ran?.input).toContain('It is about this line:\n[experience:0:1] Shipped it');
+    // The line alone: the specialist judges the claim it was asked about, and
+    // nothing else on the page can lead it.
+    expect(ran?.input).toContain('The line it is about:\n<resume_content>\n[experience:0:1] Shipped it');
+    expect(ran?.input).not.toContain('The entry it is about');
   });
 
   it('accepts a bullet id in the old entry field rather than refusing it', async () => {
@@ -260,5 +260,56 @@ describe('research: search, plan, search again, answer', () => {
 
     expect(result.success).toBe(true);
     expect(tasks[1]!.input).toContain('No web search was available');
+  });
+});
+
+describe('examine_technical_depth, many questions', () => {
+  it('runs every question in one call by an agent of its own, together', async () => {
+    let inFlight = 0;
+    let peak = 0;
+    const ctx = ctxWith(async (task) => {
+      inFlight += 1;
+      peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, 5));
+      inFlight -= 1;
+      return task.agentConfig.id === 'deep-research' && !task.agentConfig.name.includes('plan')
+        ? answered([FINDING])
+        : answered([]);
+    });
+
+    const result = await examineDepthTool.execute(
+      {
+        questions: [
+          { about: 'experience:0:0', question: 'what does the latency figure depend on?' },
+          { about: 'experience:0:1', question: 'what does shipping it involve?' },
+          { about: 'experience:0:0', question: 'can caching alone cut latency this far?' },
+        ],
+      } as never,
+      ctx,
+    );
+
+    expect(result.success).toBe(true);
+    const results = (result.data as { results: Array<{ about: string; answer?: unknown }> }).results;
+    expect(results.map((r) => r.about)).toEqual(['experience:0:0', 'experience:0:1', 'experience:0:0']);
+    expect(results.every((r) => r.answer)).toBe(true);
+    // Three questions at once, not one after another.
+    expect(peak).toBeGreaterThanOrEqual(3);
+  });
+
+  it('stops at twenty questions across every call of one reading', async () => {
+    const ctx = { ...ctxWith(async () => answered([])), runState: new Map<string, number>() } as unknown as ToolContext;
+    const many = (n: number) => ({
+      questions: Array.from({ length: n }, (_, i) => ({ about: 'experience:0:0', question: `question ${i}` })),
+    });
+
+    const first = await examineDepthTool.execute(many(15) as never, ctx);
+    const second = await examineDepthTool.execute(many(10) as never, ctx);
+    const third = await examineDepthTool.execute(many(1) as never, ctx);
+
+    expect((first.data as { results: unknown[] }).results).toHaveLength(15);
+    // Five were left: those are asked, and the rest are said not to have been.
+    expect((second.data as { results: unknown[]; notAsked: number }).results).toHaveLength(5);
+    expect((second.data as { notAsked: number }).notAsked).toBe(5);
+    expect(third.success).toBe(false);
   });
 });

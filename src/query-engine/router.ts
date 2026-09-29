@@ -77,11 +77,6 @@ function defaultRules(config: AppConfig): RouteRule[] {
       reason: 'the questions only a practitioner in that field would think to ask',
     },
     {
-      task: 'verify_claims',
-      model: primary,
-      reason: 'short questions about a field, answered without the line that raised them',
-    },
-    {
       task: 'rewrite_bullet',
       model: primary,
       reason: 'must rewrite without inventing metrics — the hardest constraint here',
@@ -126,7 +121,6 @@ const DEFAULT_EFFORTS: ReadonlyArray<[TaskKind, Effort]> = [
   ['diagnose_bullet', 'medium'],
   ['judge_wording', 'low'],
   ['research_domain', 'medium'],
-  ['verify_claims', 'medium'],
   ['rewrite_bullet', 'xhigh'],
   ['match_jd', 'medium'],
   ['assess_narrative', 'medium'],

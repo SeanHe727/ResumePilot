@@ -1,7 +1,6 @@
 import {
   CONTENT_PROMPT,
   DEEP_RESEARCH_PLAN_PROMPT,
-  CLAIMS_PROMPT,
   CONSISTENCY_PROMPT,
   DEEP_RESEARCH_PROMPT,
   WORDING_PROMPT,
@@ -37,21 +36,24 @@ export const CONTENT_AGENT: SubAgentConfig = {
   // `examine_technical_depth` runs a second agent inside one of these turns.
   // It takes no pool slot, so it costs latency and a call rather than a place
   // in the fan-out.
-  // Checking whether a claim holds is the claims reader's; this one looks up
-  // rules and, where it can, the world.
-  tools: ['query_knowledge_base'],
+  // Its claims are checked by deep research, one specialist per question, run
+  // together inside one call: a reader unsure of anything asks.
+  tools: ['query_knowledge_base', 'examine_technical_depth'],
   optionalTools: ['web_search'],
   optionalPrompt: `${WEB_SEARCH_CORE}\n\n${CONTENT_SEARCH_TRIGGERS}`,
-  // One more than before for the claim check, which is a turn of its own.
-  maxTurns: 7,
-  // 180s was 2-3x a measured peak of 67s — measured before this role could
-  // search. Checking a figure against the world costs a turn per claim, and on
-  // the two entries with the densest technical figures the deadline stopped
-  // being headroom and started being the thing that failed them: peak 165s on
-  // the entries that finished, `Request aborted` on the two that did not.
-  // Loosened well past the new peak deliberately; tighten it once a full run
-  // has been measured with searching in it rather than around it.
-  timeoutMs: 420_000,
+  // A lookup or two, a round of questions, perhaps a second, and the answer.
+  maxTurns: 8,
+  // A round of research is a minute or two with its questions run together;
+  // the deadline allows two rounds and the reading.
+  timeoutMs: 900_000,
+  // Twenty answers come back whole: compressed on the way in, each would be
+  // cut to its first sentence and the reader would judge from fragments.
+  context: {
+    maxTotalTokens: 160_000,
+    recentBudget: 150_000,
+    toolResultBudget: 60_000,
+    outputReserve: 16_000,
+  },
   contextBoundary: ['briefing', 'entry', 'previousFindings'],
 };
 
@@ -155,26 +157,6 @@ export const DEEP_RESEARCH_PLANNER: SubAgentConfig = {
 };
 
 /**
- * Whether one entry's claims hold, checked one by one.
- *
- * Runs beside the content reader on every entry that reader is sent, and its
- * errors join that reader's findings. Not in `ROLES`: nothing dispatches it
- * on its own, because a check without the reading beside it is half a review.
- */
-export const CLAIMS_AGENT: SubAgentConfig = {
-  id: 'claims',
-  task: 'diagnose_bullet',
-  name: 'Claim Check',
-  description: 'Checks whether each claim in one entry can be true',
-  systemPrompt: CLAIMS_PROMPT,
-  tools: ['verify_claims', 'examine_technical_depth'],
-  // Lists, one check call, a confirmation or two, and the answer.
-  maxTurns: 6,
-  timeoutMs: 420_000,
-  contextBoundary: ['briefing', 'entry'],
-};
-
-/**
  * The whole page checked against itself. Runs beside the career reader, and
  * fills the parts of its reading that are checks rather than judgement.
  */
@@ -191,8 +173,8 @@ export const CONSISTENCY_AGENT: SubAgentConfig = {
 };
 
 /**
- * The single-agent ablation: content, claims, wording, narrative and
- * consistency in one agent and one context, with the union of their tools.
+ * The single-agent ablation: content, wording, narrative and consistency in
+ * one agent and one context, with the union of their tools.
  *
  * Not in `ROLES`, and reached only through `review_resume`, which the
  * coordinator is offered only when `RESUMEPILOT_SINGLE_AGENT` is set. It exists
@@ -205,7 +187,7 @@ export const SINGLE_AGENT: SubAgentConfig = {
   name: 'Single Reviewer',
   description: 'Every per-entry and whole-page reading, in one context',
   systemPrompt: SINGLE_AGENT_PROMPT,
-  tools: ['query_knowledge_base', 'verify_claims', 'examine_technical_depth'],
+  tools: ['query_knowledge_base', 'examine_technical_depth'],
   optionalTools: ['web_search'],
   optionalPrompt: SINGLE_AGENT_SEARCH,
   // Roughly what the specialists take for two entries between them; the
@@ -227,8 +209,8 @@ export const SINGLE_AGENT: SubAgentConfig = {
 };
 
 /**
- * The single agent with no layer beneath it: the claim check and the nested
- * research, each of which runs a model of its own, are gone. Lookups that are
+ * The single agent with no layer beneath it: the research specialists, each an
+ * agent of its own, are gone. Lookups that are
  * not agents (the knowledge base, web search) stay.
  */
 export const FLAT_AGENT: SubAgentConfig = {

@@ -17,7 +17,5 @@ export * from './rewrite.js';
 export * from './full-report.js';
 export * from './generate-report.js';
 export * from './internal.js';
-export * from './verify-claims.js';
-export * from './claims.js';
 export * from './consistency.js';
 export * from './single-agent.js';

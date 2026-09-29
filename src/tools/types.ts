@@ -89,6 +89,13 @@ export interface ToolContext {
    * up afterwards.
    */
   subAgents?: { run(task: SubAgentTask): Promise<SubAgentResult> };
+  /**
+   * Counters that live for one agent run, shared by every tool call in it.
+   *
+   * How a tool enforces a limit on the run rather than on one call: the
+   * deep-research questions a reading may ask in total.
+   */
+  runState?: Map<string, number>;
 }
 
 export interface Tool<TInput = unknown, TOutput = unknown> {
