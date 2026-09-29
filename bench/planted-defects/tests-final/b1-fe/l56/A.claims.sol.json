@@ -1,0 +1,180 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "- Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and deferring the analytics script, raised the checkout page's Lighthouse performance score from 52 to 91.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Documented the design-system tokens in Storybook so designers could check spacing and color values without asking engineers.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Apr 2024 - Aug 2024",
+    "- Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop list offline.",
+    "- Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved stops.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Presented the demo to the library staff and handed over the code with setup notes.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The timeline has an unexplained nine-month gap between the bachelor’s degree and the university web-development role.",
+      "because": "No study or work is listed between June 2023 and April 2024, which may prompt questions."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The 9% booking result does not say whether it is a relative lift or a percentage-point increase.",
+      "because": "A reader cannot interpret the A/B-test impact precisely."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The claim that keyboard navigation and screen-reader labels fixed all 14 accessibility issues is too broad.",
+      "because": "An audit can identify other kinds of issues that those changes do not address."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The checkout performance result is buried after four implementation details.",
+      "because": "A scanning reader may miss the measurable outcome until the end of the bullet."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Attributing the LCP improvement to lazy-loading the hero image is technically backwards in the ordinary case.",
+      "because": "Lazy-loading a hero image commonly delays the largest contentful element and worsens or leaves LCP unchanged."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The Storybook bullet gives an unmeasured benefit and ends with filler wording.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Converting PNG images to WebP cannot ordinarily cut a JavaScript bundle by 60%, and the measured quantity is unclear.",
+      "because": "WebP conversion reduces image-asset size, not JavaScript code, unless the images were embedded in the bundle."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The reduction in broken pages should open the bullet instead of following the interview details.",
+      "because": "The result is more persuasive than the research setup and gives an immediate measure of impact."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "“Writes” is the wrong tense for a role that ended in August 2024.",
+      "because": "It makes the work sound current even though the position has ended."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The accessibility checklist’s practice or standard is unspecified.",
+      "because": "The reader cannot see the accessibility practice behind the checklist, limiting the claim’s technical credibility."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The search-time result does not define what was timed.",
+      "because": "A reader cannot tell whether it covers server response, browser rendering, or the full user interaction."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Under 1” omits its unit.",
+      "because": "The endpoint is incomplete and cannot confidently be interpreted as a one-second result."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The audience measure in “900 riders a week” is undefined.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The 75% improvement is mathematically wrong.",
+      "because": "A decrease from 3.0 seconds to 1.5 seconds is a 50% reduction."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Caching the stop list alone does not establish the stated total cold-start reduction.",
+      "because": "Cold-start time includes other loading, execution, rendering, requests, and device performance."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The change from 30% to 40% is a 10-percentage-point increase, not a 10% increase.",
+      "because": "A relative increase from the 30% baseline would be about 33.3%."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The bullet says React while the project heading says Vue.",
+      "because": "The inconsistent framework descriptions make it unclear which technology the project used."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Worked on the frontend” is vague duty framing without a specific contribution or outcome.",
+      "because": "A recruiter cannot tell what was delivered or why it mattered."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The booking-calendar bullet gives deliverables and edge cases but no outcome or effectiveness measure.",
+      "because": "The reader cannot see what the work enabled in the booking flow."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The demo and handover bullet does not state what the delivery achieved or provide a measure.",
+      "because": "The reader cannot tell whether staff accepted, ran, evaluated, or continued using the result."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The Tools list misspells Storybook as “Storybok.”",
+      "because": "The typo is visible in the technical skills section and obscures a recognizable tool."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Angular is listed under Tools without supporting experience elsewhere in the résumé.",
+      "because": "No entry shows Angular work, so a reader cannot assess whether it is a current, practiced skill."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3729,
+    "input_tokens_details": {
+      "cache_write_tokens": 3726,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1350,
+    "output_tokens_details": {
+      "reasoning_tokens": 324
+    },
+    "total_tokens": 5079
+  }
+}

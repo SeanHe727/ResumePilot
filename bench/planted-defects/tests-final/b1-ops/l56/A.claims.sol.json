@@ -1,0 +1,254 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only SKUs that sold every week.",
+    "- Ran a time study of the returns desk; my findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations, raising inventory record accuracy from 91% to 98.5% within a year.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Cut inbound freight cost per pallet from $48 to $41 over two quarters by consolidating supplier pickups into four regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-time inbound deliveries from 81% to 93%.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Trained 6 planners on the new forecasting workflow and wrote its exception-handling guide, which the team still uses for promotions.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing problem with customer time windows.",
+    "- Raised on-time deliveries by 9% in simulation, from 84% to 93%, by adding customer time windows to the routing model.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again after its spring expansion.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed newest-first: Lakeview appears above the more recent Crestway role.",
+      "because": "Recruiters expect the most recent professional experience first, and the current order delays the latest relevant supply-chain work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before seven years of professional experience.",
+      "because": "The degree receives disproportionate prominence over recent accomplishments and career progression."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The prominent Greenleaf entry makes the career direction appear to move backward from operations and supply chain work.",
+      "because": "Its placement and two bullets give it more visual weight than the relevant roles without explaining the transition."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Last-Mile Routing Study is separated from the supply-chain experience it reinforces and is less prominent than the florist role.",
+      "because": "Its placement makes relevant routing, simulation, and Python evidence harder to connect with the professional record."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The delivery count shows workload but not the result or value of the deliveries.",
+      "because": "The reader cannot tell whether deliveries were timely, accurate, reliable, or otherwise successful."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The wedding-order and cooler duties do not show what they achieved.",
+      "because": "Without an outcome, the line reads as routine responsibilities rather than evidence of contribution."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Prepared weekend wedding orders” does not identify what preparation the candidate personally performed.",
+      "because": "The broad wording makes the candidate's practical skill and responsibility difficult to assess."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The claimed rise in forecast accuracy from 70% to 85% is invalid because the MAPE calculation changed to cover only weekly-selling SKUs.",
+      "because": "Changing the SKU population makes the figures non-comparable and can improve the reported metric without improving forecasting performance."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“My findings” uses a first-person pronoun, and the candidate's role in creating the triage station is unclear.",
+      "because": "The pronoun breaks the impersonal style, while the causal wording does not distinguish informing, designing, or implementing the station."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The processing-time figures do not identify what summary of processing time they represent.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The processing-time result appears only after the study and station description.",
+      "because": "This slows recognition of the strongest evidence."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The trailer-wait reduction is buried after the scheduling rules and carrier count.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Set up” is generic, and the inventory-accuracy improvement follows the process description.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The reorder-points bullet states the task and scale but not what changed as a result.",
+      "because": "The reader cannot tell whether it reduced stockouts, excess inventory, planner effort, or another problem."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“From 18 months of daily demand and supplier lead-time data” makes the source of the reorder points less clear than “using” that data.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The vendor-scorecard result is delayed by a participial opening, four measures, and two timing clauses.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "The claim that OEE rose to 112% is invalid under the standard OEE definition, and the line does not establish what 112% measures.",
+      "because": "Standard OEE cannot exceed 100%, so the figure indicates a calculation, denominator, or metric-definition error."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“Cutting changeover time and micro-stops” names loss categories rather than the actions that delivered the improvement.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Continued use of the guide shows adoption but not what it improved.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The 18% planned-route-miles reduction lacks baseline miles or a comparison period.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Modeled ... as a vehicle-routing problem” identifies the problem type but not the technical work used to solve it.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The change from 120 to 90 miles is not a 40% reduction, and it conflicts with the separate 18% reduction unless the measures differ.",
+      "because": "Thirty miles divided by the original 120 miles is 25%, making the project's core result look unreliable."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Solving the problem with customer time windows names a constraint but not the solving technique or specific modeling action.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "“Raised on-time deliveries by 9%” misstates the change from 84% to 93%.",
+      "because": "The change is nine percentage points, while the relative increase is approximately 10.7%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“In simulation” does not state the simulation scope or what counted as an on-time delivery.",
+      "because": "Without the number of simulated days or stops and the timing criterion, the service-level result is harder to judge or reproduce."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Adding customer time windows repeats the previous bullet's method without distinguishing the additional work behind this result.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The first two routing bullets repeat the distance result instead of separating primary impact from distinct technical evidence.",
+      "because": "Both describe reduced route miles or length, and their differing figures look inconsistent until the measures are explained."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The analysis and recommendations do not show what analysis was performed or what operational change resulted.",
+      "because": "The reader cannot tell whether the work improved warehouse performance or remained an advisory deliverable."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The analysis and recommendations provide no measure of the problem, improvement, or scope.",
+      "because": "Without an anchor, the reader cannot judge the analysis's scale or demonstrated value."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Made recommendations” is vague, and naming the food bank's leadership does not clarify the work.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Donations reached the shelves a day sooner” lacks a comparison point.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The passive wording obscures the candidate's actions in mapping intake and removing duplicate steps.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The re-slotting statement shows adoption but not the improvement produced, and “again” is redundant.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Use by the volunteer coordinators does not show how broadly or effectively the guide was applied.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 4554,
+    "input_tokens_details": {
+      "cache_write_tokens": 4551,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1824,
+    "output_tokens_details": {
+      "reasoning_tokens": 289
+    },
+    "total_tokens": 6378
+  }
+}

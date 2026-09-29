@@ -1,0 +1,259 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes personal details that are conventionally omitted.",
+      "because": "Date of birth and nationality do not support the technical qualifications and can distract the reader."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé leaves a 10-month period unaccounted for between the bachelor's degree and the Junior Software Engineer role.",
+      "because": "No study or work is listed between Jun 2022 and May 2023, interrupting the chronology."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience should appear above education.",
+      "because": "The engineering roles carry the résumé's strongest career story."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% accuracy improvement does not state its baseline, comparison, or whether it is relative or in percentage points.",
+      "because": "A reader cannot judge the size or credibility of the improvement."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The evaluation-harness bullet does not show what changed because the regressions were caught before release.",
+      "because": "It implies release value without making the consequence legible."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The phrase \"the team used to compare\" delays the stronger facts.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Assistant-only loss masking cannot make the model reproduce tool outputs more faithfully as claimed.",
+      "because": "Tool-result tokens are excluded from the loss and receive no direct training signal."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The assistant-only loss-masking detail repeats the adapter fine-tuning accomplishment on line 9.",
+      "because": "Repeating the method uses space without adding a second achievement."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The backlog result should say \"by 68%\" rather than \"68%.\"",
+      "because": "The missing preposition makes the reduction read less cleanly."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Switching from FP32 to BF16 mixed precision alone cannot account for a 4x cut in fine-tuning GPU memory.",
+      "because": "BF16 roughly halves direct tensor storage, while fine-tuning commonly retains FP32 states, gradients, or weights."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "\"By 4x\" lacks a baseline and does not clearly state how memory changed.",
+      "because": "The magnitude is difficult to verify without starting and ending values."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The bullet mixes past and present tense and leads with routine maintenance instead of the improvement.",
+      "because": "The ended role calls for consistent past tense, and the stronger contribution is easy to miss."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The three-day release-cycle result omits the prior duration.",
+      "because": "The endpoint alone does not establish the size of the improvement."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "\"Automated regression checks\" does not identify what the checks evaluated.",
+      "because": "The model-release risks addressed remain unclear."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The nightly-backlog result does not quantify dispatch delays or backlog incidents.",
+      "because": "The operational effect remains unanchored."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The 30-service event-queue migration should open the entry.",
+      "because": "It carries the clearest operational result."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The line does not identify which AI-first practices were introduced.",
+      "because": "The ownership claim remains abstract without the technical or organizational work performed."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "\"Accelerating delivery\" and \"improving outcomes\" are unmeasured benefits.",
+      "because": "Without a checkable result, a reader cannot assess the platform impact."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The context constraint has no stated capability, reliability, cost, or user benefit.",
+      "because": "The bullet reads as a successful test condition rather than an outcome."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "\"Working context\" is jargon and does not say what stayed below 10K tokens.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "\"Grew 100x\" lacks a starting point.",
+      "because": "The raw conversation's scale is difficult to interpret."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The method phrase does not explain which change produced the context constraint.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The claim that the changes removed nested-pool deadlocks and lost tool results is too broad.",
+      "because": "The fixes address specific failure modes but cannot guarantee that all such failures disappear."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The 50-way fan-out figure does not measure how much failures fell.",
+      "because": "It gives test scale but no before-and-after failure count or rate."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "\"Under 50-way fan-out\" does not clearly explain the concurrency condition.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The concurrency and cache-write bullet should open the entry.",
+      "because": "It presents the clearest concrete reliability problem and fix."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The metric-integration bullet does not say what changed because the eight metrics were added.",
+      "because": "The work reads as implementation without a visible result."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line does not say what the Kendall correlation was calculated between.",
+      "because": "The statistic is difficult to interpret without its two variables."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The trial description does not explain how the evaluator detected or scored degradation.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "\"Showed the evaluator tracks\" is awkward.",
+      "because": "It makes the relationship between the action and the evaluator unclear."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The evaluator bullet should open the project.",
+      "because": "It provides the strongest measured evidence of evaluation quality."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The sensor-signal triage achievement is duplicated across entries and conflicts in ownership and reduction figure.",
+      "because": "The same 800+ signal method appears with both a 68% and a two-thirds backlog reduction."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The two-thirds backlog reduction lacks a comparison period or baseline.",
+      "because": "The reader cannot see how the result was calculated."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "\"Triage branch\" may not tell a general reader what work was performed.",
+      "because": "The implementation term hides the practical function of screening and routing cases."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "\"Pending-case backlog\" is redundant.",
+      "because": "Cases in a backlog are already pending."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4685,
+    "input_tokens_details": {
+      "cache_write_tokens": 4682,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1892,
+    "output_tokens_details": {
+      "reasoning_tokens": 437
+    },
+    "total_tokens": 6577
+  }
+}
