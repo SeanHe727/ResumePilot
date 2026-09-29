@@ -187,5 +187,10 @@ describe('single-agent ablation', () => {
 
     const bad = await submitReviewTool.execute({ review: 'not json' }, { session, orchestrator } as never);
     expect(bad.success).toBe(false);
+
+    // A hand-in that read no line is refused rather than filed as a clean page.
+    const empty = { ...ANSWER, entries: [{ entryId: 'experience:0', content: { bullets: [] }, claims: { errors: [] }, wording: { perBullet: [] } }] };
+    const refused = await submitReviewTool.execute({ review: JSON.stringify(empty) }, { session, orchestrator } as never);
+    expect(refused.success).toBe(false);
   });
 });

@@ -595,6 +595,17 @@ export const submitReviewTool: Tool<{ review: string }, unknown> = {
     const review = ctx.orchestrator.readWhole(resume, whole, {
       name: 'Coordinator', success: true, turns: 0, compactions: 0, durationMs: 0, tokens: 0,
     });
+    // A hand-in with no line read is not a review, and filed it would reach
+    // the report as a clean page.
+    const unread = review.verdicts
+      .filter((v) => !v.substance && (resume.sections.flatMap((x) => x.entries).find((e) => e.id === v.entryId)?.bullets.length ?? 0) > 0)
+      .map((v) => v.entryId);
+    if (unread.length > 0 && unread.length === review.verdicts.filter((v) => v.substance || unread.includes(v.entryId)).length) {
+      return {
+        success: false,
+        error: { code: 'input_error', message: `no line was read: every entry with lines needs its readings (${unread.join(', ')})` },
+      };
+    }
     fileWholeReview(ctx, resume, review);
     return { success: true, data: wholeSummary(review) };
   },

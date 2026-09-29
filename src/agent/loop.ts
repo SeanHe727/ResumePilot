@@ -270,6 +270,9 @@ async function runTurn(
       response.toolCalls.forEach((call, i) => {
         context.addToolResult(call.id, JSON.stringify(results[i]));
       });
+      // The `one` ablation reviews the text itself, and a résumé parsed during
+      // this turn is not in the task layer set before it.
+      if (one) setResumeContext(context, session);
 
       await context.autoCompact(deps.queryEngine);
       continue;
