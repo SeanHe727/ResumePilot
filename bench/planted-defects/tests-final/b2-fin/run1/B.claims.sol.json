@@ -1,0 +1,296 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Lakeside Golf Club | Caddie | Metro City, USA | Aug 2025 - Present",
+    "- Caddied about 5 rounds a week, carrying bags and reading greens for members.",
+    "- Helped the pro shop run the weekend junior tournament.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Underwrote 60 small-business loans worth USD 45M, and none of the approved loans defaulted in their first two years.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+    "- Shared the model and a two-page note with the university investment club, which used it in its spring pitch.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "SKILLS",
+    "Tools: Excel, Bloomberg Terminal",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The profile link may be a placeholder rather than a real, working professional profile.",
+      "because": "Recruiters need working contact details."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "“About” makes the five-round workload figure sound imprecise.",
+      "because": "Keep the metric only if you can state it confidently."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The bullet could emphasize service or operational responsibilities more.",
+      "because": "Those responsibilities may better support your target roles."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Helped” does not show your specific responsibility.",
+      "because": "The reader cannot tell what you owned."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The bullet does not indicate the tournament’s size.",
+      "because": "A meaningful event measure would make the work more informative."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Close efficiency” does not define what improved by 40%.",
+      "because": "A tracked measure would make the result verifiable and meaningful."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The 40% improvement lacks a comparison period.",
+      "because": "The result needs a basis for comparison."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Your contribution to the capital-plan model is unclear.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The bullet does not say what decisions or evaluations the model enabled.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Using the same discount rate for every project needs explanation.",
+      "because": "It could suggest project risk was not considered."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The meaning of the 5% budget threshold is unclear.",
+      "because": "It is not clear whether it means percentage variance against budget."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The scope of the 5% threshold is unclear.",
+      "because": "It is not clear whether it applied to every line item or only material ones."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The bullet describes the task without showing the commentary’s usefulness or scope.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The valuation pairs FCFE with WACC.",
+      "because": "FCFE is discounted at the cost of equity, not WACC."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Verify that the stated method matches the value produced.",
+      "because": "The bullet should distinguish equity value from enterprise value."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Adding business-unit EBITDA margins does not produce a group EBITDA margin.",
+      "because": "The group result must reflect the units’ EBITDA and revenue weights."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The USD 600M cash-flow forecast duplicates the Student Investment Fund bullet despite conflicting dates.",
+      "because": "The two entries make the accomplishment look copied and chronologically implausible."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The forecast-error measure and period are undefined.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The link between the forecast and early debt repayment needs clarification.",
+      "because": "The wording could imply that the forecast alone caused the full repayment."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The zero-default claim needs an observation period and a clear eligible loan group.",
+      "because": "It should cover loans that completed the full two-year period."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The bullet should not imply that underwriting alone caused zero defaults.",
+      "because": "Zero defaults does not prove that causal claim."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The size of the reviewed application population is missing.",
+      "because": "It would provide context for the approval-rate change."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The period used to assess early defaults is missing.",
+      "because": "It would support the claim of no rise in early defaults."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The claimed link between your findings and higher approvals needs substantiation.",
+      "because": "“Raised approvals” implies a causal link."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The increase should be identified as seven percentage points rather than a 7% relative increase.",
+      "because": "Those are different ways to describe the change from 41% to 48%."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "“Writes” uses present tense for a completed role.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The before-and-after periods behind “7 to 1 a year” are unclear.",
+      "because": "The comparison should use consistent reporting periods."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The template’s scale or adoption is missing.",
+      "because": "It would show the improvement was not limited to one case."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The valuation date is missing.",
+      "because": "Market-price proximity needs context."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The bullet does not clarify what was compared to market price.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Being within 6% of market price should not be presented as independent validation.",
+      "because": "Proximity to market price is not, by itself, evidence that a valuation is accurate."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“A 1-point change” is ambiguous.",
+      "because": "It should say whether this means a one-percentage-point change in the discount rate."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The sensitivity test does not identify the starting assumption.",
+      "because": "That would make the USD 52-to-USD 44 range interpretable."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Your contribution to the pitch or the club’s use of the model is unclear.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The FP&A-support bullet is broad and lacks specific work, scope, or a result.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The team or organization supported is unclear.",
+      "because": "An investment fund’s FP&A work may not be obvious to a reader."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The performance-report benchmark is unidentified.",
+      "because": "The comparison should be clear."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The bullet does not say what decisions or analysis the report supported.",
+      "because": "“Every meeting” shows use but not its purpose."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The cash forecast almost exactly duplicates the Stonebridge result despite the 2018–2019 project dates.",
+      "because": "The overlap makes the later work look backdated."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "The listed methods are broad and should be supported by the experience or projects.",
+      "because": "The technical issues above particularly call financial modeling and DCF valuation into question."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The presentation could prioritize the finance roles and their strongest, well-supported results.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2577,
+    "input_tokens_details": {
+      "cache_write_tokens": 2574,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2565,
+    "output_tokens_details": {
+      "reasoning_tokens": 1052
+    },
+    "total_tokens": 5142
+  }
+}

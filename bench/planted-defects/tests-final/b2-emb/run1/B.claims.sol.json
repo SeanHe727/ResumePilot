@@ -1,0 +1,215 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes, FPGA",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The code-profile link should be a complete, working URL that leads directly to relevant work.",
+      "because": "A generic or inaccessible link adds little."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider putting Experience before Education.",
+      "because": "With several years of experience, your most relevant evidence should appear first."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent punctuation, date formatting, and capitalization throughout.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Consider adding relevant academic distinctions, a strong technical project, or coursework if they fill a gap.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify what “improved update speed by 60%” measures and give the conditions or baseline if possible.",
+      "because": "It could mean faster transfer or shorter total update time."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add evidence of the test rig’s value, such as coverage, defects caught, or time saved.",
+      "because": "The bullet currently shows test volume but not its value."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the crash logger identified the causes or supplied data for an investigation.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz cannot capture it without aliasing.",
+      "because": "The sampling rate is below the Nyquist rate."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Declaring the shared counter volatile does not fix the race condition.",
+      "because": "Volatile does not make access atomic or prevent a race between the interrupt handler and main loop."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Give the period or definition behind the reduction in field motor faults, if applicable.",
+      "because": "It would clarify the relationship between the rewrite and the reported result."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The motor-controller accomplishment is repeated in Projects.",
+      "because": "The Formula Student bullet claims nearly the same 300-robot fleet work and results."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify that 20,000 units a month is the production volume covered by the change.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the comparison period or batch scope for the return rates.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Ensure the return-rate change can reasonably be attributed to the reflow-profile update.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify a comparable time period for the before-and-after complaint figures.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make clear that the complaints relate to calibration drift.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Confirm that the before-and-after boards-per-hour figures use the same measurement conditions.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Replace or remove the generic claims about innovation and redefining sensing.",
+      "because": "They are marketing language that does not show what you built or contributed."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Include the operating or sampling conditions behind the average-current measurements, if available.",
+      "because": "The conditions would make the comparison interpretable."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Link to the published schematics and firmware and make sure they are accessible.",
+      "because": "A reader should be able to verify or reproduce the project."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The bullet describes work on a robot fleet under a student electric-car project.",
+      "because": "The work should be relevant to the Formula Student vehicle and your team role."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Replace the passive phrasing with what you personally owned or implemented.",
+      "because": "The current phrasing obscures your contribution."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify what testing before races demonstrated, if you can support it.",
+      "because": "The result of the testing is unclear."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The 300-robot motor-control claim appears to duplicate the Voltline accomplishment.",
+      "because": "It conflicts with the Formula Student project’s dates and setting."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Separate or regroup the Tools entries by type.",
+      "because": "The category mixes languages, a microcontroller platform, test equipment, and an FPGA."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify the toolchain or level of experience represented by FPGA, if applicable.",
+      "because": "The entry leaves that experience unexplained."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Use a more specific category or term than “firmware” as a method.",
+      "because": "Firmware is too broad to function as a method."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Categorize CAN as a protocol rather than a method.",
+      "because": "The categories should distinguish protocols from practices."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2302,
+    "input_tokens_details": {
+      "cache_write_tokens": 2299,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1671,
+    "output_tokens_details": {
+      "reasoning_tokens": 598
+    },
+    "total_tokens": 3973
+  }
+}

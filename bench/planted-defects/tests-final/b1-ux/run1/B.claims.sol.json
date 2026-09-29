@@ -1,0 +1,239 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "- Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "- Built a research repository of 250 tagged session clips that product managers searched before writing new requirements.",
+    "- Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Apr 2020 - Feb 2022",
+    "- Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients while also running the team's recruiting calendar, updating the style guide, onboarding two interns and taking notes for the accessibility working group, which cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "- Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds and errors from 11 to 3 across the 12 sessions.",
+    "- Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Tested three onboarding prototypes with 24 new customers and shipped the design that lifted completed sign-ups by 41% in its first quarter.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The 40% completion improvement is ambiguous.",
+      "because": "It is unclear whether it is a relative or percentage-point increase, and the baseline or comparison period is missing."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "A 3:1 contrast ratio is not the WCAG 2.1 AA minimum for ordinary body text.",
+      "because": "Normal text generally requires 4.5:1; 3:1 applies to large text."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The broad claim of bringing the design system to WCAG 2.1 AA needs a defined scope and verification method.",
+      "because": "The bullet does not say what was assessed or tested."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The repository bullet needs evidence of its use or effect.",
+      "because": "The clip count does not show whether it changed research reuse, requirement quality, or team efficiency."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The description of session clips should address consent and access practices.",
+      "because": "The repository contains participant session clips."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify what “top five” refers to and how the three shipped fixes relate to it.",
+      "because": "The connection between the recommendations and shipped fixes is hard to follow."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "An open card sort does not directly validate findability in a finished navigation.",
+      "because": "It reveals how participants group and label content rather than whether they can find items."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Add the card sort’s outcome or explain how it informed the navigation.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Move the onboarding result nearer the top of the Pinegrove bullets.",
+      "because": "It is one of the strongest outcomes but appears last."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify the sign-up metric’s percentage-point change, denominator, and comparison period.",
+      "because": "The bullet gives rates of 41% and 58% without that measurement context."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Avoid implying the research alone caused the post-launch sign-up increase without support.",
+      "because": "The result was measured after launch."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Add the survey and dashboard’s scope or impact.",
+      "because": "Ownership alone does not show who used the work, what decisions it supported, or why it mattered."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the percentage-point decrease and timeframe or comparison basis for missed appointments.",
+      "because": "That context would make the result more interpretable and credible."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Define “study setup time” and the basis for the two-week-to-three-day comparison.",
+      "because": "It is unclear whether the comparison is typical or from a specific period."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Ensure the claim that the templates covered all patient studies is supportable.",
+      "because": "“All patient studies” is a broad claim."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The bullet combines too many responsibilities.",
+      "because": "The crowded list obscures the most relevant contributions."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Identify which change is connected to the 30% reduction in support calls.",
+      "because": "The reduction is attached to the whole list of responsibilities."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Give the comparison period for the support-call reduction, if available.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Replace the generic inclusive-design claim with specific work and evidence of an outcome, or remove it.",
+      "because": "It does not say what you did or what changed."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Lead the transit project with its measured usability results instead of the generic claim.",
+      "because": "The timed-task evidence is stronger."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Define what “errors” counts and whether the figures are totals, rates, or per-participant measures.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain how the before-and-after measurements were collected.",
+      "because": "The review needs enough detail to tell whether they are comparable."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Give the year or status of the agency invitation.",
+      "because": "It is unclear whether the review has happened or is upcoming."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Confirm that the openly published materials contain no participant-identifying information.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Give the timeframe and basis for the quarter reduction in phone bookings.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Connect fewer phone bookings to the intended outcome, ideally with an overall booking or completion measure.",
+      "because": "Fewer phone bookings could reflect successful online booking, reduced access, or reduced demand."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify how the 10 patients were divided between the two testing rounds.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Say whether fixing the six issues improved task completion or another usability measure.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The onboarding bullet appears to duplicate Pinegrove work while giving a different sign-up result.",
+      "because": "Both bullets cite three prototypes and 24 participants, but place the work in different projects."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Check the description “new customers” in the clinic-booking project.",
+      "because": "It seems inconsistent with that project."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Separate screen-reader testing from the tools list.",
+      "because": "It is a capability or testing activity, not a tool in the same sense as Figma and Tableau."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Support the listed A/B-testing method with concrete experience or remove it.",
+      "because": "The résumé does not otherwise demonstrate that experience."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2609,
+    "input_tokens_details": {
+      "cache_write_tokens": 2606,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1952,
+    "output_tokens_details": {
+      "reasoning_tokens": 652
+    },
+    "total_tokens": 4561
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Summit Climbing Gym | Front Desk Staff | Metro City, USA | Sep 2025 - Present",
+    "- Checked in about 150 climbers a shift and sold day passes and memberships.",
+    "- Ran the weekend rental desk and logged gear inspections for the manager.",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Reduced data-entry errors by 70% by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Built the enrollment tracker the three sites reviewed each week, flagging sites more than 10% behind target.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Established that the program was equivalent to usual care because the superiority test on readmission was not significant (p = 0.41).",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Jul 2021 - Aug 2022",
+    "- Screened 2,300 medical records for a diabetes cohort study, confirming eligibility for 410 patients against the protocol criteria.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that follow-up within 7 days was linked to lower readmission: 8.2% against 11.9% without it, after adjusting for age and insurance.",
+    "- Presented the analysis at the state public-health conference poster session.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Ran a randomized discharge study of more than 600 heart-failure patients that completed enrollment months ahead of schedule.",
+    "SKILLS",
+    "Tools: R, REDCap, SAS",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The profile link may be a placeholder rather than a real, working professional profile.",
+      "because": "A professional, current profile destination is needed."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "The education section could include relevant coursework, a thesis, or an analytical capstone.",
+      "because": "Those details could strengthen your fit for biostatistics roles."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "The education section shows only the MPH and could include a relevant undergraduate degree.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify the time period meant by “a shift.”",
+      "because": "It would make the workload easier to assess."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Distinguish check-ins from sales if you have figures for both.",
+      "because": "The bullet combines two duties but quantifies only one."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The rental-desk bullet does not show scale, responsibility, or outcome.",
+      "because": "“Ran” and “logged” describe duties rather than a meaningful measure or result."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify what the inspection log enabled if that matters to the role.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify how the 70% reduction in data-entry errors was defined and measured, and over what period or sample.",
+      "because": "The result needs to be substantiated."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Make clear whether range checks and double entry were both your interventions.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Averaging follow-up times only for patients who died does not estimate median survival.",
+      "because": "Excluding censored patients can give a biased result; an appropriate time-to-event analysis is needed."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you built the enrollment tracker yourself.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Add the enrollment target or the number of sites the tracker helped keep on track, if available.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“All 4 reviews passed without a protocol change” is difficult to interpret as an accomplishment.",
+      "because": "Passing reviews and no protocol change do not necessarily show that the reports were effective."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Focus on your contribution to preparing or presenting the safety reports.",
+      "because": "A concrete result belongs here only if it reflects a meaningful outcome."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "A nonsignificant superiority test does not establish equivalence.",
+      "because": "Equivalence requires a prespecified margin and an appropriate analysis showing the confidence interval falls within it."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Move the trial-coordination bullet nearer the top of the role.",
+      "because": "One of your strongest relevant accomplishments appears last."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Make your specific trial-coordination responsibilities clearer.",
+      "because": "Your contribution should be distinguishable from the team’s."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the denominator or interpretation of “94% of follow-up visits completed.”",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Add a little detail about the screening process if it would help.",
+      "because": "The eligibility count alone may not fully show the scale and your role."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The bullet implies the interviews caused the reduction in no-shows.",
+      "because": "That causal wording needs an evaluation that supports it; otherwise distinguish the interviews from the reminder intervention and its result."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Specify your ownership of the data dictionary if you created it.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Make sure “reused” accurately describes the dictionary’s use in later studies.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Split the data-cleaning result from the list of other duties.",
+      "because": "The many responsibilities obscure the important result."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify how you resolved the mismatched identifiers and what the 1,200 represents.",
+      "because": "It is unclear how the listed duties relate to resolving them."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Indicate what portion of the asthma analysis is complete, if useful.",
+      "because": "The project is dated as ongoing, and its status would help a reader assess it."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Check that the dates and “Independent Project” label accurately reflect the work.",
+      "because": "The project overlaps with the Meridian role."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Replace the unsupported promotional language with specific analytical work or a deliverable.",
+      "because": "The other bullets already offer concrete results."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether the 8.2% and 11.9% figures are crude or adjusted rates.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Make clear that the follow-up result is an association, not a causal effect, unless the design supports that conclusion.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Include the sample size and confidence interval if available.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Name the conference if appropriate and accurate.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify your individual contribution to the survey.",
+      "because": "It was conducted within a five-person team."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Giving the clinic its first estimate” may overstate what the survey establishes.",
+      "because": "A representative neighborhood estimate depends on the sampling and analysis."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Note the survey’s reach or method if important to interpreting the estimate.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Identify your role in the translation and pilot if you were responsible for them.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Explain what the pilot checked or changed if that information is available and relevant.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The randomized heart-failure discharge study appears to duplicate the Meridian trial rather than belong to the survey project.",
+      "because": "If it is a separate study, it needs a separate entry with its project and your role made clear."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The enrollment timing conflicts with the Meridian claim.",
+      "because": "The Meridian bullet says enrollment finished four months early, so the timing and result need reconciliation."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "The tools list gives little indication of your level or the kinds of analyses you can perform.",
+      "because": "Specific capabilities or relevant packages would help for biostatistics roles if you have used them."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Make sure the methods list reflects your practical proficiency.",
+      "because": "The survival-analysis and equivalence claims make it especially important not to imply expertise you cannot substantiate."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Tailor which experience the résumé foregrounds to the target role.",
+      "because": "Biostatistics roles call for analytical work and methods, while coordination roles call for trial operations and data quality."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2879,
+    "input_tokens_details": {
+      "cache_write_tokens": 2876,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1903,
+    "output_tokens_details": {
+      "reasoning_tokens": 302
+    },
+    "total_tokens": 4782
+  }
+}
