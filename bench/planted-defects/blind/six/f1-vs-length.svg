@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="680" viewBox="0 0 1000 680" font-family="Helvetica, Arial, sans-serif">
+<rect width="1000" height="680" fill="#fcfcfb"/>
+<text x="80" y="32" font-size="17" font-weight="600" fill="#0b0b0b">F1 vs review length</text>
+<line x1="80.0" y1="60" x2="80.0" y2="620" stroke="#e6e5e0"/><text x="80.0" y="638" font-size="11" fill="#52514e" text-anchor="middle">500</text>
+<line x1="208.0" y1="60" x2="208.0" y2="620" stroke="#e6e5e0"/><text x="208.0" y="638" font-size="11" fill="#52514e" text-anchor="middle">1,000</text>
+<line x1="336.0" y1="60" x2="336.0" y2="620" stroke="#e6e5e0"/><text x="336.0" y="638" font-size="11" fill="#52514e" text-anchor="middle">1,500</text>
+<line x1="464.0" y1="60" x2="464.0" y2="620" stroke="#e6e5e0"/><text x="464.0" y="638" font-size="11" fill="#52514e" text-anchor="middle">2,000</text>
+<line x1="592.0" y1="60" x2="592.0" y2="620" stroke="#e6e5e0"/><text x="592.0" y="638" font-size="11" fill="#52514e" text-anchor="middle">2,500</text>
+<line x1="720.0" y1="60" x2="720.0" y2="620" stroke="#e6e5e0"/><text x="720.0" y="638" font-size="11" fill="#52514e" text-anchor="middle">3,000</text>
+<line x1="80" y1="620.0" x2="720" y2="620.0" stroke="#e6e5e0"/><text x="72" y="624.0" font-size="11" fill="#52514e" text-anchor="end">0.70</text>
+<line x1="80" y1="518.2" x2="720" y2="518.2" stroke="#e6e5e0"/><text x="72" y="522.2" font-size="11" fill="#52514e" text-anchor="end">0.74</text>
+<line x1="80" y1="416.4" x2="720" y2="416.4" stroke="#e6e5e0"/><text x="72" y="420.4" font-size="11" fill="#52514e" text-anchor="end">0.78</text>
+<line x1="80" y1="314.5" x2="720" y2="314.5" stroke="#e6e5e0"/><text x="72" y="318.5" font-size="11" fill="#52514e" text-anchor="end">0.82</text>
+<line x1="80" y1="212.7" x2="720" y2="212.7" stroke="#e6e5e0"/><text x="72" y="216.7" font-size="11" fill="#52514e" text-anchor="end">0.86</text>
+<line x1="80" y1="110.9" x2="720" y2="110.9" stroke="#e6e5e0"/><text x="72" y="114.9" font-size="11" fill="#52514e" text-anchor="end">0.90</text>
+<text x="400.0" y="662" font-size="12" fill="#0b0b0b" text-anchor="middle">Words per review</text>
+<text transform="translate(26,340.0) rotate(-90)" font-size="12" fill="#0b0b0b" text-anchor="middle">F1</text>
+<line x1="244.8" y1="541.1" x2="260.1" y2="541.1" stroke="#c98500" stroke-width="2" stroke-dasharray="3 2"/><line x1="252.5" y1="620.0" x2="252.5" y2="423.8" stroke="#c98500" stroke-width="2" stroke-dasharray="3 2"/>
+<circle cx="252.5" cy="541.1" r="4.5" fill="#fcfcfb" stroke="#c98500" stroke-width="2.5"><title>ResumeSkills (luna 6): 1174 words, F1 0.731</title></circle>
+<line x1="263.6" y1="460.4" x2="279.2" y2="460.4" stroke="#a8324a" stroke-width="2" stroke-dasharray="3 2"/><line x1="271.4" y1="512.8" x2="271.4" y2="408.0" stroke="#a8324a" stroke-width="2" stroke-dasharray="3 2"/>
+<circle cx="271.4" cy="460.4" r="4.5" fill="#fcfcfb" stroke="#a8324a" stroke-width="2.5"><title>cyber-resume-reviewer (luna 6): 1248 words, F1 0.763</title></circle>
+<line x1="241.3" y1="400.1" x2="252.7" y2="400.1" stroke="#b5541f" stroke-width="2" stroke-dasharray="3 2"/><line x1="247.0" y1="467.2" x2="247.0" y2="332.9" stroke="#b5541f" stroke-width="2" stroke-dasharray="3 2"/>
+<circle cx="247.0" cy="400.1" r="4.5" fill="#fcfcfb" stroke="#b5541f" stroke-width="2.5"><title>LLMInternSkill (luna 6): 1152 words, F1 0.786</title></circle>
+<line x1="125.7" y1="395.0" x2="135.8" y2="395.0" stroke="#e87ba4" stroke-width="2" stroke-dasharray="3 2"/><line x1="130.7" y1="443.4" x2="130.7" y2="346.7" stroke="#e87ba4" stroke-width="2" stroke-dasharray="3 2"/>
+<circle cx="130.7" cy="395.0" r="4.5" fill="#fcfcfb" stroke="#e87ba4" stroke-width="2.5"><title>sol 6: 698 words, F1 0.788</title></circle>
+<line x1="221.1" y1="362.1" x2="234.1" y2="362.1" stroke="#eda100" stroke-width="2" stroke-dasharray="3 2"/><line x1="227.6" y1="411.1" x2="227.6" y2="313.1" stroke="#eda100" stroke-width="2" stroke-dasharray="3 2"/>
+<circle cx="227.6" cy="362.1" r="4.5" fill="#fcfcfb" stroke="#eda100" stroke-width="2.5"><title>luna 6: 1076 words, F1 0.801</title></circle>
+<line x1="580.7" y1="342.0" x2="631.5" y2="342.0" stroke="#1baf7a" stroke-width="2" stroke-dasharray="3 2"/><line x1="606.1" y1="395.1" x2="606.1" y2="288.8" stroke="#1baf7a" stroke-width="2" stroke-dasharray="3 2"/>
+<circle cx="606.1" cy="342.0" r="4.5" fill="#fcfcfb" stroke="#1baf7a" stroke-width="2.5"><title>luna 5.6: 2555 words, F1 0.809</title></circle>
+<line x1="440.5" y1="263.6" x2="464.5" y2="263.6" stroke="#0f8a8a" stroke-width="2" stroke-dasharray="3 2"/><line x1="452.5" y1="317.2" x2="452.5" y2="210.0" stroke="#0f8a8a" stroke-width="2" stroke-dasharray="3 2"/>
+<circle cx="452.5" cy="263.6" r="4.5" fill="#fcfcfb" stroke="#0f8a8a" stroke-width="2.5"><title>sol 5.6: 1955 words, F1 0.840</title></circle>
+<line x1="407.1" y1="230.4" x2="431.6" y2="230.4" stroke="#eb6834" stroke-width="2"/><line x1="419.4" y1="276.2" x2="419.4" y2="184.5" stroke="#eb6834" stroke-width="2"/>
+<circle cx="419.4" cy="230.4" r="7" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>ResumePilot (sol 6): 1826 words, F1 0.853</title></circle>
+<line x1="402.7" y1="143.7" x2="417.5" y2="143.7" stroke="#e34948" stroke-width="2"/><line x1="410.1" y1="178.3" x2="410.1" y2="109.1" stroke="#e34948" stroke-width="2"/>
+<circle cx="410.1" cy="143.7" r="7" fill="#e34948" stroke="#fcfcfb" stroke-width="2"><title>ResumePilot (luna 6): 1789 words, F1 0.887</title></circle>
+<line x1="582.8" y1="138.2" x2="621.7" y2="138.2" stroke="#4a3aa7" stroke-width="2"/><line x1="602.2" y1="183.4" x2="602.2" y2="93.0" stroke="#4a3aa7" stroke-width="2"/>
+<circle cx="602.2" cy="138.2" r="7" fill="#4a3aa7" stroke="#fcfcfb" stroke-width="2"><title>ResumePilot (sol 5.6): 2540 words, F1 0.889</title></circle>
+<line x1="488.6" y1="135.6" x2="523.6" y2="135.6" stroke="#2a78d6" stroke-width="2"/><line x1="506.1" y1="190.5" x2="506.1" y2="80.8" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="506.1" cy="135.6" r="7" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>ResumePilot (luna 5.6): 2164 words, F1 0.890</title></circle>
+<circle cx="750.0" cy="68.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"></circle><text x="762" y="72" font-size="12" fill="#0b0b0b">ResumePilot (luna 5.6)</text><text x="762" y="87" font-size="11" fill="#52514e">F1 0.890 · 2,164 words</text>
+<circle cx="750.0" cy="118.0" r="5" fill="#4a3aa7" stroke="#fcfcfb" stroke-width="2"></circle><text x="762" y="122" font-size="12" fill="#0b0b0b">ResumePilot (sol 5.6)</text><text x="762" y="137" font-size="11" fill="#52514e">F1 0.889 · 2,540 words</text>
+<circle cx="750.0" cy="168.0" r="5" fill="#e34948" stroke="#fcfcfb" stroke-width="2"></circle><text x="762" y="172" font-size="12" fill="#0b0b0b">ResumePilot (luna 6)</text><text x="762" y="187" font-size="11" fill="#52514e">F1 0.887 · 1,789 words</text>
+<circle cx="750.0" cy="218.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"></circle><text x="762" y="222" font-size="12" fill="#0b0b0b">ResumePilot (sol 6)</text><text x="762" y="237" font-size="11" fill="#52514e">F1 0.853 · 1,826 words</text>
+<circle cx="750.0" cy="268.0" r="4" fill="#fcfcfb" stroke="#0f8a8a" stroke-width="2.5"></circle><text x="762" y="272" font-size="12" fill="#0b0b0b">sol 5.6</text><text x="762" y="287" font-size="11" fill="#52514e">F1 0.840 · 1,955 words</text>
+<circle cx="750.0" cy="318.0" r="4" fill="#fcfcfb" stroke="#1baf7a" stroke-width="2.5"></circle><text x="762" y="322" font-size="12" fill="#0b0b0b">luna 5.6</text><text x="762" y="337" font-size="11" fill="#52514e">F1 0.809 · 2,555 words</text>
+<circle cx="750.0" cy="368.0" r="4" fill="#fcfcfb" stroke="#eda100" stroke-width="2.5"></circle><text x="762" y="372" font-size="12" fill="#0b0b0b">luna 6</text><text x="762" y="387" font-size="11" fill="#52514e">F1 0.801 · 1,076 words</text>
+<circle cx="750.0" cy="418.0" r="4" fill="#fcfcfb" stroke="#e87ba4" stroke-width="2.5"></circle><text x="762" y="422" font-size="12" fill="#0b0b0b">sol 6</text><text x="762" y="437" font-size="11" fill="#52514e">F1 0.788 · 698 words</text>
+<circle cx="750.0" cy="468.0" r="4" fill="#fcfcfb" stroke="#b5541f" stroke-width="2.5"></circle><text x="762" y="472" font-size="12" fill="#0b0b0b">LLMInternSkill (luna 6)</text><text x="762" y="487" font-size="11" fill="#52514e">F1 0.786 · 1,152 words</text>
+<circle cx="750.0" cy="518.0" r="4" fill="#fcfcfb" stroke="#a8324a" stroke-width="2.5"></circle><text x="762" y="522" font-size="12" fill="#0b0b0b">cyber-resume-reviewer (luna 6)</text><text x="762" y="537" font-size="11" fill="#52514e">F1 0.763 · 1,248 words</text>
+<circle cx="750.0" cy="568.0" r="4" fill="#fcfcfb" stroke="#c98500" stroke-width="2.5"></circle><text x="762" y="572" font-size="12" fill="#0b0b0b">ResumeSkills (luna 6)</text><text x="762" y="587" font-size="11" fill="#52514e">F1 0.731 · 1,174 words</text>
+</svg>
