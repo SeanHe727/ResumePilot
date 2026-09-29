@@ -18,6 +18,9 @@ const ARMS: Record<string, { model: string; instructions?: string }> = {
   E: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-cyber-resume-reviewer.md', 'utf8') },
   F: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-resumeskills-tech-optimizer.md', 'utf8') },
   G: { model: 'gpt-6-luna', instructions: readFileSync('bench/planted-defects/skill-llm-intern.md', 'utf8') },
+  // The previous generation, plain, to tell a version effect from a field effect.
+  H: { model: 'gpt-5.6-luna' },
+  I: { model: 'gpt-5.6-sol' },
 };
 const cfg = ARMS[arm!]!;
 const client = new OpenAI();

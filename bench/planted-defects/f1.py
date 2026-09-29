@@ -135,7 +135,7 @@ rows = {}
 for test in sys.argv[1:]:
     d = TESTS / test
     key = json.loads((d / 'key.json').read_text())
-    for arm in 'ABCDEFG':
+    for arm in 'ABCDEFGHI':
         p = d / os.environ.get('OUT', 'out') / f"{arm}.claims{os.environ.get('CLAIMS', '')}.json"
         if not p.exists(): continue
         c = json.loads(p.read_text()); items, lines = c['items'], c['lines']
