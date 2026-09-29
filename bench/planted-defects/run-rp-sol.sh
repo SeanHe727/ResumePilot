@@ -8,7 +8,7 @@ set -a; . ./.env >/dev/null 2>&1; set +a
 export RESUMEPILOT_MODEL_PRIMARY=gpt-6-sol RESUMEPILOT_MODEL_SECONDARY=gpt-6-sol RESUMEPILOT_MODEL_CHEAP=gpt-6-sol
 export TESTS=tests-final
 P=bench/planted-defects
-T=(b1-ce b1-pm b1-quant b1-ux b1-ops b1-da b1-fe b1-clin b1-fin b1-emb)
+T=(${=TESTS_LIST:-b1-ce b1-pm b1-quant b1-ux b1-ops b1-da b1-fe b1-clin b1-fin b1-emb})
 a_done() { grep -q "Wrote the full review to" $1/A.log 2>/dev/null }
 for t in $T; do
   d=$P/$TESTS/$t/sol1; mkdir -p $d
@@ -28,4 +28,4 @@ for t in $T; do
   fi
 done
 wait
-OUT=sol1 CLAIMS=.sol F1_OUT=f1.rp-sol.json python3 $P/f1.py $T
+OUT=sol1 CLAIMS=.sol F1_OUT=f1.${TAG:-rp-sol}.json python3 $P/f1.py $T
