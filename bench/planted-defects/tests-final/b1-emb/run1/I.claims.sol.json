@@ -1,0 +1,473 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not in reverse chronological order; Voltline should appear before Clearwater Sensors.",
+      "because": "Voltline is the more recent position."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Date formatting is inconsistent across the résumé.",
+      "because": "The review recommends abbreviated months and en dashes throughout."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Bullets should be ordered by relevance and impact rather than chronology.",
+      "because": "The strongest, most role-relevant bullets should come first."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Formula Student project may not need three bullets.",
+      "because": "You now have professional experience, so it should earn the space through distinct leadership, automotive, CAN, or safety experience."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The portfolio URL does not clearly identify what kind of site it is.",
+      "because": "The domain does not make it obvious whether it is GitHub, a code portfolio, or a personal site."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm that the linked page immediately shows relevant embedded and hardware work.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Consider adding a city or region.",
+      "because": "Location may matter for the roles you are targeting."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Ensure the portfolio link is clickable PDF text rather than only an icon.",
+      "because": "That supports ATS compatibility."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Use an en dash instead of a hyphen in the date range.",
+      "because": "Date-range formatting should be consistent."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Standardize this role’s date separator.",
+      "because": "It should match the rest of the résumé."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify whether 20,000 units was monthly production volume or line capacity.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Indicate the technical scope of the test automation.",
+      "because": "The line shows impact but not enough of the engineering method."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Avoid manually breaking “25 seconds” across lines in the source document.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify your role in validating the reflow-profile change if you did more than identify the cause.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Check or soften the claim that the intervention cut returns.",
+      "because": "Other changes may have contributed to the reduction."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify what the calibration procedure included.",
+      "because": "Test limits, reference equipment, compensation, or operator steps would make the technical contribution clearer."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify what the “15 to 2” figures count.",
+      "because": "They could refer to customer complaints, internal incidents, or returned units."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Verify that the before-and-after periods were comparable.",
+      "because": "Otherwise the metric may look overstated."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Add relevant technical elements of the fixture if they support the target job.",
+      "because": "Switching, instrumentation, control software, or electrical protection could show its engineering scope."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Move the Voltline role above Clearwater Sensors.",
+      "because": "Voltline is the more recent position."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Use the same date formatting as in every other section.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Define what “update speed” means.",
+      "because": "It could mean transfer time, total installation time, or completion rate under unreliable connectivity."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Add baseline and final update values if available.",
+      "because": "A percentage alone is less concrete."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify which parts of the update work you designed or implemented.",
+      "because": "The line does not distinguish protocol design, compression, checkpointing, and integration of existing components."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Separate the effects of compression and resumed downloads if measured differently.",
+      "because": "Resuming interrupted downloads may improve reliability more than raw speed."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add an engineering or quality outcome for the test rig.",
+      "because": "Reduced manual testing, caught regressions, increased coverage, or release gating would show its value."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify whether you created the physical rig, test software, CI integration, or all three.",
+      "because": "“Wrote a rig” is imprecise when a rig usually includes hardware and software."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Indicate execution time or frequency if it demonstrates scale.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The crash logger is incorrectly said to have “found” root causes.",
+      "because": "The logger enabled diagnosis; it did not itself find causes."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Specify what triggered capture and preserved data through a crash or reset if relevant.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify whether the five failures had one root cause or five separate issues.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Sampling a 5 kHz component at 8 kHz cannot capture it without aliasing.",
+      "because": "The sample rate is below the 10 kHz Nyquist minimum."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Verify what the stated frequency and sample rate actually represent.",
+      "because": "The frequency might be below 4 kHz, the sample rate higher, the sampling intentional, or “5 kHz” a different quantity."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Include anti-alias filtering if it was part of the real design.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Declaring the shared counter volatile does not fix a race condition.",
+      "because": "Volatile does not provide atomicity, mutual exclusion, or synchronization."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Describe stale or optimized-away reads instead if that was the actual defect.",
+      "because": "That would not be the race condition claimed."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "State the actual synchronization mechanism if it was a genuine race.",
+      "because": "Atomic access, interrupt masking, a critical section, or safe data transfer would address it."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Verify whether the counter width could be accessed atomically on the target MCU.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Move the motor-controller rewrite near the top of the Voltline role.",
+      "because": "It is the strongest and most relevant accomplishment there."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify the scope of “rewrote.”",
+      "because": "It could cover architecture, scheduler, control loop, drivers, communications, or all of these."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "State how jitter was measured if the method was rigorous.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Define the period over which the 60% fault reduction was observed.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Add other central technologies if genuinely important.",
+      "because": "The radio or power architecture could strengthen the project description."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Ensure the linked project has schematics, firmware, documentation, and reproducible build instructions.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Use date punctuation consistent with the rest of the résumé.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Replace the marketing statement with what you built and the technical problem it solves.",
+      "because": "Its unsupported phrases contain no verifiable engineering information."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Use the line to show concrete design or validation details.",
+      "because": "System architecture, sensor accuracy, battery-life targets, environmental validation, or communications design would be more informative."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Add the conditions and method used to measure average current.",
+      "because": "Supply voltage, sampling interval, reporting interval, and measurement method give the figures context."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Translate the reduction into expected battery life if validated.",
+      "because": "That makes the system-level benefit easier to understand."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether 0.9 mA is a long-term average over a representative duty cycle.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify whether the school built its stations without your direct assistance.",
+      "because": "That would better establish reproducibility."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Include repository adoption evidence if available.",
+      "because": "Releases, contributors, or documented deployments could substantiate adoption without weak vanity metrics."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify whether you led all 12 members or were one lead on a 12-person team.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Add the hardware platform or bus technology if relevant.",
+      "because": "It could strengthen the project."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "A robot fleet is misplaced in the Formula Student electric-car project.",
+      "because": "It does not match the project context."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The robot-fleet work duplicates the Voltline experience.",
+      "because": "It appears copied from that role."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Replace the line with a genuine Formula Student responsibility.",
+      "because": "It should show leadership or a vehicle-electronics contribution."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Worked on” is too vague.",
+      "because": "It does not establish ownership or outcome."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Change the passive voice.",
+      "because": "Your personal contribution and level of ownership should be clear."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Specify what the dashboard firmware did and how interoperability was tested.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add a measurable result if available.",
+      "because": "Reliability, latency, test coverage, or successful race operation would show the outcome."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Use “CAN” or “CAN bus” consistently rather than “CAN-bus.”",
+      "because": "The hyphen is usually unnecessary."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify when testing occurred.",
+      "because": "It may have been before every race, every event, or every firmware release."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The robot-fleet accomplishment is duplicated and misplaced under Formula Student.",
+      "because": "It belongs under Voltline and conflicts with the electric-car context."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The repeated metrics are less precise than the Voltline versions.",
+      "because": "“About 300,” “eightfold,” and “more than half” replace the specific figures there."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Tools” mixes languages, a microcontroller family, and lab equipment.",
+      "because": "They belong in accurate, separate categories."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Consider adding relevant embedded development and test tools you have used.",
+      "because": "Version control, debuggers, build systems, RTOS experience, logic analyzers, and interfaces are commonly screened for embedded roles."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Be more specific about substantial STM32 experience.",
+      "because": "Peripherals, toolchains, or MCU families would convey its scope."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Methods” groups a domain, a protocol, and engineering practices together.",
+      "because": "Firmware, CAN, hardware-in-the-loop testing, and low-power design are not the same kind of skill."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Add other supported engineering methods if relevant.",
+      "because": "Unit testing, integration testing, CI, debugging, control systems, or signal processing could strengthen the skills section."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Avoid broad concepts already obvious from the bullets unless useful as ATS keywords.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3830,
+    "input_tokens_details": {
+      "cache_write_tokens": 3827,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3125,
+    "output_tokens_details": {
+      "reasoning_tokens": 443
+    },
+    "total_tokens": 6955
+  }
+}

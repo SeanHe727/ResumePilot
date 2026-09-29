@@ -1,0 +1,488 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Summit Climbing Gym | Front Desk Staff | Metro City, USA | Sep 2025 - Present",
+    "- Checked in about 150 climbers a shift and sold day passes and memberships.",
+    "- Ran the weekend rental desk and logged gear inspections for the manager.",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Reduced data-entry errors by 70% by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Built the enrollment tracker the three sites reviewed each week, flagging sites more than 10% behind target.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Established that the program was equivalent to usual care because the superiority test on readmission was not significant (p = 0.41).",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Jul 2021 - Aug 2022",
+    "- Screened 2,300 medical records for a diabetes cohort study, confirming eligibility for 410 patients against the protocol criteria.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that follow-up within 7 days was linked to lower readmission: 8.2% against 11.9% without it, after adjusting for age and insurance.",
+    "- Presented the analysis at the state public-health conference poster session.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Ran a randomized discharge study of more than 600 heart-failure patients that completed enrollment months ahead of schedule.",
+    "SKILLS",
+    "Tools: R, REDCap, SAS",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the LinkedIn URL clickable in the submitted PDF.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm that LinkedIn content, dates, and job titles match the résumé.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Add a bachelor’s degree if you have one.",
+      "because": "The education section currently shows only graduate education."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Confirm that “M.P.H. in Biostatistics” is the official degree title.",
+      "because": "A concentration should not be represented as the named degree."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Consider adding relevant academic distinctions if they are selective and useful.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Give the Summit role less space than the research roles.",
+      "because": "The target positions are technical."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Use present tense if checking in climbers and selling passes is ongoing.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify whether 150 climbers is an average, typical, or peak shift volume.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Add a substantiated service, revenue, accuracy, or efficiency result if available.",
+      "because": "Volume alone shows workload, not performance."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Use present tense if the rental-desk responsibility is ongoing.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify the rental operation’s scale or inspection volume if available.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Explain the significance of logging inspections.",
+      "because": "The bullet currently ends with a routine task."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify the comparison period, record count, or error-rate denominator.",
+      "because": "That would make the 70% reduction auditable."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether you designed, implemented, or proposed the checks.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Avoid splitting “primary outcome” across lines in the final PDF.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "The stated method is not a valid estimate of median survival.",
+      "because": "It averages follow-up time among patients who died and excludes censored patients."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Name the tracker’s platform or tool if technically relevant.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Add the operational result of flagging sites if known.",
+      "because": "The review asks whether flagging prompted corrective action or improved enrollment."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Explain who defined the 10% threshold.",
+      "because": "It is unclear whether it was a protocol, management, or personal monitoring rule."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Do not say the committee reviews “passed.”",
+      "because": "Data monitoring committees generally review evidence and issue recommendations rather than pass or fail reports."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "State the actual committee outcome accurately.",
+      "because": "The review asks whether there were safety concerns, pauses, amendments, or recommendations."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify whether you created the analyses, assembled the report, presented it, or did all three.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Use “no protocol change” only if it was an official committee outcome.",
+      "because": "It should not merely describe an absence of action."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "A nonsignificant superiority test does not establish equivalence.",
+      "because": "Equivalence requires a prespecified margin and an appropriate confidence-interval-based analysis."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "If the trial was designed for superiority, report the result neutrally with an effect estimate and confidence interval.",
+      "because": "The p-value alone is insufficient."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Move trial coordination to the first bullet under Meridian.",
+      "because": "It is the strongest and most relevant accomplishment in that role."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify your level of ownership.",
+      "because": "Readers need to distinguish coordination from overall study leadership."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Explain your contribution to early enrollment or high follow-up if possible.",
+      "because": "The outcomes are presented without a mechanism."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Check that “Research Assistant” reflects the responsibility shown in the bullets.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Add the screening or abstraction system if technically relevant.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether you independently adjudicated eligibility or escalated uncertain cases.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Soften the claim that the reminders cut no-shows unless the evaluation supports causation.",
+      "because": "The review says the intervention needs a design that supports a causal conclusion."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify your role in turning the interviews into the reminder intervention.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Provide the evaluation period, patient count, or comparison method for the 18%-to-11% reduction.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Identify whether the percentages are clinic-wide, study-participant, or adjusted rates.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Specify which data-dictionary elements you defined, if accurate.",
+      "because": "Variable names, formats, coding rules, derivations, and validation requirements would clarify the work."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Indicate whether later studies reused the dictionary completely or partially if possible.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Split the technical accomplishment from the administrative duties or remove the administrative list.",
+      "because": "The sentence is too long and combines unrelated work, burying the technical accomplishment."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify what the 1,200 mismatched identifiers count.",
+      "because": "They could be records, rows, patients, or discrepancies."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Explain which technical process resolved the mismatches.",
+      "because": "The grammar implies that scheduling, ordering supplies, taking minutes, and covering the front desk contributed."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify what work remains ongoing in the project.",
+      "because": "It is marked “Present” despite already producing a conference presentation."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Add the dataset source, sample size, and analytical design somewhere in the project.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Include relevant methods or packages if you can discuss them in an interview.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Delete the generic “cutting-edge analytics” bullet and use the space for substantive detail.",
+      "because": "Its promotional terms have no specific method, scope, result, or evidence and reduce credibility."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether 8.2% and 11.9% are raw rates or model-adjusted estimates.",
+      "because": "The sentence makes that ambiguous."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Name the regression or statistical model used.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Add the sample size, effect estimate, and confidence interval.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Avoid implying that follow-up caused lower readmission.",
+      "because": "The analysis appears observational."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Explain the choice of age and insurance and whether other confounders were considered.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Confirm that the analysis handled repeat admissions or clustering if applicable.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add the official conference name, location or sponsor, and presentation date if space allows.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Say whether the poster was peer-reviewed or competitively accepted if applicable.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Consider a separate conference-presentations section if there is more than one presentation.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify your individual responsibilities on the survey team.",
+      "because": "Otherwise the work reads as a team accomplishment with uncertain ownership."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Identify the analysis tool and method if you analyzed the survey data.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify your personal contribution to survey design and collection.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "State the sampling or recruitment approach if presenting the estimate as representative.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Qualify the “estimate” of uninsured residents if the sample was unweighted or unadjusted convenience sampling.",
+      "because": "Such a sample may not support a representative neighborhood estimate."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Replace the passive construction and specify your role in translation or piloting.",
+      "because": "Your contribution is unclear."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Explain what changed after the 20-person pilot if there was a concrete improvement.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The randomized discharge-study bullet does not belong under Community Health Survey.",
+      "because": "It duplicates the Meridian trial and conflicts with the survey’s dates and subject matter."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "List only tools you can use independently and discuss in detail.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Demonstrate R and SAS in experience or project bullets.",
+      "because": "R appears only in a project heading, and SAS is not demonstrated at all."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Add specific technical strengths if they are genuine.",
+      "because": "The review suggests areas such as data cleaning, visualization, reproducible reporting, or database management."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Support each listed method with a project, course, or job accomplishment.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Demonstrate mixed-effects models or remove them.",
+      "because": "Their use is not shown anywhere on the résumé."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Name the types of regression you can perform and interpret.",
+      "because": "“Regression” is broad."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Distinguish trial operations from statistical trial methodology.",
+      "because": "Coordinating a randomized trial does not automatically demonstrate trial-design or analysis expertise."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date punctuation and en dashes for date ranges.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Lead each role with its strongest, most relevant accomplishment.",
+      "because": "The bullets should not simply follow task order."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep current-role bullets in present tense and completed-role bullets in past tense.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Prevent bullets from breaking awkwardly across lines where possible.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Give less space to routine duties and more to analytical methods, data systems, study design, and validated outcomes.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3550,
+    "input_tokens_details": {
+      "cache_write_tokens": 3547,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3340,
+    "output_tokens_details": {
+      "reasoning_tokens": 794
+    },
+    "total_tokens": 6890
+  }
+}

@@ -1,0 +1,573 @@
+{
+  "lines": [
+    "Avery Brooks",
+    "+1 (555) 010-3319 | avery.brooks@example.com | example.com/in/abrooks",
+    "Date of birth: 9 Jan 1998 | Nationality: Brazilian",
+    "EDUCATION",
+    "Eastmoor University | B.S. in Statistics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Riverside Cinema | Box Office Attendant | Metro City, USA | Aug 2025 - Present",
+    "- Sold tickets and concessions during evening shifts and balanced the cash drawer at close.",
+    "- Trained 3 new attendants on the ticketing system and the refund policy.",
+    "Brightcart Retail | Data Analyst | Metro City, USA | Aug 2022 - Jun 2025",
+    "- Built the weekly retention dashboard for 2.4M customers that marketing used to retarget lapsed buyers, lifting 90-day repeat purchase from 22% to 27%.",
+    "- Cut the monthly revenue report from 3 days of spreadsheet work to 2 hours by moving it to scheduled SQL queries and a shared dashboard.",
+    "- Found customers with no orders by left-joining the orders table to the customers table and counting rows with a null customer name.",
+    "- Joining 40 source tables, deduplicating customer records across two loyalty systems and rebuilding the attribution logic in dbt-style SQL models, raised the share of orders tied to a campaign from 58% to 81%.",
+    "- Presented the quarterly customer review to the leadership team, and two of its three recommendations were funded in the next budget.",
+    "- Trained 20 merchandisers to answer their own questions with the self-serve dashboards, halving ad hoc data requests.",
+    "Pinecrest Insurance | Junior Analyst | Metro City, USA | Jul 2020 - Jul 2022",
+    "- Ran the checkout A/B test until significance by checking the p-value every day and stopping on the first day it fell below 0.05.",
+    "- Analyzed 18 months of call-center data; my findings moved two agents to the evening peak and cut average hold time from 9 to 5 minutes.",
+    "- Writes the team's SQL style guide and review checklist, which cut query errors found in review by half.",
+    "- Automated the monthly fraud-flag extract while also maintaining the team calendar, answering ad hoc questions from sales, updating onboarding documents and covering the help desk on Fridays, which saved the fraud team 10 hours a month.",
+    "PROJECTS",
+    "City Bike-Share Demand Study | Independent Project | Python, SQL | Jan 2025 - Present",
+    "- Modeled hourly bike-share demand for 120 stations from 2 years of public trip data, forecasting next-day demand within 12% mean absolute error.",
+    "- Cut empty-station hours from 300 to 200 a week, a 50% reduction, in a replay of last summer's rebalancing.",
+    "- Raised forecast hit rate by 15% across 120 stations, from 60% to 75%, by adding weather and event features.",
+    "Food Pantry Visit Analysis | Volunteer, Team of 3 | Excel, SQL | Mar 2023 - Aug 2023",
+    "- Mapped 14 months of pantry visits by hour and day, so the pantry moved one volunteer shift and cut the Saturday line from 50 to 20 minutes.",
+    "- Cleaned 9,000 handwritten visit logs into a single table and matched repeat visitors, giving the pantry its first count of unique households.",
+    "- Wrote a one-page guide the pantry coordinator used to update the visit table each month after the project ended.",
+    "SKILLS",
+    "Tools: SQL, Python, Excel",
+    "Methods: dashboards, forecasting, metric design, data-quality checks"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The professional profile URL is ambiguous and should be labeled clearly if it is a LinkedIn profile.",
+      "because": "A complete, professional link is easier to identify."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Consider adding a city and state if location is relevant to the role.",
+      "because": "Location can help with local positions."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth.",
+      "because": "It is not normally needed for U.S. hiring and unnecessarily discloses personal data."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove nationality unless an employer specifically requests it.",
+      "because": "It is generally unnecessary and can create privacy and discrimination concerns; work authorization should be addressed separately."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Use an en dash rather than a hyphen in the date range.",
+      "because": "Date-range formatting should be consistent."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Check the institution’s official wording for the degree and use it consistently.",
+      "because": "The degree may officially be styled “Bachelor of Science” rather than “B.S.”"
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider adding relevant coursework, honors, GPA, or statistical technologies only if they strengthen the application.",
+      "because": "With this experience level, those details are optional."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Verify that the cinema position is current before listing “Present.”",
+      "because": "“Present” would be misleading if the position has ended."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep the less-relevant cinema role concise unless it shows transferable skills or explains current employment.",
+      "because": "It is less relevant to data analyst applications."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add the work’s volume, accuracy, frequency, or level of responsibility.",
+      "because": "The bullet describes duties without establishing their scope or quality."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Omit the evening-shift detail unless the schedule or setting is relevant.",
+      "because": "That detail is not important on its own."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Consider whether this customer-facing duty merits space on an analytics résumé.",
+      "because": "It is a low-priority bullet unless used to show employment continuity."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Add context about the training process or its result.",
+      "because": "Faster independent operation or fewer errors would show its effect."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Verify the number trained and the extent of your responsibility.",
+      "because": "The training should be meaningfully yours rather than informal peer assistance."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Give the Brightcart experience the most space.",
+      "because": "The review calls it the strongest section."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify whether the dashboard or a campaign informed by it produced the repeat-purchase increase.",
+      "because": "The analysis-to-action link is not clear."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Give the increase’s time period and, if available, its comparison group or measurement method.",
+      "because": "Those details would make the result more credible."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Describe the increase as percentage points or relative percent change, as appropriate.",
+      "because": "The current wording can be interpreted either way."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Define “lapsed buyers” if the definition mattered to the analysis.",
+      "because": "The audience may not know which customers qualified."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Verify that 2.4M customers was the dashboard’s actual population.",
+      "because": "It should not merely be the size of the entire company database."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether the time savings occurred each reporting cycle and whether manual review remained.",
+      "because": "“Scheduled” queries do not establish that the process was fully automated."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Mention recurring adoption by a team if the dashboard became its source of truth.",
+      "because": "That would further establish its value."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The stated join direction does not identify customers with no orders.",
+      "because": "A left join would normally start with customers to retain customers without matching orders."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Counting null customer names is technically incorrect for the stated approach.",
+      "because": "The missing value would normally be an order-side identifier, while the retained customer name stays populated."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Specify the table on the left and the field used to identify missing orders.",
+      "because": "The SQL logic is unclear."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "State the business use or result of finding customers with no orders.",
+      "because": "The finding is an analysis step, not yet an accomplishment."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Do not make a basic SQL operation the main achievement without a meaningful outcome.",
+      "because": "Its value depends on the decision or improvement it supported."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Fix the opening phrase and sentence structure.",
+      "because": "The participial phrase leaves the subject dangling or unclear."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Use past tense consistently with the completed Brightcart role.",
+      "because": "The bullet’s grammar does not align cleanly with the rest of the role."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify whether you actually used dbt.",
+      "because": "“dbt-style” can sound imprecise or inflated if you only followed similar conventions."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Explain how the 58%-to-81% attribution increase was validated.",
+      "because": "Improved tracking, changed rules, and genuinely more attributable orders are different outcomes."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Give the time period and business significance of the attribution improvement.",
+      "because": "Those details would make the result clearer."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Make the technical scope understandable to nontechnical reviewers.",
+      "because": "The 40 tables and two loyalty systems make the bullet dense."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify whether you created the analysis, presented it, or both.",
+      "because": "“Presented” does not establish your analytical contribution."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Add later business results if they exist.",
+      "because": "Funding shows leadership adoption but not eventual impact."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Check whether “customer review” correctly names the deliverable.",
+      "because": "It may have been a review, analysis, or presentation."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Provide the baseline or measurement period for halving requests.",
+      "because": "Readers need to know the interval over which the reduction was measured."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether you built the dashboards or only used them for training.",
+      "because": "The current bullet does not distinguish those contributions."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make “answer their own questions” more precise.",
+      "because": "The phrase is somewhat informal and does not specify the capability gained."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The stated A/B-test stopping practice is flawed.",
+      "because": "Repeatedly checking the p-value and stopping at the first significant result inflates the false-positive rate."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Specify a valid planned sample size, duration, stopping rule, or sequential-testing method if one was used.",
+      "because": "The bullet otherwise signals optional stopping or p-hacking."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Do not present this procedure as a methodological strength or attach a business result unless the test was sound.",
+      "because": "It may raise concerns for analytics and experimentation roles."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify whether moving the agents was your recommendation and whether hold time was measured afterward.",
+      "because": "The analysis-to-action link and result timing are unclear."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Include the hold-time evaluation period if available.",
+      "because": "It would put the reported reduction in context."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Separate the analysis’s contribution from the staffing change’s effect.",
+      "because": "The operational change likely produced the reduction in hold time."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Change “Writes” to past tense.",
+      "because": "The Pinecrest role has ended."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify whether you wrote the materials independently or contributed to them.",
+      "because": "The extent of your ownership is unclear."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Give the baseline and period for the claimed halving of errors.",
+      "because": "The size of the improvement needs measurement context."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Specify the type of query errors reduced.",
+      "because": "Syntax, logic, and performance issues differ in relevance and significance."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Separate the automation achievement from the administrative duties.",
+      "because": "The long list buries the strongest result."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Remove support duties that do not demonstrate a relevant skill.",
+      "because": "Calendar, onboarding, and help-desk work are not especially relevant to most analytics applications."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Specify which activity saved the fraud team 10 hours a month.",
+      "because": "The sentence could imply that all the listed duties produced the savings."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Describe the automation’s scope, frequency, or error reduction if available.",
+      "because": "Those details would make the achievement clearer."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Verify that the bike-share project is still active.",
+      "because": "A completed project should have a completion date rather than “Present.”"
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Add important libraries, modeling or visualization tools, or data sources if relevant.",
+      "because": "The project header currently names only Python and SQL."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "Correct the “12% mean absolute error” metric terminology.",
+      "because": "Mean absolute error is normally expressed in original units, not as a percentage."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Identify the percentage-based metric if that is what was measured.",
+      "because": "It may be mean absolute percentage error, normalized MAE, or another measure."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether next-day demand means next-day hourly predictions or a daily total.",
+      "because": "The forecast target is ambiguous."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "State the out-of-sample validation approach.",
+      "because": "Without it, the accuracy result may sound like in-sample performance."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The stated 50% reduction is mathematically incorrect.",
+      "because": "A drop from 300 to 200 is 100 hours, or approximately 33.3%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Make the simulated nature of the reduction explicit rather than simply saying “cut.”",
+      "because": "A replay shows potential impact, not confirmed operational impact."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Explain the replay’s operational assumptions.",
+      "because": "Travel time, vehicle and station capacity, and available staff may affect the result."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "Describe the rise from 60% to 75% as 15 percentage points, not a 15% increase.",
+      "because": "Its relative increase is 25%."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Define “forecast hit rate” and its tolerance.",
+      "because": "Readers need to know what counted as a hit."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Say whether both forecasts used the same holdout data and whether features were available at forecast time.",
+      "because": "Those details help rule out data leakage."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain whether the improvement was widespread or concentrated at some stations.",
+      "because": "The aggregate result may conceal variation."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Distinguish this feature-improvement result from the first forecasting bullet.",
+      "because": "The two bullets may sound like repeated versions of the same achievement."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Make your individual contribution to the food-pantry project clear.",
+      "because": "The header says it was completed by a team of three."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Avoid identifying details if the pantry data involved sensitive personal information.",
+      "because": "Privacy protection matters for this project."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify that the analysis informed the staffing change and that wait time was measured afterward.",
+      "because": "The current wording blurs the analysis-to-action link."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Include the post-change measurement period.",
+      "because": "It would put the reduction in context."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Avoid attributing the entire wait-time reduction to the analysis if other changes occurred.",
+      "because": "Other simultaneous changes could have contributed."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Describe the repeat-visitor matching method at a high level.",
+      "because": "Readers cannot tell whether it was manual, rule-based, or probabilistic."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Clarify whether unique households were observed directly or inferred.",
+      "because": "The available fields may not establish household identity."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Note material limitations such as incomplete records or uncertain matches.",
+      "because": "The count may depend on matching assumptions."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Clarify how you know the coordinator used the guide after the project.",
+      "because": "Confirmed use or observed updates would support that claim."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Mention independent maintenance if the guide enabled it.",
+      "because": "That would show a stronger handoff outcome."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Add specific databases, visualization platforms, libraries, version-control tools, or modeling tools you know well.",
+      "because": "The tools list is underspecified for a data analyst résumé."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Name the warehouse used for SQL or the libraries used for Python, if applicable.",
+      "because": "Specifics help recruiters assess fit."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Make the broad methods more specific.",
+      "because": "Some may be interpreted as vague."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Provide stronger evidence for “metric design” elsewhere on the résumé.",
+      "because": "It is less clearly demonstrated than forecasting, dashboards, or data quality."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Consider separating analytical methods from business capabilities if there are enough skills.",
+      "because": "Distinct categories could make the list clearer."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make date formatting and dash characters consistent throughout.",
+      "because": "The entries use inconsistent date-range styling."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use present tense for current roles and past tense for completed roles and projects.",
+      "because": "Verb tense is inconsistent."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Prioritize outcomes over routine duties, especially in the cinema and insurance sections.",
+      "because": "Duties are less persuasive than results for the target role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Validate quantified results and make their measurement methods clear.",
+      "because": "Several metrics may otherwise appear inflated."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Emphasize the Brightcart experience, Pinecrest staffing analysis, and sound bike-share work.",
+      "because": "The review identifies them as the strongest content for a data analyst target."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4644,
+    "input_tokens_details": {
+      "cache_write_tokens": 4641,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3820,
+    "output_tokens_details": {
+      "reasoning_tokens": 402
+    },
+    "total_tokens": 8464
+  }
+}
