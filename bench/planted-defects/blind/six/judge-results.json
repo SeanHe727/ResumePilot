@@ -1,0 +1,382 @@
+[
+  {
+    "case": "case-1",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 2": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 3": {
+        "actionability": 5,
+        "readability": 7
+      },
+      "Reviewer 4": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 5": {
+        "actionability": 6,
+        "readability": 6
+      },
+      "Reviewer 6": {
+        "actionability": 7,
+        "readability": 7
+      }
+    },
+    "ranking": [
+      "Reviewer 1",
+      "Reviewer 4",
+      "Reviewer 2",
+      "Reviewer 6",
+      "Reviewer 3",
+      "Reviewer 5"
+    ],
+    "why": "Reviewer 1 names the exact words to change with a reason and a fix for each, and tags errors so they stand out; Reviewer 4 is equally correct and direct but has less explanation. Reviewer 6 plays down the single-rollout GRPO error as 'not a conclusion that the method is incorrect', Reviewer 3 turns many points into interview prep instead of résumé edits, and Reviewer 5 makes moving Skills to the top its first priority and stays vague on the batching and 12% problems."
+  },
+  {
+    "case": "case-2",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 8,
+        "readability": 7
+      },
+      "Reviewer 2": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 3": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 4": {
+        "actionability": 7,
+        "readability": 8
+      },
+      "Reviewer 5": {
+        "actionability": 6,
+        "readability": 7
+      },
+      "Reviewer 6": {
+        "actionability": 7,
+        "readability": 8
+      }
+    },
+    "ranking": [
+      "Reviewer 3",
+      "Reviewer 1",
+      "Reviewer 6",
+      "Reviewer 4",
+      "Reviewer 2",
+      "Reviewer 5"
+    ],
+    "why": "Reviewer 3 leads with the three credibility problems and gives short, correct fixes for each line, including the A/B-testing skill the evidence does not support. Reviewer 1 is the most precise (for example, 'prepares' to 'prepared', and the date conflict behind the duplicated result), but marks moving bullets around as 'Important', which buries the real problems. Reviewer 6 is clear but misattributes the repeated 'Launched'; Reviewer 5's first priority mixes checkout conversion into the onboarding claims, which muddies the fix."
+  },
+  {
+    "case": "case-3",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 7,
+        "readability": 8
+      },
+      "Reviewer 2": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 3": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 4": {
+        "actionability": 6,
+        "readability": 7
+      },
+      "Reviewer 5": {
+        "actionability": 6,
+        "readability": 6
+      },
+      "Reviewer 6": {
+        "actionability": 7,
+        "readability": 8
+      }
+    },
+    "ranking": [
+      "Reviewer 2",
+      "Reviewer 6",
+      "Reviewer 1",
+      "Reviewer 3",
+      "Reviewer 5",
+      "Reviewer 4"
+    ],
+    "why": "Reviewer 2 is short and correct: √252, the nested Diebold–Mariano test, 25% and six percentage points, the 'Joining' construction, and Kafka, each with a clear instruction. Reviewer 5 gives exact word-level edits, but one option is to delete 'by multiplying it by 252', which hides the Sharpe error rather than fixing it, and it tags trivial reordering as 'Important'. Reviewer 4 treats the wrong 33% figure as a real result that only needs its metric distinguished, and adds low-value layout advice such as removing locations and moving Skills up."
+  },
+  {
+    "case": "case-4",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 2": {
+        "actionability": 5,
+        "readability": 6
+      },
+      "Reviewer 3": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 4": {
+        "actionability": 7,
+        "readability": 8
+      },
+      "Reviewer 5": {
+        "actionability": 6,
+        "readability": 7
+      },
+      "Reviewer 6": {
+        "actionability": 7,
+        "readability": 6
+      }
+    },
+    "ranking": [
+      "Reviewer 3",
+      "Reviewer 1",
+      "Reviewer 4",
+      "Reviewer 6",
+      "Reviewer 5",
+      "Reviewer 2"
+    ],
+    "why": "Reviewer 3 is short, correct and prioritised (WCAG 4.5:1, card sort vs findability, remove the duplicated bullet, unsupported A/B testing, the gap after June 2025), and each point is a concrete edit; Reviewer 1 is equally sound but longer. Reviewer 2 tells the candidate to swap '3:1' for '4.5:1' as if that were a wording fix, which makes the claim untrue unless it was achieved, and suggests changing 'new customers' to 'clinic patients' on what is a duplicated Pinegrove result. Reviewer 6's table repeats the WCAG row and is hard to work through, and Reviewer 5 leans on 'be ready to explain' instead of edits."
+  },
+  {
+    "case": "case-5",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 2": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 3": {
+        "actionability": 7,
+        "readability": 8
+      },
+      "Reviewer 4": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 5": {
+        "actionability": 6,
+        "readability": 5
+      },
+      "Reviewer 6": {
+        "actionability": 7,
+        "readability": 8
+      }
+    },
+    "ranking": [
+      "Reviewer 2",
+      "Reviewer 6",
+      "Reviewer 3",
+      "Reviewer 4",
+      "Reviewer 1",
+      "Reviewer 5"
+    ],
+    "why": "Reviewer 2 puts the three metric problems (MAPE scope, OEE above 100%, 120 to 90 miles being 25%) first, keeps every line short and specific, and alone notes that adding time windows as constraints cannot by itself produce the gain. Reviewers 6 and 3 are equally sound and well prioritised but wordier; Reviewer 1 is accurate but adds low-value advice such as moving Skills up and an unprompted software-engineering target. Reviewer 5 buries its fixes among 24 bare 'Polish' notes, repeats the route-distance point four times, and includes untagged, confusing text ('The finding identifies this as the strongest line')."
+  },
+  {
+    "case": "case-6",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 7,
+        "readability": 6
+      },
+      "Reviewer 2": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 3": {
+        "actionability": 7,
+        "readability": 8
+      },
+      "Reviewer 4": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 5": {
+        "actionability": 6,
+        "readability": 7
+      },
+      "Reviewer 6": {
+        "actionability": 8,
+        "readability": 8
+      }
+    },
+    "ranking": [
+      "Reviewer 6",
+      "Reviewer 4",
+      "Reviewer 3",
+      "Reviewer 2",
+      "Reviewer 1",
+      "Reviewer 5"
+    ],
+    "why": "Reviewer 6 leads with a numbered list of the real problems and gets the SQL right on both counts (join direction and the null-name test), with a clear keep, fix or delete for every line; Reviewer 4 is equally correct and even tighter. Reviewer 1 is precise but also asks the candidate to add outcomes to the flawed conversion-rate bullet, and leaves many bare 'Polish' notes. Reviewer 5 suggests testing a 'reliably populated customer identifier', which does not fix the no-orders query."
+  },
+  {
+    "case": "case-7",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 2": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 3": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 4": {
+        "actionability": 7,
+        "readability": 6
+      },
+      "Reviewer 5": {
+        "actionability": 7,
+        "readability": 8
+      },
+      "Reviewer 6": {
+        "actionability": 8,
+        "readability": 7
+      }
+    },
+    "ranking": [
+      "Reviewer 2",
+      "Reviewer 1",
+      "Reviewer 6",
+      "Reviewer 5",
+      "Reviewer 3",
+      "Reviewer 4"
+    ],
+    "why": "Reviewer 2 opens with the five credibility fixes (50% and percentage points, Vue vs React, WebP not shrinking JavaScript, lazy-loading the LCP hero, two tense problems), then gives short, correct line notes; Reviewer 1 is just as accurate and compact but has no priority list. Reviewer 6 adds a useful point about code-splitting versus total JavaScript, but labels section-order notes 'in priority order'. Reviewer 4 is precise but overweights minor items (the demo handoff is 'Important', the 'about 900' hedge is flagged) and its punctuation fix leaves the awkward gerund opening in place."
+  },
+  {
+    "case": "case-8",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 8,
+        "readability": 7
+      },
+      "Reviewer 2": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 3": {
+        "actionability": 6,
+        "readability": 6
+      },
+      "Reviewer 4": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 5": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 6": {
+        "actionability": 7,
+        "readability": 7
+      }
+    },
+    "ranking": [
+      "Reviewer 5",
+      "Reviewer 2",
+      "Reviewer 1",
+      "Reviewer 6",
+      "Reviewer 4",
+      "Reviewer 3"
+    ],
+    "why": "Reviewer 5 puts the survival and equivalence errors first, then gives each line a short keep, fix or delete with its reason, so it is the easiest to act on; Reviewer 2 is equally correct with a clear priority list but longer. Reviewer 1 is thorough and flags the unsupported SAS and mixed-effects skills, but its 'priority order' is really section order. Reviewer 3 offers to replace the median-survival claim with 'mean observed time to death among patients who died', which is still a biased statistic, and it spends 'Important' tags on moving bullets around."
+  },
+  {
+    "case": "case-9",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 2": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 3": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 4": {
+        "actionability": 7,
+        "readability": 6
+      },
+      "Reviewer 5": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 6": {
+        "actionability": 7,
+        "readability": 7
+      }
+    },
+    "ranking": [
+      "Reviewer 3",
+      "Reviewer 5",
+      "Reviewer 1",
+      "Reviewer 6",
+      "Reviewer 2",
+      "Reviewer 4"
+    ],
+    "why": "Reviewer 3 gives one short, correct instruction per line covering the hedge, FCFE vs WACC, 20%, 12 percentage points, the tense errors, the job order and the FP&A mismatch, with no filler; Reviewer 5 is nearly as tight and names its four biggest fixes up front. Reviewer 6 is well organised but wrongly says Education already sits after the work history, and Reviewer 2 opens by praising the untested 'forecast accuracy'. Reviewer 4 marks the capital-plan wording as an 'Error' and scatters its real fixes among many bare 'Polish' notes."
+  },
+  {
+    "case": "case-10",
+    "scores": {
+      "Reviewer 1": {
+        "actionability": 7,
+        "readability": 8
+      },
+      "Reviewer 2": {
+        "actionability": 8,
+        "readability": 7
+      },
+      "Reviewer 3": {
+        "actionability": 7,
+        "readability": 7
+      },
+      "Reviewer 4": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 5": {
+        "actionability": 8,
+        "readability": 8
+      },
+      "Reviewer 6": {
+        "actionability": 6,
+        "readability": 5
+      }
+    },
+    "ranking": [
+      "Reviewer 5",
+      "Reviewer 4",
+      "Reviewer 2",
+      "Reviewer 1",
+      "Reviewer 3",
+      "Reviewer 6"
+    ],
+    "why": "Reviewer 5 leads with the duplicated Formula Student/robot-fleet claims, the 8 kHz Nyquist error and the volatile race fix, explains each correctly, and gives clear per-line actions, including the unsupported C++; Reviewer 4 covers the same ground more tersely. Reviewer 1 is well organised but wrongly tells the candidate to keep Education 'below Experience, as you have it' when it sits above. Reviewer 6 spreads the Formula Student problem over four separate entries, leaves several problems untagged, and suggests keeping a bullet that says the counter was made volatile, which still shows the flawed fix."
+  }
+]
