@@ -117,6 +117,17 @@ export const MODEL_REGISTRY: Readonly<Record<string, ModelSpec>> = {
     reasoningEffort: true,
     responsesApi: true,
   },
+  'gpt-5.6-sol': {
+    id: 'gpt-5.6-sol',
+    provider: 'openai',
+    // Not confirmed against the price list: gpt-6-sol's rates, so the budget
+    // errs the same way as for the other sol entry.
+    pricing: { inputPerMTok: 2.0, outputPerMTok: 10.0, cachedInputPerMTok: 0.2 },
+    contextWindow: 400_000,
+    usesMaxCompletionTokens: true,
+    reasoningEffort: true,
+    responsesApi: true,
+  },
   'gpt-6-luna': {
     id: 'gpt-6-luna',
     provider: 'openai',
