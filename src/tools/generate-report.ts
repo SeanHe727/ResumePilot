@@ -1,3 +1,4 @@
+import { reportStepQuery } from './one-agent-steps.js';
 import { IMPROVEMENT_PLAN_PROMPT } from '../prompts/index.js';
 import { randomUUID } from 'node:crypto';
 
@@ -444,7 +445,7 @@ async function buildImprovementPlan(
       ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${roomWords(input)} words of room.`
       : `The resume runs ${length.wordCount} words over ${length.pageCount} pages. It is already long, so anything added has to displace something.`;
 
-  const ask = (followUp?: { previous: string; note: string }) => ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => reportStepQuery(ctx, {
     task: 'generate_report',
     systemPrompt: IMPROVEMENT_PLAN_PROMPT,
     messages: [

@@ -9,6 +9,7 @@ import type {
 } from '../domain.js';
 import { FULL_REPORT_PROMPT } from '../prompts/index.js';
 import type { ToolContext } from './types.js';
+import { reportStepQuery } from './one-agent-steps.js';
 import { parseJsonObject } from './verify.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 import { currentReadings } from './versions.js';
@@ -152,7 +153,7 @@ export async function writeFullReport(
     .map((entry) => `- ${entry.id}: ${withoutContactDetails(entry.headerLines.join(' | '))}`)
     .join('\n');
 
-  const ask = (followUp?: { previous: string; note: string }) => ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => reportStepQuery(ctx, {
     task: 'generate_report',
     systemPrompt: FULL_REPORT_PROMPT,
     messages: [
