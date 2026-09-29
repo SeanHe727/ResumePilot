@@ -248,3 +248,16 @@ export function estimateCostUsd(
     (usage.outputTokens * pricing.outputPerMTok) / 1_000_000
   );
 }
+
+/**
+ * Which single-agent ablation is on, if any. `RESUMEPILOT_SINGLE_AGENT`:
+ * unset for the product; `1` for one agent with the specialists' tools, nested
+ * research included; `flat` for one agent with no sub-agent of any kind.
+ */
+export type SingleAgentVariant = 'off' | 'merged' | 'flat';
+
+export function singleAgentVariant(env: NodeJS.ProcessEnv = process.env): SingleAgentVariant {
+  const raw = (env.RESUMEPILOT_SINGLE_AGENT ?? '').trim().toLowerCase();
+  if (raw === 'flat') return 'flat';
+  return /^(1|true|yes)$/.test(raw) ? 'merged' : 'off';
+}

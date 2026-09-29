@@ -38,7 +38,7 @@ This replaces each section's own Answer.
 - Coverage: one item in \`entries\` for every entry the user message lists,
   with all three per-entry readings.`;
 
-export const SINGLE_AGENT_PROMPT = [
+export const SINGLE_AGENT_PROMPT: string = [
   ARRANGEMENT,
   `# Reading 1: content (per entry)\n\n${CONTENT_PROMPT}`,
   `# Reading 2: claims (per entry)\n\n${CLAIMS_PROMPT}`,
@@ -51,3 +51,17 @@ export const SINGLE_AGENT_PROMPT = [
 
 /** The searching roles' triggers together, for when a search provider exists. */
 export const SINGLE_AGENT_SEARCH = [WEB_SEARCH_CORE, CONTENT_SEARCH_TRIGGERS, NARRATIVE_SEARCH_TRIGGERS].join('\n\n');
+
+/**
+ * The flat variant: the same agent with no sub-agent beneath it. The claims
+ * section names two tools that each run a model of their own; here the checks
+ * they describe are the agent's to do in its own context.
+ */
+const FLAT = `# Checking without helpers
+
+\`verify_claims\` and \`examine_technical_depth\`, named in Reading 2, are not
+available here. Do the checks they describe yourself: write each standalone
+question, answer it from what you know, and read the answer against the line
+the way Reading 2 says.`;
+
+export const FLAT_AGENT_PROMPT = `${SINGLE_AGENT_PROMPT}\n\n${FLAT}`;

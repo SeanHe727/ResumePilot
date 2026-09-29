@@ -15,7 +15,7 @@ import { buildClaimsMessage, buildEntryMessage, normaliseEntryDiagnosis } from '
 import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
 import { buildTimeline, renderTimeline } from '../document/timeline.js';
 import { SemaphorePool } from './pool.js';
-import { CLAIMS_AGENT, CONSISTENCY_AGENT, ROLES, SINGLE_AGENT } from './roles.js';
+import { CLAIMS_AGENT, CONSISTENCY_AGENT, FLAT_AGENT, ROLES, SINGLE_AGENT } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
 import type {
   AgentRunStat,
@@ -212,20 +212,21 @@ export class DefaultOrchestrator {
    * read by the same code, so everything after this point (the filter, the
    * report) sees the same shapes as on the multi-agent path.
    */
-  async reviewWhole(resume: ResumeDocument, briefing?: Briefing): Promise<WholeReview> {
+  async reviewWhole(resume: ResumeDocument, briefing?: Briefing, flat = false): Promise<WholeReview> {
+    const agent = flat ? FLAT_AGENT : SINGLE_AGENT;
     const entries = resume.sections.flatMap((section) => section.entries);
     const readable = entries.filter((entry) => entry.bullets.length > 0);
     const timeline = renderTimeline(buildTimeline(resume));
 
     const [result] = await this.parallel([
       {
-        agentConfig: SINGLE_AGENT,
+        agentConfig: agent,
         input: buildSingleAgentMessage(resume, readable),
         context: { ...(timeline ? { timeline } : {}), ...briefingContext(briefing) },
       },
     ]);
     const stat: AgentRunStat = {
-      name: SINGLE_AGENT.name,
+      name: agent.name,
       success: Boolean(result?.success),
       turns: result?.turns ?? 0,
       compactions: result?.compactions ?? 0,

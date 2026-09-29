@@ -216,7 +216,7 @@ export interface Orchestrator {
    * The single-agent ablation: every per-entry and whole-page reading from one
    * agent in one context. Optional, since only the default orchestrator has it.
    */
-  reviewWhole?(resume: ResumeDocument, briefing?: Briefing): Promise<WholeReview>;
+  reviewWhole?(resume: ResumeDocument, briefing?: Briefing, flat?: boolean): Promise<WholeReview>;
   parallel(tasks: SubAgentTask[]): Promise<SubAgentResult[]>;
 }
 

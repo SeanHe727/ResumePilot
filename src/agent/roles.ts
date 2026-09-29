@@ -14,6 +14,7 @@ import {
   WEB_SEARCH_CORE,
   SINGLE_AGENT_PROMPT,
   SINGLE_AGENT_SEARCH,
+  FLAT_AGENT_PROMPT,
 } from '../prompts/index.js';
 import type { SubAgentConfig } from './types.js';
 
@@ -223,6 +224,19 @@ export const SINGLE_AGENT: SubAgentConfig = {
   },
   // The answer carries every entry's three readings at once.
   maxTokens: 64_000,
+};
+
+/**
+ * The single agent with no layer beneath it: the claim check and the nested
+ * research, each of which runs a model of its own, are gone. Lookups that are
+ * not agents (the knowledge base, web search) stay.
+ */
+export const FLAT_AGENT: SubAgentConfig = {
+  ...SINGLE_AGENT,
+  name: 'Flat Reviewer',
+  description: 'Every reading in one context, with no sub-agent beneath it',
+  systemPrompt: FLAT_AGENT_PROMPT,
+  tools: ['query_knowledge_base'],
 };
 
 export const ROLES: Readonly<Record<string, SubAgentConfig>> = {

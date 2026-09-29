@@ -1,3 +1,4 @@
+import { singleAgentVariant } from '../config.js';
 import { MAIN_AGENT_PROMPT } from '../prompts/index.js';
 import type { CommandParser } from '../command/types.js';
 import { renderResume } from '../document/index.js';
@@ -103,7 +104,7 @@ export function coordinatorTools(env: NodeJS.ProcessEnv = process.env): string[]
 }
 
 export function singleAgentMode(env: NodeJS.ProcessEnv = process.env): boolean {
-  return /^(1|true|yes)$/i.test(env.RESUMEPILOT_SINGLE_AGENT ?? '');
+  return singleAgentVariant(env) !== 'off';
 }
 
 /**

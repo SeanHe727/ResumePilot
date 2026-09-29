@@ -10,6 +10,7 @@ import { analyzeFormat } from './analyze-format.js';
 import { renderResume } from '../document/index.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { entryTextHash, fileReading } from './versions.js';
+import { singleAgentVariant } from '../config.js';
 
 /**
  * One tool per specialist, and that is the dispatch mechanism.
@@ -488,12 +489,16 @@ export const reviewResumeTool: Tool<WithBriefing, unknown> = {
     if (!resume) return noResume();
 
     try {
-      const review = await ctx.orchestrator.reviewWhole(resume, briefingFrom(
+      const review = await ctx.orchestrator.reviewWhole(
+        resume,
+        briefingFrom(
           input,
           // Every fact: this reader reads every entry.
           ((ctx.session?.state as ResumeSessionState | undefined)?.suppliedFacts ?? []).map((f) => `"${f.fact}"`),
           pageRoom(ctx),
-        ));
+        ),
+        singleAgentVariant() === 'flat',
+      );
       const entries = resume.sections.flatMap((s) => s.entries);
       const readAt = new Date().toISOString();
 

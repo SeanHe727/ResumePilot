@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ResumeDocument, ResumeEntry } from '../../src/domain.js';
-import { DefaultOrchestrator, SINGLE_AGENT, SubAgentRuntime } from '../../src/agent/index.js';
+import { DefaultOrchestrator, FLAT_AGENT, SINGLE_AGENT, SubAgentRuntime } from '../../src/agent/index.js';
+import { singleAgentVariant } from '../../src/config.js';
 import { SUB_AGENT_CONTEXT } from '../../src/agent/sub-agent.js';
 import { coordinatorTools, singleAgentMode } from '../../src/agent/loop.js';
 import type { ParsedResponse, QueryEngine, QueryParams } from '../../src/query-engine/types.js';
@@ -126,5 +127,31 @@ describe('single-agent ablation', () => {
 
     expect(review.verdicts.find((v) => v.entryId === 'experience:0')?.substance).toBeNull();
     expect(orchestrator.failures.get('content:experience:0')).toMatch(/no content reading/);
+  });
+
+  it('reads the variant from the environment', () => {
+    expect(singleAgentVariant({})).toBe('off');
+    expect(singleAgentVariant({ RESUMEPILOT_SINGLE_AGENT: '1' })).toBe('merged');
+    expect(singleAgentVariant({ RESUMEPILOT_SINGLE_AGENT: 'flat' })).toBe('flat');
+    expect(coordinatorTools({ RESUMEPILOT_SINGLE_AGENT: 'flat' })).toContain('review_resume');
+  });
+
+  it('runs the flat variant with no sub-agent beneath it', async () => {
+    // Neither the claim check nor the nested research: each runs a model of its own.
+    expect(FLAT_AGENT.tools).not.toContain('verify_claims');
+    expect(FLAT_AGENT.tools).not.toContain('examine_technical_depth');
+    expect(FLAT_AGENT.systemPrompt.startsWith(SINGLE_AGENT.systemPrompt)).toBe(true);
+    const budget = FLAT_AGENT.context?.systemPromptBudget ?? SUB_AGENT_CONTEXT.systemPromptBudget;
+    expect(estimateTokens(`${FLAT_AGENT.systemPrompt}\n\n${FLAT_AGENT.optionalPrompt}`)).toBeLessThan(budget);
+
+    const { orchestrator, seen } = orchestratorReplying(text(JSON.stringify(ANSWER)));
+    const review = await orchestrator.reviewWhole(resume, undefined, true);
+
+    const offered = (seen[0]!.tools ?? []).map((t) => t.name);
+    expect(offered).not.toContain('verify_claims');
+    expect(offered).not.toContain('examine_technical_depth');
+    expect(seen[0]!.systemPrompt).toContain('Checking without helpers');
+    expect(review.stat.name).toBe('Flat Reviewer');
+    expect(review.verdicts.find((v) => v.entryId === 'experience:0')?.substance?.bullets).toHaveLength(2);
   });
 });
