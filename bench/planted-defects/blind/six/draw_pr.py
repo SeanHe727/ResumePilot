@@ -9,10 +9,15 @@ s = json.loads((HERE / 'pr-summary.json').read_text())
 names = {'A': 'ResumePilot (luna 6)', 'L': 'ResumePilot (luna 5.6)', 'S': 'ResumePilot (sol 6)', 'M': 'ResumePilot (sol 5.6)',
          'I': 'sol 5.6', 'H': 'luna 5.6', 'B': 'luna 6', 'C': 'sol 6', 'G': 'LLMInternSkill (luna 6)',
          'E': 'cyber-resume-reviewer (luna 6)', 'F': 'ResumeSkills (luna 6)'}
-col = {'A': '#2a78d6', 'L': '#2a78d6', 'S': '#4a3aa7', 'M': '#4a3aa7', 'C': '#eb6834', 'I': '#eb6834',
-       'B': '#1baf7a', 'H': '#1baf7a', 'G': '#eda100', 'E': '#e87ba4', 'F': '#008300'}
-hollow = {'H', 'I', 'L', 'M'}
-big = {'A', 'L', 'S', 'M'}
+# Colour says the model generation: GPT-5.6 in cool hues, GPT-6 in warm ones.
+# Line and fill say whose it is: ResumePilot solid and filled, everything
+# else dashed and hollow.
+col = {'L': '#2a78d6', 'M': '#4a3aa7', 'H': '#1baf7a', 'I': '#0f8a8a',
+       'A': '#e34948', 'S': '#eb6834', 'B': '#eda100', 'C': '#e87ba4',
+       'G': '#b5541f', 'E': '#a8324a', 'F': '#c98500'}
+ours = {'A', 'L', 'S', 'M'}
+hollow = set(names) - ours
+big = ours
 W, H = 1000, 680
 L, R, T, B = 80, 280, 60, 60
 x0, x1, y0, y1 = 0.55, 0.95, 0.85, 1.00
