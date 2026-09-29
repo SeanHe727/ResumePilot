@@ -1,0 +1,240 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.",
+    "- Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.",
+    "- Trained 12 product managers to run their own unmoderated tests with a shared script template, which doubled the number of tests run each quarter.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022",
+    "- Raised the patient app's Net Promoter Score from 6.1 to 8.4, calculated as the average 0-10 recommendation rating across 2,000 monthly survey responses.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Writes the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality.",
+      "because": "They are irrelevant personal details conventionally left off a résumé."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the more relevant UX research experience.",
+      "because": "With nearly six years of listed work, the degree is no longer the strongest introduction."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The page does not clarify your work situation since the last listed employment ended.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "A 3:1 body-text contrast threshold does not establish WCAG 2.1 AA compliance.",
+      "because": "Ordinary-sized text generally requires 4.5:1, and contrast alone cannot establish compliance for an entire design system."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The design-system work is not connected to the Senior UX Researcher role.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The line wrongly credits research synthesis itself with reducing repeat support calls.",
+      "because": "The listed methods organize findings but do not change the customer experience or support workflow."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The 23% reduction is buried after the research counts and method list.",
+      "because": "A scanning reader may miss the most consequential result."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Synthesizing” breaks the past-tense pattern in this ended role.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Recommended fixes” does not identify what the shipped changes affected.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The three-of-five shipping result comes after the presentation detail.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“The number of tests run each quarter” is unnecessarily wordy.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The onboarding bullet opens with the assignment instead of the completed-sign-up increase.",
+      "because": "Leading with the increase would show the value of the prototype testing on a quick scan."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The strongest Pinegrove result is not the entry’s opening bullet.",
+      "because": "Readers encounter the card-dispute study before the stronger onboarding result."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The line incorrectly calls an average recommendation rating a Net Promoter Score.",
+      "because": "Net Promoter Score subtracts the percentage of detractors from the percentage of promoters; averaging ratings produces a different measure."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The rating increase does not show what you contributed to it.",
+      "because": "The line does not identify the research finding or recommendation behind the app change."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The calculation detail slows the rating bullet.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "“The findings” does not name the insight behind the two-way reminder.",
+      "because": "The line does not show what patients said that pointed toward two-way texting."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The drop in missed appointments is buried after the interview and reminder details.",
+      "because": "A scanning reader sees the research activity before its measurable outcome."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The missed-appointments bullet should lead the Northwind entry.",
+      "because": "It connects interviews, a product change and a measured reduction."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Writes” uses present tense for a role that ended in February 2022.",
+      "because": "The date range and verb disagree."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The 30% reduction in support calls comes after the testing method.",
+      "because": "A scanning reader sees the participant count before the outcome."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“The revised layout” does not identify the change prompted by testing.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The testing bullet says what was measured but not what the tests found.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "“A 50% improvement” incorrectly describes the drop from 90 to 60 seconds.",
+      "because": "The decrease is 30 seconds, or 33% of the original 90 seconds."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "“By 20%” incorrectly labels a 20-percentage-point increase.",
+      "because": "Moving from 65% to 85% adds 20 percentage points, while the relative increase is approximately 31%."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Across 12 participants” repeats the participant count in the preceding bullet.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The audio-landmarks and color phrase repeats the methods in the preceding bullet.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The booking-flow bullet does not say what changed to remove five steps.",
+      "because": "A reader cannot picture the design decision behind the before-and-after counts."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The drop in phone bookings has no stated comparison period.",
+      "because": "“The next two months” gives the timing, not the baseline against which bookings fell."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The six resolved issues lack evidence of booking completion after the fixes.",
+      "because": "A reader cannot tell whether first-time users could then finish booking."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Hallway testing” may be unclear to readers outside design teams.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The Methods skills line misspells “interviews.”",
+      "because": "A spelling error in a UX research method can distract a reader."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3969,
+    "input_tokens_details": {
+      "cache_write_tokens": 3966,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1712,
+    "output_tokens_details": {
+      "reasoning_tokens": 461
+    },
+    "total_tokens": 5681
+  }
+}

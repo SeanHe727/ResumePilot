@@ -1,0 +1,255 @@
+{
+  "lines": [
+    "Avery Brooks",
+    "+1 (555) 010-3319 | avery.brooks@example.com | example.com/in/abrooks",
+    "Date of birth: 9 Jan 1998 | Nationality: Brazilian",
+    "EDUCATION",
+    "Eastmoor University | B.S. in Statistics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Riverside Cinema | Box Office Attendant | Metro City, USA | Aug 2025 - Present",
+    "- Sold tickets and concessions during evening shifts and balanced the cash drawer at close.",
+    "- Trained 3 new attendants on the ticketing system and the refund policy.",
+    "Brightcart Retail | Data Analyst | Metro City, USA | Aug 2022 - Jun 2025",
+    "- Built the weekly retention dashboard for 2.4M customers that marketing used to retarget lapsed buyers, lifting 90-day repeat purchase from 22% to 27%.",
+    "- Cut the monthly revenue report from 3 days of spreadsheet work to 2 hours by moving it to scheduled SQL queries and a shared dashboard.",
+    "- Found customers with no orders by left-joining the orders table to the customers table and counting rows with a null customer name.",
+    "- Joining 40 source tables, deduplicating customer records across two loyalty systems and rebuilding the attribution logic in dbt-style SQL models, raised the share of orders tied to a campaign from 58% to 81%.",
+    "- Presented the quarterly customer review to the leadership team, and two of its three recommendations were funded in the next budget.",
+    "- Trained 20 merchandisers to answer their own questions with the self-serve dashboards, halving ad hoc data requests.",
+    "Pinecrest Insurance | Junior Analyst | Metro City, USA | Jul 2020 - Jul 2022",
+    "- Ran the checkout A/B test until significance by checking the p-value every day and stopping on the first day it fell below 0.05.",
+    "- Analyzed 18 months of call-center data; my findings moved two agents to the evening peak and cut average hold time from 9 to 5 minutes.",
+    "- Writes the team's SQL style guide and review checklist, which cut query errors found in review by half.",
+    "- Automated the monthly fraud-flag extract while also maintaining the team calendar, answering ad hoc questions from sales, updating onboarding documents and covering the help desk on Fridays, which saved the fraud team 10 hours a month.",
+    "PROJECTS",
+    "City Bike-Share Demand Study | Independent Project | Python, SQL | Jan 2025 - Present",
+    "- Modeled hourly bike-share demand for 120 stations from 2 years of public trip data, forecasting next-day demand within 12% mean absolute error.",
+    "- Cut empty-station hours from 300 to 200 a week, a 50% reduction, in a replay of last summer's rebalancing.",
+    "- Raised forecast hit rate by 15% across 120 stations, from 60% to 75%, by adding weather and event features.",
+    "Food Pantry Visit Analysis | Volunteer, Team of 3 | Excel, SQL | Mar 2023 - Aug 2023",
+    "- Mapped 14 months of pantry visits by hour and day, so the pantry moved one volunteer shift and cut the Saturday line from 50 to 20 minutes.",
+    "- Cleaned 9,000 handwritten visit logs into a single table and matched repeat visitors, giving the pantry its first count of unique households.",
+    "- Wrote a one-page guide the pantry coordinator used to update the visit table each month after the project ended.",
+    "SKILLS",
+    "Tools: SQL, Python, Excel",
+    "Methods: dashboards, forecasting, metric design, data-quality checks"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The current cinema role leads the experience instead of the analyst roles and projects.",
+      "because": "A reader encounters the box-office position before the evidence of several years of analysis."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education opens the résumé instead of supporting the more recent analyst experience.",
+      "because": "Opening with the degree delays the more immediate evidence of fit."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The reason for the shift from Data Analyst to Box Office Attendant is not apparent.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The cash-drawer duty does not say what the reconciliation showed.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The training count does not show whether the new attendants became ready to work independently.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The dashboard wording makes its customer coverage sound like its audience.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The stated join direction is wrong for finding customers with no orders.",
+      "because": "A join that preserves orders omits customers with no orders, and a null customer name cannot substantiate the finding."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The line does not say what identifying customers with no orders enabled.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The count operation gives no count.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The long method-first opening buries the increase from 58% to 81%.",
+      "because": "A scanning reader reaches several technical steps before the strongest evidence of the work."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The funded recommendations are not identified.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The line describes presenting the review but not the analysis behind its recommendations.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The description of using the dashboards is longer than needed.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Stopping at the first daily p-value below 0.05 does not establish significance at the usual 5% threshold.",
+      "because": "Repeated checks followed by stopping at the first crossing increase the false-positive rate."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The A/B-test line gives neither a checkout outcome nor a resulting decision.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The staffing result should open this collection of separate junior-analyst assignments.",
+      "because": "The change from 9 to 5 minutes gives a scanning reader an immediate reason to examine the work."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The analysis that identified the evening peak is not specified.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The first-person phrase is out of place in this résumé bullet.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "“Writes” incorrectly presents work in a role that ended in July 2022 as ongoing.",
+      "because": "Present tense conflicts with the position dates and the other completed-work bullets."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The halving of query errors has no stated measurement unit or comparison period.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The administrative task list separates the fraud-extract automation from its claimed time saving.",
+      "because": "The list makes a reader wonder which duty saved the fraud team 10 hours a month."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The automation claim does not identify what was built or changed.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "“12% mean absolute error” incorrectly gives a percentage for an error metric measured in demand units.",
+      "because": "Mean absolute error is measured in trips or bikes per hour; a percentage needs a defined denominator or a different metric."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The model type behind the hourly demand forecast is missing.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The forecast error has no baseline for comparison.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The drop from 300 to 200 empty-station hours is a 33% reduction, not a 50% reduction.",
+      "because": "The decrease of 100 hours divided by the starting 300 hours is 33.3%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The replay result should open the project once its percentage is corrected.",
+      "because": "The change in empty-station hours is the project's clearest operational result."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The replay setting does not say what rebalancing decision changed.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The 300-hour starting point does not identify the rebalancing approach used as the baseline.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "A rise from 60% to 75% is 15 percentage points, not a 15% increase.",
+      "because": "Relative to the original 60% rate, the increase is 25%."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Forecast hit rate” does not define what counted as a hit.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Saturday line” does not clearly name the time measure that fell.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The first count of unique households is not given.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The line does not say how repeat visitors were matched.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3648,
+    "input_tokens_details": {
+      "cache_write_tokens": 3645,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1648,
+    "output_tokens_details": {
+      "reasoning_tokens": 408
+    },
+    "total_tokens": 5296
+  }
+}
