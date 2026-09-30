@@ -114,14 +114,17 @@ function defaultRules(config: AppConfig): RouteRule[] {
  * because a fabricated metric is worse than no suggestion; splitting text earns
  * the bottom one because there is nothing to deliberate about.
  */
+// Medium across the readers. Reasoning is billed as output at six times the
+// input rate, and was most of a review's cost; high was the default rather
+// than a measured need.
 const DEFAULT_EFFORTS: ReadonlyArray<[TaskKind, Effort]> = [
-  ['diagnose_bullet', 'high'],
+  ['diagnose_bullet', 'medium'],
   ['judge_wording', 'low'],
-  ['research_domain', 'high'],
+  ['research_domain', 'medium'],
   ['rewrite_bullet', 'xhigh'],
-  ['match_jd', 'high'],
-  ['assess_narrative', 'high'],
-  ['generate_report', 'high'],
+  ['match_jd', 'medium'],
+  ['assess_narrative', 'medium'],
+  ['generate_report', 'medium'],
   // Grouping is bookkeeping over a page in front of it: every judgement it
   // makes is checked against the rows before anything is built.
   ['label_rows', 'low'],

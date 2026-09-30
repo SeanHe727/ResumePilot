@@ -1,3 +1,4 @@
+import { sessionContextConfig } from '../config.js';
 import { LayeredContextManager } from '../context/manager.js';
 import type {
   CheckpointManager,
@@ -57,7 +58,7 @@ export class DefaultSessionRestorer implements SessionRestorer {
 
     // Rebuilt rather than mutated: the live window may hold turns from after
     // the checkpoint, and those are exactly what a rewind is discarding.
-    session.contextManager = new LayeredContextManager();
+    session.contextManager = new LayeredContextManager(sessionContextConfig());
     for (const message of checkpoint.messages) session.contextManager.addMessage(message);
 
     this.sessions.save(session);

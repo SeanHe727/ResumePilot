@@ -1,0 +1,236 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Lakeside Golf Club | Caddie | Metro City, USA | Aug 2025 - Present",
+    "- Caddied about 5 rounds a week, carrying bags and reading greens for members.",
+    "- Helped the pro shop run the weekend junior tournament.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Underwrote 60 small-business loans worth USD 45M, and none of the approved loans defaulted in their first two years.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+    "- Shared the model and a two-page note with the university investment club, which used it in its spring pitch.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "SKILLS",
+    "Tools: Excel, Bloomberg Terminal",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the profile link works and leads to a current profile.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Consider adding your location if you are applying outside Metro City.",
+      "because": "It may help recruiters."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Move the Lakeside role below the finance experience or into a separate section.",
+      "because": "Its current position makes it the first experience a reader sees."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Use a tense consistent with an ongoing role.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Keep the five-rounds-a-week figure only if it reflects your typical schedule.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Show more impact than the duties alone convey.",
+      "because": "The duties alone do not show much impact."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Specify your tournament responsibility or the tournament’s scale.",
+      "because": "“Helped” leaves your contribution unclear."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Define and explain how you measured the 40% close-efficiency improvement.",
+      "because": "“Efficiency” is too broad to verify."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify your ownership of the capital-plan modeling.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Say whether the standardized approach affected investment decisions, if applicable.",
+      "because": "The outcome is less clear."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Indicate the scope or consequence of the board-pack commentary.",
+      "because": "The bullet describes a task rather than its value."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Correct the acquisition-valuation methodology.",
+      "because": "Free cash flow to equity is generally discounted at the cost of equity, while free cash flow to the firm is generally discounted at WACC."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Adding business-unit EBITDA margins does not produce a group margin.",
+      "because": "The group margin must use appropriate consolidated EBITDA and revenue, accounting for eliminations."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Define how the under-4% forecast error was measured.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Avoid implying the forecast alone caused the early debt repayment.",
+      "because": "The forecast should reasonably have supported that decision."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify which approved loans had a full two-year observation period.",
+      "because": "Readers may question the cohort and timing."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Explain the basis for linking your findings to the threshold changes.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Ensure the approval-rate comparison covers comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Define the observation window for “no rise in early defaults.”",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Change “Writes” to a tense matching the completed role.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify whether seven missed tests falling to one is an annual comparison.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Specify whether the time saving applied to typical memos or a particular loan type, if relevant.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Reconsider using proximity to market price as the valuation’s result.",
+      "because": "Being within 6% does not by itself demonstrate that the valuation was sound."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Be ready to defend the valuation assumptions.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "State the direction and starting point of the discount-rate change.",
+      "because": "Without them, the USD 52-to-44 sensitivity is hard to interpret."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Check that “spring pitch” aligns with the project dates.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify what the investment club used from your work.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Verify that the FP&A work belonged to the student fund.",
+      "because": "“FP&A team” sounds like a corporate role and conflicts with the project heading unless the fund had such a team."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify your individual contribution to the performance report, if needed.",
+      "because": "The project lists a six-person team."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "Delete or relocate the student-fund cash forecast after verifying the facts.",
+      "because": "It repeats the Stonebridge forecast’s scale, error, and debt outcome under a 2018–19 student project."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Correct the valuation-method bullet before listing DCF valuation as a strength.",
+      "because": "The listed methods should be substantiated by the experience and projects above."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2061,
+    "input_tokens_details": {
+      "cache_write_tokens": 2058,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1491,
+    "output_tokens_details": {
+      "reasoning_tokens": 402
+    },
+    "total_tokens": 3552
+  }
+}

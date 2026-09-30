@@ -1,0 +1,110 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/C.md",
+  "recall": 8,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N1"
+  ],
+  "coverage": false,
+  "suggestions": 27,
+  "words": 1108,
+  "quotes": 1,
+  "grounded": 1,
+  "rewrites": 15,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3444,
+    "completion_tokens": 13838,
+    "total_tokens": 17282,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12910
+    },
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2932
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Derived a variance bound for a sparse regression estimator that improves the previous result by a logarithmic factor; the proof appears in Section 3 of a manuscript under review at *JASA*."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Fix the typo: time-series econometircs to time-series econometrics"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "That is an increase of **6 percentage points**, not 6%. The relative increase is approximately 11.5%."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "That is a **25% reduction**: ((0.20 - 0.15) / 0.20 = 25%"
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Rewrite: Built a reusable point-in-time feature store by joining 120 microstructure features across six venues, deduplicating late prints, and versioning schemas; the team reused it in two subsequent projects."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The final bullet combines too many unrelated responsibilities: > Released an open-source R package... while maintaining the lab’s shared cluster, organizing the weekly reading group and grading..."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "daily Sharpe is annualized by multiplying by **√252**, not 252"
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "For quant roles, the bakery position should not be the first experience recruiters see. Consider splitting the section: QUANTITATIVE EXPERIENCE / ADDITIONAL EXPERIENCE - Sunrise Bakery"
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 27,
+    "rewrites": [
+      "Built a reusable point-in-time feature store by joining 120 microstructure features across six venues, deduplicating late prints, and versioning schemas; the team reused it in two subsequent projects.",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures, improving net out-of-sample Sharpe by 0.4 over an 18-month walk-forward backtest after modeled transaction costs.",
+      "Reduced daily turnover from 34% to 21% with a cost-aware position smoother while retaining 90% of gross returns and lowering estimated slippage by 33%.",
+      "Evaluated forecast performance against a HAR-RV baseline using Diebold–Mariano tests and documented backtest assumptions, transaction costs, and failure regimes.",
+      "Developed a temporal convolutional model for realized-volatility forecasting across 30 equity indices, reducing out-of-sample QLIKE loss by 7% relative to a HAR-RV baseline.",
+      "Reduced forecast error from 0.20 to 0.15 and increased directional accuracy from 52% to 58% through realized-volatility features and an asymmetric loss function.",
+      "Built a reproducible cluster-based simulation pipeline, reducing runtime for a 2,000-run Monte Carlo study from three days to five hours.",
+      "Derived a variance bound for a sparse regression estimator that improves the previous result by a logarithmic factor; the proof appears in Section 3 of a manuscript under review at *JASA*.",
+      "Released an open-source R package for high-dimensional covariance estimation that received 3,000 downloads in its first year.",
+      "Led weekly probability recitations for 60 graduate students, developed 12 problem sets, and earned a 4.8/5 teaching rating.",
+      "Programming: Python, R, SQL, C++",
+      "Libraries/Tools: PyTorch, Kafka, Git, Linux",
+      "Methods: Time-series econometrics, Bayesian inference, gradient boosting, statistical learning",
+      "time-series econometrics",
+      "labor"
+    ],
+    "falsePositives": []
+  }
+}

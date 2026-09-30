@@ -187,7 +187,7 @@ export function findBareNumber(query: string): string | null {
  * search would come back useless — the failure mode that made the earlier
  * session redactor not worth keeping.
  */
-function findContactDetail(query: string): string | null {
+export function findContactDetail(query: string): string | null {
   if (/[\w.+-]+@[\w-]+\.[\w.-]+/.test(query)) return 'email address';
   // Long enough to be a phone number rather than a year, a port or a metric.
   if (/(?:\+\d{1,3}[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]\d{3}[\s.-]\d{4}\b/.test(query)) {

@@ -1,0 +1,288 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Hedged the bank's interest-rate risk on its fixed-rate bond holdings by buying more fixed-rate bonds of the same duration.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "- Cut the monthly close from 8 working days to 5 by automating 30 reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Mapping 600 general-ledger accounts to a new chart of accounts, rebuilding the allocation rules and testing them against two prior closes, cut manual journal entries from 350 to 90 a month.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Trained 5 plant controllers on the new budgeting template and wrote its user guide.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Showed the share value fell from USD 50 to USD 40, a 25% drop, when the discount rate rose by 1 point.",
+    "- Raised the model's forecast accuracy by 12% across 10 years, from 70% to 82%, by adding rate-case timing.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Wrote onboarding notes on the fund's models for new analysts.",
+    "SKILLS",
+    "Tools: Excel",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the LinkedIn or portfolio link points to a complete, current profile.",
+      "because": ""
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth.",
+      "because": "It is not generally needed on a US resume and could invite bias."
+    },
+    {
+      "line": 3,
+      "kind": "suggestion",
+      "says": "Include nationality only if it is relevant, and state work authorization directly if that is the concern.",
+      "because": "Nationality does not directly establish work authorization."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider adding GPA, honors, or relevant coursework if accurate and helpful.",
+      "because": "Some target roles screen for them."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "Buying more fixed-rate bonds of the same duration does not establish an interest-rate hedge.",
+      "because": "It generally adds fixed-rate exposure; the risk being offset and hedge mechanics are not explained."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Define the sample and comparison behind the approval-rate change.",
+      "because": "The number of applications reviewed and the meaning of “early defaults” are unclear."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Make clear that the change from 41% to 48% is seven percentage points.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Substantiate the link between the analysis and the approval-rate increase.",
+      "because": "The bullet implies the analysis caused the outcome."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Change the present-tense verb to match the past-tense role.",
+      "because": "It clashes with the role dates and surrounding bullets."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify the period and scope of the reduction in missed covenant tests.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Say how often the template was used or how many memos it affected, if verifiable.",
+      "because": "That would show the scale of the improvement."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Define the forecast-error measure and period, including whether the result is monthly or aggregate.",
+      "because": "“Under 4%” is unclear."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify what USD 600M represents.",
+      "because": "The scale is otherwise hard to assess."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain how the forecast informed the USD 40M debt paydown.",
+      "because": "The attribution is otherwise hard to assess."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Specify what the eight-to-five-working-day measure refers to.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Name the tools or systems that enabled the automation, if accurate.",
+      "because": "Employers could better judge its relevance to their environment."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify whether the shared discount rate and payback rules were approved policy or a modeling convention, and how project risk was handled.",
+      "because": "A single rate may not suit projects with different risk profiles."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Describe the standardization’s effect on decisions or workflow.",
+      "because": "The bullet currently describes standardization but not its effect."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make the opening verb’s tense consistent with the completed experience.",
+      "because": "It is in the present progressive."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify when the mapping and reduction happened.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Define what “manual journal entries” counts.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Say whether the reduction in manual journal entries was sustained.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The FCFE and WACC valuation methods are mismatched.",
+      "because": "FCFE is normally discounted at the cost of equity, while WACC is normally used with free cash flow to the firm."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Use this space for a higher-impact result if training or documentation is not relevant to the target role.",
+      "because": "This bullet has less impact than the quantified accomplishments above."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "State the valuation date and how the market-price comparison was made.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain the assumptions and comparable-company check rather than treating proximity to market price as forecast quality.",
+      "because": "Being within 6% of market price does not, by itself, establish forecast quality."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The stated 25% decline from USD 50 to USD 40 is incorrect.",
+      "because": "That decline is 20%."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Define forecast accuracy and its baseline.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify whether the change from 70% to 82% is 12 percentage points or a 12% relative improvement.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain the evaluation period and method behind “across 10 years.”",
+      "because": "Readers may interpret it as testing a long-term forecast against actual results; an accuracy-improvement claim needs a defensible backtest or comparable evidence."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether the work was FP&A support or fund analysis and reporting.",
+      "because": "The FP&A-team wording appears inconsistent with the Student Investment Fund role and raises questions about ownership."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain what changed in the report and identify the benchmark and period.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Identify the committee’s role and substantiate its use of the report at every meeting.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Prioritize evidence of analytical work if the notes were not used by later analysts or space is limited.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Specify your Excel level and demonstrable capabilities.",
+      "because": "“Excel” alone is too broad for finance roles."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Add other tools only if you have genuinely used them.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Align the methods list with target roles and be ready to give a concrete example of each.",
+      "because": "The listed methods are general."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Update current status or activities if needed.",
+      "because": "The latest employment entry ends in June 2025, so the timeline should be current."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the strongest, most relevant results first within each role.",
+      "because": "Readers should see the fit before process details."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date formatting, punctuation, and units throughout.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2529,
+    "input_tokens_details": {
+      "cache_write_tokens": 2526,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1944,
+    "output_tokens_details": {
+      "reasoning_tokens": 442
+    },
+    "total_tokens": 4473
+  }
+}

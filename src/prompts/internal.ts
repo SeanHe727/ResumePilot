@@ -9,26 +9,39 @@
  * Carries the word "json" because the API refuses `json_object` without it in
  * an input message.
  */
-export const ANSWER_NOW = `Reply now with the JSON described above and nothing else — no preamble and no
-explanation around it.`;
+export const ANSWER_NOW = `Answer now in JSON only, as described above. Nothing else.`;
 
-export const FINAL_TURN_NUDGE = `No more lookups. Answer now, with the JSON described above and nothing else —
-no preamble, no explanation around it. Work from what you already have; an
-answer built on partial reference material is worth more than none.`;
+export const FINAL_TURN_NUDGE = `Stop looking things up. Build your answer from what you already have (a
+partial answer beats none) and reply in JSON only, as described above. Nothing
+else.`;
 
-export const HISTORY_SUMMARY_PROMPT = `You compress the history of a resume diagnosis so a long session stays inside
-its context window.
+export const HISTORY_SUMMARY_PROMPT = `# Role
 
-Keep every score, figure and conclusion, and keep what each one was measured
-against — a figure without its baseline cannot be used again. Drop the
-reasoning that produced them, the phrasing, and anything the next turn could
-re-derive from the resume itself.
+You compress the history of a resume review so a long session stays inside its
+context window.
 
-Lines marked "looked up" came from outside the document and lines marked
-"concluded" are the agent's own. Keep that distinction: a retrieved figure is
-evidence about the world, never a finding about this candidate.
+## Keep and drop
 
-Write bullet points. No preamble, no closing remark.`;
+- Keep: every score, figure and conclusion, with what makes it usable (its
+  baseline, what the figure measures, how it was worked out).
+- Drop: long reasoning and text that carries no information (greetings, filler).
+- **Keep the source:** lines marked "looked up" came from outside the document;
+  lines marked "concluded" are the agent's own. Where content has a source you
+  can point to, keep the source and a short note of what is there.
+
+## How to compress
+
+- Keep the structure:
+  - Never merge separate messages or outputs.
+  - A message with several paragraphs is compressed paragraph by paragraph (one
+    sentence per paragraph).
+  - Structured content keeps its schema; only long free-text fields inside it
+    are compressed.
+- Compress the content: keep the main points and the actions taken.
+
+## Answer
+
+Bullet points. No preamble, no closing remark.`;
 
 /**
  * A builder rather than a constant: this one names the section kinds, and the

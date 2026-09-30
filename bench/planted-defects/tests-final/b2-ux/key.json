@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Writes the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "defect": "WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for body text; 3:1 is enough only for large text, so the design system does not meet AA."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Raised the patient app's Net Promoter Score from 6.1 to 8.4, calculated as the average 0-10 recommendation rating across 2,000 monthly survey responses.",
+    "defect": "Net Promoter Score is the percentage of promoters (9-10) minus the percentage of detractors (0-6), from -100 to 100; an average rating is not NPS."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Tableau)"
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

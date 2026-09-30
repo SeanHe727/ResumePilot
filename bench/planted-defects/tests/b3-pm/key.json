@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W4",
+    "category": "wording",
+    "line": "Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "defect": "Comparing opt-in merchants with the rest is confounded by self-selection; it does not measure the redesign's effect."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "defect": "The improvement comes from changing the metric's definition, not from better delivery performance."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 2 Nov 1996 | Nationality: American",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

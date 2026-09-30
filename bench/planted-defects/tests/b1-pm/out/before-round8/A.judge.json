@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 1669,
+  "quotes": 5,
+  "grounded": 5,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4016,
+    "completion_tokens": 11368,
+    "total_tokens": 15384,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10955
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 2352
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "“Prepares” is the wrong tense for a completed role."
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Passive wording also obscures the candidate's ownership."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Explain what the “35%” checkout-conversion improvement is measured against."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "the same 2,300-merchant achievement appears elsewhere."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Held weekly working sessions with clinic managers… Each explains what you did but not what changed."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "Opt-in merchants may differ systematically from non-opt-ins, so the comparison cannot establish the redesign's effect."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Changing the population and denominator only shows improvement in a redefined metric."
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "Explain the eight-month gap between the bachelor’s degree ending in June 2018 and Crestline beginning in March 2019."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Delete the date-of-birth and nationality details."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

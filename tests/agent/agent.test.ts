@@ -259,10 +259,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
-      'query_knowledge_base',
-      'examine_technical_depth',
-    ]);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'examine_technical_depth']);
   });
 
   it('offers an optional tool once something is behind it', async () => {
@@ -272,11 +269,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
 
-    expect(seen[0]?.tools?.map((t) => t.name)).toEqual([
-      'query_knowledge_base',
-      'examine_technical_depth',
-      'web_search',
-    ]);
+    expect(seen[0]?.tools?.map((t) => t.name)).toEqual(['query_knowledge_base', 'examine_technical_depth', 'web_search']);
   });
 
   it('sends a role its whole prompt, however long it has grown', async () => {
@@ -388,7 +381,9 @@ describe('SubAgentRuntime', () => {
     );
     const { runtime } = runtimeWith(engine, [], registry);
 
-    await runtime.run({ agentConfig: CONTENT_AGENT, input: 'diagnose' });
+    // On the shared sub-agent window: the content reader's own is sized to
+    // hold its research answers whole and would not fill here.
+    await runtime.run({ agentConfig: { ...CONTENT_AGENT, context: {} }, input: 'diagnose' });
 
     // Asserted on the window rather than on which rung was reached: level 1
     // re-compresses tool output for free and usually settles it there, and a
@@ -439,7 +434,7 @@ describe('SubAgentRuntime', () => {
     expect(seen[1]?.tools).toBeUndefined();
     // Taking the tools away is not enough: a model that was about to look
     // something up writes about what it would have looked up instead.
-    expect(seen[1]?.messages.at(-1)?.content).toMatch(/No more lookups/);
+    expect(seen[1]?.messages.at(-1)?.content).toMatch(/Stop looking things up/);
   });
 
   it('does not nudge an agent that answered on its first turn', async () => {
@@ -448,7 +443,7 @@ describe('SubAgentRuntime', () => {
 
     await runtime.run({ agentConfig: WORDING_AGENT, input: 'judge' });
 
-    expect(JSON.stringify(seen[0])).not.toContain('No more lookups');
+    expect(JSON.stringify(seen[0])).not.toContain('Stop looking things up');
   });
 
   it('fails cleanly when the last turn asks for another tool instead of answering', async () => {
@@ -547,6 +542,7 @@ describe('DefaultOrchestrator', () => {
 
     const verdict = await orchestrator(engine).diagnoseEntry(entry, bothRoles);
 
+    // Content and wording.
     expect(call).toBe(2);
     expect(verdict.substance?.bullets[0]?.issues).toEqual([
       { what: 'no measurable outcome', costWords: 4 },
@@ -554,6 +550,28 @@ describe('DefaultOrchestrator', () => {
     expect(verdict.wording?.perBullet[0]?.verbStrength.score).toBe(20);
     expect(verdict.overallScore).toBe(30);
     expect(verdict.agentStats.map((s) => s.name).sort()).toEqual(['Entry Substance', 'Entry Wording']);
+  });
+
+  it('puts what does not hold first on each line', async () => {
+    const withError = JSON.stringify({
+      bullets: [
+        {
+          bulletId: entry.bullets[0]!.id,
+          overallScore: 20,
+          dimensions: { impact: { score: 20, detail: '' }, measurement: { score: 0, detail: '' }, method: { score: 10, detail: '' } },
+          issues: [
+            { what: 'no measurable outcome', costWords: 4, kind: 'missing' },
+            { what: 'the percentage does not match its figures', costWords: 0, kind: 'wrong', axis: 'measurement' },
+          ],
+          strengths: [],
+        },
+      ],
+    });
+    const { engine } = scriptedEngine(text(withError));
+
+    const verdict = await orchestrator(engine).diagnoseEntry(entry, { roles: ['content'], reasons: {} });
+
+    expect(verdict.substance?.bullets[0]?.issues.map((i) => i.kind)).toEqual(['wrong', 'missing']);
   });
 
   it('takes the brackets off the ids the wording reader hands back', async () => {
@@ -642,6 +660,7 @@ describe('DefaultOrchestrator', () => {
       { roles: ['content'], reasons: {} },
     );
 
+    // The reader fails once and is tried again.
     expect(attempts).toBe(2);
     expect(verdict.substance).not.toBeNull();
   });
@@ -731,6 +750,24 @@ describe('whole-document roles', () => {
     expect(narrative?.gaps).toHaveLength(1);
     // Both entries reached the agent, wrapped as data rather than instructions.
     expect(seen[0]?.messages.some((m) => m.content.includes('<resume_content>'))).toBe(true);
+  });
+
+  it('takes the checks from the consistency reader and the story from the career reader', async () => {
+    const checks = JSON.stringify({ conflicts: ['two dates disagree'], unsupportedSkills: ['Fortran'], misspellings: ['Pyhton'] });
+    const engine: QueryEngine = {
+      async query(params) {
+        return text(params.systemPrompt?.includes('check a resume against itself') ? checks : NARRATIVE_JSON);
+      },
+      getUsageSummary: () => '',
+      checkBudget: () => ({ ok: true }),
+    };
+
+    const narrative = await orch(engine).assessNarrative(doc([entry]));
+
+    expect(narrative?.arc).toMatch(/no visible progression/);
+    expect(narrative?.conflicts).toEqual(['two dates disagree']);
+    expect(narrative?.unsupportedSkills).toEqual(['Fortran']);
+    expect(narrative?.misspellings).toEqual(['Pyhton']);
   });
 
   it('shows the agent which section each entry sits under', async () => {

@@ -1,0 +1,219 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present",
+    "- Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.",
+    "- Opened the café three days a week and handled the daily cash count.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Migrated 40 department sites to a shared component library, cutting new-page build time from 2 days to half a day.",
+    "- Interviewed 8 department editors about publishing; my findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybook, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The link reads as a placeholder and should lead directly to a working portfolio or code profile.",
+      "because": "`example.com` reads as a placeholder."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date formatting throughout.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider placing the barista job below the technical experience.",
+      "because": "Its current position makes it the first thing an engineering recruiter reads."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether you or the whole café handled the 200 orders.",
+      "because": "The number could overstate your contribution."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "Fix the character-encoding error the review identifies as “cafØ.”",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify what the 35% performance improvement measures.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify how the 35% improvement was measured.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether all 14 accessibility issues concerned the date picker.",
+      "because": "“All” needs a clear scope."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Correct the explanation that lazy-loading the hero image cut LCP.",
+      "because": "Lazy-loading a hero image commonly worsens LCP because the hero is often the LCP element."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Retain the LCP figures only if measurements support them.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Remove or fundamentally correct the XSS-prevention claim.",
+      "because": "React state does not sanitize input, and `dangerouslySetInnerHTML` can introduce XSS."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Substantiate both the speed and A/B-test figures.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make your specific contribution to the rebuild clear.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify how the broken-page counts were tracked.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Change “Writes” to past tense.",
+      "because": "The role has an end date."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify whether you authored, maintained, or introduced the checklist.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Specify what “search time” measures.",
+      "because": "That would make the improvement credible."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Verify that “Present” remains accurate.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Be ready to explain how you measured 900 weekly riders.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Qualify the performance comparison if it did not use the same device and network conditions.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Make the repository and agency link easy to verify from the project link.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "Resolve the Vue versus React/TypeScript mismatch with the next bullet.",
+      "because": "The project should list the technologies actually used."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Specify which part of the booking flow you owned.",
+      "because": "“Worked on” gives little sense of scope."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Remove the travel-search bullet from this project.",
+      "because": "It appears to duplicate the Lumen hotel-search achievement and is unrelated to library booking, making both entries less trustworthy."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Separate languages from frameworks and tools if space permits.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Check whether Angular is supported by the experience or projects shown.",
+      "because": ""
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Revisit “accessibility” after correcting the checklist tense.",
+      "because": "Methods listed should be backed up by the bullets."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Revisit “server-side rendering” after confirming exactly what you implemented at Lumen.",
+      "because": "Methods listed should be backed up by the bullets."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2001,
+    "input_tokens_details": {
+      "cache_write_tokens": 1998,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1616,
+    "output_tokens_details": {
+      "reasoning_tokens": 691
+    },
+    "total_tokens": 3617
+  }
+}

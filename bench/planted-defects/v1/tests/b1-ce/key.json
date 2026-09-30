@@ -1,0 +1,62 @@
+[
+  {
+    "id": "D1",
+    "type": "D1",
+    "line": "Responsible for the monitoring dashboards of the diagnostics service and for supporting the on-call team with weekly reports.",
+    "defect": "Duty-style opener ('Responsible for') naming an assigned duty, with no action taken and no outcome."
+  },
+  {
+    "id": "D2",
+    "type": "D2",
+    "line": "Improved model performance by 35% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "defect": "A percentage with no defined metric and no baseline: which measure, compared against what."
+  },
+  {
+    "id": "D3",
+    "type": "D3",
+    "line": "Single-handedly built the company's entire ML platform, which is now used by every team across engineering, operations and research.",
+    "defect": "Implausible overclaim for the role's level: sole credit for something company-wide."
+  },
+  {
+    "id": "D5",
+    "type": "D5",
+    "line": "Leveraged cutting-edge AI synergies and next-generation agentic paradigms to drive innovation and unlock value across the organization.",
+    "defect": "Empty buzzwords with no concrete action, subject or result."
+  },
+  {
+    "id": "D6",
+    "type": "D6",
+    "line": "I worked on improving the latency of our API and I also wrote tests for it, which I think made the service a lot faster for users.",
+    "defect": "First-person pronoun and a conversational full sentence, with a weak verb and no result."
+  },
+  {
+    "id": "D7",
+    "type": "D7",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role (Eastern Robotics Co.) is listed before the newer one (Mobility Systems Company)."
+  },
+  {
+    "id": "D10",
+    "type": "D10",
+    "line": "Jun 2022 graduation to Oct 2023",
+    "defect": "An unexplained gap between graduating (Jun 2022) and the first role (starting Oct 2023)."
+  },
+  {
+    "id": "D16",
+    "type": "D16",
+    "line": "Was involved in the process of helping to support the evaluation of the reports that were being produced by the pipeline at the time.",
+    "defect": "Passive, filler-heavy wording ('was involved in the process of helping to ...')."
+  },
+  {
+    "id": "D18",
+    "type": "D18",
+    "line": "Led the Project Falcon migration to NGX on the KRT stack, coordinating the cutover of the Orion and Vega pipelines.",
+    "defect": "Unexplained internal code names or acronyms that an outside reader cannot interpret."
+  },
+  {
+    "id": "D19",
+    "type": "D19",
+    "line": "Age: 26 | Marital status: Single | Hobbies: watching TV, sleeping in",
+    "defect": "Irrelevant personal information (age, marital status, hobbies)."
+  }
+]

@@ -1,0 +1,210 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "Date of birth: 22 May 1997 | Nationality: Chilean",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "- Cut data-entry errors in the trial database from 6.1% to 1.8% of fields by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-checking them against pharmacy records each week, cut unresolved safety queries from 45 to 6.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Trained 9 site nurses on the consent process and outcome forms, and no consent deviations were found at the final audit.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Apr 2022 - Aug 2022",
+    "- Randomized patients by assigning those admitted on odd-numbered days to the program and even-numbered days to usual care.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting for age and insurance.",
+    "- Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited residents.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Wrote the survey's data codebook, which the clinic used for its follow-up survey the next year.",
+    "SKILLS",
+    "Tools: R, REDCap",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality, personal details conventionally left off.",
+      "because": "They do not show qualifications and draw attention away from experience and skills."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before directly relevant clinical research experience.",
+      "because": "Leading with Education gives less relevant information the first position."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The 2020 Community Health Survey project takes more space than its relevance warrants.",
+      "because": "It can draw attention away from more recent and directly relevant work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The timeline leaves 10 months with no study or work listed between the MPH and Research Assistant roles.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The described calculation does not estimate median survival, and the line gives no survival result.",
+      "because": "Averaging follow-up among patients who died gives a mean for observed deaths, while excluding censored patients discards survival information."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The opening participle makes the action and its timing awkward beside the past-tense result.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Passed” does not explain what the four reviews concluded or what standard they met.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The sentence awkwardly joins a subjectless résumé phrase to a clause with a different subject.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The sentence awkwardly joins a subjectless résumé phrase to a clause with a different subject.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Calling the odd- and even-day assignment “Randomized” is inaccurate.",
+      "because": "The admission-day rule is predictable and deterministic, not random allocation."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The line describes the assignment procedure but gives no study result.",
+      "because": "Readers cannot see what the study found or why the work mattered."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The no-show rates lack a comparison period or group.",
+      "because": "Readers cannot tell what the 18% and 11% rates compare."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The result is buried after the interview details, and “the findings added” obscures who acted on them.",
+      "because": "The impact arrives late, and the phrasing weakens the link between the research and the change."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The two cohort studies appear in an awkward trailing clause instead of being stated directly as users of the dictionary.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The identifier-resolution result is buried after unrelated duties, and “which” leaves its cause unclear.",
+      "because": "Readers may not know what resolved the mismatches, and the long list obscures the main research contribution."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Cutting-edge analytics” leaves the specific analytical approach unstated.",
+      "because": "Readers cannot tell what analytical skill the project demonstrates."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Transformative, patient-centered insights” gives no specific finding or consequence.",
+      "because": "Readers cannot tell what the project established or what decision it informed."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The change from 12% to 8% is not a 50% reduction.",
+      "because": "It is a 4-percentage-point decrease, or about a 33% relative reduction."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The strongest result is not the opening bullet.",
+      "because": "The concrete result appears after a vague claim, delaying the project’s measurable outcome."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The readmission rates lack a comparison group or period.",
+      "because": "Readers cannot tell what the 12% and 8% rates represent."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The line names adjustment factors but not the statistical approach.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The increase from 35% to 55% is 20 percentage points, not a 20% relative increase.",
+      "because": "Calling it “20%” conflates percentage points with a relative increase of about 57%."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The asthma project presents readmission and survey-response results as separate strands rather than one clear narrative.",
+      "because": "No link is stated between them, leaving the project’s unifying question or contribution unclear."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line gives the survey’s output but not what the estimate found.",
+      "because": "Response count shows scale, not what the clinic learned or how it used the estimate."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The translation and pilot steps have no stated outcome.",
+      "because": "Readers cannot tell whether feedback revealed an issue or led to a change."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The strongest bullet is not the opening one.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The passive wording does not show what you did.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3677,
+    "input_tokens_details": {
+      "cache_write_tokens": 3674,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1570,
+    "output_tokens_details": {
+      "reasoning_tokens": 446
+    },
+    "total_tokens": 5247
+  }
+}

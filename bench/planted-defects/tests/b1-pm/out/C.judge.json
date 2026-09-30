@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/C.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "S4",
+    "T2",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 86,
+  "words": 1713,
+  "quotes": 13,
+  "grounded": 13,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3780,
+    "completion_tokens": 7481,
+    "total_tokens": 11261,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7173
+    },
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 2244
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Change “prepares” to past tense for consistency."
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Change the passive construction so your contribution is clear."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Clarify whether 35% is a relative increase or a percentage-point increase. Add the measurement period and population or transaction volume."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Delete it from this project. It is unrelated to the hospital engagement and duplicates the Harbor Payments accomplishment."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Replace activity emphasis with the decision or improvement those sessions produced. If no concrete outcome resulted, remove this bullet."
+      },
+      {
+        "id": "S4",
+        "found": true,
+        "evidence": "Move this higher because it is one of the strongest bullets."
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "A comparison between merchants who chose different flows is vulnerable to selection bias."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "As written, it says the apparent improvement came from redefining the denominator rather than improving operations."
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove date of birth and nationality. They are unnecessary in U.S. hiring and introduce protected-personal information."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 86,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

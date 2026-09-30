@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b2-pm/out/B.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W4",
+    "A2",
+    "A3",
+    "S3",
+    "T3",
+    "N1",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 88,
+  "words": 2752,
+  "quotes": 24,
+  "grounded": 24,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5353,
+    "completion_tokens": 13347,
+    "total_tokens": 18700,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12966
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5353
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "This is the weakest Crestline bullet because it describes ownership of a report and meeting without showing what changed as a result."
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "This is too passive and does not show enough of your contribution."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Moving from 75% to 95% is a 20-percentage-point increase and approximately a 26.7% relative increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The arithmetic is incorrect: going from 400 to 1,150 is a 187.5% increase, not a 150% increase."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "This contains too many separate accomplishments: software rollout, SOP redesign, driver training, vendor negotiations, and labor savings. Split it into separate bullets."
+      },
+      {
+        "id": "T1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "In standard RICE, Reach generally refers to the number of users or customers affected in a defined period, not simply the number of support tickets a feature might close."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "The current Diesel Mechanic role conflicts with the product/operations direction suggested by your MBA, product internship, and projects."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Your entries are not in reverse chronological order: Coastal Marine Services July 2025–Present; Harbor Payments June–August 2024; Crestline Logistics July 2018–August 2023. Harbor Payments should appear before Crestline."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 88,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

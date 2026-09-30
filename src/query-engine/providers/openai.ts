@@ -1,3 +1,4 @@
+import { abortable, beforeAbort } from './abortable.js';
 import OpenAI from 'openai';
 
 import type { Message, StopReason, ToolSchema } from '../../types.js';
@@ -24,7 +25,7 @@ export class OpenAIProvider implements LLMProvider {
   }
 
   async *stream(params: StreamParams): AsyncIterable<StreamEvent> {
-    const stream = await this.client.chat.completions.create(
+    const stream = await beforeAbort(this.client.chat.completions.create(
       {
         model: params.model,
         messages: toOpenAIMessages(params.messages, params.systemPrompt),
@@ -49,7 +50,7 @@ export class OpenAIProvider implements LLMProvider {
         stream_options: { include_usage: true },
       },
       params.abortSignal ? { signal: params.abortSignal } : undefined,
-    );
+    ), params.abortSignal);
 
     // OpenAI interleaves parallel tool calls by `index`, so a call's deltas can
     // arrive between another call's. The Harness stream vocabulary is sequential
@@ -60,7 +61,7 @@ export class OpenAIProvider implements LLMProvider {
     let usage = { inputTokens: 0, outputTokens: 0 };
     let stopReason: StopReason = 'end_turn';
 
-    for await (const chunk of stream) {
+    for await (const chunk of abortable(stream, params.abortSignal)) {
       // The usage-bearing chunk carries an empty `choices` array.
       if (chunk.usage) {
         usage = {

@@ -1,0 +1,169 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality, personal details that do not belong on it.",
+      "because": "Readers are not meant to weigh them when assessing qualifications, and they use space unrelated to the work and education."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% increase is attributed to the flow change and presented as applying to all merchants without evidence of causation or full-base coverage.",
+      "because": "A before-and-after increase does not isolate the flow’s effect or establish that every merchant experienced the uplift."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% change has no comparison basis.",
+      "because": "Readers cannot tell whether it is relative growth or a percentage-point increase, or what period or group it compares."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Six months of data do not, by themselves, establish annual chargeback losses of 1.1 million dollars.",
+      "because": "The annualization method and loss calculation are not explained."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The business case and roadmap result are buried after the methods.",
+      "because": "A scanning reader may miss the work’s business impact."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The opt-in comparison does not establish that the redesign caused the onboarding improvement.",
+      "because": "Merchants who opted in may differ from those who stayed on the old flow."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The comparison describes how the redesign was measured but gives no result.",
+      "because": "Readers cannot tell what the comparison found or whether onboarding improved."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The change from 9 days to 4 is attributed to the redesign without establishing causation.",
+      "because": "Before-and-after figures do not show what caused the change."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Excluding weather-delayed shipments changes the calculation, not necessarily the number of late deliveries.",
+      "because": "The 11% and 7% rates are comparable only if both use the same inclusion criteria."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The 30% reduction has no baseline or measurement period.",
+      "because": "Readers cannot gauge the change without the starting and ending rates or understand how it was measured."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The bullet switches from past to present tense in an ended role.",
+      "because": "The shift makes the timeline of the forecast-pack responsibility unclear."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The 1,800 annual driver hours are presented as realized savings without saying whether they were measured or estimated.",
+      "because": "An annualized estimate is not the same as verified hours saved."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The strongest result appears after the rollout and training details.",
+      "because": "Readers scanning the bullet may miss the 1,800-hour result."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“That would have been thrown away” repeats the surplus-food context.",
+      "because": "It lengthens the result without adding a distinct detail."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The timing may imply that pickup reminders caused the growth in weekly active users.",
+      "because": "Growth after launch does not establish causation, and the interviews do not show how prevalent missed pickups were among students generally."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Passive wording hides who mapped intake and shortened the form.",
+      "because": "Readers cannot tell what the candidate contributed to the practicum."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The adoption result appears after the methods instead of leading the bullet.",
+      "because": "Scanning readers see the process changes before learning that front-desk staff adopted them."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The practicum bullet assigns a merchant-onboarding result to a hospital project.",
+      "because": "The other practicum bullets concern clinics, while merchant onboarding is a payments-platform activity."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The same onboarding achievement is attributed to two roles with conflicting reductions.",
+      "because": "Harbor Payments reports 9 days to 4 across 2,300 merchants, while the practicum calls the same result a halving."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "“Halved” is numerically wrong for a change from 9 days to 4 days.",
+      "because": "Half of 9 days is 4.5 days; the reported change is about a 56% reduction."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3860,
+    "input_tokens_details": {
+      "cache_write_tokens": 3857,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1547,
+    "output_tokens_details": {
+      "reasoning_tokens": 587
+    },
+    "total_tokens": 5407
+  }
+}

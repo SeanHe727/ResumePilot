@@ -1,0 +1,8 @@
+[
+{"case":"case-1","scores":{"Reviewer 1":{"actionability":7,"readability":7},"Reviewer 2":{"actionability":8,"readability":8},"Reviewer 3":{"actionability":5,"readability":5},"Reviewer 4":{"actionability":6,"readability":7}},"ranking":["Reviewer 2","Reviewer 1","Reviewer 4","Reviewer 3"]},
+{"case":"case-2","scores":{"Reviewer 1":{"actionability":7,"readability":6},"Reviewer 2":{"actionability":8,"readability":7},"Reviewer 3":{"actionability":6,"readability":7},"Reviewer 4":{"actionability":6,"readability":6}},"ranking":["Reviewer 2","Reviewer 1","Reviewer 3","Reviewer 4"]},
+{"case":"case-3","scores":{"Reviewer 1":{"actionability":8,"readability":8},"Reviewer 2":{"actionability":7,"readability":7},"Reviewer 3":{"actionability":6,"readability":6},"Reviewer 4":{"actionability":8,"readability":7}},"ranking":["Reviewer 1","Reviewer 4","Reviewer 2","Reviewer 3"]},
+{"case":"case-4","scores":{"Reviewer 1":{"actionability":6,"readability":7},"Reviewer 2":{"actionability":7,"readability":7},"Reviewer 3":{"actionability":8,"readability":7},"Reviewer 4":{"actionability":5,"readability":5}},"ranking":["Reviewer 3","Reviewer 2","Reviewer 1","Reviewer 4"]},
+{"case":"case-5","scores":{"Reviewer 1":{"actionability":8,"readability":6},"Reviewer 2":{"actionability":5,"readability":6},"Reviewer 3":{"actionability":8,"readability":8},"Reviewer 4":{"actionability":6,"readability":6}},"ranking":["Reviewer 3","Reviewer 1","Reviewer 4","Reviewer 2"]},
+{"case":"case-6","scores":{"Reviewer 1":{"actionability":7,"readability":6},"Reviewer 2":{"actionability":8,"readability":8},"Reviewer 3":{"actionability":8,"readability":7},"Reviewer 4":{"actionability":8,"readability":7}},"ranking":["Reviewer 4","Reviewer 2","Reviewer 3","Reviewer 1"]}
+]

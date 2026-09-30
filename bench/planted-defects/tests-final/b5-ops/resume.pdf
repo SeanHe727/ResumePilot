@@ -1,0 +1,76 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 4810>>
+stream
+BT /F1 16 Tf 72 752 Td (Jamie Alvarez) Tj ET
+BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez) Tj ET
+BT /F1 10 Tf 72 720.5 Td (Date of birth: 14 Nov 1995 | Nationality: Mexican) Tj ET
+BT /F1 12 Tf 72 703.0 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 72 689.0 Td (Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018) Tj ET
+BT /F1 12 Tf 72 671.5 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 72 657.5 Td (Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025) Tj ET
+BT /F1 10 Tf 80 645.0 Td (- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal) Tj ET
+BT /F1 10 Tf 86 633.2 Td (forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.) Tj ET
+BT /F1 10 Tf 80 621.4000000000001 Td (- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.) Tj ET
+BT /F1 10 Tf 80 609.6000000000001 Td (- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data,) Tj ET
+BT /F1 10 Tf 86 597.8000000000002 Td (reviewed monthly with the category managers.) Tj ET
+BT /F1 10 Tf 80 586.0000000000002 Td (- Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice) Tj ET
+BT /F1 10 Tf 86 574.2000000000003 Td (accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-) Tj ET
+BT /F1 10 Tf 86 562.4000000000003 Td (time inbound deliveries from 81% to 93%.) Tj ET
+BT /F1 10 Tf 80 550.6000000000004 Td (- Raised the packaging line's overall equipment effectiveness \(OEE\) from 71% to 112% by) Tj ET
+BT /F1 10 Tf 86 538.8000000000004 Td (cutting changeover time and micro-stops.) Tj ET
+BT /F1 10 Tf 80 527.0000000000005 Td (- Cut average order lead time through the warehouse from 10 days to 5 while holding daily) Tj ET
+BT /F1 10 Tf 86 515.2000000000005 Td (throughput constant and doubling work-in-process to keep pickers busy.) Tj ET
+BT /F1 10 Tf 72 503.4000000000005 Td (Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021) Tj ET
+BT /F1 10 Tf 80 490.9000000000005 Td (- Redesigned the pick paths for the fast-moving zone, cutting walking distance per order by) Tj ET
+BT /F1 10 Tf 86 479.1000000000005 Td (28% and raising picks per labor hour from 92 to 110.) Tj ET
+BT /F1 10 Tf 80 467.30000000000047 Td (- Ran a time study of the returns desk; the findings led to a triage station that cut returns) Tj ET
+BT /F1 10 Tf 86 455.50000000000045 Td (processing time from 3 days to 1.) Tj ET
+BT /F1 10 Tf 80 443.70000000000044 Td (- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock) Tj ET
+BT /F1 10 Tf 86 431.90000000000043 Td (from 95 to 40 minutes.) Tj ET
+BT /F1 10 Tf 80 420.1000000000004 Td (- Set up cycle counting for the 2,000 highest-value locations, raising inventory record) Tj ET
+BT /F1 10 Tf 86 408.3000000000004 Td (accuracy from 91% to 98.5% within a year.) Tj ET
+BT /F1 12 Tf 72 391.5000000000004 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 377.5000000000004 Td (Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present) Tj ET
+BT /F1 10 Tf 80 365.0000000000004 Td (- Spearheaded a data-driven, optimization-first transformation of last-mile logistics that) Tj ET
+BT /F1 10 Tf 86 353.2000000000004 Td (unlocked significant efficiency gains.) Tj ET
+BT /F1 10 Tf 80 341.4000000000004 Td (- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing) Tj ET
+BT /F1 10 Tf 86 329.60000000000036 Td (problem with customer time windows.) Tj ET
+BT /F1 10 Tf 80 317.80000000000035 Td (- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the) Tj ET
+BT /F1 10 Tf 86 306.00000000000034 Td (routes on two trucks for a month.) Tj ET
+BT /F1 10 Tf 72 294.20000000000033 Td (Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022) Tj ET
+BT /F1 10 Tf 80 281.70000000000033 Td (- Analyzed warehouse operations and made recommendations to the food bank's leadership.) Tj ET
+BT /F1 10 Tf 80 269.9000000000003 Td (- Mapped the donation intake process with the warehouse lead and removed two duplicate data-) Tj ET
+BT /F1 10 Tf 86 258.1000000000003 Td (entry steps, so donations reached the shelves a day sooner.) Tj ET
+BT /F1 10 Tf 80 246.3000000000003 Td (- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again) Tj ET
+BT /F1 10 Tf 86 234.50000000000028 Td (after its spring expansion.) Tj ET
+BT /F1 12 Tf 72 217.70000000000027 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 203.70000000000027 Td (Tools: Excel, Python, SAP) Tj ET
+BT /F1 10 Tf 72 191.20000000000027 Td (Methods: demand forcasting, inventory planning, time studies, vehicle routing) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+5140
+%%EOF

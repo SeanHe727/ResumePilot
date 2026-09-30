@@ -1,0 +1,159 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "There is no product-focused headline or summary.",
+      "because": "The current mechanic title makes the target role unclear on a quick scan."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The move from operations to the MBA and product internship to mechanic needs context.",
+      "because": "Readers may be unsure about the career direction and recency of product work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The experience entries are not in reverse chronological order.",
+      "because": "The 2024 Harbor Payments internship appears after Crestline, which ended in 2023."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The amount of direct product experience may limit the level of product role this résumé supports.",
+      "because": "Most professional experience is in operations rather than a formal product role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé does not establish engineering or design collaboration.",
+      "because": "Product reviewers look for evidence of delivering with those partners."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The skills section offers limited evidence of technical analytics or software-delivery workflows.",
+      "because": "A skills list alone does not establish practical proficiency."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Metrics and units could be styled more consistently.",
+      "because": "Consistency would make the results easier to scan."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The first mechanic bullet may not need both engines and gearboxes.",
+      "because": "The detail should support the intended product-career narrative."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The scorecard bullet does not say what the scorecards or meetings changed.",
+      "because": "It describes ownership of a recurring task without decision context or impact."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The pick-error result does not show how it was measured and attributed.",
+      "because": "A reader may ask how the reported outcome was established."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The driver-hours result does not show how it was measured and attributed.",
+      "because": "A reader may ask how the reported outcome was established."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The scope of shipping the checkout flow to “all merchants” is unclear.",
+      "because": "A later bullet says leadership funded a rollout to two more regions."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The description of how RICE Reach was scored needs clarification or qualification.",
+      "because": "It may suggest imprecise use of standard RICE terminology."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The checkout-test bullet appears to repeat the experiment and conversion lift in line 17.",
+      "because": "Repetition takes space from other product contributions and can make the internship look thinner."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "Growth from 400 to 1,150 weekly active users is not a 150% increase.",
+      "because": "The starting value, ending value, and stated percentage cannot all be right."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The passive intake bullet does not clearly identify your contribution.",
+      "because": "It is difficult to tell what you personally did."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The intake bullet does not clearly identify the result.",
+      "because": "It is difficult to tell what changed."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The consulting section has two bullets about the same approved pilot.",
+      "because": "The bullets should demonstrate distinct work rather than repeat the approval."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4391,
+    "input_tokens_details": {
+      "cache_write_tokens": 4388,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1714,
+    "output_tokens_details": {
+      "reasoning_tokens": 968
+    },
+    "total_tokens": 6105
+  }
+}

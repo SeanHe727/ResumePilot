@@ -1,3 +1,4 @@
+import { buildTimeline, timelineIssues } from '../document/timeline.js';
 import { sectionText } from '../document/render.js';
 import { DATE_RANGE, EMAIL, PHONE } from '../document/vocabulary.js';
 import type { Bullet, FormatDiagnosis, ResumeDocument, ScoredDimension } from '../domain.js';
@@ -29,7 +30,10 @@ const MESSAGES: Readonly<Record<string, string>> = {
   'harvard.no-pronouns': 'uses a personal pronoun; resume lines are phrases, not sentences',
   'harvard.passive-voice': 'passive voice hides who did the work',
   'harvard.no-references': 'references are requested separately; the line spends space to say nothing',
-  'harvard.no-personal-details': 'age, gender and photos are excluded by convention',
+  // No list of what else might be there. Measured: the list was read as a
+  // finding, and a report told a candidate to remove a gender and a photo the
+  // page did not have.
+  'harvard.no-personal-details': 'personal details a reader is not meant to weigh are left off by convention',
   'harvard.date-first-line':
     'opens with a date, putting the reader on the timeline instead of the achievement',
   'harvard.missing-contact': 'no email or phone in the body — the application cannot be answered',
@@ -106,6 +110,8 @@ export function analyzeFormat(resume: ResumeDocument): FormatDiagnosis {
   collectSkillsIssues(resume, issues);
   collectContactIssues(resume, issues);
   collectConventionIssues(resume, issues);
+  // Dates that are simply wrong, found by arithmetic rather than by a reader.
+  issues.push(...timelineIssues(buildTimeline(resume)));
 
   // Only what a machine reading the file can decide.
   //
@@ -343,7 +349,7 @@ function collectSkillsIssues(resume: ResumeDocument, issues: string[]): void {
  * that reports what the classifier thinks rather than what the resume says.
  */
 function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
-  const text = resume.sections.flatMap(sectionText).join(' ');
+  const text = [...resume.sections.flatMap(sectionText), ...unplacedLines(resume)].join(' ');
 
   const hasEmail = EMAIL.test(text);
   const hasPhone = PHONE.test(text);
@@ -360,7 +366,7 @@ function collectContactIssues(resume: ResumeDocument, issues: string[]): void {
  * can appear in a section this analysis does not otherwise model.
  */
 function collectConventionIssues(resume: ResumeDocument, issues: string[]): void {
-  const lines = resume.sections.flatMap(sectionText);
+  const lines = [...resume.sections.flatMap(sectionText), ...unplacedLines(resume)];
 
   for (const line of lines) {
     if (mentionsReferences(line)) issues.push(describe('harvard.no-references', line));
@@ -368,6 +374,24 @@ function collectConventionIssues(resume: ResumeDocument, issues: string[]): void
     const detail = personalDetail(line);
     if (detail) issues.push(describe('harvard.no-personal-details', line));
   }
+}
+
+/**
+ * Lines of the file the parse left out of every section.
+ *
+ * A row the parser could not place is still on the page, and a reader still
+ * sees it. Measured: a date of birth the parse dropped went
+ * unreported in two runs, while every run that placed it reported it.
+ * A line a revision has since rewritten also lands here, which only matters if
+ * the old wording carried a contact detail or a personal one.
+ */
+function unplacedLines(resume: ResumeDocument): string[] {
+  const squash = (t: string) => t.toLowerCase().replace(/\s+/g, '');
+  const placed = squash(resume.sections.flatMap(sectionText).join(' '));
+  return (resume.rawText ?? '')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line && !placed.includes(squash(line)));
 }
 
 /** Convenience for the report layer: the same score, but explained. */

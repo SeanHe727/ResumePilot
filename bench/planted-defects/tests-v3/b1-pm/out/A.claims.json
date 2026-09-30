@@ -1,0 +1,250 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Personal details such as date of birth and nationality should be removed from the résumé.",
+      "because": "Readers are not meant to weigh these details when assessing your qualifications. Keeping them uses scarce space and can introduce irrelevant personal information into the hiring decision."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The résumé repeats the same onboarding achievement under Harbor Payments and the hospital practicum, with conflicting context and results.",
+      "because": "A reader would notice that a merchant-payment result is attributed to a regional hospital project and that '9 days to 4' conflicts with 'halved.' This creates doubt about ownership, accuracy and which experience actually produced the result."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Move EXPERIENCE above EDUCATION.",
+      "because": "The résumé currently makes the MBA and undergraduate degree establish the story before more than four years of full-time work. A recruiter may miss the operations and product direction that should frame the candidacy."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "The résumé has an unexplained eight-month gap between the undergraduate degree and the first listed role.",
+      "because": "The dates show the degree ending in June 2018 and the first role beginning in March 2019. A recruiter may wonder whether a job, relocation, study period or other relevant activity is missing."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The checkout-conversion claim is not established for 'all merchants' by merely replacing the flow.",
+      "because": "A before-and-after result cannot separate the flow’s effect from seasonality, traffic mix, instrumentation changes or other factors without a controlled comparison. The universal scope also requires evidence that the result applies across all merchants."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The checkout-conversion bullet does not identify the baseline or comparison period behind the 35% figure.",
+      "because": "A reader cannot tell whether 35% means a relative increase or a change from one conversion rate to another. Stating the comparison would make the result easier to interpret and trust."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The checkout-conversion bullet should present the measured population rather than claiming the result for all merchants.",
+      "because": "The current universal scope is not supported by the bullet’s evidence. Narrowing the claim protects credibility while preserving the reported improvement."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The dispute self-service bullet gives a delivery milestone but no outcome from the product itself.",
+      "because": "Shipping two weeks early proves execution speed, not whether the feature solved a customer or business problem. A product reader needs one result showing why the shipped work mattered."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The chargeback-loss result is stated indirectly and the dollar figure is not in a scannable résumé format.",
+      "because": "The roadmap impact comes after too much setup, so the reader must work to find the business consequence. '1.1 million dollars' is also slower to scan than the standard abbreviated format."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The triage bullet uses vague timing filler and gives the queue reduction without its starting or ending count.",
+      "because": "'Over the summer' adds little beyond the dated internship. A relative reduction without counts makes the scale harder to judge quickly."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The onboarding comparison cannot establish that the redesign caused any improvement because merchants self-selected into the flows.",
+      "because": "Adopters and non-adopters may have differed in size, motivation, capability or onboarding difficulty before the redesign. The comparison supports an association, not a causal measurement, so presenting it as proof would overstate the analysis."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The onboarding-measurement bullet reports the comparison method but not its outcome.",
+      "because": "A reader can see how the redesign was evaluated but cannot tell whether onboarding improved or the change was justified. Without the result, the line reads as a measurement process rather than an accomplishment."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The phrase 'merchants who opted into the new flow with those who stayed on the old one' is unnecessarily long.",
+      "because": "The comparison groups are difficult to scan, especially inside a bullet that already explains a measurement approach. The length competes with the result and makes the method less direct."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The 9-days-to-4-days result conflicts with the separate claim that the same redesign halved time to first payment.",
+      "because": "Reducing 9 days to 4 days is a 5-day reduction, or about 55.6%, not an exact halving; half of 9 days is 4.5 days. If the metric, population and redesign are the same, both figures cannot be exact."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The unit is missing after the ending value in 'from 9 days to 4.'",
+      "because": "Without 'days' after 4, the comparison is grammatically incomplete and the reader must infer the unit. Repeating the unit makes the before-and-after result immediately clear."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The internship currently reads as separate tasks instead of a prioritized product story.",
+      "because": "The strongest outcomes are present, but routine triage and measurement dilute the product results when they appear as an undifferentiated list. A recruiter may not immediately see the redesign, roadmap and shipped-product ownership."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Excluding weather-delayed shipments changed the reported late-delivery rate but did not cut the underlying number of late deliveries.",
+      "because": "A practitioner would distinguish an actual performance improvement from a change in the metric’s denominator. As written, the bullet presents a reporting change as an operational result, which weakens confidence in the analysis."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "'Cut warehouse pick errors 30%' is grammatically incomplete because the reduction needs 'by.'",
+      "because": "The missing preposition makes the result read awkwardly and can slow a recruiter’s scan. It also leaves the reduction less polished than the surrounding quantified bullets."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The pick-error result gives a percentage reduction without its starting and ending error rates.",
+      "because": "A percentage reduction without a baseline is harder to judge across warehouse operations. The comparison would make the result more credible and easier to understand quickly."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "'Prepares the forecast pack' incorrectly uses present tense for a role that ended in August 2023.",
+      "because": "The entry describes a completed past role, but the wording claims the preparation is ongoing. That tense shift can make the employment timeline seem inaccurate."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The S&OP review and forecast-pack bullet does not state what changed as a result.",
+      "because": "A hiring manager can see the activity and cross-functional scope, but not whether it improved forecast accuracy, inventory decisions, service levels or another operating outcome. Without a result, the line reads mainly as meeting administration."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "'S&OP' is unexplained jargon for readers outside operations and supply-chain functions.",
+      "because": "A recruiter unfamiliar with the abbreviation may not know that it refers to sales and operations planning. The unexplained acronym can obscure the cross-functional scope of the work."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The app-launch bullet does not show what you personally did as product lead.",
+      "because": "A reader can see the scale and outcome but cannot tell which product decision or ownership detail enabled the launch or adoption. Adding one compact action would make the achievement more credible and interviewable."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The app’s scope is unclear because 'with two dining halls' does not say whether it served students, halls or both.",
+      "because": "A recruiter may misread the relationship between the users and the dining halls. The passive phrase about discarded food also buries the result instead of showing what the app achieved."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The pickup-reminder bullet should not imply that interviews proved the reminders caused user growth.",
+      "because": "The growth could also reflect seasonality, promotion, changes in food supply or other operational changes during the following term. The interviews support the problem diagnosis, not the causal attribution."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The volunteer-system bullet does not show what product or operational work you owned.",
+      "because": "The results are persuasive, but a reader cannot distinguish designing the process from simply administering an existing arrangement. A compact ownership detail would show the skill behind the outcome."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The volunteer-system bullet does not clearly show whether it operated across both dining halls, and it repeats the weekly time frame.",
+      "because": "The scope of the system is ambiguous, so the reader cannot tell whether both halls used it or merely helped create it. 'Each week' followed by 'a week' makes the ending awkward and adds redundant wording."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The outpatient-scheduling working-session bullet gives no resulting change or measurable outcome.",
+      "because": "A reader can see stakeholder engagement but cannot tell whether the sessions improved scheduling, informed a recommendation or led to implementation. Without an outcome, the practicum reads as recurring meetings rather than consulting work."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "'Working sessions with clinic managers on outpatient scheduling' does not show what analytical or consulting work you led.",
+      "because": "The collaboration is clear, but the reader cannot picture the skill behind it. The bullet therefore gives stakeholder access without demonstrating your contribution."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The patient-intake bullet does not show what the mapping analysis identified or what the shortened form improved.",
+      "because": "The reader cannot tell what was removed, how substantial the reduction was or what operational result followed. The passive construction also obscures your role and buries adoption at the end."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding result does not belong in the regional hospital network practicum.",
+      "because": "Merchant onboarding and time to first payment are payments-industry processes, not hospital patient-intake or outpatient-scheduling metrics. The line also duplicates the Harbor Payments claim, creating a clear contradiction in the work history."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The phrase 'it takes' incorrectly shifts the merchant bullet into present tense.",
+      "because": "The practicum is a completed role, so present tense makes the timing inconsistent even before the bullet’s industry mismatch is considered. The awkward placement of 'across 2,300 merchants' also separates the scope from the result."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The hospital practicum should remove the merchant-payment bullet and lead with the adopted intake improvement.",
+      "because": "The first two bullets form a coherent hospital-scheduling project, while the third changes industry and duplicates another entry. Keeping the unrelated result makes the practicum look copied or factually unreliable."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5449,
+    "completion_tokens": 2378,
+    "total_tokens": 7827,
+    "prompt_tokens_details": {
+      "cached_tokens": 5248,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

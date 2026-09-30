@@ -1,0 +1,109 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometrics, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The return-retention and slippage figures lack a comparison period and baseline."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Purged walk-forward splits and an embargo period did not establish that every backtest decision used only information available at the time."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The bullet does not state what the validation established or enabled."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The capacity estimate and approved live allocation are not quantified."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The onboarding outcome is phrased as though the intern cohort onboarded someone else."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "A seed and configuration file alone do not guarantee that every run is reproducible."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The claim that the variance bound improves the previous bound by a logarithmic factor is not verifiable as written and may be misleading."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The reported Diebold–Mariano tests do not establish that the gain was significant in both crisis periods."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The research bullet leads with testing and paper length, uses passive presentation wording, and omits the consequence of the presentation."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The bullet repeats the same ranking information in both the placement and top-percentile claims."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The 0.02 validation gap is not interpretable because its metric, unit, and before-and-after change are unspecified."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The phrase 'without losing validation score' gives no score, metric, or comparison point."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3486,
+    "completion_tokens": 11392,
+    "total_tokens": 14878,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10859
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3486
+  }
+}

@@ -137,7 +137,7 @@ describe('a specialist on the record', () => {
       tools: ['query_knowledge_base', 'examine_technical_depth'],
       contextKeys: ['entry', 'briefing'],
       allowedContextKeys: ['briefing', 'entry', 'previousFindings'],
-      maxTurns: 6,
+      maxTurns: 8,
     });
   });
 

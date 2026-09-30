@@ -1,0 +1,99 @@
+{
+  "file": "tmp/bench/tests/b1-pm/out/A.md",
+  "recall": 9,
+  "found": [
+    "D4",
+    "D8",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D17",
+    "D20"
+  ],
+  "coverage": true,
+  "suggestions": 20,
+  "words": 1539,
+  "quotes": 15,
+  "grounded": 10,
+  "rewrites": 3,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3911,
+    "completion_tokens": 12582,
+    "total_tokens": 16493,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12262
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 3655
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "Two Harbor bullets cover substantially the same dispute-self-service work"
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "Skills not demonstrated elsewhere: SQL, Jira, Figma, Amplitude, Excel, Python, Kubernetes, and machine learning"
+      },
+      {
+        "id": "D9",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D11",
+        "found": true,
+        "evidence": "The stated endpoints represent a decrease, not a 90% increase"
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "it appears to be copied from or inconsistent with the Harbor Payments entry"
+      },
+      {
+        "id": "D13",
+        "found": true,
+        "evidence": "Qualify the team-of-40 and P&L claim by distinguishing direct management from cross-functional coordination and shared responsibility"
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "The end date precedes the start date"
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "too general to communicate specific work"
+      },
+      {
+        "id": "D17",
+        "found": true,
+        "evidence": "One Crestline bullet combines training, vendor negotiations, finance audits, committee work, and several broad outcomes"
+      },
+      {
+        "id": "D20",
+        "found": true,
+        "evidence": "Misspellings: `roadmaping`, `user interveiws`"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 20,
+    "rewrites": [
+      "a one-page checkout against the three-step version.",
+      "shipped two weeks early.",
+      "with engineering, risk and support; shipped early."
+    ],
+    "falsePositives": []
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 1247,
+  "quotes": 5,
+  "grounded": 4,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Remove age, gender, photographs, date of birth, and nationality.",
+    "Add the user or business outcomes behind the dispute work and chargeback research."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3460,
+    "completion_tokens": 16386,
+    "total_tokens": 19846,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15964
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 1796
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "s2:e1:b2: 'Coordinated ... and prepares' mixes past and present tense"
+      },
+      {
+        "id": "W4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Clarify the 35% conversion baseline, unit, and merchant comparison."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Replace the unrelated merchant-onboarding bullet with the hospital project’s actual outcome. The mismatch breaks the entry’s narrative and suggests copied content."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "the hospital weekly-sessions bullet describe recurring work but do not show what changed as a result"
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "s2:e0:b4: 'merchants who opted into the new flow' introduces a self-selection problem"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Replace the adjusted late-delivery claim with an unadjusted rate or shipment comparison. Changing the KPI definition does not prove faster deliveries."
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "Move Experience above Education and explain the eight-month post-graduation gap."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove personal demographic information. The format review identified “Date of birth” and “Nationality.”"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": [],
+    "falsePositives": [
+      "Remove age, gender, photographs, date of birth, and nationality.",
+      "Add the user or business outcomes behind the dispute work and chargeback research."
+    ]
+  }
+}

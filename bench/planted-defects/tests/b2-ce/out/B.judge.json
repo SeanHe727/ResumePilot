@@ -1,0 +1,91 @@
+{
+  "file": "bench/planted-defects/tests/b2-ce/out/B.md",
+  "recall": 5,
+  "found": [
+    "W3",
+    "W5",
+    "A1",
+    "A4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 98,
+  "words": 2687,
+  "quotes": 2,
+  "grounded": 2,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5179,
+    "completion_tokens": 11483,
+    "total_tokens": 16662,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11035
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5179
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Correct the grammar error in the Eastern Robotics CI bullet. “Maintained” and “adds” are inconsistent in tense. Make the entire bullet past tense."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "Remove or substantially replace this bullet. It is vague, promotional, and unsupported by metrics. “AI-first,” “accelerating delivery,” and “improving outcomes” do not tell the reader what you built or what changed."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "specify what “diagnostic accuracy” means elsewhere in the bullet or surrounding context: for example, the evaluation measure or baseline definition. Clarify whether this was a relative or percentage-point improvement."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Investigate the duplicated backlog metric. The Mobility Systems role and Research-Agent Evaluation Framework both claim reducing a pending-case backlog involving 800+ sensor signals."
+      },
+      {
+        "id": "S2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove date of birth and nationality. They are not needed for most Canadian/U.S. technical applications and can introduce bias or create work-authorization questions."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 98,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code link open directly to relevant, working code or project documentation.",
+      "because": "A general profile is less useful if a reviewer has to hunt for your work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the more recent Voltline role above Clearwater Sensors.",
+      "because": "Experience should run newest to oldest so your current level of work is visible first."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify what part of the end-of-line test process you automated.",
+      "because": "It helps establish your technical contribution."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the drop in complaints can reasonably be attributed to the calibration procedure.",
+      "because": "That makes the causal claim more credible."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Specify whether the 60% improvement means download time, total update time, or transfer rate.",
+      "because": "Compression and interrupted-download recovery solve different problems, so the metric is ambiguous."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add the relevant hardware or test scope if it demonstrates a skill required by target jobs.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Say the recorded data enabled diagnosis rather than suggesting the logger found root causes.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz does not capture it without aliasing.",
+      "because": "That would require a sampling rate above 10 kHz, or a different explanation of the measured signal."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Declaring a shared counter volatile does not by itself fix a race condition.",
+      "because": "It does not make access atomic."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Be ready to explain how the field-fault reduction was measured.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Remove the promotional language.",
+      "because": "It does not tell a reviewer what you built or how."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "If relevant, specify the operating conditions used for the current measurements.",
+      "because": "That would show the measurements are comparable."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "State the responsibilities you actually held as electronics lead.",
+      "because": "The current bullets do not show how you led the team of 12."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The bullet discusses a robot fleet rather than the electric car.",
+      "because": "As written, it undermines confidence in the rest of the resume."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Make your own role in writing and testing the CAN-bus firmware explicit.",
+      "because": "The passive construction obscures your contribution."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The bullet discusses a robot fleet rather than the electric car.",
+      "because": "As written, it undermines confidence in the rest of the resume."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The bullet substantially duplicates the Voltline motor-controller achievement.",
+      "because": "As written, it undermines confidence in the rest of the resume."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Separate languages, hardware or platforms, and lab tools more consistently.",
+      "because": "A more specific skills list is more useful."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Separate methods more consistently from the other skill categories.",
+      "because": "A more specific skills list is more useful."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Use specific, substantiated tools or protocols instead of broad terms such as “firmware.”",
+      "because": "That makes the skills list more useful."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1822,
+    "input_tokens_details": {
+      "cache_write_tokens": 1819,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1304,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 3126
+  }
+}

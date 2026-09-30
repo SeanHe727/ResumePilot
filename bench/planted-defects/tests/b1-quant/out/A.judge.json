@@ -1,0 +1,111 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1"
+  ],
+  "coverage": true,
+  "suggestions": 27,
+  "words": 2906,
+  "quotes": 17,
+  "grounded": 7,
+  "rewrites": 13,
+  "inventedNumbers": [
+    "25"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 6014,
+    "completion_tokens": 9113,
+    "total_tokens": 15127,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8500
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4094
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "The phrase “my proof” uses a first-person pronoun in a résumé written as phrases rather than first-person sentences."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "The Methods skills line misspells “econometrics.”"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 52% to 58% is an increase of 6 percentage points, not a 6% relative improvement."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The reduction from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The long sequence of implementation details delays the reusable feature-store result and its later-project impact."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The package's download result is separated from its subject by several unrelated responsibilities, creating an ambiguous “which.”"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "The daily Sharpe ratio was annualized incorrectly by multiplying it by 252 instead of √252."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Standard Diebold–Mariano testing is not sufficient as the sole confirmation when the competing HAR-RV model is nested."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "The first position gives an unrelated retail role more narrative weight than the quantitative research experience most relevant to the apparent target."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": true,
+    "suggestions": 27,
+    "rewrites": [
+      "keeping weekly labour spend within [variance] of budget",
+      "Tracked daily stock and supplier orders; unsold bread fell from 12% to 7% of production.",
+      "reproducible with fixed per-replicate random streams and a controlled environment",
+      "supporting reproducibility with fixed random seeds.",
+      "the proof",
+      "included as Section 3 of a JASA submission.",
+      "4.8/5 from [number of respondents]",
+      "by 6 percentage points.",
+      "a 25% reduction.",
+      "√252.",
+      "by 7% relative,",
+      "econometrics.",
+      "a 0.02 [metric] gap"
+    ],
+    "falsePositives": []
+  }
+}

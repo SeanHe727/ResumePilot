@@ -1,0 +1,105 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 17,
+  "words": 2061,
+  "quotes": 11,
+  "grounded": 6,
+  "rewrites": 5,
+  "inventedNumbers": [
+    "25",
+    "11.5"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4806,
+    "completion_tokens": 7115,
+    "total_tokens": 11921,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 6601
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2886
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove the first-person reference in the research-assistant entry"
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "The Methods skill is misspelled: \"econometircs\" should be \"econometrics.\""
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 52% to 58% is 6 percentage points, not a 6% improvement."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The line incorrectly calls the reduction from 0.20 to 0.15 a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "the reuse result is buried after three implementation details without saying what the reuse enabled"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The research-assistant entry mixes research, systems work, teaching, grading, reading-group organization, and cluster maintenance"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "The daily Sharpe ratio was annualized incorrectly by multiplying it by 252 instead of by the square root of 252."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "The claim that standard Diebold–Mariano tests confirmed the gain is technically incorrect for a nested baseline"
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Sunrise Bakery currently appears first and interrupts the quantitative-research narrative."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "SQL, C++, Kafka, and Bayesian inference are listed as skills without corresponding evidence anywhere in the résumé."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 17,
+    "rewrites": [
+      "multiplying it by √252",
+      "a 25% reduction",
+      "by 6 percentage points",
+      "by approximately 11.5% relative",
+      "econometrics."
+    ],
+    "falsePositives": []
+  }
+}

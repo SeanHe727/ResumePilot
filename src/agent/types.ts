@@ -1,5 +1,6 @@
 import type { TokenUsage } from '../types.js';
 import type { TaskKind } from '../query-engine/types.js';
+import type { ContextConfig } from '../context/types.js';
 import type {
   EntryDiagnosis,
   ExtractionQuality,
@@ -61,6 +62,15 @@ export interface SubAgentConfig {
    * narrower the input, the sharper the judgement.
    */
   contextBoundary: string[];
+  /**
+   * Window limits for this agent, over the shared defaults.
+   *
+   * Every role reads one entry or one page and fits the same window. Only the
+   * single-agent ablation, which reads everything in one context, needs more.
+   */
+  context?: Partial<ContextConfig>;
+  /** Output cap per call, where the provider default is too small for the answer. */
+  maxTokens?: number;
 }
 
 export interface SubAgentTask {
@@ -200,7 +210,22 @@ export interface Orchestrator {
   /** Whole-document roles, run once rather than per entry. Null when the agent failed. */
   assessNarrative(resume: ResumeDocument, briefing?: Briefing): Promise<NarrativeAssessment | null>;
   matchJd(resume: ResumeDocument, jd: JobDescription, briefing?: Briefing): Promise<JdMatch | null>;
+  /**
+   * The single-agent ablation: every per-entry and whole-page reading from one
+   * agent in one context. Optional, since only the default orchestrator has it.
+   */
+  reviewWhole?(resume: ResumeDocument, briefing?: Briefing, flat?: boolean): Promise<WholeReview>;
+  /** Splits a combined answer the coordinator wrote itself, for the `one` ablation. */
+  readWhole?(resume: ResumeDocument, whole: Record<string, unknown> | null, stat: AgentRunStat): WholeReview;
   parallel(tasks: SubAgentTask[]): Promise<SubAgentResult[]>;
+}
+
+/** What the single agent's one answer comes to, split the way the specialists' would be. */
+export interface WholeReview {
+  verdicts: EntryVerdict[];
+  narrative: NarrativeAssessment | null;
+  /** The one run, for the coverage line and the trace. */
+  stat: AgentRunStat;
 }
 
 export interface ConcurrencyPool {

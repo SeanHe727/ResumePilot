@@ -1,0 +1,93 @@
+{
+  "file": "tmp/bench/out/A-2.md",
+  "recall": 10,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 1428,
+  "quotes": 17,
+  "grounded": 12,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "judgeUsage": {
+    "prompt_tokens": 3745,
+    "completion_tokens": 12422,
+    "total_tokens": 16167,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11987
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3745
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "“Responsible for the monitoring dashboards…” — identify what you built or changed and the operational result."
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "“Improved model performance by 35%” — specify which performance metric and how it was evaluated."
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "“Single-handedly built the company’s entire ML platform used by every team” contains broad absolute claims. Replace it with a precise description of your actual ownership and scope."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "The bullet describing the domain adapter repeats the preceding quantified fine-tuning result. Remove the duplicate or replace it with distinct evidence."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Remove or replace “Leveraged cutting-edge AI synergies to drive innovation across the organization.” It does not identify a concrete contribution or outcome."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "“I worked on improving the latency…” — remove first-person narration; identify the optimization, the before/after latency, and what the tests covered."
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Put Mobility Systems Company before Eastern Robotics Co. The current experience order is not reverse chronological."
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "Keep SKILLS last, but narrow and reorder it around tools demonstrated in Experience and Projects; the current list is broader than the evidence shown in the body."
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Change the present-tense “Builds and maintains” to past tense for consistency with the internship."
+      },
+      {
+        "id": "D10",
+        "found": true,
+        "evidence": "Explain both unexplained intervals—Jun 2022 to Sep 2023 and Mar 2024 to Sep 2024—with the relevant activity or status."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": []
+  }
+}

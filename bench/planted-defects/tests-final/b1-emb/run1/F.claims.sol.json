@@ -1,0 +1,239 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Add a LinkedIn profile if you use one.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Identify whether the code link is GitHub, a portfolio, or another platform.",
+      "because": "Recruiters should be able to identify what they’re opening."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put experience before education.",
+      "because": "With several years of relevant engineering experience, the work history is more important than the degree."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the experience entries in reverse chronological order.",
+      "because": "Voltline is the more recent role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep section formatting consistent and avoid bullets wrapping mid-phrase.",
+      "because": "Natural line breaks make the résumé easier to scan."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Add the unit to both the 90 and 25 values.",
+      "because": "Explicit units make the metric immediately clear."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify that 20,000 units a month is the production volume covered by the test process, if accurate.",
+      "because": "Its relationship to the time savings could be clearer."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Specify whether the lower return rate applied to the affected batch, a later run, or the overall product.",
+      "because": "That context helps readers interpret the improvement."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify what counted as a calibration drift complaint.",
+      "because": "Complaints are less precise than a measured engineering outcome."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "State the period used for the before-and-after complaint comparison.",
+      "because": "The comparison period is unclear."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Confirm that the throughput figures use the same conditions and unit of work.",
+      "because": "Readers need a comparable basis for the increase."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether the throughput increase reflects a measured production rate.",
+      "because": "The increase is strong enough that readers may want to know."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Define what update speed measures and under what conditions.",
+      "because": "Compression and resumable downloads may affect different parts of the update process."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add a supported result of running the HIL tests.",
+      "because": "The bullet describes the activity but not its impact."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify whether the logger identified each root cause or contributed to the diagnoses.",
+      "because": "That distinction makes the claim more exact."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "An 8 kHz sampling rate cannot capture a 5 kHz signal without aliasing.",
+      "because": "The sampling rate must exceed twice the highest frequency of interest, with practical margin and appropriate filtering."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Declaring the shared counter volatile does not fix the race condition.",
+      "because": "Volatile does not make access atomic or prevent a race between an interrupt handler and the main loop."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The motor-controller rewrite duplicates a nearly identical Formula Student claim.",
+      "because": "The claim needs to belong to the right section, or the two projects must be distinguished."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Make the motor-controller work’s scope and your role unambiguous.",
+      "because": "It is unclear what work and results belong to this role."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify the before-and-after basis for the performance and fault-reduction figures.",
+      "because": "The figures need to be credible and interpretable."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Remove the promotional “next-generation, innovation-driven” bullet.",
+      "because": "It is not informative and does not show what you built or what changed."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain the basis for the power-consumption measurements.",
+      "because": "The before-and-after figures should be measured under comparable operating conditions."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify your contribution and the extent of the school’s use.",
+      "because": "That would help show the project’s reach."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain what leading the 12-person team involved.",
+      "because": "The title indicates leadership, but the bullets do not show specific responsibilities or outcomes."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Specify your personal contribution to the team’s firmware and testing.",
+      "because": "“Worked on” is broad."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Identify your role in writing and testing the CAN-bus firmware.",
+      "because": "The passive wording does not identify your contribution."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify the dashboard and motor-controller relationship and the system’s function.",
+      "because": "The bullet mentions both without explaining how they relate."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The 300-robot motor-control claim repeats the Voltline accomplishment.",
+      "because": "Similar performance improvements make the duplication a major credibility risk unless the projects are distinct."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Separate the languages, microcontroller platform, and lab equipment in the Tools category.",
+      "because": "The current category mixes different types of skills."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Separate technical practices from the CAN protocol in the Methods category.",
+      "because": "The current category mixes different types of skills."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Remove or narrow “firmware” as a standalone skill.",
+      "because": "It describes a field of work rather than a distinct skill."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add other relevant embedded tools, languages, or debugging and build systems if accurate.",
+      "because": "The experience suggests you may have used technologies not listed in Skills."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2394,
+    "input_tokens_details": {
+      "cache_write_tokens": 2391,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1788,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 4182
+  }
+}

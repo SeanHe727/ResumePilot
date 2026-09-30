@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Ran a time study of the returns desk; my findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Writes the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Set safety stock for all 1,400 SKUs with the economic order quantity (EOQ) formula, balancing ordering and holding costs.",
+    "defect": "EOQ sets how much to order by balancing ordering and holding costs; it does not set safety stock, which depends on demand and lead-time variability and the target service level."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only SKUs that sold every week.",
+    "defect": "Excluding intermittent SKUs from the MAPE calculation changes what is measured; the forecasts did not become more accurate."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "May 2018 graduation to May 2019",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Tools: Excel, Python, SAP",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (SAP)"
+  }
+]

@@ -77,6 +77,14 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
     reason: 'Hands one entry or the document to a specialist and reads back what it found.',
   },
   {
+    id: 'allow-submit-review',
+    name: 'Submitted review',
+    match: { type: 'tool_name', pattern: 'submit_review' },
+    level: 'low',
+    action: 'allow',
+    reason: 'Files a review the coordinator wrote itself (the single-agent ablation); writes session state only.',
+  },
+  {
     id: 'allow-parse-resume',
     name: 'Read a resume file',
     match: { type: 'tool_name', pattern: 'parse_resume' },
@@ -94,8 +102,8 @@ export const DEFAULT_RULES: readonly PermissionRule[] = [
     level: 'low',
     action: 'allow',
     reason:
-      'Runs one nested agent over one entry and returns what it found. Costs a model call ' +
-      'and writes nothing.',
+      'Runs one nested agent per question, over the line it is about, and returns what they ' +
+      'found. Costs model calls and searches; writes nothing.',
   },
   {
     id: 'allow-record-fact',

@@ -1,0 +1,219 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present",
+    "- Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.",
+    "- Opened the café three days a week and handled the daily cash count.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Migrated 40 department sites to a shared component library, cutting new-page build time from 2 days to half a day.",
+    "- Interviewed 8 department editors about publishing; my findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybook, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience and Projects.",
+      "because": "The résumé does not lead with the most relevant development work."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The morning-rush duties and order count describe work and workload, not an outcome.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "“cafØ” is a corrupted spelling.",
+      "because": "The corrupted character makes a common word look like a typo and can distract a reader."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The opening and cash-counting duties have no stated outcome.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Handled the daily cash count” uses a vague verb.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Barista entry lists routine duties but gives little context for a software-development direction.",
+      "because": "The details do not connect to the development experience elsewhere and take space from more relevant work."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Page performance by 35%” does not identify the metric or its comparison.",
+      "because": "Without a baseline and defined metric, the scale of the improvement is hard to interpret."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The repeated “by” makes the gain and implementation sound clumsy.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Flagged in the audit” is redundant after “accessibility issues.”",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Which caught” makes the connection between the tests and regressions less direct.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "“By adding” could be tightened without losing the implementation detail.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Storing user input in React state does not prevent XSS when it is rendered with `dangerouslySetInnerHTML`.",
+      "because": "React state does not sanitize HTML, and `dangerouslySetInnerHTML` bypasses React’s normal escaping."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The XSS-prevention claim has no verification result or evidence.",
+      "because": "Without a security test or audit result, the claim is difficult to assess."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The result is buried after the technology and implementation details.",
+      "because": "A scanning reader encounters the method before the load-time and booking gains."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“My findings” uses a first-person pronoun in a résumé bullet.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "“Writes” is the wrong tense.",
+      "because": "The role ended in August 2024."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Search time” does not specify what the 4 seconds to under 1 measures.",
+      "because": "A reader cannot tell whether it means page time, query response time, or time to find a course."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Showing live bus arrivals” does not explain how the app retrieves or updates arrival information.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The faster load-time result appears after the implementation detail.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“And” does not clarify the relationship between open-sourcing the app and the agency linking it.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The project heading says Vue, but the bullet says the booking flow used React and TypeScript.",
+      "because": "The framework mismatch makes the technology description less credible unless different parts used different frameworks."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Worked on the frontend” is vague and does not name the specific action performed.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The booking-flow contribution has no stated result.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The calendar component and its tests are described without a result.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The calendar-component result is not the opening point of the project entry.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The travel-search bullet does not clearly belong with the library room-booking project.",
+      "because": "The other bullets describe library booking, while this one resembles work in the Lumen Travel internship."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The booking increase does not specify the booking measure or its comparison.",
+      "because": "Without that context, “about a tenth” is difficult to interpret."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The travel-search achievement closely matches the Lumen Travel internship achievement and may look duplicated.",
+      "because": "Both describe a travel-search rebuild with server rendering and a booking gain, casting doubt on whether they are separate achievements."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3274,
+    "input_tokens_details": {
+      "cache_write_tokens": 3271,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1527,
+    "output_tokens_details": {
+      "reasoning_tokens": 458
+    },
+    "total_tokens": 4801
+  }
+}

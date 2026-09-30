@@ -1,0 +1,202 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The feature-store result is hidden after a long sequence of implementation details."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Sunrise Bakery appears before the quantitative roles, making retail look like the candidate's primary direction."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The quantitative projects are separated from Northpeak Capital instead of reinforcing the visible research and modeling trajectory."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Within its weekly labour budget” does not show how closely labour spending matched the budget."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Ran daily stock counts and supplier orders” does not say what changed in the ordering process and makes supplier orders sound counted rather than placed."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Keeping 90% of gross returns” does not identify the return measure or comparison behind the retention figure."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Standard Diebold–Mariano tests do not by themselves validly confirm a forecast gain against a nested HAR-RV model across 30 indices."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The bullet says the forecast gain was confirmed without stating how large the gain was or what changed."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Nested HAR-RV baseline” and “Diebold-Mariano tests” obscure the plain-language result for a general reader."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The construction “Joining 120 microstructure features ... built” is grammatically incorrect and leaves the subject of the work unclear."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The daily Sharpe ratio was annualized with the wrong factor: daily Sharpe ratios scale by the square root of time, not by 252."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Multiplying the daily Sharpe ratio by 252 provides no performance comparison, validation result or downstream measure."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The wiki's onboarding use is stated without showing what improvement it produced."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The onboarding result is placed at the end after several documentation details."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "A seed and configuration file alone do not guarantee that every shared-cluster run is reproducible."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "The phrase “my proof” violates the résumé's phrase-style bullet format."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The bound improvement is stated without the exact old-versus-new bound or asymptotic comparison."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The phrase “is now Section 3 of a paper” is awkward and makes the publication status harder to scan."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The teaching bullet describes recitations and problem sets without showing the instructional method or learning result."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The final bullet bundles the package, cluster, reading group and grading into an unordered task list."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The R package is named without indicating the distinctive technical work implemented inside it."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The package's 3,000-download result is grammatically separated from the product it measures."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The reduction from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Forecast error” does not identify the metric that changed from 0.20 to 0.15."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The second volatility-study bullet repeats “adding realized-volatility features” without showing that it was a separate experiment."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The change from 52% to 58% is an increase of 6 percentage points, not 6%."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The competition placement and top-2% statement communicate nearly the same result."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The 0.02 gap is not identified by metric or described with a clear before-and-after comparison."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Cut validation leakage” is abstract, and the measurable score-gap reduction is buried after the method."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "“Without losing validation score” does not name the metric or state the comparison with the 900-feature model."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5651,
+    "completion_tokens": 6684,
+    "total_tokens": 12335,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 5678
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5651
+  }
+}

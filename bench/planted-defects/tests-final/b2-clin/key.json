@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W4",
+    "category": "wording",
+    "line": "The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
+  },
+  {
+    "id": "W5",
+    "category": "wording",
+    "line": "Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "defect": "Generic claims with no concrete action, subject or result."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited residents.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting for age and insurance.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-checking them against pharmacy records each week, cut unresolved safety queries from 45 to 6.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "defect": "Averaging follow-up of deaths while excluding censored patients is biased; median survival needs a Kaplan-Meier estimate that uses censored data."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Randomized patients by assigning those admitted on odd-numbered days to the program and even-numbered days to usual care.",
+    "defect": "Assigning by odd and even days is alternation, not randomization: allocation is predictable and cannot be concealed."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "May 2021 graduation to Apr 2022",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 22 May 1997 | Nationality: Chilean",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

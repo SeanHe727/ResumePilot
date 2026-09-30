@@ -1,0 +1,76 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 4963>>
+stream
+BT /F1 16 Tf 72 752 Td (Casey Morgan) Tj ET
+BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan) Tj ET
+BT /F1 12 Tf 72 715.5 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 72 701.5 Td (Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019) Tj ET
+BT /F1 12 Tf 72 684.0 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 72 670.0 Td (Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025) Tj ET
+BT /F1 10 Tf 80 657.5 Td (- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers;) Tj ET
+BT /F1 10 Tf 86 645.7 Td (the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.) Tj ET
+BT /F1 10 Tf 80 633.9000000000001 Td (- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by) Tj ET
+BT /F1 10 Tf 86 622.1000000000001 Td (splitting it into three short steps with saved progress.) Tj ET
+BT /F1 10 Tf 80 610.3000000000002 Td (- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so) Tj ET
+BT /F1 10 Tf 86 598.5000000000002 Td (every major release was tested with real account holders before launch.) Tj ET
+BT /F1 10 Tf 80 586.7000000000003 Td (- Built a research repository of 250 tagged session clips that product managers searched) Tj ET
+BT /F1 10 Tf 86 574.9000000000003 Td (before writing new requirements.) Tj ET
+BT /F1 10 Tf 80 563.1000000000004 Td (- Presented quarterly findings to the head of product and two design teams; three of the top) Tj ET
+BT /F1 10 Tf 86 551.3000000000004 Td (five recommended fixes shipped in the next release cycle.) Tj ET
+BT /F1 10 Tf 80 539.5000000000005 Td (- Trained 12 product managers to run their own unmoderated tests with a shared script) Tj ET
+BT /F1 10 Tf 86 527.7000000000005 Td (template, which doubled the number of tests run each quarter.) Tj ET
+BT /F1 10 Tf 72 515.9000000000005 Td (Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022) Tj ET
+BT /F1 10 Tf 80 503.40000000000055 Td (- Ran the monthly patient survey and rebuilt its reporting dashboard, cutting the time from) Tj ET
+BT /F1 10 Tf 86 491.60000000000053 Td (survey close to published findings from 3 weeks to 4 days.) Tj ET
+BT /F1 10 Tf 80 479.8000000000005 Td (- Interviewed 40 patients about appointment reminders; the findings led to a two-way text) Tj ET
+BT /F1 10 Tf 86 468.0000000000005 Td (reminder that cut missed appointments from 14% to 9%.) Tj ET
+BT /F1 10 Tf 80 456.2000000000005 Td (- Wrote the screener and consent templates for all patient studies, cutting study setup time) Tj ET
+BT /F1 10 Tf 86 444.4000000000005 Td (from two weeks to three days.) Tj ET
+BT /F1 10 Tf 80 432.6000000000005 Td (- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut) Tj ET
+BT /F1 10 Tf 86 420.80000000000047 Td (support calls about joining a video visit by 30%.) Tj ET
+BT /F1 12 Tf 72 404.00000000000045 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 390.00000000000045 Td (Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present) Tj ET
+BT /F1 10 Tf 80 377.50000000000045 Td (- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12) Tj ET
+BT /F1 10 Tf 86 365.70000000000044 Td (participants on timed route-finding tasks.) Tj ET
+BT /F1 10 Tf 80 353.90000000000043 Td (- Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds) Tj ET
+BT /F1 10 Tf 86 342.1000000000004 Td (and errors from 11 to 3 across the 12 sessions.) Tj ET
+BT /F1 10 Tf 80 330.3000000000004 Td (- Published the design files and test protocol openly, and the city's transit agency invited) Tj ET
+BT /F1 10 Tf 86 318.5000000000004 Td (the project to its spring accessibility review.) Tj ET
+BT /F1 10 Tf 72 306.7000000000004 Td (Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023) Tj ET
+BT /F1 10 Tf 80 294.2000000000004 Td (- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone) Tj ET
+BT /F1 10 Tf 86 282.4000000000004 Td (bookings fell by a quarter in the next two months.) Tj ET
+BT /F1 10 Tf 80 270.60000000000036 Td (- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues) Tj ET
+BT /F1 10 Tf 86 258.80000000000035 Td (that stopped first-time users from finishing a booking.) Tj ET
+BT /F1 10 Tf 80 247.00000000000034 Td (- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later) Tj ET
+BT /F1 10 Tf 86 235.20000000000033 Td (volunteer teams used to add Spanish-language booking.) Tj ET
+BT /F1 12 Tf 72 218.40000000000032 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 204.40000000000032 Td (Tools: Figma, screen-reader testing \(VoiceOver, NVDA\)) Tj ET
+BT /F1 10 Tf 72 191.90000000000032 Td (Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+5293
+%%EOF

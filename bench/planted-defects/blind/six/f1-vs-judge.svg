@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="600" viewBox="0 0 1180 600" font-family="Helvetica, Arial, sans-serif">
+<rect width="1180" height="600" fill="#fcfcfb"/>
+<text x="90" y="28" font-size="17" font-weight="600" fill="#0b0b0b">Defects found (F1) vs blind judge score, two judges</text>
+<text x="90" y="48" font-size="12" fill="#52514e">10 planted-defect résumés, one per field · judge score = mean of actionability and readability (1–10) · bars: ±1 standard error</text>
+<text x="90" y="68" font-size="13" font-weight="600" fill="#0b0b0b">Judge: Claude Opus</text>
+<line x1="90.0" y1="78" x2="90.0" y2="522" stroke="#e6e5e0"/><text x="90.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">5.5</text>
+<line x1="153.3" y1="78" x2="153.3" y2="522" stroke="#e6e5e0"/><text x="153.3" y="540" font-size="11" fill="#52514e" text-anchor="middle">6</text>
+<line x1="216.7" y1="78" x2="216.7" y2="522" stroke="#e6e5e0"/><text x="216.7" y="540" font-size="11" fill="#52514e" text-anchor="middle">6.5</text>
+<line x1="280.0" y1="78" x2="280.0" y2="522" stroke="#e6e5e0"/><text x="280.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">7</text>
+<line x1="343.3" y1="78" x2="343.3" y2="522" stroke="#e6e5e0"/><text x="343.3" y="540" font-size="11" fill="#52514e" text-anchor="middle">7.5</text>
+<line x1="406.7" y1="78" x2="406.7" y2="522" stroke="#e6e5e0"/><text x="406.7" y="540" font-size="11" fill="#52514e" text-anchor="middle">8</text>
+<line x1="470.0" y1="78" x2="470.0" y2="522" stroke="#e6e5e0"/><text x="470.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">8.5</text>
+<line x1="90" y1="522.0" x2="470" y2="522.0" stroke="#e6e5e0"/>
+<text x="82" y="526.0" font-size="11" fill="#52514e" text-anchor="end">0.70</text>
+<line x1="90" y1="441.3" x2="470" y2="441.3" stroke="#e6e5e0"/>
+<text x="82" y="445.3" font-size="11" fill="#52514e" text-anchor="end">0.74</text>
+<line x1="90" y1="360.5" x2="470" y2="360.5" stroke="#e6e5e0"/>
+<text x="82" y="364.5" font-size="11" fill="#52514e" text-anchor="end">0.78</text>
+<line x1="90" y1="279.8" x2="470" y2="279.8" stroke="#e6e5e0"/>
+<text x="82" y="283.8" font-size="11" fill="#52514e" text-anchor="end">0.82</text>
+<line x1="90" y1="199.1" x2="470" y2="199.1" stroke="#e6e5e0"/>
+<text x="82" y="203.1" font-size="11" fill="#52514e" text-anchor="end">0.86</text>
+<line x1="90" y1="118.4" x2="470" y2="118.4" stroke="#e6e5e0"/>
+<text x="82" y="122.4" font-size="11" fill="#52514e" text-anchor="end">0.90</text>
+<text x="280.0" y="564" font-size="12" fill="#0b0b0b" text-anchor="middle">Judge score</text>
+<line x1="406.7" y1="370.6" x2="406.7" y2="370.6" stroke="#eb6834" stroke-width="2"/><line x1="406.7" y1="423.2" x2="406.7" y2="317.9" stroke="#eb6834" stroke-width="2"/>
+<circle cx="406.7" cy="370.6" r="5.5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>sol: judge 8.00, F1 0.775</title></circle>
+<line x1="332.1" y1="345.6" x2="367.2" y2="345.6" stroke="#1baf7a" stroke-width="2"/><line x1="349.7" y1="400.6" x2="349.7" y2="290.6" stroke="#1baf7a" stroke-width="2"/>
+<circle cx="349.7" cy="345.6" r="5.5" fill="#1baf7a" stroke="#fcfcfb" stroke-width="2"><title>luna: judge 7.55, F1 0.787</title></circle>
+<line x1="273.9" y1="380.3" x2="324.1" y2="380.3" stroke="#eda100" stroke-width="2"/><line x1="299.0" y1="468.5" x2="299.0" y2="292.1" stroke="#eda100" stroke-width="2"/>
+<circle cx="299.0" cy="380.3" r="5.5" fill="#eda100" stroke="#fcfcfb" stroke-width="2"><title>LLMInternSkill (luna): judge 7.15, F1 0.770</title></circle>
+<line x1="286.0" y1="397.7" x2="324.7" y2="397.7" stroke="#e87ba4" stroke-width="2"/><line x1="305.3" y1="451.2" x2="305.3" y2="344.3" stroke="#e87ba4" stroke-width="2"/>
+<circle cx="305.3" cy="397.7" r="5.5" fill="#e87ba4" stroke="#fcfcfb" stroke-width="2"><title>cyber-resume-reviewer (luna): judge 7.20, F1 0.762</title></circle>
+<line x1="258.9" y1="411.3" x2="301.1" y2="411.3" stroke="#008300" stroke-width="2"/><line x1="280.0" y1="496.6" x2="280.0" y2="325.9" stroke="#008300" stroke-width="2"/>
+<circle cx="280.0" cy="411.3" r="5.5" fill="#008300" stroke="#fcfcfb" stroke-width="2"><title>ResumeSkills (luna): judge 7.00, F1 0.755</title></circle>
+<line x1="163.6" y1="141.6" x2="231.8" y2="141.6" stroke="#2a78d6" stroke-width="2"/><line x1="197.7" y1="183.2" x2="197.7" y2="100.0" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="197.7" cy="141.6" r="7" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>ResumePilot (luna): judge 6.35, F1 0.888</title></circle>
+<text x="530" y="68" font-size="13" font-weight="600" fill="#0b0b0b">Judge: GPT-5.6 sol</text>
+<line x1="530.0" y1="78" x2="530.0" y2="522" stroke="#e6e5e0"/><text x="530.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">7.5</text>
+<line x1="606.0" y1="78" x2="606.0" y2="522" stroke="#e6e5e0"/><text x="606.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">8</text>
+<line x1="682.0" y1="78" x2="682.0" y2="522" stroke="#e6e5e0"/><text x="682.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">8.5</text>
+<line x1="758.0" y1="78" x2="758.0" y2="522" stroke="#e6e5e0"/><text x="758.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">9</text>
+<line x1="834.0" y1="78" x2="834.0" y2="522" stroke="#e6e5e0"/><text x="834.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">9.5</text>
+<line x1="910.0" y1="78" x2="910.0" y2="522" stroke="#e6e5e0"/><text x="910.0" y="540" font-size="11" fill="#52514e" text-anchor="middle">10</text>
+<line x1="530" y1="522.0" x2="910" y2="522.0" stroke="#e6e5e0"/>
+<line x1="530" y1="441.3" x2="910" y2="441.3" stroke="#e6e5e0"/>
+<line x1="530" y1="360.5" x2="910" y2="360.5" stroke="#e6e5e0"/>
+<line x1="530" y1="279.8" x2="910" y2="279.8" stroke="#e6e5e0"/>
+<line x1="530" y1="199.1" x2="910" y2="199.1" stroke="#e6e5e0"/>
+<line x1="530" y1="118.4" x2="910" y2="118.4" stroke="#e6e5e0"/>
+<text x="720.0" y="564" font-size="12" fill="#0b0b0b" text-anchor="middle">Judge score</text>
+<line x1="771.6" y1="370.6" x2="805.2" y2="370.6" stroke="#eb6834" stroke-width="2"/><line x1="788.4" y1="423.2" x2="788.4" y2="317.9" stroke="#eb6834" stroke-width="2"/>
+<circle cx="788.4" cy="370.6" r="5.5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>sol: judge 9.20, F1 0.775</title></circle>
+<line x1="729.4" y1="345.6" x2="771.4" y2="345.6" stroke="#1baf7a" stroke-width="2"/><line x1="750.4" y1="400.6" x2="750.4" y2="290.6" stroke="#1baf7a" stroke-width="2"/>
+<circle cx="750.4" cy="345.6" r="5.5" fill="#1baf7a" stroke="#fcfcfb" stroke-width="2"><title>luna: judge 8.95, F1 0.787</title></circle>
+<line x1="665.7" y1="380.3" x2="713.5" y2="380.3" stroke="#eda100" stroke-width="2"/><line x1="689.6" y1="468.5" x2="689.6" y2="292.1" stroke="#eda100" stroke-width="2"/>
+<circle cx="689.6" cy="380.3" r="5.5" fill="#eda100" stroke="#fcfcfb" stroke-width="2"><title>LLMInternSkill (luna): judge 8.55, F1 0.770</title></circle>
+<line x1="758.0" y1="397.7" x2="758.0" y2="397.7" stroke="#e87ba4" stroke-width="2"/><line x1="758.0" y1="451.2" x2="758.0" y2="344.3" stroke="#e87ba4" stroke-width="2"/>
+<circle cx="758.0" cy="397.7" r="5.5" fill="#e87ba4" stroke="#fcfcfb" stroke-width="2"><title>cyber-resume-reviewer (luna): judge 9.00, F1 0.762</title></circle>
+<line x1="682.0" y1="411.3" x2="727.6" y2="411.3" stroke="#008300" stroke-width="2"/><line x1="704.8" y1="496.6" x2="704.8" y2="325.9" stroke="#008300" stroke-width="2"/>
+<circle cx="704.8" cy="411.3" r="5.5" fill="#008300" stroke="#fcfcfb" stroke-width="2"><title>ResumeSkills (luna): judge 8.65, F1 0.755</title></circle>
+<line x1="616.1" y1="141.6" x2="656.7" y2="141.6" stroke="#2a78d6" stroke-width="2"/><line x1="636.4" y1="183.2" x2="636.4" y2="100.0" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="636.4" cy="141.6" r="7" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>ResumePilot (luna): judge 8.20, F1 0.888</title></circle>
+<text transform="translate(30,300.0) rotate(-90)" font-size="12" fill="#0b0b0b" text-anchor="middle">F1 on planted defects</text>
+<circle cx="950" cy="86" r="5" fill="#2a78d6"/><text x="962" y="90" font-size="12" fill="#0b0b0b">ResumePilot (luna)</text><text x="962" y="105" font-size="11" fill="#52514e">F1 0.888 · Opus 6.35 · sol 8.20</text>
+<circle cx="950" cy="130" r="5" fill="#eb6834"/><text x="962" y="134" font-size="12" fill="#0b0b0b">sol</text><text x="962" y="149" font-size="11" fill="#52514e">F1 0.775 · Opus 8.00 · sol 9.20</text>
+<circle cx="950" cy="174" r="5" fill="#1baf7a"/><text x="962" y="178" font-size="12" fill="#0b0b0b">luna</text><text x="962" y="193" font-size="11" fill="#52514e">F1 0.787 · Opus 7.55 · sol 8.95</text>
+<circle cx="950" cy="218" r="5" fill="#eda100"/><text x="962" y="222" font-size="12" fill="#0b0b0b">LLMInternSkill (luna)</text><text x="962" y="237" font-size="11" fill="#52514e">F1 0.770 · Opus 7.15 · sol 8.55</text>
+<circle cx="950" cy="262" r="5" fill="#e87ba4"/><text x="962" y="266" font-size="12" fill="#0b0b0b">cyber-resume-reviewer (luna)</text><text x="962" y="281" font-size="11" fill="#52514e">F1 0.762 · Opus 7.20 · sol 9.00</text>
+<circle cx="950" cy="306" r="5" fill="#008300"/><text x="962" y="310" font-size="12" fill="#0b0b0b">ResumeSkills (luna)</text><text x="962" y="325" font-size="11" fill="#52514e">F1 0.755 · Opus 7.00 · sol 8.65</text>
+<text x="90" y="588" font-size="11" fill="#52514e">F1 is from the same review each judge scored. Every reviewer was asked not to rewrite lines; judges scored only actionability and readability.</text></svg>

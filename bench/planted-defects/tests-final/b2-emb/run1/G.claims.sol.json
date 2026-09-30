@@ -1,0 +1,227 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes, FPGA",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The website URL looks like a placeholder.",
+      "because": "It can make the resume appear unfinished."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Ensure the phone number and email are the ones you want recruiters to use.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code link lead directly to relevant, accessible work.",
+      "because": "An empty, private, or unrelated link weakens the resume."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Consider adding relevant coursework, honors, or a strong academic project.",
+      "because": "They could support the roles you are targeting."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify what “update speed” measures and what the 60% improvement is compared against.",
+      "because": "The result is otherwise difficult to interpret or validate."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Explain what the 400 tests covered and how the rig fit into the build process.",
+      "because": "Readers may want to know whether the tests were automated, how long they took, or what failures they caught."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Explain how the crash logger identified the five failure root causes.",
+      "because": "The connection between the logger and the findings is unclear."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Explain how sensor data was buffered and written to flash.",
+      "because": "Memory, data loss, and flash wear may constrain the approach."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Sampling a 5 kHz component at 8 kHz cannot capture it without aliasing.",
+      "because": "The sample rate is below the Nyquist rate."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Declaring the shared counter `volatile` does not by itself fix a race condition.",
+      "because": "It does not make shared access atomic or provide synchronization."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The 300-robot firmware rewrite overlaps with a Formula Student claim.",
+      "because": "The resume does not establish which role or project owns the work."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Define how jitter and field motor faults were measured and give the comparison period or baseline.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider putting the strongest, most role-relevant Voltline accomplishments first.",
+      "because": "The fleet rewrite may deserve earlier placement once its ownership is resolved."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify the basis of the test-time reduction and monthly volume.",
+      "because": "It is unclear whether the volume is the line’s total or the volume processed by the automated tests."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the sequence and your role in the diagnosis, process change, and reduction in returns.",
+      "because": "The bullet links all three without showing how directly the profile change explains the reduction."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Substantiate the return-rate baseline and follow-up period.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Explain how drift complaints were counted and over what period.",
+      "because": "The before-and-after figures are hard to compare without a consistent time window."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify the throughput comparison and whether the increase was sustained in production.",
+      "because": "The large improvement invites questions about bottlenecks, staffing, and measurement conditions."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Remove the broad “next-generation, innovation-driven” promotional claim.",
+      "because": "It lacks technical evidence and is less persuasive than the measured results."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain how average current was measured and whether the before-and-after readings used the same operating pattern.",
+      "because": "The measurement conditions are needed to assess the reduction."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain the trade-offs from sleeping and batching transmissions.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Make the project link easy to find and confirm the published materials are accessible.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Distinguish what you built from what the school built.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The robot-fleet work appears mismatched with the Formula Student project and work described at Voltline.",
+      "because": "An electric-car project does not naturally align with a robot fleet."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify your individual contribution to writing and testing the CAN-bus firmware.",
+      "because": "The passive phrasing obscures what you personally handled."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Specify what “tested against the motor controller” means.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The 300-robot motor-control firmware claim repeats the Voltline accomplishment.",
+      "because": "Its ownership, project, and timeline are unclear, especially given the Formula Student title and dates."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Reorganize the “Tools” category.",
+      "because": "It mixes languages, a hardware platform, and test equipment."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify the basis for listing FPGA.",
+      "because": "Substantive FPGA experience is not supported elsewhere on the resume."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Make “firmware” more specific and show proficiency or context for the skills.",
+      "because": "“Firmware” is broad, and the list does not show proficiency or context."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2502,
+    "input_tokens_details": {
+      "cache_write_tokens": 2499,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1708,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 4210
+  }
+}

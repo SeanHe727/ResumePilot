@@ -1,0 +1,104 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "W4",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 15,
+  "words": 2090,
+  "quotes": 9,
+  "grounded": 4,
+  "rewrites": 9,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4577,
+    "completion_tokens": 15297,
+    "total_tokens": 19874,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14899
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 2913
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "The bullet uses present tense for a role that ended in August 2023"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "hides who performed the work"
+      },
+      {
+        "id": "A1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "duplicates the Harbor Payments achievement, including the 2,300-merchant figure"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Held weekly working sessions... no result"
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "The opt-in comparison cannot credibly measure the onboarding redesign's causal effect"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "The late-delivery rate fell ... only because weather-delayed shipments were excluded"
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "unexplained eight-month gap between the bachelor's degree and the Crestline Logistics role"
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Personal details such as date of birth and nationality should be left off"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 15,
+    "rewrites": [
+      "Lowered the reported late-delivery rate",
+      "after excluding",
+      "by revising the on-time calculation to exclude",
+      "Observed",
+      "by 30%",
+      "to identify chargeback pain points",
+      "Compared onboarding outcomes descriptively",
+      "prepared",
+      "sales and operations planning (S&OP)"
+    ],
+    "falsePositives": []
+  }
+}

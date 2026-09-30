@@ -1,0 +1,136 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/D.md",
+  "recall": 4,
+  "found": [
+    "W3",
+    "A4",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 21,
+  "words": 1092,
+  "quotes": 2,
+  "grounded": 1,
+  "rewrites": 39,
+  "inventedNumbers": [
+    "50",
+    "5",
+    "18",
+    "11",
+    "20"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3112,
+    "completion_tokens": 9554,
+    "total_tokens": 12666,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8371
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 2856
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "change “prepares” to “prepared” in the Crestline role"
+      },
+      {
+        "id": "W4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "The bullet about reducing first payment time appears twice: Correctly under Harbor Payments Incorrectly under the hospital consulting practicum. Remove it from the practicum section."
+      },
+      {
+        "id": "S2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "“Set the company’s logistics strategy” is impressive but too broad without scope or outcome."
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove date of birth and nationality - These are not needed for U.S. applications and can introduce bias."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 21,
+    "rewrites": [
+      "RILEY CHEN",
+      "+1 (555) 010-7731 | riley.chen@example.com | linkedin.com/in/riley-chen",
+      "EDUCATION",
+      "Northfield School of Management | MBA",
+      "Metro City, USA | Expected Jun 2025",
+      "Lakeview University | B.A. in Economics",
+      "Lake City, USA | Jun 2018",
+      "EXPERIENCE",
+      "Harbor Payments | Associate Product Manager Intern",
+      "Metro City, USA | Jun 2024 – Aug 2024",
+      "• Increased checkout conversion by 35% by replacing a three-step checkout flow with a one-page experience across the merchant base.",
+      "• Defined requirements and success metrics for a dispute self-service product, aligning engineering, risk, and support teams; delivered the product two weeks ahead of schedule.",
+      "• Interviewed 25 merchants to size the chargeback problem and developed the business case that drove the following quarter’s roadmap prioritization.",
+      "• Led weekly engineering and support triage, closing 140 onboarding tickets and reducing the open-ticket queue by 50%.",
+      "• Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 days across 2,300 merchants in the pilot region.",
+      "Crestline Logistics | Operations Analyst",
+      "Lake City, USA | Mar 2019 – Aug 2023",
+      "• Developed a logistics strategy adopted across [number] regions and [number] business lines, aligning operational priorities across the company.",
+      "• Reduced warehouse picking errors by 30% at two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
+      "• Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials used for cross-functional planning.",
+      "• Led deployment of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.",
+      "PROJECTS",
+      "Campus Food Rescue App | Product Lead, Student Venture",
+      "Oct 2023 – Present",
+      "• Launched a surplus-food pickup app for 3,100 students across two dining halls, redistributing 9 tonnes of food in its first year.",
+      "• Increased weekly active users from 400 to 1,150 by introducing pickup reminders based on insights from 60 user interviews.",
+      "• Designed a volunteer scheduling system with two dining halls, filling 95% of pickup slots each week and eliminating the need for staff to cover volunteer gaps.",
+      "MBA Consulting Practicum | Team Lead, Regional Hospital Network",
+      "Jan 2024 – May 2024",
+      "• Led weekly working sessions with clinic managers to analyze outpatient scheduling and patient-intake processes across a regional hospital network.",
+      "• Mapped the intake process at four clinics and redesigned the patient intake form; the revised process was adopted by front-desk staff.",
+      "• [Add measurable result, such as: Reduced average intake time by X%, removed X form fields, or affected approximately X patients per week.]",
+      "SKILLS",
+      "Product: Product discovery, user interviews, roadmap prioritization, PRDs, requirements definition, A/B testing, success metrics",
+      "Analytics: SQL, Amplitude, Excel",
+      "Tools: Jira, Figma",
+      "> Developed a logistics strategy adopted across 5 regions and 3 business lines, improving [cost/service-level metric] by [X%].",
+      "> Shortened the patient intake form from 18 to 11 fields and reduced average registration time by 20% across four clinics.",
+      "> MBA candidate and product/operations professional with experience improving conversion, onboarding, and operational workflows. Skilled in customer discovery, product requirements, experimentation, SQL, and cross-functional delivery."
+    ],
+    "falsePositives": []
+  }
+}

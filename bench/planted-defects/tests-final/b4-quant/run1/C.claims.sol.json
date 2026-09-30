@@ -1,0 +1,277 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The displayed phone number and code URL look like placeholders.",
+      "because": "Contact details should be real and current, and the link should lead to work you want reviewed."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality should not appear on a U.S. résumé unless required.",
+      "because": "They do not establish qualifications and can invite bias."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Keep the expected Ph.D. completion date current.",
+      "because": ""
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider adding a research area or dissertation topic.",
+      "because": "It would help readers place the statistical work quickly."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put Northpeak before the Research Assistant role.",
+      "because": "The experience entries are out of reverse-chronological order."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify the scale or consequence of the simulation pipeline and reproducibility checks.",
+      "because": "“Other students relied on” gives little sense of their impact."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify your contribution to the paper.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Check that the log-factor comparison uses the same assumptions as the prior bound.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Confirm the teaching role, course level, problem-set count, and rating are accurate and attributable to this appointment.",
+      "because": "Otherwise, the bullet can raise timeline or ownership questions."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Separate the R package result from cluster maintenance, reading-group organization, and grading.",
+      "because": "Combining them obscures the package contribution."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Make clear what received 3,000 downloads.",
+      "because": "The download figure is grammatically ambiguous."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Say whether the Sharpe figures are annualized.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Explain how the 18-month out-of-sample period was constructed.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify whether both Sharpe figures use the same after-cost assumptions.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Present the improvement strictly as a backtest result, not realized desk performance.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Confirm the Sharpe figures are cleared for disclosure.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Define what “daily turnover” measures.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Distinguish estimated slippage from observed execution costs.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Check that the gross-return and slippage comparisons use consistent periods.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Recheck the claim that standard Diebold–Mariano tests confirm the gain over a nested baseline.",
+      "because": "A standard Diebold–Mariano test can be inappropriate for nested forecasting models."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Account for testing across 30 indices where relevant.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Explain how the volatility-forecast comparison relates to the order-book internship work.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Fix the sentence construction around the feature-store work.",
+      "because": "The data integration work and your ownership of the feature store are unclear."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Multiplying daily Sharpe by 252 is not the usual annualization.",
+      "because": "Under the standard independence assumption the factor is √252, with further care needed for autocorrelated returns."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Substantiate the claim that the next intern cohort used the wiki to onboard, or focus on what was documented.",
+      "because": "The onboarding use should be supported."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Describe how the out-of-sample QLIKE evaluation was set up.",
+      "because": "It would let a reader assess the comparison."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Say whether the 7% QLIKE result is an aggregate across indices or a particular result.",
+      "because": "It would let a reader assess the comparison."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The reduction from 0.20 to 0.15 is 25%, not 33%.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Name the forecast-error metric.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain how the error-reduction result differs from the QLIKE result.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The move from 52% to 58% is 6 percentage points, not 6%.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Define the direction being predicted.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Indicate whether the hit-rate gain is robust across indices.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Verify that the rank refers to the private leaderboard.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Be precise about what the time-grouped folds prevented.",
+      "because": "Closing a local-versus-leaderboard gap supports better validation alignment but does not by itself prove leakage was eliminated."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify whether feature selection was performed within the validation procedure.",
+      "because": "Otherwise, the bullet could raise the same leakage concern as the preceding one."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Distinguish programming languages from frameworks.",
+      "because": "PyTorch is a framework, not a programming language."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2268,
+    "input_tokens_details": {
+      "cache_write_tokens": 2265,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2136,
+    "output_tokens_details": {
+      "reasoning_tokens": 826
+    },
+    "total_tokens": 4404
+  }
+}

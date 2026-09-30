@@ -1,0 +1,273 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check whether the code link leads to work you want an employer to evaluate, or whether a professional profile or research page would be more useful.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Add your research area or dissertation topic if it helps explain your fit for quant roles.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Give the Sunrise Bakery role less space than your technical work.",
+      "because": "The résumé is targeting quant applications."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Make the weekly labour-budget claim more specific if you can substantiate it.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Be ready to explain how you measured the 12% and 7% figures.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify whether the Sharpe-ratio change describes the desk book or a backtested strategy.",
+      "because": "A claim about improving an entire book invites close scrutiny."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain how you attributed the Sharpe-ratio change to your signal.",
+      "because": "A claim about improving an entire book invites close scrutiny."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Specify what “daily turnover” measures.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Distinguish observed results from estimated slippage.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Make sure the 90% gross-return comparison uses the same baseline.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Recheck the Diebold–Mariano test choice and assumptions.",
+      "because": "Standard DM tests can be inappropriate for nested forecast models."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify what “across the 30 indices” means statistically.",
+      "because": "The wording implies 30 independent confirmations."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Fix the grammar so your feature-store contribution is unambiguous.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Multiplying daily Sharpe by 252 is the wrong annualization.",
+      "because": "Daily Sharpe is ordinarily annualized using the square root of the number of trading days."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Confirm that the simulation timing comparison is like-for-like.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Verify the claimed improvement to the variance bound.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Verify the paper’s current status.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Make your individual contribution clear without overstating authorship.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Consider moving the teaching bullet below the research achievements or shortening it if space is tight.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Verify whether the recitations were part of the research-assistant role.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Separate the R package’s impact from cluster maintenance, reading-group organization, and grading.",
+      "because": "Combining four activities obscures the most relevant achievement."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Verify the package’s download count and period.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Identify the evaluation period or test setup if space allows.",
+      "because": "It would make the out-of-sample result interpretable."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "A decrease from 0.20 to 0.15 is 25% relative to 0.20, not 33%.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Name the forecast-error metric.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Distinguish the forecast-error result from the QLIKE result.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "A change from 52% to 58% is 6 percentage points, not an unqualified 6% improvement.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Consider whether the hit-rate result adds enough beyond the other two bullets.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain the hit-rate evaluation setup if you retain the result.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Check that the rank and private-leaderboard placement are final.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Explain why the original folds leaked information.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Do not rely on “closed a gap” to establish that leakage was eliminated.",
+      "because": "Closing a gap alone does not establish that leakage was eliminated."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Explain how permutation importance was calculated without using held-out or leaderboard information.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "error",
+      "says": "PyTorch is miscategorized as a programming language.",
+      "because": "PyTorch is a framework."
+    },
+    {
+      "line": 32,
+      "kind": "error",
+      "says": "Kafka is miscategorized as a programming language.",
+      "because": "Kafka is a data-streaming technology."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled.",
+      "because": "The correct spelling is “econometrics.”"
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "If the résumé runs long, cut or condense lower-relevance operational and teaching details first.",
+      "because": "Evidence of rigorous validation, research contributions, and production-quality data work is more relevant."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2315,
+    "input_tokens_details": {
+      "cache_write_tokens": 2312,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2273,
+    "output_tokens_details": {
+      "reasoning_tokens": 1034
+    },
+    "total_tokens": 4588
+  }
+}

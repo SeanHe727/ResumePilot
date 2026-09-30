@@ -195,7 +195,7 @@ describe('parse_resume, when a model does the grouping', () => {
     expect(seen).toHaveLength(2); // one call, one retry after the empty answer
     expect(seen[0]).toContain('size=1.00');
     expect(seen[0]).toMatch(/\[0\] /);
-    expect(seen[0]).toContain('Return numbers only');
+    expect(seen[0]).toContain('Numbers only');
   });
 
   it('falls back to the rules when the answer does not account for every row', async () => {

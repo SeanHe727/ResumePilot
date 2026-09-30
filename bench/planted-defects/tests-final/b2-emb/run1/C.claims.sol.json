@@ -1,0 +1,149 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes, FPGA",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify what “update speed” measures.",
+      "because": "The reader needs to know whether the 60% improvement is in download time, total update time, or something else."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add what the hardware-in-the-loop tests covered or what failures they caught.",
+      "because": "The test count shows scale, not effectiveness."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the logger enabled diagnosis rather than itself finding the root causes.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The sampling claim does not establish alias-free capture of a 5 kHz signal at 8 kHz.",
+      "because": "Under ordinary sampling, the signal would alias."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Declaring the shared counter `volatile` does not resolve the race condition.",
+      "because": "It does not, by itself, make access atomic or safe between an interrupt handler and the main loop."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Verify that the 60% fault reduction can reasonably be attributed to the firmware rewrite.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Lead the Voltline section with the fleet-scale motor-controller result and group the supporting work logically.",
+      "because": "That result establishes scope and impact more strongly than the other bullets."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Check that the return-rate comparison uses comparable periods and products.",
+      "because": "The claimed reduction needs to be defensible."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify how the calibration procedure reduced drift complaints.",
+      "because": "The causal link is currently thin."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Remove the broad promotional weather-station claims.",
+      "because": "They do not tell the reader what you built or measured."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Check that the current measurements used comparable operating conditions.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The robot-fleet work does not belong under the electric-car project.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Specify what you did on the CAN-bus firmware.",
+      "because": "The bullet describes the team’s process more than your contribution."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify what testing against the motor controller involved.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The robot-fleet result appears to repeat a Voltline accomplishment under the earlier Formula Student project.",
+      "because": "It creates a serious attribution inconsistency."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Add supporting work for FPGA and C++, or leave them off if they are not strengths.",
+      "because": "The résumé may not provide enough evidence for those skills."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Account for work since June 2025 if applying after that date.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 1872,
+    "input_tokens_details": {
+      "cache_write_tokens": 1869,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1161,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 3033
+  }
+}

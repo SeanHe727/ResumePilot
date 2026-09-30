@@ -1,0 +1,284 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Owned the pick-path layouts for the fast-moving zone and the labor reports the shift leads used.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put Crestway before Lakeview in reverse chronological order.",
+      "because": "The current order interrupts the reader’s understanding of the career timeline."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent wrapping and spacing in the final document.",
+      "because": "The apparent manual line breaks split bullets mid-sentence."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Prioritize bullets for the job being targeted.",
+      "because": "The résumé mixes supply-chain analysis, warehouse operations, delivery work, and routing."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm the contact details are current and clickable unless they were anonymized for the review.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Add GPA, relevant coursework, or honors only if they strengthen the application for the target roles.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify whether 30–40 deliveries describes a typical, peak, or average day.",
+      "because": "That distinction may matter to the scale of the work."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Consider whether payment collection deserves space.",
+      "because": "It is less relevant to many analyst roles than analytical or operational experience."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Use a tense consistent with work still performed in this current role.",
+      "because": "The bullet uses a past-tense verb."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Separate or prioritize the wedding-preparation and cooler-stocking responsibilities.",
+      "because": "They are different duties, and neither shows scope or impact."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Use a tense consistent with work still performed in this current role.",
+      "because": "The bullet uses past-tense verbs."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify what “owned” meant for the layouts and reports.",
+      "because": "“Owned” is broad."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "State what changed or what the work achieved, if substantiated.",
+      "because": "The bullet gives no outcome."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain how and over what period the returns time was measured.",
+      "because": "The before-and-after result needs context."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify your personal contribution to the returns-desk change.",
+      "because": "The bullet says the findings led to the triage station."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether the wait times are averages and give the measurement period and scope.",
+      "because": "The basis for the 95-to-40-minute reduction is unclear."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Separate the inventory result from unrelated duties or cut lower-priority details.",
+      "because": "The bullet is overloaded with supervision, safety, hiring, and certification work."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify how much of the accuracy increase came from cycle counting.",
+      "because": "Other changes may have contributed to the rise from 91% to 98.5%."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Define stockouts, the periods compared, and what the $1.9M inventory reduction represents.",
+      "because": "The major metrics lack a clear measurement basis."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Give more detail about the seasonal forecast model and your contribution.",
+      "because": "That phrase alone is insufficient for a technical or planning audience."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Distinguish this result from the food-bank forecast result or correct the overlap.",
+      "because": "The scale and outcomes are nearly identical and risk looking like the same result claimed twice."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Give the comparison period and define what the 15% freight reduction measures.",
+      "because": "It is unclear whether the figure concerns total spend, cost per shipment, or another measure."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Add a dollar impact if it can be verified.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Connect the reorder-point work to a measurable result or its relevance to target roles.",
+      "because": "The bullet states no outcome."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Check whether this bullet is needed alongside the demand-planning bullet.",
+      "because": "The two may overlap."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify what changed as a result of the supplier scorecard, if there is evidence.",
+      "because": "The bullet only says buyers used it."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Define “least reliable” using the metric tracked.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "An OEE figure of 112% is invalid under the standard definition.",
+      "because": "Standard OEE is generally capped at 100%, so the figure raises questions about its definition or calculation."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Explain why doubling work-in-process was an acceptable tradeoff, or reconsider the result.",
+      "because": "It could imply excess inventory, congestion, hidden costs, or a tradeoff rather than an improvement."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain what planned route miles included and whether current routes were measured on the same basis.",
+      "because": "The 18% comparison needs to be fair and clear."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Describe what you built and how you modeled the routing problem.",
+      "because": "Listing Python in the project title does not establish the technical work or your individual contribution."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Explain how the 5% drive-time comparison was calculated and whether routes and conditions were comparable.",
+      "because": "The validation basis is unclear."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Give the pilot’s outcome, if available.",
+      "because": "The bullet describes a two-truck pilot but no result from it."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Distinguish the model’s projected improvement from what the pilot established.",
+      "because": "The pilot is not shown to have achieved the projected result."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Specify what the analysis and recommendations involved, or omit the bullet if the others cover them.",
+      "because": "The description is too broad to show what you did."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Explain how the one-day gain was measured and whether it applied consistently.",
+      "because": "It may have occurred only in particular cases."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Distinguish this forecast result from Crestway’s or correct the overlap.",
+      "because": "The scale and outcomes are nearly identical and risk looking like the same result claimed twice."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Clarify how stockouts and inventory were measured.",
+      "because": "The result lacks a clear measurement basis."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Indicate what you can do with Excel and Python, where supportable.",
+      "because": "The tools list gives no indication of your capabilities."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Back each broad method with a specific example elsewhere, especially vehicle routing.",
+      "because": "The routing project does not make that experience clear enough to support the listed skill."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2747,
+    "input_tokens_details": {
+      "cache_write_tokens": 2744,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2109,
+    "output_tokens_details": {
+      "reasoning_tokens": 544
+    },
+    "total_tokens": 4856
+  }
+}

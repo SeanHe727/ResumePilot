@@ -1,0 +1,102 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 20,
+  "words": 2416,
+  "quotes": 21,
+  "grounded": 18,
+  "rewrites": 1,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Split the compressed Education line into two separately formatted degrees, with the Ph.D. first and the B.S. second."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5345,
+    "completion_tokens": 15202,
+    "total_tokens": 20547,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14652
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3425
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "uses a personal pronoun; resume lines are phrases, not sentences — \"Derived a variance bound for a sparse regression estimator; my proof...\""
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct the misspelled Methods skill 'econometircs' to 'econometrics.'"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The directional hit-rate change should be described as 6 percentage points, not 6%."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The bullet reports a 33% improvement even though the stated reduction from 0.20 to 0.15 is 25%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "buries the main result behind three methods and makes the opening participial phrase awkward."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The current final bullet contains several unrelated responsibilities, which obscures the package’s adoption result."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "The Sharpe-ratio annualization is mathematically wrong: a daily Sharpe ratio should be multiplied by √252, not 252."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "The standard Diebold–Mariano test is not generally valid for comparing nested forecasts because its null distribution is distorted."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Because the bakery role is unrelated to the quantitative trajectory, shorten it or place it in a brief additional-experience section."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review also flagged Kafka as unsupported elsewhere in the resume; either remove it or show where you used it."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 20,
+    "rewrites": [
+      "Cut unsold bread from 12% to 7% of production by [specific change]."
+    ],
+    "falsePositives": [
+      "Split the compressed Education line into two separately formatted degrees, with the Ph.D. first and the B.S. second."
+    ]
+  }
+}

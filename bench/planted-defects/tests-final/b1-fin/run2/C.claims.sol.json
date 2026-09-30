@@ -1,0 +1,198 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Hedged the bank's interest-rate risk on its fixed-rate bond holdings by buying more fixed-rate bonds of the same duration.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "- Cut the monthly close from 8 working days to 5 by automating 30 reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Mapping 600 general-ledger accounts to a new chart of accounts, rebuilding the allocation rules and testing them against two prior closes, cut manual journal entries from 350 to 90 a month.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Trained 5 plant controllers on the new budgeting template and wrote its user guide.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Showed the share value fell from USD 50 to USD 40, a 25% drop, when the discount rate rose by 1 point.",
+    "- Raised the model's forecast accuracy by 12% across 10 years, from 70% to 82%, by adding rate-case timing.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Wrote onboarding notes on the fund's models for new analysts.",
+    "SKILLS",
+    "Tools: Excel",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality should be removed for most US applications.",
+      "because": "They do not help assess qualifications and may invite bias."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put Stonebridge before Crescent Bank.",
+      "because": "Employment should run most recent first."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Specify what the USD 600M measures.",
+      "because": "It would make the scale credible."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain how the under-4% forecast error was measured.",
+      "because": "It would make the accuracy credible."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify whether the forecast directly informed the USD 40M repayment.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Add an outcome for the capital-plan work if one is known.",
+      "because": "The bullet establishes consistency but not its consequence."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Fix the awkward “Mapping … cut” sentence structure and tense.",
+      "because": "It sits awkwardly alongside the other past-tense bullets."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the mapping caused the drop in manual entries or was part of a broader change.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The FCFE valuation uses the wrong discount rate.",
+      "because": "FCFE is ordinarily discounted at the cost of equity; WACC is ordinarily used with free cash flow to the firm."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "Buying more fixed-rate bonds of the same duration would not hedge the stated interest-rate risk.",
+      "because": "It would generally increase the bank’s exposure to rate changes in those holdings."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Explain how “no rise in early defaults” was assessed.",
+      "because": "An observation period or cohort comparison would make the risk result supportable."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Change “Writes” to past tense.",
+      "because": "The Crescent Bank role ended in 2022."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Make the valuation date clear.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Do not treat being within 6% of the market price as proof the valuation was accurate.",
+      "because": "The comparison is context, not necessarily proof of accuracy."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The stated 25% drop is incorrect.",
+      "because": "A fall from USD 50 to USD 40 is 20% of USD 50."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Check that “1 point” means one percentage point.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Check that the sensitivity figures come from the model.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify what was forecast and what the 70% and 82% scores measure.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify whether the accuracy result came from historical back-testing.",
+      "because": "A ten-year future forecast cannot yet have measured accuracy."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The improvement is described as “12%” rather than 12 percentage points.",
+      "because": "The stated scores rise from 70% to 82%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Remove the FP&A support bullet unless the fund had an FP&A team and the contribution can be named.",
+      "because": "It is generic and seems out of place in an investment-fund project."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Specify the benchmark if relevant and space permits.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Keep the onboarding-notes bullet only if there is room.",
+      "because": "The analysis and reporting bullets are stronger."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Consider adding software actually used for automation, reporting, or modeling.",
+      "because": "“Excel” alone undersells the technical work described above."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Check whether the ongoing project has substantive work since November 2024; otherwise give it an accurate end date.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 1957,
+    "input_tokens_details": {
+      "cache_write_tokens": 1954,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2317,
+    "output_tokens_details": {
+      "reasoning_tokens": 1394
+    },
+    "total_tokens": 4274
+  }
+}

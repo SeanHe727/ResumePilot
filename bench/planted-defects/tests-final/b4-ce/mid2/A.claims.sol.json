@@ -1,0 +1,202 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country | Jun 2025 - Present",
+    "- Designed stamping dies for automotive brackets in SolidWorks, cutting the scrap rate from 6% to 4% on two press lines.",
+    "- Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier.",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality, personal details that should be left off by convention.",
+      "because": "They are not relevant to the candidate’s qualifications and use space."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The current Mechanical Design Engineer entry takes attention away from an ML/agent target.",
+      "because": "As the lead experience entry, its mechanical-design focus pulls the reader away from that direction."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The role sequence does not explain the candidate’s career progression.",
+      "because": "A reader may be unsure how the current Mechanical Design Engineer role fits after software engineering and an ML internship."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience.",
+      "because": "A reader looking for relevant work history must get past the degrees first."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The inspection work gives its scope but not its outcome.",
+      "because": "The 12-part count shows reach, not what changed for fit, quality, or production."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The 35% accuracy gain has no comparison basis.",
+      "because": "Without a baseline or whether the gain is relative or in percentage points, its size is difficult to interpret."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The routing design comes before its result.",
+      "because": "That makes the improvement easy to miss."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The reductions in calls and latency come after the training method and a compressed comparison.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The claimed purpose of assistant-only loss masking is technically incorrect.",
+      "because": "It excludes tool-output tokens from the training loss rather than directly training the model to reproduce them."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The bullet repeats the adapter method from the accuracy bullet without adding a distinct result.",
+      "because": "It uses space without giving the reader another outcome or contribution to evaluate."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The feature-extraction description is unexplained and difficult for readers outside the team to interpret.",
+      "because": "“ML-extracted features” does not show the technical approach, and “diagnostics triage branch” may not explain what the system does."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The backlog result is not the opening of the entry, although it is the strongest line.",
+      "because": "Placing its concrete contribution and 68% result last makes them less likely to be seen on a quick scan."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "The 4x GPU-memory reduction is overstated as an effect of switching from FP32 to BF16 alone.",
+      "because": "BF16 uses half the storage per value, while total fine-tuning memory depends on other tensors and optimizer states."
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "The bullet shifts from past tense to present tense in a role that ended in July 2024.",
+      "because": "“Adds” sounds like a current activity and conflicts with the role dates."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The three-day release-cycle duration has no prior duration for comparison.",
+      "because": "A reader cannot judge how much the cycle improved."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The claim that the migration removed nightly backlogs gives no measure of the operational change.",
+      "because": "A reader cannot tell how much backlogs or dispatch delays changed."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The migration result is not the opening of the entry, although it is the strongest line.",
+      "because": "Leading with the 30-service migration and removal of dispatch-delaying backlogs would make their scale and result easier to notice."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The AI-practices claim gives neither a specific practice nor a checkable result, and it does not connect clearly to the runtime work.",
+      "because": "A reader cannot picture what was introduced or see evidence of the claimed benefits, so the broad claim feels disconnected from the other bullets."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The 100x comparison leaves unclear what grew.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 50-way test condition does not show how the failures were verified as resolved.",
+      "because": "It gives the test scale but no result or before-and-after comparison supporting the reliability claim."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The concrete concurrency result is not the opening bullet of the project.",
+      "because": "Putting it first would give a scanning reader a concrete example of the technical work."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The 0.89 correlation does not identify the two quantities being compared.",
+      "because": "A reader cannot tell what the evaluator’s scores were correlated with."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The result is buried after a long, jargon-heavy description of the trial conditions.",
+      "because": "“Injected degradation” may be unclear outside the team, and the wording and ordering make the finding harder to scan."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "The triage outcome appears misattributed, and its backlog figure conflicts with the result elsewhere.",
+      "because": "The Mobility Systems bullet attributes a 68% reduction to the industrial inspection triage branch, while this project claims the same result as two-thirds."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "The remaining triage description does not explain how screening changed case handling and relies on unclear jargon.",
+      "because": "“Triage branch” and “ML-extracted features” do not make the system, method, or contribution to this evaluation project clear."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4254,
+    "input_tokens_details": {
+      "cache_write_tokens": 4251,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1558,
+    "output_tokens_details": {
+      "reasoning_tokens": 344
+    },
+    "total_tokens": 5812
+  }
+}

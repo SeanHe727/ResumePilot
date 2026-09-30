@@ -1,0 +1,358 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country | Jun 2025 - Present",
+    "- Designed stamping dies for automotive brackets in SolidWorks, cutting the scrap rate from 6% to 4% on two press lines.",
+    "- Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier.",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé does not make its target role clear.",
+      "because": "It combines mechanical design, software engineering, and ML/agent work without foregrounding the work most relevant to a particular application."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code or portfolio link a complete, clickable URL to a polished, relevant page.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Consider adding your current location.",
+      "because": "It may help clarify where you are based."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality.",
+      "because": "They generally are not needed on a résumé and can introduce privacy or bias concerns."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Replace the generic location with accurate information.",
+      "because": "The submitted version should not contain anonymized location details."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Update the expected graduation date if it changes or once you graduate.",
+      "because": ""
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Replace “Country” with a specific, accurate location.",
+      "because": "It is a placeholder."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider putting Experience before Education for ML/software applications.",
+      "because": "You have several years of relevant work."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Replace the generic location with accurate information.",
+      "because": "The submitted version should not contain anonymized location details."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Make this mechanical-design role’s relevance clear for ML/software applications, or emphasize it more for mechanical applications.",
+      "because": "It is the most recent role, while much of the résumé targets ML/software."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Update the “Present” date before submitting.",
+      "because": "It should reflect the submission date."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify that the change from 6% to 4% is a two-percentage-point reduction and explain the production scope.",
+      "because": "Readers may interpret the size of the improvement differently."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Add the outcome or value of the analyses and inspections.",
+      "because": "“Ran” and “signed off” communicate activity, but not the consequence."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Make clear what you personally owned.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Replace the generic location with accurate information.",
+      "because": "The submitted version should not contain anonymized location details."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Explain whether the 35% accuracy gain is relative or in percentage points, what was measured, and the evaluation baseline.",
+      "because": "The result needs context to be meaningful."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain how disagreement was measured and whether the reviewer’s judgment was validated.",
+      "because": "Less disagreement is not automatically a better outcome."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify what “in-scope signals” means if the target audience may not know.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "State the evaluation set or conditions supporting equal accuracy against the SFT baseline.",
+      "because": "The accuracy comparison needs a clear basis."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify that the 5% latency figure is a reduction.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Add context about the two regressions or why catching them mattered if space permits.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify whether you built the harness independently or contributed to a team effort.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Combine this assistant-only loss-masking bullet with the diagnostic-accuracy bullet or keep only the stronger version.",
+      "because": "It repeats the technique, adds little on its own, and can make the work appear duplicated."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Explain how the backlog reduction was measured and whether other changes contributed.",
+      "because": "The bullet does not establish how much of the reduction the triage branch caused."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The backlog-reduction result is repeated in the Research-Agent project.",
+      "because": "Presenting the same achievement twice makes it unclear whether the work was distinct."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Reduce and reorder the six Mobility Systems bullets.",
+      "because": "One is redundant, and ordering the rest by target-role relevance would make the entry easier to scan."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Replace “Country” with an accurate location.",
+      "because": "It is a placeholder."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Give context for the fourfold memory reduction, such as hardware or whether model quality was maintained.",
+      "because": "Readers may not know what the comparison covers."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify the load-test conditions behind the 180 ms p95 measurement if they materially affect it.",
+      "because": "The 200 ms build threshold does not explain those conditions."
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "Fix the tense mismatch between “Maintained” and “adds.”",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Give a baseline for the three-day release-cycle figure.",
+      "because": "Without one, the impact is hard to judge."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Include a defensible measure of reduced backlogs or dispatch delays if available.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Order the Eastern Robotics bullets by relevance to the target role.",
+      "because": "For ML/software roles, latency, model-memory, and service-migration work may be more immediately relevant than release-process maintenance."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify what “Owner” means and ensure it accurately describes your role.",
+      "because": "Readers may not know whether it means project owner, sole developer, or something else."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Update the “Present” date before submitting.",
+      "because": "It should reflect the submission date."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Substantiate or remove the broad “AI-first engineering practices” claim.",
+      "because": "It is vague rather than a specific accomplishment."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Give measurable or otherwise verifiable support for accelerated delivery and improved outcomes.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Say what the raw conversation’s 100x growth is relative to.",
+      "because": "The comparison is unclear without a reference point."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify what quality or capability was preserved as context was reduced.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Explain how the 50-way fan-out was tested and how the absence of deadlocks and lost results was verified.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Name and, if available, link to the open-source framework or relevant contribution.",
+      "because": "The project is too general for readers who may want to verify the work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Be ready to explain how the Research-Agent project relates to the overlapping internship.",
+      "because": "It is unclear whether the project was independent, open-source, or part of the internship."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Identify the citation and faithfulness metrics, or at least their kinds.",
+      "because": "“Eight metrics” alone does not show their relevance."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Explain the relationship represented by the 0.89 Kendall correlation and what the evaluator was expected to track.",
+      "because": "The figure is difficult to interpret without that context."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "The backlog-reduction result duplicates the Mobility Systems achievement.",
+      "because": "It should not appear here unless this project had a genuinely separate system, dataset, or outcome."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Expand the short skills list with relevant tools you can confidently discuss, such as SolidWorks for mechanical roles.",
+      "because": "Its coverage is thin relative to the experience described."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Tailor the skills list to each target role.",
+      "because": "It includes ML/agent terms but little context for the mechanical-design or software-infrastructure work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep skill categories and names consistent, and avoid broad terms unsupported by the work shown.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date formatting, punctuation, and dash styles throughout.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Check tense in bullets under current roles, using present tense for ongoing work and past tense for completed work.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Ensure bullets wrap naturally and remain intact in the PDF and when copied into an application system.",
+      "because": "The displayed line breaks split several bullets mid-sentence."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3129,
+    "input_tokens_details": {
+      "cache_write_tokens": 3126,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2917,
+    "output_tokens_details": {
+      "reasoning_tokens": 947
+    },
+    "total_tokens": 6046
+  }
+}

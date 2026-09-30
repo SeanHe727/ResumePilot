@@ -1,0 +1,260 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only SKUs that sold every week.",
+    "- Ran a time study of the returns desk; my findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations, raising inventory record accuracy from 91% to 98.5% within a year.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Cut inbound freight cost per pallet from $48 to $41 over two quarters by consolidating supplier pickups into four regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-time inbound deliveries from 81% to 93%.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Trained 6 planners on the new forecasting workflow and wrote its exception-handling guide, which the team still uses for promotions.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing problem with customer time windows.",
+    "- Raised on-time deliveries by 9% in simulation, from 84% to 93%, by adding customer time windows to the routing model.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again after its spring expansion.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The experience entries are not in reverse chronological order.",
+      "because": "Lakeview appears above the more recent Crestway role, making the work history harder to scan."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the stronger work history.",
+      "because": "A reader may not see the most relevant professional experience as quickly."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The current florist entry is longer than needed for the operations and supply-chain direction.",
+      "because": "Its shop and delivery duties do not advance that direction."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The delivery bullet gives volume and duties but no outcome.",
+      "because": "The reader cannot see what the work achieved."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The wedding-order bullet does not explain what preparing the orders involved.",
+      "because": "“Prepared” could describe a range of tasks, so the candidate’s contribution is unclear."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The wedding-order bullet lists responsibilities without showing what they accomplished.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The forecast-accuracy increase is not a valid like-for-like comparison.",
+      "because": "Excluding SKUs that did not sell every week changes the population measured and can make the metric look better without improving forecasts."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The description of which SKUs the MAPE calculation covers is wordy and imprecise.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The time-study bullet uses a first-person pronoun.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The candidate’s role in putting the triage station in place is indirect.",
+      "because": "“My findings led to” does not say whether the candidate helped implement it."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The returns-processing comparison does not define the days.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The dock-scheduling bullet does not say what the rules governed.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“At the dock” repeats context already conveyed by “trailer wait.”",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The inventory-accuracy figures do not identify the population they measure.",
+      "because": "The improvement could apply to the 2,000 counted locations or to a broader inventory population."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The demand-planning bullet puts its impact after the scope and method.",
+      "because": "A scanning reader must reach the end to find the stockout and inventory results."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“A seasonal forecast model” is too general to show the specific forecasting approach.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The reorder-point bullet gives no result.",
+      "because": "A reader cannot tell whether the work improved availability, reduced excess inventory, or otherwise helped the business."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The monthly-review phrase shifts attention to a recurring duty.",
+      "because": "It makes the bullet sound more like an ongoing responsibility than a completed action."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The vendor-scorecard bullet opens awkwardly.",
+      "because": "The participial opening makes the causal link between the scorecards and delivery improvement unclear."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The vendor-scorecard bullet buries its result after lengthy process details.",
+      "because": "A scanning reader may not reach the strongest evidence of the work’s value."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "The OEE figure of 112% is impossible under the conventional OEE definition.",
+      "because": "Availability, performance, and quality are each bounded at 100%, so conventional OEE cannot exceed 100%."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The OEE bullet names areas of improvement but not the specific intervention.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The guide’s use for promotions does not show what it improved.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The 120-to-90-mile change is a 25% reduction, not 40%.",
+      "because": "The decrease is 30 miles, or 25% of the original 120 miles, and the stated percentage also conflicts with the other route-mile result."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Average route length” does not say which routes the average covers.",
+      "because": "The measure is harder to interpret without the comparison population."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The route-mile result is repeated across two bullets in the same study.",
+      "because": "Both bullets report reducing route miles and may read as duplicate evidence for the same result."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The time-window intervention is repeated from the preceding bullet.",
+      "because": "Both bullets describe adding customer time windows, so they read as though they report the same intervention."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The warehouse-analysis bullet gives no scope or approach.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The warehouse-analysis bullet does not say what changed as a result.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Made recommendations” is broad and does not specify the action taken.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The intake-process bullet uses passive voice, obscuring the candidate’s role.",
+      "because": "A reader cannot tell who mapped the process or removed the duplicate steps."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The intake-process bullet puts its clearest impact late in the line.",
+      "because": "Donations reaching shelves sooner appears after the background."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The slotting-guide bullet does not show the expertise it captured.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The slotting-guide bullet does not show the result of the re-slotting.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Again” is redundant after “re-slot.”",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3809,
+    "input_tokens_details": {
+      "cache_write_tokens": 3806,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1853,
+    "output_tokens_details": {
+      "reasoning_tokens": 503
+    },
+    "total_tokens": 5662
+  }
+}

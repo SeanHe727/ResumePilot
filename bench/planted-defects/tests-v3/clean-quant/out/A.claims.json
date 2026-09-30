@@ -1,0 +1,171 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometrics, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The phrase 'lowering estimated slippage by a third' is less precise than the percentage format used elsewhere in the entry.",
+      "because": "A reader must translate 'a third' into a percentage before comparing it with the other quantified results."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Purged walk-forward splits and an embargo period do not justify the claim that every backtest decision used only information available at the time.",
+      "because": "Those controls address leakage from overlapping labels and nearby training observations, but they do not prevent revised data, feature construction, universe selection, corporate actions, preprocessing, or execution timestamps from introducing future information."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The validation method is described, but the bullet does not say what the validation demonstrated.",
+      "because": "A reader can see that the test design was careful, but cannot tell whether the signal remained effective, stable, or usable after that validation."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The phrase 'small live allocation' gives no concrete measure of the allocation or capacity estimate.",
+      "because": "'Small' is relative and leaves the reader unable to judge the scale of the trust placed in the work."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The approval outcome is buried after the presentation details.",
+      "because": "The live allocation is the strongest evidence of impact in this bullet, but the reader reaches it only after the signal, capacity estimate, and failure cases."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The phrase 'tightens the previous bound by a log factor' does not specify the exact comparison or the scale of the improvement.",
+      "because": "A reader can tell that the result improves prior theory but cannot confidently judge the size or form of the improvement."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The pronoun 'it' has an unclear antecedent because it could refer to the variance bound or the estimator.",
+      "because": "A technical reader may not know whether Section 3 contains the new bound or the estimator itself."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The paper-status clause is wordier than necessary and arrives after the technical result.",
+      "because": "The mathematical contribution should remain the main point, while the paper status should support it without interrupting the comparison."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The phrase 'Beat a HAR-RV baseline’s out-of-sample QLIKE loss by 7%' does not specify whether 7% is a relative reduction in loss or a percentage-point difference.",
+      "because": "A technical reader needs to know how the improvement was calculated to interpret its size consistently."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The stated full-sample Diebold–Mariano tests and Holm correction do not support the additional claim that the gain held at the 5% level in both crisis periods.",
+      "because": "Significance in the full sample does not imply significance within each crisis subperiod."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The phrase 'and in both crisis periods' does not identify the periods or show how the gain held within them.",
+      "because": "A reader cannot judge the robustness of the result without knowing which periods were tested or whether the statement means significance in both periods across all indices."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The result appears only after a long testing and correction clause.",
+      "because": "The reader must pass through the Diebold–Mariano tests and Holm correction before reaching the outcome."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The research deliverable is described, but the bullet does not state what it established or enabled.",
+      "because": "A reader can see that the work was documented and shared, but not why that output mattered or what conclusion it communicated."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The phrase 'method, robustness checks and results' does not name the analytical work performed.",
+      "because": "A specialist gets no clear technical detail to associate with the research skill."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "'Wrote up' is informal and 'which was presented' uses passive voice.",
+      "because": "'Wrote up' contributes little meaning in a resume bullet, while the passive construction obscures who presented the work."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The 41st-place ranking and the top-2% description repeat nearly the same result, while the percentage is less precise.",
+      "because": "The exact rank already communicates the competition outcome and lets the reader assess it against the stated field of 2,900 teams."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Switching to time-grouped folds alone does not establish that leakage was reduced or that it caused the 0.02 score-gap improvement.",
+      "because": "Time-grouped folds can reduce temporal leakage, but look-ahead features, overlapping labels, rolling calculations, or globally fitted preprocessing can still leak information."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The phrase 'closed a 0.02 gap between local validation and leaderboard scores' does not identify the metric or what the 0.02 represents.",
+      "because": "A reader cannot tell whether 0.02 is an absolute difference in a named evaluation score, a relative percentage, or another quantity."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "'Without losing validation score' does not name the score or clarify the comparison baseline.",
+      "because": "The reader can see that feature count fell, but cannot tell what performance was preserved or whether it was compared with the full 900-feature set."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "'Without losing validation score' is awkward and imprecise.",
+      "because": "The wording makes the performance result sound informal and leaves the evaluation standard unnamed."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4182,
+    "completion_tokens": 1514,
+    "total_tokens": 5696,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

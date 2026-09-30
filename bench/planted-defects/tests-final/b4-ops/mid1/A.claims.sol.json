@@ -1,0 +1,204 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "Date of birth: 14 Nov 1995 | Nationality: Mexican",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Cut inbound freight cost per pallet from $48 to $41 over two quarters by consolidating supplier pickups into four regional milk runs.",
+    "- Set safety stock for all 1,400 SKUs with the economic order quantity (EOQ) formula, balancing ordering and holding costs.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Led the monthly sales and operations planning meeting, reconciling the sales forecast with plant capacity for the finance and production teams.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Redesigned the pick paths for the fast-moving zone, cutting walking distance per order by 28% and raising picks per labor hour from 92 to 110.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Spearheaded a data-driven, optimization-first transformation of last-mile logistics that unlocked significant efficiency gains.",
+    "- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing problem with customer time windows.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Re-slotted the food bank's dry-goods warehouse by turnover, cutting volunteer picking time per pantry order from 25 to 15 minutes.",
+    "- Mapped the donation intake process with the warehouse lead and removed two duplicate data-entry steps, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python, SAP",
+    "Methods: demand forcasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality are personal details that should not be included.",
+      "because": "They are unrelated to the qualifications presented."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before relevant work experience.",
+      "because": "The reader reaches the degree before the work that best demonstrates the candidate’s experience."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "EOQ does not calculate safety stock.",
+      "because": "EOQ balances ordering and holding costs to determine an order quantity, not safety stock."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The safety-stock claim gives no resulting change.",
+      "because": "The SKU count shows scale but not whether the work improved availability or reduced excess inventory."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The scorecard’s outcome is missing.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The scorecard’s use is buried in the sentence.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The meeting description does not say what the reconciliation produced.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The lead-time, throughput and work-in-process figures are incompatible if they describe the same warehouse system.",
+      "because": "At constant throughput, halving lead time requires work-in-process to fall by half, not double."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The demand-planning results are buried after the scope and model detail.",
+      "because": "The stockout and inventory changes are the clearest evidence of impact."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The seasonal forecasting method is underspecified.",
+      "because": "“Seasonal forecast model” does not show the seasonal signal or adjustment used."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The bullet does not make the candidate’s role in creating or implementing the triage station clear.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Unrelated duties bury the accuracy result and obscure its connection to cycle counting.",
+      "because": "The reader cannot tell which contribution raised accuracy, and the duty list makes the entry less focused."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The cycle-counting bullet is not the opening line of the entry.",
+      "because": "A scanning reader may miss the stronger inventory-accuracy evidence."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The opening bullet uses broad, promotional language instead of naming the work or its result.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The route-length figures show a 25% reduction, not 40%.",
+      "because": "The 30-mile decrease divided by the original 120 miles is 25%."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The route-length result is not the project’s opening bullet.",
+      "because": "A scanning reader may not reach the project’s clearest measurable evidence first."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The route-length averages lack comparison context.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The method description does not say how the customer time windows were used.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The pilot’s result is missing.",
+      "because": "The reader cannot tell whether operations improved or the trial informed a decision."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The trial detail delays the point of the handoff.",
+      "because": "The relative clause postpones the most useful information."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The handoff bullet does not show how the model was made or validated.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“A day sooner” gives no baseline for the intake-to-shelf improvement.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The forecast results give no comparison baselines or period.",
+      "because": "The reader cannot tell what prior levels or period the stockout and inventory changes are compared with."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The forecast claim gives too little detail about how it was produced.",
+      "because": "“Seasonal forecast” names only a broad approach."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The bullet reports nearly the same forecasting achievement as the Crestway demand-planning bullet.",
+      "because": "The claims may look like one achievement presented under two entries."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "“Forcasting” is misspelled.",
+      "because": "A spelling error in a skills term can distract from the qualifications and make the résumé appear less carefully checked."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3432,
+    "input_tokens_details": {
+      "cache_write_tokens": 3429,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1368,
+    "output_tokens_details": {
+      "reasoning_tokens": 379
+    },
+    "total_tokens": 4800
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 16,
+  "words": 1930,
+  "quotes": 9,
+  "grounded": 8,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Move Campus Food Rescue App before the practicum."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4426,
+    "completion_tokens": 12709,
+    "total_tokens": 17135,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12444
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 2762
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Change “prepares” to “prepared,”"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Passive wording obscures who performed the work"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "checkout claim lacks a baseline and does not establish causation or universal scope"
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "merchant-onboarding result is assigned to two projects"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "describes meetings rather than your work or its result"
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "opt-in comparison is descriptive, not a valid causal measurement"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Excluding weather-delayed shipments changes the calculation; it does not prove overall late deliveries fell"
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "Explain the eight-month gap"
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove personal details that are not relevant to hiring"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 16,
+    "rewrites": [],
+    "falsePositives": [
+      "Move Campus Food Rescue App before the practicum."
+    ]
+  }
+}

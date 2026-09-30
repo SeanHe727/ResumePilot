@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Ran a time study of the returns desk; my findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W4",
+    "category": "wording",
+    "line": "The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised on-time deliveries by 9% in simulation, from 84% to 93%, by adding customer time windows to the routing model.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing problem with customer time windows.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-time inbound deliveries from 81% to 93%.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "defect": "OEE is availability times performance times quality, each at most 100%, so OEE cannot exceed 100%; 112% is impossible."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only SKUs that sold every week.",
+    "defect": "Excluding intermittent SKUs from the MAPE calculation changes what is measured; the forecasts did not become more accurate."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  }
+]

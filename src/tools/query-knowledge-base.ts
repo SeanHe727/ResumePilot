@@ -11,7 +11,6 @@ interface KnowledgeQueryInput {
 interface KnowledgeHit {
   id: string;
   dimension: DiagnosisDimension;
-  dimensionLabel: string;
   question: string;
   /** The version most people write. Usually the closest match to a real bullet. */
   weakExample: string;
@@ -20,8 +19,8 @@ interface KnowledgeHit {
   /** What separates them. */
   gap: string;
   source?: string;
-  similarity: number;
-  matchedBy: 'fts' | 'embedding' | 'both';
+  // Retrieval scores and labels are left out: the reader cannot act on them,
+  // and every hit is re-sent on each of its later turns.
 }
 
 interface KnowledgeQueryOutput {
@@ -76,14 +75,11 @@ export const queryKnowledgeBaseTool: Tool<KnowledgeQueryInput, KnowledgeQueryOut
           hits: results.map((r) => ({
             id: r.id,
             dimension: r.dimension,
-            dimensionLabel: r.dimensionLabel,
             question: r.question,
             weakExample: r.weakAnswer,
             strongExample: r.strongAnswer,
             gap: r.gapAnalysis,
             ...(r.source ? { source: r.source } : {}),
-            similarity: Number(r.similarity.toFixed(3)),
-            matchedBy: r.matchType,
           })),
           ...(input.dimension ? { scopedTo: input.dimension } : {}),
         },

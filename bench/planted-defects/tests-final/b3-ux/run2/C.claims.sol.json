@@ -1,0 +1,228 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.",
+    "- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Apr 2020 - Feb 2022",
+    "- Ran the monthly patient survey and rebuilt its reporting dashboard, cutting the time from survey close to published findings from 3 weeks to 4 days.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the portfolio link goes directly to relevant UX research work.",
+      "because": "The projects and outcomes on the résumé should be easy to verify there."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality unless an application requires them.",
+      "because": "They generally aren’t needed on a US résumé and can introduce bias."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "If space is tight, remove the education location.",
+      "because": "It is less valuable than the degree and dates."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether 37% and 22% were the A/B test’s control and variant results.",
+      "because": "That makes the attribution credible."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether you led the research, the design change, or both.",
+      "because": "That makes the attribution credible."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Replace or qualify “every major release” if the sessions did not cover every one.",
+      "because": "An absolute claim invites scrutiny."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "“Synthesizing” does not fit the sentence.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The research methods did not directly cut support calls.",
+      "because": "The product or service changes need to be distinguished from your research contribution."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "A System Usability Scale score of 104 cannot be right.",
+      "because": "The scale runs from 0 to 100."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "State what the two testing rounds measured if you retain the comparison.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "An open card sort does not directly validate findability in the proposed navigation.",
+      "because": "It can inform grouping and labels, but findability requires an appropriate test."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify how testing informed the shipped design.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify how the post-launch sign-up figures were measured and avoid an unsupported causal “raised.”",
+      "because": "A before-and-after comparison alone may not establish causation."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the strongest, defensible Pinegrove outcomes before activity counts.",
+      "because": "Once corrected, the onboarding and abandonment results are likely more compelling."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify whether automation, a changed reporting process, or both saved time.",
+      "because": "This shows what you contributed."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify your role in turning interview findings into the two-way text reminder.",
+      "because": "Otherwise the missed-appointment reduction reads as entirely attributable to the interviews."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether the setup-time comparison is for a typical study.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether other process changes contributed to the setup-time reduction.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Indicate how and over what period the 30% reduction was measured, if known.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Remove the broad “inclusive, human-centered” claim or support it with a specific action or result.",
+      "because": "It adds little beside the two measurable bullets."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Going from 90 to 60 seconds is a 33% reduction in time, not 50%.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Give enough testing context to show what was compared.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Going from 65% to 85% is a 20-percentage-point increase, not a 20% relative increase.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain the basis for the percentages with 12 participants, if possible.",
+      "because": "The denominator is not obvious."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Clarify whether the two transit results came from the same test.",
+      "because": "Both credit the same features and could appear to be independent validations."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify the source of the phone-booking figures.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Avoid implying the redesign was the sole cause of the drop in phone bookings unless you can support that.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Be able to explain how each of the six issues was identified and resolved.",
+      "because": "“The six issues” is specific."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Correct the typo “interveiws.”",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "List A/B testing only if you can discuss your role in designing, analyzing, or interpreting a test.",
+      "because": "Working on a product that ran a test is not enough."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2118,
+    "input_tokens_details": {
+      "cache_write_tokens": 2115,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1578,
+    "output_tokens_details": {
+      "reasoning_tokens": 474
+    },
+    "total_tokens": 3696
+  }
+}

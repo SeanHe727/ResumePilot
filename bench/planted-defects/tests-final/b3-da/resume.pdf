@@ -1,0 +1,79 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 5001>>
+stream
+BT /F1 16 Tf 72 752 Td (Avery Brooks) Tj ET
+BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-3319 | avery.brooks@example.com | example.com/in/abrooks) Tj ET
+BT /F1 10 Tf 72 720.5 Td (Date of birth: 9 Jan 1998 | Nationality: Brazilian) Tj ET
+BT /F1 12 Tf 72 703.0 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 72 689.0 Td (Eastmoor University | B.S. in Statistics | Metro City, USA | Sep 2016 - May 2020) Tj ET
+BT /F1 12 Tf 72 671.5 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 72 657.5 Td (Pinecrest Insurance | Junior Analyst | Metro City, USA | Jul 2020 - Jul 2022) Tj ET
+BT /F1 10 Tf 80 645.0 Td (- Ran the checkout A/B test until significance by checking the p-value every day and stopping) Tj ET
+BT /F1 10 Tf 86 633.2 Td (on the first day it fell below 0.05.) Tj ET
+BT /F1 10 Tf 80 621.4000000000001 Td (- Analyzed 18 months of call-center data; my findings moved two agents to the evening peak and) Tj ET
+BT /F1 10 Tf 86 609.6000000000001 Td (cut average hold time from 9 to 5 minutes.) Tj ET
+BT /F1 10 Tf 80 597.8000000000002 Td (- Writes the team's SQL style guide and review checklist, which cut query errors found in) Tj ET
+BT /F1 10 Tf 86 586.0000000000002 Td (review by half.) Tj ET
+BT /F1 10 Tf 80 574.2000000000003 Td (- Automated the monthly fraud-flag extract while also maintaining the team calendar, answering) Tj ET
+BT /F1 10 Tf 86 562.4000000000003 Td (ad hoc questions from sales, updating onboarding documents and covering the help desk on) Tj ET
+BT /F1 10 Tf 86 550.6000000000004 Td (Fridays, which saved the fraud team 10 hours a month.) Tj ET
+BT /F1 10 Tf 72 538.8000000000004 Td (Brightcart Retail | Data Analyst | Metro City, USA | Aug 2022 - Jun 2025) Tj ET
+BT /F1 10 Tf 80 526.3000000000004 Td (- Built the weekly retention dashboard for 2.4M customers that marketing used to retarget) Tj ET
+BT /F1 10 Tf 86 514.5000000000005 Td (lapsed buyers, lifting 90-day repeat purchase from 22% to 27%.) Tj ET
+BT /F1 10 Tf 80 502.70000000000044 Td (- Cut the monthly revenue report from 3 days of spreadsheet work to 2 hours by moving it to) Tj ET
+BT /F1 10 Tf 86 490.90000000000043 Td (scheduled SQL queries and a shared dashboard.) Tj ET
+BT /F1 10 Tf 80 479.1000000000004 Td (- Found customers with no orders by left-joining the orders table to the customers table and) Tj ET
+BT /F1 10 Tf 86 467.3000000000004 Td (counting rows with a null customer name.) Tj ET
+BT /F1 10 Tf 80 455.5000000000004 Td (- Joining 40 source tables, deduplicating customer records across two loyalty systems and) Tj ET
+BT /F1 10 Tf 86 443.7000000000004 Td (rebuilding the attribution logic in dbt-style SQL models, raised the share of orders tied to) Tj ET
+BT /F1 10 Tf 86 431.9000000000004 Td (a campaign from 58% to 81%.) Tj ET
+BT /F1 10 Tf 80 420.10000000000036 Td (- Presented the quarterly customer review to the leadership team, and two of its three) Tj ET
+BT /F1 10 Tf 86 408.30000000000035 Td (recommendations were funded in the next budget.) Tj ET
+BT /F1 10 Tf 80 396.50000000000034 Td (- Trained 20 merchandisers to answer their own questions with the self-serve dashboards,) Tj ET
+BT /F1 10 Tf 86 384.70000000000033 Td (halving ad hoc data requests.) Tj ET
+BT /F1 12 Tf 72 367.9000000000003 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 353.9000000000003 Td (City Bike-Share Demand Study | Independent Project | Python, SQL | Jan 2025 - Present) Tj ET
+BT /F1 10 Tf 80 341.4000000000003 Td (- Modeled hourly bike-share demand for 120 stations from 2 years of public trip data,) Tj ET
+BT /F1 10 Tf 86 329.6000000000003 Td (forecasting next-day demand within 12% mean absolute error.) Tj ET
+BT /F1 10 Tf 80 317.8000000000003 Td (- Cut empty-station hours from 300 to 200 a week, a 50% reduction, in a replay of last) Tj ET
+BT /F1 10 Tf 86 306.0000000000003 Td (summer's rebalancing.) Tj ET
+BT /F1 10 Tf 80 294.2000000000003 Td (- Raised forecast hit rate by 15% across 120 stations, from 60% to 75%, by adding weather and) Tj ET
+BT /F1 10 Tf 86 282.40000000000026 Td (event features.) Tj ET
+BT /F1 10 Tf 72 270.60000000000025 Td (Food Pantry Visit Analysis | Volunteer, Team of 3 | Excel, SQL | Mar 2023 - Aug 2023) Tj ET
+BT /F1 10 Tf 80 258.10000000000025 Td (- Mapped 14 months of pantry visits by hour and day, so the pantry moved one volunteer shift) Tj ET
+BT /F1 10 Tf 86 246.30000000000024 Td (and cut the Saturday line from 50 to 20 minutes.) Tj ET
+BT /F1 10 Tf 80 234.50000000000023 Td (- Cleaned 9,000 handwritten visit logs into a single table and matched repeat visitors, giving) Tj ET
+BT /F1 10 Tf 86 222.70000000000022 Td (the pantry its first count of unique households.) Tj ET
+BT /F1 10 Tf 80 210.9000000000002 Td (- Wrote a one-page guide the pantry coordinator used to update the visit table each month) Tj ET
+BT /F1 10 Tf 86 199.1000000000002 Td (after the project ended.) Tj ET
+BT /F1 12 Tf 72 182.30000000000018 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 168.30000000000018 Td (Tools: SQL, Python, Excel) Tj ET
+BT /F1 10 Tf 72 155.80000000000018 Td (Methods: dashboards, forecasting, metric design, data-quality checks) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+5331
+%%EOF

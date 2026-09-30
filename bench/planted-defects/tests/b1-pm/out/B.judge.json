@@ -1,0 +1,101 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/B.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "S4",
+    "T2",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 71,
+  "words": 2082,
+  "quotes": 16,
+  "grounded": 15,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Add the starting and ending queue sizes or the time period.",
+    "Use consistent punctuation. Either end every bullet with a period or omit periods from all bullets."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4473,
+    "completion_tokens": 11557,
+    "total_tokens": 16030,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11092
+    },
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 2937
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Fix the tense. “Prepares” should match the past-tense framing of the role."
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Replace the passive, vague framing with measurable evidence of your contribution."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Clarify whether the 35% figure is a relative increase or a percentage-point increase."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Delete this bullet from the practicum. It is clearly unrelated to a regional hospital network and duplicates the Harbor Payments content."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Add a deliverable or outcome. Weekly meetings are an activity, not an accomplishment by themselves."
+      },
+      {
+        "id": "S4",
+        "found": true,
+        "evidence": "Move this bullet higher, likely near the top of the role."
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "Be precise about the comparison group. Merchants who opted into the new flow may differ systematically from those who stayed on the old one."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Do not present a reporting-definition change as an operational improvement."
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove “Date of birth” and “Nationality.”"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 71,
+    "rewrites": [],
+    "falsePositives": [
+      "Add the starting and ending queue sizes or the time period.",
+      "Use consistent punctuation. Either end every bullet with a period or omit periods from all bullets."
+    ]
+  }
+}

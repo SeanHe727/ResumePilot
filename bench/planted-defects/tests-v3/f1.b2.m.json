@@ -1,0 +1,64 @@
+{
+  "A": [
+    {
+      "test": "b2-ce",
+      "recall": 0.7857142857142857,
+      "precision": 0.875,
+      "f1": 0.8279569892473119,
+      "errors": 8,
+      "falseAlarms": 1,
+      "verdicts": {
+        "W3": "right",
+        "W5": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "right",
+        "S4": "mentioned",
+        "T2": "right",
+        "T4": "mentioned",
+        "N3": "right",
+        "N5": "right"
+      }
+    },
+    {
+      "test": "b2-pm",
+      "recall": 0.9285714285714286,
+      "precision": 0.8333333333333334,
+      "f1": 0.8783783783783784,
+      "errors": 6,
+      "falseAlarms": 1,
+      "verdicts": {
+        "W1": "right",
+        "W4": "right",
+        "A2": "right",
+        "A3": "right",
+        "S1": "mentioned",
+        "S3": "right",
+        "T1": "right",
+        "T3": "right",
+        "N1": "right",
+        "N2": "right"
+      }
+    },
+    {
+      "test": "b2-quant",
+      "recall": 0.8571428571428571,
+      "precision": 0.8333333333333334,
+      "f1": 0.8450704225352113,
+      "errors": 6,
+      "falseAlarms": 1,
+      "verdicts": {
+        "W2": "right",
+        "W6": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "right",
+        "S4": "mentioned",
+        "T2": "right",
+        "T4": "right",
+        "N1": "right",
+        "N4": "mentioned"
+      }
+    }
+  ]
+}

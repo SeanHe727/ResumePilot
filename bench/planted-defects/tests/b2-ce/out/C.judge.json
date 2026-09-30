@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b2-ce/out/C.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "W5",
+    "A1",
+    "A4",
+    "S2",
+    "S4",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 100,
+  "words": 2018,
+  "quotes": 19,
+  "grounded": 14,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4313,
+    "completion_tokens": 13410,
+    "total_tokens": 17723,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13081
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4313
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Fix the tense mismatch: “maintained” is past tense, while “adds” is present tense."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "It is generic, leadership-heavy, and unsupported."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Clarify whether 35% is an absolute percentage-point increase or a relative improvement. The current wording is ambiguous. Identify the baseline or evaluation set sufficiently to make the result credible."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Remove this bullet from the project. It duplicates the internship bullet"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Add evidence that the contribution was accepted, tested, or used."
+      },
+      {
+        "id": "S4",
+        "found": true,
+        "evidence": "Move this higher, potentially to the first or second position, because it has the clearest operational impact."
+      },
+      {
+        "id": "T2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "BF16 mixed precision alone often does not produce a fourfold reduction from FP32, so be prepared to explain whether optimizer state, gradients, checkpointing, or another change contributed."
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove date of birth and nationality; they are generally inappropriate for a U.S.-focused résumé and can introduce bias."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 100,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

@@ -1,69 +1,91 @@
 /**
  * The one place every proposed change is visible at once.
  *
- * Selection has to happen here rather than inside each entry's reading, because
- * a page budget spent entry by entry is spent greedily: the first entry read
- * fills it and the last gets nothing, and which entry is read first is
- * arbitrary. It also cannot dedupe — the same demand recurs across bullets, and
- * only a view of all of them shows that it is one demand.
+ * It was a selection: choose what reaches the candidate against a page budget.
+ * Measured on the final validation run, that choice kept the wrong things: doubts
+ * about claims the line itself supported reached the report ranked above plain
+ * wording fixes, and the wording fixes (passive voice, a buried result) were set
+ * aside as polish. The readers had found them; the choosing lost them. So this
+ * is a filter now: everything reaches the candidate unless it should not, and
+ * the order still comes from here, because only a view of all of them can
+ * dedupe and rank.
  */
-export const IMPROVEMENT_PLAN_PROMPT = `You are given every finding a resume review produced — from the readers that
-scored the lines, the one that judged how they are written, the one that read
-the career end to end, the file check, and the comparison against the posting
-where there was one. Each says where it came from, and the ones that would add
-words say roughly how many. You are told how much room the page has left.
+export const IMPROVEMENT_PLAN_PROMPT = `# Role
 
-Choose what is worth doing, then sort what you chose by what it asks of the
-candidate.
+You receive every finding a resume review produced. By default every finding
+reaches the candidate; you remove only the ones that should not, and score the
+rest. You do not group and you do not write: the writer sees each line with
+every finding on it and merges what repeats.
 
-## Choosing
+## What you are given
 
-The findings outrun the page. A technical resume attracts more demands than it
-has room to answer — the resolution, the batch size, the warm-up, the seed all
-genuinely change how a figure reads, and all of them together do not fit. Your
-job is to decide which of them buy the most.
+- Findings: from the readers of each line (content, with its checked claims, and wording), the
+  whole-page readers (career story, consistency), the file check and, where
+  there is one, the job-posting comparison.
+- Each finding: its source, and where known its page cost (words added or
+  saved).
+- Problem type (content and wording findings):
+  - wrong: an error, a claim that does not hold (figures that do not add up,
+    a method that cannot do what is claimed, a claim the page contradicts).
+  - missing: something the line needs is not there.
+  - unclear: it is there but a reader cannot use it.
+- Room: how many words the page has left. It shapes how you score an addition,
+  never whether a finding is kept.
 
-Weigh each against what it costs: how much a reader would revise their judgement
-of this candidate, per word it would add. A four-word answer that settles a
-whole class of doubt beats a sentence that adds a detail.
+## What to remove
 
-Findings that ask the same thing in different places are one finding. The same
-demand recurs across bullets — whether a percentage is relative or in points,
-what a comparison was against, what a measurement covered — and each copy is
-counted separately until someone looks at all of them together. Merge them by
-putting their names in one group. A group holds only findings that ask the same
-thing: a finding asking something else of another line goes in a group of its
-own, however alike the two sound.
+Only a finding that would mislead or waste the candidate's time:
 
-You choose; you do not write. What reaches the candidate is the readers' own
-findings, so answer with names only. The one-line reasons the schema asks for are
-read by the people building this, never by the candidate.
+- A doubt about a claim the line already supports: asking a résumé line to
+  prove causation, rule out every alternative or show its full method, where
+  the line gives its own figures and a plausible mechanism. Measured: these
+  reached the report ranked above real fixes and pushed candidates to soften
+  sound claims.
+- A finding that is wrong about the line: it asks for what the line already
+  has, or misreads it.
+- Detail only a specialist would ask about (exact settings, how precisely it
+  was run), which belongs to the interview, not the page. **A method that
+  cannot support the line's conclusion is not this**: it is a problem on the
+  page (a comparison that does not isolate the effect, a metric redefined to
+  show a gain).
 
-Not everything costs words. A finding about how a line is written — filler, a
-verb doing no work, a clause saying twice what it said once — usually takes
-words away, and on a page with no room left those are the ones that pay for the
-rest. Findings about order, about dates, about a requirement the posting states
-and the resume does not answer, cost nothing at all and can still be the most
-important thing on the list.
+Keep everything else, however small. A small fix is cheap for the candidate,
+and it is theirs to skip. Wording findings (passive voice, duty framing, tense,
+a buried result, filler) are kept. Measured: set aside as polish, they were the
+findings plain reviews reported and this one did not.
 
-Fill the room and stop. Where the room is already gone, keep only what would be
-worth displacing something for — and reach first for the findings that free
-space rather than spend it. Where the resume has space, use it. There is no
-right number of findings; there is a page.
+- **Errors (wrong) are never removed.**
+- **Do not polish a line that should go:** where a finding says a line should be
+  removed (it repeats another entry or does not belong), remove findings that
+  ask to improve that line.
+- **Nothing disappears:** everything you remove goes in setAside, with a reason.
 
-Everything you leave out goes in ${'setAside'}. Nothing disappears: a candidate
-who can see what was set aside can disagree with the order, and one who sees a
-shorter list cannot tell it was ever longer.
+## Scoring
 
-## Sorting what you kept
+Score every kept finding from 1 to 10 for how much it matters to this résumé.
+The report is ordered by these scores, and low scores are shown briefly.
+Readers overlap: findings that name the same problem get the same score.
 
-- immediate: they can fix it right now, from the page alone. Deleting a pronoun,
-  reordering bullets, renaming a section, switching to a single column.
-- shortTerm: the fix is clear but needs a figure they have to go and find —
-  checking a dashboard, asking a former colleague, digging through a ticket.
-- longTerm: no amount of rewriting closes it. The experience itself is missing.
+- 9-10: an error that undermines the line or the page (figures that do not add
+  up, a method that cannot do what is claimed, a result under the wrong entry),
+  and personal details a resume should not carry.
+- 7-8: a smaller error.
+- 4-6: a change that clearly improves how the line reads to a hiring reader.
+  Cheap and valuable ranks higher: a change that costs no words or saves words
+  is cheap; one that changes a reader's judgement is valuable.
+- 1-3: polish.
 
-Order the groups by how much the change would move a reader's judgement. Mark
-every finding once: chosen in a group, or set aside with a reason. No preamble.
+## Fix type (for each kept finding)
 
-Reply with JSON only, matching the schema in the user message.`;
+- immediate: fixable now from the page alone.
+- shortTerm: the fix is clear but needs a figure the candidate has to find.
+- longTerm: rewriting cannot close it; the experience itself is missing.
+
+## Answer
+
+- Names only: answer with finding names; what reaches the candidate is the
+  readers' own findings.
+- Reasons: the one-line reasons are for the developers, never shown to the
+  candidate.
+- Decide every finding once: kept, with a score and a fix type, or removed.
+- JSON only, matching the schema in the user message. No preamble.`;

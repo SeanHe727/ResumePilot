@@ -1,0 +1,99 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 26,
+  "words": 1446,
+  "quotes": 5,
+  "grounded": 2,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "The feature-store and intern-wiki bullets describe substantial work, but should indicate adoption or practical effect—such as users, projects supported, time saved, or reduced rework—if you have those figures. (The feature-store bullet already states the team reused it in two later projects.)"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3956,
+    "completion_tokens": 14862,
+    "total_tokens": 18818,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14401
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2164
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove the personal pronoun from the proof bullet."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "correct 'time-series econometircs' to 'time-series econometrics.'"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Changing directional hit rate from 52% to 58% should be described as a 6-percentage-point increase, not simply a 6% improvement."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "reducing error from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "lead with the reusable feature-store outcome rather than dense implementation details"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Separate these or remove lower-priority responsibilities so the research-software contribution is not buried."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "multiplying a daily Sharpe ratio by 252 is not the standard annualization method."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Reduce the prominence of the bakery role. Move it to an Additional Experience section below the quantitative research and projects, or place it last."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "no supporting entries for SQL, C++, Kafka, Bayesian inference, or time-series econometrics."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 26,
+    "rewrites": [],
+    "falsePositives": [
+      "The feature-store and intern-wiki bullets describe substantial work, but should indicate adoption or practical effect—such as users, projects supported, time saved, or reduced rework—if you have those figures. (The feature-store bullet already states the team reused it in two later projects.)"
+    ]
+  }
+}

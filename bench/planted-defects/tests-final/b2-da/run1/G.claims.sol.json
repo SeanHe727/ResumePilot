@@ -1,0 +1,339 @@
+{
+  "lines": [
+    "Avery Brooks",
+    "+1 (555) 010-3319 | avery.brooks@example.com | example.com/in/abrooks",
+    "Date of birth: 9 Jan 1998 | Nationality: Brazilian",
+    "EDUCATION",
+    "Eastmoor University | B.S. in Statistics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Riverside Cinema | Box Office Attendant | Metro City, USA | Aug 2025 - Present",
+    "- Sold tickets and concessions during evening shifts and balanced the cash drawer at close.",
+    "- Trained 3 new attendants on the ticketing system and the refund policy.",
+    "Brightcart Retail | Data Analyst | Metro City, USA | Aug 2022 - Jun 2025",
+    "- Built the weekly retention dashboard for 2.4M customers that marketing used to retarget lapsed buyers, lifting 90-day repeat purchase from 22% to 27%.",
+    "- Cut the monthly revenue report from 3 days of spreadsheet work to 2 hours by moving it to scheduled SQL queries and a shared dashboard.",
+    "- Found customers with no orders by left-joining the orders table to the customers table and counting rows with a null customer name.",
+    "- Joining 40 source tables, deduplicating customer records across two loyalty systems and rebuilding the attribution logic in dbt-style SQL models, raised the share of orders tied to a campaign from 58% to 81%.",
+    "- Presented the quarterly customer review to the leadership team, and two of its three recommendations were funded in the next budget.",
+    "- Trained 20 merchandisers to answer their own questions with the self-serve dashboards, halving ad hoc data requests.",
+    "Pinecrest Insurance | Junior Analyst | Metro City, USA | Jul 2020 - Jul 2022",
+    "- Ran the checkout A/B test until significance by checking the p-value every day and stopping on the first day it fell below 0.05.",
+    "- Analyzed 18 months of call-center data; my findings moved two agents to the evening peak and cut average hold time from 9 to 5 minutes.",
+    "- Writes the team's SQL style guide and review checklist, which cut query errors found in review by half.",
+    "- Automated the monthly fraud-flag extract while also maintaining the team calendar, answering ad hoc questions from sales, updating onboarding documents and covering the help desk on Fridays, which saved the fraud team 10 hours a month.",
+    "PROJECTS",
+    "City Bike-Share Demand Study | Independent Project | Python, SQL | Jan 2025 - Present",
+    "- Modeled hourly bike-share demand for 120 stations from 2 years of public trip data, forecasting next-day demand within 12% mean absolute error.",
+    "- Cut empty-station hours from 300 to 200 a week, a 50% reduction, in a replay of last summer's rebalancing.",
+    "- Raised forecast hit rate by 15% across 120 stations, from 60% to 75%, by adding weather and event features.",
+    "Food Pantry Visit Analysis | Volunteer, Team of 3 | Excel, SQL | Mar 2023 - Aug 2023",
+    "- Mapped 14 months of pantry visits by hour and day, so the pantry moved one volunteer shift and cut the Saturday line from 50 to 20 minutes.",
+    "- Cleaned 9,000 handwritten visit logs into a single table and matched repeat visitors, giving the pantry its first count of unique households.",
+    "- Wrote a one-page guide the pantry coordinator used to update the visit table each month after the project ended.",
+    "SKILLS",
+    "Tools: SQL, Python, Excel",
+    "Methods: dashboards, forecasting, metric design, data-quality checks"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The email and profile URL look like placeholders.",
+      "because": "The submitted version should have real, working contact details."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth.",
+      "because": "It is generally irrelevant to the role and can invite bias."
+    },
+    {
+      "line": 3,
+      "kind": "suggestion",
+      "says": "Usually remove nationality from a U.S. resume.",
+      "because": "Work authorization, if relevant, should be addressed directly rather than inferred from nationality."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Give the ticket-sales bullet less space.",
+      "because": "It is less relevant to data analyst roles than the analytics experience."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Keep the attendant-training bullet only if there is room.",
+      "because": "The training is not especially relevant to analytics."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify what drove the repeat-purchase increase and how the dashboard contributed.",
+      "because": "The bullet implies the dashboard caused the increase."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "State the comparison period or cohort for the repeat-purchase metric.",
+      "because": "That context would help substantiate the change."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether the time saved was preparation time, elapsed time, or both.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether the new reporting process was used consistently.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The join and null check do not establish that customers had no orders.",
+      "because": "A null customer name generally indicates an unmatched customer record or missing name."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Fix the opening phrase so it connects cleanly to the result.",
+      "because": "The bullet is difficult to parse and has a grammatical problem."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify your specific contribution.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify what “dbt-style” means and whether you used dbt.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Explain how the attribution logic was validated.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Define the denominator for the campaign-linked share.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Explain whether the increase reflects better coverage, changed attribution rules, or both.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify your role in producing the analysis and recommendations.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Be ready to substantiate the funding outcome.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Avoid implying the presentation alone caused the funding decision.",
+      "because": "That causal claim needs support."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Define the measurement period and what counts as an ad hoc request.",
+      "because": "Otherwise, “halving” is hard to evaluate."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the reduction can be attributed to the training and dashboards.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The stated A/B-test stopping procedure is not sound experimentation.",
+      "because": "Repeatedly checking a conventional p-value and stopping at the first significant result inflates false-positive risk."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify what analysis informed the staffing change.",
+      "because": "The wording claims a direct effect on hold time."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Give the lengths of the before-and-after periods.",
+      "because": "They are needed to assess the hold-time reduction."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Address whether other factors could explain the hold-time reduction.",
+      "because": "The wording claims a direct effect from the staffing change."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "“Writes” has inconsistent tense for a past role.",
+      "because": "The resume otherwise describes completed work."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify whether you authored the guide or contributed to it.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Define the comparison period for the claimed 50% reduction.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Define how “query errors” were measured.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Separate the automation achievement from the unrelated duties or remove the less relevant details.",
+      "because": "Combining them buries the main accomplishment."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify how the 10-hour saving was estimated.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify that the saving was team time saved rather than time shifted elsewhere.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify the exact error measure and units.",
+      "because": "“12% mean absolute error” is ambiguous unless normalized or expressed as a percentage."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Explain the train/test split, baseline, and how data leakage was avoided.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The reduction from 300 to 200 is one-third, not 50%.",
+      "because": "The stated percentage is arithmetically inconsistent."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Label the reduction clearly as a simulation or replay result.",
+      "because": "It was not a real-world reduction."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Explain the replay assumptions.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The increase from 60% to 75% is 15 percentage points, not a 15% relative increase.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Define “hit rate” and the threshold for a hit.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain how hit rate was evaluated.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain how hit rate relates to the preceding MAE metric.",
+      "because": "Otherwise, the project may appear to use whichever metric looks best."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify how the wait time was measured.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify whether the shorter line can be attributed to the shift adjustment.",
+      "because": "The bullet implies the analysis caused the reduction."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Explain the matching method and how uncertain matches were handled.",
+      "because": "The “unique households” count should rest on a defensible method."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Explain how visitor privacy was protected.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Show more of the tools, libraries, or environment behind the experience.",
+      "because": "The current list is broad and does not show technical depth."
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Ground the listed methods in concrete examples from the resume.",
+      "because": "The methods are general, and the projects should demonstrate them."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Tailor the ordering and detail to a specific job description.",
+      "because": "The resume reads as a general data analyst resume rather than one aimed at a specialty."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3054,
+    "input_tokens_details": {
+      "cache_write_tokens": 3051,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2050,
+    "output_tokens_details": {
+      "reasoning_tokens": 446
+    },
+    "total_tokens": 5104
+  }
+}

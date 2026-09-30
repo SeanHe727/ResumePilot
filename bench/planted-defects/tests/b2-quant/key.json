@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Methods: time-series econometircs, Bayesian inference, gradient boosting, PyTorch",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Built a short-horizon order-book imbalance signal for liquid index futures that added 0.4 Sharpe to the desk's book over 18 months of out-of-sample backtest after costs.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "defect": "Reporting the best of 400 backtests without a multiple-testing or deflated-Sharpe adjustment overstates expected live performance."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "defect": "Using the same seed on every worker makes the parallel runs identical, so the study no longer has 2,000 independent draws."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Programming: Python, R, SQL, C++, Kafka",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Kafka)"
+  }
+]

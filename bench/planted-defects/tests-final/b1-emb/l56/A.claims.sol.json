@@ -1,0 +1,227 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not listed in reverse chronological order.",
+      "because": "Clearwater Sensors appears above the more recent Voltline Robotics role, delaying the reader’s view of the embedded-software work."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Formula Student project should be shortened to a compact supporting entry.",
+      "because": "It is older and gives substantial space to claims that overlap with the later robotics experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The 10-month period between graduation and the first listed job is unexplained.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "“Automated end-of-line tests” does not show how the automation was implemented.",
+      "because": "The reader cannot tell what technical capability the work required."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The strongest Clearwater Sensors achievement should lead the entry.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The calibration-procedure bullet does not describe the procedure’s technical content.",
+      "because": "The reader cannot see the engineering judgment behind the reduction in drift complaints."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Improved update speed by 60%” does not identify the measured metric or baseline.",
+      "because": "The reader cannot tell whether it refers to installation time, download time, or throughput."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The hardware-in-the-loop test-rig bullet does not state what changed as a result.",
+      "because": "The reader cannot tell whether it caught regressions, shortened validation, or improved release confidence."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "“Which found the root cause” gives the crash logger agency.",
+      "because": "It obscures that the captured data enabled the investigation."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "An 8 kHz sampling rate cannot capture the stated 5 kHz signal without aliasing.",
+      "because": "Its 4 kHz Nyquist frequency is below the stated signal frequency."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The sampling bullet states an intended capability but no resulting improvement.",
+      "because": "The reader cannot see whether fault detection became more accurate, sensitive, or useful in a missed case."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Declaring the shared counter volatile does not by itself fix the race condition.",
+      "because": "It does not make increments atomic or provide mutual exclusion."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The race-condition bullet gives no result beyond the code change.",
+      "because": "The reader cannot tell what failure the fix eliminated."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The motor-controller rewrite duplicates the distinctive accomplishment claimed in the Formula Student project.",
+      "because": "The entries place nearly identical results and roughly 300 robots in different roles and periods."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The opening weather-station bullet uses promotional, generic language instead of engineering work or a concrete result.",
+      "because": "It reads as marketing rather than evidence of embedded-systems capability."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The strongest weather-station result should lead the entry.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Average current” omits the measurement conditions or duty cycle.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The school-built-stations result does not explain what the adoption enabled or demonstrated.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Published ... openly” is redundant and imprecise.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The bullet incorrectly assigns robot-fleet motor-controller work to the Formula Student project.",
+      "because": "The project concerns a race car, and the same robot work appears under Voltline Robotics."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Worked on firmware and testing” gives no specific contribution or outcome.",
+      "because": "It does not show what you developed, modified, or tested, or prove its value."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The passive dashboard CAN-bus bullet obscures your ownership.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The dashboard CAN-bus bullet does not state what the work enabled or improved.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The Formula Student bullet incorrectly claims a rewrite for a fleet of about 300 robots.",
+      "because": "The claim fits the later robotics role and repeats its distinctive motor-control result."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Rewrote motor-control firmware” does not identify the technical approach.",
+      "because": "The reader cannot tell whether the improvement came from scheduling, control-loop design, communication, or fault handling."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Cutting control-loop jitter eightfold” is ambiguous.",
+      "because": "It can mean reduced to one-eighth or reduced by eight times."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The relative results do not identify the testing context or measurement period.",
+      "because": "The reader cannot assess whether they came from controlled testing, race data, or another period."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Formula Student entry is loosely ordered, opening with a broad task before its more consequential firmware result.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "C++ is listed without evidence of C++ work elsewhere in the résumé.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Oscilloscopes are listed without evidence of their use in the entries.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3822,
+    "input_tokens_details": {
+      "cache_write_tokens": 3819,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1899,
+    "output_tokens_details": {
+      "reasoning_tokens": 686
+    },
+    "total_tokens": 5721
+  }
+}

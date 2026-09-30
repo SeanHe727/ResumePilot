@@ -1,0 +1,206 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Owned the pick-path layouts for the fast-moving zone and the labor reports the shift leads used.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The Crestway and food-bank bullets claim nearly identical forecasting results in different settings.",
+      "because": "They describe similar scope and results, which may make a reader question whether the same achievement is attributed twice."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not in newest-first order.",
+      "because": "Lakeview appears above the more recent Crestway role, disrupting the chronology."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The unrelated florist role leads Experience.",
+      "because": "It draws attention away from the more relevant operations experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience despite several years of post-degree work.",
+      "because": "It delays the work history that better establishes the candidate’s professional direction."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The delivery line gives volume but not the result of the deliveries.",
+      "because": "Volume alone does not show whether arrangements arrived on time or what value the work produced."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The wedding-order and cooler tasks do not show their outcome.",
+      "because": "The reader cannot tell whether orders were ready when needed or how the cooler work helped the shop."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The line does not say what the layouts or reports improved.",
+      "because": "The reader cannot tell why they mattered operationally."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Owned” names responsibility rather than a specific action.",
+      "because": "It leaves the actual work unclear and hard to distinguish from routine responsibility."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The time reduction comes after the study description instead of leading the line.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Unrelated duties interrupt the link between cycle counting and the accuracy gain.",
+      "because": "A scanning reader may not know which work drove the increase, and the duties make the line read partly like a task list."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The inventory-accuracy result is buried at the end of the line.",
+      "because": "The clear result and scale of contribution are harder to see."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The strongest Lakeview bullet does not open the entry.",
+      "because": "Opening with the accuracy gain would put the entry’s strongest evidence first."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The reorder-point line describes a process but not what changed as a result.",
+      "because": "The reader cannot tell whether it improved availability, reduced excess inventory or otherwise helped the business."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The scorecard line does not state what changed after buyers renegotiated delivery windows.",
+      "because": "The effect on supplier reliability or another measurable result remains unknown."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The buyer-use detail comes before the outcome.",
+      "because": "It delays the result in a quick scan."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The lead-time, throughput and work-in-process figures are inconsistent.",
+      "because": "Under Little’s law, doubling average work-in-process at constant throughput cannot halve lead time."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The throughput constraint and work-in-process tradeoff obscure the main outcome.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The pilot is described without its operational result.",
+      "because": "Truck count and duration show scale, but not whether deliveries improved or planned savings held."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The opening is too broad to show what the analysis involved or what changed.",
+      "because": "The reader cannot tell what analytical skill was used or whether leadership adopted the recommendations."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Made recommendations” does not name a specific action.",
+      "because": "The broad phrasing leaves the work and its operational value unclear."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The broad opening does not connect the entry’s two warehouse improvements.",
+      "because": "The intake and forecasting work read as separate accomplishments rather than a clear account of the project."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The one-day intake-to-shelf improvement lacks a stated comparison basis.",
+      "because": "The reader cannot tell whether it came from measured before-and-after times or an estimate."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Passive voice obscures who mapped the intake process.",
+      "because": "It hides the candidate’s role."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The forecast is credited with reducing stockouts and inventory without showing the intervening actions.",
+      "because": "A forecast can inform purchasing and allocation, but does not itself change orders or inventory."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The stockout and inventory reductions lack a baseline or comparison period.",
+      "because": "The reader cannot judge their scale or timeframe, and the inventory figure depends on how and when it was valued."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The strongest food-bank bullet does not open the entry.",
+      "because": "Its specific scope and claimed outcomes are more concrete than the broad opening."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3747,
+    "input_tokens_details": {
+      "cache_write_tokens": 3744,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1852,
+    "output_tokens_details": {
+      "reasoning_tokens": 754
+    },
+    "total_tokens": 5599
+  }
+}

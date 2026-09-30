@@ -1,0 +1,215 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "- Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "- Built a research repository of 250 tagged session clips that product managers searched before writing new requirements.",
+    "- Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Apr 2020 - Feb 2022",
+    "- Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients while also running the team's recruiting calendar, updating the style guide, onboarding two interns and taking notes for the accessibility working group, which cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "- Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds and errors from 11 to 3 across the 12 sessions.",
+    "- Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Tested three onboarding prototypes with 24 new customers and shipped the design that lifted completed sign-ups by 41% in its first quarter.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm the portfolio link is current and accessible.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify the baseline, measurement period, and whether the 40% is relative or a percentage-point change.",
+      "because": "The metric’s meaning is not yet clear."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Avoid implying the form change alone caused the outcome if other changes contributed.",
+      "because": "The outcome’s attribution is not yet clear."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "A 3:1 contrast ratio does not support a WCAG 2.1 AA claim for ordinary body text.",
+      "because": "Normal-sized text generally requires 4.5:1; 3:1 applies to large text."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Confirm that all relevant design-system combinations were assessed before claiming the system met AA.",
+      "because": "The claim covers the design system as a whole."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify the text sizes and backgrounds assessed and what “every background” means.",
+      "because": "Readers may wonder whether it means every approved combination or every possible component use."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Show what practical work the research repository improved.",
+      "because": "The bullet gives its size and use but stops short of showing its impact."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Check that searchable session clips are consistent with consent and privacy practices.",
+      "because": "Research recordings can raise confidentiality questions."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify who identified the “top five” fixes.",
+      "because": "More precision would clarify the relationship between the recommendations and shipped work."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether all three fixes shipped in the same next release cycle.",
+      "because": "More precision would clarify the relationship between the recommendations and shipped work."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "An open card sort does not by itself validate findability in a finished navigation.",
+      "because": "It typically shows how people group and label information, so the method and claim may not align."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Tie the sign-up result clearly to the named flow and quarter.",
+      "because": "The similar Community Clinic claim makes accuracy and attribution especially important."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Distinguish this onboarding metric from the similar Community Clinic claim.",
+      "because": "The repeated project claim elsewhere makes attribution especially important."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Give a concrete indication of the survey or dashboard’s scope or use.",
+      "because": "“Owned” shows responsibility but not what it enabled."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the measurement period, denominator, and whether the drop was five percentage points or a relative reduction.",
+      "because": "The missed-appointment metric needs context."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Avoid implying the interviews alone caused the drop if other factors were involved.",
+      "because": "The causal link needs context."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Define what “study setup time” covers and whether the time comparison is typical.",
+      "because": "Defining the measure would make the result easier to understand and trust."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Break up or reduce the bullet’s mix of testing, other responsibilities, and the support-call result.",
+      "because": "Combining them makes the research contribution and outcome hard to evaluate."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Confirm which work contributed to the 30% reduction in support calls.",
+      "because": "The bullet combines several responsibilities with one major result."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Replace or remove the broad claim about an inclusive, human-centered approach and meaningful outcomes.",
+      "because": "The next two bullets provide more concrete project evidence."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify what the 12 sessions represent and whether the before-and-after tasks were comparable.",
+      "because": "Readers need context to interpret how the improvement was measured."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify the timing and status of the agency invitation.",
+      "because": "An invitation to a review is different from adoption or implementation."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify the period, comparison, and whether the drop in phone bookings was a relative reduction.",
+      "because": "The result’s measurement is ambiguous."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Consider whether other changes contributed to the drop in phone bookings.",
+      "because": "The result’s attribution is ambiguous."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Identify what the two testing rounds covered and how the six issues were found to block completion.",
+      "because": "The connection between the testing and the stated issues could be more explicit."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The onboarding bullet closely duplicates Pinegrove work but gives a different result, raising a possible misattribution.",
+      "because": "The duplication and differing figures could make readers question the work or metric’s attribution."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Substantiate the VoiceOver and NVDA screen-reader testing skill or reconsider listing it.",
+      "because": "The experience bullets provide little evidence of its depth or context."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Substantiate the A/B testing skill or reconsider listing it.",
+      "because": "The experience bullets provide little evidence of its depth or context."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2912,
+    "input_tokens_details": {
+      "cache_write_tokens": 2909,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1470,
+    "output_tokens_details": {
+      "reasoning_tokens": 285
+    },
+    "total_tokens": 4382
+  }
+}

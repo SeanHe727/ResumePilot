@@ -1,0 +1,93 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/D.md",
+  "recall": 7,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S3",
+    "T3",
+    "N2"
+  ],
+  "coverage": true,
+  "suggestions": 31,
+  "words": 3063,
+  "quotes": 21,
+  "grounded": 19,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5897,
+    "completion_tokens": 10366,
+    "total_tokens": 16263,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 9913
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 4233
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "“Owned” is common resume language and does not establish what you personally did. “Two major releases” is also vague unless the releases had meaningful scale or significance."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "“AI-first engineering practices,” “accelerating delivery,” and “improving outcomes” are vague and sound like marketing language. They do not tell the reader what you built or how success was measured."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 71% to 83% is: 12 percentage points, or approximately 17% relative improvement. It should not be described as a 12% improvement unless you specifically mean percentage points."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "That calculation is incorrect: The reduction is 300 ms. 300 / 900 = 33.3%."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "It currently combines: Service migration. Logging-library rewriting. New-hire onboarding. Weekend on-call ownership. Removal of nightly backlogs. Why: The bullet contains too many distinct contributions."
+      },
+      {
+        "id": "T1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Technical concern: “Single-request” and “dynamic batching” may appear contradictory unless the benchmark captures requests under concurrent load."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "The experience order is incorrect. The 2024–2025 internship appears after the 2022–2024 full-time role."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": true,
+    "suggestions": 31,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

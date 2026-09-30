@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b2-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "W2",
+    "W6",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 23,
+  "words": 2622,
+  "quotes": 2,
+  "grounded": 2,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5498,
+    "completion_tokens": 10092,
+    "total_tokens": 15590,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 9781
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5498
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Replace the first-person wording in the research bullet (“my proof”)."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct “econometircs” to “econometrics.”"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "The 35% improvement does not identify its comparison or the return measure."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "The same order-book imbalance result appears to be claimed in both the Northpeak and Kaggle entries."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "The feature-engineering and modeling bullet gives no result, performance measure, or specific feature work."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "Selecting the best result from 400 backtested configurations creates selection bias, so its Sharpe is not a valid expected live Sharpe."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "Using the same random seed on every worker duplicates random sequences instead of producing independent Monte Carlo runs."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "The experience order gives an unrelated retail role prominence before the quantitative research role."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The skills list claims C++, Kafka, and Bayesian inference without evidence elsewhere in the résumé."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 23,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The date of birth should be removed.",
+      "because": "It does not help establish product-role fit and can introduce unnecessary bias or screening concerns."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The nationality should be removed.",
+      "because": "It does not help establish product-role fit and can introduce unnecessary bias or screening concerns."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé lacks a product-focused headline or summary.",
+      "because": "A recruiter should not have to infer the target role from the sections below."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "The MBA completion date should reflect the applicant’s actual status when applying.",
+      "because": ""
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "The economics degree could be visually secondary to the MBA.",
+      "because": "The MBA better supports the current product positioning."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Harbor Payments should appear before Crestline Logistics.",
+      "because": "The internship ended in 2024, after the Crestline role ended in 2023, and reverse-chronological order is expected."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "The late-delivery reduction may reflect a changed calculation rather than better delivery performance.",
+      "because": "Excluding weather-delayed shipments can improve the reported rate without making deliveries more reliable."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether the 30% pick-error reduction is relative or a percentage-point change.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Make the two-site scope and retraining details easier to parse.",
+      "because": "The bullet packs the result, intervention, rollout, and training into a lot of information."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain how the forecast-error comparison was measured.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether the annual driver-hour savings were measured or projected.",
+      "because": "Those imply different levels of demonstrated impact."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Give the baseline, measurement period, and meaning of the 35% conversion improvement.",
+      "because": "Readers need to know whether it is a relative lift or a percentage-point increase."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify the evidence attributing the conversion improvement to the new flow.",
+      "because": "A result this significant needs substantiation."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify the rollout and measurement scope behind “for all merchants.”",
+      "because": "The phrase invites questions about which merchants were included."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Add a verified customer or business outcome for dispute self-service if available.",
+      "because": "Shipping early does not establish what the feature achieved."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify the currency for “1.1 million dollars.”",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the chargeback-loss figure is observed, estimated, or annualized.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Use US spelling consistently instead of “analysed.”",
+      "because": "The résumé mixes spelling forms with US contact and location details."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Consider giving ticket triage less space unless it demonstrates meaningful ownership.",
+      "because": "It reads more like operational support than product management."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Do not treat the opt-in comparison as causal evidence without a supporting design.",
+      "because": "Merchants who opted in may differ from those who did not, creating selection bias."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Explain how the opt-in analysis relates to the following onboarding result.",
+      "because": "The two bullets overlap."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Explain how median time to first payment was measured and whether the pilot had a suitable baseline.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Lead the Harbor Payments entry with its strongest product outcome and discovery evidence.",
+      "because": "A lower-level operational task should not compete for early attention."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify the measurement basis for the food tonnage.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Ensure “first year” matches the project dates.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Use US spelling consistently instead of “tonnes.”",
+      "because": "The résumé mixes spelling forms with US contact and location details."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Keep the implied link between reminders and user growth proportionate.",
+      "because": "The interviews informed the change, but weekly active users may have grown for other reasons."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "State the user-growth measurement period consistently.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether staff cover shifts were measured over comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Avoid repeating the dining-hall partnership detail without adding value.",
+      "because": "It may overlap with the first project bullet."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Add a concrete outcome for the weekly working sessions if one can be substantiated.",
+      "because": "The bullet describes an activity rather than what changed."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Make your role in the patient-intake work clear.",
+      "because": "The passive construction obscures your contribution."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify the practical effect of the shorter intake form, if known.",
+      "because": "The result is vague."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The merchant-onboarding result does not belong under the hospital practicum as written.",
+      "because": "It describes merchant payments and appears copied from the Harbor Payments experience."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Support the A/B testing skill with controlled-experiment experience or remove it.",
+      "because": "The opt-in comparison is not necessarily an A/B test."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Show more depth in the tools section, adding tools only if they can be discussed competently.",
+      "because": "The section is short and does not show depth."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3026,
+    "input_tokens_details": {
+      "cache_write_tokens": 3023,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2016,
+    "output_tokens_details": {
+      "reasoning_tokens": 663
+    },
+    "total_tokens": 5042
+  }
+}

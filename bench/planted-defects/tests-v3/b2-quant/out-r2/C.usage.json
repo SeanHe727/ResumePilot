@@ -1,0 +1,16 @@
+{
+  "model": "gpt-5.6-sol",
+  "usage": {
+    "input_tokens": 853,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3538,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 4391
+  },
+  "seconds": 59.558
+}

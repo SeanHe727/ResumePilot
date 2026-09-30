@@ -1,0 +1,134 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "- Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Rebuilt the diagnostics service's monitoring dashboards around per-sensor error budgets, cutting mean time to detect incidents from 40 to 12 minutes.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Raised defect localization on a 120-case benchmark from 82% to 94% by dispatching tasks to role-specialized sub-agents with isolated prompts, toolsets and contexts.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The resume order lets older software and infrastructure work define the page before the most current multi-agent work."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "The bullet attributes its full measured improvement to the described ML architecture without establishing causation."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The reviewer-disagreement result does not immediately identify what the 14% and 6% percentages measure."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The comparison qualifier that the reductions preserved accuracy appears too late in the GRPO bullet."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The strongest outcome in the runbook bullet is buried after the documentation details."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "In the latency bullet, change 'fail the build' to 'failed the build' if describing completed work."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The CI bullet leads with an ongoing maintenance duty instead of the specific improvement performed."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The migration bullet gives no measured change in the nightly backlog or morning-dispatch delay."
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "The bullet attributes its full measured improvement to role-specialized dispatch without establishing causation."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The concurrency and cache changes do not by themselves establish that nested deadlocks and lost tool results were completely eliminated."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The 50-way test scale is given without a failure-rate or before-and-after comparison."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The contribution's technical ownership is unclear because the bullet says the metrics were upstreamed without saying what was implemented, adapted, integrated, or validated."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Replace 'upstreamed' with a clearer term such as 'integrated' only if it precisely describes the contribution."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Make the following pronoun explicitly refer to the metrics."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The Kendall correlation establishes rank association in the trial setup, not broad evaluator validity or causal sensitivity."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The metric result does not say what capability the validated evaluator enabled or changed."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The bullet may claim root-cause localization and confirmed fixes that layered instrumentation alone does not establish."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3627,
+    "completion_tokens": 8194,
+    "total_tokens": 11821,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7442
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3627
+  }
+}

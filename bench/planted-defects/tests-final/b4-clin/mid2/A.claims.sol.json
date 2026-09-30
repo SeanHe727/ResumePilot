@@ -1,0 +1,161 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Apr 2022 - Aug 2022",
+    "- Randomized patients by assigning those admitted on odd-numbered days to the program and even-numbered days to usual care.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "- Cut data-entry errors in the trial database from 6.1% to 1.8% of fields by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-checking them against pharmacy records each week, cut unresolved safety queries from 45 to 6.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Trained 9 site nurses on the consent process and outcome forms, and no consent deviations were found at the final audit.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting for age and insurance.",
+    "- Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited residents.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Wrote the survey's data codebook, which the clinic used for its follow-up survey the next year.",
+    "SKILLS",
+    "Tools: R, REDCap",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience entries are not in newest-first order.",
+      "because": "The older Northgate role appears above the more recent Meridian role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience and Projects, so recent work does not lead the page.",
+      "because": "Readers looking for current experience have to scan past it."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The dates show a 10-month period with no study or work listed.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "error",
+      "says": "Odd- and even-day assignment is quasi-random, not randomized.",
+      "because": "Admission day makes assignment predictable rather than based on chance."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The assignment description gives no study result.",
+      "because": "Readers cannot judge what the study found or why the work mattered."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The strongest bullet in the entry is not the opening one.",
+      "because": "Leading with the measured reduction in no-shows would show the value of the work sooner."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The result is buried after unrelated duties, and the line mixes data work with operational tasks.",
+      "because": "Readers may miss the identifier result, and the assorted tasks dilute the entry’s focus."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The trial description does not identify the coordination work you owned.",
+      "because": "Readers cannot tell which actions helped deliver the enrollment and follow-up outcomes."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Averaging follow-up times only for patients who died does not estimate median survival or account for censoring.",
+      "because": "The average is not a median, and excluding censored patients discards survival information and can bias the result."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The line gives no median-survival estimates or comparison between arms.",
+      "because": "Readers cannot see what the analysis found or its relevance to the trial."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The zero-deviation result does not state the scope of the audit.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The opening claim gives neither a concrete finding nor a clear through-line for the project.",
+      "because": "Readers cannot tell what the analysis revealed or what ties the readmission and survey-response results together."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "“Cutting-edge analytics” does not name the analysis performed.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "The relative reduction from 12% to 8% is about 33.3%, not 50%.",
+      "because": "The 4-percentage-point difference divided by the starting 12% is about 33.3%."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The strongest project result is not the opening bullet.",
+      "because": "Leading with the concrete readmission result would show the project’s substance sooner."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The line names age and insurance but not the method used to adjust for them.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The increase from 35% to 55% is 20 percentage points, not 20%.",
+      "because": "Relative to the starting 35% rate, the increase is about 57.1%."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The response count does not show how residents were sampled or how many neighborhoods the estimate covers.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line does not say what the pilot revealed or changed.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2985,
+    "input_tokens_details": {
+      "cache_write_tokens": 2982,
+      "cached_tokens": 0
+    },
+    "output_tokens": 999,
+    "output_tokens_details": {
+      "reasoning_tokens": 206
+    },
+    "total_tokens": 3984
+  }
+}

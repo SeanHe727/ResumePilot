@@ -65,6 +65,17 @@ describe('examine_technical_depth', () => {
     expect(ran?.input).toContain('[experience:0:0]');
   });
 
+  it('takes an id with the brackets it is shown in', async () => {
+    // Measured: told to use "the id shown in brackets", the reader passed
+    // `[s2:e0:b0]` thirteen times in one run and was refused every time.
+    const result = await examineDepthTool.execute(
+      { about: '[experience:0:1]', question: 'q' },
+      ctxWith(async () => answered([FINDING])),
+    );
+
+    expect(result.success).toBe(true);
+  });
+
   it('drops a finding about a line the candidate never wrote', async () => {
     // An invented id would attach a finding to a line that does not exist, and
     // the reader would score it as theirs.
@@ -135,10 +146,10 @@ describe('what the caller is allowed to name', () => {
 
     expect(result.success).toBe(true);
     expect(ran?.agentConfig.id).toBe('deep-research');
-    // Named on its own, not merely present inside the rendered entry: the
-    // researcher's findings come back keyed by bullet, and a question about one
-    // line reads differently from a question about the entry holding it.
-    expect(ran?.input).toContain('It is about this line:\n[experience:0:1] Shipped it');
+    // The line alone: the specialist judges the claim it was asked about, and
+    // nothing else on the page can lead it.
+    expect(ran?.input).toContain('The line it is about:\n<resume_content>\n[experience:0:1] Shipped it');
+    expect(ran?.input).not.toContain('The entry it is about');
   });
 
   it('accepts a bullet id in the old entry field rather than refusing it', async () => {
@@ -165,5 +176,140 @@ describe('what the caller is allowed to name', () => {
 
     expect(result.success).toBe(false);
     expect(result.error?.message).toContain('experience:0');
+  });
+});
+
+describe('research: search, plan, search again, answer', () => {
+  const planned = (subquestions: unknown): SubAgentResult =>
+    ({ ...answered([]), output: { subquestions } }) as SubAgentResult;
+
+  function pipeline(plan: SubAgentResult, options: { search?: boolean } = {}) {
+    const queries: string[] = [];
+    const tasks: SubAgentTask[] = [];
+    const ctx = {
+      session: { state: { resume: RESUME } },
+      subAgents: {
+        async run(task: SubAgentTask) {
+          tasks.push(task);
+          return tasks.length === 1 ? plan : answered([{ ...FINDING, basis: 'S2' }]);
+        },
+      },
+      ...(options.search === false
+        ? {}
+        : {
+            search: {
+              name: 'fake',
+              async search(query: string) {
+                queries.push(query);
+                return [{ title: `about ${query}`, url: 'https://example.org', content: 'a page' }];
+              },
+            },
+          }),
+      abortSignal: new AbortController().signal,
+    } as unknown as ToolContext;
+    return { ctx, queries, tasks };
+  }
+
+  it('searches the question first, then the sub-questions the plan says need it', async () => {
+    const { ctx, queries, tasks } = pipeline(
+      planned([
+        { question: 'Does dynamic batching lower single-request latency?', search: true },
+        { question: 'What does INT8 quantisation change?', search: false },
+      ]),
+    );
+    const result = await examineDepthTool.execute({ about: 'experience:0:0', question: 'Can batching cut latency?' }, ctx);
+
+    expect(queries).toEqual(['Can batching cut latency?', 'Does dynamic batching lower single-request latency?']);
+    expect(tasks.map((t) => t.agentConfig.name)).toEqual(['Deep Research (plan)', 'Deep Research']);
+    // The plan sees the first results; the answer sees every search, numbered.
+    expect(tasks[0]!.input).toContain('[S1] about Can batching cut latency?');
+    expect(tasks[1]!.input).toContain('[S2] about Does dynamic batching lower single-request latency?');
+    expect(tasks[1]!.input).toContain('2. What does INT8 quantisation change?');
+    expect((result as { data: { findings: Array<{ basis?: string }> } }).data.findings[0]?.basis).toBe('S2');
+  });
+
+  it('never sends the candidate\'s figures to the search engine', async () => {
+    const { ctx, queries } = pipeline(planned([{ question: 'Is a cut from 900 to 600 ms a 50% drop?', search: true }]));
+    await examineDepthTool.execute({ about: 'experience:0:0', question: 'Does 71% hold for p95 latency?' }, ctx);
+
+    for (const q of queries) expect(q).not.toMatch(/(^|\s)\d/);
+    expect(queries[0]).toBe('Does hold for p95 latency?');
+  });
+
+  it('never sends the résumé\'s own wording, or a count like 400+', async () => {
+    const { ctx, queries } = pipeline(planned([]));
+    await examineDepthTool.execute(
+      { about: 'experience:0:0', question: "Does the wording 'Owned the diagnostics service dashboards' fit a junior role, with 400+ trials and a 3x speedup?" },
+      ctx,
+    );
+
+    expect(queries[0]).not.toContain('Owned');
+    expect(queries[0]).not.toMatch(/400|3x/);
+  });
+
+  it('takes at most three sub-questions', async () => {
+    const { ctx, queries } = pipeline(planned(Array.from({ length: 5 }, (_, i) => ({ question: `q${String.fromCharCode(97 + i)}?`, search: true }))));
+    await examineDepthTool.execute({ about: 'experience:0:0', question: 'first?' }, ctx);
+
+    expect(queries).toHaveLength(4);
+  });
+
+  it('still answers where there is no search, or the plan fails', async () => {
+    const { ctx, tasks } = pipeline({ success: false, error: 'timed out' } as SubAgentResult, { search: false });
+    const result = await examineDepthTool.execute({ about: 'experience:0:0', question: 'q?' }, ctx);
+
+    expect(result.success).toBe(true);
+    expect(tasks[1]!.input).toContain('No web search was available');
+  });
+});
+
+describe('examine_technical_depth, many questions', () => {
+  it('runs every question in one call by an agent of its own, together', async () => {
+    let inFlight = 0;
+    let peak = 0;
+    const ctx = ctxWith(async (task) => {
+      inFlight += 1;
+      peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, 5));
+      inFlight -= 1;
+      return task.agentConfig.id === 'deep-research' && !task.agentConfig.name.includes('plan')
+        ? answered([FINDING])
+        : answered([]);
+    });
+
+    const result = await examineDepthTool.execute(
+      {
+        questions: [
+          { about: 'experience:0:0', question: 'what does the latency figure depend on?' },
+          { about: 'experience:0:1', question: 'what does shipping it involve?' },
+          { about: 'experience:0:0', question: 'can caching alone cut latency this far?' },
+        ],
+      } as never,
+      ctx,
+    );
+
+    expect(result.success).toBe(true);
+    const results = (result.data as { results: Array<{ about: string; answer?: unknown }> }).results;
+    expect(results.map((r) => r.about)).toEqual(['experience:0:0', 'experience:0:1', 'experience:0:0']);
+    expect(results.every((r) => r.answer)).toBe(true);
+    // Three questions at once, not one after another.
+    expect(peak).toBeGreaterThanOrEqual(3);
+  });
+
+  it('stops at twenty questions across every call of one reading', async () => {
+    const ctx = { ...ctxWith(async () => answered([])), runState: new Map<string, number>() } as unknown as ToolContext;
+    const many = (n: number) => ({
+      questions: Array.from({ length: n }, (_, i) => ({ about: 'experience:0:0', question: `question ${i}` })),
+    });
+
+    const first = await examineDepthTool.execute(many(15) as never, ctx);
+    const second = await examineDepthTool.execute(many(10) as never, ctx);
+    const third = await examineDepthTool.execute(many(1) as never, ctx);
+
+    expect((first.data as { results: unknown[] }).results).toHaveLength(15);
+    // Five were left: those are asked, and the rest are said not to have been.
+    expect((second.data as { results: unknown[]; notAsked: number }).results).toHaveLength(5);
+    expect((second.data as { notAsked: number }).notAsked).toBe(5);
+    expect(third.success).toBe(false);
   });
 });

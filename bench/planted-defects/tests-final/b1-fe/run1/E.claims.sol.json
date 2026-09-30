@@ -1,0 +1,258 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "- Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and deferring the analytics script, raised the checkout page's Lighthouse performance score from 52 to 91.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Documented the design-system tokens in Storybook so designers could check spacing and color values without asking engineers.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Apr 2024 - Aug 2024",
+    "- Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop list offline.",
+    "- Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved stops.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Presented the demo to the library staff and handed over the code with setup notes.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether the 9% booking increase is a relative lift or a percentage-point change.",
+      "because": "The conversion result will be easier to interpret."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add the A/B test context if available.",
+      "because": "The conversion result will be easier to interpret."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the JavaScript figures measure initial or total transferred JavaScript.",
+      "because": "Code-splitting can reduce what loads initially without reducing the total JavaScript for the flow."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the figures use the same compression and measurement conditions.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify the scope of the accessibility audit and what “all 14 accessibility issues” refers to.",
+      "because": "This distinguishes a defined list of findings from broad accessibility compliance."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Fix the verb tense in “Moving image resizing to the CDN.”",
+      "because": "The internship is dated in the past."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Identify the Lighthouse test conditions and whether the scores used comparable settings.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Make clear that the score change reflects the overall set of optimizations.",
+      "because": "The bullet combines several changes, not separately measured effects for each."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Verify the causal link between lazy-loading the hero image and the LCP improvement.",
+      "because": "Lazy-loading an above-the-fold hero image can delay loading rather than improve LCP."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add the documentation’s scope or evidence that designers used it, if known.",
+      "because": "The current benefit is plausible but not quantified."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Correct the JavaScript-bundle metric or its stated cause.",
+      "because": "Converting PNG images to WebP reduces image-file size, not JavaScript bundle size."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether you designed or implemented the preview mode.",
+      "because": "Saying the findings led to it does not establish your contribution."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Explain how broken-page reports were counted, if known.",
+      "because": "That would make the reduction from 30 to 6 per month more interpretable."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Change “Writes” to match the completed role.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify what the failed-audit counts represent.",
+      "because": "The scope of “failed audits” is unclear."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether you authored or maintained the checklist.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Define what “search time” measures.",
+      "because": "Client-side filtering most directly affects interaction after the data is available."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain how the 900 weekly riders figure was measured.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether “riders” means unique riders, users, or visits.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Make the app’s live status clear if it is live.",
+      "because": "The résumé should not imply a deployment status unless accurate."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Correct the claimed 75% improvement to a 50% reduction in time.",
+      "because": "A drop from 3.0 seconds to 1.5 seconds is a 50% reduction."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "State what “cold-start time” measures.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Explain how the slow-3G comparison was made, if available.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Describe the change from 30% to 40% as a 10-percentage-point increase, not a 10% increase.",
+      "because": "The relative increase is different."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Avoid attributing the increase to saved stops unless you measured that causal effect.",
+      "because": "A before-and-after increase alone may not establish cause."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "Resolve the heading’s Vue versus React/TypeScript discrepancy.",
+      "because": "The project heading and first bullet name different technologies."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "Resolve the bullet’s React/TypeScript versus Vue discrepancy.",
+      "because": "The first bullet and project heading name different technologies."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Make your individual frontend contribution more specific.",
+      "because": "“Worked on the frontend” does not show what you did, especially beside the calendar-component bullet."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify whether the tests covered overlapping bookings and time-zone changes or those were component behaviors.",
+      "because": "The distinction makes your contribution easier to assess."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Add the handoff recipient or how the handoff was used, if known and supportable.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "Correct “Storybok” to “Storybook.”",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Check that Angular reflects experience you can discuss.",
+      "because": "The résumé gives no supporting example for it."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Organize the “Methods” entries more consistently.",
+      "because": "Server-side rendering, accessibility, and component testing are different kinds of capabilities."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm that the portfolio link is clickable.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm that the portfolio demonstrates work relevant to the target roles.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2597,
+    "input_tokens_details": {
+      "cache_write_tokens": 2594,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1806,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 4403
+  }
+}

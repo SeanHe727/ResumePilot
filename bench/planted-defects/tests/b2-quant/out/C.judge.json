@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b2-quant/out/C.md",
+  "recall": 9,
+  "found": [
+    "W2",
+    "W6",
+    "A1",
+    "A4",
+    "S2",
+    "S4",
+    "T2",
+    "T4",
+    "N1"
+  ],
+  "coverage": false,
+  "suggestions": 132,
+  "words": 2394,
+  "quotes": 2,
+  "grounded": 1,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4821,
+    "completion_tokens": 14612,
+    "total_tokens": 19433,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14262
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4821
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Replace first-person phrasing with the same impersonal style used elsewhere."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Fix the typo in 'econometircs'"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Define what 'improved risk-adjusted returns by 35%' actually measures. State the comparison baseline and evaluation period."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Remove the duplicated version from the Kaggle section."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Include an outcome or remove the bullet"
+      },
+      {
+        "id": "S4",
+        "found": true,
+        "evidence": "should appear earlier within the internship"
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "classic backtest overfitting: selecting the best performer from many configurations and reporting that result as expected live performance."
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "The same random seed on every worker can generate identical streams or duplicate runs, undermining the claimed 2,000-run study."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Move the bakery role out of the main quantitative experience sequence."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 132,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

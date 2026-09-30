@@ -1,0 +1,127 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/D.md",
+  "recall": 8,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": false,
+  "suggestions": 28,
+  "words": 1755,
+  "quotes": 1,
+  "grounded": 0,
+  "rewrites": 29,
+  "inventedNumbers": [
+    "24",
+    "25"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4430,
+    "completion_tokens": 14066,
+    "total_tokens": 18496,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12853
+    },
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 3918
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; proof incorporated"
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct the spelling and categorization in Skills"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Improved directional hit rate from 52% to 58% across 30 indices; evaluated robustness"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "reducing error from 0.20 to 0.15 is a 25% reduction, not a 33% improvement"
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "combines too many unrelated responsibilities"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "A daily Sharpe ratio is generally annualized by multiplying by √252, not 252"
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "this role creates an apparent career-transition question"
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "only list Kafka if you can discuss how you used it. If not, remove it"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 28,
+    "rewrites": [
+      "Programming: Python, R, SQL, C++, Kafka",
+      "Machine Learning: PyTorch, gradient boosting, temporal convolutional networks",
+      "Statistics/Methods: Time-series econometrics, Bayesian inference, Monte Carlo simulation, volatility modeling",
+      "Quantitative Finance: Order-book modeling, market microstructure, backtesting, transaction-cost modeling",
+      "Statistics Ph.D. candidate with experience in quantitative research, market microstructure, time-series modeling, and statistical learning. Built and evaluated trading signals across 30 futures/index markets, developed reproducible simulation and feature pipelines, and published open-source statistical software.",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures that improved portfolio Sharpe by 0.4 over an 18-month out-of-sample backtest after transaction costs.",
+      "Reduced daily turnover from 34% to 21% with a cost-aware position smoother, preserving 90% of gross returns while reducing estimated slippage by 33%.",
+      "Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report statistical significance and p-values if available.",
+      "Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices, with improvements statistically significant at the 5% level in 24 markets.",
+      "Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.",
+      "Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki for future researchers.",
+      "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 – Aug 2025",
+      "Evaluated forecast improvements against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices.",
+      "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 – Present",
+      "Trained a temporal convolutional network on realized-volatility features, reducing out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices.",
+      "Reduced [specified error metric] from 0.20 to 0.15, a 25% improvement, using realized-volatility features and an asymmetric loss function.",
+      "Improved directional hit rate from 52% to 58% across 30 indices; evaluated robustness across rolling time-series splits.",
+      "Ridgeway University | Graduate Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 – Aug 2021",
+      "Built a reproducible simulation pipeline on a shared computing cluster, reducing a 2,000-run Monte Carlo study from 3 days to 5 hours.",
+      "Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; proof incorporated as Section 3 of a JASA manuscript under review.",
+      "Developed and released an open-source R package for high-dimensional covariance estimation, downloaded 3,000 times in its first year.",
+      "Taught weekly graduate-probability recitations for 60 students, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+      "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 – Present",
+      "Supervise opening operations and a team of six bakers and cashiers while maintaining weekly labor-budget targets.",
+      "Managed daily inventory counts and supplier orders, reducing unsold bread from 12% to 7% of production.",
+      "Assistant Store Manager, Part-Time",
+      "Morgan Patel",
+      "Metro City, USA | +1 (555) 010-4410 | morgan.patel@example.com",
+      "github.com/mpatel | linkedin.com/in/morganpatel | morganpatel.github.io"
+    ],
+    "falsePositives": []
+  }
+}

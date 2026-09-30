@@ -1,0 +1,120 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/B.md",
+  "recall": 3,
+  "found": [
+    "W6",
+    "S3",
+    "T1"
+  ],
+  "coverage": false,
+  "suggestions": 28,
+  "words": 1212,
+  "quotes": 6,
+  "grounded": 4,
+  "rewrites": 24,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Add an expected graduation date prominently: `Ph.D. Candidate in Statistics, expected May 2026`.",
+    "Put the location on the same line as the employer or omit it if space is tight."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3587,
+    "completion_tokens": 13285,
+    "total_tokens": 16872,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12100
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3587
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": false,
+        "evidence": "The JASA statement is fine if accurate, but “manuscript under review” is not the same as publication."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "There is a typo: “time-series econometircs” should be: **time-series econometrics**"
+      },
+      {
+        "id": "A2",
+        "found": false,
+        "evidence": "Improved directional accuracy from 52% to 58% using an asymmetric loss and rolling time-series evaluation."
+      },
+      {
+        "id": "A3",
+        "found": false,
+        "evidence": "Only retain the 0.20-to-0.15 result if you name the metric and explain why it is not redundant with QLIKE."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": "“Joining 120 features” is awkward. “Integrated,” “aligned,” or “joined” the data sources is clearer."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "This bullet contains too many unrelated accomplishments"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "A daily Sharpe ratio is generally annualized by multiplying by **√252**, not 252."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": "Demonstrated statistically significant forecast improvement versus a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report the test specification and adjusted p-values if relevant."
+      },
+      {
+        "id": "N1",
+        "found": false,
+        "evidence": "The bakery role is fine, especially if it fills an employment gap, but it should probably have only one or two concise bullets."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": "Only list tools you can discuss in an interview."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 28,
+    "rewrites": [
+      "Built a short-horizon order-book imbalance signal for liquid index futures that improved the desk’s out-of-sample Sharpe by 0.4 over an 18-month backtest after transaction costs.",
+      "- Reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices using a temporal convolutional model trained on realized-volatility features.",
+      "- Improved directional accuracy from 52% to 58% using an asymmetric loss, with evaluation based on rolling time-series splits.",
+      "- Demonstrated statistically significant forecast improvement versus a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report the test specification and adjusted p-values if relevant.",
+      "- Released an open-source R package for high-dimensional covariance estimation, downloaded more than 3,000 times in its first year.",
+      "- Maintained the lab’s shared computing cluster and built reproducible workflows for simulation studies.",
+      "- Organized the weekly reading group and graded for two graduate courses.",
+      "- Reduced daily turnover from 34% to 21% with a cost-aware position smoother, retaining 90% of gross returns while reducing estimated slippage by one-third.",
+      "- Evaluated forecast performance against a nested HAR-RV baseline using Diebold–Mariano tests across 30 indices; report p-values or confidence intervals if available.",
+      "- Joined 120 point-in-time microstructure features across six venues, deduplicated late prints, and versioned schemas to build a reusable feature store adopted by two subsequent projects.",
+      "- Documented backtest assumptions, transaction-cost methodology, and known failure regimes in the desk’s research wiki.",
+      "- Built a reproducible cluster-based simulation pipeline, reducing a 2,000-run Monte Carlo study from three days to five hours.",
+      "- Derived a variance bound for a sparse regression estimator, tightening the prior result by a logarithmic factor; the proof appears in Section 3 of a manuscript under review at JASA.",
+      "- Taught weekly recitations for 60 graduate probability students, wrote 12 problem sets, and received a 4.8/5 teaching rating.",
+      "- Reduced out-of-sample QLIKE loss by 7% versus a HAR-RV baseline across 30 equity indices using a temporal convolutional model and realized-volatility features.",
+      "- Increased directional accuracy from 52% to 58% using an asymmetric loss and rolling time-series evaluation.",
+      "- Ranked 41st among 2,900 teams—top 2%—with a gradient-boosting ensemble using 300 engineered features.",
+      "- Eliminated validation leakage by switching to time-grouped folds, reducing the local-validation/leaderboard gap by 0.02.",
+      "- Automated permutation-importance-based feature selection, reducing 900 candidate features to 300 without degrading validation performance.",
+      "time-series econometrics",
+      "**Programming:** Python, C++, R, SQL, Kafka",
+      "**Machine Learning:** PyTorch, gradient boosting, time-series forecasting",
+      "**Statistics:** Bayesian inference, statistical learning, volatility modeling, hypothesis testing",
+      "Ph.D. Candidate in Statistics, expected May 2026"
+    ],
+    "falsePositives": [
+      "Add an expected graduation date prominently: `Ph.D. Candidate in Statistics, expected May 2026`.",
+      "Put the location on the same line as the employer or omit it if space is tight."
+    ]
+  }
+}

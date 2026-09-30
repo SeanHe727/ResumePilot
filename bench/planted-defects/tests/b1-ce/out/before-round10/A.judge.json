@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 10,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 13,
+  "words": 1795,
+  "quotes": 4,
+  "grounded": 3,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4351,
+    "completion_tokens": 8835,
+    "total_tokens": 13186,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8458
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2559
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "The dashboard and on-call ownership shows responsibility but not the resulting operational change."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The adoption and delivery claim is vague and has no measurable scale."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The task-completion increase is 12 percentage points, not 12% as written."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The latency reduction is 33.3%, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The latency result is buried after a long method list and gives insufficient context for attribution."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The result is also buried after several unrelated actions."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Sampling exactly one rollout per prompt does not stabilize standard GRPO as stated."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Dynamic batching can add batching-wait overhead when no concurrent requests are available, so it does not generally reduce the latency of an isolated request."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Experience is not listed in reverse chronological order."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "no supporting resume entries for LangGraph, RAG, or Kubernetes."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 13,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

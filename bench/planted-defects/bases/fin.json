@@ -1,0 +1,150 @@
+{
+  "id": "fin",
+  "job": "financial analysis / corporate finance",
+  "name": "Riley Chen",
+  "contact": "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+  "personal": "Age: 27 | Marital status: Single | Hobbies: watching TV, sleeping in",
+  "education": [
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020"
+  ],
+  "graduated": "May 2020",
+  "exp": [
+    {
+      "head": "Stonebridge Manufacturing | Financial Analyst | Metro City, USA",
+      "dates": "Jan 2023 - Jun 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early."
+        },
+        {
+          "slot": "D2",
+          "clean": "Cut the monthly close from 8 working days to 5 by automating 30 reconciliations and intercompany eliminations.",
+          "subtle": "Improved close efficiency by 40% by automating reconciliations and intercompany eliminations."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules."
+        },
+        {
+          "slot": "D4",
+          "clean": "Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget."
+        },
+        {
+          "slot": "D3",
+          "clean": "Presented the annual budget to the plant managers and finance director, and it was approved in one review cycle."
+        },
+        {
+          "slot": "D13",
+          "clean": "Trained 5 plant controllers on the new budgeting template and wrote its user guide."
+        }
+      ]
+    },
+    {
+      "head": "Crescent Bank | Credit Analyst | Metro City, USA",
+      "dates": "Jul 2020 - Dec 2022",
+      "datesD10Subtle": "May 2021 - Dec 2022",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Underwrote 60 small-business loans worth USD 45M, and none of the approved loans defaulted in their first two years.",
+          "subtle": "Owned the credit reviews for the small-business loan book and the watch list the lending officers used."
+        },
+        {
+          "slot": "D6",
+          "clean": "Reviewed 3 years of declined applications; the findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+          "subtle": "Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults."
+        },
+        {
+          "slot": "D9",
+          "clean": "Wrote the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+          "subtle": "Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year."
+        },
+        {
+          "slot": "D17",
+          "clean": "Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+          "subtle": "Built a spreading template for borrower financials while also covering the loan-operations inbox, updating the procedures manual, organizing the quarterly credit committee and training summer interns, which cut each credit memo from 6 hours to 3."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Regional Utility Valuation | Independent Project | Excel",
+      "dates": "Nov 2024 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+          "subtle": "Delivered best-in-class, value-driven financial insights leveraging holistic valuation frameworks and strategic thinking."
+        },
+        {
+          "slot": "D11",
+          "clean": "Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+          "subtle": "Showed the share value fell from USD 50 to USD 40, a 25% drop, when the discount rate rose by 1 point."
+        },
+        {
+          "slot": "D18",
+          "clean": "Shared the model and a two-page note with the university investment club, which used it in its spring pitch."
+        }
+      ]
+    },
+    {
+      "head": "Student Investment Fund | Analyst, Team of 6 | Excel",
+      "dates": "Sep 2018 - May 2019",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Pitched two mid-cap industrials to the fund committee; both were bought and returned 14% over the following year."
+        },
+        {
+          "slot": "D16",
+          "clean": "Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+          "subtle": "The fund's performance report was rebuilt to show returns against its benchmark, and the committee used it at every meeting."
+        },
+        {
+          "slot": "D12",
+          "clean": "Wrote onboarding notes on the fund's models for new analysts.",
+          "subtle": "Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Tools: Excel",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "skillsD20Subtle": [
+    "Tools: Excel",
+    "Methods: financial modeling, DCF valuaton, forecasting, credit analysis"
+  ],
+  "skillsD8Subtle": [
+    0,
+    "Bloomberg Terminal"
+  ],
+  "unevidencedSubtle": "Bloomberg Terminal",
+  "personalSubtle": "Date of birth: 5 Feb 1998 | Nationality: Singaporean",
+  "v2": {
+    "S1": "Mapping 600 general-ledger accounts to a new chart of accounts, rebuilding the allocation rules and testing them against two prior closes, cut manual journal entries from 350 to 90 a month.",
+    "S2": "Supported the FP&A team with financial reporting and analysis.",
+    "T1": "Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "T2": "Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "T3": "Set the DCF's terminal value with an 8% perpetual growth rate against a 7% discount rate in the Gordon growth formula.",
+    "T4": "Hedged the bank's interest-rate risk on its fixed-rate bond holdings by buying more fixed-rate bonds of the same duration.",
+    "N1": {
+      "head": "Lakeside Golf Club | Caddie | Metro City, USA",
+      "dates": "Aug 2025 - Present",
+      "bullets": [
+        "Caddied about 5 rounds a week, carrying bags and reading greens for members.",
+        "Helped the pro shop run the weekend junior tournament."
+      ]
+    },
+    "A2": "Raised the model's forecast accuracy by 12% across 10 years, from 70% to 82%, by adding rate-case timing.",
+    "desc": {
+      "T1": "Free cash flow to equity must be discounted at the cost of equity; WACC is for free cash flow to the firm.",
+      "T2": "Margins cannot be added across units; the group margin is total EBITDA over total revenue.",
+      "T3": "The Gordon growth formula needs growth below the discount rate; with 8% growth against 7%, the terminal value is negative or undefined.",
+      "T4": "Buying more bonds of the same duration adds interest-rate exposure; a hedge needs an offsetting position, such as shorting duration or paying fixed on a swap."
+    }
+  }
+}

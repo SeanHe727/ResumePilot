@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/B.md",
+  "recall": 6,
+  "found": [
+    "W6",
+    "A3",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": false,
+  "suggestions": 80,
+  "words": 2492,
+  "quotes": 9,
+  "grounded": 9,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Explain whether the one-third slippage reduction is estimated or observed. If estimated, label it consistently as a model-based result."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5180,
+    "completion_tokens": 14046,
+    "total_tokens": 19226,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13709
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3388
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct 'econometircs' to 'econometrics.'"
+      },
+      {
+        "id": "A2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "A reduction from 0.20 to 0.15 is a 25% reduction relative to 0.20, not a 33% improvement"
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Split or substantially narrow this bullet. It currently combines four unrelated responsibilities"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Multiplying a daily Sharpe ratio by 252 is incorrect; annualization normally uses the square root of the number of trading days, approximately √252."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Decide whether this role belongs... it is not directly relevant... move it to an 'Additional Experience' section or omit it."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "SQL, C++, and Kafka are currently not demonstrated elsewhere"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 80,
+    "rewrites": [],
+    "falsePositives": [
+      "Explain whether the one-third slippage reduction is estimated or observed. If estimated, label it consistently as a model-based result."
+    ]
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Owned the department websites and the shared component library other developers relied on.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience section is not ordered newest first.",
+      "because": "The older Westfield role appears above the Lumen internship, making the timeline harder to scan and hiding the most recent experience."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The move from Web Developer to Frontend Engineering Intern can read as a seniority step backward.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The line states responsibility without showing what changed as a result.",
+      "because": "A hiring manager cannot distinguish routine maintenance from work that improved the websites or delivery."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Owned” does not identify the technical work performed.",
+      "because": "It frames the work as a duty rather than a concrete implementation contribution."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The sentence makes the findings, rather than you, the actor.",
+      "because": "“The findings led to” obscures whether you designed or implemented the preview mode."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The strongest bullet in the Westfield entry is not first.",
+      "because": "Leading with a responsibility-only bullet delays the clearest user-facing result."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The accessibility checklist does not identify its standard or criteria.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The figures do not specify whether 12 and 2 count audits, pages, or findings.",
+      "because": "Those units represent very different scales of improvement."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The comparison omits the unit after “under 1.”",
+      "because": "The missing unit makes the measurement read as incomplete."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Search time” does not identify the performance metric compared.",
+      "because": "Response latency, result-render time, and task-completion time measure different things."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The 35% improvement lacks a performance metric and comparison baseline.",
+      "because": "A reader cannot tell what improved or evaluate the scale of the change."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The repeated “by” makes the cause-and-result phrasing clunky.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Lazy-loading the hero image cannot credibly explain the claimed Largest Contentful Paint reduction.",
+      "because": "Lazy-loading an above-the-fold hero generally delays its request and worsens LCP."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The metric name uses incorrect capitalization.",
+      "because": "Largest Contentful Paint is the metric’s official name."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Storing untrusted input in React state does not prevent cross-site scripting when rendering it with dangerouslySetInnerHTML.",
+      "because": "React state neither sanitizes nor escapes attacker-controlled HTML."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The definitive XSS-prevention claim has no verification result.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The Lumen entry’s strongest result is not its opening bullet.",
+      "because": "This bullet establishes technical and commercial impact faster than the opening performance percentage."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The live-arrival claim does not say how transit data was retrieved or refreshed.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The weekly adoption figure does not define “riders” or give its source.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Opened” does not define the loading milestone measured at 0.8 seconds.",
+      "because": "Different milestones describe different user experiences."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The offline-caching claim does not identify its implementation mechanism.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "“Against 2.9s before” phrases the before-and-after comparison awkwardly.",
+      "because": "It slows comprehension and makes the reduction sound unnatural."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Open-sourced” does not show what made the project understandable or reusable.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The agency link does not show what the exposure changed.",
+      "because": "It establishes recognition but not whether it generated users, referrals, or contributions."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The bullet says React and TypeScript, contradicting the entry’s Vue header.",
+      "because": "The conflicting framework labels make the implementation unclear."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Worked on” does not identify the capability you delivered.",
+      "because": "A reader cannot tell which booking step you implemented or what users could do because of it."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Handling” does not explain the calendar’s behavior for the named edge cases.",
+      "because": "It does not say whether the component prevented conflicts, detected overlaps, or converted displayed times."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The calendar-ownership bullet should lead the entry.",
+      "because": "It shows more specific ownership than the current opening statement."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The modifier does not make clear whether the component, the tests, or both handled the edge cases.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The travel-search accomplishment is in the wrong entry and duplicates the Lumen result.",
+      "because": "Travel search and booking conversion do not fit the library hackathon, and the close match makes attribution unclear."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The result lacks a load-time metric and a basis for comparing bookings.",
+      "because": "Load milestones differ, and booking changes need a defined denominator or experiment."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The bullet places its strongest outcomes after the implementation detail.",
+      "because": "The load-time and booking results have more scanning value than the server-rendering method."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "“Storybok” is misspelled.",
+      "because": "The typo can look careless on a technical résumé and prevent an exact keyword match."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4158,
+    "input_tokens_details": {
+      "cache_write_tokens": 4155,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1718,
+    "output_tokens_details": {
+      "reasoning_tokens": 402
+    },
+    "total_tokens": 5876
+  }
+}

@@ -1,0 +1,578 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Owned the pick-path layouts for the fast-moving zone and the labor reports the shift leads used.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put education below experience.",
+      "because": "You have substantial post-graduate experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Reorder experience as Greenleaf, Crestway, then Lakeview.",
+      "because": "Experience should be in reverse chronological order."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use one date style and en dashes for ranges throughout.",
+      "because": "The date formatting is inconsistent."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use a consistent number style.",
+      "because": "“Three distribution centers” and “3 distribution centers” should follow one approach."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep terms such as SKUs/products and warehouses/distribution centers consistent unless the distinctions are real.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Aim for one page by reducing routine duties and generic project descriptions first.",
+      "because": "The supply-chain work is the strongest material."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Confirm the contact details are real rather than placeholders.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Use the actual LinkedIn URL and check that its profile matches the résumé.",
+      "because": "The titles, employers, and dates should agree."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the URL clickable in the submitted PDF.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Use an en dash rather than a hyphen in the date range.",
+      "because": "Date ranges should be formatted consistently."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Remove the location if space is tight.",
+      "because": "It adds little value."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Limit the Greenleaf entry to the most operationally relevant content.",
+      "because": "The move from Supply Chain Planner to Delivery Driver/Shop Assistant may raise questions."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Confirm the September 2025 start date.",
+      "because": ""
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Confirm that the dual title is official, or use the employer-recognized title.",
+      "because": "An unofficial title could cause background-check inconsistencies."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Use present tense for this current responsibility.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify whether 30–40 arrangements is your personal daily volume on normal or peak days.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Add a performance measure such as timeliness, accuracy, or route efficiency if available.",
+      "because": "Volume alone does not show effectiveness."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Remove the payment detail if you cannot show its accountability or scale.",
+      "because": "It may have been incidental."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Use present tense for current work.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add the scale or quality impact of the wedding-order work if available.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Make your specific responsibility alongside the head florist clear.",
+      "because": "“With the head florist” weakens ownership unless collaboration is important."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Explain the operational significance of stocking and labeling.",
+      "because": "As written, it reads as a basic task."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Describe your actual pick-path responsibility more precisely than “owned.”",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Quantify the size of the fast-moving zone.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Add the effect of the layout work.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Separate the labor-reporting work if it had a distinct impact.",
+      "because": "Combining unrelated duties makes both less persuasive."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Give the time study’s observed volume, duration, or sample size if available.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Define what “processing time” measures.",
+      "because": "It could mean cycle time, backlog age, or end-to-end turnaround."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify your role in implementing the triage station.",
+      "because": "The bullet only establishes your role in producing findings."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify the measurement period and whether the 12 carriers were all carriers or a subset.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Add an effect on detention fees, dock utilization, or on-time unloading if available.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you also coordinated adoption and enforcement of the rules.",
+      "because": "“Wrote the rules” may not describe your full role."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Split or sharply reduce this bullet.",
+      "because": "It combines at least five unrelated responsibilities and is difficult to scan."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Tie cycle counting directly to the inventory-accuracy result.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Remove or separately quantify the night-shift, safety, hiring, and certification duties.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Do not imply that every listed activity raised inventory accuracy.",
+      "because": "The causal relationship is unclear."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain what “2,000 highest-value locations” means.",
+      "because": "Locations are not usually described by value without reference to the inventory stored there."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify the period and method used to measure the accuracy increase.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Verify that the stockout and inventory figures cover comparable periods and account for other major causes.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify whether you designed, implemented, or managed the planning model and process.",
+      "because": "Your level of ownership is unclear."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Define “stockouts” and what the $1.9M inventory figure represents.",
+      "because": "It could refer to average inventory, period-end inventory, or working capital."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Add the dollar value, annualized savings, shipment volume, or number of suppliers or lanes if available.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether you designed, negotiated, implemented, or monitored the milk runs.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify the comparison period for the 15% saving.",
+      "because": "Fuel rates and volume changes could affect the comparison."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Give the SKU count or reference the portfolio size consistently.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Add a measurable business result if available.",
+      "because": "The bullet describes activity rather than impact."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether the reorder points were implemented in a system and regularly maintained.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Explain the purpose of the monthly reviews.",
+      "because": "The bullet merely notes the meetings."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "State what the scorecard measured and how its data influenced decisions.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add the result of renegotiating delivery windows if known.",
+      "because": "The bullet stops at an action rather than an operational outcome."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify whether all 40 vendors were in your scope and the scorecard identified the five least reliable.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "Correct or remove the 112% OEE claim.",
+      "because": "Standard OEE cannot exceed 100%."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Quantify the changeover and micro-stop improvements separately if reliable.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Explain why a supply chain planner owned packaging-line improvement work.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Recalculate or redefine the claim that lead time halved while throughput stayed constant and WIP doubled.",
+      "because": "Under Little’s Law, doubling WIP at constant throughput would generally increase flow time."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Remove “to keep pickers busy” unless its economic benefit can be shown.",
+      "because": "It suggests utilization was prioritized over flow and inventory."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "State the customer or financial outcome if the corrected claim remains.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Confirm that “Independent Project” accurately describes the arrangement.",
+      "because": "Work with the grocer might instead be consulting, volunteer work, or a client project."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Ensure you have permission to disclose the grocer’s operating data and results if confidential.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Distinguish completed work from ongoing work through tense and dates.",
+      "because": "The project is listed as ongoing."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "List relevant technical tools beyond Python if genuinely used.",
+      "because": "Optimization, mapping, or data-processing tools could better describe the work."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain whether the current-route baseline used comparable stops, constraints, traffic assumptions, capacities, and service windows.",
+      "because": "The 18% comparison is meaningful only if the routes are comparable."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "State whether the 18% mileage reduction was modeled or realized.",
+      "because": "It currently appears to be a planned result."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify the optimization constraints and method.",
+      "because": "They demonstrate technical depth."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Define what “within 5%” measures and whether estimates were above or below actual drive times.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify whether validation used out-of-sample logs.",
+      "because": "The same logs may have been used to calibrate the model."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Distinguish drive time from total route time.",
+      "because": "Total route time may include loading, parking, and service."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Include the number of routes or observations if it is more informative than four weeks.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add the pilot outcome if the month has concluded.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify if the pilot is still underway.",
+      "because": "The bullet should not imply proven operational savings."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether you supported implementation or only handed over materials.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Make your individual contribution clear alongside “Team of 4.”",
+      "because": "Otherwise the team size may dilute ownership."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Identify advanced Excel capabilities if they were central to the project.",
+      "because": "“Excel” by itself is too broad."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Ensure no employer-owned methods, data, or results were improperly reused.",
+      "because": "The project predates some Crestway work."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Replace the generic description with the areas you personally analyzed and the method used.",
+      "because": "“Analyzed warehouse operations” gives little detail."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Remove this summary bullet if the following bullets demonstrate the work.",
+      "because": "Generic summaries consume space without adding evidence."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Use an active construction that makes your contribution clear.",
+      "because": "“The donation intake process was mapped” is passive."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Quantify the baseline and final intake time more precisely if possible.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Clarify how “a day sooner” was measured and whether it was sustained.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "State your role in implementation as well as process mapping.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "Remove or resolve the forecasting result duplicated from Crestway.",
+      "because": "The matching scope, stockout reduction, and roughly $2M inventory result look copied or misattributed."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Do not present employer-confidential work as a volunteer-project result.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Add specific, job-relevant capabilities you genuinely have.",
+      "because": "Two broad tool names undersell your technical background."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Describe advanced Excel or Python work through concrete competencies rather than proficiency labels.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Ensure prominent technical skills are supported by the experience and project bullets.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Use consistent capitalization.",
+      "because": ""
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Consider adding relevant demonstrated methods such as process improvement or transportation planning.",
+      "because": "They may be target-job keywords that reflect your expertise."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Avoid listing basic concepts solely to increase keyword count.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3847,
+    "input_tokens_details": {
+      "cache_write_tokens": 3844,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3636,
+    "output_tokens_details": {
+      "reasoning_tokens": 641
+    },
+    "total_tokens": 7483
+  }
+}

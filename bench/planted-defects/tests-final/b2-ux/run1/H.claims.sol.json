@@ -1,0 +1,498 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.",
+    "- Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.",
+    "- Trained 12 product managers to run their own unmoderated tests with a shared script template, which doubled the number of tests run each quarter.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022",
+    "- Raised the patient app's Net Promoter Score from 6.1 to 8.4, calculated as the average 0-10 recommendation rating across 2,000 monthly survey responses.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Writes the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the phone format consistent with the country where you are applying.",
+      "because": "The country code is useful for international applications."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the portfolio URL is clickable in the PDF and leads directly to a polished portfolio.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Provide access instructions if the portfolio requires a password.",
+      "because": ""
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth.",
+      "because": "It does not establish your qualifications and creates privacy and bias risks."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the nationality unless it is specifically required.",
+      "because": "Work authorization is more relevant, and nationality itself usually is not."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider omitting the location if space becomes tight.",
+      "because": "The degree and institution are more important."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Add a relevant concentration, thesis, honors, or coursework only if it strengthens your UX research positioning.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether 37% and 22% compare test and control groups or pre- and post-test performance.",
+      "because": "An A/B test implies a comparison between variants."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Provide sample size or statistical confidence in the portfolio if available.",
+      "because": "A four-week test may not establish a reliable result without sufficient volume."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Ensure that “saved progress” describes what the product actually did.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "A 3:1 contrast ratio does not establish WCAG 2.1 AA compliance for normal body text.",
+      "because": "Normal-sized text generally requires 4.5:1; 3:1 applies to large text and certain other cases."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Verify or narrow the claim about “every background.”",
+      "because": "It includes relevant combinations and states such as hover, focus, disabled, error, and visited links."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Make your role in the compliance effort precise.",
+      "because": "“Brought the design system to” may imply you personally owned the entire effort."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Document the testing method or audit scope in the portfolio.",
+      "because": "The specific accessibility claim may be scrutinized."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Fix the grammatical structure and tense of the bullet beginning “Synthesizing.”",
+      "because": "It begins with a present participle while describing completed work."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify what changes based on the research cut repeat support calls.",
+      "because": "The research synthesis itself did not necessarily cut calls."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "State the comparison period for the 23% reduction if available.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Include only methods that were materially used.",
+      "because": "The density of methods otherwise makes the result harder to understand."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify the issue category behind “about statements” if possible.",
+      "because": "The phrase is somewhat broad."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify whether you made or prioritized the recommendations rather than only presenting findings.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain what made the fixes the “top five.”",
+      "because": "They could have been highest-impact fixes, stakeholder selections, or your own recommendations."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Give measurable outcomes for the shipped fixes if possible.",
+      "because": "Shipping shows influence but is weaker evidence than adoption plus impact."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Give the before-and-after quarterly test counts.",
+      "because": "“Doubled” is less informative without a baseline."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify how the increased number of tests maintained acceptable quality.",
+      "because": "Increased quantity alone can raise questions about rigor."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Reflect the full scope of your enablement or governance contribution, not just the script template.",
+      "because": "The repeatable process may have been the more important contribution."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify whether the sign-up figures represent comparable cohorts and whether other changes occurred.",
+      "because": "Other onboarding, marketing, or traffic changes could affect the result."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Specify what “led research” involved.",
+      "because": "The phrase does not show responsibilities such as study design, recruitment, synthesis, or stakeholder decisions."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Provide a comparison group or clear pre-launch baseline if available.",
+      "because": "It would make the post-launch claim more credible."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The stated average recommendation rating is not Net Promoter Score.",
+      "because": "NPS is promoters minus detractors as percentages, not an average 0–10 rating."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "State the comparison period if the figure is an average rating.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Explain your contribution to the metric’s improvement.",
+      "because": "A UX researcher usually influences changes rather than single-handedly raising a product metric."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make the connection between the research and the two-way reminder precise.",
+      "because": "“Led to” should be supportable by stakeholders."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Include the comparison period, cohort, or timeframe if available.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Describe any implementation, experimentation, or operations partnership elsewhere if it was part of the work.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Change “Writes” to past tense.",
+      "because": "The role has ended."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether you created, maintained, or repeatedly wrote the templates.",
+      "because": "The current tense and phrasing make the timeline unclear."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Verify the scope of “all patient studies.”",
+      "because": "It is a broad claim."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Explain what the measured “setup time” included if space permits.",
+      "because": "It could mean recruitment, approvals, or study preparation."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Specify the study’s criteria for “older patients” in the portfolio.",
+      "because": "The term is imprecise, particularly if age was an accessibility factor."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify the support-call measurement window and whether volume was adjusted for telehealth visits.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Avoid implying that testing alone cut support calls.",
+      "because": "The redesigned interface and its implementation were also part of the causal chain."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Consider emphasizing the project’s research scope, accessibility methods, or deliverable instead of Figma.",
+      "because": "Figma is a tool, not necessarily the most important project descriptor."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Distinguish completed findings from planned work in this ongoing project.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Avoid implying deployed, real-world impact if this is an independent concept.",
+      "because": "The impact may extend only to the study."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether participants included both screen-reader and low-vision users, and whether the map was screen-reader accessible.",
+      "because": "Being evaluated with screen readers is not necessarily the same as being accessible to them."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Specify the testing format in the portfolio.",
+      "because": "It is unclear whether testing was moderated, remote, or in person."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Avoid presenting the 12-person study as broadly representative.",
+      "because": "Twelve participants can be appropriate for qualitative usability work."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The reduction from 90 to 60 seconds is about 33%, not a 50% improvement.",
+      "because": "It is a 30-second reduction from a 90-second baseline."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Say whether “improvement” means faster completion or reduced time.",
+      "because": "Improvement is ambiguous for a time-based measure."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Qualify the attribution to audio landmarks and high-contrast colors if their effects were not isolated.",
+      "because": "The study may not have compared them separately or against a control condition."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Present the result as a study finding, not validated population-level impact.",
+      "because": "The sample is small."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Calling the change from 65% to 85% a 20% increase confuses percentage points with relative change.",
+      "because": "It is 20 percentage points, or approximately a 31% relative increase."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Reduce the repetition of the preceding bullet’s intervention and participant count.",
+      "because": "It makes the project feel less substantial and may look like metrics were split to inflate impact."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Make clear that this and the preceding bullet report distinct measures, and explain the testing comparison.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Define “task success.”",
+      "because": "It could mean completion without assistance, within a time limit, or under another criterion."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify your individual responsibilities within the three-person team.",
+      "because": "Recruiters need to know what you personally did."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Consider emphasizing research, design, or implementation scope rather than Figma.",
+      "because": "Figma is less informative if space is limited."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify why phone bookings fell.",
+      "because": "Online bookings, demand, or another process may have changed."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Check that the underlying booking count supports the “by a quarter” claim.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether the booking flow was deployed.",
+      "because": "Readers may otherwise assume it was only a prototype."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain the recruitment and consent process behind “hallway testing” in the portfolio.",
+      "because": "The term can sound informal, particularly in a health-related setting."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain how you determined that the six issues prevented completion.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Avoid implying statistical validation from the ten participants.",
+      "because": "Ten participants are reasonable for finding usability problems."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify your direct contribution to the Spanish-language booking addition.",
+      "because": "The wording may imply the handbook alone caused that work."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Specify the handbook’s maintenance scope in the portfolio if relevant.",
+      "because": "It could include content governance, accessibility checks, translation workflow, or technical updates."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Separate software tools from screen-reader testing and other capabilities.",
+      "because": "The current “Tools” category mixes tools with a method."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Include relevant analytics, survey, recruiting, repository, or prototyping platforms used in the roles if applicable.",
+      "because": "They may be relevant to target jobs."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Correct the spelling of “interveiws.”",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Make capitalization and punctuation consistent.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "List A/B testing as a method only if you personally designed, analyzed, or interpreted tests.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Add other relevant methods only if the experience supports them.",
+      "because": "The methods list could be stronger, but additions should be genuine."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date spacing and dash style throughout.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Give experience metrics more methodological context.",
+      "because": "Sample size, comparison period, baseline, and your specific contribution are not always clear."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Prioritize bullets relevant to the job description rather than letting the résumé become crowded.",
+      "because": "Adding detail to the six-bullet senior role could crowd the page."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep the projects from competing with stronger professional experience.",
+      "because": "The professional roles provide stronger evidence."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4580,
+    "input_tokens_details": {
+      "cache_write_tokens": 4577,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3450,
+    "output_tokens_details": {
+      "reasoning_tokens": 616
+    },
+    "total_tokens": 8030
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes personal details that readers are not meant to weigh in hiring.",
+      "because": "Date of birth and nationality are unrelated to qualifications and may introduce avoidable bias."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The chronology leaves a 10-month gap between the B.S. and the first listed role unexplained.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% accuracy improvement lacks a starting value and does not say whether it is relative or a percentage-point gain.",
+      "because": "Without a baseline, readers cannot determine the final quality or interpret the improvement."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The two percentage reductions are missing the word “by.”",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“GRPO” and “SFT” are not defined on first use.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The latency reduction does not identify the measured statistic.",
+      "because": "Mean, median and tail latency can give materially different impressions of performance."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The regression count gives neither the failures’ severity nor the acceptance threshold they violated.",
+      "because": "Readers cannot tell whether the regressions were marginal fluctuations or release-blocking failures."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Assistant-only loss masking does not directly train the model to reproduce separate tool-output messages.",
+      "because": "The mask excludes tool-output tokens from the training loss, and no improved output fidelity is measured."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The adapter fine-tuning method is repeated without adding a distinct contribution.",
+      "because": "The earlier bullet already gives the method, so repeating it dilutes the stronger measured achievements."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The strongest internship result is buried in the final clause of the final bullet.",
+      "because": "Leading with the 68% backlog reduction would make the business impact visible immediately."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "“ML-extracted features” is too broad to identify the machine-learning approach.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The backlog reduction is missing the word “by.”",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "“Eight weeks” is inconsistent with the entry’s use of numerals.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "A 4x reduction in total GPU memory from switching to BF16 mixed precision is technically unsupported as written.",
+      "because": "BF16 at most halves storage for converted tensors, while other memory can remain FP32; a 4x total result requires additional changes."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The memory reduction does not say what practical capability or constraint it changed.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Fail” incorrectly shifts to present tense within an ended role.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Maintained” and “adds” incorrectly mix past and present tense.",
+      "because": "The role ended in July 2024, so both actions should be in the past tense."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The release-cycle result gives the final duration without the prior duration.",
+      "because": "Without the baseline, readers cannot quantify the benefit of the automation."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line leads with routine maintenance and buries the stronger automation contribution.",
+      "because": "Readers scanning its first words see upkeep rather than the change that shortened release cycles."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Automated regression checks” does not identify the model-release property they protected.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The strongest systems-migration bullet is not first in the entry.",
+      "because": "Migrating 30 services and eliminating dispatch delays shows greater scope and consequence than the current opening bullet."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“AI-first engineering practices” is undefined jargon rather than a concrete implementation.",
+      "because": "It conceals the workflow, tool or quality mechanism personally introduced."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The claimed delivery and downstream benefits are generic and unsupported by a specific change or result.",
+      "because": "Readers cannot distinguish a measured improvement from a statement of positive intent."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The strongest quantified context-management result is not the opening bullet.",
+      "because": "The stress-test figures would make the project more credible than the generic adoption statement."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The bounded-context result does not show whether useful agent performance survived compaction.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“Under” makes the tested fan-out level ambiguous.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The fan-out test gives no before-and-after failure evidence.",
+      "because": "It does not show the previous failure frequency or zero failures across a defined test."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The metric description is too broad to show which methods were implemented or how they were integrated.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The integration bullet does not say what capability it enabled or gap it closed.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The correlation does not identify the two variables or rankings compared.",
+      "because": "Without the paired orderings, readers cannot tell what the correlation proves about the evaluator."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The strongest validation result is not the opening bullet.",
+      "because": "The correlation across more than 400 trials is stronger evidence than the implementation count alone."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Injected degradation” is opaque jargon.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Showed” describes the validation action too generically.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The bullet wrongly attributes the internship’s industrial-inspection achievement to the research-agent project.",
+      "because": "The same 800+ signal triage work appears under the internship, with a different backlog figure and no explained adaptation."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Pending-case backlog” is redundant.",
+      "because": "A backlog already consists of pending work."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The backlog reduction does not state the period over which it occurred.",
+      "because": "A reduction over days, weeks or months would imply different operational performance."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The screening description does not explain the machine-learning method or triage decision.",
+      "because": "“Triage branch” does not identify the workflow, and “ML-extracted” does not identify how the features were produced."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4421,
+    "input_tokens_details": {
+      "cache_write_tokens": 4418,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1804,
+    "output_tokens_details": {
+      "reasoning_tokens": 319
+    },
+    "total_tokens": 6225
+  }
+}

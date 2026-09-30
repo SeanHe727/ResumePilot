@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b2-pm/out/D.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W4",
+    "A2",
+    "A3",
+    "S3",
+    "T3",
+    "N1",
+    "N2"
+  ],
+  "coverage": true,
+  "suggestions": 95,
+  "words": 3983,
+  "quotes": 17,
+  "grounded": 17,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 7119,
+    "completion_tokens": 15931,
+    "total_tokens": 23050,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15573
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 7119
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "This is currently your weakest Crestline bullet because “owned” and “discussed” do not show business impact."
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Clarify your contribution to the mapping and redesign."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Label the change correctly as a 20-percentage-point increase if the rate moved from 75% to 95%."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "Correct the mathematics. Increasing from 400 to 1,150 is a 187.5% increase, not a 150% increase."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "the current bullet contains too many achievements"
+      },
+      {
+        "id": "T1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Be careful with the definition of “Reach.” Counting support tickets may be a proxy for reach, but it is not automatically the same as the number of affected users or transactions."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "The current Diesel Mechanic role dominates the first impression but is not connected to product or operations work."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "The current order is not chronological: Crestline ends in 2023, but Harbor Payments from 2024 appears afterward."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 95,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

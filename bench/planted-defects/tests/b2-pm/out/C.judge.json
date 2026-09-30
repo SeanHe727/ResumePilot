@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b2-pm/out/C.md",
+  "recall": 10,
+  "found": [
+    "W1",
+    "W4",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 82,
+  "words": 1943,
+  "quotes": 1,
+  "grounded": 1,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4308,
+    "completion_tokens": 19796,
+    "total_tokens": 24104,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 19444
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4308
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "Replace the emphasis on owning a meeting with the decisions or improvements the scorecards enabled."
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Change from passive voice to clear ownership."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Change “20%” to 20 percentage points. The relative increase is approximately 26.7%."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "Correct the math: the increase from 400 to 1,150 is 187.5%, not 150%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Lead with the decision or outcome rather than the chronological list of activities."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Reduce the number of initiatives in this one bullet. It currently combines software rollout, procedures, training, contract negotiation, and labor savings."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Correct the unit of inference. Randomization by session supports a session-level conversion effect, not necessarily an effect on unique customers."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Change the Reach definition. Support tickets closed measures expected support impact, not necessarily the number of users or accounts reached."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "An MBA, product internship, and current diesel mechanic role create an unusual transition."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Fix the experience order. Put Harbor Payments between Coastal Marine Services and Crestline Logistics. Experience should be in strict reverse chronological order."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 82,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

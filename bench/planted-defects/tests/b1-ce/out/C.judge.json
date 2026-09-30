@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/C.md",
+  "recall": 9,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 88,
+  "words": 2089,
+  "quotes": 21,
+  "grounded": 18,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4534,
+    "completion_tokens": 19905,
+    "total_tokens": 24439,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 19461
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 2870
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "Clarify exactly what “owned” involved... Add an operational result if available... Without an outcome, this is weaker than the surrounding bullets."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "“AI-first,” “accelerating delivery,” and “improving outcomes” are broad claims without evidence. Identify the actual practices introduced, who adopted them, and the measured delivery or quality change."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Change “12%” to **12 percentage points**. If using relative improvement instead, it is approximately 17%."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "900 ms to 600 ms is a **33% reduction**, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Simplify the method list. It currently delays the result and is difficult to scan."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Split this into at least two bullets. It currently combines: migration architecture, logging-library work, onboarding, weekend on-call ownership, backlog elimination."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "GRPO generally requires multiple outputs per prompt to calculate group-relative advantages. The statement that each prompt or update used exactly one scored trajectory may sound technically impossible, especially after the previous bullet mentions grouped rollouts."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Resolve the tension between “single-request” inference and “dynamic batching.” Dynamic batching normally benefits concurrent requests, so the current wording may look contradictory."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Put the Oct 2024–May 2025 internship above the Aug 2022–Jul 2024 role. Experience should normally be reverse chronological."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 88,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

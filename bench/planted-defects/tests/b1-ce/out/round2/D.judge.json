@@ -1,0 +1,121 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/D.md",
+  "recall": 6,
+  "found": [
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 36,
+  "words": 1628,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 24,
+  "inventedNumbers": [
+    "33",
+    "11",
+    "33"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4118,
+    "completion_tokens": 15782,
+    "total_tokens": 19900,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14433
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4118
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "This bullet is too generic: ... It does not explain what you built or how adoption was measured."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Increased task-completion rate from 71% to 83% on the [benchmark name] benchmark by retrying failed sub-agent calls with preserved partial context."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "That is a 33% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Reduced end-to-end triage latency by 5% by implementing grouped tool-use rollouts, a composite reward for accuracy, citation validity, and call count, and a GRPO loop with a frozen SFT reference."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The last sentence from your original bullet was overloaded."
+      },
+      {
+        "id": "T1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "The internship currently appears after the older full-time role."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 36,
+    "rewrites": [
+      "Machine Learning Engineering Intern, part-time during M.S. program",
+      "Cut p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.",
+      "Raised diagnostic accuracy from 71% to 79%—an 8-percentage-point, or 11% relative, improvement.",
+      "Built reusable agent-runtime components for tool execution, result caching, and sub-agent context reuse, enabling downstream teams to integrate multi-agent workflows through a common TypeScript API.",
+      "Languages: Python, TypeScript, SQL, Bash\nML/AI: PyTorch, LoRA, GRPO, RAG, LLM fine-tuning, agent evaluation\nFrameworks: LangGraph\nInfrastructure/Tools: Kubernetes, Git, CI/CD",
+      "Jordan Lee\nMetro City, USA | +1 (555) 010-2468 | jordan.lee@example.com\ngithub.com/jordan-lee | linkedin.com/in/jordan-lee | jordanlee.dev",
+      "Machine learning engineer and software engineer with experience building production diagnostics systems, LLM agents, model-serving infrastructure, and evaluation frameworks. Improved inference latency, diagnostic accuracy, release cycles, and robot-fleet reliability across robotics and industrial inspection systems.",
+      "Built an ML-assisted diagnostics triage branch for an industrial inspection system processing 800+ sensor signals per case, reducing the pending-case backlog by 68% in the first quarter after launch.",
+      "Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+      "Reduced p95 edge-inference latency by 40% by serving an INT8 engine with dynamic batching.",
+      "Reduced end-to-end triage latency by 5% by implementing grouped tool-use rollouts, a composite reward for accuracy, citation validity, and call count, and a GRPO loop with a frozen SFT reference.",
+      "Stabilized sparse-reward GRPO training by sampling one rollout per prompt, ensuring each update used exactly one scored trajectory.",
+      "Documented abstention rules and escalation paths for the triage branch; the on-call review team adopted the documentation as its operational runbook.",
+      "Improved GRPO training stability and reduced end-to-end triage latency by 5% through single-rollout updates, grouped tool-use sampling, composite rewards, and a frozen SFT reference.",
+      "Owned monitoring dashboards for the diagnostics service across two major releases and maintained the on-call rotation supporting the service.",
+      "Reduced p95 API latency from 420 ms to 180 ms by adding request caching and batching sensor reads; added load tests to prevent regression.",
+      "Maintained the perception team’s CI pipeline and added automated model-regression checks, shortening release cycles from two weeks to three days.",
+      "Migrated 30 robot-fleet services from cron jobs to an event-driven queue and rewrote the shared logging library, eliminating nightly processing backlogs that delayed morning dispatch.",
+      "Onboarded two new hires and assumed responsibility for the weekend on-call rotation.",
+      "Migrated 30 robot-fleet services from cron jobs to Kafka-based event processing, eliminating nightly backlogs across X daily jobs and removing morning dispatch delays.",
+      "Agent Runtime Suite | TypeScript, LangGraph, Multi-Agent Systems | Aug 2025–Present\n- Built reusable runtime components for multi-agent tool execution, result caching, and sub-agent context reuse.\n- Cut p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.\n- Increased task-completion rate from 71% to 83% on the [benchmark name] benchmark by retrying failed sub-agent calls with preserved partial context.",
+      "Research-Agent Evaluation Framework | Python, LLM Evaluation | Feb 2025–Jul 2025\n- Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.\n- Validated evaluator sensitivity to injected degradation with Kendall’s τ = 0.89 across 400+ report-level trials involving removed citations, sources, and claims.\n- Used layered instrumentation to trace three structural defects in stability, sourcing, and parameter handling to their responsible modules; all three were fixed upstream.",
+      "Western State University — M.S. Computer Engineering\nMetro City, USA | Expected Jun 2026\n\nEastern Institute of Technology — B.S. Electrical Engineering\nMetro City, Country | Jun 2022",
+      "Relevant coursework: Machine Learning, Distributed Systems, Computer Architecture, Algorithms"
+    ],
+    "falsePositives": []
+  }
+}

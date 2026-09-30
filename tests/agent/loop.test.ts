@@ -187,7 +187,7 @@ describe('what the coordinator can and cannot reach', () => {
     await handleInput('anything wrong with it?', session, deps);
 
     const prompt = seen[0]?.systemPrompt ?? '';
-    expect(prompt).toContain('You do not do the work');
+    expect(prompt).toMatch(/You do not do\s+the\s+reviewing\s+yourself/);
     expect(prompt).toContain('What you must not do');
   });
 });

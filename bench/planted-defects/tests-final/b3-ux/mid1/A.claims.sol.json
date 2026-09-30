@@ -1,0 +1,198 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.",
+    "- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Apr 2020 - Feb 2022",
+    "- Ran the monthly patient survey and rebuilt its reporting dashboard, cutting the time from survey close to published findings from 3 weeks to 4 days.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes a date of birth and nationality that readers are not meant to weigh.",
+      "because": "These details do not help readers assess qualifications and can distract from experience and skills."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience and Projects despite several years of relevant professional experience.",
+      "because": "That ordering delays the strongest evidence of experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The résumé shows a 10-month period with no study or work listed between May 2019 and April 2020.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The final clause is a lengthy, broad rationale that distracts from the session and panel details.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "“Synthesizing” is the wrong tense for this ended role and does not match “cut.”",
+      "because": "The role ended in June 2025, so the participle makes the action sound ongoing and interrupts the past-tense result."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The long list of inputs and methods delays the 23% result.",
+      "because": "A scanning reader may miss the clearest evidence of the work’s value."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "The reported SUS score of 104 is invalid.",
+      "because": "Standard SUS scores run from 0 to 100."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "An open card sort cannot by itself validate navigation findability.",
+      "because": "It shows how participants group and label content, not whether they can find items in a navigation structure."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The line claims findability validation without giving a card-sort finding or other evidence for it.",
+      "because": "The reader cannot tell what result showed that the navigation was findable."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The sign-up result is delayed behind the prototype-testing detail.",
+      "because": "The increase in completed sign-ups is the most direct evidence of impact and would be easier to spot first."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The missed-appointment result is delayed behind the interview and reminder details.",
+      "because": "A reader scanning the experience may move on before reaching the clearest evidence of impact."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line does not name the kind of test or the period used to measure the call reduction.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The broad design-language claim does not identify the work or a checkable user outcome.",
+      "because": "It does not show what shaped the map or say what became easier or better."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The line names a design philosophy rather than the design work performed.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The reduction from 90 to 60 seconds is a 33.3% decrease, not a 50% improvement.",
+      "because": "The time fell by 30 seconds from a starting point of 90 seconds."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The strongest project result is not the opening bullet.",
+      "because": "The route-finding result is more concrete and compelling than the broad opening claim."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The line does not say whose performance the median represents or what test produced the times.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The change from 65% to 85% is 20 percentage points, not a 20% relative increase.",
+      "because": "Relative to the starting 65%, the increase is about 30.8%."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The line does not specify the task participants completed or what counted as success.",
+      "because": "Without that context, a reader cannot tell what the result demonstrates."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The audio landmarks and high-contrast colors repeat the method stated in the preceding bullet.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The phone-booking decline has no stated comparison period.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“The steps to book” is redundant with “booking flow.”",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The clause about six issues makes the outcome harder to scan than a compact statement of what was fixed.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The handbook’s later use is buried in a lengthy trailing clause.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "“interveiws” is misspelled.",
+      "because": "The visible typo can distract from the methods listed and creates a preventable polish issue."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3507,
+    "input_tokens_details": {
+      "cache_write_tokens": 3504,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1348,
+    "output_tokens_details": {
+      "reasoning_tokens": 311
+    },
+    "total_tokens": 4855
+  }
+}

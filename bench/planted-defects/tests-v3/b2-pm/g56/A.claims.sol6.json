@@ -1,0 +1,213 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience should appear above Education.",
+      "because": "Five years of full-time work should carry the page rather than the MBA."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience section is not in reverse chronological order.",
+      "because": "Crestline appears above the more recent Harbor Payments internship, making the timeline harder to follow."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Coastal Marine Services needs to be shortened or its relevance explained.",
+      "because": "The diesel-mechanic role reads as unrelated to the product, operations and consulting narrative."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The dry-dock wording attributes the entire turnaround result to rebuilding engines and gearboxes.",
+      "because": "Other repairs, parts availability and dock logistics also determine total dry-dock time."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“Owned” and the meeting description bury the actual action.",
+      "because": "The wording states an assigned responsibility but not what you did in the review."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The forecast-error result comes after the cadence, scope and method.",
+      "because": "A scanning reader may miss the strongest evidence in the bullet."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Quarterly” and “12 consecutive quarters” repeat the cadence.",
+      "because": "One phrase adds little evidence and takes space from the result or scope."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The driver-hour result comes after a long chain of implementation details.",
+      "because": "The clearest proof of value is harder to find."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "“Cutting” attributes the reduction in time to first payment to the redesign without a comparison method.",
+      "because": "The figures show an observed reduction, but not necessarily that the verification step caused it."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The line treats support-ticket counts as RICE Reach without defining them as a proxy.",
+      "because": "Reach estimates distinct users or customers, while raw tickets can include repeat contacts."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The RICE prioritization has no stated consequence.",
+      "because": "The reader sees the decision process but not what changed or what value followed."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“RICE” is unexplained jargon.",
+      "because": "Readers outside product management may not know what the framework represents."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The long method list comes before the roadmap decision.",
+      "because": "The result is easy to miss and the analysis reads like a task list."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The session-randomized result is reported as an effect on merchants’ customers.",
+      "because": "Session randomization directly estimates session-level conversion, not automatically a customer-level effect."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The five-point lift lacks a defined conversion measure and comparison.",
+      "because": "The reader cannot tell the unit or which conversion event was measured."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The checkout A/B test and its five-point lift are repeated in another bullet.",
+      "because": "The duplicate consumes space without adding evidence."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“To 3,100 students” does not say what was measured.",
+      "because": "The students could have been reached, registered or using the app."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The launch bullet gives no specific product-lead contribution beyond launching the app.",
+      "because": "The reader cannot see the product or execution skill behind the outcome."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“That would have been thrown away” buries the food-rescue outcome.",
+      "because": "The relative clause slows the scan of the 9-tonne result."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "Calling the rise from 400 to 1,150 a 150% increase is arithmetically wrong.",
+      "because": "An increase of 750 from 400 is 187.5%."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The rise from 75% to 95% is 20 percentage points, not a 20% increase.",
+      "because": "The relative increase is approximately 26.7%."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“$2.4M annual saving” presents a modeled estimate as an actual saving.",
+      "because": "Funding a pilot does not establish that the saving was realized."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Sized a $2.4M annual saving” is awkward phrasing.",
+      "because": "Savings are usually estimated or quantified rather than sized."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The front-desk adoption result comes after passive process details.",
+      "because": "The candidate’s action and the practical outcome are harder to distinguish."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The pilot approval comes after the presentation wording.",
+      "because": "The clearest evidence of client impact is harder to scan."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "“The final recommendation” does not identify what was recommended.",
+      "because": "The reader cannot connect the presentation to the scheduling solution."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The scheduling-pilot approval is repeated in another bullet.",
+      "because": "Repeating the same outcome uses space without showing an additional result."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4933,
+    "input_tokens_details": {
+      "cache_write_tokens": 4930,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1619,
+    "output_tokens_details": {
+      "reasoning_tokens": 460
+    },
+    "total_tokens": 6552
+  }
+}

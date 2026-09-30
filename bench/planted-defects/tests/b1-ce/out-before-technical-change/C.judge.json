@@ -1,0 +1,124 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/C.md",
+  "recall": 7,
+  "found": [
+    "W5",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "T3",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 19,
+  "words": 1251,
+  "quotes": 1,
+  "grounded": 0,
+  "rewrites": 28,
+  "inventedNumbers": [
+    "33"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3517,
+    "completion_tokens": 12656,
+    "total_tokens": 16173,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11528
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 3261
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "Remove the generic project bullet. This says little about what you built"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "This is **12 percentage points**, not necessarily 12%:"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "This is a **33% reduction**, not 50%:"
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The current bullet combines migration, logging, onboarding, and on-call work."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Early stopping on the test set means it is no longer an untouched test set, so the 91% cannot be described as held-out performance."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Cross-entropy is normally a training loss, while statistical significance has a different technical meaning."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Move **Mobility Systems Company** above **Eastern Robotics Co.** because it is more recent."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 19,
+    "rewrites": [
+      "Identified and corrected test-set leakage by introducing a separate validation split for early stopping, then re-evaluated the final model on an untouched test set.",
+      "Cut p95 tool-call latency 33%, from 900 ms to 600 ms, by caching tool results and reusing completed sub-agent responses.",
+      "Raised benchmark task-completion rate 12 percentage points, from 71% to 83%, by retrying failed sub-agent calls with retained partial context.",
+      "Trained a routing model with cross-entropy loss to rank findings from 3 specialist agents before reviewer evaluation.",
+      "Trained a routing model to prioritize findings from 3 specialist agents, reducing reviewer triage time by X%.",
+      "Built a TypeScript runtime for orchestrating multi-agent tool calls, retries, caching, and context handoffs across X workflows.",
+      "Built a TypeScript multi-agent runtime adopted by X projects and Y developers for tool execution, retries, and sub-agent orchestration.",
+      "Migrated 30 robot-fleet services from cron jobs to an event queue, eliminating nightly backlogs that delayed morning dispatch.",
+      "Rewrote the shared logging library, onboarded 2 engineers, and supported the weekend on-call rotation.",
+      "Fine-tuned agent behavior with GRPO using rewards for accuracy, citation validity, and tool-call efficiency, reducing end-to-end latency 5%.",
+      "Reduced end-to-end latency 5% without lowering diagnostic accuracy by optimizing agent tool use with GRPO.",
+      "Owned monitoring dashboards for the diagnostics service across 2 major releases and supported the on-call rotation using them.",
+      "Built an ML-based diagnostics triage pipeline that screened 800+ sensor signals per case, reducing the pending-case backlog 68% in its first quarter.",
+      "Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+      "Documented abstention criteria and escalation paths adopted as the on-call reviewers’ operating runbook.",
+      "If applicable: Identified and corrected test-set leakage by separating validation-based early stopping from final evaluation on an untouched test set.",
+      "Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regressions.",
+      "Shortened perception-model release cycles from 2 weeks to 3 days by adding automated regression checks to the CI pipeline.",
+      "Owned monitoring dashboards for the diagnostics service across 2 major releases and supported the on-call rotation.",
+      "Rewrote the shared logging library and onboarded 2 new engineers.",
+      "Built a TypeScript runtime for multi-agent tool execution, caching, retries, and context handoffs.",
+      "Contributed 8 citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in its default release benchmark.",
+      "Demonstrated that the evaluator tracked injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials involving removed citations, sources, and claims.",
+      "Used layered instrumentation to trace 3 defects in stability, sourcing, and parameter handling; all were fixed upstream.",
+      "**Languages:** Python, TypeScript, SQL, Bash",
+      "**ML/LLM:** PyTorch, LoRA, GRPO, RAG, LangGraph, agent evaluation",
+      "**Tools/Infrastructure:** Git, Kubernetes",
+      "Agent Runtime Suite — Lead Developer"
+    ],
+    "falsePositives": []
+  }
+}

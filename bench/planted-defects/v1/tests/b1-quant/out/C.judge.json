@@ -1,0 +1,120 @@
+{
+  "file": "tmp/bench/tests/b1-quant/out/C.md",
+  "recall": 8,
+  "found": [
+    "D3",
+    "D4",
+    "D5",
+    "D12",
+    "D14",
+    "D15",
+    "D18",
+    "D19"
+  ],
+  "coverage": false,
+  "suggestions": 30,
+  "words": 1223,
+  "quotes": 10,
+  "grounded": 7,
+  "rewrites": 19,
+  "inventedNumbers": [
+    "33"
+  ],
+  "falsePositives": [
+    "Make clear that the Sharpe result is **backtested**, not live."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3441,
+    "completion_tokens": 15628,
+    "total_tokens": 19069,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14761
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3441
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "This sounds implausible for a three-month internship"
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "These two internship bullets say the same thing"
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Remove vague jargon and unexplained internal names"
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "The Kaggle bullet repeats the same result as the Northpeak internship, including the 0.4 Sharpe improvement."
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "“Jun 2023 – Mar 2023” runs backward."
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "The first bullet is too generic"
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "Recruiters will not know those internal names"
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Remove personal information"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 30,
+    "rewrites": [
+      "Built reusable backtesting and market-data components adopted by three research teams across equities, rates, and commodities.",
+      "Morgan Patel\n(555) 010-4410 | morgan.patel@example.com | GitHub: example.com/code/mpatel | Metro City, USA",
+      "**Ridgeway University**, Metro City, USA\nPh.D. Candidate in Statistics, expected May 2026\nResearch: high-dimensional statistics, time-series modeling, and statistical learning",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures that improved the desk portfolio’s backtested Sharpe ratio by 0.4 over an 18-month out-of-sample period after estimated transaction costs.",
+      "Designed a cost-aware position smoother that reduced daily turnover from 34% to 21%, retained 90% of gross returns, and lowered estimated slippage by 33%.",
+      "Evaluated the signal on six years of tick data using purged walk-forward validation and embargo periods to prevent look-ahead leakage.",
+      "Documented backtest assumptions, transaction-cost methodology, and known failure regimes to support reproducibility and future research.",
+      "Built a reproducible simulation pipeline on a shared computing cluster, reducing runtime for a 2,000-run Monte Carlo study from three days to five hours.",
+      "Derived a variance bound for a sparse regression estimator that improves the previous result by a logarithmic factor; incorporated into Section 3 of a manuscript under review at *JASA*.",
+      "Developed an open-source R package for high-dimensional covariance estimation using shrinkage and factor models; reached 3,000 downloads in its first year.",
+      "Led weekly graduate probability recitations for 60 students, authored 12 problem sets, and earned a 4.8/5 teaching rating.",
+      "Compared `[model names]` with GARCH and historical-volatility baselines for one-day-ahead volatility forecasting across 30 equity indices.",
+      "Improved average `[QLIKE/RMSE]` by `[X%]` relative to the strongest baseline using a `[brief model description]`.",
+      "Applied Diebold–Mariano tests across 30 indices; forecast improvements were significant at the 5% level for 24 indices and remained significant during two crisis periods.",
+      "Built a reproducible PyTorch training and evaluation pipeline with rolling-window retraining and time-series cross-validation.",
+      "Designed the team’s time-series validation framework, replacing random folds with time-grouped splits and reducing the gap between local validation and leaderboard performance by 0.02.",
+      "Built `[specific model or feature pipeline]`, improving the team’s validation score by `[amount]`.",
+      "Finished in the top `[X% or rank]` of `[number]` teams.",
+      "**Languages:** Python, R, SQL, C++, Haskell\n**ML/Statistics:** time-series econometrics, Bayesian inference, gradient boosting, PyTorch\n**Data & Infrastructure:** Kubernetes, Kafka, Git, Linux, `[cloud/cluster tools if applicable]`"
+    ],
+    "falsePositives": [
+      "Make clear that the Sharpe result is **backtested**, not live."
+    ]
+  }
+}

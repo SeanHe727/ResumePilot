@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 33,
+  "words": 1615,
+  "quotes": 10,
+  "grounded": 7,
+  "rewrites": 5,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3894,
+    "completion_tokens": 14272,
+    "total_tokens": 18166,
+    "prompt_tokens_details": {
+      "cached_tokens": 384
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13901
+    },
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 3510
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Make the S&OP bullet use one tense and remove “for each meeting” after “quarterly S&OP review.”"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Rewrite the patient-intake bullet in active voice to show that you mapped the process and shortened the form across four clinics."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Specify whether the 35% checkout-conversion improvement was a relative lift or percentage-point gain and identify the comparison period, cohort, or baseline."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "because its merchant-onboarding bullet duplicates Harbor Payments and makes the project appear misattributed."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Replace “Held weekly working sessions” with the specific scheduling analysis, decision, or process change that those sessions delivered."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "Replace the vague post-launch wording with the specific product decision that the discovery work produced, or remove that clause if it produced no distinct result."
+      },
+      {
+        "id": "T4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "Explain the eight-month gap between the B.A. ending in Jun 2018 and Crestline Logistics beginning in Mar 2019."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove the date of birth and nationality from the résumé."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 33,
+    "rewrites": [
+      "Rolled out a route-planning tool.",
+      "Built",
+      "Implemented",
+      "after 60 interviews revealed missed pickup windows.",
+      "eliminating staff coverage gaps."
+    ],
+    "falsePositives": []
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 8,
+  "found": [
+    "W2",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 23,
+  "words": 2136,
+  "quotes": 14,
+  "grounded": 8,
+  "rewrites": 9,
+  "inventedNumbers": [
+    "25"
+  ],
+  "falsePositives": [
+    "only 9 of 18 bullets begin with action verbs"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5004,
+    "completion_tokens": 14325,
+    "total_tokens": 19329,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13932
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3084
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove the first-person wording in “my proof.”"
+      },
+      {
+        "id": "W6",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The directional hit-rate change from 52% to 58% should be described using percentage points, not simply “6%.”"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The 0.20-to-0.15 change is a 25% reduction, not a 33% improvement"
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The Northpeak feature-store bullet similarly buries the result beneath implementation details."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The research-assistant entry combines the R-package release, cluster maintenance, reading-group organization, and course grading in one bullet."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Daily Sharpe is normally multiplied by √252, not 252"
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Sunrise Bakery currently dominates the narrative and obscures the quantitative direction."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review identified skills such as C++, SQL, and Kafka that are not demonstrated in the experience or project bullets."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 23,
+    "rewrites": [
+      "by 6 percentage points",
+      "a 25% reduction",
+      "√252",
+      "retaining 90% of the pre-smoothing gross returns",
+      "by 33%",
+      "Built a feature store reused in two later projects",
+      "the proof tightened",
+      "Cut unsold bread from 12% to 7% of production by running daily stock counts and supplier orders",
+      "the proof"
+    ],
+    "falsePositives": [
+      "only 9 of 18 bullets begin with action verbs"
+    ]
+  }
+}

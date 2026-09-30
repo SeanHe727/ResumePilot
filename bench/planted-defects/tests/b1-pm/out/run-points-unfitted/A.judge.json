@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 8,
+  "found": [
+    "W3",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 20,
+  "words": 1782,
+  "quotes": 4,
+  "grounded": 3,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4101,
+    "completion_tokens": 11498,
+    "total_tokens": 15599,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11087
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4101
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "rewrite the bullet consistently in past tense"
+      },
+      {
+        "id": "W4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Explain whether the 35% checkout-conversion improvement is relative growth or percentage-point growth, and identify the comparison period or group."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "duplicates Harbor Payments content"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "Add outcomes to hospital practicum. The project bullets describe meetings and process mapping, but the first two do not show the scheduling result"
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "opt-in versus old-flow performance may reflect self-selection"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "excluding weather-delayed shipments changes the denominator rather than proving that fewer shipments were late"
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "Address the unexplained eight-month period between the June 2018 degree date and March 2019 employment"
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove personal information that is not customary on a U.S. resume, specifically the date of birth and nationality line"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 20,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

@@ -1,0 +1,33 @@
+Taylor Nguyen
++1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen
+EDUCATION
+Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026
+Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023
+EXPERIENCE
+Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present
+- Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.
+- Opened the café three days a week and handled the daily cash count.
+Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025
+- Improved page performance by 35% by code-splitting the calendar and map widgets.
+- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.
+- Wrote 60 component tests for the search filters, which caught 3 regressions before release.
+- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading="lazy" to the hero image.
+- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.
+- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.
+Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024
+- Owned the department websites and the shared component library other developers relied on.
+- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.
+- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.
+- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.
+PROJECTS
+Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present
+- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.
+- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.
+- Open-sourced the app, and the city transit agency linked it from its developer page.
+Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024
+- Worked on the frontend of the booking flow using React and TypeScript.
+- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.
+- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.
+SKILLS
+Tools: TypeScript, React, Vue, Storybok, Angular
+Methods: server-side rendering, accessibility, component testing

@@ -1,4 +1,4 @@
-import type { DiagnosisReport, FullReport } from '../domain.js';
+import type { DiagnosisReport, FullReportPoint } from '../domain.js';
 
 /**
  * Two documents out of one, and only one of them is written.
@@ -12,52 +12,113 @@ import type { DiagnosisReport, FullReport } from '../domain.js';
  * than scanned in a terminal.
  */
 export function renderFull(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Full review')];
+  const lines = [...head(report, sourcePath, 'Full review'), ...tally(report), ...body(report, true)];
 
-  for (const section of report.full?.sections ?? []) {
-    lines.push(`## ${section.heading}`, '');
-
-    for (const point of section.points) {
-      lines.push(`### ${point.what}`, '');
-      if (point.evidence) lines.push(`> ${point.evidence}`, '');
-      if (point.why) lines.push(point.why, '');
-
-      const aside = [
-        point.from.length > 0 ? `raised by ${point.from.join(', ')}` : '',
-        point.cost ? `costs ${point.cost}` : '',
-      ].filter(Boolean);
-      if (aside.length > 0) lines.push(`*${aside.join(' · ')}*`, '');
-    }
+  // All of it here; the brief gives the count.
+  const setAside = report.improvementPlan.setAside ?? [];
+  if (setAside.length > 0) {
+    lines.push(`## Set aside (${setAside.length})`, '', ...setAside.map((s) => `- ${s.what}`), '');
   }
-
   return `${lines.join('\n').trimEnd()}\n`;
 }
 
-/** The same points, each reduced to the sentence written to stand alone. */
 export function renderBrief(report: DiagnosisReport, sourcePath: string): string {
-  const lines = [...head(report, sourcePath, 'Review')];
+  const lines = [...head(report, sourcePath, 'Review'), ...tally(report), ...body(report, false)];
 
-  for (const section of report.full?.sections ?? []) {
-    lines.push(`## ${section.heading}`, '');
-    for (const point of section.points) {
-      lines.push(`- ${point.what}${point.cost ? ` *(${point.cost})*` : ''}`);
-    }
-    lines.push('');
-  }
-
+  // A count, not the list. Measured: judges read the set-aside lines, merged
+  // across many lines, as a garbled second report.
   const setAside = report.improvementPlan.setAside ?? [];
   if (setAside.length > 0) {
     lines.push(
       `## Set aside (${setAside.length})`,
       '',
-      'Worth knowing, and not worth the space on this page:',
-      '',
-      ...setAside.map((s) => `- ${s.what}${s.because ? ` — *${s.because}*` : ''}`),
+      `${setAside.length} findings were left out as not worth acting on; they are in \`/report --full\`.`,
       '',
     );
   }
-
   return `${lines.join('\n').trimEnd()}\n`;
+}
+
+const TAG = { error: 'Error', important: 'Important', polish: 'Polish' } as const;
+
+/** One line saying how much of each kind there is, so the key problems stand out. */
+function tally(report: DiagnosisReport): string[] {
+  const points = (report.full?.sections ?? []).flatMap((s) => s.points);
+  if (points.length === 0) return [];
+  const count = (tag: keyof typeof TAG) => points.filter((p) => p.tag === tag).length;
+  const parts = [
+    `${count('error')} error${count('error') === 1 ? '' : 's'}`,
+    `${count('important')} important`,
+    `${count('polish')} polish`,
+  ];
+  return [`${parts.join(', ')}. Errors are marked [Error]; fix those first.`, ''];
+}
+
+/**
+ * The review in the résumé's own order, one block per line.
+ *
+ * Each block: the line as written, then its problems, the reasons and the
+ * changes, numbered alike, the most important problem first. The candidate
+ * works down the page with the résumé beside it; the tags say what matters
+ * most, where a list at the top once repeated points and held only three.
+ */
+function body(report: DiagnosisReport, full: boolean): string[] {
+  const out: string[] = [];
+  const lineText = textOfLines(report);
+  for (const section of report.full?.sections ?? []) {
+    out.push(`## ${section.heading}`, '');
+    // Consecutive points about the same line share its block.
+    const blocks: Array<{ key: string; points: FullReportPoint[] }> = [];
+    for (const point of section.points) {
+      const key = (point.lines ?? []).join('+') || `point:${point.id}`;
+      const last = blocks.at(-1);
+      if (last && last.key === key && point.lines?.length) last.points.push(point);
+      else blocks.push({ key, points: [point] });
+    }
+    for (const { points } of blocks) out.push(...block(points, lineText, full), '');
+  }
+  if ((report.full?.strengths ?? []).length > 0) {
+    out.push('## Already working', '', ...report.full!.strengths!.map((s) => `- ${s}`), '');
+  }
+  return out;
+}
+
+function block(points: FullReportPoint[], lineText: Map<string, string>, full: boolean): string[] {
+  const first = points[0]!;
+  const quoted = (first.lines ?? []).flatMap((id) => (lineText.has(id) ? [lineText.get(id)!] : []));
+  const quote = quoted.length > 0 ? quoted : first.evidence ? [first.evidence] : [];
+  const numbered = (i: number, text: string) => `${points.length > 1 ? `${i + 1}. ` : ''}${text}`;
+  const out = [...quote.map((t) => `> ${t}`), ''];
+  out.push(
+    '**Problem**',
+    ...points.map((p, i) =>
+      // The word cost is for the full review only. Measured: blind judges read it
+      // in the brief as leftover notes, not as advice.
+      numbered(i, `${p.tag ? `[${TAG[p.tag]}] ` : ''}${p.what}${full && p.cost ? ` *(${p.cost})*` : ''}`),
+    ),
+    '',
+  );
+  // Polish is kept in the brief as its problem line alone. Everything reaches
+  // the candidate now, and a small fix explained at full length is what makes
+  // a long report read as a long report.
+  const explained = (p: FullReportPoint) => full || p.tag !== 'polish';
+  const whys = points.filter((p) => p.why && explained(p));
+  if (whys.length > 0) {
+    out.push('**Why**', ...points.flatMap((p, i) => (explained(p) ? [numbered(i, p.why || '—')] : [])), '');
+  }
+  const fixes = points.filter((p) => p.fix && explained(p));
+  if (fixes.length > 0) {
+    out.push('**How to change it**', ...points.flatMap((p, i) => (explained(p) ? [numbered(i, p.fix || '—')] : [])), '');
+  }
+  if (full) {
+    const from = [...new Set(points.flatMap((p) => p.from))];
+    if (from.length > 0) out.push(`*raised by ${from.join(', ')}*`, '');
+  }
+  return out.slice(0, -1);
+}
+
+function textOfLines(report: DiagnosisReport): Map<string, string> {
+  return new Map(report.perEntry.flatMap((e) => e.bullets.map((b) => [b.bulletId, b.text] as const)));
 }
 
 /**

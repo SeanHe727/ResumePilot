@@ -1,0 +1,114 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometrics, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience appears after Education, so the resume does not establish the candidate’s research and market direction before the academic background."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "The line attributes the entire increase in the desk book’s Sharpe ratio from 1.1 to 1.5 to the signal without showing that the signal caused the full improvement."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The method behind the 'cost-aware position smoother' is too compressed for a quant reader to assess."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Purged walk-forward splits and an embargo period cannot support the claim that every backtest decision used only information available at the time."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The feature store’s stated outcome is limited to reuse in two later signal projects, without showing what that reuse improved."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The line does not state the capacity estimate or the scale of the 'small live allocation.'"
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The onboarding outcome is delayed until the final clause instead of leading the bullet."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The claim that every run was reproducible from its seed and configuration file overstates what those two artifacts alone can guarantee."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The claimed logarithmic-factor improvement to the previous variance bound is not established with enough detail to verify the comparison."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The line describes writing and presenting a working paper but does not state what the communication achieved."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line gives both '41st of 2,900 teams' and 'top 2%,' which communicate nearly the same ranking information."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line gives a 0.02 gap between local validation and leaderboard scores without identifying the score metric or making clear how the gap changed."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The phrase 'without losing validation score' does not identify which validation metric was preserved or whether it remained identical or merely comparable."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3840,
+    "completion_tokens": 7292,
+    "total_tokens": 11132,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 6650
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3840
+  }
+}

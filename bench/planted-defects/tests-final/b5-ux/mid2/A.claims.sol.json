@@ -1,0 +1,192 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022",
+    "- Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "- Interviewed 40 patients about appointment reminders; my findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "- Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Conducted user interviews and created wireframes for a free clinic's online booking flow.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality are personal details readers are not meant to weigh.",
+      "because": "They do not help assess research experience or results and use space unrelated to professional evidence."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience appears after Education.",
+      "because": "The degree delays the candidate’s professional trajectory."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience entries are not in newest-first order.",
+      "because": "Northwind appears above the more recent Pinegrove role."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The survey and dashboard are presented as responsibilities without an outcome.",
+      "because": "The reader cannot tell what they helped accomplish."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Owned” does not name a specific action.",
+      "because": "The responsibility framing obscures what the candidate actually did."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“The care teams used” is low-value context.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The strongest Northwind bullet is not first.",
+      "because": "A scanning reader encounters a responsibility-focused bullet before this research-to-outcome result."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“My findings” uses a first-person pronoun.",
+      "because": "It breaks the résumé’s phrase-based style and draws attention to the author."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The 30% reduction has no stated comparison period or reference point.",
+      "because": "The reader cannot tell what the percentage is compared against."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The 40% completion increase is not identified as relative or in percentage points.",
+      "because": "The ambiguity makes the size of the improvement difficult to judge."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“So every major release was tested” is conversational and emphasizes a passive result.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The bullet wrongly credits qualitative synthesis methods with measuring a 23% reduction in support calls.",
+      "because": "Those methods organize findings; establishing a call-volume reduction requires outcome data and a comparison."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "“Synthesizing” conflicts with the past-tense “cut.”",
+      "because": "The tense shift makes the timing of the completed work unclear."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The 23% result is buried under a long list of inputs and methods.",
+      "because": "A scanning reader reaches the clearest statement of value only at the end."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "A standard System Usability Scale score cannot be 104.",
+      "because": "The SUS scale ranges from 0 to 100."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "An open card sort does not directly validate findability.",
+      "because": "It shows how participants group and label content, not whether users can find items in the redesigned navigation."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The bullet does not say what the card sort found.",
+      "because": "The reader cannot tell what the research established or changed."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The timed route-finding test is described without a result.",
+      "because": "Without an outcome or comparison, the evaluation does not establish whether the redesign helped riders."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The decrease from 90 to 60 seconds is a 33.3% reduction, not a 50% improvement.",
+      "because": "The 30-second decrease is 33.3% of the 90-second baseline."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The agency’s invitation is given without saying what it led to.",
+      "because": "The reader cannot tell whether the candidate presented, took part in the review or influenced a decision."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The clipped opening leaves the publisher implicit.",
+      "because": "It makes the shift to the agency harder to follow."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The interview scope or a concrete research finding is missing.",
+      "because": "The reader cannot gauge the research scope or see what evidence informed the design."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The wireframes are not linked to a booking problem or change.",
+      "because": "They are named as a deliverable without showing what problem they addressed or result they produced."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The later teams’ use of the handbook to add Spanish-language booking is buried after the handbook description.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3364,
+    "input_tokens_details": {
+      "cache_write_tokens": 3361,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1283,
+    "output_tokens_details": {
+      "reasoning_tokens": 302
+    },
+    "total_tokens": 4647
+  }
+}

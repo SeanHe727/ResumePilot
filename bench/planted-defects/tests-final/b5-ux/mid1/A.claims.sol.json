@@ -1,0 +1,216 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022",
+    "- Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "- Interviewed 40 patients about appointment reminders; my findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "- Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Conducted user interviews and created wireframes for a free clinic's online booking flow.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality are personal details the résumé should not include.",
+      "because": "They direct attention to personal information rather than qualifications."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Move EXPERIENCE above EDUCATION.",
+      "because": "Several years of relevant work now demonstrate fit better than the earlier degree."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "List experience newest-first, with Pinegrove Financial above Northwind Health.",
+      "because": "Readers may not see the latest role and seniority as quickly."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The survey-and-dashboard bullet does not show what the work changed for care teams or patients.",
+      "because": "Without a decision or action it enabled, the line reads as responsibility rather than evidence of impact."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Owned” names responsibility without showing how the survey was run or the dashboard maintained.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Move the reminder-research bullet ahead of the survey-and-dashboard bullet.",
+      "because": "Its concrete change and reduction in missed appointments should lead the entry."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“My findings” uses a first-person pronoun in a résumé bullet.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The 30% reduction in support calls lacks a measurement period or comparison window.",
+      "because": "Readers cannot tell when calls were counted or what period the reduction compares."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“About joining a video visit” is wordier than necessary.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“In the quarter after launch” expresses the timing less efficiently than “post-launch.”",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "“Improved dispute-form completion by 40%” does not distinguish a relative increase from a percentage-point increase.",
+      "because": "Those describe different amounts of change."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The coverage clause says releases were tested but not what the testing changed or achieved.",
+      "because": "Readers can see that research happened regularly, but not what it contributed to the product or business."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The explanation of the sessions’ purpose is longer than necessary.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "“Synthesizing” uses present-participle form for a completed role described in the past tense.",
+      "because": "The tense shift can make the work sound ongoing despite the completed role dates and past-tense result."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The 23% reduction in repeat support calls is buried after a long list of inputs and methods.",
+      "because": "A scanning reader reaches the methods before the strongest evidence of impact."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "A standard System Usability Scale score cannot be 104.",
+      "because": "SUS scores range from 0 to 100."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "An open card sort does not validate findability in a particular navigation.",
+      "because": "It reveals how participants group and label content, not whether they can find items in a designed navigation."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line does not say what the card sort revealed or changed.",
+      "because": "Readers cannot tell whether the research uncovered a problem, confirmed a decision, or affected the shipped design."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Before it shipped” is unnecessary timing detail.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“On timed route-finding tasks” is wordy and indirect.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The change from 90 to 60 seconds is a 33.3% reduction, not a 50% improvement.",
+      "because": "The decrease is 30 seconds out of the original 90 seconds."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The percentage repeats the time reduction without adding information.",
+      "because": "The 90-to-60-second figures already show that route-finding time fell."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The agency invitation, the strongest outcome, follows a long publication clause.",
+      "because": "Readers encounter the publication detail before the more distinctive invitation."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Openly” is redundant.",
+      "because": "“Published” already conveys that the materials were made public."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The line does not say what the agency review covered or what followed from the invitation.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line names interviews and wireframes but not the redesign’s outcome or evidence.",
+      "because": "Readers cannot tell whether booking became easier or more successful."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Hallway testing” is team-specific jargon that may be unclear outside the field.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“The six issues that stopped first-time users from finishing a booking” is wordy.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3572,
+    "input_tokens_details": {
+      "cache_write_tokens": 3569,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1634,
+    "output_tokens_details": {
+      "reasoning_tokens": 512
+    },
+    "total_tokens": 5206
+  }
+}

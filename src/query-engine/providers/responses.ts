@@ -1,3 +1,4 @@
+import { abortable, beforeAbort } from './abortable.js';
 import OpenAI from 'openai';
 
 import type { Message, StopReason, ToolSchema } from '../../types.js';
@@ -37,7 +38,7 @@ export class OpenAIResponsesProvider implements LLMProvider {
   }
 
   async *stream(params: StreamParams): AsyncIterable<StreamEvent> {
-    const stream = await this.client.responses.create(
+    const stream = await beforeAbort(this.client.responses.create(
       {
         model: params.model,
         input: toInput(params.messages) as never,
@@ -46,14 +47,15 @@ export class OpenAIResponsesProvider implements LLMProvider {
         ...(params.reasoningEffort ? { reasoning: { effort: params.reasoningEffort } } : {}),
         ...(params.jsonMode ? { text: { format: { type: 'json_object' as const } } } : {}),
         max_output_tokens: params.maxTokens ?? DEFAULT_MAX_TOKENS,
+        ...(params.promptCacheKey ? { prompt_cache_key: params.promptCacheKey } : {}),
         stream: true,
       },
       params.abortSignal ? { signal: params.abortSignal } : undefined,
-    );
+    ), params.abortSignal);
 
     let completed: OpenAI.Responses.Response | null = null;
 
-    for await (const event of stream) {
+    for await (const event of abortable(stream, params.abortSignal)) {
       if (event.type === 'response.output_text.delta') {
         yield { type: 'text_delta', content: event.delta };
       } else if (event.type === 'response.reasoning_summary_text.delta') {

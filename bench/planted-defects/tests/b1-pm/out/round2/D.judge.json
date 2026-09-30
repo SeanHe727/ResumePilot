@@ -1,0 +1,120 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/D.md",
+  "recall": 7,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T4",
+    "N5"
+  ],
+  "coverage": false,
+  "suggestions": 19,
+  "words": 1292,
+  "quotes": 1,
+  "grounded": 0,
+  "rewrites": 24,
+  "inventedNumbers": [
+    "50"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3414,
+    "completion_tokens": 13641,
+    "total_tokens": 17055,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12613
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3414
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "This bullet uses present tense in an otherwise historical role"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Mapped patient intake processes at four clinics and redesigned the intake form to reduce unnecessary steps; changes were adopted by front-desk staff."
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "Clarify whether this means: a 35% relative increase, such as 20% to 27%; or a 35 percentage-point increase, such as 40% to 75%."
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "It duplicates this Harbor bullet"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "do not leave the section with only descriptive bullets. Add at least one measurable outcome."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "This bullet currently sounds like the metric improved because you changed the definition"
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Remove date of birth and nationality"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 19,
+    "rewrites": [
+      "Increased checkout conversion by 35% relative by replacing the three-step flow with a one-page experience across the merchant base.",
+      "Increased checkout conversion by 35% relative in an A/B test by replacing the three-step flow with a one-page experience.",
+      "Reworked on-time delivery reporting to distinguish controllable delays from weather-related disruptions, giving operations leaders a more accurate view of carrier and warehouse performance.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast packs for each meeting.",
+      "Product: Product discovery, user interviews, roadmap prioritization, PRDs, requirements definition, experimentation, KPI definition, stakeholder management",
+      "Analytics: SQL, A/B testing, funnel analysis, cohort analysis, product metrics",
+      "Tools: Jira, Figma, Amplitude, Excel",
+      "+1 (555) 010-7731 | riley.chen@example.com | LinkedIn: linkedin.com/in/riley-chen | Portfolio: example.com",
+      "Increased checkout conversion by 35% [clarify relative vs. percentage-point increase] by replacing the three-step checkout flow with a one-page experience.",
+      "Defined requirements, success metrics, and launch criteria for a dispute self-service product, aligning engineering, risk, and support; the team shipped two weeks ahead of plan.",
+      "Conducted 25 merchant interviews to size the chargeback problem and translated findings into a business case that secured the initiative as a next-quarter roadmap priority.",
+      "Led weekly triage with engineering and support, resolving 140 onboarding tickets and reducing the open-ticket queue by 50%.",
+      "Designed an evaluation comparing merchants using the redesigned onboarding flow with merchants remaining on the legacy flow.",
+      "Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 days across 2,300 new merchants in the pilot region.",
+      "Reworked on-time delivery reporting to distinguish weather-related disruptions from controllable delays, improving visibility into operational performance.",
+      "Reduced warehouse pick errors by 30% across two sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials for each meeting.",
+      "Led rollout of a route-planning tool across three depots, training 60 drivers and dispatchers and saving approximately 1,800 driver hours annually.",
+      "Launched a surplus-food pickup app for 3,100 students across two dining halls, redistributing 9 tonnes of food during its first year.",
+      "Increased weekly active users from 400 to 1,150 by adding pickup reminders based on findings from 60 student interviews.",
+      "Designed and implemented a volunteer shift system with two dining halls, filling 95% of pickup slots each week and eliminating the need for staff to cover volunteer gaps.",
+      "Led weekly working sessions with clinic managers to assess outpatient scheduling and patient intake across the network.",
+      "Mapped patient intake processes at four clinics and redesigned the intake form to reduce unnecessary steps; changes were adopted by front-desk staff.",
+      "Add a measurable result here, such as reduced intake time, fewer incomplete forms, increased patient throughput, or adoption across a certain number of clinics."
+    ],
+    "falsePositives": []
+  }
+}

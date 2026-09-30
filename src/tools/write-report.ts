@@ -9,12 +9,14 @@ import type {
 } from '../domain.js';
 import { FULL_REPORT_PROMPT } from '../prompts/index.js';
 import type { ToolContext } from './types.js';
+import { reportStepQuery } from './one-agent-steps.js';
 import { parseJsonObject } from './verify.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 import { currentReadings } from './versions.js';
 
 /** The program's own title for what is not about one entry. */
 const ACROSS_THE_RESUME = 'Across the whole résumé';
+const SKILLS = 'Skills';
 
 /**
  * The diagnosis written out at length, from findings something else has chosen.
@@ -29,27 +31,47 @@ export async function writeFullReport(
   state: ResumeSessionState,
   findings: readonly SourceFinding[],
   ctx: ToolContext,
+  /** Words the page has left, when known. The write-up is fitted to it. */
+  room?: number,
 ): Promise<FullReport | null> {
   const plan = report.improvementPlan;
   const shortOf = new Map(aliasFindings(findings).named.map(({ short, finding }) => [finding.id, short]));
   const label = { immediate: 'fix now', shortTerm: 'needs a figure', longTerm: 'needs new work' } as const;
-  // Each group with its findings as the readers wrote them, so the writing
-  // explains what they said about the lines they said it about, rather than
-  // expanding a summary of it.
-  const chosen = plan.groups
-    ? plan.groups.map((group, i) =>
-        `- group ${i + 1} (${label[group.kind]}), about ${group.targets.join(', ')}:\n` +
-        group.findingIds
-          .map((id) => findings.find((f) => f.id === id))
-          .filter((f): f is SourceFinding => f !== undefined)
-          .map((f) => `    ${shortOf.get(f.id)} [${f.target}] ${f.what}`)
-          .join('\n'),
-      )
-    : [
-        ...plan.immediate.map((what) => `- [fix now] ${what}`),
-        ...plan.shortTerm.map((what) => `- [needs a figure] ${what}`),
-        ...plan.longTerm.map((what) => `- [needs new work] ${what}`),
+  // What was kept, under the line it is about, so the writer merges what
+  // repeats on one line and never across lines. It was one block per group,
+  // and a group could span lines: code then split groups by line, and one
+  // duplicate came out as two or three points about the same bullet.
+  const kept = (plan.groups ?? []).flatMap((group) =>
+    group.findingIds.flatMap((id) => {
+      const finding = findings.find((f) => f.id === id);
+      return finding ? [{ finding, group }] : [];
+    }),
+  );
+  const describe = ({ finding: f, group }: (typeof kept)[number]) =>
+    `      ${shortOf.get(f.id)} [${f.role}${f.kind ? `, ${f.kind}` : ''}, ${label[group.kind]}, score ${group.score ?? '?'}] ${f.what}` +
+    (f.why ? `\n        why: ${f.why}` : '') +
+    (f.fix ? `\n        fix: ${f.fix}` : '');
+  const on = (target: string) => kept.filter((k) => lineOf(k.finding) === target);
+  const placedIds = new Set<string>();
+  const block = (heading: string, items: typeof kept): string[] => {
+    items.forEach((k) => placedIds.add(k.finding.id));
+    return items.length > 0 ? [heading, ...items.map(describe)] : [];
+  };
+  const chosen = plan.groups ? [
+    ...[...entriesOf(state)].flatMap((entry) => {
+      const lines = [
+        ...block('  - the entry as a whole:', on(entry.id)),
+        ...entry.bullets.flatMap((bullet) => block(`  - [${bullet.id}] ${bullet.text}`, on(bullet.id))),
       ];
+      return lines.length > 0 ? [`[${entry.id}] ${withoutContactDetails(entry.headerLines.join(' | '))}`, ...lines] : [];
+    }),
+    ...block('The whole résumé:', kept.filter((k) => !placedIds.has(k.finding.id))),
+  ] : [
+    // A plan from before findings were kept one by one: its lists, as they are.
+    ...plan.immediate.map((what) => `- [fix now] ${what}`),
+    ...plan.shortTerm.map((what) => `- [needs a figure] ${what}`),
+    ...plan.longTerm.map((what) => `- [needs new work] ${what}`),
+  ];
   if (chosen.length === 0) return null;
 
   // The readings themselves, so the write-up can quote what they said rather
@@ -78,7 +100,7 @@ export async function writeFullReport(
     ...(report.narrative
       ? [
           `## the résumé end to end (${report.narrative.overallScore})\n` +
-            [...report.narrative.gaps, ...report.narrative.orderingNotes]
+            [...report.narrative.gaps, ...report.narrative.orderingNotes, ...(report.narrative.conflicts ?? []), ...(report.narrative.misspellings ?? [])]
               .map((n) => `- ${n}`)
               .join('\n'),
         ]
@@ -86,6 +108,22 @@ export async function writeFullReport(
     `## the file itself (${report.format.overallScore})\n` +
       report.format.issues.map((i) => `- ${i}`).join('\n'),
   ];
+
+  // What the content reader found strong, verbatim and by short name. The
+  // writer picks up to three by name; the words stay the reader's.
+  // Not from a line the reader found something wrong on. Measured: a line
+  // whose percentage did not match its own figures opened the report as the
+  // first thing to fix and was praised two lines further down.
+  const strengthsOffered = current.content.current.flatMap((entry) =>
+    entry.bullets
+      // Only a line nobody found anything to fix on. Measured: a line packed
+      // with four activities was praised as the entry's strongest.
+      .filter((bullet) => bullet.issues.length === 0 && !findings.some((f) => f.target.startsWith(bullet.bulletId)))
+      .flatMap((bullet) => (bullet.strengths ?? []).map((text) => ({ bulletId: bullet.bulletId, text }))),
+  );
+  const strengthByName = new Map<string, { bulletId: string; text: string }>(
+    strengthsOffered.map((s, i) => [`s${i + 1}`, s]),
+  );
 
   // Every finding, under a short alias the model has to copy.
   //
@@ -115,7 +153,7 @@ export async function writeFullReport(
     .map((entry) => `- ${entry.id}: ${withoutContactDetails(entry.headerLines.join(' | '))}`)
     .join('\n');
 
-  const response = await ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => reportStepQuery(ctx, {
     task: 'generate_report',
     systemPrompt: FULL_REPORT_PROMPT,
     messages: [
@@ -123,13 +161,21 @@ export async function writeFullReport(
         role: 'user',
         content:
           `The résumé:\n${state.resume ? renderForQuoting(state) : ''}\n\n` +
-          `What was chosen, as groups of findings:\n${chosen.join('\n')}\n\n` +
-          `Write one point per group. Its "from" is the ids listed under that group, and it is about ` +
-          `the lines those findings are about and no others: check it against those lines' text and ` +
-          `against what the readers said, and leave out anything that is not true of a line.\n\n` +
+          `What was kept, under the line each finding is about:\n${chosen.join('\n')}\n\n` +
+          `Write the review line by line. Within one line, findings that name the same problem are one point whose "from" ` +
+          `lists them all; different problems are different points. A point cites only findings listed under its own line, ` +
+          `except that a finding under the entry as a whole or the whole résumé that names a problem already written under a ` +
+          `line is cited in that line's point rather than written again. Cite every finding listed above. Check each point ` +
+          `against its line's text and against what the readers said, and leave out anything that is not true of the line.\n\n` +
           `What the readers said:\n${readings.join('\n\n')}\n\n` +
           `The findings, by id:\n${offered}\n\n` +
           `The entries a point can be filed under:\n${targets}\n\n` +
+          (strengthsOffered.length > 0
+            ? `What the content reader found strong, by name:\n` +
+              [...strengthByName].map(([name, s]) => `- ${name} [${s.bulletId}] ${s.text}`).join('\n') +
+              `\n\nPick up to three of these, by name, that a candidate should keep doing — the ` +
+              `ones a recruiter would notice first. Names only; their words are kept as written.\n\n`
+            : '') +
           `Each section says what it is about. Use { "type": "entry", "entryId": "<one of the ids above>" } ` +
           `for a section about one entry, and { "type": "resume" } for anything that spans the whole ` +
           `document — dates, ordering, what the file itself does. Nothing else goes in "about", and no ` +
@@ -137,25 +183,109 @@ export async function writeFullReport(
           `Return JSON of exactly this shape:
 
 {
+  "strengths": ["s1"],
   "sections": [
     {
       "about": { "type": "entry", "entryId": "one of the entry ids listed above" },
       "points": [
         {
-          "what": "the finding in one sentence — this sentence is the short version",
-          "why": "what a reader would do differently knowing it",
-          "evidence": "the shortest phrase from the résumé that shows the problem — a few words, not the line",
+          "what": "the problem, in one sentence",
+          "why": "the reasoning, two or three sentences: what a reader would doubt, misread or ask, and what that costs the candidate",
+          "evidence": "the shortest phrase from the résumé that shows the problem, copied exactly — a few words, not the line",
+          "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets]",
           "from": ["the short ids of the findings this point rests on, exactly as listed above — several where they agree, and none that is not on that list"],
-          "cost": "a number of words, like 'about 6 words' — or 'no words' where the fix removes or moves text rather than adding it. Not a description of the work."
+          "cost": "a number of words, like 'about 6 words' to add, 'saves about 10 words' for a cut, or 'no words' where text only moves. Not a description of the work."
         }
       ]
     }
   ]
 }`,
       },
+      ...(followUp
+        ? [
+            { role: 'assistant' as const, content: followUp.previous },
+            { role: 'user' as const, content: followUp.note },
+          ]
+        : []),
     ],
     abortSignal: ctx.abortSignal,
   });
+
+  // One look at the page before it is handed over. The selection chooses a
+  // little past the room on purpose, so the writing has something to trim
+  // rather than something to pad; what it wrote is measured by its own costs
+  // and, well outside the room either way, it is asked once to fit.
+  let response = await ask();
+  const firstParsed = parseJsonObject(response.content ?? '');
+  if (room !== undefined && Array.isArray(firstParsed?.sections) && firstParsed.sections.length > 0) {
+    const first = pageWords(firstParsed);
+    const count = pointCount(firstParsed);
+    // Every point is about words on the page, and says which. A quote that is
+    // not there is a point about a résumé nobody sent: measured, blind judges
+    // marked the report down for small misreadings of the line it named.
+    // The file as read, and each line as it now stands: a revision changes a
+    // line, and a point can be about the top of the page no entry holds.
+    const page = [
+      state.resume?.rawText ?? '',
+      ...[...entries.values()].flatMap((e) => [...e.headerLines, ...e.bullets.map((b) => b.text)]),
+    ].join('\n');
+    const missing = unquoted(firstParsed, page);
+    const quoteNote =
+      missing.length > 0
+        ? `These quotes are not on the résumé: ${missing.map((q) => `"${q}"`).join(', ')}. Quote the ` +
+          `words exactly as the résumé has them, or drop the point if it is not about anything the ` +
+          `résumé says. `
+        : '';
+    // Every chosen group gets its point. Measured: asked for one point per
+    // group, a write-up covered twelve of twenty-one and left out a certain
+    // error the selection had scored among the highest.
+    const cited = new Set(
+      ((firstParsed.sections ?? []) as Array<{ points?: Array<{ from?: unknown }> }>).flatMap((sec) =>
+        (sec.points ?? []).flatMap((pt) => (Array.isArray(pt.from) ? pt.from.map(String) : [])),
+      ),
+    );
+    const uncovered = (plan.groups ?? [])
+      .map((group, i) => ({ i: i + 1, names: group.findingIds.map((id) => shortOf.get(id) ?? id) }))
+      .filter(({ names }) => !names.some((name) => cited.has(name)));
+    const coverNote =
+      uncovered.length > 0
+        ? `These findings are cited by no point: ${uncovered.flatMap(({ names }) => names).join(', ')}. ` +
+          `Cite each in a point under its line, in "from", and keep every point you wrote. `
+        : '';
+    // Words, not points: the selection decided what goes in, so fitting to the
+    // page shortens points and never drops a group.
+    const fitNote =
+      first > room * 1.1
+        ? `What you wrote adds about ${first} words and the page has about ${room}. Shorten the ` +
+          `points to fit; keep every finding cited. Same JSON shape.`
+        : first < room * 0.6 && room > 20 && count < 12
+          ? `What you wrote adds about ${first} words and the page has about ${room}. There is room to ` +
+            `say more: give the points that matter most their fuller fix, and split a point that bundles ` +
+            `two different fixes. Do not add anything the findings do not support. Same JSON shape.`
+          : null;
+    const note =
+      fitNote || quoteNote || coverNote ? `${coverNote}${quoteNote}${fitNote ?? 'Same JSON shape.'}` : null;
+    if (note) {
+      const second = await ask({ previous: response.content ?? '', note });
+      ctx.trace?.event(() => ({
+        phase: 'decision',
+        purpose: 'report fitted to the page',
+        input: { room, wordsBefore: first, pointsBefore: count, notQuoted: missing, uncovered: uncovered.map((u) => u.i) },
+        output: {
+          wordsAfter: pageWords(parseJsonObject(second.content ?? '')),
+          pointsAfter: pointCount(parseJsonObject(second.content ?? '')),
+        },
+      }));
+      const secondParsed = parseJsonObject(second.content ?? '');
+      if (secondParsed?.sections) {
+        // A retry asked to fix one quote must not cost the groups it already
+        // covered. Measured: asked to requote one phrase, a write-up went from
+        // 25 points to 18 and lost a certain error the selection ranked first.
+        const groups = (plan.groups ?? []).map((group) => group.findingIds.map((id) => shortOf.get(id) ?? id));
+        response = { ...second, content: JSON.stringify(keepCovered(firstParsed, secondParsed, groups)) };
+      }
+    }
+  }
 
   const parsed = parseJsonObject(response.content ?? '');
   const rawSections = Array.isArray(parsed?.sections) ? parsed.sections : [];
@@ -202,6 +332,7 @@ export async function writeFullReport(
           ...(typeof point?.cost === 'string' && point.cost.trim()
             ? { cost: point.cost.trim() }
             : {}),
+          ...(typeof point?.fix === 'string' && point.fix.trim() ? { fix: point.fix.trim() } : {}),
           claimed: Array.isArray(point?.from)
             ? point.from.filter((f): f is string => typeof f === 'string').map((f) => f.trim())
             : [],
@@ -214,6 +345,32 @@ export async function writeFullReport(
 
   const invented: string[] = [];
   const links: Array<{ reportPointId: string; sourceFindingIds: string[] }> = [];
+
+  // Where a point goes, worked out from what it rests on. Measured: a point
+  // about the agent runtime's hardening, citing only findings on that entry,
+  // was filed by the writer under the evaluation framework below it.
+  const findingById = new Map(findings.map((f) => [f.id, f] as const));
+  const entryOfLine = new Map<string, string>();
+  for (const entry of entries.values()) {
+    entryOfLine.set(entry.id, entry.id);
+    for (const bullet of entry.bullets) entryOfLine.set(bullet.id, entry.id);
+  }
+  const fileUnder = (sources: SourceFinding[], chosen: string): string => {
+    const owners = new Set(
+      sources.flatMap((f) => {
+        const owner = entryOfLine.get(f.target.replace(/, wording$/, ''));
+        return owner ? [owner] : [];
+      }),
+    );
+    // One entry: that one. None: the writer's choice, which is the résumé as a
+    // whole unless it named a real entry. Several: the writer's choice if it is
+    // one of them, otherwise the résumé as a whole.
+    // Several: the résumé as a whole. Measured: a point about lines in three
+    // entries, filed under the first, put two projects' lines under a job.
+    if (owners.size === 1) return [...owners][0]!;
+    if (owners.size === 0) return chosen;
+    return 'resume';
+  };
 
   const placed = drafts.map((draft) => {
     // Checked, not taken. A source that was never offered is dropped and said
@@ -228,11 +385,30 @@ export async function writeFullReport(
     ];
     invented.push(...draft.claimed.filter((id) => !byId.has(id)));
 
-    const { about, claimed: _claimed, ...rest } = draft;
+    const { about: chosen, claimed: _claimed, ...rest } = draft;
+    const about = fileUnder(sourceFindingIds.map((id) => findingById.get(id)!), chosen);
+    // The lines it is about, from what it rests on: the report shows each
+    // point under the words it is about.
+    const lines = [
+      ...new Set(
+        sourceFindingIds
+          .map((id) => findingById.get(id)!.target.replace(/, wording$/, ''))
+          .filter((t) => /:b\d+$/.test(t)),
+      ),
+    ];
+    // The group it rests on decides its score and how it is shown; the
+    // highest where it rests on several.
+    const groups = (report.improvementPlan.groups ?? []).filter((g) =>
+      g.findingIds.some((id) => sourceFindingIds.includes(id)),
+    );
+    const top = groups.sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0];
     const point: FullReportPoint = {
       id: `report_point_${randomUUID()}`,
       sourceFindingIds,
       ...rest,
+      ...(lines.length > 0 ? { lines } : {}),
+      ...(top?.score !== undefined ? { score: top.score } : {}),
+      ...(top?.tag ? { tag: top.tag } : {}),
       // Derived from the sources that checked out rather than claimed
       // separately. Asked for twice, the two answers disagree — and the one
       // that can be verified should be the one that decides.
@@ -242,10 +418,24 @@ export async function writeFullReport(
     return { about, point };
   });
 
-  // Grouped in the document's own order, not the order the model wrote them
-  // in. Two runs of the same review then produce reports that can be read side
-  // by side.
+  // In the résumé's own order, so the candidate can work down the page: what
+  // concerns the page as a whole first, then each entry line by line, then
+  // the skills. Within a line, the points go by the selection's score.
+  const lineOrder = new Map<string, number>();
+  let n = 0;
+  for (const entry of entries.values()) for (const bullet of entry.bullets) lineOrder.set(bullet.id, n++);
+  const position = (point: FullReportPoint) =>
+    Math.min(...(point.lines ?? []).map((l) => lineOrder.get(l) ?? -1), Number.MAX_SAFE_INTEGER);
+  const ordered = (points: FullReportPoint[]) =>
+    [...points].sort((a, b) => position(a) - position(b) || (b.score ?? 0) - (a.score ?? 0));
+  const aboutSkills = (point: FullReportPoint) =>
+    point.sourceFindingIds.every((id) => findingById.get(id)?.target === 'skills');
+
   const built: FullReport['sections'] = [];
+  const wide = placed.filter((p) => p.about === 'resume' && !aboutSkills(p.point)).map((p) => p.point);
+  if (wide.length > 0) {
+    built.push({ heading: ACROSS_THE_RESUME, target: { type: 'resume' }, points: ordered(wide) });
+  }
   for (const entry of entries.values()) {
     const points = placed.filter((p) => p.about === entry.id).map((p) => p.point);
     if (points.length === 0) continue;
@@ -255,12 +445,12 @@ export async function writeFullReport(
       // would otherwise read out here with everything else.
       heading: withoutContactDetails(entry.headerLines.join(' | ')) || entry.id,
       target: { type: 'entry', entryId: entry.id },
-      points,
+      points: ordered(points),
     });
   }
-  const wide = placed.filter((p) => p.about === 'resume').map((p) => p.point);
-  if (wide.length > 0) {
-    built.push({ heading: ACROSS_THE_RESUME, target: { type: 'resume' }, points: wide });
+  const skills = placed.filter((p) => p.about === 'resume' && aboutSkills(p.point)).map((p) => p.point);
+  if (skills.length > 0) {
+    built.push({ heading: SKILLS, target: { type: 'resume' }, points: ordered(skills) });
   }
 
   const accepted = built.flatMap((section) => section.points);
@@ -288,7 +478,99 @@ export async function writeFullReport(
     },
   }));
 
-  return { sections: built };
+  // One strength per line. Measured: the same bullet praised twice in a list
+  // of three.
+  const praised = new Set<string>();
+  const strengths = (Array.isArray(parsed?.strengths) ? parsed.strengths : [])
+    .flatMap((name) => {
+      const s = typeof name === 'string' ? strengthByName.get(name.trim()) : undefined;
+      if (!s || praised.has(s.bulletId)) return [];
+      praised.add(s.bulletId);
+      return [`${s.bulletId}: ${s.text}`];
+    })
+    .slice(0, 3);
+
+  return {
+    ...(strengths.length > 0 ? { strengths } : {}),
+    sections: built,
+  };
+}
+
+/**
+ * What a write-up does to the page, by the costs it gave its own points:
+ * "about 6 words" adds six, "saves about 10 words" takes ten off.
+ */
+export function pageWords(parsed: Record<string, unknown> | null): number {
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  let net = 0;
+  for (const section of sections as Array<{ points?: Array<{ cost?: unknown }> }>) {
+    for (const point of section.points ?? []) {
+      const cost = typeof point.cost === 'string' ? point.cost : '';
+      const n = Number(/(\d+)/.exec(cost)?.[1] ?? 0);
+      net += /save|cut|remove/i.test(cost) ? -n : n;
+    }
+  }
+  return net;
+}
+
+/**
+ * The evidence quotes a write-up gives that the page does not contain.
+ * Compared loosely — case, spacing, quote marks and dashes — and piece by
+ * piece where the quote joins several with an ellipsis or a semicolon.
+ */
+export function unquoted(parsed: Record<string, unknown> | null, page: string): string[] {
+  const norm = (t: string) =>
+    t.toLowerCase().replace(/[“”"‘’']/g, '').replace(/[‐-―−]/g, '-').replace(/\s+/g, ' ').trim();
+  const text = norm(page);
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  const out: string[] = [];
+  for (const section of sections as Array<{ points?: Array<{ evidence?: unknown }> }>) {
+    for (const point of section.points ?? []) {
+      if (typeof point.evidence !== 'string' || !point.evidence.trim()) continue;
+      // Several quotes in one are joined with a semicolon or an ellipsis.
+      const pieces = point.evidence.split(/…|\.\.\.|;/).map(norm).filter(Boolean);
+      if (pieces.some((piece) => !text.includes(piece))) out.push(point.evidence.trim());
+    }
+  }
+  return out;
+}
+
+/** How many points a write-up holds. */
+/**
+ * The retry, with any group the first answer covered and the retry dropped put
+ * back as the first answer wrote it, under the same section.
+ */
+export function keepCovered(
+  first: Record<string, unknown>,
+  second: Record<string, unknown>,
+  groups: readonly (readonly string[])[],
+): Record<string, unknown> {
+  type Point = { from?: unknown };
+  type Section = { about?: unknown; points?: Point[] };
+  const cites = (point: Point) => (Array.isArray(point.from) ? point.from.map(String) : []);
+  const sectionsOf = (parsed: Record<string, unknown>) =>
+    (Array.isArray(parsed.sections) ? parsed.sections : []) as Section[];
+  const sections = sectionsOf(second).map((section) => ({ ...section, points: [...(section.points ?? [])] }));
+  const citedBy = (all: Section[]) => new Set(all.flatMap((section) => (section.points ?? []).flatMap(cites)));
+  const before = citedBy(sectionsOf(first));
+  const after = citedBy(sections);
+  const lost = groups.filter((names) => names.some((n) => before.has(n)) && !names.some((n) => after.has(n)));
+  if (lost.length === 0) return second;
+  const lostNames = new Set(lost.flat());
+  for (const section of sectionsOf(first)) {
+    const points = (section.points ?? []).filter((point) => cites(point).some((n) => lostNames.has(n)));
+    if (points.length === 0) continue;
+    const about = JSON.stringify(section.about);
+    const home = sections.find((s) => JSON.stringify(s.about) === about);
+    if (home) home.points.push(...points);
+    else sections.push({ ...section, points });
+  }
+  return { ...second, sections };
+}
+
+export function pointCount(parsed: Record<string, unknown> | null): number {
+  const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
+  return (sections as Array<{ points?: unknown[] }>).reduce((n, s) => n + (s.points?.length ?? 0), 0);
 }
 
 /**
@@ -341,4 +623,14 @@ function renderForQuoting(state: ResumeSessionState): string {
     .join('\n\n');
 
   return withoutContactDetails(body);
+}
+
+/** The line a finding is about, without the reader's suffix. */
+function lineOf(finding: SourceFinding): string {
+  return finding.target.replace(/, wording$/, '');
+}
+
+/** The résumé's entries, in its own order. */
+function entriesOf(state: ResumeSessionState) {
+  return (state.resume?.sections ?? []).flatMap((section) => section.entries);
 }

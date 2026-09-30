@@ -1,0 +1,45 @@
+Avery Brooks
++1 (555) 010-3319 | avery.brooks@example.com | example.com/in/abrooks
+EDUCATION
+Eastmoor University | B.S. in Statistics | Metro City, USA | Sep 2016 - May 2020
+EXPERIENCE
+Brightcart Retail | Data Analyst | Metro City, USA | Aug 2022 - Jun 2025
+- Built the weekly retention dashboard for 2.4M customers that marketing used to retarget
+lapsed buyers, lifting 90-day repeat purchase from 22% to 27%.
+- Cut the monthly revenue report from 3 days of spreadsheet work to 2 hours by moving it to
+scheduled SQL queries and a shared dashboard.
+- Defined 12 core metrics with finance and marketing, writing each one’s SQL definition so
+every team reported the same numbers.
+- Wrote data-quality checks on the 40 most-used tables, catching 15 broken loads before they
+reached a dashboard.
+- Presented the quarterly customer review to the leadership team, and two of its three
+recommendations were funded in the next budget.
+- Trained 20 merchandisers to answer their own questions with the self-serve dashboards,
+halving ad hoc data requests.
+Pinecrest Insurance | Junior Analyst | Metro City, USA | Jul 2020 - Jul 2022
+- Rebuilt the claims backlog report in SQL, cutting its refresh from weekly to daily and
+showing managers 300 stalled claims a week.
+- Analyzed 18 months of call-center data; the findings moved two agents to the evening peak
+and cut average hold time from 9 to 5 minutes.
+- Wrote the team’s SQL style guide and review checklist, which cut query errors found in
+review by half.
+- Automated the monthly fraud-flag extract, saving the fraud team 10 hours a month of manual
+pulls.
+PROJECTS
+City Bike-Share Demand Study | Independent Project | Python, SQL | Jan 2025 - Present
+- Modeled hourly bike-share demand for 120 stations from 2 years of public trip data,
+forecasting next-day demand within 12% mean absolute error.
+- Compared the forecast with the operator’s rebalancing schedule: empty-station hours fell
+from 310 to 205 a week in a replay of last summer.
+- Published the notebooks and a short write-up, which the city’s open-data team linked from
+its bike-share page.
+Food Pantry Visit Analysis | Volunteer, Team of 3 | Excel, SQL | Mar 2023 - Aug 2023
+- Mapped 14 months of pantry visits by hour and day, so the pantry moved one volunteer shift
+and cut the Saturday line from 50 to 20 minutes.
+- Cleaned 9,000 handwritten visit logs into a single table and matched repeat visitors, giving
+the pantry its first count of unique households.
+- Wrote a one-page guide the pantry coordinator used to update the visit table each month
+after the project ended.
+SKILLS
+Tools: SQL, Python, Excel
+Methods: dashboards, forecasting, metric design, data-quality checks

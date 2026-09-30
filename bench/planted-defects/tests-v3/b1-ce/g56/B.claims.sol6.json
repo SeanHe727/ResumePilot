@@ -1,0 +1,486 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Owned the diagnostics service's monitoring dashboards across two major releases and the on-call rotation that used them.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases, adding automated regression checks that shortened release cycles from 2 weeks to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue while rewriting the shared logging library, onboarding two new hires and taking over the weekend on-call rotation, which removed the nightly backlogs that delayed morning dispatch.",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "- Raised diagnostic accuracy on 1,200 held-out cases from 71% to 79% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Cut p95 latency of single-request edge inference by 40% by serving the INT8 engine with dynamic batching.",
+    "- Using grouped tool-use rollouts, a composite reward over accuracy, citation validity and call count, and a GRPO loop with a frozen SFT reference, reduced end-to-end latency 5%.",
+    "- Stabilised GRPO training on sparse rewards by sampling a single rollout per prompt, so each update used exactly one scored trajectory.",
+    "- Documented the triage branch's abstention rules and escalation paths for the on-call reviewers, who adopted them as the team's runbook.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Cut p95 tool-call latency from 900 ms to 600 ms, a 50% reduction, by caching tool results and reusing completed sub-agent answers.",
+    "- Raised the runtime's task-completion rate by 12% on the benchmark suite, from 71% to 83%, by retrying failed sub-agent calls with their partial context.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Upstreamed 8 citation and faithfulness metrics to an open-source research-agent framework, where they now run in the default benchmark for every release.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Traced 3 structural pipeline defects in stability, sourcing and parameter handling to their modules with layered instrumentation; each was fixed upstream.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation, Kubernetes"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put the experience entries in reverse chronological order, with Mobility Systems Company before Eastern Robotics Co.",
+      "because": "The internship ended in May 2025, after the full-time role ended in July 2024."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date and location formatting throughout.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Remove manual line breaks inside bullets in the final document.",
+      "because": "Bullets should wrap naturally rather than leave short fragments on their own lines."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Add a LinkedIn profile if you have a complete, professional one.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the code portfolio link is a direct, working URL.",
+      "because": ""
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Consider adding a relevant focus to the graduate degree.",
+      "because": "A focus such as machine learning, distributed systems, robotics, or computer architecture could strengthen it."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider adding honors, a relevant concentration, or especially relevant courses if space permits.",
+      "because": "They should be included only if they strengthen your candidacy."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify what “owned” means for the dashboards and on-call rotation.",
+      "because": "Hiring managers need to see what your responsibility involved."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add the scale of the dashboard or operational work if available.",
+      "because": "Numbers of dashboards, services, users, incidents, or releases would make the responsibility clearer."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Reword “that used them” to remove its ambiguity.",
+      "because": "It is unclear whether the phrase refers to the dashboards or the releases."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add an operational outcome rather than only describing responsibility.",
+      "because": "Hiring managers need to see what changed because of your work."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether caching and sensor-read batching both contributed to the latency improvement.",
+      "because": "The causal contribution of each action is unclear."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Identify the affected API or service and testing environment if possible.",
+      "because": "The result needs more context."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Make clear whether the 200 ms threshold is a CI regression guard rather than a production SLO.",
+      "because": "The safeguard needs contextual precision."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify what the automated regression checks covered.",
+      "because": "The mechanism behind the release-cycle result needs to be clearer."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Qualify the claim that the checks shortened release cycles unless you can defend that causal link.",
+      "because": "The checks alone may not explain the result."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Define what “release cycles” measures.",
+      "because": "It could mean time between releases, preparation time, or time from commit to production."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Split the bullet or remove lower-priority details.",
+      "because": "Its migration, logging, onboarding, and on-call themes make the main accomplishment difficult to identify."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify which action removed the nightly backlogs.",
+      "because": "The causal relationship is unclear."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Quantify the operational improvement if possible.",
+      "because": "Backlog volume, duration, dispatch delay, or failure rate would show its scale."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain the significance of the event queue migration.",
+      "because": "Its effect on reliability, scalability, scheduling accuracy, or operational work is not stated."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Keep the onboarding detail only if mentorship or technical leadership is important to the target role.",
+      "because": "It is a lower-priority detail in an already dense bullet."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain what “triage branch” means to an outside reader.",
+      "because": "The system is not immediately understandable to someone outside the team."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Clarify whether the system or the branch screens 800+ signals per case.",
+      "because": "The contribution of the branch is unclear."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Identify what the ML-extracted features contributed to the workflow.",
+      "because": "The contribution is not immediately understandable."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Give the baseline and measurement method for the 68% backlog reduction if space permits.",
+      "because": "The metric needs more context."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Avoid implying that the launch alone caused the entire backlog reduction.",
+      "because": "A comparison period or operational context would clarify the claim."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Define “domain adapter” for a less research-oriented target role.",
+      "because": "The comparison needs enough context to be interpretable."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify that the accuracy gain is 8 percentage points rather than an 8% relative increase.",
+      "because": "The comparison should be precise."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "State the baseline model or training setup.",
+      "because": "The comparison needs an interpretable baseline."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Identify the evaluation metric if “accuracy” could hide class imbalance or a multi-label setup.",
+      "because": "Readers need enough evaluation context to interpret the result."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Explain how “single-request” inference relates to dynamic batching.",
+      "because": "Batching is usually associated with multiple requests."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Give before-and-after latency if available.",
+      "because": "It would put the 40% reduction in context."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Identify the inference engine or deployment environment if relevant.",
+      "because": "The phrasing raises technical questions about the result."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "State the traffic load or hardware configuration under which the reduction was measured.",
+      "because": "The measurement conditions are unclear."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Fix the dependent introductory phrase that lacks a clear subject.",
+      "because": "The bullet’s grammar obscures the accomplishment."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "State what changed and what you personally implemented.",
+      "because": "The technical details currently obscure the accomplishment."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Explain how the training procedure reduced end-to-end latency.",
+      "because": "The causal connection is not obvious."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Define the 5% comparison baseline and whether the result was meaningful.",
+      "because": "The result needs a clearer comparison."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Remove implementation details that do not help explain the result.",
+      "because": "The technical details currently obscure the accomplishment."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Distinguish this end-to-end result from the 40% inference-latency result.",
+      "because": "The bullets could appear to overlap or conflict."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Add an outcome of the claimed GRPO stabilization, or omit the bullet if there was none.",
+      "because": "It currently describes a method rather than what the method enabled."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Explain why one rollout per prompt improved stability.",
+      "because": "That connection may not be obvious to the intended audience."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Consider combining this bullet with the preceding one if both describe the same experiment.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Quantify the runbook’s adoption or usage if possible.",
+      "because": "Its impact is currently limited to “they adopted it.”"
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify whether you created the runbook, standardized a process, or drove adoption.",
+      "because": "Your contribution to the runbook is unclear."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add an operational outcome of the runbook if available.",
+      "because": "The bullet does not show whether it improved escalations, review speed, or consistency."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Replace the broad adoption claim with a concrete contribution or measurable adoption result.",
+      "because": "The bullet is generic, promotional, and unsupported by evidence."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Remove or narrow “AI-first,” “accelerating delivery,” and “improving outcomes” unless you have metrics.",
+      "because": "The phrases are overly promotional and unsupported."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "State what you built or changed and how many teams, users, or workflows it affected.",
+      "because": "The current bullet does not demonstrate the project’s value concretely."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Correct “50% reduction” or the before-and-after values.",
+      "because": "A drop from 900 ms to 600 ms is a 33.3% reduction."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify whether the latency metric covers one tool call, a workflow, or all tool calls.",
+      "because": "The scope of the measurement is unclear."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Explain how you handled cache invalidation, stale results, or correctness if important.",
+      "because": "Those may be important design constraints."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Change “12%” to “12 percentage points” or give the correct relative increase.",
+      "because": "A rise from 71% to 83% is 12 percentage points, or approximately 16.9% relative."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Define whether task completion is measured per task, benchmark instance, or workflow.",
+      "because": "The metric’s unit is unclear."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Explain any latency, cost, or tool-call tradeoff from retries if it matters.",
+      "because": "Retries may increase those costs."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Name the framework if it is recognizable or publicly accessible.",
+      "because": "Naming it would increase the contribution’s credibility."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether you designed the metrics, implemented them, or both.",
+      "because": "The nature of your contribution is unclear."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Quantify the framework’s reach if available.",
+      "because": "Users, repositories, releases, or benchmark runs would establish adoption."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Verify that the metrics still run in the default benchmark for every release.",
+      "because": "The claim should be accurate and defensible."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "State what the evaluator’s score was correlated against.",
+      "because": "The correlation is difficult to interpret without both variables."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Specify whether the statistic is Kendall’s tau and include uncertainty if relevant.",
+      "because": "The statistical result needs clearer interpretation."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain experimentally what it means to remove citations, sources, and claims.",
+      "because": "The injected degradation is not fully defined."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Distinguish whether the 400+ trials were reports, perturbations, or evaluation runs.",
+      "because": "The unit of the trials is unclear."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify whether stability, sourcing, and parameter handling are separate defects or categories.",
+      "because": "The description of the three defects is ambiguous."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Identify the practical impact of the fixes if available.",
+      "because": "Readers need to understand why the defects mattered."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Explain “fixed upstream” for readers unfamiliar with the contribution workflow.",
+      "because": "Its meaning may not be clear to the audience."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Move Git out of “Programming.”",
+      "because": "Git is a version-control tool, not a programming language."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Add directly used technologies demonstrated in the experience section.",
+      "because": "The current skills section understates the breadth of the backend, systems, ML, and deployment work."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Separate frameworks, techniques, concepts, and platforms into clearer categories.",
+      "because": "The current grouping makes the technical profile harder to scan."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Put “agent evaluation” with evaluation or ML methods rather than tools.",
+      "because": "It is a capability area rather than a tool."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Support Kubernetes with experience or project evidence, or remove it.",
+      "because": "Its use is not shown elsewhere in the résumé."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Include relevant, directly used inference-serving, queueing, CI/CD, cloud, database, observability, and testing technologies.",
+      "because": "The skills section looks narrower than the experience and should reinforce its technical themes."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4393,
+    "input_tokens_details": {
+      "cache_write_tokens": 4390,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3186,
+    "output_tokens_details": {
+      "reasoning_tokens": 334
+    },
+    "total_tokens": 7579
+  }
+}

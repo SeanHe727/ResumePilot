@@ -1,0 +1,216 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation, Kubernetes"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Use a live, professional code link instead of one that looks like a placeholder.",
+      "because": "The link should go directly to work an employer should see."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Check that “Expected Jun 2026” is still accurate when applying.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use a consistent location and date format throughout.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Say whether the 35% accuracy gain is relative or in percentage points.",
+      "because": "The accuracy result needs enough context to be credible."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Name the baseline for the accuracy gain.",
+      "because": "The accuracy result needs enough context to be credible."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Explain what “reviewer disagreement” measures.",
+      "because": "Readers need to understand the comparison."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Say whether the 14% and 6% figures came from the same evaluation set.",
+      "because": "Readers need to understand the comparison."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Identify the evaluation size or workload if space allows.",
+      "because": "It would make the 18% and 5% gains more persuasive."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify what counted as an accuracy regression.",
+      "because": "That may not be obvious to the roles being targeted."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Remove or substantially change the repeated fine-tuning bullet.",
+      "because": "It repeats the first bullet’s method."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The claim about learning to reproduce tool outputs may not describe what happened.",
+      "because": "Assistant-only masking normally excludes tool outputs from the loss."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Be prepared to substantiate the attribution of the backlog reduction.",
+      "because": "The reduction could have had other causes."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify what GPU memory was measured and what else changed.",
+      "because": "Attributing a 4× reduction solely to BF16 mixed precision may prompt scrutiny."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Explain the load-test conditions.",
+      "because": "They provide context for the latency result."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Establish whether the 420 ms and 180 ms results used comparable traffic.",
+      "because": "The latency comparison needs to be comparable."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Fix the tense inconsistency between “maintained” and “adds”.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether the regression checks shortened the release cycle.",
+      "because": "Other changes may have contributed to the three-day cycle."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Add a before-and-after measure of the backlog or dispatch delay if available.",
+      "because": "It would make the impact more concrete."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Replace or remove the broad, unmeasured adoption claim.",
+      "because": "It does not tell readers what was built or changed."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Define what counted as working context.",
+      "because": "The measurement behind the claim should be defensible."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Explain how the stress test was run and the 100× growth measured.",
+      "because": "The striking 100× claim should be defensible."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Indicate how the deadlocks and lost results were verified as resolved.",
+      "because": "A concise test or measurement would support the result."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Specify whether the contribution implemented metrics, integrated existing ones, or both.",
+      "because": "“Integrated” alone leaves the contribution’s boundary unclear."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify what was ranked for the Kendall correlation.",
+      "because": "Readers need that to interpret the 0.89 figure."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The backlog result duplicates the Mobility Systems bullet.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The backlog result appears misplaced under the research-agent project.",
+      "because": "It appears unrelated to the framework and could undermine trust."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "Git is grouped with programming languages.",
+      "because": "It belongs outside the programming-languages grouping."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Kubernetes is grouped with ML methods.",
+      "because": "It belongs with infrastructure or tooling."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2107,
+    "input_tokens_details": {
+      "cache_write_tokens": 2104,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1735,
+    "output_tokens_details": {
+      "reasoning_tokens": 733
+    },
+    "total_tokens": 3842
+  }
+}

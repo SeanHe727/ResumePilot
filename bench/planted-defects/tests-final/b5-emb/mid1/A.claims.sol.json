@@ -1,0 +1,224 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present",
+    "- Delivered morning wholesale orders to about 20 cafés and collected signed invoices.",
+    "- Loaded the van and checked each order against the dispatch list before leaving.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Jul 2021 - Feb 2023",
+    "- Made the sensor line's UART link to the test PC more reliable by raising its baud rate from 115200 to 921600.",
+    "- Traced a batch of early field failures to a solder-paste change; my findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Writes the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once while also ordering lab parts, maintaining the ESD program, training line operators and running the monthly safety walk, which raised station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "- Cut firmware update time over the air from 11 minutes to 4 by compressing images and resuming interrupted downloads.",
+    "- Debounced the robot's emergency-stop input with a single 10 kOhm pull-up resistor.",
+    "- Profiling the interrupt load, moving sensor reads to DMA, splitting the control loop into fixed-priority tasks and pinning the scheduler tick, raised the controller's spare CPU from 8% to 35%.",
+    "- Presented the firmware roadmap to the hardware and product teams each quarter, and two board revisions followed its recommendations.",
+    "- Documented the bootloader and flashing process, so new engineers could flash a board on their first day.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and runs 9 days without sun.",
+    "- Cut average current from 4 mA to 1 mA, a 300% reduction, by sleeping between readings and batching radio transmissions.",
+    "- Raised packet delivery by 15% over LoRa, from 80% to 95% of readings, by retrying failed transmissions.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Designed the battery-monitoring board for the team's electric car, which passed technical inspection on the first attempt.",
+    "- Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller before each race.",
+    "- Mentored 4 first-year members on soldering and board bring-up.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not in reverse chronological order.",
+      "because": "Clearwater Sensors appears above the more recent Voltline Robotics role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience should appear before Education.",
+      "because": "A reader scanning for relevant work history has to pass the degree first."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Low-Power Weather Station project should appear before the Formula Student project.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "error",
+      "says": "The delivery bullet gives no result showing the deliveries were successful.",
+      "because": "The count shows scope, not timely, accurate, or dependable performance."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The dispatch-check bullet gives no measured benefit or result.",
+      "because": "The reader cannot tell whether checking improved accuracy or prevented delivery problems."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The stronger dispatch-check bullet should come before the delivery bullet.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The delivery entry does not connect its routine duties to the résumé’s embedded-systems direction.",
+      "because": "The two bullets do not show why the entry matters to that direction and take space from relevant work."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Raising the UART baud rate alone does not establish that the link became more reliable.",
+      "because": "Higher speed does not by itself improve signal quality or error tolerance."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“My findings” uses a personal pronoun and makes the result read like narrative.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "“Writes” is the wrong tense for a role that ended in February 2023.",
+      "because": "It implies the procedure is still being written."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The calibration procedure is named without a technical step or approach.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Unrelated duties crowd the fixture achievement and separate it from the throughput result.",
+      "because": "The long list makes it unclear what raised throughput."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“Rewrote the motor-controller firmware” does not identify the technical change.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The fleet description is wordier than needed.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "A single 10 kOhm pull-up resistor does not debounce the emergency-stop input.",
+      "because": "A pull-up sets the default logic level but does not provide a reliable debounce interval."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“With a single” is filler before the component detail.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The emergency-stop change has no stated outcome.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Profiling ... raised” mismatches a participle with the finite verb “raised.”",
+      "because": "The opening does not form a parallel grammatical construction with the main verb."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The spare-CPU result comes after a four-part method list and is easy to miss.",
+      "because": "A scanning reader reaches several implementation details before the clearest measure of impact."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The board-revision result is appended rather than foregrounded.",
+      "because": "Its position after the presentation detail makes the evidence of follow-through slower to find."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The two board revisions do not show what recommendation was adopted or what changed.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "“So” makes the onboarding result conversational.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The weather station’s reported measurements are not identified.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The drop from 4 mA to 1 mA is a 75% reduction, not a 300% reduction.",
+      "because": "The 3 mA decrease is 75% of the original 4 mA."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The change from 80% to 95% is 15 percentage points, not a 15% increase.",
+      "because": "Relative to the original 80% rate, the increase is 18.75%."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The battery-monitoring board is named without a specific design decision or technical challenge.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The motor-controller testing is described without its outcome.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Board bring-up” is team-specific jargon.",
+      "because": "It may obscure the mentoring topic."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The mentoring bullet does not say what the members could do as a result.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3609,
+    "input_tokens_details": {
+      "cache_write_tokens": 3606,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1936,
+    "output_tokens_details": {
+      "reasoning_tokens": 861
+    },
+    "total_tokens": 5545
+  }
+}

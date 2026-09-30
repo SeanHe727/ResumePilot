@@ -1,0 +1,212 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Owned the pick-path layouts for the fast-moving zone and the labor reports the shift leads used.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The Crestway and food-bank forecast bullets report nearly identical results and scale in different settings, leaving the achievement’s context unclear.",
+      "because": "A reader may wonder whether one achievement is presented twice and may doubt the figures until the contexts agree."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience section is not in newest-first order.",
+      "because": "Lakeview appears above the more recent Crestway role, so a reader may miss the most recent relevant experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears above the work history, even though the work history carries the main story.",
+      "because": "It delays the section that best shows the candidate’s current professional qualifications."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Greenleaf Florist takes more space than needed for a role that may not support the supply-chain or operations target.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The delivery bullet gives workload but no result of the work.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The wedding-order and cooler duties have no stated outcome.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The opening bullet describes ownership without specifying the actions or what the reports were used to do.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The time-study result should lead the entry rather than follow the opening bullet.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The long list of unrelated duties buries the cycle-counting work and inventory-accuracy result.",
+      "because": "The duties separate the method from the result, obscuring which work drove the improvement."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Lakeview entry reads as responsibilities and results rather than a clearly ordered account of the role.",
+      "because": "A reader has to assemble the role’s story from separate duties and outcomes."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The forecast method is named only as a “seasonal forecast model.”",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The reorder-point bullet does not state the effect of setting the reorder points.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The scorecard bullet does not say what the delivery-window negotiations achieved.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "Standard OEE cannot defensibly be reported as 112% against a valid ideal-cycle-time baseline.",
+      "because": "A result above 100% indicates a baseline or calculation problem rather than standard OEE exceeding the valid ideal rate."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The OEE method names improvement levers but not what was changed on the line.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The lead-time, throughput, and work-in-process figures are inconsistent if they describe the same flow and period.",
+      "because": "With constant throughput, halving lead time implies lower average work-in-process, not double."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The explanation about throughput and work-in-process buries the concise lead-time result.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The routing bullet names the problem type but not a specific modeling or solution choice.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The drive-time comparison does not specify whether 5% applies to each route or to an aggregate.",
+      "because": "Those comparisons establish different levels of predictive accuracy, so the validation is unclear."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The pilot bullet describes a trial but not its outcome.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The first bullet does not identify the analysis performed or what the recommendations changed.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Made recommendations” is generic and obscures the specific action.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The donation-intake result does not state the baseline for the one-day improvement.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The strongest line is not the opening bullet, and its opening phrase uses passive voice.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The stockout and inventory results have no stated measurement period.",
+      "because": "Without a time window, their scope and whether they were measured over the same period are unclear."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The seasonal-forecast bullet names the deliverable but not the forecasting approach or key input.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The food-bank entry combines a generic recommendation statement with two operational improvements, so the project does not read as focused.",
+      "because": "It does not clearly explain how the broad recommendation claim and the concrete results fit together."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3415,
+    "input_tokens_details": {
+      "cache_write_tokens": 3412,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1390,
+    "output_tokens_details": {
+      "reasoning_tokens": 328
+    },
+    "total_tokens": 4805
+  }
+}

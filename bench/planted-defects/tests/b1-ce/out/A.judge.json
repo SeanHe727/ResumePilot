@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N2"
+  ],
+  "coverage": true,
+  "suggestions": 17,
+  "words": 1650,
+  "quotes": 7,
+  "grounded": 1,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4276,
+    "completion_tokens": 6599,
+    "total_tokens": 10875,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 6209
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2484
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "The dashboard ownership line gives neither an outcome nor a concrete operating method."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The delivery benefits are generic, unmeasured, and jargon-heavy."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Raising task completion from 71% to 83% is a 12-percentage-point increase, not simply '12%'."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The 50% latency reduction is arithmetically incorrect."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The end-to-end latency result is buried after methods"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The migration bullet crowds the technical result with unrelated duties"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Standard GRPO needs multiple completions for within-prompt relative rewards; one rollout makes that signal degenerate or unavailable."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Experience is not ordered newest-first."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": true,
+    "suggestions": 17,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

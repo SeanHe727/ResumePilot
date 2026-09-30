@@ -1,0 +1,216 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "- Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and deferring the analytics script, raised the checkout page's Lighthouse performance score from 52 to 91.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Documented the design-system tokens in Storybook so designers could check spacing and color values without asking engineers.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Apr 2024 - Aug 2024",
+    "- Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop list offline.",
+    "- Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved stops.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Presented the demo to the library staff and handed over the code with setup notes.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify what “load time” measures.",
+      "because": "The tested change and measurement should be clear."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether the 9% booking lift was statistically reliable.",
+      "because": "An A/B test supports the claim best when its measurement is clear."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify whether the JavaScript figures are transferred, compressed, or parsed sizes.",
+      "because": "These measures differ, and code-splitting may affect them differently."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Say how the 14 accessibility fixes were verified, if known.",
+      "because": "Verification would make the “all 14” claim more credible."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Separate your contribution from the combined result if others made some of the changes.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Distinguish the Lighthouse lab score from an improvement measured for real users.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Lazy-loading the hero image does not normally explain an improved largest contentful paint.",
+      "because": "It generally delays the image most likely to be the largest contentful paint element."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add evidence that the Storybook documentation was adopted or saved time.",
+      "because": "Its outcome is less concrete than the surrounding bullets."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Converting PNG images to WebP would not normally cut the JavaScript bundle by 60%.",
+      "because": "It can reduce image or total page transfer size instead."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify how the interview findings led to preview mode and fewer broken-page reports.",
+      "because": "The causal chain is compressed."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Change the present-tense “Writes” to match the completed role.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether the checklist specifically caused the drop in failed audits.",
+      "because": "The drop may have resulted from broader accessibility work."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Define whether “search time” means response time or time until results appear.",
+      "because": "Client-side filtering can speed repeated searches while increasing initial download or load work."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Indicate how the roughly 900 weekly riders were counted, if available.",
+      "because": "The figure could sound like an estimate presented as a measured user count."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Calling the change from 3.0s to 1.5s a 75% improvement is incorrect.",
+      "because": "It is a 50% reduction."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Verify that offline caching explains the cold-start improvement.",
+      "because": "A first visit would not have the stop list cached."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Calling the rise from 30% to 40% a 10% increase is incorrect.",
+      "because": "It is 10 percentage points, or about 33% relative growth."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Check whether one month of observation supports the weekly-retention claim.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The project heading says Vue, but the first bullet says React and TypeScript.",
+      "because": "The heading and bullet conflict about the frontend technology."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The React and TypeScript claim conflicts with the heading’s Vue description.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "If space is tight, prioritize the implementation and testing details over the general frontend statement.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify whether the staff used the work or the handoff was an important deliverable.",
+      "because": "Otherwise, the bullet is less compelling than the implementation bullets."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Check that “Expected Jun 2026” is still accurate when submitting the résumé.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Replace the phone number, email, and URL if they are placeholders.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code link point directly to work you want reviewed.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "“Storybok” is misspelled.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "List Angular only if you can discuss relevant hands-on experience.",
+      "because": "The résumé has no supporting example."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Reconcile Vue with the hackathon project before featuring it as a skill.",
+      "because": "The project heading conflicts with its React frontend bullet."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1951,
+    "input_tokens_details": {
+      "cache_write_tokens": 1948,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1896,
+    "output_tokens_details": {
+      "reasoning_tokens": 843
+    },
+    "total_tokens": 3847
+  }
+}

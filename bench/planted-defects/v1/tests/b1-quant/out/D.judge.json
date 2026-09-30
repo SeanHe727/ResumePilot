@@ -1,0 +1,113 @@
+{
+  "file": "tmp/bench/tests/b1-quant/out/D.md",
+  "recall": 8,
+  "found": [
+    "D3",
+    "D4",
+    "D5",
+    "D12",
+    "D14",
+    "D15",
+    "D18",
+    "D19"
+  ],
+  "coverage": false,
+  "suggestions": 28,
+  "words": 1672,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 16,
+  "inventedNumbers": [
+    "4"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4070,
+    "completion_tokens": 12549,
+    "total_tokens": 16619,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11124
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4070
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "“Single-handedly” sounds exaggerated."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "You have two nearly identical bullets in the Northpeak role"
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "This is empty language and will hurt your credibility."
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "You also repeat the order-book signal in both Northpeak and the Kaggle project."
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "That is impossible chronologically."
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "It says nothing measurable about your contribution."
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "It contains several unexplained proper nouns and no measurable outcome."
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Age, Marital status, Hobbies. These are irrelevant to hiring and may introduce bias."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 28,
+    "rewrites": [
+      "Morgan Patel\nMetro City, USA | +1 (555) 010-4410 | morgan.patel@example.com\nGitHub: github.com/mpatel | LinkedIn: linkedin.com/in/mpatel",
+      "Validated the signal on 6 years of tick-level data using purged walk-forward splits and embargo periods, eliminating look-ahead bias in model training.",
+      "Built reusable components for the desk’s research and backtesting infrastructure, improving experiment reproducibility and supporting research across [asset classes/desks].",
+      "Developed a Python/Kafka backtesting pipeline used by 4 research teams, reducing setup time for new experiments by 60% and standardizing transaction-cost assumptions.",
+      "Jun 2022 – Mar 2023",
+      "Jun 2023 – Mar 2024",
+      "Compared neural-network and statistical volatility models using rolling-origin evaluation across 30 equity indices.",
+      "Migrated the volatility forecasting pipeline to [platform/tool], coordinating with 3 teams and reducing model runtime by [X]%.",
+      "Northpeak Capital | Quantitative Research Intern\nMetro City, USA | Jun 2025 – Aug 2025\n\n• Developed a short-horizon order-book imbalance signal for liquid index futures that improved the desk’s book by 0.4 Sharpe over an 18-month out-of-sample backtest after transaction costs.\n• Reduced signal turnover from 34% to 21% using a cost-aware position smoother, retaining 90% of gross returns and reducing estimated slippage by one-third.\n• Validated the strategy on 6 years of tick-level data using purged walk-forward splits and embargo periods to prevent look-ahead bias.\n• Built reusable research/backtesting infrastructure for [specific use case], supporting [number] researchers or desks and improving [runtime/reproducibility/throughput] by [metric].\n• Documented backtest assumptions, transaction-cost models, validation methodology, and known failure regimes in the team research wiki.",
+      "Ridgeway University | Graduate Research Assistant, Statistical Learning Lab\nMetro City, USA | Oct 2021 – Aug 2022\n\n• Built a reproducible Monte Carlo simulation pipeline on a shared compute cluster, reducing a 2,000-run study from 3 days to 5 hours.\n• Derived a variance bound for a sparse regression estimator, tightening the prior bound by a logarithmic factor; results comprise Section 3 of a manuscript under review at JASA.\n• Taught weekly recitations for 60 graduate probability students, authored 12 problem sets, and earned a 4.8/5 teaching rating.\n• Developed and released an open-source R package for high-dimensional covariance estimation using shrinkage and factor models; reached 3,000 downloads in its first year.",
+      "Volatility Forecasting Study | Python, PyTorch | Jan 2024 – Present\n• Compared statistical and neural-network volatility forecasts across 30 equity indices using rolling out-of-sample evaluation and Diebold–Mariano tests.\n• Observed statistically significant forecast improvements at the 5% level on 24 of 30 indices, including both tested crisis periods.\n• [Add a bullet describing the model architecture, features, forecast horizon, or economic value.]\n• GitHub: [link] | Paper/report: [link]",
+      "• Implemented rolling-window training, benchmark comparisons, and reproducible experiment tracking for 1-day and 5-day volatility forecasts.",
+      "Kaggle Market Prediction Competition | Python | [Correct dates]\n• Collaborated on a 3-person team to develop time-series prediction models and feature pipelines for [competition name].\n• Replaced random cross-validation with time-grouped folds, reducing the gap between local validation and leaderboard scores from 0.02 to near zero.\n• Implemented [specific model/features/preprocessing technique], contributing to a final rank of [ranking/percentile].",
+      "TECHNICAL SKILLS\n\nProgramming: Python, R, SQL, C++\n\nMachine Learning & Statistics: Time-series econometrics, Bayesian inference, statistical learning, gradient boosting, PyTorch, Monte Carlo simulation, high-dimensional statistics\n\nQuantitative Research: Signal research, volatility forecasting, time-series cross-validation, purged walk-forward validation, transaction-cost modeling, order-book data, backtesting\n\nInfrastructure & Data: Kubernetes, Kafka, Linux, Git, [NumPy, pandas, scikit-learn, Polars, Spark—only if applicable]",
+      "Ridgeway University — Ph.D. Candidate, Statistics\nMetro City, USA | Expected May 2026\nResearch focus: Statistical learning, high-dimensional inference, time-series modeling\n\nRidgeway University — B.S., Mathematics\nMetro City, USA | May 2020",
+      "PUBLICATIONS & RESEARCH\n\nPatel, M. et al. “[Paper Title].” Manuscript under review at Journal of the American Statistical Association.\nPatel, M. “[Package Name].” Open-source R package, [GitHub/CRAN link]."
+    ],
+    "falsePositives": []
+  }
+}

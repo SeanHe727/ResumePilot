@@ -1,0 +1,240 @@
+{
+  "lines": [
+    "Avery Brooks",
+    "+1 (555) 010-3319 | avery.brooks@example.com | example.com/in/abrooks",
+    "Date of birth: 9 Jan 1998 | Nationality: Brazilian",
+    "EDUCATION",
+    "Eastmoor University | B.S. in Statistics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Pinecrest Insurance | Junior Analyst | Metro City, USA | Jul 2020 - Jul 2022",
+    "- Owned the claims backlog report and the weekly numbers the claims managers used.",
+    "- Analyzed 18 months of call-center data; my findings moved two agents to the evening peak and cut average hold time from 9 to 5 minutes.",
+    "- Wrote the team's SQL style guide and review checklist, which cut query errors found in review by half.",
+    "- Automated the monthly fraud-flag extract while also maintaining the team calendar, answering ad hoc questions from sales, updating onboarding documents and covering the help desk on Fridays, which saved the fraud team 10 hours a month.",
+    "Brightcart Retail | Data Analyst | Metro City, USA | Aug 2022 - Jun 2025",
+    "- Improved reporting efficiency by 90% by moving the monthly revenue report to scheduled SQL queries.",
+    "- Found customers with no orders by left-joining the orders table to the customers table and counting rows with a null customer name.",
+    "- Wrote data-quality checks on the 40 most-used tables, catching 15 broken loads before they reached a dashboard.",
+    "- Presented the quarterly customer review to the leadership team, and two of its three recommendations were funded in the next budget.",
+    "- Reported the national conversion rate as the simple average of 14 regional conversion rates, without weighting by regional traffic.",
+    "- Built the weekly retention dashboard for 2.4M customers that marketing used to retarget lapsed buyers, lifting 90-day repeat purchase from 22% to 27%.",
+    "PROJECTS",
+    "City Bike-Share Demand Study | Independent Project | Python, SQL | Jan 2025 - Present",
+    "- Modeled hourly bike-share demand for 120 stations from 2 years of public trip data, forecasting next-day demand within 12% mean absolute error.",
+    "- Compared the forecast with the operator's rebalancing schedule: empty-station hours fell from 310 to 205 a week in a replay of last summer.",
+    "- Published the notebooks and a short write-up, which the city's open-data team linked from its bike-share page.",
+    "Food Pantry Visit Analysis | Volunteer, Team of 3 | Excel, SQL | Mar 2023 - Aug 2023",
+    "- Mapped 14 months of pantry visits by hour and day, so the pantry moved one volunteer shift and cut the Saturday line from 50 to 20 minutes.",
+    "- Cleaned 9,000 handwritten visit logs into a single table and matched repeat visitors, giving the pantry its first count of unique households.",
+    "- Built a retention dashboard for about 2.4 million shoppers that raised repeat purchases by nearly a quarter.",
+    "SKILLS",
+    "Tools: SQL, Python, Excel",
+    "Methods: dashboards, forecasting, metric design, data-quality checks"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Use real, working contact details if these are placeholders.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the profile supports the experience on the résumé.",
+      "because": ""
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality unless an application asks for them.",
+      "because": "They do not generally help assess qualifications and may introduce bias."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Check whether the education location adds value.",
+      "because": "The degree and graduation date are sufficient."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put Brightcart before Pinecrest.",
+      "because": "The most recent role should appear first."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Add the backlog report’s scale or a decision it supported.",
+      "because": "“Owned” establishes responsibility but not impact."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify how the analysis led to the staffing change.",
+      "because": "This supports the causal claim."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the hold-time comparison covers comparable periods.",
+      "because": "This supports the causal claim."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "State the comparison period or measurement behind “by half.”",
+      "because": "The result needs to be backed up."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Separate the automation achievement from the unrelated administrative duties.",
+      "because": "The long list obscures the relevant accomplishment."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify which work saved 10 hours a month.",
+      "because": "The saving is unclear as written."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Define what became 90% more efficient.",
+      "because": "The percentage is otherwise hard to evaluate."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain how the 90% improvement was measured.",
+      "because": "The percentage is otherwise hard to evaluate."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Starting from orders cannot identify customers with no orders.",
+      "because": "The bullet describes the wrong SQL check."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "A null customer name is not a reliable test for an unmatched order.",
+      "because": "The SQL logic is technically wrong."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify what kinds of failures the checks caught.",
+      "because": "That would make the scope of the work clearer."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify your analytical contribution to the recommendations.",
+      "because": "The reader needs to know what you did beyond presenting them."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The unweighted average of regional conversion rates is an inappropriate national-rate calculation.",
+      "because": "It can misstate the national rate when traffic differs by region."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Make clear how the dashboard informed retargeting.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Substantiate the claimed purchase-rate lift.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Distinguish the 5-percentage-point change from the approximately 23% relative increase.",
+      "because": "The change from 22% to 27% can be expressed in either way."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Name the forecast error metric precisely and give its denominator.",
+      "because": "“12% mean absolute error” may mean a different metric."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Explain how the forecast was evaluated.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Make explicit that the reduction was simulated, not observed in live operations.",
+      "because": "It came from a replay."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Briefly identify the replay assumptions.",
+      "because": "That would strengthen the result."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify how the line-time change was measured.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify whether other changes could have affected the line time.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Check that “9,000 handwritten visit logs” accurately describes the source.",
+      "because": "The detail may prompt questions."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Check that the household-matching method was reliable.",
+      "because": "The detail may prompt questions."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The retention-dashboard bullet appears to duplicate the Brightcart achievement and belongs outside the pantry project.",
+      "because": "Its 2.4-million-shopper scale and repeat-purchase result conflict with the pantry context."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Make the broad tools list more specific only where the tools were used and are relevant.",
+      "because": "The current list is credible but broad."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Make the broad methods list more specific only where the methods were used and are relevant.",
+      "because": "The current list is credible but broad."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1933,
+    "input_tokens_details": {
+      "cache_write_tokens": 1930,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1533,
+    "output_tokens_details": {
+      "reasoning_tokens": 438
+    },
+    "total_tokens": 3466
+  }
+}

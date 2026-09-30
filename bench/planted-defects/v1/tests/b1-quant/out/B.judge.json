@@ -1,0 +1,123 @@
+{
+  "file": "tmp/bench/tests/b1-quant/out/B.md",
+  "recall": 7,
+  "found": [
+    "D3",
+    "D4",
+    "D5",
+    "D12",
+    "D14",
+    "D18",
+    "D19"
+  ],
+  "coverage": false,
+  "suggestions": 14,
+  "words": 1209,
+  "quotes": 2,
+  "grounded": 2,
+  "rewrites": 25,
+  "inventedNumbers": [
+    "0.40",
+    "0.40",
+    "33"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3426,
+    "completion_tokens": 12804,
+    "total_tokens": 16230,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11680
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3426
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "This bullet will likely hurt your credibility: Single-handedly built the firm’s entire trading infrastructure... It sounds implausible"
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "These two Northpeak bullets describe the same work: Validated the signal... Tested the signal..."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "This bullet should be deleted: Leveraged cutting-edge quantitative synergies... It says nothing measurable and reads like filler."
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "You also repeat the order-book imbalance project under the Kaggle project. Remove it unless it was genuinely a separate project."
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "This entry is impossible: Kaggle Market Prediction Competition | Jun 2023 - Mar 2023"
+      },
+      {
+        "id": "D15",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "This bullet is difficult to understand: Ported the VX-9 stack onto QRT under the Helix program... Unless these names are recognized externally, translate them into plain language."
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Remove personal information Delete: Age, Marital status, Hobbies"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 14,
+    "rewrites": [
+      "Morgan Patel +1 (555) 010-4410 | morgan.patel@example.com | GitHub: github.com/mpatel",
+      "Kaggle Market Prediction Competition | Jun 2022 – Mar 2023",
+      "Kaggle Market Prediction Competition | Jun 2023 – Mar 2024",
+      "Developed a short-horizon order-book imbalance signal for liquid index futures, improving annualized out-of-sample Sharpe by 0.40 after estimated transaction costs over an 18-month backtest.",
+      "Reduced signal turnover from 34% to 21% using a cost-aware position smoother while retaining 90% of gross backtest returns and reducing estimated slippage by one-third.",
+      "Validated the signal on six years of tick data using purged walk-forward splits and an embargo period to prevent look-ahead leakage.",
+      "Documented backtest assumptions, transaction-cost methodology, and identified failure regimes for future research.",
+      "Built and deployed components of the firm’s research and backtesting infrastructure, improving workflow support for multiple trading desks.",
+      "Developed a reusable backtesting module adopted by research teams across equities, rates, and commodities.",
+      "Compared LSTM, temporal convolutional, and gradient-boosting models for volatility forecasting across 30 equity indices.",
+      "Evaluated volatility forecasting models across 30 equity indices using time-series cross-validation.",
+      "Integrated the volatility forecasting pipeline into the team’s production research platform and coordinated testing with two partner teams.",
+      "Improved annualized out-of-sample Sharpe by 0.40 after estimated transaction costs over an 18-month backtest.",
+      "Reduced turnover from 34% to 21% while retaining 90% of gross backtest returns and reducing estimated slippage by 33%.",
+      "“Paper Title,” manuscript under review at *Journal of the American Statistical Association*, coauthor(s), year.",
+      "Ph.D. in Statistics, expected May 2026",
+      "**Ph.D. in Statistics**, expected May 2026 | Sep 2021–Present",
+      "**B.S. in Mathematics** | May 2020",
+      "**Programming:** Python, C++, R, SQL, Haskell  \n**Machine Learning/Statistics:** Time-series econometrics, Bayesian inference, gradient boosting, PyTorch  \n**Infrastructure:** Kubernetes, Kafka, distributed computing",
+      "Built a reproducible simulation pipeline on a shared computing cluster, reducing a 2,000-run Monte Carlo study from three days to five hours.",
+      "Derived a variance bound for a sparse regression estimator that improves the prior bound by a logarithmic factor; manuscript under review at *JASA*.",
+      "Taught weekly recitations for 60 graduate students in probability, authored 12 problem sets, and received a 4.8/5 teaching rating.",
+      "Released an open-source R package for high-dimensional covariance estimation using shrinkage and factor models; downloaded more than 3,000 times in its first year.",
+      "Used Diebold–Mariano tests to compare forecast accuracy; observed statistically significant improvements at the 5% level on 24 of 30 indices, including both examined crisis periods.",
+      "Improved validation reliability by replacing random folds with time-grouped folds, reducing the gap between local validation and leaderboard performance by 0.02."
+    ],
+    "falsePositives": []
+  }
+}

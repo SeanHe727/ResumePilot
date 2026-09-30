@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the department websites and the shared component library other developers relied on.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Tools: TypeScript, React, Vue, Storybok",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Worked on the frontend of the booking flow using React and TypeScript.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "defect": "The hero image is usually the largest contentful paint element; lazy-loading it delays its load, so it cannot cut LCP."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "defect": "React state does not sanitize anything, and dangerouslySetInnerHTML bypasses React's escaping, so this renders user HTML and enables XSS."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Angular)"
+  }
+]

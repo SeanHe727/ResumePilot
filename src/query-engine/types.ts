@@ -32,6 +32,13 @@ export interface StreamParams {
    * verbatim across a fan-out, so it is exactly what should be cached.
    */
   cacheSystemPrompt?: boolean;
+  /**
+   * Which requests share a cached prefix (OpenAI's `prompt_cache_key`).
+   * Requests with the same system prompt and tools carry the same key, so the
+   * provider routes them to the same cache rather than spreading them over
+   * machines that each start cold.
+   */
+  promptCacheKey?: string;
   abortSignal?: AbortSignal;
 }
 

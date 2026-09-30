@@ -1,4 +1,5 @@
 import type {
+  BulletIssue,
   EntryDiagnosis,
   EntryRead,
   JdMatch,
@@ -9,11 +10,13 @@ import type {
   WordingDiagnosis,
 } from '../domain.js';
 import { renderResume } from '../document/index.js';
+import { SINGLE_AGENT_SCHEMA } from '../prompts/index.js';
 import { withoutContactDetails } from '../document/vocabulary.js';
 import { buildEntryMessage, normaliseEntryDiagnosis } from '../tools/analyze-entry.js';
-import { buildWordingMessage } from '../tools/analyze-wording.js';
+import { buildWordingMessage, wordingIssues } from '../tools/analyze-wording.js';
+import { buildTimeline, renderTimeline } from '../document/timeline.js';
 import { SemaphorePool } from './pool.js';
-import { ROLES } from './roles.js';
+import { CONSISTENCY_AGENT, FLAT_AGENT, ROLES, SINGLE_AGENT } from './roles.js';
 import type { SubAgentRuntime } from './sub-agent.js';
 import type {
   AgentRunStat,
@@ -25,10 +28,14 @@ import type {
   RoleSelection,
   SubAgentResult,
   SubAgentTask,
+  WholeReview,
 } from './types.js';
 
 const DEFAULTS: OrchestratorConfig = {
-  maxConcurrency: 3,
+  // Two readers per entry (content and wording) and two for the whole page. At
+  // three, a reader queued behind the rest of the fan-out, on a deadline that
+  // counts the wait.
+  maxConcurrency: 6,
   timeoutMs: 300_000,
   // `retry` rather than `continue`, and it is still `continue`'s promise that
   // holds: a role that fails twice is dropped, not allowed to fail the batch.
@@ -126,7 +133,8 @@ export class DefaultOrchestrator {
     }
 
     const chosen = roles.roles.filter((role): role is PerEntryRole => PER_ENTRY.has(role));
-    const results = await this.parallel(chosen.map((role) => taskFor(role, entry, briefing)));
+    const tasks = chosen.map((role) => taskFor(role, entry, briefing));
+    const results = await this.parallel(tasks);
 
     return aggregate(entry, results, this.failures);
   }
@@ -165,24 +173,120 @@ export class DefaultOrchestrator {
     briefing?: Briefing,
   ): Promise<NarrativeAssessment | null> {
     if (resume.sections.every((section) => section.entries.length === 0)) return null;
+    const timeline = renderTimeline(buildTimeline(resume));
 
-    const [result] = await this.parallel([
+    const [result, check] = await this.parallel([
       {
         agentConfig: ROLES['narrative']!,
         input: 'Read these entries in sequence and return the JSON described above.',
-        context: { entries: renderResume(resume), ...briefingContext(briefing) },
+        // The dates worked out in code, beside the text they came from: the
+        // reader judges what they mean, and no longer has to compute them.
+        context: {
+          entries: renderResume(resume),
+          ...(timeline ? { timeline } : {}),
+          ...briefingContext(briefing),
+        },
+      },
+      // The page checked against itself, beside the reading of its story.
+      {
+        agentConfig: CONSISTENCY_AGENT,
+        input: 'Check this résumé against itself and return the JSON described above.',
+        context: { entries: renderResume(resume), ...(timeline ? { timeline } : {}) },
       },
     ]);
 
     const raw = this.readWholeDocument('narrative', result);
     if (!raw) return null;
+    const checked = this.readWholeDocument('consistency', check) ?? {};
 
+    return composeNarrative(resume, raw, checked);
+  }
+
+  /**
+   * The single-agent ablation: one agent, one context, every reading.
+   *
+   * Its one answer is split into what each specialist would have returned and
+   * read by the same code, so everything after this point (the filter, the
+   * report) sees the same shapes as on the multi-agent path.
+   */
+  async reviewWhole(resume: ResumeDocument, briefing?: Briefing, flat = false): Promise<WholeReview> {
+    const agent = flat ? FLAT_AGENT : SINGLE_AGENT;
+    const entries = resume.sections.flatMap((section) => section.entries);
+    const readable = entries.filter((entry) => entry.bullets.length > 0);
+    const timeline = renderTimeline(buildTimeline(resume));
+
+    const [result] = await this.parallel([
+      {
+        agentConfig: agent,
+        input: buildSingleAgentMessage(resume, readable),
+        context: { ...(timeline ? { timeline } : {}), ...briefingContext(briefing) },
+      },
+    ]);
+    const stat: AgentRunStat = {
+      name: agent.name,
+      success: Boolean(result?.success),
+      turns: result?.turns ?? 0,
+      compactions: result?.compactions ?? 0,
+      durationMs: result?.durationMs ?? 0,
+      tokens: (result?.usage.inputTokens ?? 0) + (result?.usage.outputTokens ?? 0),
+    };
+
+    return this.readWhole(resume, this.readWholeDocument('single', result), stat);
+  }
+
+  /**
+   * One combined answer, split into what each specialist would have returned.
+   *
+   * Public for the `one` ablation, where the answer arrives through a tool call
+   * of the coordinator's own rather than from an agent run here.
+   */
+  readWhole(resume: ResumeDocument, whole: Record<string, unknown> | null, stat: AgentRunStat): WholeReview {
+    const entries = resume.sections.flatMap((section) => section.entries);
+    const items = Array.isArray(whole?.entries) ? whole.entries : [];
+    const byId = new Map(
+      items.flatMap((item) => {
+        const record = asObject(item);
+        return record ? [[bareId(record.entryId), record] as const] : [];
+      }),
+    );
+
+    // Each part posed as the result of the role that would have produced it,
+    // so `aggregate` reads it exactly as it reads theirs.
+    const part = (id: string, name: string, output: unknown): SubAgentResult => {
+      const present = asObject(output) !== null;
+      return {
+        agentId: id,
+        agentName: name,
+        success: present,
+        ...(present ? { output } : { error: whole ? `the single agent gave no ${id} reading` : this.failures.get('single') ?? 'the single agent failed' }),
+        usage: { inputTokens: 0, outputTokens: 0 },
+        turns: 0,
+        compactions: 0,
+        durationMs: 0,
+      };
+    };
+    const verdicts = entries.map((entry): EntryVerdict => {
+      if (entry.bullets.length === 0) {
+        return { entryId: entry.id, substance: null, wording: null, overallScore: 0, agentStats: [] };
+      }
+      const record = byId.get(entry.id);
+      const verdict = aggregate(
+        entry,
+        [
+          part('content', ROLES['content']!.name, record?.content),
+          part('wording', ROLES['wording']!.name, record?.wording),
+        ],
+        this.failures,
+      );
+      return { ...verdict, agentStats: [stat] };
+    });
+
+    const narrative = asObject(whole?.narrative);
+    if (whole && !narrative) this.failures.set('narrative', 'the single agent gave no narrative reading');
     return {
-      overallScore: numeric(raw.overallScore),
-      arc: typeof raw.arc === 'string' ? raw.arc : '',
-      gaps: strings(raw.gaps),
-      orderingNotes: strings(raw.orderingNotes),
-      withinEntries: readEntryReads(resume, raw.withinEntries),
+      verdicts,
+      narrative: narrative ? composeNarrative(resume, narrative, asObject(whole?.consistency) ?? {}) : null,
+      stat,
     };
   }
 
@@ -306,6 +410,39 @@ export class DefaultOrchestrator {
   }
 }
 
+function composeNarrative(
+  resume: ResumeDocument,
+  raw: Record<string, unknown>,
+  checked: Record<string, unknown>,
+): NarrativeAssessment {
+  return {
+    overallScore: numeric(raw.overallScore),
+    arc: typeof raw.arc === 'string' ? raw.arc : '',
+    gaps: strings(raw.gaps),
+    orderingNotes: strings(raw.orderingNotes).filter((note) => !confirmsOrder(note)),
+    unsupportedSkills: strings(checked.unsupportedSkills),
+    conflicts: strings(checked.conflicts),
+    misspellings: strings(checked.misspellings),
+    withinEntries: readEntryReads(resume, raw.withinEntries),
+  };
+}
+
+/**
+ * The single agent's task: the whole résumé, which entries to read one by one,
+ * and one answer holding what the five readers would each have returned.
+ *
+ * The per-reading shapes are the specialists' own, field for field, so the
+ * same readers parse them.
+ */
+export function buildSingleAgentMessage(resume: ResumeDocument, readable: ResumeEntry[]): string {
+  return `${renderResume(resume)}
+
+Entries to read one by one (every per-entry reading covers each of these):
+${readable.map((entry) => `- [${entry.id}]`).join('\n')}
+
+${SINGLE_AGENT_SCHEMA}`;
+}
+
 function asObject(output: unknown): Record<string, unknown> | null {
   return output && typeof output === 'object' ? (output as Record<string, unknown>) : null;
 }
@@ -401,7 +538,8 @@ function aggregate(
   results: SubAgentResult[],
   failures: Map<string, string>,
 ): EntryVerdict {
-  const substance = readSubstance(entry, results, (r) => failures.set(`content:${entry.id}`, r));
+  const read = readSubstance(entry, results, (r) => failures.set(`content:${entry.id}`, r));
+  const substance = read ? errorsFirst(read) : null;
   const wording = readWording(entry, results, (r) => failures.set(`wording:${entry.id}`, r));
 
   const scores = [substance?.overallScore, wording?.overallScore].filter(
@@ -447,6 +585,32 @@ function readSubstance(
   return normalised.data ?? null;
 }
 
+/**
+ * On each line, what does not hold before what is missing or unclear: it
+ * matters most, and the selection reads issues in order.
+ */
+function errorsFirst(diagnosis: EntryDiagnosis): EntryDiagnosis {
+  const rank = (issue: BulletIssue) => (issue.kind === 'wrong' ? 0 : 1);
+  return {
+    ...diagnosis,
+    bullets: diagnosis.bullets.map((bullet) => ({
+      ...bullet,
+      issues: [...bullet.issues].sort((a, b) => rank(a) - rank(b)),
+    })),
+  };
+}
+
+/**
+ * A note that the order is already right, rather than a change to make.
+ *
+ * The prompt asks for changes only and the reader still sends these. Measured
+ * three times, the last as a report's second-most-important point: "Keep
+ * Education before Experience".
+ */
+export function confirmsOrder(note: string): boolean {
+  return /^\s*(keep|leave|retain|maintain)\b/i.test(note) || /\balready (?:in|correct|right|appropriate|chronological)\b/i.test(note);
+}
+
 /** Ids are shown bracketed, so they come back bracketed. */
 function bareId(raw: unknown): string {
   return String(raw ?? '').replace(/[[\]]/g, '').trim();
@@ -470,9 +634,10 @@ function readWording(
   // Left alone it matches no bullet in the document and every wording score is
   // keyed to nothing. The sibling reader was fixed for this — in the tool that
   // is no longer reachable, while this path, the one that runs, was not.
-  const rows = (perBullet as WordingDiagnosis['perBullet']).map((row) => ({
+  const rows = (perBullet as Array<WordingDiagnosis['perBullet'][number] & { issues: unknown }>).map((row) => ({
     ...row,
     bulletId: bareId(row.bulletId),
+    ...wordingIssues(row.issues),
   }));
   const scores = rows.flatMap((b) => [b.verbStrength?.score ?? 0, b.concision?.score ?? 0]);
 
@@ -487,7 +652,7 @@ function readWording(
 
 function successOutput(
   results: SubAgentResult[],
-  agentId: RoleId,
+  agentId: string,
   note: (reason: string) => void,
 ): Record<string, unknown> | null {
   const result = results.find((r) => r.agentId === agentId);

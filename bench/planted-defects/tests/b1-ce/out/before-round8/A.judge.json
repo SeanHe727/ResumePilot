@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N2"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 2234,
+  "quotes": 14,
+  "grounded": 8,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4971,
+    "completion_tokens": 11409,
+    "total_tokens": 16380,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11081
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3179
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "The dashboard bullet states responsibility but does not show what changed because of that ownership."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The phrase 'Drove adoption of AI-first engineering practices' does not say which practices you introduced or how you drove adoption."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The task-completion increase is expressed as 12% when the stated values show a 12-percentage-point increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The stated 50% reduction in p95 tool-call latency is arithmetically incorrect."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The 5% latency result is buried after three implementation details and is missing 'by' before the percentage."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Separate the robotics bullet that combines migration, logging, onboarding, and on-call work."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "The claim that sampling a single rollout per prompt stabilised standard GRPO training is technically backwards."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Experience is not listed newest-first because the 2024–2025 Mobility Systems Company internship appears below the 2022–2024 Eastern Robotics Co. role."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

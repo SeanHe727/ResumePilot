@@ -1,0 +1,90 @@
+{
+  "A": [
+    {
+      "test": "b1-pm",
+      "recall": 0.7142857142857143,
+      "precision": 1.0,
+      "f1": 0.8333333333333333,
+      "errors": 3,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W3": "right",
+        "W4": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "mentioned",
+        "S4": "missed",
+        "T2": "mentioned",
+        "T4": "right",
+        "N3": "right",
+        "N5": "right"
+      }
+    }
+  ],
+  "B": [
+    {
+      "test": "b1-pm",
+      "recall": 0.7142857142857143,
+      "precision": 1.0,
+      "f1": 0.8333333333333333,
+      "errors": 6,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W3": "right",
+        "W4": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "right",
+        "S4": "mentioned",
+        "T2": "mentioned",
+        "T4": "right",
+        "N3": "mentioned",
+        "N5": "right"
+      }
+    }
+  ],
+  "C": [
+    {
+      "test": "b1-pm",
+      "recall": 0.7142857142857143,
+      "precision": 1.0,
+      "f1": 0.8333333333333333,
+      "errors": 4,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W3": "right",
+        "W4": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "right",
+        "S4": "mentioned",
+        "T2": "mentioned",
+        "T4": "right",
+        "N3": "mentioned",
+        "N5": "right"
+      }
+    }
+  ],
+  "D": [
+    {
+      "test": "b1-pm",
+      "recall": 0.7142857142857143,
+      "precision": 1.0,
+      "f1": 0.8333333333333333,
+      "errors": 4,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W3": "right",
+        "W4": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "right",
+        "S4": "mentioned",
+        "T2": "mentioned",
+        "T4": "right",
+        "N3": "mentioned",
+        "N5": "right"
+      }
+    }
+  ]
+}

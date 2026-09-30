@@ -1,0 +1,212 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present",
+    "- Delivered morning wholesale orders to about 20 cafés and collected signed invoices.",
+    "- Loaded the van and checked each order against the dispatch list before leaving.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Jul 2021 - Feb 2023",
+    "- Owned the end-of-line test station for the humidity sensor and the yield reports the line leads used.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and runs 9 days without sun.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, osciloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The engineering experience is not ordered newest first.",
+      "because": "Clearwater Sensors appears above the more recent Voltline Robotics role."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Northside Bakery entry should be shortened to a single line.",
+      "because": "Its two bullets take space from engineering experience and projects."
+    },
+    {
+      "line": 7,
+      "kind": "error",
+      "says": "The review says “cafØs” is corrupted spelling.",
+      "because": "It may look like a typo or encoding error."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The delivery duties have no stated result or value.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The dispatch-list check has no stated result.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Before leaving” repeats the pre-departure timing conveyed by the check.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The line does not say what changed as a result of the yield reports.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Owned” describes responsibility rather than a specific action.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The quantified return reduction appears at the end instead of leading the line.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The test-fixture line is a stronger opening line for the entry.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The 60% update-speed improvement has no comparison baseline.",
+      "because": "Without a prior duration or other reference point, its size is hard to judge."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The test count shows the rig’s scope but not its effect.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The five-failure diagnosis is buried after the logger’s implementation details.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz cannot capture it without aliasing.",
+      "because": "An 8 kHz sample rate has a 4 kHz Nyquist frequency, below the signal’s frequency."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "Declaring the counter volatile does not, by itself, fix a race condition.",
+      "because": "Volatile does not make accesses atomic or synchronize the interrupt handler and main loop."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The phrase about the counter shared by the interrupt handler and main loop repeats context.",
+      "because": "It lengthens the sentence without clarifying the race condition."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The line does not say what changed in the program’s behavior.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The quantified outcomes are delayed by the fleet scope, and this is the stronger opening line for the entry.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The nine-day runtime lacks battery capacity or test-setup context.",
+      "because": "Runtime depends on stored energy and operating conditions."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The current-reduction line is the strongest line in the project entry and should lead it.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Openly” is vague and may repeat what “Published” conveys.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The bullet attributes robot-fleet motor-controller work to a Formula Student electric-car project.",
+      "because": "The project context conflicts with the warehouse robot-fleet work described under Voltline."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The CAN-dashboard line does not say what the testing established or changed.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The CAN-dashboard line is the stronger opening line for the entry.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Before each race” emphasizes timing rather than the testing’s value.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The fleet and motor-control results duplicate the Voltline achievement and are attributed to Formula Student.",
+      "because": "The student project ended before the Voltline role began, and Voltline states matching results."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "“osciloscopes” is misspelled in the Tools line.",
+      "because": "The conspicuous misspelling obscures the intended tool name and can look unproofread."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3188,
+    "input_tokens_details": {
+      "cache_write_tokens": 3185,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1292,
+    "output_tokens_details": {
+      "reasoning_tokens": 316
+    },
+    "total_tokens": 4480
+  }
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W4",
+    "category": "wording",
+    "line": "The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
+  },
+  {
+    "id": "W5",
+    "category": "wording",
+    "line": "Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "defect": "Generic claims with no concrete action, subject or result."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Reduced data-entry errors by 70% by adding range checks and double entry for the primary outcome.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Ran a randomized discharge study of more than 600 heart-failure patients that completed enrollment months ahead of schedule.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Established that the program was equivalent to usual care because the superiority test on readmission was not significant (p = 0.41).",
+    "defect": "A non-significant superiority test does not show equivalence; equivalence needs a prespecified margin and an equivalence or non-inferiority test."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "defect": "Averaging follow-up of deaths while excluding censored patients is biased; median survival needs a Kaplan-Meier estimate that uses censored data."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Summit Climbing Gym | Front Desk Staff | Metro City, USA | Sep 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Tools: R, REDCap, SAS",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (SAS)"
+  }
+]

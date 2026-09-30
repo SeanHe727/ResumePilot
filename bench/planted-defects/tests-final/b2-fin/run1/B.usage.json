@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 700,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3922,
+    "output_tokens_details": {
+      "reasoning_tokens": 2451
+    },
+    "total_tokens": 4622
+  },
+  "seconds": 36.462
+}

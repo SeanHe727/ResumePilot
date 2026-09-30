@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W2",
+    "category": "wording",
+    "line": "Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "defect": "A first-person pronoun ('my') inside a bullet."
+  },
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Supported the FP&A team with financial reporting and analysis.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "defect": "Free cash flow to equity must be discounted at the cost of equity; WACC is for free cash flow to the firm."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "defect": "Margins cannot be added across units; the group margin is total EBITDA over total revenue."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Lakeside Golf Club | Caddie | Metro City, USA | Aug 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  }
+]

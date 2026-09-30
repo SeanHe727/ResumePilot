@@ -1,0 +1,44 @@
+Morgan Kim
++1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim
+EDUCATION
+Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021
+EXPERIENCE
+Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023
+- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25
+seconds across 20,000 units a month.
+- Traced a batch of early field failures to a solder-paste change; the findings updated the
+reflow profile and cut returns from 2.1% to 0.4%.
+- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints
+from 15 to 2 a quarter.
+- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to
+150 boards an hour.
+Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025
+- Improved update speed by 60% by compressing firmware images and resuming interrupted
+downloads.
+- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware
+build.
+- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the
+root cause of 5 field failures.
+- Sampled the motor’s 5 kHz vibration signal at 8 kHz so the fault detector could capture it
+without aliasing.
+- Fixed a race condition on the counter shared by the interrupt handler and the main loop by
+declaring the counter volatile.
+- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting
+control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.
+PROJECTS
+Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present
+- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable
+environmental sensing.
+- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio
+transmissions.
+- Published the schematics and firmware openly, and a local school built two stations from
+them.
+Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021
+- Worked on firmware and testing for the robot fleet’s motor controllers.
+- The CAN-bus firmware for the dashboard was written and tested against the motor controller
+before each race.
+- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter
+eightfold and motor faults by more than half.
+SKILLS
+Tools: C, C++, STM32, oscilloscopes
+Methods: firmware, hardware-in-the-loop testing, CAN, low-power design

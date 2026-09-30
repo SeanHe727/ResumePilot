@@ -1,0 +1,230 @@
+> Here is my resume: bench/planted-defects/tests-final/b5-pm/resume.pdf. Please review my resume and tell me what to change.
+hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
+hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
+hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
+hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
+hook "memory-weak-point" failed: Cannot read properties of undefined (reading 'impact')
+**Coverage:** Content and wording reviews covered all 5 entries with bullets; narrative and format reviews covered the resume. JD matching was not run because no job posting was provided.
+
+The main changes to address:
+- Correct the project metrics: the user count change from 400 to 1,150 is not a 150% increase, and a fill-rate change from 75% to 95% is 20 percentage points—not 20%.
+- Remove or reconcile the repeated checkout-test result in the internship entry, and clarify what the reported conversion lift measures.
+- Put experience in newest-first order and address the narrative gap between the product-focused experience and the current mechanic role.
+
+The file parses cleanly. See **/report --full** for the complete findings and action plan.
+
+> /report
+# Review: resume.pdf
+
+**85/100** — format 100 · content 78 · wording 82 · narrative 64
+
+Read 5 of 5 entries for content, 5 for wording. Career reading done, posting comparison no-posting.
+
+3 errors, 9 important, 10 polish. Errors are marked [Error]; fix those first.
+
+## Across the whole résumé
+
+> Northfield School of Management | MBA
+
+**Problem**
+[Important] The experience section is below education despite the substantial work history and current post-MBA role.
+
+**Why**
+Readers may reach the work history only after the education section, even though the experience is a central part of the candidate’s background. Keeping the MBA visible while leading with experience would better match the emphasis recommended by the reviewers.
+
+**How to change it**
+Move EXPERIENCE above EDUCATION and keep the MBA entry in the education section.
+
+> Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023
+
+**Problem**
+[Important] The experience entries are not in newest-first order.
+
+**Why**
+The older Crestline role appears above the more recent Harbor Payments internship. A reader may therefore miss the more recent product experience while scanning the section.
+
+**How to change it**
+Move Harbor Payments above Crestline Logistics within EXPERIENCE.
+
+> Coastal Marine Services | Diesel Mechanic
+
+**Problem**
+[Important] The latest Coastal Marine Services role dominates the opening impression without explaining its place in the résumé’s direction.
+
+**Why**
+As the first experience entry, it can draw attention away from the product story, while the relationship between the mechanic role and that direction is not apparent. Shortening it or adding a brief, accurate link would address that emphasis.
+
+**How to change it**
+Shorten this entry to a line or two, or add [a brief, accurate phrase linking the role to the résumé’s direction].
+
+## Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present
+
+> Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.
+
+**Problem**
+1. [Polish] The under-five-day turnaround has no comparison to show whether it was faster or met a target.
+2. [Polish] The current-role duty uses past tense for work that may be ongoing.
+
+> Maintained hydraulic winch systems and logged service records for the harbor authority’s annual inspections.
+
+**Problem**
+1. [Polish] The bullet names the winch systems but does not say what maintenance you performed.
+2. [Polish] The service records are tied to inspections, but the inspection result is missing.
+3. [Polish] The current-role duties use past tense for work that may be ongoing.
+
+## Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023
+
+> Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.
+
+**Problem**
+1. [Polish] The 30% reduction has no baseline or comparison period.
+2. [Polish] The bullet uses a first-person pronoun and passive phrasing that obscures who carried out the rollout.
+
+> Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.
+
+**Problem**
+[Polish] The forecast-error reduction appears after the review and process details, so the result is easy to miss.
+
+> Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.
+
+**Problem**
+[Important] The strongest result is buried after several activities, and the listed activities do not explain the route-planning change behind it.
+
+**Why**
+The annual hours saved are the most scannable outcome, but they appear at the end of a long line. The reader also cannot tell which change to route planning produced the savings, so the supporting work does not fully explain the result.
+
+**How to change it**
+Move the 1,800-hour result to the opening and add [the specific route-planning change] that drove it. Cut or shorten activities that do not explain the result.
+
+## Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
+
+> Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.
+
+**Problem**
+[Important] The strongest checkout result does not lead the entry, and the rollout phrase shifts tense.
+
+**Why**
+The conversion improvement is likely to catch a scanning reader’s attention, but the line is not first. Then shipping also makes the rollout sound like a separate ongoing action rather than a completed step.
+
+**How to change it**
+Move this bullet to the top of the entry and change then shipping it to then shipped it, if the rollout was completed.
+
+> Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.
+
+**Problem**
+[Important] The RICE bullet describes the process but not the priority it produced, and it uses unexplained jargon.
+
+**Why**
+A reader can see that you evaluated features but cannot tell what the evaluation selected or changed. Readers unfamiliar with RICE may also have to pause to interpret the framework.
+
+**How to change it**
+Replace RICE with [a brief explanation of the prioritization framework] and add [the selected roadmap item] and, if available, [what the prioritization changed].
+
+> After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter’s roadmap priority.
+
+**Problem**
+[Important] The selected roadmap priority is vague and buried after a long list of activities.
+
+**Why**
+A reader sees substantial analysis but cannot tell what decision it produced or why that decision mattered. Leading with the selected initiative would make the outcome easier to find.
+
+**How to change it**
+Replace that phrase with [the selected priority] and, if available, [the resulting action or outcome]; move it to the beginning, then summarize the supporting work.
+
+> Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants’ customers.
+
+**Problem**
+1. [Error] Session randomization does not establish the reported lift as an effect on customers.
+2. The five-point lift does not specify its unit or the conversion comparison it refers to.
+
+**Why**
+1. The test directly supports a session-level estimate. Customers with repeat sessions may be counted more than once or experience different variants, so the claim as written goes beyond what the randomization establishes.
+2. Five-point could mean a percentage-point change or a relative percent change. Without naming the comparison, readers may also be unsure which result the figure describes.
+
+**How to change it**
+1. Report the lift as an effect on checkout sessions; claim a customer-level effect only if the experiment and analysis account for repeat sessions and estimate customer-level outcomes.
+2. If this is the same test as the 61%-to-66% result, replace the 5-point conversion lift with a 5-percentage-point increase in checkout conversion from 61% to 66%.
+
+> Lifted checkout conversion from 61% to 66%
+
+**Problem**
+[Important] The checkout A/B-test result is repeated in two bullets.
+
+**Why**
+Both bullets report the same test and five-point lift, so the repetition takes space without showing a distinct accomplishment. A reader may also be unsure whether these are separate tests or two descriptions of one result.
+
+**How to change it**
+Keep the result in one bullet and remove the duplicate account; if useful, fold the session-randomization detail into the retained bullet.
+
+## Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
+
+> Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.
+
+**Problem**
+[Polish] The launch result does not show what product or launch work you owned.
+
+> Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.
+
+**Problem**
+[Error] The change from 400 to 1,150 weekly active users is a 187.5% increase, not a 150% increase.
+
+**Why**
+The increase is 750 users over a baseline of 400, which equals 187.5%. The incorrect percentage conflicts with the stated user counts and can undermine confidence in the other figures.
+
+**How to change it**
+Replace a 150% increase with a 187.5% increase.
+
+> Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.
+
+**Problem**
+[Error] A rise in fill rate from 75% to 95% is 20 percentage points, not a 20% increase.
+
+**Why**
+The relative increase from 75% is about 26.7%, while the absolute change is 20 percentage points. Calling it 20% is ambiguous and could lead readers to interpret the result as a relative increase.
+
+**How to change it**
+Replace by 20% with by 20 percentage points, if accurate; alternatively, use by 26.7% for the relative increase.
+
+## MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
+
+> Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.
+
+**Problem**
+The savings estimate is attributed to a model without saying what analysis supported it.
+
+**Why**
+A reader can see the estimated annual savings but cannot assess what analysis underlies the model. Naming the analysis would make the basis of the estimate clearer.
+
+**How to change it**
+Add [the analysis supporting the savings estimate] after based on the model, if known.
+
+> Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.
+
+**Problem**
+[Polish] The intake bullet uses passive voice, obscuring who did the work, and does not quantify how much the form was shortened.
+
+> Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.
+
+**Problem**
+[Important] The pilot approval appears at the end of the bullet, while another bullet already reports that a scheduling pilot was funded or approved.
+
+**Why**
+The approval is the strongest outcome but may be missed by a scanning reader when it comes last. Reporting the same pilot decision in two bullets also uses space without establishing a separate result.
+
+**How to change it**
+Keep the pilot approval in one bullet, retaining the most informative detail, and move that approval to the beginning of the bullet.
+
+## Already working
+
+- s2:e1:b0: Connects scorecard work to a business use and a measurable delivery improvement.
+- s2:e2:b0: Connects a specific onboarding change to a quantified improvement in merchant payment timing.
+- s2:e2:b5: Connects a leadership presentation to a concrete funding and rollout decision.
+
+## Set aside (5)
+
+5 findings were left out as not worth acting on; they are in `/report --full`.
+
+
+> /report --full
+Wrote the full review to /Users/sean/Develop/ResumePilot/resume-review-08c7cdee.md.
+

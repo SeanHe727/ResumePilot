@@ -1,0 +1,112 @@
+{
+  "file": "tmp/bench/tests/b1-ce/out/C.md",
+  "recall": 9,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D5",
+    "D6",
+    "D7",
+    "D16",
+    "D18",
+    "D19"
+  ],
+  "coverage": false,
+  "suggestions": 33,
+  "words": 1284,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 16,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3458,
+    "completion_tokens": 13278,
+    "total_tokens": 16736,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12251
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3458
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "These bullets are weak: > Responsible for the monitoring dashboards... Avoid 'responsible for,' first-person language..."
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "Specify the metric and whether the improvement is relative or absolute"
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "It is unusually broad for an internship"
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "This says almost nothing"
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Avoid 'responsible for,' first-person language, 'worked on,' 'helping,' and 'I think.'"
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Put experience in reverse chronological order"
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D16",
+        "found": true,
+        "evidence": "These bullets are weak: > Was involved in the process of helping to support..."
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "A recruiter cannot tell what these systems do."
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Age and marital status are inappropriate on a U.S. resume"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 33,
+    "rewrites": [
+      "Jordan Lee  \nMetro City, USA | (555) 010-2468 | jordan.lee@example.com | GitHub: example.com/code/jordan-lee",
+      "Built and deployed a shared ML workflow for [training/evaluation/inference], adopted by X teams for [specific use case].",
+      "Built and maintained diagnostics dashboards tracking **[metrics]**, enabling the on-call team to identify **[failure mode]** and produce weekly reliability reports.",
+      "Reduced API **p95 latency from X ms to Y ms** by **[optimization]**; added **[number/type]** automated tests to prevent regressions.",
+      "Evaluated generated research reports for citation accuracy and faithfulness, identifying **[number]** failure patterns that informed pipeline fixes.",
+      "Migrated two agent-processing pipelines from **[old architecture]** to **[new architecture]**, preserving **[capability]** while reducing **[latency/cost/failure rate]** by X%.",
+      "Improved diagnostic **F1 from X to Y** by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+      "Designed a routing layer that restricted three specialist agents and an independent reviewer to authorized signal groups, preserving source-level traceability for every finding and reducing **[unsupported findings/review time]** by X%.",
+      "Applied GRPO with grouped tool-use rollouts and a composite reward, reducing unnecessary tool calls by X% and end-to-end latency by 5% without lowering diagnostic accuracy.",
+      "Added automated regression checks to the perception team’s model-release pipeline, reducing release cycles from two weeks to three days.",
+      "Maintained a context window below 10K tokens during a 100-turn stress test, despite 100× growth in raw conversation history, using budgeted context layers and staged compaction.",
+      "Contributed eight citation-quality and faithfulness metrics to an open-source research-agent framework; the metrics now run in its default release benchmark.",
+      "Identified three pipeline defects affecting stability, source attribution, and parameter handling using layered instrumentation; fixes were accepted upstream.",
+      "Evaluated generated research reports for citation accuracy and faithfulness, documenting **[number]** recurring failure modes.",
+      "**Languages:** Python, TypeScript, SQL, Bash  \n**ML/AI:** PyTorch, LoRA, GRPO, RAG, LangGraph, agent evaluation  \n**Tools:** Git, **[Docker, Linux, CI/CD platform, cloud services, databases—if genuinely used]**",
+      "**Jordan Lee**  \nMetro City, USA | (555) 010-2468 | jordan.lee@example.com | GitHub\n\n### EDUCATION\n**Western State University**, Metro City, USA  \nM.S. in Computer Engineering, Expected Jun 2026\n\n**Eastern Institute of Technology**, Metro City, Country  \nB.S. in Electrical Engineering, Jun 2022\n\n### EXPERIENCE\n**Mobility Systems Company**, Metro City, USA  \n**Machine Learning Engineering Intern** | Oct 2024 – May 2025\n\n- Built an ML-based diagnostics triage system that screened 800+ sensor signals per case, reducing the pending-case backlog by 68% in its first quarter.\n- Improved **[specific model metric]** by 35% by fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.\n- Designed a routing layer for three specialist agents and an independent reviewer, maintaining source-level traceability for every diagnostic finding.\n- Applied GRPO with grouped tool-use rollouts and a composite reward, reducing end-to-end latency by 5% versus the SFT baseline without lowering diagnostic accuracy.\n- Documented abstention criteria and escalation paths adopted as the on-call review team’s runbook."
+    ],
+    "falsePositives": []
+  }
+}

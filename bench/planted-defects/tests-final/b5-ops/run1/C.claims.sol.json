@@ -1,0 +1,240 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "Date of birth: 14 Nov 1995 | Nationality: Mexican",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-time inbound deliveries from 81% to 93%.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Redesigned the pick paths for the fast-moving zone, cutting walking distance per order by 28% and raising picks per labor hour from 92 to 110.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations, raising inventory record accuracy from 91% to 98.5% within a year.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Spearheaded a data-driven, optimization-first transformation of last-mile logistics that unlocked significant efficiency gains.",
+    "- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing problem with customer time windows.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- Mapped the donation intake process with the warehouse lead and removed two duplicate data-entry steps, so donations reached the shelves a day sooner.",
+    "- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again after its spring expansion.",
+    "SKILLS",
+    "Tools: Excel, Python, SAP",
+    "Methods: demand forcasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the LinkedIn URL works.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the contact details are the ones you intend to publish.",
+      "because": ""
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality for most U.S. applications.",
+      "because": "They generally do not help an employer assess your qualifications."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Put Experience before Education.",
+      "because": "You now have several years of relevant work."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify how stockouts were measured.",
+      "because": "The outcome should be easy to verify."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether the $1.9M is an inventory reduction.",
+      "because": "The outcome should be easy to verify."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Add the scope or comparison period behind the 15% saving.",
+      "because": "Otherwise the size of the saving is hard to judge."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Add an outcome if you have one.",
+      "because": "The bullet describes the method and coverage but not what improved."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Fix the verb tense at the start.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Fix the awkward line-break hyphenation in “on-time.”",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Do not imply the scorecards alone caused the delivery improvement if other changes contributed.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Correct or verify the 112% OEE figure.",
+      "because": "Conventional OEE tops out at 100%."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Make sure the before and after OEE figures use the same definition.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Recheck the lead-time, work-in-process and throughput figures and scope.",
+      "because": "At constant throughput, doubled work-in-process and halved lead time do not describe the same stable process."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain why increasing work-in-process was desirable if that is accurate.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Check that the walking-distance and productivity measures cover comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify your role in getting the triage station implemented, if you had one.",
+      "because": "The current line gives credit mainly to the findings."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Add the period or operating scope if space permits.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify whether inventory record accuracy applies to the counted locations or the full inventory.",
+      "because": "That distinction may matter."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Confirm that “Present” is accurate.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Remove the unsupported claim of “significant efficiency gains.”",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "The efficiency-gains claim duplicates the measurable route result below.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Correct the stated 40% reduction or the underlying mile figures.",
+      "because": "A drop from 120 to 90 miles is a 25% reduction."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Say whether the route-length result came from a model, a pilot, or both.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Add the pilot’s observed result if you have it.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Keep the pilot distinct from the modeled saving.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Remove the vague recommendations bullet unless it adds a distinct contribution.",
+      "because": "The two bullets that follow are concrete."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify how the one-day improvement was measured if you can.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Add an effect of the re-slotting only if you can substantiate one.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Specify relevant SAP modules or functions if you know them.",
+      "because": "“SAP” alone is broad."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Correct the typo in “forcasting.”",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Add relevant work since July 2025 if you have had any, or be ready to explain the gap.",
+      "because": "The most recent listed job ended in July 2025, leaving the chronology ambiguous."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1941,
+    "input_tokens_details": {
+      "cache_write_tokens": 1938,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1806,
+    "output_tokens_details": {
+      "reasoning_tokens": 753
+    },
+    "total_tokens": 3747
+  }
+}

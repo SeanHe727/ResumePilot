@@ -1,0 +1,296 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-9054 | riley.chen@example.com | example.com/in/rchen",
+    "EDUCATION",
+    "Harbor State University | B.B.A. in Finance | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Lakeside Golf Club | Caddie | Metro City, USA | Aug 2025 - Present",
+    "- Caddied about 5 rounds a week, carrying bags and reading greens for members.",
+    "- Helped the pro shop run the weekend junior tournament.",
+    "Stonebridge Manufacturing | Financial Analyst | Metro City, USA | Jan 2023 - Jun 2025",
+    "- Improved close efficiency by 40% by automating reconciliations and intercompany eliminations.",
+    "- Modeled the capital plan for 12 plant projects in a shared NPV template, so every request used the same discount rate and payback rules.",
+    "- Wrote the variance commentary for the monthly board pack, explaining each line more than 5% off budget.",
+    "- Valued the acquisition target by discounting its free cash flow to equity at the company's weighted average cost of capital.",
+    "- Reported a 45% group EBITDA margin by adding the EBITDA margins of the three business units.",
+    "- Built the rolling 18-month cash-flow forecast for a USD 600M manufacturer, keeping monthly forecast error under 4% and letting treasury pay down USD 40M of revolver debt early.",
+    "Crescent Bank | Credit Analyst | Metro City, USA | Jul 2020 - Dec 2022",
+    "- Underwrote 60 small-business loans worth USD 45M, and none of the approved loans defaulted in their first two years.",
+    "- Reviewed 3 years of declined applications; my findings changed two ratio thresholds and raised approvals from 41% to 48% with no rise in early defaults.",
+    "- Writes the covenant-monitoring checklist for the portfolio, cutting missed covenant tests from 7 to 1 a year.",
+    "- Built a spreading template for borrower financials that cut each credit memo from 6 hours to 3.",
+    "PROJECTS",
+    "Regional Utility Valuation | Independent Project | Excel | Nov 2024 - Present",
+    "- Valued a listed regional utility with a 10-year DCF and a comparable-company check, landing within 6% of the market price.",
+    "- Tested the valuation's sensitivity: a 1-point change in the discount rate moved the share value from USD 52 to USD 44.",
+    "- Shared the model and a two-page note with the university investment club, which used it in its spring pitch.",
+    "Student Investment Fund | Analyst, Team of 6 | Excel | Sep 2018 - May 2019",
+    "- Supported the FP&A team with financial reporting and analysis.",
+    "- Rebuilt the fund's performance report to show returns against its benchmark, which the committee used at every meeting.",
+    "- Built an 18-month cash forecast for a USD 600M business, holding error to about 4% and freeing USD 40M to repay debt early.",
+    "SKILLS",
+    "Tools: Excel, Bloomberg Terminal",
+    "Methods: financial modeling, DCF valuation, forecasting, credit analysis"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Finance experience should appear before education.",
+      "because": "After five years of post-degree work, leading with the degree makes the résumé feel student-oriented and may hide the most relevant experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Caddie role should not be the first experience signal.",
+      "because": "Its position gives a finance reader an unrelated first impression despite stronger finance roles elsewhere."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Caddie entry should be shortened and visually subordinated.",
+      "because": "Its duties offer little relevant finance evidence and take attention from the analyst and credit roles."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Projects should follow finance experience.",
+      "because": "That placement would better support the résumé's finance direction."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The older Student Investment Fund project should be shortened or removed.",
+      "because": "Keeping it prominent weakens the progression and adds material that appears disconnected."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The caddie bullet gives duties and activity volume but no evidence of effective service.",
+      "because": "The reader cannot see what value the work delivered to members or the club."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The tournament bullet does not identify the candidate's contribution or its outcome.",
+      "because": "“Helped the pro shop run” leaves the tasks unclear, and the event name gives no measure of scope or success."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The 40% close-efficiency result lacks a defined metric and prior-process baseline.",
+      "because": "A hiring manager cannot tell what improved by 40% or what supplied the comparison."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The bullet repeats “by” in a clumsy causal construction.",
+      "because": "The repetition makes the relationship between the result and the automation harder to scan."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The capital-plan bullet buries the standardization result behind conversational wording.",
+      "because": "“So every request used” describes the purpose instead of directly showing what changed."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The capital-plan bullet gives no quantified business or decision-making impact.",
+      "because": "The reader cannot tell whether the common template improved approvals, comparability, or capital allocation."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The variance-commentary bullet gives no outcome.",
+      "because": "It shows a recurring responsibility but not how the commentary improved decisions, accountability, forecasts, or board understanding."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The 5% budget threshold is difficult to parse.",
+      "because": "It is unclear what items were measured and how the threshold was applied."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "The valuation discounts free cash flow to equity at WACC.",
+      "because": "FCFE should generally use the cost of equity; WACC is appropriate for free cash flow to the firm."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The valuation bullet gives no valuation result or decision impact.",
+      "because": "Without a value or decision, the method overwhelms the accomplishment."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The group EBITDA margin is calculated by adding business-unit margins.",
+      "because": "Margins cannot be added to produce a group margin; the calculation needs total EBITDA divided by total revenue or a revenue-weighted average."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The EBITDA-margin bullet gives no resulting management impact.",
+      "because": "It does not show a planning, performance-review, or management decision enabled by the figure."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The rolling cash-flow forecast bullet should open the Stonebridge entry.",
+      "because": "Its scale, accuracy, and financial consequence make it the strongest opening evidence."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“Letting treasury pay down” is an informal, weak causal phrase.",
+      "because": "It weakens the connection between the forecast and the debt repayment."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The underwriting bullet does not state the analytical basis for the loans.",
+      "because": "The reader sees the volume and performance but not the judgment that produced them."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The no-default result needs a defined observation period or cohort.",
+      "because": "“None of the approved loans defaulted in their first two years” does not define the group observed."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The approval-rate result is buried.",
+      "because": "The reader must pass the review scope and threshold change before reaching the strongest result."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The bullet uses the first-person pronoun “my.”",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“No rise in early defaults” lacks a baseline or comparison period.",
+      "because": "That omission weakens confidence in the risk-control outcome."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "“Writes” uses the wrong tense for a role that ended in December 2022.",
+      "because": "It makes the responsibility read as though it is ongoing."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The reduction in missed covenant tests has no defined scope.",
+      "because": "The reader cannot tell whether 7 to 1 applies to the whole portfolio or an average period."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The bullet does not identify the monitoring-process change.",
+      "because": "It does not say whether the checklist added scheduling, escalation, documentation, or another control."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The spreading-template bullet does not say what the tool automated or standardized.",
+      "because": "The process or technical skill behind cutting memo time from six hours to three is unclear."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The 6% market-price comparison lacks a defined valuation output and price date.",
+      "because": "The reader cannot tell whether it compares an implied share price with a dated market price."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“A 1-point change” does not specify a percentage-point change or its direction.",
+      "because": "Those details distinguish the rate change from a relative percentage change and explain the move from USD 52 to USD 44."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The sensitivity bullet opens with a task rather than the quantified result.",
+      "because": "The reader has to wait for the more precise share-price impact."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Which used it” refers ambiguously to the model or the note.",
+      "because": "The reader cannot tell which material the club used."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The bullet does not explain how the materials affected the spring pitch.",
+      "because": "Adoption alone does not show the recommendation, presentation, investment conclusion, or decision enabled."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The FP&A bullet uses broad, assistance-oriented language.",
+      "because": "“Supported the FP&A team” suggests assistance, while “financial reporting and analysis” is too broad to show the work or relevant skill."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The FP&A bullet gives no concrete deliverable or result.",
+      "because": "The reader cannot tell what the candidate produced or why it mattered."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The performance-reporting bullet should lead the Student Investment Fund entry.",
+      "because": "It is the strongest project evidence, but its impact is buried in a trailing clause."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The report bullet does not say what the committee did differently because of it.",
+      "because": "Frequent use shows adoption but not an investment decision, portfolio action, or monitoring process."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The cash-forecast accuracy metric is undefined and imprecise.",
+      "because": "“About 4%” does not identify what the error measures or give a precise figure."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "The student-fund bullet duplicates the Stonebridge cash-forecast achievement.",
+      "because": "The two entries repeat the duration, company scale, forecast error, and debt repayment result despite separate dates and settings."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The forecast bullet does not show how the forecast was constructed.",
+      "because": "It gives the output without showing the forecasting method."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Bloomberg Terminal appears unsupported.",
+      "because": "No experience or project bullet connects it to market-data, research, or valuation work."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4792,
+    "input_tokens_details": {
+      "cache_write_tokens": 4789,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2223,
+    "output_tokens_details": {
+      "reasoning_tokens": 396
+    },
+    "total_tokens": 7015
+  }
+}

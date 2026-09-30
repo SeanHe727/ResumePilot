@@ -1,0 +1,102 @@
+{
+  "file": "tmp/bench/tests/b1-ce/out/A.md",
+  "recall": 10,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D5",
+    "D6",
+    "D7",
+    "D10",
+    "D16",
+    "D18",
+    "D19"
+  ],
+  "coverage": true,
+  "suggestions": 28,
+  "words": 1396,
+  "quotes": 12,
+  "grounded": 10,
+  "rewrites": 1,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Under 'Rework the Eastern Robotics entry', the review says: 'For the Falcon/NGX/KRT migration bullet, state what improved or was protected after cutover and define internal terms that an outside reader would not know.' That bullet is in the Agent Runtime Suite project, not Eastern Robotics."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3612,
+    "completion_tokens": 16105,
+    "total_tokens": 19717,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15497
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 3356
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "Replace the dashboard/on-call responsibility bullet with the specific dashboard or monitoring work performed and its operational result."
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "Define what “improved model performance by 35%” means: metric, baseline, evaluation set, and whether the figure is a relative improvement or percentage-point change."
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Narrow the claim that you “single-handedly built the company’s entire ML platform.” Identify the specific platform area you owned and provide an adoption or usage measure if one exists."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Replace the opening bullet’s broad phrases such as “cutting-edge AI synergies,” “next-generation agentic paradigms,” “drive innovation,” and “unlock value” with the actual runtime work performed and a verified outcome."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Remove first-person phrasing such as “I worked” and “I also wrote.”"
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Move Mobility Systems Company above Eastern Robotics Co. in the Experience section. The dates currently appear out of reverse chronological order."
+      },
+      {
+        "id": "D10",
+        "found": true,
+        "evidence": "The resume leaves June 2022–October 2023 unexplained. Add the relevant work, study, or other explanation if appropriate."
+      },
+      {
+        "id": "D16",
+        "found": true,
+        "evidence": "Replace or remove the bullet beginning with “Was involved in the process of helping to support…”. It does not identify a concrete contribution."
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "Define “NGX” and “KRT” for an external reader."
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Remove age, gender, and photo details from the résumé."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 28,
+    "rewrites": [
+      "adopted as the team runbook."
+    ],
+    "falsePositives": [
+      "Under 'Rework the Eastern Robotics entry', the review says: 'For the Falcon/NGX/KRT migration bullet, state what improved or was protected after cutover and define internal terms that an outside reader would not know.' That bullet is in the Agent Runtime Suite project, not Eastern Robotics."
+    ]
+  }
+}

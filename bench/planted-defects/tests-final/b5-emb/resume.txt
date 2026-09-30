@@ -1,0 +1,48 @@
+Morgan Kim
++1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim
+EDUCATION
+Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021
+EXPERIENCE
+Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present
+- Delivered morning wholesale orders to about 20 cafØs and collected signed invoices.
+- Loaded the van and checked each order against the dispatch list before leaving.
+Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Jul 2021 - Feb 2023
+- Made the sensor line’s UART link to the test PC more reliable by raising its baud rate from
+115200 to 921600.
+- Traced a batch of early field failures to a solder-paste change; my findings updated the
+reflow profile and cut returns from 2.1% to 0.4%.
+- Writes the calibration procedure for the sensor line, cutting calibration drift complaints
+from 15 to 2 a quarter.
+- Designed a test fixture that checked 8 boards at once while also ordering lab parts,
+maintaining the ESD program, training line operators and running the monthly safety walk,
+which raised station throughput from 40 to 150 boards an hour.
+Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025
+- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting
+control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.
+- Cut firmware update time over the air from 11 minutes to 4 by compressing images and
+resuming interrupted downloads.
+- Debounced the robot’s emergency-stop input with a single 10 kOhm pull-up resistor.
+- Profiling the interrupt load, moving sensor reads to DMA, splitting the control loop into
+fixed-priority tasks and pinning the scheduler tick, raised the controller’s spare CPU from
+8% to 35%.
+- Presented the firmware roadmap to the hardware and product teams each quarter, and two board
+revisions followed its recommendations.
+- Documented the bootloader and flashing process, so new engineers could flash a board on
+their first day.
+PROJECTS
+Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present
+- Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and
+runs 9 days without sun.
+- Cut average current from 4 mA to 1 mA, a 300% reduction, by sleeping between readings and
+batching radio transmissions.
+- Raised packet delivery by 15% over LoRa, from 80% to 95% of readings, by retrying failed
+transmissions.
+Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021
+- Designed the battery-monitoring board for the team’s electric car, which passed technical
+inspection on the first attempt.
+- Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller
+before each race.
+- Mentored 4 first-year members on soldering and board bring-up.
+SKILLS
+Tools: C, C++, STM32, oscilloscopes
+Methods: firmware, hardware-in-the-loop testing, CAN, low-power design

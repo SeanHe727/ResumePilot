@@ -1,0 +1,224 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present",
+    "- Delivered morning wholesale orders to about 20 cafés and collected signed invoices.",
+    "- Loaded the van and checked each order against the dispatch list before leaving.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Jul 2021 - Feb 2023",
+    "- Made the sensor line's UART link to the test PC more reliable by raising its baud rate from 115200 to 921600.",
+    "- Traced a batch of early field failures to a solder-paste change; my findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Writes the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once while also ordering lab parts, maintaining the ESD program, training line operators and running the monthly safety walk, which raised station throughput from 40 to 150 boards an hour.",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "- Cut firmware update time over the air from 11 minutes to 4 by compressing images and resuming interrupted downloads.",
+    "- Debounced the robot's emergency-stop input with a single 10 kOhm pull-up resistor.",
+    "- Profiling the interrupt load, moving sensor reads to DMA, splitting the control loop into fixed-priority tasks and pinning the scheduler tick, raised the controller's spare CPU from 8% to 35%.",
+    "- Presented the firmware roadmap to the hardware and product teams each quarter, and two board revisions followed its recommendations.",
+    "- Documented the bootloader and flashing process, so new engineers could flash a board on their first day.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and runs 9 days without sun.",
+    "- Cut average current from 4 mA to 1 mA, a 300% reduction, by sleeping between readings and batching radio transmissions.",
+    "- Raised packet delivery by 15% over LoRa, from 80% to 95% of readings, by retrying failed transmissions.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Designed the battery-monitoring board for the team's electric car, which passed technical inspection on the first attempt.",
+    "- Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller before each race.",
+    "- Mentored 4 first-year members on soldering and board bring-up.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not in reverse chronological order.",
+      "because": "Clearwater Sensors appears above the more recent Voltline Robotics role, obscuring the recency of the embedded-software experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the stronger work history.",
+      "because": "Leading with the degree delays the more relevant technical evidence."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The full Northside Bakery entry interrupts the technical career arc.",
+      "because": "Its length draws attention from the technical experience, and its relevance is not clear."
+    },
+    {
+      "line": 7,
+      "kind": "error",
+      "says": "“cafØs” contains a corrupted character.",
+      "because": "A reader may not recognize the intended word."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The delivery bullet gives the route’s scale but not its outcome.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The dispatch-check bullet explains the process but not its result.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The UART reliability claim is broad.",
+      "because": "A reader cannot tell what “more reliable” meant or whether the change made a meaningful difference."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The measurable baud-rate change is buried after the reliability claim.",
+      "because": "Bringing the change forward would make the result easier to assess."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The bullet uses a first-person possessive.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Writes” uses present tense for a role that has ended.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The fixture result is buried behind unrelated duties.",
+      "because": "A reader must work through separate responsibilities before reaching the throughput result, making it harder to see which work drove the improvement."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The fixture accomplishment is not the opening line of the entry.",
+      "because": "Its eight-board capacity and throughput increase are the clearest technical contribution and should be easy to find."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“Rewrote the motor-controller firmware” does not say what changed in the firmware.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "A pull-up resistor cannot by itself debounce the emergency-stop input.",
+      "because": "It establishes a defined input level but does not suppress mechanical contact bounce."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The emergency-stop bullet gives no result for the implementation.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Single” is redundant in the resistor description.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "The plural series of actions takes the singular verb “raised.”",
+      "because": "The review says the subject and verb do not agree, interrupting the reader’s understanding."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The spare-CPU result comes after a four-part methods list.",
+      "because": "The result is easy to miss."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The roadmap bullet does not say what the board revisions changed or achieved.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“Each quarter” is wordier than necessary for the stated cadence.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "“So new engineers could” expresses the onboarding outcome indirectly.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The project description does not say which weather variables the station measures.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The decrease from 4 mA to 1 mA is a 75% reduction, not 300%.",
+      "because": "The 3 mA drop is 75% of the original 4 mA."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The change from 80% to 95% is 15 percentage points, not a 15% relative increase.",
+      "because": "Relative to the original 80% rate, the increase is 18.75%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The packet-delivery rates omit how many readings were assessed.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The battery-monitoring-board bullet does not describe the technical contribution within the work.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The CAN-bus bullet describes testing activity but gives no result.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The mentoring bullet does not say what the mentees achieved.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Board bring-up” is specialist jargon.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3301,
+    "input_tokens_details": {
+      "cache_write_tokens": 3298,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1334,
+    "output_tokens_details": {
+      "reasoning_tokens": 296
+    },
+    "total_tokens": 4635
+  }
+}

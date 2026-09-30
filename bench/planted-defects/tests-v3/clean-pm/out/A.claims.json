@@ -1,0 +1,177 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form from 5 pages to 2 without losing required fields.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "EDUCATION appears before EXPERIENCE even though five years of professional experience should lead the résumé.",
+      "because": "Opening with education makes the candidate's substantial operating background less visible and gives the MBA more prominence than the experience that supports the product pivot."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The experience sections interrupt the product story by placing the earlier operations role between product-focused work.",
+      "because": "Separating those stories makes the transition harder to follow and weakens the narrative of the target role."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The dispute self-service bullet shows requirements ownership and delivery speed but does not state what changed after launch.",
+      "because": "A hiring reader can see execution and that the team shipped early, but cannot tell whether the feature solved a customer, support, or risk problem."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The bullet attributes the full improvement in late deliveries to the scorecards without evidence isolating their effects.",
+      "because": "A before-and-after change over two quarters does not establish that rebuilding scorecards caused late deliveries to fall, because other carrier or operational changes could explain the result."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "'Rebuilt weekly carrier scorecards' does not show what was rebuilt or what analytical capability it added.",
+      "because": "The business result is clear, but a hiring manager cannot tell whether the work involved new metrics, data modeling, reporting logic, or another operations-analysis skill."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "'Cut warehouse pick errors 30%' gives no baseline or endpoint for the reduction.",
+      "because": "A percentage reduction is easier to judge when the reader can see the error rate before and after the change."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The implementation detail 'retraining 45 pickers on the new layout' slightly overexplains the warehouse bullet after its result is established.",
+      "because": "The 30% reduction and two-site scope already show the achievement and scale. The extra training detail takes attention away from the operational change without adding a distinct outcome."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The bullet attributes the full improvement in forecast error to the consensus forecast without evidence isolating its effect.",
+      "because": "Demand, data quality, tools, or market conditions could have contributed, so the causal wording may invite scrutiny."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The bullet buries its forecast-error result under process duration, stakeholder scope, and method detail.",
+      "because": "The result appears only after 'quarterly,' 'across sales, finance and operations,' '12 consecutive quarters,' and 'introducing a consensus forecast.' That structure slows scanning and makes the measurable improvement less prominent."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "'12 consecutive quarters' is redundant beside 'quarterly.'",
+      "because": "Quarterly activity already communicates the cadence, so 'consecutive' adds little unless a gap is material."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "'Led the rollout of a route-planning tool' identifies implementation ownership but not the operational change enabled by the tool.",
+      "because": "The reader can see project ownership and training scope, but cannot tell whether the savings came from route optimization, dispatch redesign, consolidation, or another planning decision."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The launch bullet does not show how the candidate shaped, tested, or launched the product, and its 9-tonne result may over-attribute total redistribution and avoided disposal to the app.",
+      "because": "A reader can see the outcome but cannot tell what the Product Lead personally did beyond releasing an app. Recording total food picked up does not prove that every tonne was app-mediated or would otherwise have been discarded."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The relationship between the app, the students, and the dining halls is unclear in the launch bullet, and the avoided-waste wording is passive and wordy.",
+      "because": "'With two dining halls' can describe service, coordination, or partnership, so the scope of the launch is not immediately clear. 'That would have been thrown away' also spends words on an unverified counterfactual instead of stating the surplus-food result directly."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "'After 60 user interviews showed students missed pickup windows' is grammatically awkward, and 'over the following term' gives an imprecise time frame.",
+      "because": "Interviews identify a reported problem; they do not literally show missed windows. The vague period also makes the growth result harder to compare or evaluate."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The volunteer-system bullet does not clarify the dining halls’ relationship to the system, and it repeats the same weekly time unit.",
+      "because": "'With two dining halls' does not show whether the system served, coordinated, or was created in partnership with the halls. Using both 'each week' and 'a week' also adds repetition that makes the ending less concise."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The $2.4M saving is not anchored to a baseline, and the model used to produce it is not described.",
+      "because": "A reader cannot judge the scale or credibility of the estimate without knowing whether it is measured against current scheduling cost, labor hours, or another comparison."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line shows presentation and approval but not the analytical or consulting work that supported the recommendation.",
+      "because": "The reader can see the audience and decision reached, but not the substantive method used to reach it."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The key approval result is buried after the presentation method, and 'Final' adds no useful information.",
+      "because": "Readers scanning the bullet encounter the activity before the decision it produced, so the strongest outcome is less prominent. 'Final' does not distinguish the recommendation because a recommendation presented to decision-makers is already the concluding deliverable."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The two practicum bullets repeat the same client approval outcome.",
+      "because": "Both 'funded a pilot' and 'approved a 90-day scheduling pilot' tell the reader that the client authorized a pilot. Repeating that outcome uses one bullet without showing another aspect of the analysis or project impact."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The claim that the shortened form retained all required fields is unsupported by the stated process mapping.",
+      "because": "Mapping patient intake with front-desk staff can identify workflow redundancy, but it does not by itself validate clinical, compliance, payer, EHR, accessibility, or specialty-specific requirements."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The food-app line also treats all 9 tonnes as app-mediated avoided disposal without proving that counterfactual.",
+      "because": "Recording total food picked up does not prove that every tonne was app-mediated or would otherwise have been discarded, which weakens the credibility of the impact claim."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4377,
+    "completion_tokens": 1693,
+    "total_tokens": 6070,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

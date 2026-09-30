@@ -1,0 +1,150 @@
+{
+  "id": "ux",
+  "job": "UX research / product design",
+  "name": "Casey Morgan",
+  "contact": "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+  "personal": "Age: 28 | Marital status: Married | Hobbies: watching TV, sleeping in",
+  "education": [
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019"
+  ],
+  "graduated": "May 2019",
+  "exp": [
+    {
+      "head": "Pinegrove Financial | Senior UX Researcher | Metro City, USA",
+      "dates": "Mar 2022 - Jun 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch."
+        },
+        {
+          "slot": "D2",
+          "clean": "Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.",
+          "subtle": "Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch."
+        },
+        {
+          "slot": "D4",
+          "clean": "Built a research repository of 250 tagged session clips that product managers searched before writing new requirements."
+        },
+        {
+          "slot": "D3",
+          "clean": "Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle."
+        },
+        {
+          "slot": "D13",
+          "clean": "Trained 12 product managers to run their own unmoderated tests with a shared script template, which doubled the number of tests run each quarter."
+        }
+      ]
+    },
+    {
+      "head": "Northwind Health | UX Research Associate | Metro City, USA",
+      "dates": "Jul 2019 - Feb 2022",
+      "datesD10Subtle": "Apr 2020 - Feb 2022",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Ran the monthly patient survey and rebuilt its reporting dashboard, cutting the time from survey close to published findings from 3 weeks to 4 days.",
+          "subtle": "Owned the monthly patient survey and the reporting dashboard the care teams used."
+        },
+        {
+          "slot": "D6",
+          "clean": "Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+          "subtle": "Interviewed 40 patients about appointment reminders; my findings led to a two-way text reminder that cut missed appointments from 14% to 9%."
+        },
+        {
+          "slot": "D9",
+          "clean": "Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+          "subtle": "Writes the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days."
+        },
+        {
+          "slot": "D17",
+          "clean": "Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+          "subtle": "Tested the telehealth waiting-room screens with 16 older patients while also running the team's recruiting calendar, updating the style guide, onboarding two interns and taking notes for the accessibility working group, which cut support calls about joining a video visit by 30%."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Accessible Transit Map | Independent Project | Figma",
+      "dates": "Sep 2024 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+          "subtle": "Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes."
+        },
+        {
+          "slot": "D11",
+          "clean": "Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds and errors from 11 to 3 across the 12 sessions.",
+          "subtle": "Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors."
+        },
+        {
+          "slot": "D18",
+          "clean": "Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review."
+        }
+      ]
+    },
+    {
+      "head": "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma",
+      "dates": "Mar 2023 - Aug 2023",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months."
+        },
+        {
+          "slot": "D16",
+          "clean": "Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+          "subtle": "Ten clinic patients were recruited and two rounds of hallway testing were run, and the six issues that stopped first-time users were fixed."
+        },
+        {
+          "slot": "D12",
+          "clean": "Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+          "subtle": "Tested three onboarding prototypes with 24 new customers and shipped the design that lifted completed sign-ups by 41% in its first quarter."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "skillsD20Subtle": [
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing"
+  ],
+  "skillsD8Subtle": [
+    0,
+    "Tableau"
+  ],
+  "unevidencedSubtle": "Tableau",
+  "personalSubtle": "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+  "v2": {
+    "S1": "Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "S2": "Conducted user interviews and created wireframes for a free clinic's online booking flow.",
+    "T1": "Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "T2": "Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "T3": "Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "T4": "Raised the patient app's Net Promoter Score from 6.1 to 8.4, calculated as the average 0-10 recommendation rating across 2,000 monthly survey responses.",
+    "N1": {
+      "head": "Harborview Surf School | Surf Instructor | Metro City, USA",
+      "dates": "Aug 2025 - Present",
+      "bullets": [
+        "Taught weekend group lessons to beginners aged 8 to 60, keeping each class to one instructor for every six students.",
+        "Ran the rental desk's morning equipment checks and logged board and wetsuit repairs for the shop owner."
+      ]
+    },
+    "A2": "Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "desc": {
+      "T1": "The System Usability Scale runs from 0 to 100, so a score of 104 is impossible; the figure is misreported.",
+      "T2": "An open card sort shows how people group content; it cannot measure whether they find items in a given navigation, which needs a tree test or task-based test.",
+      "T3": "WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for body text; 3:1 is enough only for large text, so the design system does not meet AA.",
+      "T4": "Net Promoter Score is the percentage of promoters (9-10) minus the percentage of detractors (0-6), from -100 to 100; an average rating is not NPS."
+    }
+  }
+}

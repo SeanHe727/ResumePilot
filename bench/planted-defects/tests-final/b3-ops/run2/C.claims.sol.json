@@ -1,0 +1,185 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set safety stock for all 1,400 SKUs with the economic order quantity (EOQ) formula, balancing ordering and holding costs.",
+    "- Built the weekly supplier scorecard for 40 vendors, which buyers used to renegotiate delivery windows with the five least reliable.",
+    "- Led the monthly sales and operations planning meeting, reconciling the sales forecast with plant capacity for the finance and production teams.",
+    "- Trained 6 planners on the new forecasting workflow and wrote its exception-handling guide, which the team still uses for promotions.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | May 2019 - Jan 2021",
+    "- Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only SKUs that sold every week.",
+    "- Ran a time study of the returns desk; my findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Writes the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Checked the planned routes against 4 weeks of real delivery logs; planned drive times came within 5% of the actual ones.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- Mapped the donation intake process with the warehouse lead and removed two duplicate data-entry steps, so donations reached the shelves a day sooner.",
+    "- Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "SKILLS",
+    "Tools: Excel, Python, SAP",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Check that the profile link works and points to the professional profile you want employers to see.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Move Education below Experience.",
+      "because": "Your recent work is more relevant than a 2018 degree and should be seen first."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Confirm that the stockout and inventory changes cover the same period and scope as the demand-planning work.",
+      "because": "That makes the attribution credible."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Specify the freight-cost baseline or period and whether the 15% reduction covers all freight or only affected pickups.",
+      "because": "The percentage needs a clear denominator."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "EOQ does not calculate safety stock.",
+      "because": "EOQ determines order quantity, not safety stock."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify what changed after the five vendors’ delivery windows were renegotiated.",
+      "because": "The bullet stops at use of the scorecard rather than its effect."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Identify a concrete decision or outcome the sales and operations planning meeting enabled.",
+      "because": "“Led the meeting” alone undersells the work."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Include evidence of adoption or fewer exceptions if you have it.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Changing which SKUs count does not demonstrate better forecasting.",
+      "because": "Excluding intermittently selling SKUs changes the population being measured rather than showing forecasts improved."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify whether “3 days to 1” measures elapsed time or hands-on processing time.",
+      "because": "The distinction matters."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Change “Writes” to past tense.",
+      "because": "The role ended in 2021."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Confirm that the wait-time reduction is attributable to the scheduling rules.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Split or trim the cycle-counting bullet’s unrelated duties.",
+      "because": "They obscure the cycle-counting result and make it unclear which work raised record accuracy."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Confirm that modeled and current routes used the same stops and constraints.",
+      "because": "Otherwise the 18% savings figure may overstate the opportunity."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether the drive-time check compared the same trips or proposed routes with historical trips.",
+      "because": "Those comparisons support different conclusions."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Add the two-truck pilot’s outcome if you know it.",
+      "because": "Its result is stronger evidence than the fact it happened."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Remove the analysis-and-recommendations bullet or make it distinct from the next two.",
+      "because": "It is too general to add much on its own."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Confirm how the one-day improvement was measured.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Confirm whether removing the duplicate steps caused the one-day improvement.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The food-bank forecast result appears to duplicate the Crestway result.",
+      "because": "The product and warehouse counts and the stockout and inventory reductions closely mirror the Crestway bullet."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Specify your SAP level or relevant applications if that helps match target jobs.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Revisit inventory planning after correcting the EOQ bullet.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Confirm that the project’s “Present” date and the July 2025 role end date are current and accurate.",
+      "because": "The project shows ongoing work after the role ended."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1985,
+    "input_tokens_details": {
+      "cache_write_tokens": 1982,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1557,
+    "output_tokens_details": {
+      "reasoning_tokens": 689
+    },
+    "total_tokens": 3542
+  }
+}

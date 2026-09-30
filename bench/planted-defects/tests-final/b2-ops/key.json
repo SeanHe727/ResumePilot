@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the pick-path layouts for the fast-moving zone and the labor reports the shift leads used.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W4",
+    "category": "wording",
+    "line": "The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
+  },
+  {
+    "id": "A1",
+    "category": "data",
+    "line": "Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "defect": "A percentage with a named metric but no baseline or evaluation set, and no sign of whether it is relative or absolute."
+  },
+  {
+    "id": "A4",
+    "category": "data",
+    "line": "Built a seasonal forecast for 1,400 products across three warehouses that more than halved stockouts and cut inventory by nearly $2M.",
+    "defect": "The same achievement is claimed twice, in different words and figures, under two different entries."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Set up cycle counting for the 2,000 highest-value locations while also covering night-shift supervision, updating the safety training slides, coordinating holiday temp hiring and running the forklift certification schedule, which raised inventory record accuracy from 91% to 98.5%.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "defect": "OEE is availability times performance times quality, each at most 100%, so OEE cannot exceed 100%; 112% is impossible."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "defect": "By Little's law, work-in-process equals throughput times lead time: at constant throughput, halving lead time halves WIP, and doubling WIP doubles lead time."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  }
+]

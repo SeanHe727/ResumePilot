@@ -1,0 +1,224 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Harborview Surf School | Surf Instructor | Metro City, USA | Aug 2025 - Present",
+    "- Taught weekend group lessons to beginners aged 8 to 60, keeping each class to one instructor for every six students.",
+    "- Ran the rental desk's morning equipment checks and logged board and wetsuit repairs for the shop owner.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022",
+    "- Raised the patient app's Net Promoter Score from 6.1 to 8.4, calculated as the average 0-10 recommendation rating across 2,000 monthly survey responses.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Writes the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "- Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "- Ran 18 moderated usability sessions a quarter from a recruiting panel of 400 customers, so every major release was tested with real account holders before launch.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "- Trained 12 product managers to run their own unmoderated tests with a shared script template, which doubled the number of tests run each quarter.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+    "- Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds and errors from 11 to 3 across the 12 sessions.",
+    "- Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Conducted user interviews and created wireframes for a free clinic's online booking flow.",
+    "- Ten clinic patients were recruited and two rounds of hallway testing were run, and the six issues that stopped first-time users were fixed.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA)",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The experience entries are not in newest-first order.",
+      "because": "Northwind appears above the newer Pinegrove role, which may confuse a reader scanning the chronology."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Harborview takes two bullets and appears before the UX roles despite being unrelated to the UX research story.",
+      "because": "Its prominent placement and space can distract from the more relevant UX experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience and Projects.",
+      "because": "The work history now carries more weight than the degree, so readers reach the strongest evidence later."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The teaching and equipment-check duties give the unrelated Harborview role too much space.",
+      "because": "Neither duty connects to the UX research experience that anchors the résumé."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The line labels an average recommendation rating as Net Promoter Score.",
+      "because": "NPS is the percentage of promoters minus detractors, not the average rating."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The line gives the outcome but not the work that produced it.",
+      "because": "A reader cannot tell what UX research or product change contributed to the result."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The rating-calculation explanation is lengthy.",
+      "because": "It slows the result."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The strongest line in the Northwind entry does not appear first.",
+      "because": "Opening with its link between interviews, a change, and fewer missed appointments would bring the clearer outcome to readers sooner."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "“Writes” incorrectly presents work in a role that ended in February 2022 as ongoing.",
+      "because": "The present-tense claim conflicts with the role’s end date."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The 30% reduction in support calls has no stated baseline or comparison period.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The 40% dispute-form completion claim lacks before-and-after rates and a comparison.",
+      "because": "A reader cannot judge the size of the improvement or tell whether 40% means a relative increase or percentage points."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The repeated “by” makes the sentence awkward.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The explanation after the usability sessions is longer than needed.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The statement-support result is buried after a long list of sources and methods.",
+      "because": "A scanning reader reaches the 23% reduction only after several research inputs and methods."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The 23% reduction in repeat support calls has no stated baseline or comparison period.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "“Synthesizing” is inconsistent with completed work and leaves the sentence without a clear main verb.",
+      "because": "Its present-participle form makes the action harder to follow."
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "A System Usability Scale score of 104 is outside the valid range.",
+      "because": "Standard SUS scores range from 0 to 100."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "“Which doubled” can refer to the shared script template rather than the training.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The first project bullet gives the test setup but no observed outcome.",
+      "because": "The participant count shows the test’s scale, not whether the redesign helped riders."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The first project bullet repeats the participant count and task setup in the next bullet.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The results bullet describes the evaluation but not how the map was redesigned.",
+      "because": "It does not show the design skill or approach behind the results."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The results bullet repeats the timed-task setup and participant count from the previous bullet.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The change from 65% to 85% is 20 percentage points, not 20%.",
+      "because": "The relative increase from 65% is about 30.8%."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line names the work but not its effect.",
+      "because": "A reader cannot tell whether the redesign improved booking or otherwise helped the clinic."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Online” adds little to the description of a digital booking flow.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The line gives the number of issues fixed but no post-fix evidence.",
+      "because": "A reader cannot tell whether the fixes made booking easier or helped more first-time users complete it."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The six issues fixed appear after the recruitment and testing details.",
+      "because": "They are the clearest outcome."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The passive phrasing hides your role in recruiting, testing, and fixing the issues.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Which two later volunteer teams used” has an unclear antecedent.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3802,
+    "input_tokens_details": {
+      "cache_write_tokens": 3799,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1385,
+    "output_tokens_details": {
+      "reasoning_tokens": 225
+    },
+    "total_tokens": 5187
+  }
+}

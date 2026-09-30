@@ -1,0 +1,46 @@
+Jordan Rivera
++1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera
+EDUCATION
+Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021
+EXPERIENCE
+Northgate University Hospital | Research Assistant | Metro City, USA | Apr 2022 - Aug 2022
+- Randomized patients by assigning those admitted on odd-numbered days to the program and
+even-numbered days to usual care.
+- Interviewed 25 patients about missed clinic visits; the findings added text reminders that
+cut no-shows from 18% to 11%.
+- Wrote the study’s data dictionary for 180 variables, which the next two cohort studies
+reused.
+- Cleaned and merged lab data from two hospital systems while also scheduling participant
+visits, ordering study supplies, taking minutes at lab meetings and covering the front desk,
+which resolved 1,200 mismatched patient identifiers.
+Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025
+- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure
+patients, finishing enrollment 4 months early with 94% of follow-up visits completed.
+- Cut data-entry errors in the trial database from 6.1% to 1.8% of fields by adding range
+checks and double entry for the primary outcome.
+- Estimated median survival in each arm by averaging the follow-up time of patients who died,
+excluding censored patients.
+- Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-
+checking them against pharmacy records each week, cut unresolved safety queries from 45 to
+6.
+- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed
+without a protocol change.
+- Trained 9 site nurses on the consent process and outcome forms, and no consent deviations
+were found at the final audit.
+PROJECTS
+Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present
+- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into
+respiratory health outcomes.
+- Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting
+for age and insurance.
+- Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited
+residents.
+Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020
+- Designed a 30-question community health survey and collected 1,100 responses, giving the
+clinic its first estimate of uninsured residents by neighborhood.
+- The survey was translated into Spanish and piloted with 20 residents before launch.
+- Wrote the survey’s data codebook, which the clinic used for its follow-up survey the next
+year.
+SKILLS
+Tools: R, REDCap
+Methods: randomized trials, regression, mixed-effects models, survey design

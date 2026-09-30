@@ -52,7 +52,7 @@ describe('runInBatches', () => {
   it('keeps at most four reviews in flight', async () => {
     let inFlight = 0;
     let peak = 0;
-    const calls = Array.from({ length: 10 }, (_, i) => call('review_content', `c${i}`));
+    const calls = Array.from({ length: 10 }, (_, i) => call('review_wording', `w${i}`));
 
     await runInBatches(calls, async () => {
       inFlight += 1;
@@ -63,5 +63,29 @@ describe('runInBatches', () => {
     });
 
     expect(peak).toBe(4);
+  });
+
+  it('keeps at most two content reads in flight, and lets others use the rest', async () => {
+    const live = new Map<string, number>();
+    const peak = new Map<string, number>();
+    let total = 0;
+    let totalPeak = 0;
+    const calls = [
+      ...Array.from({ length: 4 }, (_, i) => call('review_content', `c${i}`)),
+      ...Array.from({ length: 4 }, (_, i) => call('review_wording', `w${i}`)),
+    ];
+
+    await runInBatches(calls, async (c) => {
+      live.set(c.name, (live.get(c.name) ?? 0) + 1);
+      peak.set(c.name, Math.max(peak.get(c.name) ?? 0, live.get(c.name)!));
+      totalPeak = Math.max(totalPeak, ++total);
+      await new Promise((r) => setTimeout(r, 5));
+      live.set(c.name, live.get(c.name)! - 1);
+      total -= 1;
+      return null;
+    });
+
+    expect(peak.get('review_content')).toBe(2);
+    expect(totalPeak).toBe(4);
   });
 });

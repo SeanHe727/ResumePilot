@@ -104,6 +104,33 @@ describe('one tool per specialist', () => {
     expect((wording as { data: { perBullet: unknown } }).data).toHaveProperty('perBullet');
   });
 
+  it('hands the coordinator the points and keeps the full reading on the session', async () => {
+    // Measured: one round of full readings came to about 31,000 characters in
+    // the coordinator's window.
+    const { ctx } = ctxWith();
+    const full = {
+      entryId: 'experience:0',
+      overallScore: 60,
+      bullets: [{
+        bulletId: 'experience:0:0', overallScore: 60,
+        dimensions: { impact: { score: 50, detail: 'long reasoning' } },
+        issues: [{ what: 'no baseline', costWords: 4 }], strengths: [],
+      }],
+    };
+    (ctx as unknown as { orchestrator: { diagnoseEntry: unknown } }).orchestrator.diagnoseEntry = async () =>
+      ({ entryId: 'experience:0', substance: full, wording: null, overallScore: 60, agentStats: [] }) as never;
+
+    const result = await reviewContentTool.execute({ entryId: 'experience:0' }, ctx);
+
+    expect(result.data).toEqual({
+      entryId: 'experience:0',
+      overallScore: 60,
+      bullets: [{ bulletId: 'experience:0:0', score: 60, issues: ['no baseline'] }],
+    });
+    const stored = (ctx.session!.state as { entryDiagnoses: Array<{ bullets: Array<{ dimensions: unknown }> }> }).entryDiagnoses;
+    expect(stored[0]!.bullets[0]!.dimensions).toBeDefined();
+  });
+
   it('carries the coordinator\'s aim down with the dispatch', async () => {
     // The specialist works without any of this — its own prompt is what makes
     // it able to do the job. This only says which way to point it.

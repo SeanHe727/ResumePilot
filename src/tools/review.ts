@@ -1,7 +1,8 @@
-import type { Briefing, EntryVerdict } from '../agent/types.js';
+import type { Briefing, EntryVerdict, WholeReview } from '../agent/types.js';
 import type {
   Bullet,
   EntryDiagnosis,
+  ResumeDocument,
   ResumeEntry,
   ResumeSessionState,
   WordingDiagnosis,
@@ -9,6 +10,8 @@ import type {
 import { analyzeFormat } from './analyze-format.js';
 import type { Tool, ToolContext, ToolResult } from './types.js';
 import { entryTextHash, fileReading } from './versions.js';
+import { singleAgentVariant } from '../config.js';
+import { readJson } from './verify.js';
 
 /**
  * One tool per specialist, and that is the dispatch mechanism.
@@ -208,6 +211,37 @@ const VERDICT_FOR: Record<
   },
 };
 
+/** What the coordinator needs of a reading: each line's score and problems. */
+function briefly(found: unknown): unknown {
+  const reading = found as {
+    entryId?: string;
+    overallScore?: number;
+    bullets?: Array<{ bulletId: string; overallScore?: number; issues?: Array<{ what: string } | string>; strengths?: string[] }>;
+    perBullet?: Array<{ bulletId: string; issues?: string[] }>;
+  };
+  const what = (i: { what: string } | string) => (typeof i === 'string' ? i : i.what);
+  if (reading.bullets) {
+    return {
+      entryId: reading.entryId,
+      overallScore: reading.overallScore,
+      bullets: reading.bullets.map((b) => ({
+        bulletId: b.bulletId,
+        score: b.overallScore,
+        issues: (b.issues ?? []).map(what),
+        ...(b.strengths?.length ? { strengths: b.strengths } : {}),
+      })),
+    };
+  }
+  if (reading.perBullet) {
+    return {
+      entryId: reading.entryId,
+      overallScore: reading.overallScore,
+      perBullet: reading.perBullet.map((b) => ({ bulletId: b.bulletId, issues: b.issues ?? [] })),
+    };
+  }
+  return found;
+}
+
 function noResume(): ToolResult<never> {
   return {
     success: false,
@@ -326,7 +360,11 @@ function entryReview(name: string, role: EntryRole, description: string): Tool<E
         const stamped = { ...found, readHash: entryTextHash(target), readAt: new Date().toISOString() };
         remember(ctx, (state) => store(state, stamped as never));
 
-        return { success: true, data: found };
+        // The coordinator gets the points, not the scoring behind them: it relays
+        // and decides what to dispatch next. The full reading is on the session,
+        // where the report reads it. Measured: one round of full readings came
+        // to about 31,000 characters in the coordinator's window.
+        return { success: true, data: briefly(found) };
       } catch (err) {
         attempted(ctx, role, entryId, 'failed', err instanceof Error ? err.message : String(err));
         return {
@@ -426,5 +464,146 @@ export const reviewFormatTool: Tool<Record<string, never>, unknown> = {
     const diagnosis = analyzeFormat(resume);
     remember(ctx, (state) => { state.formatDiagnosis = diagnosis; });
     return { success: true, data: diagnosis };
+  },
+};
+
+/**
+ * The single-agent ablation's one review: every entry and the whole page, by
+ * one agent in one context.
+ *
+ * Offered to the coordinator only when `RESUMEPILOT_SINGLE_AGENT` is set, in
+ * place of `review_content`, `review_wording` and `review_narrative`. It files
+ * its readings where theirs go, so the report cannot tell which path ran.
+ */
+export const reviewResumeTool: Tool<WithBriefing, unknown> = {
+  name: 'review_resume',
+  description:
+    'Have one reviewer read the whole resume: every entry\'s content, claims and wording, the ' +
+    'career narrative, and whether the page agrees with itself. One call covers everything.',
+  parameters: { type: 'object', properties: { ...BRIEFING_PROPS }, additionalProperties: false },
+
+  async execute(input, ctx): Promise<ToolResult<unknown>> {
+    if (!ctx.orchestrator?.reviewWhole) return noOrchestrator();
+    const resume = resumeFrom(ctx);
+    if (!resume) return noResume();
+
+    try {
+      const review = await ctx.orchestrator.reviewWhole(
+        resume,
+        briefingFrom(
+          input,
+          // Every fact: this reader reads every entry.
+          ((ctx.session?.state as ResumeSessionState | undefined)?.suppliedFacts ?? []).map((f) => `"${f.fact}"`),
+          pageRoom(ctx),
+        ),
+        singleAgentVariant() === 'flat',
+      );
+      fileWholeReview(ctx, resume, review);
+
+      if (!review.stat.success) {
+        return {
+          success: false,
+          error: { code: 'service_error', message: `review failed: ${ctx.orchestrator.failures.get('single') ?? 'unknown'}` },
+        };
+      }
+      return { success: true, data: wholeSummary(review) };
+    } catch (err) {
+      attempted(ctx, 'single', 'resume', 'failed', err instanceof Error ? err.message : String(err));
+      return {
+        success: false,
+        error: { code: 'service_error', message: `review failed: ${err instanceof Error ? err.message : String(err)}` },
+      };
+    }
+  },
+};
+
+/** Where the specialists' readings go, filed from one combined answer. */
+function fileWholeReview(ctx: ToolContext, resume: ResumeDocument, review: WholeReview): void {
+  const failures = ctx.orchestrator?.failures;
+  const entries = resume.sections.flatMap((s) => s.entries);
+  const readAt = new Date().toISOString();
+
+  for (const verdict of review.verdicts) {
+    const entry = entries.find((e) => e.id === verdict.entryId);
+    if (!entry || entry.bullets.length === 0) continue;
+    for (const role of ['content', 'wording'] as const) {
+      const found = VERDICT_FOR[role].read(verdict);
+      if (!found) {
+        const reason = failures?.get(`${role}:${entry.id}`) ?? 'the reader returned nothing';
+        attempted(ctx, role, entry.id, 'failed', reason);
+        continue;
+      }
+      const stamped = { ...found, readHash: entryTextHash(entry), readAt };
+      remember(ctx, (state) => VERDICT_FOR[role].store(state, stamped as never));
+    }
+  }
+  if (review.narrative) {
+    remember(ctx, (state) => { state.narrative = review.narrative!; });
+  } else {
+    attempted(ctx, 'narrative', 'resume', 'failed', failures?.get('narrative') ?? 'the reader returned nothing');
+  }
+
+}
+
+/** What the coordinator reads back: each line's points, and the page's. */
+function wholeSummary(review: WholeReview): unknown {
+  return {
+    entries: review.verdicts
+      .filter((v) => v.substance || v.wording)
+      .map((v) => ({
+        ...(v.substance ? { content: briefly(v.substance) } : {}),
+        ...(v.wording ? { wording: briefly(v.wording) } : {}),
+      })),
+    ...(review.narrative ? { narrative: review.narrative } : {}),
+  };
+}
+
+/**
+ * The `one` ablation's hand-in: the coordinator did every reading itself and
+ * gives the combined answer here, as one JSON string. Split and filed exactly
+ * as `review_resume` files the single agent's, so the report reads the same.
+ */
+export const submitReviewTool: Tool<{ review: string }, unknown> = {
+  name: 'submit_review',
+  description:
+    'Hand in your whole review: every entry\'s content, claims and wording readings, the narrative ' +
+    'and the consistency check, as one JSON string in the shape your instructions give. Once.',
+  parameters: {
+    type: 'object',
+    properties: { review: { type: 'string', description: 'The whole review, as one JSON object serialised to a string' } },
+    required: ['review'],
+    additionalProperties: false,
+  },
+
+  async execute(input, ctx): Promise<ToolResult<unknown>> {
+    if (!ctx.orchestrator?.readWhole) return noOrchestrator();
+    const resume = resumeFrom(ctx);
+    if (!resume) return noResume();
+
+    const { value, error } = readJson(input?.review ?? '');
+    const whole = value && typeof value === 'object' ? (value as Record<string, unknown>) : null;
+    if (!whole) {
+      return {
+        success: false,
+        error: { code: 'input_error', message: `the review would not parse as a JSON object${error ? ` — ${error}` : ''}` },
+      };
+    }
+
+    const review = ctx.orchestrator.readWhole(resume, whole, {
+      name: 'Coordinator', success: true, turns: 0, compactions: 0, durationMs: 0, tokens: 0,
+    });
+    // A hand-in with no line read is not a review, and filed it would reach
+    // the report as a clean page.
+    const unread = review.verdicts
+      .filter((v) => !v.substance && (resume.sections.flatMap((x) => x.entries).find((e) => e.id === v.entryId)?.bullets.length ?? 0) > 0)
+      .map((v) => v.entryId);
+    if (unread.length > 0 && unread.length === review.verdicts.filter((v) => v.substance || unread.includes(v.entryId)).length) {
+      return {
+        success: false,
+        error: { code: 'input_error', message: `no line was read: every entry with lines needs its readings (${unread.join(', ')})` },
+      };
+    }
+    fileWholeReview(ctx, resume, review);
+    return { success: true, data: wholeSummary(review) };
   },
 };

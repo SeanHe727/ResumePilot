@@ -1,0 +1,128 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/D.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "T3",
+    "N2"
+  ],
+  "coverage": false,
+  "suggestions": 25,
+  "words": 1899,
+  "quotes": 0,
+  "grounded": 0,
+  "rewrites": 26,
+  "inventedNumbers": [
+    "33",
+    "4"
+  ],
+  "falsePositives": [
+    "If the internship occurred while you were enrolled in your M.S., make that clear through the dates."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4483,
+    "completion_tokens": 12544,
+    "total_tokens": 17027,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11250
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 4227
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "Owned is acceptable, but the impact is unclear. Add the monitoring technology or operational outcome"
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "This bullet is too generic... lacks a concrete result and sounds like résumé marketing language"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "12 percentage points, or 16.9% relative improvement... Avoid saying 'raised by 12%' because it is ambiguous and technically inaccurate"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "That is a 33% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "This contains too many accomplishments in one sentence. Split it:"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Using the test set for early stopping means it is no longer a valid held-out evaluation set."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Cross-entropy is generally a loss function, not something normally described as ranking findings by statistical significance."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Your dates currently place the 2024–2025 internship after the 2022–2024 full-time role. Use reverse chronological order:"
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 25,
+    "rewrites": [
+      "Trained the triage classifier with early stopping on a validation split and reported 91% accuracy on a separate held-out test set.",
+      "Reduced p95 tool-call latency from 900 ms to 600 ms—a 33% reduction—by caching tool results and reusing completed sub-agent answers.",
+      "Increased benchmark task-completion rate from 71% to 83%—a 12-percentage-point improvement—by retrying failed sub-agent calls with partial context.",
+      "Built reusable TypeScript runtime components for tool invocation, sub-agent coordination, retries, and result caching, enabling downstream teams to integrate multi-agent workflows.",
+      "Integrated by 4 downstream teams to standardize tool invocation, retries, and sub-agent coordination.",
+      "Built an ML-assisted diagnostics triage pipeline that analyzed 800+ sensor signals per case, reducing the pending-case backlog by 68% during the first quarter after launch.",
+      "Improved diagnostic accuracy from 71% to 79% on 1,200 held-out cases by fine-tuning a parameter-efficient domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+      "Designed a routing layer that scored and prioritized findings from three specialist agents before human review, reducing reviewer workload and surfacing the most relevant evidence first.",
+      "Designed a routing layer that used calibrated classifier probabilities to rank findings from three specialist agents before human review.",
+      "Applied grouped tool-use rollouts and GRPO with a frozen SFT reference, optimizing a composite reward for accuracy, citation validity, and tool-call efficiency; reduced end-to-end latency by 5%.",
+      "Authored abstention rules and escalation paths for on-call reviewers; the documentation was adopted as the team’s operating runbook.",
+      "Built and maintained monitoring dashboards for the diagnostics service across two major releases, supporting the on-call rotation and incident triage.",
+      "Reduced p95 API latency from 420 ms to 180 ms by caching requests and batching sensor reads; added load tests to prevent regression.",
+      "Maintained the perception team’s model-release CI pipeline and added automated regression checks, reducing release cycles from two weeks to three days.",
+      "Migrated 30 robot-fleet services from cron jobs to an event-driven queue, eliminating nightly backlogs that delayed morning dispatch.",
+      "Rewrote the shared logging library and onboarded two new hires while taking over the weekend on-call rotation.",
+      "Languages: Python, TypeScript, SQL, Bash\nML/AI: PyTorch, LoRA, GRPO, RAG, Multi-Agent Systems, Agent Evaluation\nFrameworks/Tools: LangGraph, Git, Kubernetes",
+      "Languages: Python, TypeScript, SQL, Bash\nML/AI: PyTorch, LoRA, GRPO, RAG, Multi-Agent Systems, Agent Evaluation\nBackend/Systems: Event-Driven Architecture, Caching, REST APIs, Load Testing\nInfrastructure: Kubernetes, CI/CD, Git",
+      "Designed a routing layer that scored and prioritized findings from three specialist agents before human review.",
+      "Trained the triage classifier with early stopping on a validation split and evaluated it on a separate held-out test set, achieving 91% accuracy.",
+      "Rewrote the shared logging library, onboarded two new hires, and took over the weekend on-call rotation.",
+      "Built reusable runtime components for tool invocation, sub-agent coordination, retries, and result caching.",
+      "Increased benchmark task-completion rate from 71% to 83%, a 12-percentage-point improvement, by retrying failed sub-agent calls with partial context.",
+      "Upstreamed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default release benchmark.",
+      "Demonstrated that the evaluator detected injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials.",
+      "Traced three structural defects in stability, sourcing, and parameter handling to their respective modules using layered instrumentation; all three were fixed upstream."
+    ],
+    "falsePositives": [
+      "If the internship occurred while you were enrolled in your M.S., make that clear through the dates."
+    ]
+  }
+}

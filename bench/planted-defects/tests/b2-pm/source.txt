@@ -1,0 +1,33 @@
+Riley Chen
++1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen
+EDUCATION
+Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025
+Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018
+EXPERIENCE
+Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present
+- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.
+- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.
+Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023
+- Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.
+- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.
+- Coordinated the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, cutting forecast error from 18% to 11%.
+- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.
+Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024
+- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.
+- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.
+- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.
+- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.
+- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.
+- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.
+PROJECTS
+Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present
+- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.
+- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.
+- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.
+MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024
+- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.
+- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.
+- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.
+SKILLS
+Product: roadmapping, A/B testing, user interviews, PRDs, SQL
+Tools: Jira, Figma, Amplitude, Excel

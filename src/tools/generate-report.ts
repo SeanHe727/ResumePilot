@@ -1,3 +1,4 @@
+import { reportStepQuery } from './one-agent-steps.js';
 import { IMPROVEMENT_PLAN_PROMPT } from '../prompts/index.js';
 import { randomUUID } from 'node:crypto';
 
@@ -129,7 +130,7 @@ export const generateReportTool: Tool<Record<string, never>, DiagnosisReport> = 
     // forty findings against a page budget and then writing them all up gives
     // the writing whatever attention the weighing left over.
     // The same objects the plan was chosen from.
-    const full = await writeFullReport(report, state, findings, ctx);
+    const full = await writeFullReport(report, state, findings, ctx, roomWords(input));
     if (full) report.full = full;
 
     // Left where `/report` and `/export` read it: the coordinator is not asked
@@ -257,8 +258,53 @@ function supplied(state: ResumeSessionState): string {
  * what the selection answers with.
  */
 function asLine(short: string, finding: SourceFinding): string {
-  const cost = finding.costWords === undefined ? '' : `, ~${finding.costWords} words`;
-  return `- ${short} [${finding.target}${cost}] ${finding.what}`;
+  const c = finding.costWords;
+  const cost = c === undefined || c === 0 ? '' : c > 0 ? `, adds ~${c} words` : `, saves ~${-c} words`;
+  const kind = finding.kind ? `, ${finding.kind}` : '';
+  // Without the why, a finding whose what only quotes the line reads as no
+  // problem at all. Measured: a certain error set aside for exactly that.
+  const why = finding.why ? ` (why: ${finding.why})` : '';
+  return `- ${short} [${finding.target}${kind}${cost}] ${finding.what}${why}`;
+}
+
+/**
+ * Words the page has left: what a one-page résumé holds, less what it has. A
+ * longer one has none, and anything added has to displace something.
+ */
+function roomWords(input: GenerateReportInput): number {
+  const length = input.format.metrics.length;
+  return length.pageCount <= 1 ? Math.max(0, 650 - length.wordCount) : 0;
+}
+
+/**
+ * What the chosen groups do to the page's length: words added, words taken off,
+ * and the net. Counted per line — a demand merged across three lines is
+ * answered on each of them — at the largest figure any finding gives that line.
+ */
+export function pageEffect(
+  parsed: Record<string, unknown> | null,
+  findings: readonly SourceFinding[],
+): { adds: number; saves: number; net: number } {
+  const byId = new Map(findings.map((f) => [f.id, f] as const));
+  let adds = 0;
+  let saves = 0;
+  for (const group of planFromMarks(parsed, findings).plan.groups ?? []) {
+    const perLine = new Map<string, { add: number; save: number }>();
+    for (const id of group.findingIds) {
+      const f = byId.get(id);
+      if (!f) continue;
+      const line = perLine.get(lineOf(f)) ?? { add: 0, save: 0 };
+      const c = f.costWords ?? 0;
+      if (c > 0) line.add = Math.max(line.add, c);
+      if (c < 0) line.save = Math.max(line.save, -c);
+      perLine.set(lineOf(f), line);
+    }
+    for (const { add, save } of perLine.values()) {
+      adds += add;
+      saves += save;
+    }
+  }
+  return { adds, saves, net: adds - saves };
 }
 
 /** The line a finding is about, without the reader's suffix. */
@@ -269,19 +315,22 @@ function lineOf(finding: SourceFinding): string {
 const KINDS = ['immediate', 'shortTerm', 'longTerm'] as const;
 
 /**
- * The selection's marks, checked and turned into a plan.
+ * The filter's decisions, checked and turned into a plan.
  *
- * The selection chooses; it does not say anything the readers did not. Its
- * answer is finding names in groups, and every word that reaches the writer or
- * the candidate is a reader's own. The one-line reasons it gives go to the
- * trace and nowhere else: a note written alongside a group was measured
- * reaching the report as advice — "so the review outcome leads the bullet",
- * about a line the wording reader had called outcome-first.
+ * The filter keeps or removes each finding and scores what it keeps; it does
+ * not group. Grouping moved to the writer, which sees each line with every
+ * finding on it: the filter grouped across lines, and code then had to split
+ * its groups again by line, which turned one duplicate into two or three
+ * points about the same bullet.
  *
- * Each finding is placed once — the first mark wins — and a name that was not
- * offered is dropped. A finding the selection did not mark at all is set aside,
- * because nothing is meant to disappear. The lines a group is about come from
- * its findings.
+ * Its answer is finding names, and every word that reaches the writer or the
+ * candidate is a reader's own. The one-line reasons go to the trace and
+ * nowhere else: a note written alongside a decision was measured reaching the
+ * report as advice.
+ *
+ * Each finding is decided once (the first decision wins) and a name that was
+ * not offered is dropped. A finding the filter did not decide is kept. Each
+ * kept finding is a group of one.
  */
 export function planFromMarks(
   parsed: Record<string, unknown> | null,
@@ -297,54 +346,74 @@ export function planFromMarks(
   const placed = new Set<string>();
   const unknown: string[] = [];
   const reasons: Array<{ findingIds: string[]; chosen: boolean; reason: string }> = [];
-  const take = (raw: unknown): SourceFinding[] =>
-    (Array.isArray(raw) ? raw : []).flatMap((name) => {
-      const finding = typeof name === 'string' ? alias.get(name.trim()) : undefined;
-      if (!finding) {
-        unknown.push(String(name));
-        return [];
-      }
-      if (placed.has(finding.id)) return [];
-      placed.add(finding.id);
-      return [finding];
+  const kept: PlanGroup[] = [];
+  const removed: SourceFinding[] = [];
+
+  for (const raw of Array.isArray(parsed?.decisions) ? parsed.decisions : []) {
+    const mark = raw as Record<string, unknown> | null;
+    const name = typeof mark?.finding === 'string' ? mark.finding.trim() : '';
+    const finding = alias.get(name);
+    if (!finding) {
+      unknown.push(String(mark?.finding));
+      continue;
+    }
+    if (placed.has(finding.id)) continue;
+    placed.add(finding.id);
+    const reason = typeof mark?.why === 'string' ? mark.why.trim() : '';
+    reasons.push({ findingIds: [finding.id], chosen: mark?.keep !== false, reason });
+    if (mark?.keep === false) {
+      removed.push(finding);
+      continue;
+    }
+    const error = finding.kind === 'wrong';
+    const scored = Number(mark?.score);
+    // Unscored, an error is taken as mattering a great deal and anything else
+    // as polish: the order then falls back to errors first.
+    const score = Number.isFinite(scored) ? Math.min(10, Math.max(1, Math.round(scored))) : error ? 8 : 3;
+    kept.push({
+      // Kept without a fix type is still kept: the type labels the point, it
+      // does not decide whether the candidate sees it.
+      kind: KINDS.find((k) => k === mark?.fix) ?? 'immediate',
+      findingIds: [finding.id],
+      targets: [lineOf(finding)],
+      score,
+      tag: error ? 'error' : score >= 5 ? 'important' : 'polish',
     });
-  const targetsOf = (group: SourceFinding[]): string[] => [...new Set(group.map(lineOf))];
-  const reasonOf = (mark: Record<string, unknown> | null, key: string): string =>
-    typeof mark?.[key] === 'string' ? (mark[key] as string).trim() : '';
-
-  const groups: PlanGroup[] = (Array.isArray(parsed?.chosen) ? parsed.chosen : []).flatMap((raw) => {
-    const mark = raw as Record<string, unknown> | null;
-    const kind = KINDS.find((k) => k === mark?.kind);
-    const members = take(mark?.findings);
-    if (!kind || members.length === 0) return [];
-    reasons.push({ findingIds: members.map((f) => f.id), chosen: true, reason: reasonOf(mark, 'why') });
-    return [{ kind, findingIds: members.map((f) => f.id), targets: targetsOf(members) }];
-  });
-
-  const setAsideGroups = (Array.isArray(parsed?.setAside) ? parsed.setAside : []).flatMap((raw) => {
-    const mark = raw as Record<string, unknown> | null;
-    const members = take(mark?.findings);
-    if (members.length === 0) return [];
-    reasons.push({ findingIds: members.map((f) => f.id), chosen: false, reason: reasonOf(mark, 'because') });
-    return [members];
-  });
+  }
+  // Undecided is kept, not set aside: the filter is meant to remove only what
+  // should not reach the candidate, and a finding it never looked at was not
+  // judged to be that.
   const unmarked = findings.filter((f) => !placed.has(f.id));
+  for (const finding of unmarked) {
+    const error = finding.kind === 'wrong';
+    kept.push({
+      kind: 'immediate',
+      findingIds: [finding.id],
+      targets: [lineOf(finding)],
+      score: error ? 8 : 3,
+      tag: error ? 'error' : 'polish',
+    });
+  }
+  // By score, highest first; the filter's own order breaks ties. Scored
+  // rather than listed in order: listed, errors came out in the order they
+  // sit on the page, a small one first and the worst fourth.
+  const groups = kept
+    .map((group, i) => ({ group, i }))
+    .sort((a, b) => (b.group.score ?? 0) - (a.group.score ?? 0) || a.i - b.i)
+    .map(({ group }) => group);
 
-  // In the reader's words: the finding first in the group, and a count of the
-  // rest, which the full report carries in full.
-  const say = (members: SourceFinding[]): string =>
-    `${targetsOf(members).join(', ')}: ${members[0]!.what}` +
-    (members.length > 1 ? ` (and ${members.length - 1} more like it)` : '');
   const byId = new Map(findings.map((f) => [f.id, f] as const));
-  const membersOf = (group: PlanGroup): SourceFinding[] => group.findingIds.map((id) => byId.get(id)!);
-  const setAside = [...setAsideGroups, ...unmarked.map((f) => [f])].map((members) => ({ what: say(members) }));
+  // In the reader's words, about the line it named.
+  const say = (finding: SourceFinding): string => `${lineOf(finding)}: ${finding.what}`;
+  const sayGroup = (group: PlanGroup): string => say(byId.get(group.findingIds[0]!)!);
+  const setAside = removed.map((finding) => ({ what: say(finding) }));
 
   return {
     plan: {
       groups,
-      immediate: groups.filter((g) => g.kind === 'immediate').map((g) => say(membersOf(g))),
-      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map((g) => say(membersOf(g))),
-      longTerm: groups.filter((g) => g.kind === 'longTerm').map((g) => say(membersOf(g))),
+      immediate: groups.filter((g) => g.kind === 'immediate').map(sayGroup),
+      shortTerm: groups.filter((g) => g.kind === 'shortTerm').map(sayGroup),
+      longTerm: groups.filter((g) => g.kind === 'longTerm').map(sayGroup),
       ...(setAside.length > 0 ? { setAside } : {}),
     },
     unknown,
@@ -373,10 +442,10 @@ async function buildImprovementPlan(
   const length = input.format.metrics.length;
   const room =
     length.pageCount <= 1
-      ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${Math.max(0, 650 - length.wordCount)} words of room.`
+      ? `The resume runs ${length.wordCount} words over ${length.pageCount} page(s), leaving roughly ${roomWords(input)} words of room.`
       : `The resume runs ${length.wordCount} words over ${length.pageCount} pages. It is already long, so anything added has to displace something.`;
 
-  const ask = () => ctx.queryEngine.query({
+  const ask = (followUp?: { previous: string; note: string }) => reportStepQuery(ctx, {
     task: 'generate_report',
     systemPrompt: IMPROVEMENT_PLAN_PROMPT,
     messages: [
@@ -386,15 +455,21 @@ async function buildImprovementPlan(
           .named.map(({ short, finding }) => asLine(short, finding))
           .join('\n')}
 
-Name findings only by the short names above. Return JSON of exactly this shape:
+Name findings only by the short names above. Decide every one of them, once. Return JSON of exactly this shape:
 
 {
-  "chosen": [
-    { "kind": "immediate | shortTerm | longTerm", "findings": ["c3", "w5"], "why": "one line on why these, for the developers only" }
-  ],
-  "setAside": [{ "findings": ["c7"], "because": "one line on why, for the developers only" }]
+  "decisions": [
+    { "finding": "c3", "keep": true, "score": 7, "fix": "immediate | shortTerm | longTerm", "why": "one line, for the developers only" },
+    { "finding": "c7", "keep": false, "why": "one line, for the developers only" }
+  ]
 }`,
       },
+      ...(followUp
+        ? [
+            { role: 'assistant' as const, content: followUp.previous },
+            { role: 'user' as const, content: followUp.note },
+          ]
+        : []),
     ],
     ...(ctx.abortSignal ? { abortSignal: ctx.abortSignal } : {}),
   });
@@ -410,7 +485,30 @@ Name findings only by the short names above. Return JSON of exactly this shape:
     response = await ask();
   }
 
-  const parsed = parseJsonObject(response.content ?? '');
+  let parsed = parseJsonObject(response.content ?? '');
+
+  // Every finding decided. Measured: the filter left a certain error unmarked,
+  // and an unmarked finding never reached the candidate. Asked once for the
+  // ones it missed; what it still misses is kept (see planFromMarks).
+  const missed = planFromMarks(parsed, findings).unmarked;
+  if (parsed && missed.length > 0) {
+    const shortOf = new Map(aliasFindings(findings).named.map(({ short, finding }) => [finding.id, short]));
+    const names = missed.map((id) => shortOf.get(id)!);
+    const again = await ask({
+      previous: response.content ?? '',
+      note: `You did not decide these: ${names.join(', ')}. Decide each of them, and only them, in the same JSON shape.`,
+    });
+    const more = parseJsonObject(again.content ?? '');
+    const decisions = (raw: Record<string, unknown> | null) => (Array.isArray(raw?.decisions) ? raw.decisions : []);
+    parsed = { decisions: [...decisions(parsed), ...decisions(more)] };
+  }
+
+  // Room is the selection's to weigh, not the code's to enforce: it is told how
+  // much the page has left and chooses by what each change is worth per word.
+  // What it chose is measured against the room and recorded, so a run that
+  // overspends the page is visible in the trace rather than silently cut.
+  const left = roomWords(input);
+  const effect = pageEffect(parsed, findings);
   const { plan, unknown, reasons, unmarked } = planFromMarks(parsed, findings);
 
   // Which findings this weighed. The plan model is shown the lines without
@@ -425,6 +523,8 @@ Name findings only by the short names above. Return JSON of exactly this shape:
       ...plan,
       // The selection's own reasons, kept here and nowhere downstream.
       reasons,
+      pageEffect: effect,
+      room: left,
       ...(unmarked.length > 0 ? { unmarked } : {}),
       ...(unknown.length > 0 ? { unknownNames: unknown } : {}),
     },
@@ -563,20 +663,38 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
   });
 
   return [
-    ...input.format.issues.map((what) => at('file', 'format', undefined, what)),
+    // Personal details a reader is not meant to weigh invite bias and cost
+    // nothing to remove: ranked with the errors. Measured: a date of birth and
+    // a nationality were set among the lower priorities.
+    ...input.format.issues.map((what) => ({
+      ...at('file', 'format', undefined, what),
+      ...(what.startsWith('personal details a reader is not meant to weigh') ? { kind: 'wrong' as const } : {}),
+    })),
 
     ...input.entries.flatMap((entry) =>
       entry.bullets.flatMap((bullet) =>
-        bullet.issues.map((issue) => at('content', bullet.bulletId, issue.costWords, issue.what)),
+        bullet.issues.map((issue) => ({
+          ...at('content', bullet.bulletId, issue.costWords, issue.what),
+          ...(issue.kind ? { kind: issue.kind } : {}),
+          ...(issue.why ? { why: issue.why } : {}),
+          ...(issue.fix ? { fix: issue.fix } : {}),
+        })),
       ),
     ),
 
-    // Wording findings carry no cost of their own: cutting filler or replacing
-    // a verb takes words away rather than adding them, which is why they often
-    // belong at the top of a page that has no room left.
+    // Wording findings usually take words off. Sized as a negative cost, so a
+    // cut reads as room it makes rather than as free: unsized, every cut on
+    // every line was chosen — measured, 25 of 36 points in one report.
     ...(input.wording ?? []).flatMap((diagnosis) =>
       diagnosis.perBullet.flatMap((bullet) =>
-        bullet.issues.map((what) => at('wording', `${bullet.bulletId}, wording`, undefined, what)),
+        bullet.issues.map((what, i) => {
+          const saves = bullet.issueSavings?.[i] ?? 0;
+          const kind = bullet.issueKinds?.[i];
+          return {
+            ...at('wording', `${bullet.bulletId}, wording`, saves > 0 ? -saves : undefined, what),
+            ...(kind ? { kind } : {}),
+          };
+        }),
       ),
     ),
 
@@ -586,6 +704,20 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
           ...input.narrative.orderingNotes.map((what) =>
             at('narrative', 'whole resume, order', undefined, what),
           ),
+          ...(input.narrative.unsupportedSkills ?? []).map((what) =>
+            at('narrative', 'skills', undefined, what),
+          ),
+          // A misspelling reads as carelessness, most of all in the skills the
+          // candidate claims: ranked with the errors.
+          ...(input.narrative.misspellings ?? []).map((what) => ({
+            ...at('narrative', 'skills', undefined, what),
+            kind: 'wrong' as const,
+          })),
+          // Two claims that cannot both hold are wrong, whichever of them is.
+          ...(input.narrative.conflicts ?? []).map((what) => ({
+            ...at('narrative', 'whole resume, consistency', undefined, what),
+            kind: 'wrong' as const,
+          })),
           ...(input.narrative.withinEntries ?? []).flatMap((entry) => [
             ...entry.redundantPairs.map((pair) =>
               at(
@@ -598,16 +730,19 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
             ...(entry.coherence.score < 70 && entry.coherence.detail
               ? [at('narrative', entry.entryId, undefined, entry.coherence.detail)]
               : []),
-            ...(entry.weakLead
-              ? [
-                  at(
-                    'narrative',
-                    entry.entryId,
-                    undefined,
-                    'the strongest line is not the opening one',
-                  ),
-                ]
-              : []),
+            // The career reader's order, where it would open the entry with a
+            // different line. It was parsed and never became a finding: measured,
+            // the reader put an entry's strongest line first in most runs and no
+            // report ever said so. Only the opening line: the rest of the order
+            // is a preference, the lead is what a scanning reader sees.
+            ...leadFinding(entry, input.resume).map((lead) =>
+              at(
+                'narrative',
+                lead.bulletId,
+                undefined,
+                `the strongest line is not the opening one: “${lead.text}” would land harder first`,
+              ),
+            ),
           ]),
         ]
       : []),
@@ -626,4 +761,20 @@ export function everyFinding(input: GenerateReportInput): SourceFinding[] {
         ]
       : []),
   ];
+}
+
+/**
+ * The line the career reader would open an entry with, when it is not the one
+ * that opens it now. Ids come back checked against the document, so an order
+ * naming a line the entry does not have says nothing.
+ */
+function leadFinding(
+  read: { entryId: string; suggestedOrder?: string[] },
+  resume: ResumeDocument,
+): Array<{ bulletId: string; text: string }> {
+  const suggested = read.suggestedOrder?.[0];
+  const entry = resume.sections.flatMap((s) => s.entries).find((e) => e.id === read.entryId);
+  if (!suggested || !entry || entry.bullets.length < 2 || entry.bullets[0]!.id === suggested) return [];
+  const bullet = entry.bullets.find((b) => b.id === suggested);
+  return bullet ? [{ bulletId: bullet.id, text: bullet.text }] : [];
 }

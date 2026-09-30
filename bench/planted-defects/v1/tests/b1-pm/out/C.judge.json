@@ -1,0 +1,126 @@
+{
+  "file": "tmp/bench/tests/b1-pm/out/C.md",
+  "recall": 10,
+  "found": [
+    "D4",
+    "D8",
+    "D9",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D17",
+    "D20"
+  ],
+  "coverage": false,
+  "suggestions": 30,
+  "words": 1159,
+  "quotes": 7,
+  "grounded": 4,
+  "rewrites": 27,
+  "inventedNumbers": [
+    "50"
+  ],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3403,
+    "completion_tokens": 13950,
+    "total_tokens": 17353,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12987
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3403
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "Remove the duplicate dispute-feature bullet"
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "only include Kubernetes and machine learning if you can discuss how you have used them. They are not supported elsewhere in the resume"
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Correct tense and spelling: Coordinates → Coordinated"
+      },
+      {
+        "id": "D11",
+        "found": true,
+        "evidence": "Going from 1,000 to 900 is a 10% decrease"
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "Remove the unrelated duplicate onboarding bullet"
+      },
+      {
+        "id": "D13",
+        "found": true,
+        "evidence": "Delete or correct the “team of 40/P&L” claim"
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "The end date precedes the start date"
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "Delete the vague first bullet"
+      },
+      {
+        "id": "D17",
+        "found": true,
+        "evidence": "The final bullet is much too long"
+      },
+      {
+        "id": "D20",
+        "found": true,
+        "evidence": "Correct tense and spelling: roadmaping → roadmapping, user interveiws → user interviews"
+      }
+    ],
+    "coverage": false,
+    "suggestions": 30,
+    "rewrites": [
+      "Coordinated a 40-person cross-functional working group across product and engineering…",
+      "Redesigned merchant onboarding around a single verification step, reducing median time to first payment from 9 days to 4 across 2,300 merchants in the pilot region.",
+      "Increased checkout conversion from 61% to 66% by testing a one-page flow against the existing three-step flow across 40,000 sessions; launched the winning experience to all merchants.",
+      "Defined requirements and success metrics for dispute self-service, aligning engineering, risk, and support to launch two weeks ahead of schedule.",
+      "Led weekly triage with engineering and support, resolving 140 onboarding tickets and reducing the open-ticket backlog by 50% during the internship.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials for senior leadership.",
+      "Led rollout of a route-planning tool across 3 depots, negotiating with the vendor, rewriting SOPs, and training operations teams; reduced driver hours by [X% or X hours per week].",
+      "Led rollout of a route-planning tool across 3 depots, including vendor coordination, SOP redesign, and user training.",
+      "Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, reducing late deliveries from 11% to 7% over two quarters.",
+      "Reduced warehouse picking errors by 30% across 2 sites by redesigning slotting rules with floor supervisors and retraining 45 pickers.",
+      "Coordinated quarterly S&OP reviews across sales, finance, and operations and prepared forecast materials for senior leadership.",
+      "Led rollout of a route-planning tool across 3 depots, including vendor coordination, SOP redesign, and user training; reduced driver hours by [verified result].",
+      "Launched a surplus-food pickup app serving 3,100 students and 2 dining halls, redistributing 9 metric tons of food during its first year.",
+      "Increased weekly active users from [correct starting number] to [correct ending number] through targeted reminders and a redesigned home screen.",
+      "Created a volunteer scheduling system that filled 95% of weekly pickup slots and eliminated the need for dining-hall staff to cover gaps.",
+      "Mapped patient-intake workflows across 4 clinics and redesigned the intake form from 5 pages to 2 while preserving all required fields.",
+      "Product: Roadmapping, A/B testing, user interviews, PRDs, SQL",
+      "Tools: Jira, Figma, Amplitude, Excel",
+      "Technical: Python, Kubernetes, machine learning",
+      "Product: Product discovery, roadmapping, A/B testing, user interviews, requirements definition",
+      "Analytics: SQL, Python, Amplitude, Excel",
+      "Design & Delivery: Figma, Jira",
+      "Technical: Kubernetes, machine learning — only if genuinely proficient",
+      "SQL for funnel and cohort analysis.",
+      "MBA Candidate, expected June 2025",
+      "Master of Business Administration, June 2025",
+      "Sep 2023 – Jun 2025"
+    ],
+    "falsePositives": []
+  }
+}

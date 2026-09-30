@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W5",
+    "category": "wording",
+    "line": "Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "defect": "Generic claims with no concrete action, subject or result."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S4",
+    "category": "structure",
+    "line": "Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "defect": "The entry's strongest, most quantified achievement is its last bullet instead of its first."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Raised the onboarding flow's System Usability Scale score from 68 to 104 across two rounds of moderated testing with 20 customers.",
+    "defect": "The System Usability Scale runs from 0 to 100, so a score of 104 is impossible; the figure is misreported."
+  },
+  {
+    "id": "T2",
+    "category": "technical",
+    "line": "Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "defect": "An open card sort shows how people group content; it cannot measure whether they find items in a given navigation, which needs a tree test or task-based test."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "May 2019 graduation to Apr 2020",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N5",
+    "category": "narrative",
+    "line": "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "defect": "Irrelevant personal information (date of birth, nationality)."
+  }
+]

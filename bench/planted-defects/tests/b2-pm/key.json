@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W1",
+    "category": "wording",
+    "line": "Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.",
+    "defect": "Duty framing ('Owned ...') naming what the candidate was in charge of, with no action taken and no outcome."
+  },
+  {
+    "id": "W4",
+    "category": "wording",
+    "line": "Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "defect": "Passive voice with no actor: the bullet does not say what the candidate did."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S3",
+    "category": "structure",
+    "line": "Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "defect": "An overlong bullet packing several unrelated activities into one line."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "defect": "Randomizing by session lets returning customers see both variants, so sessions are not independent and the lift cannot be read as a per-customer effect."
+  },
+  {
+    "id": "T3",
+    "category": "technical",
+    "line": "Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "defect": "In RICE, Reach is how many users a feature affects in a period; tickets closed is an impact measure, so the score double-counts or misplaces it."
+  },
+  {
+    "id": "N1",
+    "category": "narrative",
+    "line": "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "defect": "An entire entry from an unrelated field, which breaks the career narrative."
+  },
+  {
+    "id": "N2",
+    "category": "narrative",
+    "line": "EXPERIENCE section order",
+    "defect": "Experience is not in reverse-chronological order: the older role is listed above the newer one."
+  }
+]

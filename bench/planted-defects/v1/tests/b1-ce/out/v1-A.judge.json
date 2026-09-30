@@ -1,0 +1,98 @@
+{
+  "file": "tmp/bench/tests/b1-ce/out/A.md",
+  "recall": 8,
+  "found": [
+    "D2",
+    "D3",
+    "D5",
+    "D6",
+    "D10",
+    "D16",
+    "D18",
+    "D19"
+  ],
+  "coverage": true,
+  "suggestions": 36,
+  "words": 1780,
+  "quotes": 11,
+  "grounded": 10,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Correct the wording error “dead- letter handling” to “dead-letter handling.”"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4119,
+    "completion_tokens": 13032,
+    "total_tokens": 17151,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12541
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4119
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "For the 35% model improvement, state the metric, comparison baseline, and evaluation setup."
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Replace the claim of building the entire platform single-handedly with the specific components personally owned and the relevant team boundary."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Replace the opening bullet’s broad phrases such as “AI synergies,” “next-generation agentic paradigms,” and “unlock value” with the actual system, implementation, and user or system result."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Replace the API latency bullet’s first-person, hedged language with the specific optimization performed and a before/after latency result."
+      },
+      {
+        "id": "D7",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D10",
+        "found": true,
+        "evidence": "There is an unexplained gap between June 2022 and October 2023."
+      },
+      {
+        "id": "D16",
+        "found": true,
+        "evidence": "Replace the vague “was involved in helping to support” bullet with the specific evaluation work you owned, its criteria, and its result—or remove it if it duplicates the other bullets."
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "Clarify what NGX replaced, what the KRT migration involved, and the outcome of the cutover."
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Remove the age, marital status, and personal hobbies from the résumé."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 36,
+    "rewrites": [],
+    "falsePositives": [
+      "Correct the wording error “dead- letter handling” to “dead-letter handling.”"
+    ]
+  }
+}

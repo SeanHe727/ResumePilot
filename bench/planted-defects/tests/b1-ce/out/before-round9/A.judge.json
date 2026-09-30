@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N2"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 2229,
+  "quotes": 9,
+  "grounded": 4,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4966,
+    "completion_tokens": 9539,
+    "total_tokens": 14505,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 9196
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3174
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "The diagnostics-dashboard bullet describes ownership but gives no resulting change."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The Agent Runtime Suite opening bullet uses broad claims such as “accelerating delivery,” “improving outcomes,” and “AI-first engineering practices” without specifying what changed."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The task-completion increase is 12 percentage points, not 12% relative growth."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The latency reduction is 33.3%, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The 5% latency result is buried after a dense method list and does not identify the workflow or latency path measured."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The migration result is not quantified, and the long list of parallel work obscures which actions produced it."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Sampling exactly one scored trajectory per prompt does not provide the within-group comparison required by GRPO and therefore does not itself stabilize sparse-reward training."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Experience is not in newest-first order."
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

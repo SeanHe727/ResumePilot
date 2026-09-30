@@ -1,0 +1,92 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/D.md",
+  "recall": 6,
+  "found": [
+    "W6",
+    "A3",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 80,
+  "words": 3777,
+  "quotes": 6,
+  "grounded": 6,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 6706,
+    "completion_tokens": 14518,
+    "total_tokens": 21224,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14238
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 4914
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct the spelling of “econometrics.”"
+      },
+      {
+        "id": "A2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "That is a 0.05 reduction from a 0.20 baseline, which corresponds to a 25% reduction. The stated 33% figure does not follow from the numbers shown."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The current bullet hides it inside a long list of unrelated activities."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Daily Sharpe is generally annualized using the square root of the number of periods, not the number itself."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "A quantitative-research recruiter will see a current assistant-store-manager role above a highly relevant quant internship"
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "the experience section gives no evidence for some of these, especially Kafka and C++."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 80,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

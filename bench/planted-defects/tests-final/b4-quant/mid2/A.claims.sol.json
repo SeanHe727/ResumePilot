@@ -1,0 +1,163 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes date of birth and nationality, personal details left off by convention.",
+      "because": "They are not meant to be weighed when assessing qualifications and use space without strengthening the case."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "EXPERIENCE is not newest-first: the older Ridgeway role appears above the Northpeak internship.",
+      "because": "This makes the chronology harder to follow and delays the more relevant internship."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "EXPERIENCE should appear above EDUCATION.",
+      "because": "That would bring the most relevant recent work forward."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The opening bullet claims ownership without showing what changed or improved.",
+      "because": "Without a concrete pipeline or validation task, the technical work and its effect are hard to assess."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The variance-bound result and package work should open the Ridgeway entry instead of the operations-focused bullet.",
+      "because": "They establish a clearer research arc and provide stronger evidence of it."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“By a log factor” omits the exact logarithmic term and conditions for the comparison.",
+      "because": "Readers cannot assess the comparison’s scope or strength precisely."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The teaching rating lacks its source or response count.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The package download result is delayed by the cluster, reading-group, and grading duties.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Standard Diebold-Mariano tests do not generally provide valid inference for forecasts from estimated nested models.",
+      "because": "The usual reference distribution can be invalid, and no setup making the inference valid is specified."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "“The forecast gain” does not identify the metric or size of the improvement.",
+      "because": "Readers cannot judge the size of the gain the tests supported."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Multiplying a daily Sharpe ratio by 252 is not the standard way to annualize it.",
+      "because": "Under the usual iid-return approximation, it is multiplied by the square root of 252."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The line gives no annualized Sharpe value or comparison.",
+      "because": "Readers cannot tell what the calculation contributed to the desk’s understanding or decisions."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The reduction from 0.20 to 0.15 is 25%, not 33%.",
+      "because": "The reduction of 0.05 is 25% of the original error of 0.20."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Forecast error” does not identify the metric or the before-and-after setup.",
+      "because": "Readers cannot interpret the values’ scale or understand what changed."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The line does not identify which model received the features and asymmetric loss.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The change from 52% to 58% is 6 percentage points, not 6%.",
+      "because": "The relative increase is about 11.5%; six is the difference in percentage points."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The line does not identify the model, baseline, or setup represented by the two hit rates.",
+      "because": "Readers cannot tell what produced the starting rate or what it was compared against."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.02 gap does not identify the score metric or its scale.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled; it should be “econometrics.”",
+      "because": "The typo can distract readers and undermine confidence in the care taken with the résumé."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3290,
+    "input_tokens_details": {
+      "cache_write_tokens": 3287,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1131,
+    "output_tokens_details": {
+      "reasoning_tokens": 286
+    },
+    "total_tokens": 4421
+  }
+}

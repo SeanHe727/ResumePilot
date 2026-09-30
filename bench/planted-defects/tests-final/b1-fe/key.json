@@ -1,0 +1,62 @@
+[
+  {
+    "id": "W3",
+    "category": "wording",
+    "line": "Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "defect": "A present-tense verb in a role that has already ended."
+  },
+  {
+    "id": "W6",
+    "category": "wording",
+    "line": "Tools: TypeScript, React, Vue, Storybok",
+    "defect": "A spelling mistake in the skills section."
+  },
+  {
+    "id": "A2",
+    "category": "data",
+    "line": "Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved stops.",
+    "defect": "Percent and percentage points confused: the stated '%' change is a difference in percentage points, and the relative change is different."
+  },
+  {
+    "id": "A3",
+    "category": "data",
+    "line": "Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop list offline.",
+    "defect": "The numbers contradict each other: the stated percentage does not match the before and after values."
+  },
+  {
+    "id": "S1",
+    "category": "structure",
+    "line": "Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and deferring the analytics script, raised the checkout page's Lighthouse performance score from 52 to 91.",
+    "defect": "The result is buried at the end of a long method list instead of leading the bullet."
+  },
+  {
+    "id": "S2",
+    "category": "structure",
+    "line": "Worked on the frontend of the booking flow using React and TypeScript.",
+    "defect": "An activity with no result or impact at all."
+  },
+  {
+    "id": "T1",
+    "category": "technical",
+    "line": "Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "defect": "The hero image is usually the largest contentful paint element; lazy-loading it delays its load, so it cannot cut LCP."
+  },
+  {
+    "id": "T4",
+    "category": "technical",
+    "line": "Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.",
+    "defect": "Images are not part of the JavaScript bundle, so converting PNG to WebP cannot shrink it."
+  },
+  {
+    "id": "N3",
+    "category": "narrative",
+    "line": "Jun 2023 graduation to Apr 2024",
+    "defect": "An unexplained gap between graduating and the first role."
+  },
+  {
+    "id": "N4",
+    "category": "narrative",
+    "line": "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "defect": "A listed skill with no supporting evidence anywhere in the experience or projects. (Angular)"
+  }
+]

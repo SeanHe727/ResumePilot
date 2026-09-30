@@ -1,0 +1,231 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Built the lab's simulation pipeline on the shared cluster, cutting a 2,000-run Monte Carlo study from 3 days to 5 hours, with every run reproducible from its seed and configuration file.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Northpeak Capital should lead the experience section, while Sunrise Bakery should be reduced or moved to Additional Experience.",
+      "because": "The quantitative research internship is more relevant, and the bakery role’s prominence makes the page’s direction unclear."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Managing shifts and staff does not establish that this work kept the store within its weekly labour budget.",
+      "because": "Labour performance also depends on scheduled hours, wage rates, overtime, absences and staffing requirements."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The labour-budget result has no amount or variance to show its scale.",
+      "because": "A reader cannot judge whether it was routine compliance or a meaningful result."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The reduction in unsold bread is attributed to stock counts and supplier orders without a comparison period.",
+      "because": "Production volume, demand, promotions and the definition of unsold bread can also affect the result."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The line attributes the entire increase in the desk book’s Sharpe ratio to the new signal.",
+      "because": "The backtest does not isolate the signal’s contribution from portfolio construction, data handling, implementation, costs or the comparison portfolio."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The gross-return retention and slippage-reduction figures lack defined reference and calculation bases.",
+      "because": "The reader cannot tell what the 90% refers to or whether the figures use comparable samples, portfolios and metrics."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Saying Diebold-Mariano tests confirmed the gain omits the measured improvement and test result.",
+      "because": "The conclusion depends on the loss function, dependence treatment, statistic, p-value and treatment of testing 30 indices."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The feature-store bullet begins with a dangling modifier.",
+      "because": "The grammatical subject of “Joining” is unstated."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The bullet does not clearly say what was joined to what.",
+      "because": "The reader must reconstruct the work performed."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The long method sequence delays the reusable feature-store result.",
+      "because": "It makes the contribution harder to scan."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The daily Sharpe ratio is annualized with the wrong factor: 252 instead of the square root of 252.",
+      "because": "Multiplying by 252 materially inflates the reported Sharpe ratio."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“Before reporting it to the desk” is filler, and the bullet gives no reported Sharpe result or comparison.",
+      "because": "Reporting a calculation is not an accomplishment without a decision, outcome or evidence of quantitative impact."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The wiki-use claim does not establish that the next intern cohort used it in its first week.",
+      "because": "Documentation alone does not prove later access or use without records, onboarding materials or verified feedback."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The bullet does not show that the wiki improved onboarding.",
+      "because": "Even if the cohort used it, the reader cannot tell whether it shortened onboarding or merely provided background reading."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“Tightens the previous bound by a log factor” does not specify the bound or comparison being improved.",
+      "because": "A specialist cannot tell which quantity changed or how the old and new bounds compare."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The first-person pronoun “my” is unnecessary in a résumé bullet.",
+      "because": "It breaks the otherwise consistent style and adds no information."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The teaching rating lacks response context.",
+      "because": "Without knowing whether it came from a broad evaluation or a small response set, the figure is difficult to weigh."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The bullet attaches an unordered list of unrelated responsibilities to the package accomplishment.",
+      "because": "Those duties do not clearly belong to the release and make the research story lose focus."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The bullet does not show what changed because of the cluster, reading-group and grading duties.",
+      "because": "It lists those responsibilities without an outcome."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The ambiguous “which” can appear to refer to the courses rather than the package.",
+      "because": "It obscures what was downloaded 3,000 times."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "A drop in forecast error from 0.20 to 0.15 is a 25% reduction, not a 33% improvement.",
+      "because": "The reduction of 0.05 divided by the original 0.20 is 25%."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The line does not identify which forecast-error metric changed.",
+      "because": "The reader cannot interpret the result precisely."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The rise from 52% to 58% is six percentage points, not a 6% improvement.",
+      "because": "The relative increase is approximately 11.5%."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The before-and-after rates do not establish that the temporal convolutional model caused the change.",
+      "because": "A controlled comparison would be needed to support that attribution."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“With a temporal convolutional model” repeats the model without adding a distinct result.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The line does not establish that switching to time-grouped folds caused the gap to close.",
+      "because": "Attribution would require a controlled comparison using the same data, model, features and tuning."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The claim of reduced validation leakage is not demonstrated.",
+      "because": "Time grouping alone does not guarantee leakage-free validation."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The 0.02 gap has no specified score metric, unit or score direction.",
+      "because": "A reader cannot judge the figure without that context or the resulting gap."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Kafka is listed under Programming without an entry showing how it was used.",
+      "because": "An unsupported technology looks unsubstantiated and draws attention from demonstrated skills."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "“Econometircs” misspells “econometrics.”",
+      "because": "The visible error can make the résumé appear less carefully checked."
+    }
+  ],
+  "usage": {
+    "input_tokens": 4566,
+    "input_tokens_details": {
+      "cache_write_tokens": 4563,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1739,
+    "output_tokens_details": {
+      "reasoning_tokens": 331
+    },
+    "total_tokens": 6305
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "A": [
+    {
+      "test": "b1-ux",
+      "recall": 0.9285714285714286,
+      "precision": 1.0,
+      "f1": 0.962962962962963,
+      "errors": 4,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W1": "right",
+        "W5": "right",
+        "A1": "right",
+        "A4": "right",
+        "S3": "right",
+        "S4": "right",
+        "T2": "right",
+        "T3": "right",
+        "N3": "right",
+        "N4": "missed"
+      }
+    },
+    {
+      "test": "b1-ops",
+      "recall": 0.5714285714285714,
+      "precision": 1.0,
+      "f1": 0.7272727272727273,
+      "errors": 4,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W2": "right",
+        "W4": "right",
+        "A2": "mentioned",
+        "A3": "right",
+        "S1": "mentioned",
+        "S2": "right",
+        "T1": "right",
+        "T4": "mentioned",
+        "N1": "mentioned",
+        "N2": "right"
+      }
+    },
+    {
+      "test": "b2-ux",
+      "recall": 0.8571428571428571,
+      "precision": 1.0,
+      "f1": 0.923076923076923,
+      "errors": 7,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W3": "right",
+        "W6": "right",
+        "A2": "right",
+        "A3": "right",
+        "S1": "right",
+        "S4": "mentioned",
+        "T3": "right",
+        "T4": "right",
+        "N4": "mentioned",
+        "N5": "right"
+      }
+    },
+    {
+      "test": "b2-ops",
+      "recall": 0.7142857142857143,
+      "precision": 1.0,
+      "f1": 0.8333333333333333,
+      "errors": 3,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W1": "right",
+        "W4": "right",
+        "A1": "missed",
+        "A4": "right",
+        "S2": "mentioned",
+        "S3": "right",
+        "T1": "right",
+        "T2": "right",
+        "N1": "mentioned",
+        "N2": "right"
+      }
+    },
+    {
+      "test": "b3-ux",
+      "recall": 1.0,
+      "precision": 0.8571428571428571,
+      "f1": 0.923076923076923,
+      "errors": 7,
+      "falseAlarms": 1,
+      "verdicts": {
+        "W5": "right",
+        "W6": "right",
+        "A2": "right",
+        "A3": "right",
+        "S1": "right",
+        "S4": "right",
+        "T1": "right",
+        "T2": "right",
+        "N3": "right",
+        "N5": "right"
+      }
+    },
+    {
+      "test": "b3-ops",
+      "recall": 0.8571428571428571,
+      "precision": 1.0,
+      "f1": 0.923076923076923,
+      "errors": 3,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W2": "right",
+        "W3": "right",
+        "A1": "right",
+        "A4": "right",
+        "S2": "right",
+        "S3": "right",
+        "T3": "right",
+        "T4": "mentioned",
+        "N3": "right",
+        "N4": "right"
+      }
+    },
+    {
+      "test": "b4-ux",
+      "recall": 0.9285714285714286,
+      "precision": 1.0,
+      "f1": 0.962962962962963,
+      "errors": 5,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W3": "right",
+        "W4": "right",
+        "A1": "right",
+        "A2": "right",
+        "S1": "right",
+        "S2": "mentioned",
+        "T1": "right",
+        "T4": "right",
+        "N1": "right",
+        "N2": "right"
+      }
+    },
+    {
+      "test": "b4-ops",
+      "recall": 0.9285714285714286,
+      "precision": 1.0,
+      "f1": 0.962962962962963,
+      "errors": 7,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W5": "right",
+        "W6": "right",
+        "A3": "right",
+        "A4": "right",
+        "S3": "right",
+        "S4": "right",
+        "T2": "right",
+        "T3": "right",
+        "N4": "mentioned",
+        "N5": "right"
+      }
+    },
+    {
+      "test": "b5-ux",
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "errors": 6,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W1": "right",
+        "W2": "right",
+        "A1": "right",
+        "A3": "right",
+        "S1": "right",
+        "S2": "right",
+        "T1": "right",
+        "T2": "right",
+        "N2": "right",
+        "N5": "right"
+      }
+    },
+    {
+      "test": "b5-ops",
+      "recall": 0.7142857142857143,
+      "precision": 1.0,
+      "f1": 0.8333333333333333,
+      "errors": 5,
+      "falseAlarms": 0,
+      "verdicts": {
+        "W5": "right",
+        "W6": "right",
+        "A1": "missed",
+        "A3": "right",
+        "S1": "mentioned",
+        "S2": "right",
+        "T1": "right",
+        "T2": "right",
+        "N4": "mentioned",
+        "N5": "right"
+      }
+    }
+  ]
+}

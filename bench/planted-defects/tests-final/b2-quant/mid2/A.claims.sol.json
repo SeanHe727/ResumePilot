@@ -1,0 +1,243 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The order-book-imbalance Sharpe results appear to describe the same achievement under different entries and dates.",
+      "because": "Northpeak and Kaggle report overlapping gains and 18-month out-of-sample periods."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The most recent bakery role draws attention away from the quantitative research direction.",
+      "because": "Its position can attract attention before the more relevant quantitative work."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The labour-budget result has no figure showing how much or how consistently costs were controlled.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The unsold-bread reduction is buried after the methods instead of leading the line.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The 35% improvement does not identify its comparison.",
+      "because": "A reader cannot tell whether it is relative to the unsmoothed signal, another benchmark, or a different period."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The validation description gives no result or decision it supported.",
+      "because": "A reader can see how the signal was tested but cannot tell what the validation showed."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The closing explanation repeats the safeguards already named.",
+      "because": "It restates what the safeguards are intended to ensure and pushes the missing result further back."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The feature-store reuse result is delayed in a relative clause.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The live allocation’s scale is unclear.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The approval is buried in a trailing clause.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The best backtested Sharpe from 400 configurations is not a valid estimate of expected live Sharpe as written.",
+      "because": "Selecting the top result creates selection bias, and the line describes no correction or separate validation."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The selected Sharpe has no stated value or comparison.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The indirect ending makes the result difficult to scan.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The Sharpe improvement is buried after several signal and evaluation details.",
+      "because": "Readers encounter the central outcome only after the instrument, signal, horizon, and testing qualifiers."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Using the same random seed on every worker can produce duplicate or overlapping random-number sequences.",
+      "because": "Identically initialized workers may not produce independent Monte Carlo replicates."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Running the runs” is repetitive.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“My proof” uses a first-person possessive.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“My proof” redundantly restates the derivation.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The bound-tightening result does not open the bullet.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The past-tense “Beat” conflicts with the present-tense framing of an ongoing study.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The crisis-period significance claim is not supported by the stated Holm correction across the 30 index tests.",
+      "because": "Significance within crisis subperiods requires period-specific tests and a correction covering those tests; the wording also does not clarify whether each period was tested separately."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The main significance result follows the methods and correction.",
+      "because": "Readers reach the key outcome only after those details, making it easier to miss."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The past-tense “Tested” conflicts with the present-tense framing of an ongoing study.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The past-tense “Wrote” conflicts with the present-tense framing of an ongoing study.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“Which was presented” uses passive voice without naming the presenter.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The competition modeling work has no stated result.",
+      "because": "Without an outcome, the contribution is difficult to evaluate."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The 0.02 gap does not identify the score metric.",
+      "because": "A reader cannot tell what the number measures."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The line does not say whether 0.02 is the gap before or after the change.",
+      "because": "Without before-and-after context, a reader cannot tell how much closer the scores became."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The result follows the method and a relative clause instead of leading the line.",
+      "because": "Leading with it would make the result quicker to scan."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The 0.4 Sharpe increase does not name its comparison.",
+      "because": "A reader cannot tell whether it is relative to the book without the signal or another benchmark."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The method precedes the result.",
+      "because": "The signal and testing details make the result slower to find."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled.",
+      "because": "The spelling error is visible in a skills heading and can distract from the technical content."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3725,
+    "input_tokens_details": {
+      "cache_write_tokens": 3722,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1491,
+    "output_tokens_details": {
+      "reasoning_tokens": 273
+    },
+    "total_tokens": 5216
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 9,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 20,
+  "words": 2365,
+  "quotes": 9,
+  "grounded": 8,
+  "rewrites": 1,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5177,
+    "completion_tokens": 8881,
+    "total_tokens": 14058,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8385
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3385
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "describes responsibility and scope but not the operational improvement it produced"
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "The platform-ownership claim is too generic to show what you introduced or how it helped downstream teams."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The task-completion result should be expressed in percentage points rather than as a percentage increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The latency percentage is arithmetically incorrect."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "begin with an active subject and verb, such as 'Reduced end-to-end latency 5% by using grouped tool-use rollouts, a composite reward, and a GRPO loop with a frozen SFT reference.'"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The migration bullet stacks several unrelated actions together"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Standard GRPO compares multiple completions for the same prompt; with one rollout, the within-prompt relative advantage is zero or undefined"
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "The Experience entries are not in reverse chronological order."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "the resume’s entries do not explicitly demonstrate several listed skills, including SQL, Bash, Git, Python, PyTorch, LoRA, LangGraph, RAG, and Kubernetes."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 20,
+    "rewrites": [
+      "Reduced end-to-end latency 5% by using grouped tool-use rollouts, a composite reward, and a GRPO loop with a frozen SFT reference."
+    ],
+    "falsePositives": []
+  }
+}

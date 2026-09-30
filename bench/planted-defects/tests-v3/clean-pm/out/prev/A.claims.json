@@ -1,0 +1,189 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Rebuilt weekly carrier scorecards used by 6 regional managers to renegotiate contracts, cutting late deliveries from 11% to 7% in two quarters.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Mapped patient intake at 4 clinics with front-desk staff and cut the recommended intake form from 5 pages to 2 without losing required fields.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before experience even though the work history better establishes the candidate's career direction."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The consulting practicum repeats the same scheduling-pilot outcome in both the financial-model and presentation bullets."
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "The onboarding bullet attributes the reduction in median time to the redesign without establishing causation."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "The checkout test is presented as causing the conversion increase without stating that it was properly randomized and analyzed."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The phrase 'the three-step flow' repeats 'flow' without adding much distinction after 'one-page flow.'"
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The phrase 'success metrics' does not state what outcome the metrics recorded."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The chargeback-loss estimate does not identify whose losses were measured."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The result of the chargeback analysis is delayed until after the methods and is expressed indirectly."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The dollar amount is written less concisely than standard résumé currency format."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The bullet implies that weekly triage caused the open-ticket queue to fall by half."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The phrase 'the onboarding results' does not identify which result leadership used to justify the rollout."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The late-delivery reduction is attributed to the scorecard rebuild and related renegotiations without establishing causation."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The pick-error reduction is attributed to the bundled slotting and retraining intervention without establishing causation, and its 30% measure is undefined."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The forecast-error reduction does not define the error measure or establish that the two figures are comparable."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The forecast-review bullet repeats its quarterly cadence."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The abbreviation 'S&OP' is unexplained jargon for readers outside operations."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The annual saving of 1,800 driver hours does not state whether it was measured, projected, annualized, or how it was calculated."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The 1,800-hour result is buried after the rollout and training details."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The app-launch bullet identifies the release but not the product work performed as Product Lead."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The phrase 'with two dining halls' ambiguously modifies either the app's launch or the 3,100 students."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The phrase 'that would have been thrown away' adds a long passive clause instead of stating the recovered-food result directly."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The volunteer-shift bullet describes the system but not the specific product or operating work performed to create it."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The phrase 'with two dining halls' does not clarify whether the shift system served both halls or was created in partnership with them."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The bullet repeats the weekly cadence in both the pickup-slot and staff-cover results."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The claim that the two-page form retained all required fields is not supported by the stated mapping method."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The intake-mapping method is not specific enough to show how the process was analyzed."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The presentation bullet shows the communication step but not the analytical or decision-support work behind the recommendation."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The strongest result—the approved pilot—is buried after the presentation details."
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5145,
+    "completion_tokens": 16211,
+    "total_tokens": 21356,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14973
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5145
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Sunrise Bakery | Assistant Store Manager | Metro City, USA | Sep 2025 - Present",
+    "- Managed opening shifts and a team of 6 bakers and cashiers, keeping the store within its weekly labour budget.",
+    "- Ran daily stock counts and supplier orders, cutting unsold bread from 12% to 7% of production.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Improved risk-adjusted returns by 35% with a cost-aware position smoother on the desk's futures signal.",
+    "- Validated the signal on 6 years of tick data with purged walk-forward splits and an embargo period, so every backtest decision used only information available at the time.",
+    "- Wrote a feature store for 120 microstructure features with point-in-time joins, which the research team reused in two later signal projects.",
+    "- Presented the signal, its capacity estimate and failure cases to the portfolio managers, who approved a small live allocation for the next quarter.",
+    "- Selected the smoother's parameters from 400 backtested configurations and reported the best one's Sharpe as the expected live Sharpe.",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Cut a 2,000-run Monte Carlo study from 3 days to 5 hours by running the runs in parallel with the same random seed on every worker.",
+    "- Derived a variance bound for a sparse regression estimator; my proof tightens the previous bound by a log factor and is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation with shrinkage and factor models, downloaded 3,000 times in its first year.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Tested significance with Diebold-Mariano tests across the 30 indices; after a Holm correction the forecast gain held at the 5% level on 24 of them and in both crisis periods.",
+    "- Wrote up the method, robustness checks and results as a 12-page working paper, which was presented at the department's financial econometrics seminar.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Engineered features and trained gradient-boosting models for a market prediction competition.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Added 0.4 to the Sharpe ratio of a futures book with an order-book imbalance signal, tested over 18 months out of sample.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch, Kafka",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The finding of significance on 24 indices is delayed until after the test details.",
+      "because": "The result is easier to miss while scanning."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The approved live allocation is held until the end of the bullet.",
+      "because": "That obscures the outcome."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The 0.02 gap closure comes after the method details.",
+      "because": "The result is easier to miss while scanning."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The order-book imbalance result reads like the same achievement credited to the Kaggle project.",
+      "because": "Both bullets describe a futures-book signal and an 18-month out-of-sample Sharpe gain of 0.4."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The order-book imbalance result reads like the same achievement credited to Northpeak.",
+      "because": "Both bullets describe a futures-book signal and an 18-month out-of-sample Sharpe gain of 0.4."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The unrelated Sunrise Bakery entry leads the Experience section and takes as much space as research roles.",
+      "because": "A reader looking for quantitative research sees it before the relevant experience, weakening the first impression."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The 35% change lacks a named risk-adjusted metric and comparison point.",
+      "because": "A reader cannot tell what changed or assess the result."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Purged walk-forward splits and an embargo do not by themselves guarantee every decision used only information available at the time.",
+      "because": "They address leakage across split boundaries, not look-ahead elsewhere in the feature and decision pipeline."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Validated the signal” gives no finding from the validation.",
+      "because": "The data span and split design show how it was tested, not the result supporting the claim."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The best of 400 backtest Sharpes is reported as the expected live Sharpe.",
+      "because": "Selecting the maximum can inflate it with noise and does not establish expected live performance."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The bullet attributes the desk book’s Sharpe increase to the signal without a controlled comparison.",
+      "because": "An out-of-sample backtest after costs does not by itself isolate the signal’s contribution."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Using the same random seed on every worker does not establish independent Monte Carlo runs.",
+      "because": "Workers with the same generator and seed can repeat the same random stream."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The bullet uses the first-person phrase “my proof.”",
+      "because": "It reads like a sentence and draws attention to the writer instead of the result."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The Holm correction across indices does not establish corrected significance in both crisis periods.",
+      "because": "It controls only the hypotheses included in the correction family."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Both crisis periods” does not identify the periods.",
+      "because": "A reader cannot tell which market conditions the result represents."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Cut validation leakage” is stronger than the stated fold change establishes.",
+      "because": "Closing the score gap does not show leakage caused it or was reduced."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The 0.02 gap lacks a score metric and whether it is absolute or relative.",
+      "because": "A reader cannot interpret or compare the discrepancy without that context."
+    },
+    {
+      "line": 33,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled.",
+      "because": "The error can make the skills section look insufficiently checked."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Kafka is listed without an experience or project example of its use.",
+      "because": "A reader cannot judge the level or context of the skill."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3693,
+    "input_tokens_details": {
+      "cache_write_tokens": 3690,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1511,
+    "output_tokens_details": {
+      "reasoning_tokens": 650
+    },
+    "total_tokens": 5204
+  }
+}

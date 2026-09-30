@@ -1,0 +1,310 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country | Jun 2025 - Present",
+    "- Designed stamping dies for automotive brackets in SolidWorks, cutting the scrap rate from 6% to 4% on two press lines.",
+    "- Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier.",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality unless an application requires them.",
+      "because": "They usually do not help a U.S. resume and take space from qualifications."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code link lead directly to work worth reviewing.",
+      "because": "A specific, working portfolio or repository is more useful than a general profile."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Replace any placeholder institution name or location before applying.",
+      "because": ""
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Replace any placeholder institution name or location before applying.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify that the change from 6% to 4% is a two-percentage-point reduction.",
+      "because": "That makes the result easier to assess."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify how much of the scrap-rate change is attributable to the die design.",
+      "because": "That makes the result easier to assess."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify your authority to sign off first-article inspections.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Add the outcome of the tolerance analyses if possible.",
+      "because": "The bullet describes responsibility more than impact."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep the Lakeside Auto Parts entry concise for ML or software applications.",
+      "because": "Directly relevant work deserves more space."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Specify the metric and comparison behind the 35% improvement.",
+      "because": "“Accuracy” is too broad for a reader to judge the result."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify what “domain adapter” means here.",
+      "because": "The term is too broad for a reader to judge the result."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Explain what reviewer disagreement measures.",
+      "because": "The routing layer’s benefit needs a clearer basis."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Say whether the 14% and 6% figures came from the same evaluation set.",
+      "because": "The routing layer’s benefit needs a clearer basis."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Name the evaluation conditions behind “equal accuracy.”",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Check that both the latency and tool-call reductions are attributable to the GRPO change.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Use the GRPO terminology only if you can explain it readily in an interview.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify what counted as an accuracy regression or how the harness affected release decisions.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The assistant-only loss-masking claim repeats the first fine-tuning bullet.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Check the claim that assistant-only loss masking taught the model to reproduce tool outputs.",
+      "because": "That mechanism may not support the conclusion as stated."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify what the pending-case backlog covers.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Say whether the 68% reduction was measured against a stable baseline.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Specify what memory was measured for the fourfold reduction.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Verify what else changed besides the precision switch.",
+      "because": "Switching from FP32 to BF16 alone does not necessarily explain a fourfold reduction in total fine-tuning memory."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Say whether the 420 ms and 180 ms figures came from comparable load conditions.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Change the present-tense “adds” to past tense.",
+      "because": "The role ended in 2024."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify whether the checks caused shorter release cycles.",
+      "because": "The shorter cycles may have been a broader team result."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Quantify the dispatch or backlog improvement if reliable data is available.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Replace the “AI-first engineering practices” bullet with a specific contribution or remove it.",
+      "because": "It does not say what you built."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Substantiate how the claimed improvement was measured.",
+      "because": "The bullet does not say how delivery or downstream outcomes improved."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Define what stayed under 10K tokens.",
+      "because": "The stress-test result is otherwise hard to interpret."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain what the “100x” growth compares.",
+      "because": "The stress-test result is otherwise hard to interpret."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify whether the failures were eliminated in tests or observed to disappear in production.",
+      "because": "“Removing” does not distinguish between those outcomes."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Identify your own contribution to integrating the metrics.",
+      "because": "The work may have involved multiple contributors, particularly in an open-source project."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Specify what was ranked or correlated.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Say whether the 400+ trials were independent report-level cases.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "The backlog claim duplicates the Mobility Systems triage claim.",
+      "because": "Repeating it could make both entries less credible."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "The backlog claim appears unrelated to the evaluation framework.",
+      "because": "Its placement could make both entries less credible."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Match the skills list to the jobs you want, adding relevant tools shown in the bullets and omitting skills you cannot discuss confidently.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider listing SolidWorks for mechanical roles.",
+      "because": "It is demonstrated in the experience bullets."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Check that the overlapping dates and employment arrangements are accurate and easy to explain.",
+      "because": "The internship, master’s program, current engineering role, and projects overlap."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make the resume’s target role clearer.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use space recovered from removed bullets only for evidence that adds something new.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Standardize “penalises” with the resume’s U.S.-style spelling.",
+      "because": "The resume currently mixes spelling styles."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2362,
+    "input_tokens_details": {
+      "cache_write_tokens": 2359,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2400,
+    "output_tokens_details": {
+      "reasoning_tokens": 902
+    },
+    "total_tokens": 4762
+  }
+}

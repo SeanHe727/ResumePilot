@@ -1,0 +1,120 @@
+{
+  "file": "tmp/bench/out/D-1.md",
+  "recall": 8,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D9"
+  ],
+  "coverage": false,
+  "suggestions": 25,
+  "words": 2245,
+  "quotes": 14,
+  "grounded": 8,
+  "rewrites": 26,
+  "inventedNumbers": [
+    "95"
+  ],
+  "judgeUsage": {
+    "prompt_tokens": 5038,
+    "completion_tokens": 15142,
+    "total_tokens": 20180,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13731
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5038
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "Rewrite every bullet as an accomplishment. Remove phrases such as: “Responsible for…”"
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "Clarify metrics. “Improved model performance by 35%” needs a metric ... ideally include the baseline and evaluation set"
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "“Built the company’s entire ML platform used by every team” is too broad unless you can clearly describe the platform’s scope, users, and components."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "The two fine-tuning bullets at Mobility Systems Company overlap heavily."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "It is vague, cliché-heavy, and provides no evidence of technical contribution."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Do not use first person on a resume."
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Put experience in reverse chronological order."
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Use past tense because this role has ended"
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 25,
+    "rewrites": [
+      "Jordan Lee\nMetro City, USA | +1 (555) 010-2468 | jordan.lee@example.com\nLinkedIn: linkedin.com/in/jordanlee | GitHub: github.com/jordanlee\nPortfolio: example.com/code/jordan-lee",
+      "Built an industrial-diagnostics workflow that automated triage across 800+ sensor signals per case using ML-extracted feature schemas, evidence-grounded review, and low-confidence abstention, reducing the pending-case backlog by 68% after launch.",
+      "Designed a role-aware multi-agent routing layer for 3 specialist agents and 1 independent reviewer, restricting each component to in-scope signals and preserving traceability to source data.",
+      "isolating agent context and hypotheses while preserving traceability to source data.",
+      "Fine-tuned a domain-specialist adapter on validated tool-use trajectories with assistant-only loss masking, improving claim correctness by 7%, citation quality by 9%, and tool-use accuracy by 8% over the base model on held-out diagnostic cases.",
+      "Built reusable ML platform components for model evaluation, tool integration, experiment workflows, and deployment, supporting [X] engineering teams.",
+      "Developed and maintained shared ML infrastructure used by [X] teams for model evaluation, agent orchestration, and deployment.",
+      "Built and maintained monitoring dashboards for the diagnostics service, improving visibility into [latency, failures, throughput, or model health].",
+      "Built monitoring dashboards for the diagnostics service using Grafana and Prometheus, improving visibility into API latency, error rates, and service health.",
+      "Optimized diagnostics API performance and expanded automated test coverage using [specific tools], reducing p95 latency by [X]% and improving regression detection.",
+      "Optimized diagnostics API request handling and added unit and integration tests covering [X] endpoints and failure modes.",
+      "Built and maintained CI/CD workflows for the perception team’s model releases, automating [testing, packaging, validation, or deployment] with [GitHub Actions/Jenkins/etc.].",
+      "Improved [specific model metric] by 35% through [method], evaluated on [dataset or test set].",
+      "Improved perception-model F1 score by 35% through data preprocessing and error analysis on a held-out validation set.",
+      "Agent Runtime Suite | TypeScript, SQLite, FTS5, Vector Search | GitHub Link | Aug 2025–Present",
+      "Improved planted-defect localization from 82% to 94% by replacing fixed-perspective analysis with an agent-as-tool architecture that dynamically dispatched tasks to role-specialized sub-agents with isolated prompts, tools, and context.",
+      "Hardened fan-out/fan-in execution against nested-pool deadlocks, incomplete stream reuse, and tool-result loss by separating concurrency pools, isolating branch failures, and gating cache writes on stream completion.",
+      "Kept model-bound context below 10K tokens throughout a 100-turn stress test while raw conversation history grew 100×, using independently budgeted context layers, staged compaction, SQLite checkpoints, and hybrid FTS5/vector retrieval for recoverable state.",
+      "Validated evaluator fidelity across 400+ report-level trials, achieving a Kendall rank correlation of 0.89 and an 8.5-percentage-point mean absolute deviation between injected and measured degradation.",
+      "...by systematically removing citations, sources, sections, and factual claims in 10-percentage-point increments.",
+      "Identified 3 structural defects in a multi-agent research pipeline across stability, sourcing, and parameter handling by combining layered instrumentation with systematic error attribution; mapped each failure to the responsible module to guide targeted fixes.",
+      "Identified and localized 3 structural defects in a multi-agent research pipeline involving stability, sourcing, and parameter handling through layered instrumentation and systematic error attribution.",
+      "Languages: Python, TypeScript, SQL, Bash, Rust\nML/AI: PyTorch, LLM fine-tuning, RAG, agent evaluation, multi-agent systems\nFrameworks: LangGraph, FastAPI\nData/Storage: SQLite, FTS5, vector search\nInfrastructure: Docker, Kubernetes, Apache Spark\nTools: Git, MCP",
+      "Languages: Python, TypeScript, SQL, Bash, Rust\nFrameworks: FastAPI, LangGraph, PyTorch\nAI/ML: LLM fine-tuning, RAG, multi-agent systems, tool use, agent evaluation\nData: SQLite, FTS5, vector search, Apache Spark\nInfrastructure/Tools: Docker, Kubernetes, Git, MCP",
+      "Western State University — M.S. Computer Engineering\nMetro City, USA | Expected Jun 2026\n\nEastern Institute of Technology — B.S. Electrical Engineering\nMetro City, Country | Jun 2022",
+      "Relevant Coursework: Machine Learning, Distributed Systems, Computer Architecture"
+    ]
+  }
+}

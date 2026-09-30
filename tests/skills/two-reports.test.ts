@@ -68,13 +68,33 @@ describe('the brief and the full review', () => {
     }
   });
 
-  it('keeps the reasoning and the quotes out of the brief', async () => {
-    // The brief is read through; the full one is looked things up in.
+  it('gives each point in the brief the words it is about and its reason', async () => {
+    // Measured: a brief of instructions alone scored lowest on explanation
+    // with two blind judges.
     const brief = renderBrief(REPORT, 'cv.pdf');
     const point = REPORT.full!.sections[0]!.points[0]!;
 
-    expect(brief).not.toContain(point.why);
-    expect(brief).not.toContain(point.evidence!);
+    expect(brief).toContain(point.why);
+    expect(brief).toContain(`> ${point.evidence!}`);
+  });
+
+  it('quotes the whole line a point is about, and says what doing it right looks like', async () => {
+    const point = { ...REPORT.full!.sections[0]!.points[0]!, lines: ['e1:b1'], fix: 'lead with the result' };
+    const report = {
+      ...REPORT,
+      perEntry: [{ entryId: 'e1', label: 'x', status: 'reviewed' as const, topIssue: '', bullets: [{ bulletId: 'e1:b1', text: 'The whole original line', topIssue: '' }] }],
+      full: { ...REPORT.full!, sections: [{ ...REPORT.full!.sections[0]!, points: [point] }] },
+    };
+    const brief = renderBrief(report, 'cv.pdf');
+
+    expect(brief).toContain('> The whole original line');
+    expect(brief).toContain('**How to change it**\nlead with the result');
+  });
+
+  it('keeps the word cost out of the brief and in the full one', async () => {
+    // Measured: blind judges read the cost in the brief as leftover notes.
+    expect(renderBrief(REPORT, 'cv.pdf')).not.toContain('about 6 words');
+    expect(renderFull(REPORT, 'cv.pdf')).toContain('*(about 6 words)*');
   });
 
   it('carries all of it in the full one', async () => {
@@ -94,8 +114,35 @@ describe('the brief and the full review', () => {
     }
   });
 
-  it('shows what was set aside, in the one meant to be read through', async () => {
-    // A list nobody can see was trimmed reads as a short list.
-    expect(renderBrief(REPORT, 'cv.pdf')).toContain('the batch size');
+  it('keeps polish in the brief as its problem line, and explains it only in the full one', async () => {
+    const polish = {
+      what: 'Two words repeat the cadence.',
+      why: 'They add length without meaning.',
+      fix: 'cut "each week"',
+      from: ['wording'],
+      tag: 'polish' as const,
+    };
+    const report = {
+      ...REPORT,
+      full: { sections: [{ heading: 'NIO Inc.', points: [polish] }] },
+    } as unknown as DiagnosisReport;
+
+    const brief = renderBrief(report, 'cv.pdf');
+    expect(brief).toContain('[Polish] Two words repeat the cadence.');
+    expect(brief).not.toContain(polish.why);
+    expect(brief).not.toContain(polish.fix);
+
+    const full = renderFull(report, 'cv.pdf');
+    expect(full).toContain(polish.why);
+    expect(full).toContain(polish.fix);
+  });
+
+  it('says how much was set aside in the brief, and lists it in the full one', async () => {
+    // A list nobody can see was trimmed reads as a short list; the list itself,
+    // merged across lines, read to judges as a garbled second report.
+    const brief = renderBrief(REPORT, 'cv.pdf');
+    expect(brief).toMatch(/## Set aside \(\d+\)/);
+    expect(brief).not.toContain('the batch size');
+    expect(renderFull(REPORT, 'cv.pdf')).toContain('the batch size');
   });
 });

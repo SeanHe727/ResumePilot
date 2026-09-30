@@ -1,0 +1,95 @@
+{
+  "file": "tmp/bench/tests/b1-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "D3",
+    "D4",
+    "D5",
+    "D8",
+    "D12",
+    "D14",
+    "D15",
+    "D18",
+    "D19"
+  ],
+  "coverage": true,
+  "suggestions": 29,
+  "words": 1464,
+  "quotes": 11,
+  "grounded": 11,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3845,
+    "completion_tokens": 12527,
+    "total_tokens": 16372,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12058
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3845
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Scope or substantiate s2:e0:b4. The claims about “single-handedly” building the firm’s “entire trading infrastructure” and its use by every desk are broader than the surrounding entry supports."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "Remove or consolidate s2:e0:b3, which repeats the validation method already described in s2:e0:b2."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Phrases such as “cutting-edge quantitative synergies,” “next-generation modeling paradigms,” and “alpha-driven innovation” do not identify a model, dataset, action, or result."
+      },
+      {
+        "id": "D8",
+        "found": true,
+        "evidence": "It claims infrastructure experience that the body of the resume does not currently demonstrate clearly."
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D12",
+        "found": true,
+        "evidence": "s3:e1:b2 substantially repeats the Northpeak trading-signal claim. Remove it from this project or replace it with competition-specific work and results."
+      },
+      {
+        "id": "D14",
+        "found": true,
+        "evidence": "Correct the reversed date range: Jun 2023 – Mar 2023."
+      },
+      {
+        "id": "D15",
+        "found": true,
+        "evidence": "Replace s3:e1:b0 with the specific work you owned. “Worked with various people on multiple aspects” does not identify your contribution."
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "Explain or remove the unexplained labels in s3:e0:b2: “VX-9,” “QRT,” “Helix,” “Atlas,” and “Borealis.”"
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Remove age, marital status, and hobbies from the resume."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 29,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

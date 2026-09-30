@@ -535,13 +535,13 @@ describe('prompts', () => {
     ['substance', CONTENT_PROMPT],
     ['rewrite', REWRITE_PROMPT],
   ])('forbids inventing figures in the %s prompt', (_name, prompt) => {
-    expect(prompt).toMatch(/Never state a figure the source does not contain/);
+    expect(prompt).toMatch(/never state a figure the resume does not contain/);
   });
 
   it('treats the XYZ shape as a target rather than a requirement', () => {
     // Forcing it onto a bullet with no missing metric produces padding.
     expect(REWRITE_PROMPT).toMatch(/target, not a cage/);
-    expect(REWRITE_PROMPT).toMatch(/Never more than \*\*two\*\* placeholders/);
+    expect(REWRITE_PROMPT).toMatch(/At most two placeholders/);
   });
 
   it('carries nothing that varies between requests', () => {
@@ -612,7 +612,12 @@ describe('generate_report: the improvement plan', () => {
     }],
   }];
 
-  const PLAN = JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], why: 'drop "Responsible for"' }] });
+  const PLAN = JSON.stringify({
+    decisions: [
+      { finding: 'c1', keep: true, fix: 'immediate', why: 'drop "Responsible for"' },
+      { finding: 'f1', keep: false, why: 'the same duty opener' },
+    ],
+  });
 
   /** Replies in the order given, so a test can script a retry. */
   function scriptedCtx(replies: ParsedResponse[]) {
@@ -703,7 +708,8 @@ describe('generate_report: the improvement plan', () => {
           entryId: 's1:e0',
           redundantPairs: [{ bulletA: 's1:e0:b0', bulletB: 's1:e0:b1', note: 'same result twice' }],
           coherence: { score: 40, detail: 'reads as an unordered task list' },
-          weakLead: true,
+          // The reader would open with the second line: that is a finding.
+          suggestedOrder: ['s1:e0:b1', 's1:e0:b0'],
         },
       ],
     };
@@ -850,20 +856,34 @@ describe('generate_report: the improvement plan', () => {
     const withSetAside: ParsedResponse = {
       ...answered,
       content: JSON.stringify({
-        chosen: [],
-        setAside: [{ findings: ['c1'], because: 'the page has no room left' }],
+        decisions: [{ finding: 'c1', keep: false, why: 'the page has no room left' }],
       }),
     };
-    const { ctx } = scriptedCtx([withSetAside]);
+    // Asked again for the one it did not decide, it still says nothing about it.
+    const { ctx, seen } = scriptedCtx([withSetAside, { ...answered, content: '{"decisions": []}' }]);
 
     const result = await generateReportTool.execute({} as never, ctx);
 
     expect(result.data?.improvementPlan.setAside).toEqual([
       // In the reader's own words, about the line it named.
       { what: 's1:e0:b0: "Responsible for" states a duty, not an outcome' },
-      // Not marked at all, and kept rather than dropped.
-      { what: expect.stringContaining('opens with a duty') },
     ]);
+    // Undecided twice, and kept rather than dropped.
+    expect(result.data?.improvementPlan.immediate).toEqual([expect.stringContaining('opens with a duty')]);
+    expect(seen[1]?.messages.at(-1)?.content).toMatch(/You did not decide these: f1\./);
+  });
+
+  it('asks once for the findings the filter left undecided, and takes its answer', async () => {
+    const first: ParsedResponse = { ...answered, content: JSON.stringify({ decisions: [{ finding: 'c1', keep: true, fix: 'immediate', score: 6 }] }) };
+    const second: ParsedResponse = { ...answered, content: JSON.stringify({ decisions: [{ finding: 'f1', keep: false, why: 'repeats c1' }] }) };
+    const { ctx, calls } = scriptedCtx([first, second, answered]);
+
+    const result = await generateReportTool.execute({} as never, ctx);
+
+    expect(result.data?.improvementPlan.setAside).toEqual([{ what: expect.stringContaining('opens with a duty') }]);
+    expect(result.data?.improvementPlan.immediate).toEqual([expect.stringContaining('Responsible for')]);
+    // The filter, its follow-up, then the writer.
+    expect(calls()).toBe(3);
   });
 
   it('retries when the model reasoned past writing an answer', async () => {
@@ -976,10 +996,9 @@ describe('analyze_entry: claims that need checking against the world', () => {
     // notice here and was taken out deliberately: judging the technique is not
     // this reader's job. What stays is the reason a figure gets read as a
     // strength at all, and what scale counts are and are not.
-    expect(prompt).toContain('A figure reads as a strength');
-    expect(prompt).toContain('Repository stars');
+    expect(prompt).toContain('Scale is context');
     // Two axes, one gap: the fault this prompt is likeliest to produce.
-    expect(prompt).toContain('counts one gap twice');
+    expect(prompt).toContain('a missing figure is one gap, not two');
     // And no example carries content from anyone's actual resume: the resume
     // varies, the prompt does not.
     expect(prompt).not.toMatch(/INT8|VRAM|29k/);
@@ -999,11 +1018,10 @@ describe('what the roles are told to look outward for', () => {
     const { ROLES } = await import('../../src/agent/roles.js');
     const prompt = (ROLES['content'].optionalPrompt ?? '').replace(/\s+/g, ' ');
 
-    expect(prompt).toContain('technology named');
-    expect(prompt).toContain('method named');
-    expect(prompt).toContain("figure's size is ordinary");
+    expect(prompt).toContain('Technology:');
+    expect(prompt).toContain('Method:');
     // Figures are judged, not searched: nobody has written about these numbers.
-    expect(prompt).toContain("never for the candidate's own figures");
+    expect(prompt).toContain("never the candidate's own figures");
   });
 
   it('gives each role the axes its own judgement turns on', async () => {
@@ -1011,24 +1029,11 @@ describe('what the roles are told to look outward for', () => {
     const flat = (id: string) => (ROLES[id].optionalPrompt ?? '').replace(/\s+/g, ' ');
 
     // The whole-document role asks about standing, not about bullets.
-    expect(flat('narrative')).toContain('Employers, programmes and institutions');
+    expect(flat('narrative')).toContain('Employers and institutions');
     expect(flat('narrative')).not.toContain('The figures.');
     // And the per-entry role does not ask about employer standing.
-    expect(flat('content')).not.toContain('Employers, programmes');
+    expect(flat('content')).not.toContain('Employers and institutions');
     expect(flat('jd-match')).toContain('comparable live postings');
-  });
-
-  it('asks the loop whether it knows enough before it converges', async () => {
-    // ReAct is there mechanically — reasoning carries across turns, tool
-    // results come back into the window — but nothing asked "do I know enough
-    // yet?", and the loop stopped at 3 of its 6 turns every single run.
-    const { ROLES } = await import('../../src/agent/roles.js');
-
-    for (const id of ['content', 'narrative', 'jd-match'] as const) {
-      const prompt = (ROLES[id].optionalPrompt ?? '').replace(/\s+/g, ' ');
-      expect(prompt, id).toContain('name what you still do not know');
-      expect(prompt, id).toContain('you have turns left');
-    }
   });
 });
 
@@ -1074,12 +1079,11 @@ describe('checks the model did not actually make', () => {
     expect(checks.map((c) => c.kind)).toEqual(['figure', 'technology']);
   });
 
-  it('sends an empty search back to the corpus rather than to silence', async () => {
+  it('uses an imperfect search rather than dropping it, and records only what was looked up', async () => {
     const { ROLES } = await import('../../src/agent/roles.js');
     const prompt = (ROLES['content'].optionalPrompt ?? '').replace(/\s+/g, ' ');
 
-    expect(prompt).toContain('that is a result, not a dead end');
-    expect(prompt).toContain('put a corpus lookup to work with it');
+    expect(prompt).toContain('can still be analysed and used');
     expect(prompt).toContain('Record only what you actually looked up');
   });
 });

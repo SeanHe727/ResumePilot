@@ -1,0 +1,300 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "Date of birth: 3 Mar 1997 | Nationality: Canadian",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Cut the card-dispute form's abandonment rate from 37% to 22% in a four-week A/B test by splitting it into three short steps with saved progress.",
+    "- Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "- Synthesizing 60 interviews, 400 survey responses and 18 months of support tickets through affinity mapping, journey mapping and a tagged clip library, cut repeat support calls about statements by 23%.",
+    "- Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.",
+    "- Trained 12 product managers to run their own unmoderated tests with a shared script template, which doubled the number of tests run each quarter.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Jul 2019 - Feb 2022",
+    "- Raised the patient app's Net Promoter Score from 6.1 to 8.4, calculated as the average 0-10 recommendation rating across 2,000 monthly survey responses.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Writes the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients; the revised layout cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Redesigned a city transit map for screen-reader and low-vision riders, and tested it with 12 participants on timed route-finding tasks.",
+    "- Cut median route-finding time from 90 to 60 seconds, a 50% improvement, by adding audio landmarks and high-contrast line colors.",
+    "- Raised task success by 20% across 12 participants, from 65% to 85%, with audio landmarks and high-contrast line colors.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Wrote the clinic's volunteer handbook for maintaining the booking pages, which two later volunteer teams used to add Spanish-language booking.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "Methods: moderated and unmoderated usability testing, interveiws, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality.",
+      "because": "They are generally unnecessary on a U.S.-style resume and can expose you to irrelevant bias."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the portfolio URL is clickable and leads directly to relevant, accessible case studies.",
+      "because": "Recruiters should be able to see the work behind your strongest claims."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent formatting for locations, dates, separators, and capitalization.",
+      "because": "Consistency makes scanning easier."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Consider adding relevant honors, coursework, or a distinction, if you have them.",
+      "because": "They could strengthen your UX research profile."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify the A/B test’s sample size and statistical reliability, if known.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify which change contributed to the result.",
+      "because": "The bullet combines shorter steps and saved progress."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether the change from 37% to 22% is in percentage points or is a relative reduction.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "A 3:1 contrast ratio is not sufficient for ordinary body text under WCAG AA.",
+      "because": "The threshold is generally 4.5:1 for normal text and 3:1 for large text."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify the text sizes and interface elements actually covered.",
+      "because": "“Every background” is broad and may be difficult to substantiate."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Change “Synthesizing” to a past-tense opening verb.",
+      "because": "The role has ended, and its bullets should describe completed work."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Make the sentence structure clear.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Specify what “repeat support calls” means.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Explain how the analysis connects to the 23% reduction.",
+      "because": "That would make the causal claim credible."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify whether 18 months is the period of tickets analyzed.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain what “the top five” refers to.",
+      "because": "That would make the adoption result easier to assess."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify how you know three fixes shipped in the next release cycle.",
+      "because": "That would make the adoption result easier to assess."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Add the baseline or absolute number of tests behind “doubled,” if available.",
+      "because": "That helps readers judge the scale of the result."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether you supported the quality or governance of the tests.",
+      "because": "More unmoderated research can raise questions about study rigor."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add the number of people or sign-up volume behind the rates, if available.",
+      "because": "That would make the change easier to evaluate."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add a relevant measurement period or comparison, if available.",
+      "because": "That would make the change easier to evaluate."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "The stated calculation describes an average rating, not NPS.",
+      "because": "NPS is not the average of 0–10 recommendation ratings."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Clarify the comparison period behind the increase.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Include the measurement period or number of appointments behind the missed-appointment rates, if available.",
+      "because": "That would give the result more context."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Change “Writes” to past tense.",
+      "because": "The role has ended, and its bullets should describe completed work."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Say how many studies or what period the setup-time reduction was measured across, if available.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify the age range meant by “older patients,” if relevant.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify the measurement period behind the 30% reduction.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Keep “Present” only if you are still actively working on the transit map, and ensure the bullets reflect its current status.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify what “redesigned” covered.",
+      "because": "The line establishes the audience and testing, but not the scope of the work."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify how the screen-reader and low-vision experience was evaluated.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The reduction from 90 to 60 seconds is 33%, not 50%.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Do not attribute the result to both design changes without distinguishing their contributions.",
+      "because": "The bullet does not show which change mattered more."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The change from 65% to 85% is a 20-percentage-point increase, not a 20% increase.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Reduce the repetition of the previous bullet’s design changes.",
+      "because": "The space could be used for a distinct finding."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify the number of tasks or observations used to calculate the percentages.",
+      "because": "65% and 85% do not map neatly to whole participants out of 12."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Add the baseline volume or measurement period for the phone-booking change, if available.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Be cautious about implying the redesign alone caused the decline.",
+      "because": "That attribution needs support."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify the recruitment and testing setup.",
+      "because": "“Hallway testing” suggests convenience recruitment, while “recruited 10 clinic patients” sounds like a defined patient sample."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Explain whether the six issues were all usability blockers or the issues you prioritized.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Clarify the handbook’s contribution to the later Spanish-language booking work.",
+      "because": "It is unclear whether the teams used the handbook or the work simply happened afterward."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Correct the typo “interveiws.”",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Review the skills list for coverage.",
+      "because": "The experience shows a broader range of research and accessibility work than the list communicates."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2602,
+    "input_tokens_details": {
+      "cache_write_tokens": 2599,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2008,
+    "output_tokens_details": {
+      "reasoning_tokens": 460
+    },
+    "total_tokens": 4610
+  }
+}

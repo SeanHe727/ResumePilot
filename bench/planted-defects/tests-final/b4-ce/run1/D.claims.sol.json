@@ -1,0 +1,256 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Lakeside Auto Parts | Mechanical Design Engineer | Metro City, Country | Jun 2025 - Present",
+    "- Designed stamping dies for automotive brackets in SolidWorks, cutting the scrap rate from 6% to 4% on two press lines.",
+    "- Ran tolerance stack-up analyses for 12 production parts and signed off first-article inspections with the supplier.",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | Aug 2022 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "There is no quick explanation of the target role or how the ML work, mechanical-design job, and degree connect.",
+      "because": "A reader may not know whether the résumé is aimed at ML engineering, mechanical design, or both."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Clarify how the in-progress master’s degree fits with a current job in another country.",
+      "because": "A reviewer may wonder how the locations and dates fit together."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider the current mechanical-design role’s placement for an ML application.",
+      "because": "It may be less relevant than the ML work, though the chronology should not be misleading."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Expand the skills section selectively for the intended role.",
+      "because": "It is short relative to the technical experience and projects."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use the project responsibility labels consistently and precisely.",
+      "because": "They should help the reader assess ownership accurately."
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "The email and web address look like placeholders.",
+      "because": "Literal placeholders should be replaced with professional contact details and a direct portfolio or code-profile link."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth.",
+      "because": "It does not establish qualifications and can introduce unnecessary bias."
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove nationality in most cases.",
+      "because": "It does not establish qualifications and can introduce unnecessary bias."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Make the school location unambiguous in the submitted version.",
+      "because": "The generic city and country labels may not be clear unless they are only anonymized for this review."
+    },
+    {
+      "line": 6,
+      "kind": "suggestion",
+      "says": "Make the school location unambiguous in the submitted version.",
+      "because": "The generic city and country labels may not be clear unless they are only anonymized for this review."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Explain the current mechanical-design role’s connection to the target role.",
+      "because": "It appears alongside substantial ML experience and projects, leaving the reader to guess why it is there."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Give the scrap-rate improvement more scope, such as production volume or time period, if substantiated.",
+      "because": "Readers may want that context to judge the result."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Add the inspection work’s result or consequence if it can be supported.",
+      "because": "The bullet names the work but does not show its outcome."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Define the diagnostic-accuracy metric, evaluation set, and comparison point.",
+      "because": "A technical reviewer may question what the 35% improvement measures and whether it is relative or absolute."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Define what counted as reviewer disagreement and how it was measured.",
+      "because": "The reduction is useful evidence only if its meaning is clear."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Define the evaluation behind the baseline, equal-accuracy, and latency comparison.",
+      "because": "The GRPO result should be easy to interpret."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Make the specialized terminology legible to a general recruiter.",
+      "because": "It may not be immediately understandable outside a technical audience."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Explain what the two regressions would have affected and how the harness informed release decisions.",
+      "because": "The bullet shows useful work but leaves its impact unclear."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Remove or consolidate the repeated assistant-only-loss-masking point.",
+      "because": "The earlier bullet already ties that method to an outcome, while this one adds no separate result."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The triage backlog achievement is duplicated in the evaluation-framework project.",
+      "because": "Crediting the same result twice can look like double-counting."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify ownership of the triage result.",
+      "because": "The same work is also credited to a project labeled Contributor."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Give the backlog’s starting scale if reliable figures are available.",
+      "because": "The time window after launch does not establish the backlog’s initial scope."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Specify the model, workload, or training setup behind the 4× GPU-memory reduction.",
+      "because": "The result’s value depends on those conditions."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify whether the precision change affected quality or training behavior.",
+      "because": "That helps explain the conditions behind the memory result."
+    },
+    {
+      "line": 21,
+      "kind": "error",
+      "says": "The CI bullet switches to present tense in a past role.",
+      "because": "Its tense is inconsistent with the role dates."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Define the release cycle and give a before-and-after comparison if available.",
+      "because": "“Shortened release cycles to 3 days” does not establish the metric’s basis."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Add a measurable consequence of the fleet-services migration if available.",
+      "because": "The bullet gives no frequency, scale, or operational impact for the dispatch delays."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Remove or substantiate the broad AI-first-practices claim.",
+      "because": "It has no measure, concrete deliverable, or defined adoption evidence and dilutes the technical bullets."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Clarify what grew 100×, what was measured, and whether task success was maintained.",
+      "because": "The context-window stress-test result is ambiguous."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "State the concurrency test conditions or how the fix was verified if space permits.",
+      "because": "That would make the deadlock and lost-result claim easier to assess."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Explain which two quantities the Kendall correlation relates.",
+      "because": "Reviewers need to know why 0.89 indicates the evaluator worked well."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "The triage backlog achievement duplicates the internship result.",
+      "because": "The same result is credited in two places and can look like double-counting."
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Clarify the project’s contribution to the triage system.",
+      "because": "This entry says Contributor while the internship says the system was built there."
+    },
+    {
+      "line": 34,
+      "kind": "suggestion",
+      "says": "Make “agent evaluation” more specific.",
+      "because": "A target-role reader will look for the concrete methods and tools used."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3160,
+    "input_tokens_details": {
+      "cache_write_tokens": 3157,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2442,
+    "output_tokens_details": {
+      "reasoning_tokens": 1011
+    },
+    "total_tokens": 5602
+  }
+}

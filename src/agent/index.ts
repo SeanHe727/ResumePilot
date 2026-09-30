@@ -5,8 +5,12 @@ export {
   ROLES,
   CONTENT_AGENT,
   DEEP_RESEARCH_AGENT,
+  DEEP_RESEARCH_PLANNER,
+  CONSISTENCY_AGENT,
   WORDING_AGENT,
   NARRATIVE_AGENT,
   JD_MATCH_AGENT,
+  SINGLE_AGENT,
+  FLAT_AGENT,
 } from './roles.js';
 export * from './types.js';

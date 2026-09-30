@@ -1,0 +1,452 @@
+[
+  {
+    "id": "b1-da",
+    "batch": 1,
+    "base": "da",
+    "defects": [
+      "W1",
+      "W2",
+      "A4",
+      "A1",
+      "S3",
+      "S4",
+      "T2",
+      "T3",
+      "N5",
+      "N2"
+    ],
+    "bottom": 167
+  },
+  {
+    "id": "b1-fe",
+    "batch": 1,
+    "base": "fe",
+    "defects": [
+      "W3",
+      "W6",
+      "A2",
+      "A3",
+      "S1",
+      "S2",
+      "T4",
+      "T1",
+      "N4",
+      "N3"
+    ],
+    "bottom": 191
+  },
+  {
+    "id": "b1-clin",
+    "batch": 1,
+    "base": "clin",
+    "defects": [
+      "W5",
+      "W4",
+      "A4",
+      "A1",
+      "S4",
+      "S3",
+      "T3",
+      "T2",
+      "N1",
+      "N4"
+    ],
+    "bottom": 155
+  },
+  {
+    "id": "b1-fin",
+    "batch": 1,
+    "base": "fin",
+    "defects": [
+      "W3",
+      "W2",
+      "A3",
+      "A2",
+      "S2",
+      "S1",
+      "T1",
+      "T4",
+      "N2",
+      "N5"
+    ],
+    "bottom": 191
+  },
+  {
+    "id": "b1-emb",
+    "batch": 1,
+    "base": "emb",
+    "defects": [
+      "W5",
+      "W4",
+      "A4",
+      "A1",
+      "S2",
+      "S4",
+      "T2",
+      "T1",
+      "N2",
+      "N3"
+    ],
+    "bottom": 191
+  },
+  {
+    "id": "b2-da",
+    "batch": 2,
+    "base": "da",
+    "defects": [
+      "W3",
+      "W2",
+      "A3",
+      "A2",
+      "S1",
+      "S3",
+      "T3",
+      "T4",
+      "N5",
+      "N1"
+    ],
+    "bottom": 107
+  },
+  {
+    "id": "b2-fe",
+    "batch": 2,
+    "base": "fe",
+    "defects": [
+      "W6",
+      "W1",
+      "A1",
+      "A4",
+      "S4",
+      "S2",
+      "T1",
+      "T2",
+      "N4",
+      "N2"
+    ],
+    "bottom": 226
+  },
+  {
+    "id": "b2-clin",
+    "batch": 2,
+    "base": "clin",
+    "defects": [
+      "W4",
+      "W5",
+      "A3",
+      "A2",
+      "S3",
+      "S1",
+      "T3",
+      "T4",
+      "N3",
+      "N5"
+    ],
+    "bottom": 155
+  },
+  {
+    "id": "b2-fin",
+    "batch": 2,
+    "base": "fin",
+    "defects": [
+      "W2",
+      "W3",
+      "A1",
+      "A4",
+      "S2",
+      "S4",
+      "T1",
+      "T2",
+      "N1",
+      "N4"
+    ],
+    "bottom": 167
+  },
+  {
+    "id": "b2-emb",
+    "batch": 2,
+    "base": "emb",
+    "defects": [
+      "W4",
+      "W5",
+      "A4",
+      "A1",
+      "S4",
+      "S2",
+      "T1",
+      "T2",
+      "N4",
+      "N3"
+    ],
+    "bottom": 191
+  },
+  {
+    "id": "b3-da",
+    "batch": 3,
+    "base": "da",
+    "defects": [
+      "W3",
+      "W2",
+      "A2",
+      "A3",
+      "S3",
+      "S1",
+      "T4",
+      "T3",
+      "N5",
+      "N2"
+    ],
+    "bottom": 143
+  },
+  {
+    "id": "b3-fe",
+    "batch": 3,
+    "base": "fe",
+    "defects": [
+      "W6",
+      "W1",
+      "A4",
+      "A1",
+      "S4",
+      "S2",
+      "T2",
+      "T1",
+      "N1",
+      "N4"
+    ],
+    "bottom": 190
+  },
+  {
+    "id": "b3-clin",
+    "batch": 3,
+    "base": "clin",
+    "defects": [
+      "W5",
+      "W4",
+      "A3",
+      "A2",
+      "S3",
+      "S1",
+      "T3",
+      "T4",
+      "N3",
+      "N5"
+    ],
+    "bottom": 155
+  },
+  {
+    "id": "b3-fin",
+    "batch": 3,
+    "base": "fin",
+    "defects": [
+      "W3",
+      "W2",
+      "A1",
+      "A4",
+      "S4",
+      "S2",
+      "T1",
+      "T2",
+      "N2",
+      "N1"
+    ],
+    "bottom": 167
+  },
+  {
+    "id": "b3-emb",
+    "batch": 3,
+    "base": "emb",
+    "defects": [
+      "W4",
+      "W5",
+      "A1",
+      "A4",
+      "S2",
+      "S4",
+      "T2",
+      "T1",
+      "N4",
+      "N3"
+    ],
+    "bottom": 191
+  },
+  {
+    "id": "b4-da",
+    "batch": 4,
+    "base": "da",
+    "defects": [
+      "W2",
+      "W3",
+      "A2",
+      "A3",
+      "S1",
+      "S3",
+      "T3",
+      "T4",
+      "N5",
+      "N2"
+    ],
+    "bottom": 143
+  },
+  {
+    "id": "b4-fe",
+    "batch": 4,
+    "base": "fe",
+    "defects": [
+      "W1",
+      "W6",
+      "A4",
+      "A1",
+      "S4",
+      "S2",
+      "T1",
+      "T2",
+      "N1",
+      "N4"
+    ],
+    "bottom": 190
+  },
+  {
+    "id": "b4-clin",
+    "batch": 4,
+    "base": "clin",
+    "defects": [
+      "W4",
+      "W5",
+      "A3",
+      "A2",
+      "S1",
+      "S3",
+      "T3",
+      "T4",
+      "N3",
+      "N2"
+    ],
+    "bottom": 168
+  },
+  {
+    "id": "b4-fin",
+    "batch": 4,
+    "base": "fin",
+    "defects": [
+      "W3",
+      "W2",
+      "A4",
+      "A1",
+      "S4",
+      "S2",
+      "T1",
+      "T2",
+      "N5",
+      "N1"
+    ],
+    "bottom": 154
+  },
+  {
+    "id": "b4-emb",
+    "batch": 4,
+    "base": "emb",
+    "defects": [
+      "W6",
+      "W1",
+      "A4",
+      "A1",
+      "S2",
+      "S4",
+      "T1",
+      "T2",
+      "N1",
+      "N2"
+    ],
+    "bottom": 155
+  },
+  {
+    "id": "b5-da",
+    "batch": 5,
+    "base": "da",
+    "defects": [
+      "W4",
+      "W5",
+      "A3",
+      "A2",
+      "S1",
+      "S3",
+      "T4",
+      "T3",
+      "N3",
+      "N5"
+    ],
+    "bottom": 143
+  },
+  {
+    "id": "b5-fe",
+    "batch": 5,
+    "base": "fe",
+    "defects": [
+      "W2",
+      "W3",
+      "A4",
+      "A1",
+      "S4",
+      "S2",
+      "T1",
+      "T2",
+      "N4",
+      "N1"
+    ],
+    "bottom": 178
+  },
+  {
+    "id": "b5-clin",
+    "batch": 5,
+    "base": "clin",
+    "defects": [
+      "W5",
+      "W4",
+      "A3",
+      "A2",
+      "S1",
+      "S3",
+      "T3",
+      "T4",
+      "N2",
+      "N3"
+    ],
+    "bottom": 168
+  },
+  {
+    "id": "b5-fin",
+    "batch": 5,
+    "base": "fin",
+    "defects": [
+      "W6",
+      "W1",
+      "A4",
+      "A1",
+      "S2",
+      "S4",
+      "T1",
+      "T2",
+      "N4",
+      "N5"
+    ],
+    "bottom": 191
+  },
+  {
+    "id": "b5-emb",
+    "batch": 5,
+    "base": "emb",
+    "defects": [
+      "W3",
+      "W2",
+      "A2",
+      "A3",
+      "S1",
+      "S3",
+      "T4",
+      "T3",
+      "N1",
+      "N2"
+    ],
+    "bottom": 143
+  }
+]

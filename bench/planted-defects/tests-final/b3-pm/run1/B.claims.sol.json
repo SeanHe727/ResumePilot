@@ -1,0 +1,325 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites; my redesign of the slotting rules was rolled out with the floor supervisors and 45 retrained pickers.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the profile link is a working, professional URL.",
+      "because": ""
+    },
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality.",
+      "because": "They are not needed for most U.S. applications and can invite irrelevant screening."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Make clear whether the MBA is completed or expected.",
+      "because": "Its current status is unclear."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Move Harbor Payments above Crestline Logistics.",
+      "because": "The experience section should be in reverse chronological order."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "Excluding weather-delayed shipments does not demonstrate that late deliveries fell.",
+      "because": "It changes the measure and can make the rate look better without improving delivery performance."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Define the baseline and what the 30% pick-error reduction refers to.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Clarify your role in the slotting changes and who trained the pickers.",
+      "because": "The rollout and training responsibilities are unclear."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify the period or measure behind the forecast-error comparison.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Make the link between the consensus forecast and the error reduction supportable.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Say whether the annual driver hours saved are measured or projected and how they were calculated.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Distinguish your rollout contribution from the tool’s broader impact.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify whether the 35% conversion increase is relative or in percentage points.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Add the timeframe and comparison basis for the conversion result.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Substantiate the claim that the change applied to all merchants.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Do not imply the flow change caused the conversion result without stronger support.",
+      "because": "“After replacing” alone does not establish causation."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Identify the feature or workstream more clearly and distinguish your contribution from the team’s.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify what schedule the two-week early delivery was measured against.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Say whether the work produced a user or business outcome.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "State the currency and clarify whether the chargeback-loss figure is an estimate.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Describe the link between your analysis and the roadmap decision more precisely.",
+      "because": "The current wording could overstate how directly your work determined the priority."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether you resolved the tickets yourself or coordinated their resolution.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Add the queue’s starting point or measurement period.",
+      "because": "That would make the reduction by half interpretable."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Consider whether the ticket-triage detail is relevant to your target roles.",
+      "because": "Product outcomes may be more relevant."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Explain the opt-in comparison method and its limitations.",
+      "because": "Merchants who opted in may differ from those who did not, so the comparison may not establish causation."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Combine this measurement detail with the onboarding result or remove it.",
+      "because": "It overlaps with the onboarding-result bullet and may add no distinct evidence."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify the pilot dates, cohort size, and median calculation.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Avoid presenting the onboarding result as causal unless the evaluation supports it.",
+      "because": "It overlaps with the opt-in comparison."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify the venture’s status and what your Product Lead role involved.",
+      "because": "The heading may not convey whether this was a live product, student project, or team effort."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Clarify what the 3,100-student figure counts.",
+      "because": "It could mean students reached, eligible students, or actual users."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Explain how the 9-tonne figure was measured.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Support the claim that the food would otherwise have been thrown away.",
+      "because": "It is a counterfactual claim."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Add the measurement periods for active-user growth.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify whether the growth can reasonably be attributed to reminders.",
+      "because": "The interviews explain the rationale for reminders, not their impact by themselves."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Clarify the baseline and period behind the 95% fill rate.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Explain what “staff cover shifts” means.",
+      "because": "Readers need it to understand the operational benefit."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Add a substantiated result, recommendation, or decision from the working sessions.",
+      "because": "The bullet describes an activity rather than an outcome."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Replace the passive, vague description with a clear account of your actions and what changed.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Quantify the form reduction or give another concrete effect, if available.",
+      "because": "Adoption by front-desk staff does not show its scale or benefit."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "Remove the merchant-onboarding bullet from the hospital practicum.",
+      "because": "It is unrelated to the project and duplicates a Harbor Payments achievement."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Make sure each listed product skill is supported by your experience.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Consider adding directly relevant capabilities missing from the list.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "List only tools you have used that are useful for your target roles.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "Add relevant tools if you can substantiate them.",
+      "because": "The current list is brief."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Prioritize the strongest product outcomes for product-role applications.",
+      "because": "Achievements most relevant to the specific job should come first."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Standardize date styles, punctuation, capitalization, and metric formatting across sections.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use past tense for completed work and present tense only for ongoing work.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2557,
+    "input_tokens_details": {
+      "cache_write_tokens": 2554,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2083,
+    "output_tokens_details": {
+      "reasoning_tokens": 513
+    },
+    "total_tokens": 4640
+  }
+}

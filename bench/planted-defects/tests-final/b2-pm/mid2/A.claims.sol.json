@@ -1,0 +1,195 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Coastal Marine Services | Diesel Mechanic | Lake City, USA | Jul 2025 - Present",
+    "- Rebuilt diesel engines and gearboxes for a fleet of 14 commercial fishing vessels, keeping dry-dock time under 5 days per job.",
+    "- Maintained hydraulic winch systems and logged service records for the harbor authority's annual inspections.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Jul 2018 - Aug 2023",
+    "- Owned the weekly carrier scorecards for the regional managers and the monthly review meeting that discussed them.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Ran the quarterly S&OP review across sales, finance and operations for 12 consecutive quarters, introducing a consensus forecast that cut forecast error from 18% to 11%.",
+    "- Led the rollout of a route-planning tool to 3 depots while rewriting the standard operating procedures, running driver training and taking over vendor negotiations for the telematics contract, which saved 1,800 driver hours a year across the region.",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "- Lifted checkout conversion from 61% to 66% by testing a one-page flow against the three-step flow across 40,000 sessions, then shipping it to all merchants.",
+    "- Prioritized the dispute roadmap with RICE, scoring Reach as the number of support tickets each feature would close.",
+    "- After interviewing 25 merchants, mapping chargeback reasons, sizing the loss by segment and drafting a business case with finance, set the next quarter's roadmap priority.",
+    "- Ran the checkout A/B test with randomization by session and reported the 5-point conversion lift as the effect on merchants' customers.",
+    "- Presented the onboarding results and a follow-up roadmap to the payments leadership team, who funded the rollout to two more regions.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Raised weekly active users from 400 to 1,150, a 150% increase, by adding pickup reminders chosen after 60 user interviews.",
+    "- Raised the pickup-slot fill rate by 20% across two dining halls, from 75% to 95%, by setting up a volunteer shift system.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Sized a $2.4M annual saving from consolidating outpatient scheduling across 4 clinics; the client funded a pilot based on the model.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Presented the final recommendation to the hospital COO and clinic directors, who approved a 90-day scheduling pilot at two clinics.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Coastal Marine Services role should take up only one line.",
+      "because": "It is unrelated to the product and operations story, but its two bullets give it too much space."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Experience entries are not in newest-first order: Crestline appears above the newer Harbor Payments role.",
+      "because": "The ordering obscures which experience is more recent."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears above Experience despite the substantial professional history.",
+      "because": "The current order gives education priority over several years of experience and later product work."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The bullet gives no outcome from the maintenance or inspections.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“Maintained” does not say what work was performed on the hydraulic winch systems.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The scorecard and meeting bullet describes duties without stating what they changed.",
+      "because": "It shows responsibility and meeting purpose, but not a decision or operational improvement the work enabled."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“New” adds no useful information to “layout.”",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The 1,800-hour result is buried after a long list of methods and responsibilities.",
+      "because": "A scanning reader may miss the bullet’s clearest impact."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The stack of details is difficult to scan, and “taking over vendor negotiations” names a responsibility rather than a specific action or outcome.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The RICE bullet does not name the initiative it led to prioritizing.",
+      "because": "A reader can see the framework used, but not the product decision it influenced."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The RICE and Reach explanation uses jargon and a cumbersome description of the criterion.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The bullet does not name the selected priority, and its long method list comes before the decision.",
+      "because": "The reader cannot tell what product decision the research and business case drove."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The loss analysis gives no estimate or comparison to show the scale of the opportunity.",
+      "because": "Without an estimate, a reader cannot judge the opportunity supporting the roadmap decision."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Session randomization does not by itself establish a customer-level effect, and the lift is described unclearly.",
+      "because": "It estimates a session-level effect; customers with multiple sessions could encounter both versions."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The bullet repeats the checkout A/B test and five-point lift already reported in the preceding bullet.",
+      "because": "The duplication makes the achievement look repeated rather than broader."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Who funded the rollout” makes the connection between the presentation and funding indirect.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "“That would have been thrown away” repeats the idea conveyed by “surplus-food.”",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The change from 400 to 1,150 weekly active users is a 187.5% increase, not 150%.",
+      "because": "The increase is 750 users over a baseline of 400."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The weekly-active-user increase has no timeframe.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The fill rate rose by 20 percentage points, not by 20% as a relative increase.",
+      "because": "The stated rates move from 75% to 95%, a difference of 20 percentage points."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "“Sized a $2.4M annual saving” could be read as realized savings although it came from a model.",
+      "because": "A reader needs to know whether the amount is a forecast or an outcome already achieved."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The pilot funding is reported here and again in the presentation bullet.",
+      "because": "Repeating the result makes the entry look less varied and takes space from the modeled savings estimate."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The intake bullet does not say what improved after the form was shortened.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The passive wording makes it unclear who mapped patient intake and shortened the form.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3569,
+    "input_tokens_details": {
+      "cache_write_tokens": 3566,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1688,
+    "output_tokens_details": {
+      "reasoning_tokens": 686
+    },
+    "total_tokens": 5257
+  }
+}

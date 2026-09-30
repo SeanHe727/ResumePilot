@@ -1,0 +1,180 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "Date of birth: 14 Nov 1995 | Nationality: Mexican",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Reduced freight costs by 15% by consolidating supplier pickups into regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-time inbound deliveries from 81% to 93%.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Cut average order lead time through the warehouse from 10 days to 5 while holding daily throughput constant and doubling work-in-process to keep pickers busy.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Redesigned the pick paths for the fast-moving zone, cutting walking distance per order by 28% and raising picks per labor hour from 92 to 110.",
+    "- Ran a time study of the returns desk; the findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations, raising inventory record accuracy from 91% to 98.5% within a year.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Spearheaded a data-driven, optimization-first transformation of last-mile logistics that unlocked significant efficiency gains.",
+    "- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing problem with customer time windows.",
+    "- Shared the model and a one-page summary with the grocer's dispatch team, who piloted the routes on two trucks for a month.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- Mapped the donation intake process with the warehouse lead and removed two duplicate data-entry steps, so donations reached the shelves a day sooner.",
+    "- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again after its spring expansion.",
+    "SKILLS",
+    "Tools: Excel, Python, SAP",
+    "Methods: demand forcasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Date of birth and nationality are personal details conventionally left off a résumé.",
+      "because": "They are unrelated to work and education and use space."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience should appear before education.",
+      "because": "Relevant work is more useful to a recruiter, and putting education first delays that evidence."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The reorder-point work gives its scope and inputs but no business outcome.",
+      "because": "The reader cannot tell whether it improved availability, reduced excess stock, or otherwise helped the business."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The vendor-scoring method buries the 12-point improvement.",
+      "because": "The reader must pass through the scoring and review details before reaching the result."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The claimed OEE of 112% is invalid as conventional OEE.",
+      "because": "Conventional OEE cannot exceed 100%, so the reported improvement is unreliable as stated."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Doubling work-in-process at constant throughput conflicts with cutting lead time from 10 days to 5.",
+      "because": "By Little’s Law, those claims imply lead time rising to 20 days, not falling to 5."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The throughput and work-in-process claims make the lead-time result harder to scan.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The claim of significant efficiency gains gives no specific improvement or evidence.",
+      "because": "A reader cannot judge its value from a general claim of significance."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The opening bullet uses abstract jargon instead of identifying the project work or technique.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "A decrease from 120 to 90 miles is 25%, not 40%.",
+      "because": "The decrease is 30 miles out of the original 120."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The strongest result is not the project’s opening bullet.",
+      "because": "Leading with the general transformation claim makes the measurable route-length result less prominent."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The route-length averages do not identify which routes or period they cover.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The pilot’s scale and duration are given, but its outcome is not.",
+      "because": "The reader cannot tell whether the routes performed better, were adopted, or exposed a limitation."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Sharing the model and summary does not explain how the pilot was evaluated or acted on.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The recommendations are described without saying whether they were adopted or what changed.",
+      "because": "Without an outcome, the work is difficult to distinguish from analysis that did not affect operations."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The warehouse analysis does not identify the operation examined or the analysis used.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The strongest result in the entry is not the opening bullet.",
+      "because": "The intake-process change and its effect are more concrete than the general analysis-and-recommendations statement."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "“A day sooner” has no stated comparison timeframe.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The re-slotting is described without saying what it achieved.",
+      "because": "Use of the guide shows it was applied, but not what improved for the warehouse."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The slotting guide does not say what informed its placement recommendations.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Again” makes it unclear whether the warehouse was re-slotted more than once.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "“Forcasting” is misspelled.",
+      "because": "The spelling error is visible where a reader is checking technical qualifications and can distract from the skills listed."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3154,
+    "input_tokens_details": {
+      "cache_write_tokens": 3151,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1071,
+    "output_tokens_details": {
+      "reasoning_tokens": 183
+    },
+    "total_tokens": 4225
+  }
+}

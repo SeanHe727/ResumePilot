@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 10,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 17,
+  "words": 2921,
+  "quotes": 19,
+  "grounded": 12,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5927,
+    "completion_tokens": 7166,
+    "total_tokens": 13093,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 6760
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 4135
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "“Owned” and “the on-call rotation that used them” tell the reader what was assigned to you, but not whether the dashboards improved detection, resolution, or incident handling."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "“AI-first engineering practices” does not tell a hiring reader what was introduced, while “accelerating delivery and improving outcomes for downstream teams” does not identify a measurable change"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The task-completion change is labeled as a relative percentage when it is a percentage-point increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The reduction from 900 ms to 600 ms is 300 ms, or 33.3% of the 900 ms baseline, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Move \"reduced end-to-end latency 5%\" to the front"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "the longer fleet bullet chains too many secondary actions around its result"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Standard GRPO needs within-prompt groups to form relative advantages; with one scored trajectory, that comparison collapses"
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Dynamic batching can improve throughput under concurrent traffic but can add delay to an isolated request"
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Move the Mobility Systems Company entry, dated Oct 2024–May 2025, above the Eastern Robotics Co. entry, dated Aug 2022–Jul 2024."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review found no supporting evidence in the entries for SQL, LoRA, LangGraph, RAG, or Kubernetes."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 17,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

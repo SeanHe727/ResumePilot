@@ -212,7 +212,12 @@ describe('through the tool that actually runs it', () => {
           if (asked.length === 1) {
             return {
               type: 'text',
-              content: JSON.stringify({ chosen: [{ kind: 'immediate', findings: ['c1'], why: 'name the figure' }] }),
+              // Decides everything it was shown: c1 kept, the rest removed.
+              content: JSON.stringify({
+                decisions: [...asked[0]!.matchAll(/^- (\w\d+) \[/gm)].map(([, name]) =>
+                  name === 'c1' ? { finding: 'c1', keep: true, fix: 'immediate', why: 'name the figure' } : { finding: name, keep: false },
+                ),
+              }),
               usage: { inputTokens: 0, outputTokens: 0 },
               stopReason: 'end_turn',
             };
@@ -247,15 +252,15 @@ describe('through the tool that actually runs it', () => {
     // by these names; it writes no advice and no ranges of its own.
     const { asked } = await runReport();
 
-    expect(asked[0]).toMatch(/- c\d+ \[experience:0:0, ~6 words\] no measurable outcome/);
+    expect(asked[0]).toMatch(/- c\d+ \[experience:0:0, adds ~6 words\] no measurable outcome/);
     expect(asked[0]).toMatch(/- w\d+ \[experience:0:0, wording\] opens with "Responsible for"/);
     expect(asked[0]).not.toMatch(/_finding_/);
   });
 
-  it('hands the writer each chosen group with its findings as the readers wrote them', async () => {
+  it('hands the writer each kept finding under its line, as the readers wrote it', async () => {
     const { asked } = await runReport();
 
-    expect(asked[1]).toMatch(/- group 1 \(fix now\), about experience:0:0:\n {4}c1 \[experience:0:0\] no measurable outcome/);
+    expect(asked[1]).toMatch(/ {2}- \[experience:0:0\] .+\n {6}c1 \[content, fix now, score 3\] no measurable outcome/);
     // The selection's own words never reach the writer.
     expect(asked[1]).not.toContain('name the figure');
   });
@@ -470,13 +475,15 @@ describe('filing a point under something real', () => {
     // and a silent one.
     const { trace, events } = recorder();
     const findings = everyFinding(INPUT);
+    // A finding about no one line, so the section it lands in is the writer's call.
+    const wide = findings.find((f) => !f.target.startsWith('experience:'))!;
 
     const full = await writeFullReport(
       REPORT,
       STATE,
       findings,
       ctxWith(
-        { sections: [entrySection('experience:99', point('Still worth saying.', [findings[1]!.id]))] },
+        { sections: [entrySection('experience:99', point('Still worth saying.', [wide.id]))] },
         trace,
       ),
     );
@@ -484,6 +491,21 @@ describe('filing a point under something real', () => {
     expect(full?.sections[0]?.heading).toBe('Across the whole résumé');
     expect(full?.sections[0]?.points[0]?.what).toBe('Still worth saying.');
     expect(accepted(events).unknownTargets).toEqual(['experience:99']);
+  });
+
+  it('files a point under the entry its findings are about, whatever the writer chose', async () => {
+    // Measured: a point on the agent runtime, citing only its findings, was
+    // filed under the evaluation framework below it.
+    const findings = everyFinding(INPUT);
+    const onLine = findings.find((f) => f.target.startsWith('experience:0:'))!;
+    const full = await writeFullReport(
+      REPORT,
+      STATE,
+      findings,
+      ctxWith({ sections: [{ about: { type: 'resume' }, points: [point('About that line.', [onLine.id])] }] }),
+    );
+
+    expect(full?.sections[0]?.target).toEqual({ type: 'entry', entryId: 'experience:0' });
   });
 
   it('shows the parsed header and keeps a phone number out of it', async () => {
@@ -504,7 +526,7 @@ describe('filing a point under something real', () => {
     expect(renderFull({ ...REPORT, full }, 'r.pdf')).not.toContain('138 0000 0000');
   });
 
-  it('files the whole-résumé points under one fixed title, after the entries', async () => {
+  it('files the whole-résumé points under one fixed title, before the entries', async () => {
     const findings = everyFinding(INPUT);
     const full = await writeFullReport(
       REPORT,
@@ -520,10 +542,11 @@ describe('filing a point under something real', () => {
       }),
     );
 
+    // The page as a whole first, then the entries in the résumé's order.
     expect(full?.sections.map((s) => s.heading)).toEqual([
+      'Across the whole résumé',
       'Mobility Systems Company | AI Research Intern | Oct 2024 - May 2025',
       'A Second Company | Engineer | reach me on [phone]',
-      'Across the whole résumé',
     ]);
   });
 });

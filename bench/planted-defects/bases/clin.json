@@ -1,0 +1,150 @@
+{
+  "id": "clin",
+  "job": "clinical research / biostatistics",
+  "name": "Jordan Rivera",
+  "contact": "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+  "personal": "Age: 27 | Marital status: Single | Hobbies: watching TV, sleeping in",
+  "education": [
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021"
+  ],
+  "graduated": "May 2021",
+  "exp": [
+    {
+      "head": "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA",
+      "dates": "Sep 2022 - Jul 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed."
+        },
+        {
+          "slot": "D2",
+          "clean": "Cut data-entry errors in the trial database from 6.1% to 1.8% of fields by adding range checks and double entry for the primary outcome.",
+          "subtle": "Reduced data-entry errors by 70% by adding range checks and double entry for the primary outcome."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Wrote the statistical analysis plan with the trial statistician before unblinding, prespecifying the primary outcome and two sensitivity analyses."
+        },
+        {
+          "slot": "D4",
+          "clean": "Built the enrollment tracker the three sites reviewed each week, flagging sites more than 10% behind target."
+        },
+        {
+          "slot": "D3",
+          "clean": "Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change."
+        },
+        {
+          "slot": "D13",
+          "clean": "Trained 9 site nurses on the consent process and outcome forms, and no consent deviations were found at the final audit."
+        }
+      ]
+    },
+    {
+      "head": "Northgate University Hospital | Research Assistant | Metro City, USA",
+      "dates": "Jul 2021 - Aug 2022",
+      "datesD10Subtle": "Apr 2022 - Aug 2022",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Screened 2,300 medical records for a diabetes cohort study, confirming eligibility for 410 patients against the protocol criteria.",
+          "subtle": "Owned the chart screening for the diabetes cohort study and the eligibility list the investigators used."
+        },
+        {
+          "slot": "D6",
+          "clean": "Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+          "subtle": "Interviewed 25 patients about missed clinic visits; my findings added text reminders that cut no-shows from 18% to 11%."
+        },
+        {
+          "slot": "D9",
+          "clean": "Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+          "subtle": "Writes the study's data dictionary for 180 variables, which the next two cohort studies reused."
+        },
+        {
+          "slot": "D17",
+          "clean": "Cleaned and merged lab data from two hospital systems, resolving 1,200 mismatched patient identifiers.",
+          "subtle": "Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Asthma Readmission Analysis | Independent Project | R",
+      "dates": "Jan 2025 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Analyzed 5 years of public hospital-discharge data for 38,000 pediatric asthma admissions, modeling 30-day readmission with mixed-effects logistic regression.",
+          "subtle": "Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes."
+        },
+        {
+          "slot": "D11",
+          "clean": "Found that follow-up within 7 days was linked to lower readmission: 8.2% against 11.9% without it, after adjusting for age and insurance.",
+          "subtle": "Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting for age and insurance."
+        },
+        {
+          "slot": "D18",
+          "clean": "Presented the analysis at the state public-health conference poster session."
+        }
+      ]
+    },
+    {
+      "head": "Community Health Survey | Volunteer, Team of 5 | REDCap",
+      "dates": "Mar 2020 - Aug 2020",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood."
+        },
+        {
+          "slot": "D16",
+          "clean": "Translated the survey into Spanish with two bilingual volunteers and piloted it with 20 residents before launch.",
+          "subtle": "The survey was translated into Spanish and piloted with 20 residents before launch."
+        },
+        {
+          "slot": "D12",
+          "clean": "Wrote the survey's data codebook, which the clinic used for its follow-up survey the next year.",
+          "subtle": "Ran a randomized discharge study of more than 600 heart-failure patients that completed enrollment months ahead of schedule."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Tools: R, REDCap",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "skillsD20Subtle": [
+    "Tools: R, REDCap",
+    "Methods: randomized trials, regresion, mixed-effects models, survey design"
+  ],
+  "skillsD8Subtle": [
+    0,
+    "SAS"
+  ],
+  "unevidencedSubtle": "SAS",
+  "personalSubtle": "Date of birth: 22 May 1997 | Nationality: Chilean",
+  "v2": {
+    "S1": "Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-checking them against pharmacy records each week, cut unresolved safety queries from 45 to 6.",
+    "S2": "Assisted with data collection and patient follow-up for the cohort study.",
+    "T1": "Showed the discharge program reduced readmissions with an intention-to-treat analysis that excluded the 58 patients who dropped out.",
+    "T2": "Established that the program was equivalent to usual care because the superiority test on readmission was not significant (p = 0.41).",
+    "T3": "Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "T4": "Randomized patients by assigning those admitted on odd-numbered days to the program and even-numbered days to usual care.",
+    "N1": {
+      "head": "Summit Climbing Gym | Front Desk Staff | Metro City, USA",
+      "dates": "Sep 2025 - Present",
+      "bullets": [
+        "Checked in about 150 climbers a shift and sold day passes and memberships.",
+        "Ran the weekend rental desk and logged gear inspections for the manager."
+      ]
+    },
+    "A2": "Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited residents.",
+    "desc": {
+      "T1": "Intention-to-treat analyzes every randomized patient; excluding dropouts makes it a per-protocol analysis, not ITT.",
+      "T2": "A non-significant superiority test does not show equivalence; equivalence needs a prespecified margin and an equivalence or non-inferiority test.",
+      "T3": "Averaging follow-up of deaths while excluding censored patients is biased; median survival needs a Kaplan-Meier estimate that uses censored data.",
+      "T4": "Assigning by odd and even days is alternation, not randomization: allocation is predictable and cannot be concealed."
+    }
+  }
+}

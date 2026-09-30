@@ -108,8 +108,12 @@ Return JSON of exactly this shape:
       },
       "issues": [
         {
-          "what": "what is wrong with this bullet, one sentence",
-          "costWords": "roughly how many words answering it adds to the line, as a number"
+          "axis": "impact | measurement | method",
+          "kind": "wrong | missing | unclear",
+          "what": "the problem, one sentence, quoting the line's words",
+          "why": "why it is a problem for a reader, one or two sentences",
+          "fix": "how to change the line: which words to move, cut or replace and with what, in a sentence or two; a fact only the candidate has goes in [brackets] — nothing the resume does not contain",
+          "costWords": 0
         }
       ],
       "strengths": ["..."],
@@ -258,16 +262,27 @@ function bareId(raw: unknown): string {
 function bulletIssues(raw: unknown): BulletIssue[] {
   if (!Array.isArray(raw)) return [];
 
-  return raw
-    .flatMap((item): BulletIssue[] => {
-      // A bare string is what the model returns when it ignores the shape, and
-      // the finding is worth more than the omission costs.
-      if (typeof item === 'string') return item.trim() ? [{ what: item, costWords: 0 }] : [];
+  const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
+  // In the order the reader gave them. They were sorted cheapest first here,
+  // which put a real error that costs a few words behind every trim.
+  return raw.flatMap((item): BulletIssue[] => {
+    // A bare string is what the model returns when it ignores the shape, and
+    // the finding is worth more than the omission costs.
+    if (typeof item === 'string') return item.trim() ? [{ what: item, costWords: 0 }] : [];
 
-      const record = item as Record<string, unknown> | null;
-      const what = typeof record?.what === 'string' ? record.what.trim() : '';
-      const cost = typeof record?.costWords === 'number' ? Math.round(record.costWords) : 0;
-      return what ? [{ what, costWords: cost > 0 ? cost : 0 }] : [];
-    })
-    .sort((a, b) => (a.costWords || Number.MAX_SAFE_INTEGER) - (b.costWords || Number.MAX_SAFE_INTEGER));
+    const record = item as Record<string, unknown> | null;
+    const what = text(record?.what);
+    if (!what) return [];
+    const cost = typeof record?.costWords === 'number' ? Math.round(record.costWords) : Number(record?.costWords);
+    const axis = ['impact', 'measurement', 'method'].find((a) => a === record?.axis) as BulletIssue['axis'];
+    const kind = ['wrong', 'missing', 'unclear'].find((k) => k === record?.kind) as BulletIssue['kind'];
+    return [{
+      what,
+      costWords: Number.isFinite(cost) && cost > 0 ? Math.round(cost) : 0,
+      ...(axis ? { axis } : {}),
+      ...(kind ? { kind } : {}),
+      ...(text(record?.why) ? { why: text(record?.why) } : {}),
+      ...(text(record?.fix) ? { fix: text(record?.fix) } : {}),
+    }];
+  });
 }

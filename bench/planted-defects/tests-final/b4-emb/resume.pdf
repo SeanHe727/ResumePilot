@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>
+endobj
+4 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+endobj
+5 0 obj
+<</Length 4786>>
+stream
+BT /F1 16 Tf 72 752 Td (Morgan Kim) Tj ET
+BT /F1 10 Tf 72 733 Td (+1 \(555\) 010-8173 | morgan.kim@example.com | example.com/code/mkim) Tj ET
+BT /F1 12 Tf 72 715.5 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 72 701.5 Td (Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021) Tj ET
+BT /F1 12 Tf 72 684.0 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 72 670.0 Td (Northside Bakery | Delivery Driver | Metro City, USA | Aug 2025 - Present) Tj ET
+BT /F1 10 Tf 80 657.5 Td (- Delivered morning wholesale orders to about 20 cafés and collected signed invoices.) Tj ET
+BT /F1 10 Tf 80 645.7 Td (- Loaded the van and checked each order against the dispatch list before leaving.) Tj ET
+BT /F1 10 Tf 72 633.9000000000001 Td (Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Jul 2021 - Feb 2023) Tj ET
+BT /F1 10 Tf 80 621.4000000000001 Td (- Owned the end-of-line test station for the humidity sensor and the yield reports the line) Tj ET
+BT /F1 10 Tf 86 609.6000000000001 Td (leads used.) Tj ET
+BT /F1 10 Tf 80 597.8000000000002 Td (- Traced a batch of early field failures to a solder-paste change; the findings updated the) Tj ET
+BT /F1 10 Tf 86 586.0000000000002 Td (reflow profile and cut returns from 2.1% to 0.4%.) Tj ET
+BT /F1 10 Tf 80 574.2000000000003 Td (- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints) Tj ET
+BT /F1 10 Tf 86 562.4000000000003 Td (from 15 to 2 a quarter.) Tj ET
+BT /F1 10 Tf 80 550.6000000000004 Td (- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to) Tj ET
+BT /F1 10 Tf 86 538.8000000000004 Td (150 boards an hour.) Tj ET
+BT /F1 10 Tf 72 527.0000000000005 Td (Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025) Tj ET
+BT /F1 10 Tf 80 514.5000000000005 Td (- Improved update speed by 60% by compressing firmware images and resuming interrupted) Tj ET
+BT /F1 10 Tf 86 502.70000000000044 Td (downloads.) Tj ET
+BT /F1 10 Tf 80 490.90000000000043 Td (- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware) Tj ET
+BT /F1 10 Tf 86 479.1000000000004 Td (build.) Tj ET
+BT /F1 10 Tf 80 467.3000000000004 Td (- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the) Tj ET
+BT /F1 10 Tf 86 455.5000000000004 Td (root cause of 5 field failures.) Tj ET
+BT /F1 10 Tf 80 443.7000000000004 Td (- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it) Tj ET
+BT /F1 10 Tf 86 431.9000000000004 Td (without aliasing.) Tj ET
+BT /F1 10 Tf 80 420.10000000000036 Td (- Fixed a race condition on the counter shared by the interrupt handler and the main loop by) Tj ET
+BT /F1 10 Tf 86 408.30000000000035 Td (declaring the counter volatile.) Tj ET
+BT /F1 10 Tf 80 396.50000000000034 Td (- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting) Tj ET
+BT /F1 10 Tf 86 384.70000000000033 Td (control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.) Tj ET
+BT /F1 12 Tf 72 367.9000000000003 Td (PROJECTS) Tj ET
+BT /F1 10 Tf 72 353.9000000000003 Td (Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present) Tj ET
+BT /F1 10 Tf 80 341.4000000000003 Td (- Built a solar-powered weather station on an STM32 that reports every 5 minutes over LoRa and) Tj ET
+BT /F1 10 Tf 86 329.6000000000003 Td (runs 9 days without sun.) Tj ET
+BT /F1 10 Tf 80 317.8000000000003 Td (- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio) Tj ET
+BT /F1 10 Tf 86 306.0000000000003 Td (transmissions.) Tj ET
+BT /F1 10 Tf 80 294.2000000000003 Td (- Published the schematics and firmware openly, and a local school built two stations from) Tj ET
+BT /F1 10 Tf 86 282.40000000000026 Td (them.) Tj ET
+BT /F1 10 Tf 72 270.60000000000025 Td (Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021) Tj ET
+BT /F1 10 Tf 80 258.10000000000025 Td (- Worked on firmware and testing for the robot fleet's motor controllers.) Tj ET
+BT /F1 10 Tf 80 246.30000000000024 Td (- Wrote the CAN-bus firmware for the dashboard and tested it against the motor controller) Tj ET
+BT /F1 10 Tf 86 234.50000000000023 Td (before each race.) Tj ET
+BT /F1 10 Tf 80 222.70000000000022 Td (- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter) Tj ET
+BT /F1 10 Tf 86 210.9000000000002 Td (eightfold and motor faults by more than half.) Tj ET
+BT /F1 12 Tf 72 194.1000000000002 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 180.1000000000002 Td (Tools: C, C++, STM32, osciloscopes) Tj ET
+BT /F1 10 Tf 72 167.6000000000002 Td (Methods: firmware, hardware-in-the-loop testing, CAN, low-power design) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000054 00000 n 
+0000000105 00000 n 
+0000000217 00000 n 
+0000000280 00000 n 
+trailer
+<</Size 6/Root 1 0 R>>
+startxref
+5116
+%%EOF

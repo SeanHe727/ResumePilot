@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 10,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 25,
+  "words": 2583,
+  "quotes": 19,
+  "grounded": 16,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Correct 'on- call' to 'on-call.'"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5519,
+    "completion_tokens": 17572,
+    "total_tokens": 23091,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 17065
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3727
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "Owned the diagnostics service’s monitoring dashboards uses duty framing, describing what the candidate was in charge of rather than what they changed or built."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "accelerating delivery and improving outcomes for downstream teams makes broad claims without stating what improved or by how much."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The increase from 71% to 83% is a 12-percentage-point increase, not a 12% increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The Agent Runtime Suite claim of reducing latency from 900 ms to 600 ms represents approximately a 33% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The 5% latency result is buried after a long method list."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "The final robotics bullet mixes migration work with hiring and on-call responsibilities."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Standard GRPO generally uses multiple rollouts per prompt to compare relative rewards and form an informative advantage signal. A single rollout usually increases variance or makes that signal uninformative."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Dynamic batching has no other request to combine with in an isolated single-request workload and can leave latency unchanged or increase it."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "The Experience entries are not ordered newest-first."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review found no supporting evidence in the body for Kubernetes or SQL."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 25,
+    "rewrites": [],
+    "falsePositives": [
+      "Correct 'on- call' to 'on-call.'"
+    ]
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "lines": [
+    "Casey Morgan",
+    "+1 (555) 010-7731 | casey.morgan@example.com | example.com/portfolio/cmorgan",
+    "EDUCATION",
+    "Lakeshore University | B.A. in Cognitive Science | Metro City, USA | Sep 2015 - May 2019",
+    "EXPERIENCE",
+    "Pinegrove Financial | Senior UX Researcher | Metro City, USA | Mar 2022 - Jun 2025",
+    "- Improved dispute-form completion by 40% by splitting the form into three short steps with saved progress.",
+    "- Brought the design system to WCAG 2.1 AA by setting body-text contrast to at least 3:1 against every background.",
+    "- Built a research repository of 250 tagged session clips that product managers searched before writing new requirements.",
+    "- Presented quarterly findings to the head of product and two design teams; three of the top five recommended fixes shipped in the next release cycle.",
+    "- Validated the redesigned app navigation's findability with an open card sort of 30 customers before it shipped.",
+    "- Led research on the mobile onboarding flow, testing three prototypes with 24 new customers; the shipped design raised completed sign-ups from 41% to 58% in the quarter after launch.",
+    "Northwind Health | UX Research Associate | Metro City, USA | Apr 2020 - Feb 2022",
+    "- Owned the monthly patient survey and the reporting dashboard the care teams used.",
+    "- Interviewed 40 patients about appointment reminders; the findings led to a two-way text reminder that cut missed appointments from 14% to 9%.",
+    "- Wrote the screener and consent templates for all patient studies, cutting study setup time from two weeks to three days.",
+    "- Tested the telehealth waiting-room screens with 16 older patients while also running the team's recruiting calendar, updating the style guide, onboarding two interns and taking notes for the accessibility working group, which cut support calls about joining a video visit by 30%.",
+    "PROJECTS",
+    "Accessible Transit Map | Independent Project | Figma | Sep 2024 - Present",
+    "- Championed an inclusive, human-centered design approach to transit wayfinding that delivered meaningful, user-first outcomes.",
+    "- Measured the redesign with timed tasks: median route-finding time fell from 95 to 62 seconds and errors from 11 to 3 across the 12 sessions.",
+    "- Published the design files and test protocol openly, and the city's transit agency invited the project to its spring accessibility review.",
+    "Community Clinic Booking Redesign | Volunteer, Team of 3 | Figma | Mar 2023 - Aug 2023",
+    "- Redesigned a free clinic's online booking flow, cutting the steps to book from 9 to 4; phone bookings fell by a quarter in the next two months.",
+    "- Recruited 10 clinic patients and ran two rounds of hallway testing, fixing the six issues that stopped first-time users from finishing a booking.",
+    "- Tested three onboarding prototypes with 24 new customers and shipped the design that lifted completed sign-ups by 41% in its first quarter.",
+    "SKILLS",
+    "Tools: Figma, screen-reader testing (VoiceOver, NVDA), Tableau",
+    "Methods: moderated and unmoderated usability testing, interviews, surveys, A/B testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before the UX research experience and projects.",
+      "because": "After several years of research work, the roles are the stronger introduction."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The timeline has a 10-month gap between graduation and the first role.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "No paid role is listed after June 2025.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The 40% completion increase has no stated baseline or clear type of increase.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The repeated “by” makes the action harder to read.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "error",
+      "says": "A 3:1 body-text contrast ratio does not establish WCAG 2.1 AA compliance.",
+      "because": "Normal-size body text generally requires 4.5:1, and contrast alone does not verify every applicable AA criterion."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The repository line shows that product managers used the clips but not what their use changed.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The shipped fixes are buried behind the presentation context.",
+      "because": "A scanning reader may register the presentation rather than the fact that recommendations shipped."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "The quarterly findings have no stated research method.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "An open card sort cannot validate the findability of the redesigned app navigation.",
+      "because": "Participants create groups and labels rather than navigate the proposed design."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The navigation line does not say what the study led you to learn or decide.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The onboarding result is buried after the research setup.",
+      "because": "The change from 41% to 58% is the line’s most immediately legible achievement."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "“Owned” names a responsibility without identifying the work performed.",
+      "because": "A reader cannot tell whether you designed the survey, analyzed responses, built the dashboard or maintained either one."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The care teams’ use of the dashboard does not identify a resulting decision or workflow change.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The appointment-reminder result should open the entry.",
+      "because": "Leaving it below a duty-led opening makes the fall in missed appointments less likely to be noticed first."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The line incorrectly credits testing and unrelated duties with cutting support calls.",
+      "because": "Testing does not itself change the screens patients encounter, and the other duties do not explain the reduction."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The list of other duties interrupts the connection between testing and its proposed result.",
+      "because": "The detour makes it harder to tell which work belongs to the waiting-room project."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The testing phrase does not identify the joining-screen change it informed.",
+      "because": "The participant count shows the scale of testing but not how its findings affected joining a visit."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The support-call result is stranded at the end, where “which” has an ambiguous referent.",
+      "because": "A reader may miss the 30% figure or attach it to the wrong activity."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The stated design approach does not identify the map work performed.",
+      "because": "“Inclusive” and “human-centered” describe an intention rather than an accessibility decision."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The claimed outcomes do not say what improved.",
+      "because": "A reader cannot connect the summary to a benefit for someone finding a route."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The abstract opening delays the entry’s clearest outcome.",
+      "because": "A reader encounters a broad claim before the evidence that route-finding improved."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The route-finding figures do not identify the conditions being compared.",
+      "because": "A reader cannot tell whether they compare the original map with the redesign or another condition."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The measurement setup delays the route-finding result.",
+      "because": "The time and error reductions are stronger than the introductory statement that tasks were timed."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The article before the session count is unnecessary.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The conjunction slows the transition to the agency invitation.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The booking-flow line does not show which design change removed steps.",
+      "because": "One concrete change would show the UX work rather than only its result."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The decline in phone bookings has no stated comparison period.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "The six repaired issues have no stated post-fix booking outcome.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Hallway testing” may not convey the method clearly outside UX.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The onboarding study appears incorrectly attributed to the clinic project.",
+      "because": "Matching details in the Pinegrove entry make one achievement appear under two projects, and the onboarding terms do not connect clearly to clinic booking."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The 41% sign-up increase has no stated baseline.",
+      "because": "If this is a separate clinic result, a reader cannot tell what completed sign-ups rose against."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3886,
+    "input_tokens_details": {
+      "cache_write_tokens": 3883,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1444,
+    "output_tokens_details": {
+      "reasoning_tokens": 191
+    },
+    "total_tokens": 5330
+  }
+}

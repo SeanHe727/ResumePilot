@@ -1,0 +1,100 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/B.md",
+  "recall": 8,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S3",
+    "T3",
+    "N2",
+    "N4"
+  ],
+  "coverage": false,
+  "suggestions": 91,
+  "words": 2756,
+  "quotes": 3,
+  "grounded": 2,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Use consistent punctuation across bullets. Either use periods on all bullets or omit them consistently.",
+    "Make sure line wrapping is handled by the document layout rather than manual hyphens such as “on- call,” “regression checks,” or “stabilised.”"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5405,
+    "completion_tokens": 13328,
+    "total_tokens": 18733,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12910
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 3741
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "“Owned” is common resume language and does not by itself establish seniority or impact. The bullet currently describes responsibility more than an outcome."
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "This is the weakest bullet in the resume because it is broad, promotional, and unsupported. It does not tell the reader what you built or what changed."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Describe this as a 12-percentage-point increase, not simply “by 12%,” unless you explicitly mean relative improvement."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "Reducing latency from 900 ms to 600 ms is a 33.3% reduction, not 50%."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "This bullet contains too many accomplishments and becomes difficult to scan."
+      },
+      {
+        "id": "T1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Reconcile “single-request” with “dynamic batching.” Dynamic batching generally depends on concurrent requests, so explain the workload or benchmark conditions."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "The internship appears after the earlier full-time role despite occurring later; that is acceptable if intentional, but reverse chronological order is usually easiest to scan."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "Kubernetes appears in the skills list but is not mentioned elsewhere. Either add relevant evidence in the experience section or remove it if your exposure was limited."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 91,
+    "rewrites": [],
+    "falsePositives": [
+      "Use consistent punctuation across bullets. Either use periods on all bullets or omit them consistently.",
+      "Make sure line wrapping is handled by the document layout rather than manual hyphens such as “on- call,” “regression checks,” or “stabilised.”"
+    ]
+  }
+}

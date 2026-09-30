@@ -1,0 +1,30 @@
+Taylor Nguyen
++1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen
+EDUCATION
+Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026
+Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023
+EXPERIENCE
+Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025
+- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.
+- Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and map widgets.
+- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.
+- Wrote 60 component tests for the search filters, which caught 3 regressions before release.
+- Presented the performance work at the engineering all-hands, and two other teams adopted the same code-splitting setup.
+- Documented the design-system tokens in Storybook so designers could check spacing and color values without asking engineers.
+Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024
+- Migrated 40 department sites to a shared component library, cutting new-page build time from 2 days to half a day.
+- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.
+- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.
+- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.
+PROJECTS
+Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present
+- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.
+- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.
+- Open-sourced the app, and the city transit agency linked it from its developer page.
+Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024
+- Built a room-booking page for the campus library, cutting the steps to book from 7 to 3; the library adopted it that semester.
+- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.
+- Presented the demo to the library staff and handed over the code with setup notes.
+SKILLS
+Tools: TypeScript, React, Vue, Storybook
+Methods: server-side rendering, accessibility, component testing

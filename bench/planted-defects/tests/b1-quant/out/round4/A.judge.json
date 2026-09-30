@@ -1,0 +1,102 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 10,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 26,
+  "words": 2503,
+  "quotes": 10,
+  "grounded": 6,
+  "rewrites": 1,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "does not identify ... whether it came from a live allocation or backtest (the bullet says out-of-sample backtest)"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5472,
+    "completion_tokens": 12289,
+    "total_tokens": 17761,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11749
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3552
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "uses a personal pronoun; resume lines are phrases, not sentences — \"Derived a variance bound for a sparse regression estimator; my proof...\""
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "the skill is misspelled; ... should be corrected to time-series econometrics."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 52% to 58% is 6 percentage points, not a 6% relative increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The line incorrectly calls the change from 0.20 to 0.15 a 33% improvement. ... 25% reduction"
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "Put outcomes before long method lists where possible, particularly in the Sunrise Bakery and feature-store bullets."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Both mention maintaining or building shared research infrastructure on the lab cluster; separate the cluster work from the R-package and service responsibilities."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "annualizes a daily Sharpe by multiplying by 252 instead of using the square root of 252"
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "standard Diebold–Mariano inference is generally not calibrated for nested model comparisons"
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "The Assistant Store Manager role currently appears first and interrupts the quantitative progression."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "The narrative review found no supporting experience for SQL, C++, Kafka, or Bayesian inference."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 26,
+    "rewrites": [
+      "Kept the store within its weekly labour budget while managing opening shifts and a team of 6 bakers and cashiers."
+    ],
+    "falsePositives": [
+      "does not identify ... whether it came from a live allocation or backtest (the bullet says out-of-sample backtest)"
+    ]
+  }
+}

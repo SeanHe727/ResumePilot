@@ -1,0 +1,209 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes, FPGA",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Use contact details a recruiter can reach if these are placeholders on the submitted résumé.",
+      "because": "The phone number and website may be placeholders."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Clarify what “update speed” measures.",
+      "because": "The result is hard to interpret without knowing whether it means download time, throughput, or completion time."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Explain how the 60% improvement was measured.",
+      "because": "The measurement basis would make the result easier to interpret."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether you built the rig’s hardware, software, or both.",
+      "because": "The current wording does not establish the rig’s scope."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify what “400 tests” counts.",
+      "because": "It could refer to the rig’s scope or to a test-suite count."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Explain what evidence the logger captured and how it contributed to finding the causes.",
+      "because": "The wording can sound as if the logger alone identified the root causes."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz cannot capture it without aliasing.",
+      "because": "The sample rate is below the Nyquist requirement."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Declaring the shared counter `volatile` does not by itself fix the race condition.",
+      "because": "`volatile` does not provide synchronization or atomicity."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify your contribution to the motor-controller rewrite.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Give the measurement basis and time period for the jitter and fault reductions, if available.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Resolve this result’s overlap with the Formula Student bullet before retaining both.",
+      "because": "The same 300-unit motor-control result appears under that project."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Clarify what part of the test automation you personally implemented, if useful for the target role.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Specify the measurement period for the reduction in returns if it matters.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify the relationship between the calibration procedure and the complaint reduction.",
+      "because": "The current wording does not explain how the procedure relates to the count."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Provide the comparison period or explain how complaints were tracked, if verifiable.",
+      "because": "That would make the complaint reduction clearer."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify your design contribution if “designed” could be mistaken for a team-wide effort.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Replace or remove the promotional description.",
+      "because": "“Next-generation” and “redefines” are broad claims that do not explain what you built."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Clarify the conditions under which average current was measured.",
+      "because": "The reading or transmission schedule may affect comparability."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Verify that “built two stations” accurately describes what the school did.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify your leadership scope if “Electronics Lead” does not make it clear.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "Robot-fleet firmware appears not to belong under the Formula Student electric-car project.",
+      "because": "It conflicts with the project context and resembles work described under Voltline."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "State who wrote and tested the dashboard firmware and what you contributed.",
+      "because": "The passive phrasing leaves ownership uncertain."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The 300-robot motor-control result appears duplicated or misattributed to the Formula Student project.",
+      "because": "It repeats the Voltline achievement and conflicts with the project’s dates and context."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Reconsider how the Tools list groups its items.",
+      "because": "It combines languages, a microcontroller platform, measurement equipment, and FPGA."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Support FPGA and oscilloscopes with concrete examples if retaining them.",
+      "because": "Neither is demonstrated in the experience bullets."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Make “firmware” more specific.",
+      "because": "It is broader than the other listed methods."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Prioritize methods relevant to the target roles and show where you applied them.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 2473,
+    "input_tokens_details": {
+      "cache_write_tokens": 2470,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1500,
+    "output_tokens_details": {
+      "reasoning_tokens": 467
+    },
+    "total_tokens": 3973
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "file": "tmp/bench/tests/b1-ce/out/D.md",
+  "recall": 8,
+  "found": [
+    "D1",
+    "D3",
+    "D5",
+    "D6",
+    "D7",
+    "D16",
+    "D18",
+    "D19"
+  ],
+  "coverage": false,
+  "suggestions": 34,
+  "words": 1476,
+  "quotes": 1,
+  "grounded": 1,
+  "rewrites": 25,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "Avoid listing “Multi-Agent Systems” as a technology category by itself."
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3782,
+    "completion_tokens": 15907,
+    "total_tokens": 19689,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14595
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3782
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "Several bullets use phrases that do not demonstrate ownership or technical depth: ... “Responsible for…”"
+      },
+      {
+        "id": "D2",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "It sounds implausibly broad, especially for an intern, and “entire ML platform” is not specific enough to evaluate."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "It is generic, buzzword-heavy, and provides no evidence of technical work."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Several bullets use phrases that do not demonstrate ownership or technical depth: ... “I worked on…” ... Avoid first person throughout the resume."
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Fix the reverse-chronological order of experience"
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D16",
+        "found": true,
+        "evidence": "Remove: > Was involved in the process... It is passive and unclear."
+      },
+      {
+        "id": "D18",
+        "found": true,
+        "evidence": "Be careful with acronyms such as NGX, KRT, Orion, and Vega. If they are internal technologies, briefly explain their function unless the target employer will recognize them."
+      },
+      {
+        "id": "D19",
+        "found": true,
+        "evidence": "Delete: Age: 26 Marital status: Single Hobbies: watching TV, sleeping in These details are unnecessary and can introduce bias."
+      }
+    ],
+    "coverage": false,
+    "suggestions": 34,
+    "rewrites": [
+      "Jordan Lee\nMetro City, USA | +1 (555) 010-2468 | jordan.lee@example.com\nGitHub: github.com/... | LinkedIn: linkedin.com/... | Portfolio: example.com/...",
+      "Built [specific platform components—e.g., evaluation, orchestration, deployment, or monitoring services] used by [number] engineering, operations, and research teams to [specific outcome].",
+      "Built the initial ML platform foundation—including [components]—that became the shared workflow for engineering, operations, and research teams.",
+      "Built an ML-powered diagnostics triage workflow for an industrial inspection system, processing 800+ sensor signals per case and reducing the pending-case backlog by 68% during the first quarter after launch.",
+      "Fine-tuned a domain adapter on validated tool-use trajectories with assistant-only loss masking, improving **[specific evaluation metric]** by 35%.",
+      "Designed a routing layer that constrained three specialist agents and an independent reviewer to in-scope signals, preserving source-level traceability for each diagnostic finding.",
+      "Applied GRPO with grouped tool-use rollouts and a composite reward function, reducing end-to-end latency by 5% versus the SFT baseline while maintaining diagnostic accuracy.",
+      "Built **[specific ML platform components]** adopted by **[number or percentage]** of engineering, operations, and research teams.",
+      "Documented abstention rules and escalation paths for the triage workflow; converted them into the on-call team’s operational runbook.",
+      "Maintained monitoring dashboards for the diagnostics service and automated weekly reliability reports used by the on-call team to track **[availability, incidents, latency, or error-rate metrics]**.",
+      "Optimized API **[queries/handlers/caching/request flow]** and added **[unit/integration/load]** tests, reducing p95 latency by **[X% or from X ms to Y ms]**.",
+      "Maintained the perception team’s CI pipeline and added automated regression checks, shortening model release cycles from two weeks to three days.",
+      "Migrated 30 robot-fleet services from cron-based execution to an event-driven queue with retries and dead-letter handling, eliminating nightly backlogs that delayed morning dispatch.",
+      "Designed budgeted context layers and staged compaction to keep working context below 10K tokens across a 100-turn stress test, despite 100× growth in the raw conversation history.",
+      "Led the migration of the Orion and Vega pipelines to the NGX runtime on the KRT stack, coordinating the Project Falcon cutover across **[systems/teams]**.",
+      "**[Add one bullet describing the runtime architecture, tool orchestration, evaluation, reliability, or performance improvements.]**",
+      "Lead Developer",
+      "Contributed eight citation and faithfulness metrics to an open-source research-agent framework; the metrics now run in the default benchmark suite for every release.",
+      "Instrumented the evaluation pipeline across stability, sourcing, and parameter-handling stages, tracing three structural defects to their responsible modules and contributing fixes upstream.",
+      "**[Add scale if available: number of evaluations, reports, releases, contributors, or benchmark runs.]**",
+      "Languages: Python, TypeScript, SQL, Bash\nMachine Learning: PyTorch, LoRA, GRPO, supervised fine-tuning, model evaluation\nLLM/Agent Systems: LangGraph, RAG, tool-use agents, multi-agent orchestration, context management\nSoftware Engineering: REST APIs, event-driven systems, CI/CD, automated testing, monitoring\nTools: Git, [Docker], [cloud platform], [message queue], [database], [testing frameworks]",
+      "Evaluation: Citation evaluation, faithfulness evaluation, regression testing, reward design",
+      "Western State University — M.S. Computer Engineering\nMetro City, USA | Expected Jun 2026\n\nEastern Institute of Technology — B.S. Electrical Engineering\nMetro City, Country | Jun 2022",
+      "Relevant Coursework: Machine Learning, Distributed Systems, Computer Architecture, Algorithms",
+      "Machine Learning Engineering Intern, Part-Time"
+    ],
+    "falsePositives": [
+      "Avoid listing “Multi-Agent Systems” as a technology category by itself."
+    ]
+  }
+}

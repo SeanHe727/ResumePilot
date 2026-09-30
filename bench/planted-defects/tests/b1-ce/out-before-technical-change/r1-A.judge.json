@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b1-ce/out/A.md",
+  "recall": 9,
+  "found": [
+    "W1",
+    "W5",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "T3",
+    "N2",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 24,
+  "words": 1156,
+  "quotes": 8,
+  "grounded": 5,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 3576,
+    "completion_tokens": 11029,
+    "total_tokens": 14605,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10578
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 3320
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "the monitoring/on-call bullet ... describe ownership or adoption without a concrete result"
+      },
+      {
+        "id": "W5",
+        "found": true,
+        "evidence": "Replace or remove the generic claim about accelerating delivery and improving downstream outcomes"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The change from 71% to 83% is an increase of 12 percentage points, not 12%"
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "A change from 900 ms to 600 ms is a 33.3% reduction, not 50%"
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Separate crowded bullets. The Eastern Robotics migration bullet combines migration, logging-library work, onboarding, and on-call duties"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "The bullet describing early stopping on the test set conflicts with calling the result 'held-out performance'"
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Cross-entropy alone does not establish statistical significance"
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Reorder Experience newest-first. Put Mobility Systems Company ... above Eastern Robotics Co."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "skills such as SQL, Bash, Git, PyTorch, LoRA, LangGraph, RAG, Kubernetes, and Python that are not explicitly demonstrated"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 24,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "lines": [
+    "Jordan Lee",
+    "+1 (555) 010-2468 | jordan.lee@example.com | example.com/code/jordan-lee",
+    "Date of birth: 14 Mar 1999 | Nationality: Canadian",
+    "EDUCATION",
+    "Western State University | M.S. in Computer Engineering | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Eastern Institute of Technology | B.S. in Electrical Engineering | Metro City, Country | Sep 2018 - Jun 2022",
+    "EXPERIENCE",
+    "Mobility Systems Company | Machine Learning Engineering Intern | Metro City, USA | Oct 2024 - May 2025",
+    "- Improved diagnostic accuracy by 35% after fine-tuning a domain adapter on validated tool-use trajectories with assistant-only loss masking.",
+    "- Designed a routing layer that limits each of 3 specialist agents and an independent reviewer to their in-scope signals, cutting reviewer disagreement with specialist findings from 14% to 6%.",
+    "- Trained the triage agent with GRPO on grouped tool-use rollouts and a reward that penalises redundant calls, cutting tool calls per case 18% and end-to-end latency 5% versus the SFT baseline at equal accuracy.",
+    "- Wrote the evaluation harness the team used to compare 14 adapter checkpoints on accuracy, citation quality and latency, catching 2 accuracy regressions before release.",
+    "- Fine-tuned the adapter with assistant-only loss masking so the model would learn to reproduce the tool outputs more faithfully.",
+    "- Built a diagnostics triage branch for an industrial inspection system that screens 800+ sensor signals per case with ML-extracted features, cutting the pending-case backlog 68% in the eight weeks after launch.",
+    "Eastern Robotics Co. | Junior Software Engineer | Metro City, Country | May 2023 - Jul 2024",
+    "- Cut GPU memory for fine-tuning the perception models by 4x by switching from FP32 to BF16 mixed precision.",
+    "- Reduced p95 API latency from 420 ms to 180 ms by adding a request cache and batching sensor reads, with load tests that fail the build if p95 exceeds 200 ms.",
+    "- Maintained the CI pipeline for the perception team's model releases and adds automated regression checks that shortened release cycles to 3 days.",
+    "- Migrated 30 robot-fleet services from cron jobs to an event queue with retries and dead-letter handling, removing the nightly backlogs that delayed morning dispatch.",
+    "PROJECTS",
+    "Agent Runtime Suite | Owner | TypeScript, Multi-Agent Systems | Aug 2025 - Present",
+    "- Drove adoption of AI-first engineering practices across the platform, accelerating delivery and improving outcomes for downstream teams.",
+    "- Kept working context under 10K tokens across a 100-turn stress test while the raw conversation grew 100x, using budgeted context layers and staged compaction.",
+    "- Separated concurrency pools and gated cache writes on stream completion, removing nested-pool deadlocks and lost tool results under 50-way fan-out.",
+    "Research-Agent Evaluation Framework | Contributor | LLM Evaluation | Feb 2025 - Jul 2025",
+    "- Integrated 8 citation and faithfulness metrics into an open-source research-agent framework's evaluation module.",
+    "- Showed the evaluator tracks injected degradation with a Kendall correlation of 0.89 across 400+ report-level trials that removed citations, sources and claims.",
+    "- Cut the pending-case backlog by two-thirds with a triage branch that screens 800+ sensor signals per case using ML-extracted features.",
+    "SKILLS",
+    "Programming: Python, TypeScript, Git",
+    "ML & Agents: PyTorch, LoRA, GRPO, agent evaluation"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove date of birth and nationality.",
+      "because": "They are generally irrelevant to technical hiring and can create unnecessary bias or privacy concerns."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Remove or substantially revise the duplicate backlog claim.",
+      "because": "The Mobility Systems experience bullet and the Research-Agent project bullet both claim reducing a backlog involving 800+ sensor signals."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "Remove or substantially revise the duplicate backlog claim.",
+      "because": "The Mobility Systems experience bullet and the Research-Agent project bullet both claim reducing a backlog involving 800+ sensor signals."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Remove the vague Agent Runtime Suite bullet.",
+      "because": "It is broad, promotional, and unsupported by a measurable result."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Specify what 'accuracy' means, the comparison point, and clarify the evaluation data.",
+      "because": "'Accuracy' can mean many things, and a 35% improvement is difficult to assess without a metric and baseline."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Define 'reviewer disagreement' more precisely and clarify measurement context and tradeoffs.",
+      "because": "The result is promising, but the reader needs to understand what disagreement means and whether the routing introduced tradeoffs."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Explain what 'equal accuracy' means, identify the evaluation metric, clarify the baseline, and add data volume if possible.",
+      "because": "Its credibility depends on a clearly controlled comparison."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Clarify whether the evaluation harness was used only by your team or more broadly, and how regressions were identified.",
+      "because": "The hiring manager will want to know the practical consequence of the harness."
+    },
+    {
+      "line": 13,
+      "kind": "error",
+      "says": "Resolve the duplicated loss-masking bullets.",
+      "because": "The first Mobility Systems bullet and the later loss-masking bullet describe closely related work."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Remove or combine if duplicative, or distinguish from the first bullet by emphasizing a separate experiment or result.",
+      "because": "It repeats the main technical detail from the first bullet without adding a measurable accomplishment."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Verify this is not the same project or outcome as the Research-Agent Evaluation Framework bullet, clarify your contribution, and explain measurement.",
+      "because": "The duplication elsewhere creates a credibility problem."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Specify what '4x' means, the practical consequence, and clarify hardware and quality tradeoff.",
+      "because": "The practical consequence and quality tradeoff are missing."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify the workload, request volume, endpoint, and cache safeguards if relevant.",
+      "because": "Additional scope would make the scale of the optimization easier to judge."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Correct the grammar error in the CI bullet.",
+      "because": "'Maintained' is past tense, but 'adds' is present-tense and does not agree with the subject."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Clarify what you changed in the pipeline, explain 'release cycles to 3 days,' and quantify regression check outcomes.",
+      "because": "The current bullet mixes ownership, automation, and release speed without clearly connecting cause and effect."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Clarify your role in the migration, quantify operational effect, and specify how backlog removal was measured.",
+      "because": "The current wording gives a strong technical summary but leaves the reliability and business impact somewhat qualitative."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "Remove or replace with a specific technical or adoption result.",
+      "because": "It sounds like a general claim rather than evidence of engineering work."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Define 'working context,' clarify 'raw conversation grew 100x,' explain evaluation setup, and include effect on cost or success if measured.",
+      "because": "The measurement terms are ambiguous."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Quantify the improvement, clarify test context, and explain what '50-way fan-out' represents.",
+      "because": "Adding scale or test evidence would make the result more credible."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Name the categories or types of metrics, clarify your implementation role, and state whether work was merged upstream or used externally.",
+      "because": "'Integrated' can describe a wide range of contribution levels."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Use the precise name of the statistical measure, clarify degradation protocol, and specify trial details.",
+      "because": "The experimental design is not fully clear."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "Remove if it duplicates the Mobility Systems bullet.",
+      "because": "Repeating the same accomplishment in two sections can make the resume appear padded or inconsistent."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "If it describes separate work, specify how the project’s triage branch differs from the production diagnostics system and clarify ownership and timeline.",
+      "because": "A project should add new evidence, not repeat the main internship achievement."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Git is a tool rather than a programming language; organize skills by category.",
+      "because": ""
+    },
+    {
+      "line": 31,
+      "kind": "suggestion",
+      "says": "'Agent evaluation' is broad; ensure the resume demonstrates the specific evaluation capabilities you mean.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Standardize the location format for institutions.",
+      "because": "'Metro City, USA' and 'Metro City, Country' currently look inconsistent."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Use consistent date formatting throughout.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Ensure all bullets use past tense for completed roles and present tense only for ongoing projects.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Keep punctuation consistent; either use periods on all bullets or omit them consistently.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Check that every metric has a baseline, timeframe, evaluation population, or operational context where appropriate.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Make your individual contribution clear when the result may have been team-wide.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Order bullets by relevance and impact, not by chronology of the work.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4061,
+    "completion_tokens": 1842,
+    "total_tokens": 5903,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}

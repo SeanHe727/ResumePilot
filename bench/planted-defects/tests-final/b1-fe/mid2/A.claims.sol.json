@@ -1,0 +1,180 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "- Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and deferring the analytics script, raised the checkout page's Lighthouse performance score from 52 to 91.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Documented the design-system tokens in Storybook so designers could check spacing and color values without asking engineers.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Apr 2024 - Aug 2024",
+    "- Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop list offline.",
+    "- Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved stops.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Presented the demo to the library staff and handed over the code with setup notes.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Education appears before Experience, so the relevant web-development work does not lead the résumé.",
+      "because": "A reader scanning for relevant experience reaches the education entries first."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The dates leave about nine months with no study or work listed from June 2023 to April 2024.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The gerund list delays the Lighthouse score result and makes the actions awkward to read.",
+      "because": "A reader has to work through four methods before reaching the impact, and it is less clear that you carried out the optimizations."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "Lazy-loading the hero image does not explain the claimed LCP improvement if it is the LCP element.",
+      "because": "Lazy-loading can postpone the LCP image’s fetch, making the drop from 4.1s to 1.2s seem technically implausible."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The Storybook line gives no evidence that designers used the documentation or that it reduced requests.",
+      "because": "Without an adoption or support-request measure, the benefit remains an assertion rather than a demonstrated outcome."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Without asking engineers” is a wordy add-on.",
+      "because": "The preceding phrase already says designers could check the values themselves."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Converting PNGs to WebP cannot, by itself, reduce a JavaScript bundle.",
+      "because": "Image assets are not JavaScript code, so WebP conversion does not explain the 60% bundle reduction."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The line opens with the editor interviews rather than the stronger preview-mode result.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "“Writes” is present tense in a role dated April–August 2024.",
+      "because": "The verb conflicts with the completed position’s dates and makes the timing of the checklist work unclear."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Search time” does not identify what was timed.",
+      "because": "A reader cannot tell whether the figures measure page response, result display, or time to find a result."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Under 1” omits the unit.",
+      "because": "The starting figure is in seconds, but the reader must infer that the endpoint uses the same unit."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The line gives no source or integration for the live bus arrivals.",
+      "because": "A reader cannot tell how the app obtains the arrival data, making the technical contribution harder to assess."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“About 900” makes the weekly rider count imprecise.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The drop from 3.0s to 1.5s is a 50% reduction, not a 75% improvement.",
+      "because": "The time fell by 1.5 seconds from a 3.0-second baseline, which is half the original time."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The change from 30% to 40% is 10 percentage points, not 10%.",
+      "because": "“10%” can be read as a relative increase, which would be about 33% from the 30% baseline."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The heading says Vue, but the bullet says the booking-flow frontend used React and TypeScript.",
+      "because": "React and Vue are different UI frameworks, and TypeScript does not reconcile the conflicting claims."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Worked on the frontend” does not identify what you built or changed.",
+      "because": "It gives no specific contribution or result, so a reader cannot gauge the extent of your involvement."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The line names edge cases but does not say what the component or tests achieved.",
+      "because": "An outcome or test result would show whether the implementation worked reliably or what it improved."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The calendar-component bullet should appear before the earlier, less specific project bullet.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The line does not say what came of the demo or code handover.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "“Storybok” is misspelled; the correct spelling is “Storybook.”",
+      "because": "A misspelled tool name can make the skills list look unproofread and leave a reader unsure which tool you mean."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Angular is listed under Tools, but no entry shows or plausibly requires its use.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3359,
+    "input_tokens_details": {
+      "cache_write_tokens": 3356,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1303,
+    "output_tokens_details": {
+      "reasoning_tokens": 257
+    },
+    "total_tokens": 4662
+  }
+}

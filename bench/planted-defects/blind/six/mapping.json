@@ -1,0 +1,112 @@
+{
+  "case-1": {
+    "test": "b1-ce:mid1",
+    "reviewers": {
+      "Reviewer 1": "A",
+      "Reviewer 2": "B",
+      "Reviewer 3": "G",
+      "Reviewer 4": "C",
+      "Reviewer 5": "F",
+      "Reviewer 6": "E"
+    }
+  },
+  "case-2": {
+    "test": "b1-pm:mid1",
+    "reviewers": {
+      "Reviewer 1": "A",
+      "Reviewer 2": "F",
+      "Reviewer 3": "C",
+      "Reviewer 4": "G",
+      "Reviewer 5": "E",
+      "Reviewer 6": "B"
+    }
+  },
+  "case-3": {
+    "test": "b1-quant:mid1",
+    "reviewers": {
+      "Reviewer 1": "G",
+      "Reviewer 2": "C",
+      "Reviewer 3": "B",
+      "Reviewer 4": "F",
+      "Reviewer 5": "A",
+      "Reviewer 6": "E"
+    }
+  },
+  "case-4": {
+    "test": "b1-ux:mid1",
+    "reviewers": {
+      "Reviewer 1": "B",
+      "Reviewer 2": "A",
+      "Reviewer 3": "C",
+      "Reviewer 4": "F",
+      "Reviewer 5": "G",
+      "Reviewer 6": "E"
+    }
+  },
+  "case-5": {
+    "test": "b1-ops:mid1",
+    "reviewers": {
+      "Reviewer 1": "F",
+      "Reviewer 2": "C",
+      "Reviewer 3": "E",
+      "Reviewer 4": "B",
+      "Reviewer 5": "A",
+      "Reviewer 6": "G"
+    }
+  },
+  "case-6": {
+    "test": "b1-da:mid1",
+    "reviewers": {
+      "Reviewer 1": "A",
+      "Reviewer 2": "F",
+      "Reviewer 3": "E",
+      "Reviewer 4": "C",
+      "Reviewer 5": "G",
+      "Reviewer 6": "B"
+    }
+  },
+  "case-7": {
+    "test": "b1-fe:mid1",
+    "reviewers": {
+      "Reviewer 1": "C",
+      "Reviewer 2": "F",
+      "Reviewer 3": "G",
+      "Reviewer 4": "A",
+      "Reviewer 5": "B",
+      "Reviewer 6": "E"
+    }
+  },
+  "case-8": {
+    "test": "b1-clin:mid1",
+    "reviewers": {
+      "Reviewer 1": "G",
+      "Reviewer 2": "B",
+      "Reviewer 3": "A",
+      "Reviewer 4": "F",
+      "Reviewer 5": "C",
+      "Reviewer 6": "E"
+    }
+  },
+  "case-9": {
+    "test": "b1-fin:mid1",
+    "reviewers": {
+      "Reviewer 1": "G",
+      "Reviewer 2": "F",
+      "Reviewer 3": "C",
+      "Reviewer 4": "A",
+      "Reviewer 5": "B",
+      "Reviewer 6": "E"
+    }
+  },
+  "case-10": {
+    "test": "b1-emb:mid1",
+    "reviewers": {
+      "Reviewer 1": "B",
+      "Reviewer 2": "G",
+      "Reviewer 3": "F",
+      "Reviewer 4": "C",
+      "Reviewer 5": "E",
+      "Reviewer 6": "A"
+    }
+  }
+}

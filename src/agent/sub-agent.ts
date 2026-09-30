@@ -176,7 +176,7 @@ export class SubAgentRuntime {
     const usage = { inputTokens: 0, outputTokens: 0 };
     let turns = 0;
 
-    const context = new LayeredContextManager(SUB_AGENT_CONTEXT);
+    const context = new LayeredContextManager({ ...SUB_AGENT_CONTEXT, ...config.context });
     // Set below, once it is known whether the optional tools resolved.
     context.setTaskContext(buildTaskBlock(config, task.context));
     context.addMessage({ role: 'user', content: task.input });
@@ -193,6 +193,7 @@ export class SubAgentRuntime {
         : config.systemPrompt,
     );
     const deadline = AbortSignal.timeout(config.timeoutMs);
+    const runState = new Map<string, number>();
     let toldToAnswer = false;
 
     while (turns < config.maxTurns) {
@@ -237,6 +238,7 @@ export class SubAgentRuntime {
         // while tools are on the table, so a turn that should be a lookup is
         // not pushed into answering early.
         ...(mustAnswer ? { jsonMode: true } : {}),
+        ...(config.maxTokens ? { maxTokens: config.maxTokens } : {}),
         abortSignal: deadline,
       });
 
@@ -256,9 +258,11 @@ export class SubAgentRuntime {
           // the next turn or it refuses to continue the exchange.
           ...(response.reasoning ? { reasoning: response.reasoning } : {}),
         });
-        for (const call of response.toolCalls) {
-          context.addToolResult(call.id, await this.callTool(call, deadline));
-        }
+        // Together, and filed in the order they were asked: a reader's calls in
+        // one turn do not depend on each other, and one after another a turn
+        // of research questions outlasted the reader's deadline.
+        const answers = await Promise.all(response.toolCalls.map((call) => this.callTool(call, deadline, runState)));
+        response.toolCalls.forEach((call, i) => context.addToolResult(call.id, answers[i]!));
 
         // The main loop has always done this; a sub-agent never did, so the
         // compaction ladder could not run on the one path that fills a window
@@ -367,6 +371,7 @@ export class SubAgentRuntime {
   private async callTool(
     call: { id: string; name: string; input: Record<string, unknown> },
     abortSignal: AbortSignal,
+    runState?: Map<string, number>,
   ): Promise<string> {
     return this.trace.span({}, async () => {
       const started = Date.now();
@@ -377,7 +382,7 @@ export class SubAgentRuntime {
         input: call.input,
       }));
 
-      const answer = await this.runTool(call, abortSignal);
+      const answer = await this.runTool(call, abortSignal, runState);
 
       this.trace.event(() => ({
         phase: answer.ok ? 'result' : 'failure',
@@ -395,6 +400,7 @@ export class SubAgentRuntime {
   private async runTool(
     call: { id: string; name: string; input: Record<string, unknown> },
     abortSignal: AbortSignal,
+    runState?: Map<string, number>,
   ): Promise<{ text: string; ok: boolean }> {
     if (!this.deps.toolRegistry.has(call.name)) {
       return {
@@ -415,6 +421,7 @@ export class SubAgentRuntime {
         subAgents: this,
         trace: this.trace,
         abortSignal,
+        ...(runState ? { runState } : {}),
       });
       return { text: JSON.stringify(result), ok: result.success !== false };
     } catch (err) {

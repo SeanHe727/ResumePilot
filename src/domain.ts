@@ -387,6 +387,18 @@ export interface BulletIssue {
   what: string;
   /** Roughly how many words answering it would add to the line. */
   costWords: number;
+  /** Which part of the line it is about. Absent on older readings. */
+  axis?: 'impact' | 'measurement' | 'method';
+  /**
+   * What kind of problem: something stated that is not so, something the line
+   * needs and does not have, or something there but not readable. The signal
+   * the selection weighs instead of a rank the reader assigns.
+   */
+  kind?: 'wrong' | 'missing' | 'unclear';
+  /** Why it is a problem for a reader. */
+  why?: string;
+  /** What doing it right looks like, in a phrase. No figures the page lacks. */
+  fix?: string;
 }
 
 export interface BulletDiagnosis {
@@ -463,6 +475,14 @@ export interface WordingDiagnosis {
     /** Filler, hedging, repetition within the line. */
     concision: ScoredDimension;
     issues: string[];
+    /**
+     * Words fixing each issue would take off the line, in the order of
+     * `issues`. A cut makes room for something worth more; without a size it
+     * read as free, and every cut on every line was chosen.
+     */
+    issueSavings?: number[];
+    /** Wrong, missing or unclear, per issue, parallel to `issues`. Absent on older readings. */
+    issueKinds?: Array<'wrong' | 'missing' | 'unclear' | undefined>;
   }>;
 }
 
@@ -475,6 +495,16 @@ export interface NarrativeAssessment {
   gaps: string[];
   /** Entries that would land better reordered, shortened or cut. */
   orderingNotes: string[];
+  /** Listed skills that no entry shows being used. Absent on older readings. */
+  unsupportedSkills?: string[];
+  /**
+   * Claims in different places that cannot all be true together: the same
+   * achievement told twice with different figures, more output than the dates
+   * allow, overlapping roles that do not fit. Absent on older readings.
+   */
+  conflicts?: string[];
+  /** Misspelled words outside the bullets — skills, headings, titles. Absent on older readings. */
+  misspellings?: string[];
   /**
    * How each entry reads as a unit — the same judgement at a smaller scale.
    *
@@ -632,6 +662,14 @@ export interface ReportCoverage {
  * notice.
  */
 export interface FullReport {
+  /**
+   * What already works, in the content reader's own words, at most three.
+   * Measured: a report on a résumé scoring 83 said nothing good about it and
+   * read as though everything was broken.
+   */
+  strengths?: string[];
+  /** The points to act on first: those resting on the first three groups chosen. */
+  startHere?: string[];
   sections: Array<{
     /**
      * An entry's own header, or the fixed title for what spans the document.
@@ -664,10 +702,18 @@ export interface FullReport {
 export interface SourceFinding {
   id: string;
   role: 'content' | 'wording' | 'narrative' | 'posting' | 'file';
+  /** From the content reader: wrong, missing or unclear. */
+  kind?: 'wrong' | 'missing' | 'unclear';
+  /** The reader's reason and the right way to do it, carried to the writer. */
+  why?: string;
+  fix?: string;
   /** Which line, entry or part of the document it is about. */
   target: string;
   what: string;
-  /** Roughly what answering it costs the page, where that is known. */
+  /**
+   * Roughly what answering it does to the page's length, where that is known:
+   * positive adds words, negative takes them off.
+   */
   costWords?: number;
 }
 
@@ -698,6 +744,13 @@ export interface FullReportPoint {
   from: string[];
   /** Roughly what answering it adds to the line, where it adds anything. */
   cost?: string;
+  /** What doing it right looks like, in a phrase. */
+  fix?: string;
+  /** The résumé lines it is about, by id, worked out from its findings. */
+  lines?: string[];
+  /** The selection's score of the group it rests on, and how it is shown. */
+  score?: number;
+  tag?: 'error' | 'important' | 'polish';
 }
 
 /**
@@ -715,6 +768,10 @@ export interface PlanGroup {
   findingIds: string[];
   /** The lines its findings are about, derived from them rather than written. */
   targets: string[];
+  /** How much it matters, 1 to 10, as the selection scored it. */
+  score?: number;
+  /** How it is shown: a certain error, an important point, or polish. */
+  tag?: 'error' | 'important' | 'polish';
 }
 
 export interface ImprovementPlan {

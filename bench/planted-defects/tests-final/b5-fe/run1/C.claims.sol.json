@@ -1,0 +1,219 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present",
+    "- Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.",
+    "- Opened the café three days a week and handled the daily cash count.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Migrated 40 department sites to a shared component library, cutting new-page build time from 2 days to half a day.",
+    "- Interviewed 8 department editors about publishing; my findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybook, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the code URL leads directly to a useful portfolio or code profile.",
+      "because": "A generic landing page would be less useful."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Confirm that “Expected Jun 2026” is still accurate when submitting the résumé.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Consider placing engineering experience ahead of the barista role.",
+      "because": "The engineering experience is more relevant to frontend applications."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether you personally prepared 200 orders or the team handled that volume.",
+      "because": "The distinction affects credibility."
+    },
+    {
+      "line": 9,
+      "kind": "error",
+      "says": "Fix the “cafØ” character-encoding error.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Consider cutting the cash-count bullet if space is tight.",
+      "because": "It is less relevant than the engineering work."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Name the performance metric and how it was measured.",
+      "because": "“Page performance” is too broad to evaluate."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Specify the audit’s scope if it covered only the date picker.",
+      "because": "“All” could sound like a claim about the whole product."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Verify that the three regressions were caught by those tests before release.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "Correct or remove the claim that lazy-loading the hero image cut LCP.",
+      "because": "Lazy-loading an above-the-fold hero commonly worsens LCP."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Remove or correct the XSS-prevention claim.",
+      "because": "React state does not sanitize input, and dangerouslySetInnerHTML bypasses React’s normal escaping."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Verify that the load-time and A/B-test figures are attributable to this work.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Check that the build-time comparison uses the same kind of page before and after.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "Check that the drop in broken-page reports was measured over comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "Change “Writes” to past tense.",
+      "because": "The university role is completed."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Clarify your contribution to the checklist if others maintained or approved it.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Identify what “search time” measures.",
+      "because": "It could mean response time or a person’s time finding a course."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Link directly to the live app or repository if available.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Be prepared to explain how weekly usage was measured.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Check that both timings came from comparable slow-3G tests.",
+      "because": ""
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Ensure the transit agency’s link is still live.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Check the two-month date range.",
+      "because": "It may prompt questions for a hackathon project."
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "Resolve the heading’s Vue claim against the first bullet’s React and TypeScript claim.",
+      "because": "The technologies are inconsistent."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Specify your frontend contribution more precisely.",
+      "because": "This is the least distinctive project bullet unless the calendar bullet covers all of the contribution."
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "Remove the travel-search bullet from the library-booking project.",
+      "because": "It appears to duplicate the Lumen achievement and does not fit the hackathon."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Group the listed skills more accurately than under “Tools.”",
+      "because": "TypeScript is a language, while React, Vue, and Angular are frameworks or libraries."
+    },
+    {
+      "line": 32,
+      "kind": "suggestion",
+      "says": "Keep Angular only if you can discuss hands-on experience with it.",
+      "because": ""
+    },
+    {
+      "line": 33,
+      "kind": "suggestion",
+      "says": "Consider whether the Methods section adds information beyond the bullets.",
+      "because": "The space could be used for stronger evidence if the résumé runs long."
+    }
+  ],
+  "usage": {
+    "input_tokens": 2238,
+    "input_tokens_details": {
+      "cache_write_tokens": 2235,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1486,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 3724
+  }
+}

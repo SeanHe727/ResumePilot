@@ -1,0 +1,284 @@
+{
+  "lines": [
+    "Jamie Alvarez",
+    "+1 (555) 010-5820 | jamie.alvarez@example.com | example.com/in/jalvarez",
+    "EDUCATION",
+    "Riverbend Polytechnic | B.S. in Industrial Engineering | Metro City, USA | Sep 2014 - May 2018",
+    "EXPERIENCE",
+    "Greenleaf Florist | Delivery Driver and Shop Assistant | Metro City, USA | Sep 2025 - Present",
+    "- Delivered 30 to 40 arrangements a day across the city and took cash and card payments at the door.",
+    "- Prepared weekend wedding orders with the head florist and kept the cooler stocked and labeled.",
+    "Lakeview Distribution | Operations Analyst | Metro City, USA | Jul 2018 - Jan 2021",
+    "- Raised forecast accuracy from 70% to 85% by switching the MAPE calculation to cover only SKUs that sold every week.",
+    "- Ran a time study of the returns desk; my findings led to a triage station that cut returns processing time from 3 days to 1.",
+    "- Wrote the dock scheduling rules for 12 carriers, cutting average trailer wait at the dock from 95 to 40 minutes.",
+    "- Set up cycle counting for the 2,000 highest-value locations, raising inventory record accuracy from 91% to 98.5% within a year.",
+    "Crestway Foods | Supply Chain Planner | Metro City, USA | Feb 2021 - Jul 2025",
+    "- Rebuilt weekly demand planning for 1,400 SKUs across 3 distribution centers with a seasonal forecast model, cutting stockouts from 6.2% to 2.8% while inventory fell by $1.9M.",
+    "- Cut inbound freight cost per pallet from $48 to $41 over two quarters by consolidating supplier pickups into four regional milk runs.",
+    "- Set reorder points for every SKU from 18 months of daily demand and supplier lead-time data, reviewed monthly with the category managers.",
+    "- Scoring 40 vendors weekly on on-time delivery, fill rate, lead-time variance and invoice accuracy, and sharing the scorecards with buyers before each quarterly review, raised on-time inbound deliveries from 81% to 93%.",
+    "- Raised the packaging line's overall equipment effectiveness (OEE) from 71% to 112% by cutting changeover time and micro-stops.",
+    "- Trained 6 planners on the new forecasting workflow and wrote its exception-handling guide, which the team still uses for promotions.",
+    "PROJECTS",
+    "Last-Mile Routing Study | Independent Project | Python | Oct 2024 - Present",
+    "- Modeled a regional grocer's 85 daily delivery stops as a vehicle-routing problem, cutting planned route miles 18% against the grocer's current routes.",
+    "- Cut average route length from 120 to 90 miles, a 40% reduction, by solving the routing problem with customer time windows.",
+    "- Raised on-time deliveries by 9% in simulation, from 84% to 93%, by adding customer time windows to the routing model.",
+    "Regional Food Bank Warehouse | Volunteer Consultant, Team of 4 | Excel | Mar 2022 - Jul 2022",
+    "- Analyzed warehouse operations and made recommendations to the food bank's leadership.",
+    "- The donation intake process was mapped and two duplicate data-entry steps were removed, so donations reached the shelves a day sooner.",
+    "- Wrote a slotting guide that the volunteer coordinators used to re-slot the warehouse again after its spring expansion.",
+    "SKILLS",
+    "Tools: Excel, Python",
+    "Methods: demand forecasting, inventory planning, time studies, vehicle routing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The move from Supply Chain Planner to Delivery Driver and Shop Assistant is unexplained.",
+      "because": "Without context, a recruiter may question the transition instead of focusing on seven years of relevant experience."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not ordered newest first.",
+      "because": "Lakeview appears above the later Crestway role, hiding the progression and forcing readers to reconstruct the chronology."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The Greenleaf role receives too much visual weight relative to the operations and supply-chain roles.",
+      "because": "Two bullets make it appear equally important and can distract from the intended career narrative."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Leading with the 2018 degree understates the more recent professional record.",
+      "because": "Opening with education delays the strongest evidence of current capability."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "“Delivered” and “took” use past tense for a current role.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "The delivery workload figure has no result for timeliness or accuracy.",
+      "because": "It shows volume handled but not whether deliveries were completed reliably."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Prepared” and “kept” use past tense for a current role.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Prepared weekend wedding orders” does not identify the candidate’s specific tasks.",
+      "because": "The ambiguity hides the level of responsibility in the shop."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Kept the cooler stocked and labeled” does not show its effect.",
+      "because": "Without a connection to readiness, accuracy, or freshness, it reads as routine maintenance."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "“Raised forecast accuracy from 70% to 85%” presents a change in the evaluated SKU population as a forecasting improvement.",
+      "because": "Excluding harder-to-forecast SKUs can mechanically improve the metric, making the figures incomparable unless they use the same population."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“MAPE” is unexplained jargon on its first use.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "“From 3 days to 1” omits the unit after the second number.",
+      "because": "The comparison is grammatically incomplete even though the reader can infer the unit."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "“My findings led to” uses a personal pronoun and indirectly attributes the outcome.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "“Dock scheduling rules” does not identify what changed in carrier scheduling.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "“Set up cycle counting” does not show how the program was structured or controlled.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "“A seasonal forecast model” does not identify the technique or treatment of seasonality.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Setting reorder points has no resulting change in service, inventory, or replenishment performance.",
+      "because": "Without an outcome, it can read as routine parameter maintenance rather than a planning improvement."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Reviewed monthly with the category managers” does not clearly identify what was reviewed or who reviewed it.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The on-time delivery result is buried after a long method-led opening.",
+      "because": "A scanning reader may register scorecard administration without reaching the improvement."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The gerund opening does not give an ended role a direct past-tense action.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "error",
+      "says": "An OEE increase from 71% to 112% is impossible under the standard definition.",
+      "because": "OEE is the product of components each capped at 100%, so it cannot exceed 100%."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "“By cutting changeover time and micro-stops” does not explain how the reductions were achieved.",
+      "because": "It hides the process-improvement technique and what the candidate personally changed."
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "The team’s continued use of the guide shows adoption but not its benefit.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "“Cutting planned route miles 18% against” is grammatically incorrect.",
+      "because": "It omits “by” and uses “against” awkwardly, making the result harder to read."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The vehicle-routing formulation does not say how optimized routes were produced.",
+      "because": "A technical reader cannot tell whether the project used a solver, heuristic, or another approach."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "The 18% mileage result is less visible than the method-led opening.",
+      "because": "A scanning recruiter reaches the setup before discovering the main result."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "Calling a decrease from 120 to 90 miles a 40% reduction is arithmetically wrong.",
+      "because": "The decrease is 30 miles, or 25% of the original 120 miles."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "Customer time windows name a constraint, not the optimization method.",
+      "because": "A technical reader cannot assess how the problem was solved or reproduced."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "“By 9%” confuses percent with percentage points.",
+      "because": "An increase from 84% to 93% is 9 percentage points, or approximately 10.7% relative."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Adding customer time windows does not explain their technical implementation.",
+      "because": "The reader cannot tell how the constraint was represented or enforced in the model."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The routing project reports the route-mileage achievement twice with conflicting reductions of 18% and 40%.",
+      "because": "Readers cannot tell whether the bullets describe different scenarios, and the inconsistency weakens confidence in the calculations."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Made recommendations” does not show what was adopted or improved.",
+      "because": "Advice alone does not demonstrate that the analysis influenced an operational decision."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Analyzed warehouse operations” is too broad to show what was examined or how Excel supported the analysis.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“Made recommendations to” is weaker and less direct than a single action verb.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The strongest result is not the entry’s opening bullet.",
+      "because": "Moving this specific process change and measured benefit first would give a scanning reader immediate evidence of impact."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The mapping and removal of duplicate steps are written in passive voice.",
+      "because": "The construction hides who performed the work."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Wrote a slotting guide” does not show how locations were assigned or what analysis informed the guide.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“Re-slot the warehouse again” is redundant.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "“That the volunteer coordinators used to” is unnecessarily wordy.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 4664,
+    "input_tokens_details": {
+      "cache_write_tokens": 4661,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1778,
+    "output_tokens_details": {
+      "reasoning_tokens": 157
+    },
+    "total_tokens": 6442
+  }
+}

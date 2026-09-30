@@ -1,0 +1,216 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "- Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and deferring the analytics script, raised the checkout page's Lighthouse performance score from 52 to 91.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Documented the design-system tokens in Storybook so designers could check spacing and color values without asking engineers.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Apr 2024 - Aug 2024",
+    "- Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop list offline.",
+    "- Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved stops.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Presented the demo to the library staff and handed over the code with setup notes.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make the code URL lead directly to a public profile or portfolio.",
+      "because": ""
+    },
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Replace the phone number and address if they are placeholders.",
+      "because": "Contact details should be the ones you intend to use when applying."
+    },
+    {
+      "line": 4,
+      "kind": "suggestion",
+      "says": "Confirm the expected M.S. graduation date when you submit the résumé.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Specify what “load time” measures.",
+      "because": "It could be confused with another performance metric."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Make sure the A/B test supports attributing the booking increase to this change.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Clarify whether the JavaScript sizes are transferred, compressed, or uncompressed.",
+      "because": "The comparison should be unambiguous."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "Scope “all 14” to the issues identified in that audit.",
+      "because": "It could imply the date picker has no remaining accessibility issues."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Change the opening construction to read as a completed action.",
+      "because": "It should be consistent with the other bullets."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Identify which of the four changes you made yourself.",
+      "because": "Listing four changes makes your contribution harder to distinguish."
+    },
+    {
+      "line": 12,
+      "kind": "error",
+      "says": "The stated cause of the LCP improvement appears inconsistent.",
+      "because": "Lazy-loading an above-the-fold hero image generally delays the LCP image."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "Add evidence of adoption or time saved if available.",
+      "because": "The current benefit is less concrete than the other bullets."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Converting PNGs to WebP would not ordinarily reduce a JavaScript bundle by 60%.",
+      "because": "It can reduce image bytes or page weight instead."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Make sure the broken-page counts cover comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Support the connection between preview mode and the drop in broken pages.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "“Writes” is in the wrong tense.",
+      "because": "The role ended in August 2024."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Clarify whether you authored the checklist, maintained it, or both.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Define what the four-to-under-one-second figure measures.",
+      "because": "Client-side filtering does not necessarily make initial page loading faster."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Be ready to explain how you measure approximately 900 weekly riders.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The 75% improvement figure is incorrect.",
+      "because": "Going from 3.0s to 1.5s is a 50% reduction in time."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Check whether offline caching affects the measured “cold-start” condition.",
+      "because": "Those terms may conflict."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Calling the change from 30% to 40% a 10% increase confuses percentage points with relative increase.",
+      "because": "It is a 10-percentage-point increase."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The heading’s Vue framework contradicts the frontend bullet’s React and TypeScript.",
+      "because": "The technologies listed in both places should align."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The frontend bullet’s React and TypeScript contradict the heading’s Vue framework.",
+      "because": "The technologies listed in both places should align."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Confirm that the component or its tests covered overlap and time-zone cases.",
+      "because": "The bullet implies they did."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "Consider cutting the demo-and-handoff bullet if space is needed.",
+      "because": "It says less about the software or its outcome than the calendar bullet."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "“Storybok” is misspelled.",
+      "because": "It should be “Storybook.”"
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Include Angular only if you can discuss work you have done with it.",
+      "because": ""
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Consider separating languages, frameworks, and tools.",
+      "because": "The list would be easier to scan."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1994,
+    "input_tokens_details": {
+      "cache_write_tokens": 1991,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1518,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 3512
+  }
+}

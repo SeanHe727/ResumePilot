@@ -1,0 +1,151 @@
+{
+  "id": "fe",
+  "job": "frontend engineering",
+  "name": "Taylor Nguyen",
+  "contact": "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+  "personal": "Age: 27 | Marital status: Single | Hobbies: watching TV, sleeping in",
+  "education": [
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023"
+  ],
+  "graduated": "Jun 2023",
+  "exp": [
+    {
+      "head": "Lumen Travel | Frontend Engineering Intern | Metro City, USA",
+      "dates": "Jun 2025 - Sep 2025",
+      "bullets": [
+        {
+          "slot": "anchor12",
+          "clean": "Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test."
+        },
+        {
+          "slot": "D2",
+          "clean": "Cut the booking flow's JavaScript from 410 KB to 260 KB by code-splitting the calendar and map widgets.",
+          "subtle": "Improved page performance by 35% by code-splitting the calendar and map widgets."
+        },
+        {
+          "slot": "anchor4",
+          "clean": "Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit."
+        },
+        {
+          "slot": "D4",
+          "clean": "Wrote 60 component tests for the search filters, which caught 3 regressions before release."
+        },
+        {
+          "slot": "D3",
+          "clean": "Presented the performance work at the engineering all-hands, and two other teams adopted the same code-splitting setup."
+        },
+        {
+          "slot": "D13",
+          "clean": "Documented the design-system tokens in Storybook so designers could check spacing and color values without asking engineers."
+        }
+      ]
+    },
+    {
+      "head": "Westfield State University | Web Developer, IT Services | Metro City, USA",
+      "dates": "Jul 2023 - Aug 2024",
+      "datesD10Subtle": "Apr 2024 - Aug 2024",
+      "bullets": [
+        {
+          "slot": "D1",
+          "clean": "Migrated 40 department sites to a shared component library, cutting new-page build time from 2 days to half a day.",
+          "subtle": "Owned the department websites and the shared component library other developers relied on."
+        },
+        {
+          "slot": "D6",
+          "clean": "Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+          "subtle": "Interviewed 8 department editors about publishing; my findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month."
+        },
+        {
+          "slot": "D9",
+          "clean": "Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+          "subtle": "Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester."
+        },
+        {
+          "slot": "D17",
+          "clean": "Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+          "subtle": "Rebuilt the course-catalog search with client-side filtering while also answering help-desk tickets, updating the style guide, running the student-worker schedule and moving the office intranet, which cut search time from 4 seconds to under 1."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "head": "Transit Arrival Web App | Independent Project | TypeScript, React",
+      "dates": "Oct 2025 - Present",
+      "bullets": [
+        {
+          "slot": "D5",
+          "clean": "Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+          "subtle": "Crafted a seamless, delightful, user-centric experience that empowers riders through innovative real-time technology."
+        },
+        {
+          "slot": "D11",
+          "clean": "Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+          "subtle": "Cut cold-start time on slow 3G from 3.0s to 1.5s, a 75% improvement, by caching the stop list offline."
+        },
+        {
+          "slot": "D18",
+          "clean": "Open-sourced the app, and the city transit agency linked it from its developer page."
+        }
+      ]
+    },
+    {
+      "head": "Library Room Booking | Hackathon, Team of 4 | Vue",
+      "dates": "Feb 2024 - Mar 2024",
+      "bullets": [
+        {
+          "slot": "D15",
+          "clean": "Built a room-booking page for the campus library, cutting the steps to book from 7 to 3; the library adopted it that semester."
+        },
+        {
+          "slot": "D16",
+          "clean": "Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+          "subtle": "The booking calendar component and its tests were written, and overlapping bookings and time-zone changes were handled."
+        },
+        {
+          "slot": "D12",
+          "clean": "Presented the demo to the library staff and handed over the code with setup notes.",
+          "subtle": "Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "Tools: TypeScript, React, Vue, Storybook",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "skillsD20Subtle": [
+    "Tools: TypeScript, React, Vue, Storybok",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "skillsD8Subtle": [
+    0,
+    "Angular"
+  ],
+  "unevidencedSubtle": "Angular",
+  "personalSubtle": "Date of birth: 17 Aug 2001 | Nationality: Vietnamese",
+  "v2": {
+    "S1": "Moving image resizing to the CDN, inlining critical CSS, preloading the two web fonts and deferring the analytics script, raised the checkout page's Lighthouse performance score from 52 to 91.",
+    "S2": "Worked on the frontend of the booking flow using React and TypeScript.",
+    "T1": "Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "T2": "Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "T3": "Made the checkout form accessible to screen-reader users by replacing its visible labels with placeholder text.",
+    "T4": "Cut the university sites' JavaScript bundle by 60% by converting their PNG images to WebP.",
+    "N1": {
+      "head": "Harbor Coffee Roasters | Barista | Metro City, USA",
+      "dates": "Oct 2025 - Present",
+      "bullets": [
+        "Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.",
+        "Opened the café three days a week and handled the daily cash count."
+      ]
+    },
+    "A2": "Raised weekly returning riders by 10% in the first month, from 30% to 40%, by adding saved stops.",
+    "desc": {
+      "T1": "The hero image is usually the largest contentful paint element; lazy-loading it delays its load, so it cannot cut LCP.",
+      "T2": "React state does not sanitize anything, and dangerouslySetInnerHTML bypasses React's escaping, so this renders user HTML and enables XSS.",
+      "T3": "Placeholder text is not a label: it disappears on input and is not reliably announced, so replacing labels makes the form less accessible.",
+      "T4": "Images are not part of the JavaScript bundle, so converting PNG to WebP cannot shrink it."
+    }
+  }
+}

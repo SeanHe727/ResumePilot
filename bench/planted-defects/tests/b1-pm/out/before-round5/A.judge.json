@@ -1,0 +1,108 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/A.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "T2",
+    "T4",
+    "N3",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 20,
+  "words": 2993,
+  "quotes": 23,
+  "grounded": 13,
+  "rewrites": 12,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5826,
+    "completion_tokens": 12119,
+    "total_tokens": 17945,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11574
+    },
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 4162
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "\"Prepares\" is also present tense for a role that ended in 2023"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "the hospital intake bullet hides ownership behind passive voice"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "cannot tell whether 35% means a relative increase or a percentage-point change"
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "The final practicum bullet incorrectly assigns Harbor's merchant-onboarding result to a hospital project and duplicates the Harbor entry."
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "The outpatient-scheduling bullet describes stakeholder activity without stating what changed or what result it produced."
+      },
+      {
+        "id": "S4",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "state that the opt-in comparison was observational unless you have a controlled evaluation"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "The late-delivery line incorrectly presents a reporting-definition change as an operational improvement."
+      },
+      {
+        "id": "N3",
+        "found": true,
+        "evidence": "The résumé leaves an unexplained gap from June 2018 to March 2019."
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Delete \"Date of birth: 2 Nov 1996 | Nationality: American.\""
+      }
+    ],
+    "coverage": true,
+    "suggestions": 20,
+    "rewrites": [
+      "Reduced the reported late-delivery rate",
+      "after adding pickup reminders",
+      "after interviewing 60 users who reported missing pickup windows.",
+      "characterize",
+      "Cut warehouse pick errors by 30%",
+      "sales and operations planning (S&OP)",
+      "prepared",
+      "Led weekly sessions",
+      "Mapped patient intake at 4 clinics and shortened the intake form",
+      "across two dining halls",
+      "otherwise discarded",
+      "reducing staff coverage needs by [the staff coverage hours or gaps eliminated each week]"
+    ],
+    "falsePositives": []
+  }
+}

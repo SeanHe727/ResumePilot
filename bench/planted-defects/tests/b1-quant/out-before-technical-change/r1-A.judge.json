@@ -1,0 +1,101 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 9,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 25,
+  "words": 1659,
+  "quotes": 14,
+  "grounded": 11,
+  "rewrites": 1,
+  "inventedNumbers": [],
+  "falsePositives": [
+    "\"and 1 more like it\" after noting the single personal pronoun instance in the set-aside"
+  ],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4359,
+    "completion_tokens": 16839,
+    "total_tokens": 21198,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 16403
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 4103
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove the first-person wording in “my proof.”"
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "while correcting the spelling of econometrics"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "distinguish a relative increase from a six-percentage-point increase"
+      },
+      {
+        "id": "A3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "process details about joining, deduplicating, and versioning data come before the result"
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Separate the R-package accomplishment from the unrelated lab duties"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Remove or correct the contaminated walk-forward claim"
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Replace the invalid Sharpe-ratio diagnostic"
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Move Sunrise Bakery to Additional Experience or shorten it substantially so the main sequence preserves the statistics and quantitative-finance arc"
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "flagged skills that are not demonstrated elsewhere in the resume, including SQL, C++, and Kafka"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 25,
+    "rewrites": [
+      "in an 18-month out-of-sample backtest after costs"
+    ],
+    "falsePositives": [
+      "\"and 1 more like it\" after noting the single personal pronoun instance in the set-aside"
+    ]
+  }
+}

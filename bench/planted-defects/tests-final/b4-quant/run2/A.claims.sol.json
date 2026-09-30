@@ -1,0 +1,157 @@
+{
+  "lines": [
+    "Morgan Patel",
+    "+1 (555) 010-4410 | morgan.patel@example.com | example.com/code/mpatel",
+    "Date of birth: 21 Jul 1998 | Nationality: Indian",
+    "EDUCATION",
+    "Ridgeway University | Ph.D. candidate in Statistics | Metro City, USA | Sep 2021 - Expected May 2026",
+    "Ridgeway University | B.S. in Mathematics | Metro City, USA | Sep 2016 - May 2020",
+    "EXPERIENCE",
+    "Ridgeway University | Research Assistant, Statistical Learning Lab | Metro City, USA | Jun 2020 - Aug 2021",
+    "- Owned the lab's simulation pipeline on the shared cluster and the reproducibility checks other students relied on.",
+    "- Derived a variance bound for a sparse regression estimator that tightens the previous bound by a log factor; it is now Section 3 of a paper under review at JASA.",
+    "- Taught weekly recitations for 60 students in graduate probability, writing 12 problem sets and earning a 4.8/5 teaching rating.",
+    "- Released an open-source R package for high-dimensional covariance estimation while maintaining the lab's shared cluster, organizing the weekly reading group and grading for two courses, which was downloaded 3,000 times in its first year.",
+    "Northpeak Capital | Quantitative Research Intern | Metro City, USA | Jun 2025 - Aug 2025",
+    "- Built a short-horizon order-book imbalance signal for liquid index futures that raised the desk book's Sharpe ratio from 1.1 to 1.5 over 18 months of out-of-sample backtest after costs.",
+    "- Cut the signal's daily turnover from 34% to 21% with a cost-aware position smoother, keeping 90% of gross returns and lowering estimated slippage by a third.",
+    "- Confirmed the forecast gain over the nested HAR-RV baseline with standard Diebold-Mariano tests across the 30 indices.",
+    "- Joining 120 microstructure features point-in-time across six venues, deduplicating late prints and versioning each schema, built a feature store the team reused in two later projects.",
+    "- Annualized the signal's daily Sharpe ratio by multiplying it by 252 before reporting it to the desk.",
+    "- Documented the backtest assumptions, transaction-cost model and known failure regimes in the desk's research wiki, which the next intern cohort used to onboard in their first week.",
+    "PROJECTS",
+    "Volatility Forecasting Study | Independent Research | Python, PyTorch | Jan 2024 - Present",
+    "- Beat a HAR-RV baseline's out-of-sample QLIKE loss by 7% on 30 equity indices with a temporal convolutional model trained on realized-volatility features.",
+    "- Cut forecast error from 0.20 to 0.15, a 33% improvement, by adding realized-volatility features and an asymmetric loss.",
+    "- Improved the model's directional hit rate by 6% on 30 equity indices, from 52% to 58%, with a temporal convolutional model.",
+    "Kaggle Market Prediction Competition | Team of 3 | Python | Mar 2023 - Jun 2023",
+    "- Placed 41st of 2,900 teams with a gradient-boosting ensemble on 300 engineered features, finishing in the top 2% of the private leaderboard.",
+    "- Cut validation leakage by switching to time-grouped folds, which closed a 0.02 gap between local validation and leaderboard scores.",
+    "- Wrote the team's feature-selection script using permutation importance, trimming 900 candidate features to 300 without losing validation score.",
+    "SKILLS",
+    "Programming: Python, R, PyTorch",
+    "Methods: time-series econometircs, high-dimensional statistics, gradient boosting"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The date of birth and nationality should be removed.",
+      "because": "They are irrelevant personal details that may distract from the candidate’s qualifications."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The experience entries are not in newest-first order.",
+      "because": "The 2020–2021 Ridgeway role appears above the more recent 2025 Northpeak internship, making the chronology less clear."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The package’s strongest result is buried after a list of separate duties.",
+      "because": "A reader reaches the download figure only after the cluster, reading-group, and grading duties."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The download count shows reach but not what the package helped users do.",
+      "because": "Without that context, the practical value of the contribution is hard to judge."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "The package’s outcome is delayed until after the separate duty list.",
+      "because": "Its position weakens the package’s impact on a quick scan."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "The usual Diebold–Mariano test is not valid for confirming a forecast gain against a nested HAR-RV baseline.",
+      "because": "It does not account for the distribution of loss differences from nested models; comparisons across indices may also need adjustments."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The comparison gives neither the size of the forecast gain nor the test result.",
+      "because": "A reader cannot judge the size of the difference or what the tests established."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "The opening participle does not grammatically connect to the main clause.",
+      "because": "The sentence makes the action of “Joining” appear to have built the feature store."
+    },
+    {
+      "line": 18,
+      "kind": "error",
+      "says": "Multiplying a daily Sharpe ratio by 252 uses the wrong annualization factor under the usual independence assumption.",
+      "because": "Annualization uses the square root of the number of trading days under that assumption."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The reporting destination does not show what impact the annualization had.",
+      "because": "The line ends on process detail rather than the contribution’s relevance."
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "The stated 33% improvement is arithmetically wrong; the reduction from 0.20 to 0.15 is 25%.",
+      "because": "The decrease of 0.05 is 25% of the starting error of 0.20."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "“Forecast error” does not identify the metric measured by the 0.20 and 0.15 values.",
+      "because": "A reader cannot tell what the values represent or compare the change with other forecasting results."
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The increase from 52% to 58% is 6 percentage points, not a 6% relative increase.",
+      "because": "Relative to the starting rate of 52%, the increase is about 11.5%."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The bullet repeats the index count and model type already given in the first bullet.",
+      "because": "The repeated details take space without distinguishing this result from the earlier forecast comparison."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.02 reduction in the score gap does not establish that validation leakage was cut.",
+      "because": "A smaller gap does not show that leakage caused the original gap or that the new folds removed it."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The 0.02 gap is not interpretable without the score metric and its scale.",
+      "because": "A reader cannot tell what the gap measures or judge its significance."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The result is delayed in the “which closed” clause.",
+      "because": "A reader scanning the bullet may miss the 0.02-gap change."
+    },
+    {
+      "line": 31,
+      "kind": "error",
+      "says": "“Econometircs” is misspelled; the correct spelling is “econometrics.”",
+      "because": "The typo can distract readers and weaken confidence in the résumé’s proofreading."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3560,
+    "input_tokens_details": {
+      "cache_write_tokens": 3557,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1071,
+    "output_tokens_details": {
+      "reasoning_tokens": 178
+    },
+    "total_tokens": 4631
+  }
+}

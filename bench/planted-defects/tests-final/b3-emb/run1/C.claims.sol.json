@@ -1,0 +1,203 @@
+{
+  "lines": [
+    "Morgan Kim",
+    "+1 (555) 010-8173 | morgan.kim@example.com | example.com/code/mkim",
+    "EDUCATION",
+    "Clearwater Institute of Technology | B.S. in Electrical Engineering | Metro City, USA | Sep 2017 - May 2021",
+    "EXPERIENCE",
+    "Voltline Robotics | Embedded Software Engineer | Metro City, USA | Mar 2023 - Jun 2025",
+    "- Improved update speed by 60% by compressing firmware images and resuming interrupted downloads.",
+    "- Wrote a hardware-in-the-loop test rig that ran 400 motor-control tests on every firmware build.",
+    "- Added a crash logger that saved the last 2 seconds of sensor data to flash, which found the root cause of 5 field failures.",
+    "- Sampled the motor's 5 kHz vibration signal at 8 kHz so the fault detector could capture it without aliasing.",
+    "- Fixed a race condition on the counter shared by the interrupt handler and the main loop by declaring the counter volatile.",
+    "- Rewrote the motor-controller firmware for a warehouse robot fleet of 300 units, cutting control-loop jitter from 120 to 15 microseconds and field motor faults by 60%.",
+    "Clearwater Sensors | Hardware Test Engineer | Metro City, USA | Apr 2022 - Feb 2023",
+    "- Automated end-of-line tests for a humidity sensor, cutting test time per unit from 90 to 25 seconds across 20,000 units a month.",
+    "- Traced a batch of early field failures to a solder-paste change; the findings updated the reflow profile and cut returns from 2.1% to 0.4%.",
+    "- Wrote the calibration procedure for the sensor line, cutting calibration drift complaints from 15 to 2 a quarter.",
+    "- Designed a test fixture that checked 8 boards at once, raising station throughput from 40 to 150 boards an hour.",
+    "PROJECTS",
+    "Low-Power Weather Station | Independent Project | C, STM32 | Jan 2025 - Present",
+    "- Engineered a next-generation, innovation-driven IoT solution that redefines sustainable environmental sensing.",
+    "- Cut average current from 4.2 mA to 0.9 mA by sleeping between readings and batching radio transmissions.",
+    "- Published the schematics and firmware openly, and a local school built two stations from them.",
+    "Formula Student Electric Car | Electronics Lead, Team of 12 | C | Sep 2019 - May 2021",
+    "- Worked on firmware and testing for the robot fleet's motor controllers.",
+    "- The CAN-bus firmware for the dashboard was written and tested against the motor controller before each race.",
+    "- Rewrote motor-control firmware for a fleet of about 300 robots, cutting control-loop jitter eightfold and motor faults by more than half.",
+    "SKILLS",
+    "Tools: C, C++, STM32, oscilloscopes, FPGA",
+    "Methods: firmware, hardware-in-the-loop testing, CAN, low-power design"
+  ],
+  "items": [
+    {
+      "line": 2,
+      "kind": "suggestion",
+      "says": "Make sure the code link goes directly to work a reviewer can inspect.",
+      "because": ""
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Specify whether download, installation, or total update time became 60% faster.",
+      "because": "Compression and resume address different parts of an update."
+    },
+    {
+      "line": 7,
+      "kind": "suggestion",
+      "says": "Give the conditions under which the speed improvement was measured.",
+      "because": "The result is otherwise hard to interpret."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether the 400 tests ran on every build.",
+      "because": "That makes the scale of the rig easier to judge."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify what the 400 tests covered.",
+      "because": "That makes the value of the rig easier to judge."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "Make the connection between the saved data and the five diagnosed failures precise.",
+      "because": "“Found the root cause” may overstate what the logger alone established."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Sampling a 5 kHz signal at 8 kHz does not avoid aliasing.",
+      "because": "An 8 kHz sample rate cannot directly capture a 5 kHz signal without aliasing."
+    },
+    {
+      "line": 11,
+      "kind": "error",
+      "says": "Declaring the counter `volatile` does not by itself fix a race condition.",
+      "because": "It does not provide atomic access or synchronization."
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Check that the fault reduction is attributable to the fleet-firmware work.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Check that the 300-unit figure describes the fleet affected.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "Verify that the 90-to-25-second figures cover the same portion of the test process.",
+      "because": ""
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Check whether the return-rate change can fairly be attributed to the reflow-profile update.",
+      "because": "Other simultaneous changes may have affected returns."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether complaints fell because of the calibration procedure.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the quarterly complaint counts cover comparable periods.",
+      "because": ""
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "Make clear whether the throughput figures reflect comparable operating conditions.",
+      "because": "Readers may otherwise expect an eightfold increase from the eight-board fixture."
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "The opening weather-station bullet uses promotional language without technical detail or evidence.",
+      "because": "The two bullets below it provide more substance."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Add the current-measurement conditions if space permits.",
+      "because": "Average current depends heavily on reading frequency, transmission schedule, and measurement duration."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Substantiate the school's adoption of the published work.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Ensure the linked repository makes the schematics and firmware easy to find.",
+      "because": ""
+    },
+    {
+      "line": 24,
+      "kind": "error",
+      "says": "The warehouse robot fleet does not appear to belong to a Formula Student electric-car project.",
+      "because": ""
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify your personal contribution to the CAN-bus firmware.",
+      "because": "The passive phrasing obscures it."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify your testing responsibility for the CAN-bus firmware.",
+      "because": "The passive phrasing obscures it."
+    },
+    {
+      "line": 26,
+      "kind": "error",
+      "says": "The final Formula Student bullet repeats the Voltline fleet result.",
+      "because": "It places that result under a project dated years earlier, creating a serious credibility problem."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "Make sure your experience supports the listed C++, STM32, and FPGA skills.",
+      "because": "The résumé currently gives little evidence for some of them."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Prioritize methods relevant to the roles you want.",
+      "because": "“Firmware” is broad beside the more specific items."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Be ready to account for the period since your most recent job ended in June 2025.",
+      "because": "That period may be a gap if this is your current résumé."
+    }
+  ],
+  "usage": {
+    "input_tokens": 1875,
+    "input_tokens_details": {
+      "cache_write_tokens": 1872,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1236,
+    "output_tokens_details": {
+      "reasoning_tokens": 276
+    },
+    "total_tokens": 3111
+  }
+}

@@ -262,11 +262,17 @@ export function groupingPrompt(
     return `[${i}] size=${size} ${row.dominant.bold ? 'bold' : 'plain'} gap=${gap}${heading} :: ${text}`;
   });
 
-  return `Here is every line of a résumé, in the order it appears, with what the page can say about it.
+  return `# Task
+
+Group the lines of a résumé into sections and entries. Each line comes with what
+the page shows about it (relative font size, bold or plain, the gap above it,
+and heading=named where the word marks a section heading).
 
 ${lines.join('\n')}
 
-Group them. Return JSON of exactly this shape, and nothing else:
+## Output
+
+JSON only, in exactly this shape:
 
 {
   "sections": [
@@ -280,37 +286,41 @@ Group them. Return JSON of exactly this shape, and nothing else:
   ]
 }
 
-Rules, all of them mechanical:
-- Every row number from 0 to ${rows.length - 1} appears exactly once, somewhere.
-- Return numbers only. Never any of the text: it is already correct.
-- Keep every list in ascending order, and the sections in page order.
-- A section's rows are one unbroken run.
-- "headingRowIds" is the row that names the section — EXPERIENCE, PROJECTS. The
-  block above the first heading has none: leave it out for that one.
-- A row shown as [withheld] is the top of the page, kept private. It belongs to
-  the block above the first heading, as a loose row.
-- A row marked \`heading=named\` is a section heading by its word. It opens a
-  section; it never belongs to the one above it. Rows the mark misses can still
-  be headings — judge those yourself.
-- An entry is one position, one degree, one project. "headerRowIds" is what it is
-  called, which can run to two rows: employer on one, title and dates on the next.
-- "infoRowIds" is what the entry says about itself rather than what it achieved —
-  a repository link, a line of technologies.
-- "bulletRowIds" is its achievements. Include the rows that are only the rest of
-  a bullet that wrapped; they belong to the same entry.
-- "looseRowIds" is for a section that holds lines of its own rather than entries:
-  a skills list, a summary paragraph, a list of awards or publications. An entry
-  is a position, a degree or a project — something with work under it. A line
-  that names an award and its year is a line the section holds, not an entry with
-  nothing in it.
+## Mechanical rules
 
-What to weigh:
-- A heading inside a position — "Selected Projects" under a job — is part of that
-  position, not a new entry, even when bullets follow it.
-- A project title with no dates and no emphasis is still a title if bullets belong
-  to it.
-- A position that continues onto the next page is still one entry.
-- Company, title, dates and location that describe one job belong to one entry.`;
+- Every row: each number from 0 to ${rows.length - 1} appears exactly once.
+- **Numbers only:** never return any of the text; it is already correct.
+- Order: every list ascending, sections in page order, each section one
+  unbroken run of rows.
+- headingRowIds: the row that names the section. The block above the first
+  heading has none; leave it out there.
+- [withheld] rows: the top of the page, kept private. They are loose rows of
+  the block above the first heading.
+- heading=named: this row opens a section and never belongs to the one above
+  it. Rows without the mark can still be headings; judge those yourself.
+
+## What goes where
+
+- Entry: one position, one degree or one project (something with work under it).
+- headerRowIds: what the entry is called (up to two rows: employer on one,
+  title and dates on the next).
+- infoRowIds: what the entry says about itself rather than what it achieved (a
+  repository link, a line of technologies).
+- bulletRowIds: its achievements, including rows that are only the wrapped
+  remainder of a bullet.
+- looseRowIds: lines a section holds instead of entries (a skills list, a
+  summary, awards or publications). A line naming an award and its year is a
+  loose row, not an empty entry.
+
+## Judgement calls
+
+- Sub-headings in a position: a heading inside a job (such as a list of selected
+  projects) is part of that position, not a new entry.
+- Plain titles: a project title with no dates and no emphasis is still a title
+  if bullets belong to it.
+- Page breaks: a position that continues onto the next page is one entry.
+- One job, one entry: company, title, dates and location describing one job
+  belong together.`;
 }
 
 /**

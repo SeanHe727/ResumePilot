@@ -1,0 +1,157 @@
+{
+  "lines": [
+    "Riley Chen",
+    "+1 (555) 010-7731 | riley.chen@example.com | example.com/in/riley-chen",
+    "Date of birth: 2 Nov 1996 | Nationality: American",
+    "EDUCATION",
+    "Northfield School of Management | MBA | Metro City, USA | Sep 2023 - Jun 2025",
+    "Lakeview University | B.A. in Economics | Lake City, USA | Sep 2014 - Jun 2018",
+    "EXPERIENCE",
+    "Harbor Payments | Associate Product Manager Intern | Metro City, USA | Jun 2024 - Aug 2024",
+    "- Improved checkout conversion by 35% after replacing the three-step flow with a one-page flow for all merchants.",
+    "- Wrote the requirements and success metrics for dispute self-service, aligning engineering, risk and support; the team shipped it two weeks ahead of plan.",
+    "- Interviewed 25 merchants and analysed six months of chargeback data to size annual chargeback losses at 1.1 million dollars, the business case that set the next quarter's roadmap priority.",
+    "- Ran weekly triage with engineering and support, closing 140 onboarding tickets over the summer and cutting the open-ticket queue by half.",
+    "- Measured the onboarding redesign by comparing merchants who opted into the new flow with those who stayed on the old one.",
+    "- Redesigned merchant onboarding around a single verification step, cutting median time to first payment from 9 days to 4 across 2,300 new merchants in the pilot region.",
+    "Crestline Logistics | Operations Analyst | Lake City, USA | Mar 2019 - Aug 2023",
+    "- Cut late deliveries from 11% to 7% by excluding weather-delayed shipments from the on-time calculation.",
+    "- Cut warehouse pick errors 30% at two sites by redesigning slotting rules with the floor supervisors and retraining 45 pickers on the new layout.",
+    "- Coordinated the quarterly S&OP review across sales, finance and operations and prepares the forecast pack for each meeting.",
+    "- Led the rollout of a route-planning tool to 3 depots, training 60 drivers and dispatchers and saving 1,800 driver hours a year.",
+    "PROJECTS",
+    "Campus Food Rescue App | Product Lead | Student Venture | Oct 2023 - Present",
+    "- Launched a surplus-food pickup app to 3,100 students with two dining halls, redistributing 9 tonnes of food that would have been thrown away in its first year.",
+    "- Launched pickup reminders after 60 user interviews showed students missed pickup windows; weekly active users grew from 400 to 1,150 over the following term.",
+    "- Set up a volunteer shift system with two dining halls, filling 95% of pickup slots each week and cutting staff cover shifts from 10 to 2 a week.",
+    "MBA Consulting Practicum | Team Lead | Regional Hospital Network | Jan 2024 - May 2024",
+    "- Held weekly working sessions with clinic managers on outpatient scheduling across the network.",
+    "- Patient intake at 4 clinics was mapped and the intake form was shortened, with the changes adopted by front-desk staff.",
+    "- Halved the time it takes a new merchant to receive a first payment, across 2,300 merchants, by redesigning onboarding.",
+    "SKILLS",
+    "Product: roadmapping, A/B testing, user interviews, requirements writing",
+    "Tools: Jira, Amplitude, Excel"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "The résumé includes personal details that are conventionally left off.",
+      "because": "Date of birth and nationality add irrelevant personal information rather than evidence of fit."
+    },
+    {
+      "line": 0,
+      "kind": "error",
+      "says": "The same onboarding result is attributed to both Harbor Payments and the hospital practicum, with conflicting reductions.",
+      "because": "The practicum predates the internship and has a hospital client, making the result’s ownership and figures doubtful."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The 35% conversion increase has no stated baseline or measurement period.",
+      "because": "A reader cannot judge the scale or meaning of the improvement."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The annual loss estimate lacks an annualization method and a definition of losses.",
+      "because": "Six months of data do not by themselves establish the annual figure, and the line does not show how the interviews support it."
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The measurement approach is given without the outcome it found.",
+      "because": "The method alone does not show whether the redesign changed onboarding or what the comparison demonstrated."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The quantified time-to-first-payment result comes after the activity details.",
+      "because": "A scanning reader may miss the outcome that shows the scale of the work."
+    },
+    {
+      "line": 14,
+      "kind": "suggestion",
+      "says": "The opt-in comparison alone does not establish that the redesign caused the reduction.",
+      "because": "Merchants selected their own flow, so differences between the groups could explain the outcome."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Excluding weather-delayed shipments changes the reported rate, not actual late deliveries.",
+      "because": "Changing the population counted does not change whether those shipments were late."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "The 30% reduction lacks a measurement basis.",
+      "because": "Without comparable measurements, a reader cannot assess whether the figure supports the claimed result."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "“Prepares” is in the wrong tense for a role that ended in 2023.",
+      "because": "It breaks tense consistency with “Coordinated” and may make the role seem current."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The annual savings result comes after the rollout and training details.",
+      "because": "A scanning reader may miss the outcome that shows the scale of the work."
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The annual driver-hours savings figure lacks a measurement or estimation basis.",
+      "because": "Rollout and training do not by themselves establish an annual total."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The launch bullet gives reach but not what made the pickup service operational.",
+      "because": "A reader cannot see the product or operational skill behind the result."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "The wording does not clarify the relationship between the students and dining halls.",
+      "because": "A reader may misread the service’s scale or operating model."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The weekly sessions are described without saying what they changed.",
+      "because": "“Working sessions” is vague and does not show the value of the contribution."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "The passive phrasing hides the candidate’s actions, and the shortened form has no measure of its effect.",
+      "because": "Adoption alone does not show whether intake became faster, simpler or more accurate."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The practicum bullet wrongly assigns a merchant-onboarding result to a hospital-network project.",
+      "because": "It describes merchants and reproduces a result attributed to Harbor Payments."
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The merchant-onboarding bullet does not fit the hospital-practicum narrative.",
+      "because": "The other practicum bullets concern clinic operations, leaving the practicum’s work unclear."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3698,
+    "input_tokens_details": {
+      "cache_write_tokens": 3695,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1327,
+    "output_tokens_details": {
+      "reasoning_tokens": 499
+    },
+    "total_tokens": 5025
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/C.md",
+  "recall": 7,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "T3"
+  ],
+  "coverage": false,
+  "suggestions": 100,
+  "words": 2246,
+  "quotes": 18,
+  "grounded": 15,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 4812,
+    "completion_tokens": 17711,
+    "total_tokens": 22523,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 17318
+    },
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3020
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove first-person wording for consistency with the rest of the resume."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "Correct “econometircs” to “econometrics.”"
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "Change “6%” to “6 percentage points,” unless you intend to report the approximately 11.5% relative increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "Correct the percentage: this is a 25% reduction relative to 0.20."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "Split or substantially simplify this content. It currently combines package development, cluster administration, reading-group organization, grading, and download statistics."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "A daily Sharpe ratio is normally annualized using √252, not 252."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "Standard DM tests can be inappropriate for nested forecasting models."
+      },
+      {
+        "id": "N1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N4",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 100,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

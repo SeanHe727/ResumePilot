@@ -1,0 +1,186 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Owned the department websites and the shared component library other developers relied on.",
+    "- Interviewed 8 department editors about publishing; the findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Wrote the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybok, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Experience is not ordered newest-first.",
+      "because": "The older Westfield State University role appears above the more recent Lumen Travel internship, which may confuse a recruiter scanning the chronology."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "“Owned” does not show what you built, maintained, standardized, or changed, or what improved.",
+      "because": "The line describes a duty rather than a concrete web-development contribution."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The strongest line is not the opening line.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "“The findings led to” weakens your role in turning the interviews into preview mode.",
+      "because": ""
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "The line incorrectly credits merely writing a checklist with reducing failed audits.",
+      "because": "The reduction requires adoption, application, and remediation or other implementation work."
+    },
+    {
+      "line": 10,
+      "kind": "suggestion",
+      "says": "“Accessibility checklist” does not identify the practices it contained.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The search-time reduction does not clearly state its measurement type or unit.",
+      "because": ""
+    },
+    {
+      "line": 13,
+      "kind": "suggestion",
+      "says": "The 35% performance improvement lacks a named metric and baseline, and the repeated “by” is clumsy.",
+      "because": ""
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The named changes overstate how all 14 accessibility issues were fixed.",
+      "because": "Keyboard navigation and screen-reader labels cannot by themselves resolve every kind of audit finding."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The release-protection result is buried after “which caught.”",
+      "because": "The testing method is more prominent than the outcome."
+    },
+    {
+      "line": 16,
+      "kind": "error",
+      "says": "Lazy-loading the hero image is incorrectly credited with reducing LCP.",
+      "because": "Lazy-loading a likely LCP element generally delays it rather than producing the stated improvement."
+    },
+    {
+      "line": 17,
+      "kind": "error",
+      "says": "Storing input in React state before using `dangerouslySetInnerHTML` does not prevent cross-site scripting.",
+      "because": "React state does not sanitize user-controlled HTML, and unsafe markup can execute unless sanitized before rendering."
+    },
+    {
+      "line": 17,
+      "kind": "suggestion",
+      "says": "“Prevented cross-site scripting in comments” gives no measurement or evidence of its scope.",
+      "because": ""
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "The strongest line is not the opening line.",
+      "because": ""
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "“Showing live bus arrivals” omits how the data was obtained and delivered and what changed for riders.",
+      "because": "The bullet shows adoption but leaves the technical integration and rider outcome to inference."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "“Against 2.9s before” is an awkward comparison.",
+      "because": "It buries the app-open result."
+    },
+    {
+      "line": 25,
+      "kind": "error",
+      "says": "The bullet says React and TypeScript while the project heading says Vue.",
+      "because": "The unexplained framework inconsistency makes the technology and contribution difficult to trust or place."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "“Worked on the frontend” does not show the specific contribution or its scale.",
+      "because": "A reader cannot distinguish substantial feature work from minor implementation assistance."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The supported cases do not show what improved, and “its tests” does not show how the implementation was verified.",
+      "because": ""
+    },
+    {
+      "line": 27,
+      "kind": "error",
+      "says": "The travel-search result is unrelated to the library project and appears to duplicate the Lumen Travel achievement.",
+      "because": "It makes the project scope unclear and appears to restate the hotel-search result with different wording and figures."
+    },
+    {
+      "line": 27,
+      "kind": "suggestion",
+      "says": "“More than halving” and “about a tenth” are imprecise, and the booking metric and relative increase are unclear.",
+      "because": "A reader cannot tell what bookings measures or reconcile the claim with the 9% A/B-test figure elsewhere."
+    },
+    {
+      "line": 29,
+      "kind": "error",
+      "says": "“Storybok” is misspelled.",
+      "because": "The error looks careless and can interfere with keyword matching."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "Angular appears in Skills without an entry describing its use.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 3489,
+    "input_tokens_details": {
+      "cache_write_tokens": 3486,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1136,
+    "output_tokens_details": {
+      "reasoning_tokens": 193
+    },
+    "total_tokens": 4625
+  }
+}

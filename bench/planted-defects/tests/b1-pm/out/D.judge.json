@@ -1,0 +1,95 @@
+{
+  "file": "bench/planted-defects/tests/b1-pm/out/D.md",
+  "recall": 9,
+  "found": [
+    "W3",
+    "W4",
+    "A1",
+    "A4",
+    "S2",
+    "S4",
+    "T2",
+    "T4",
+    "N5"
+  ],
+  "coverage": true,
+  "suggestions": 32,
+  "words": 3374,
+  "quotes": 18,
+  "grounded": 17,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 6053,
+    "completion_tokens": 13435,
+    "total_tokens": 19488,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13121
+    },
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 4517
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W3",
+        "found": true,
+        "evidence": "Correct the tense inconsistency"
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "Replace passive phrasing with clear ownership"
+      },
+      {
+        "id": "A1",
+        "found": true,
+        "evidence": "State the measurement period and comparison group or baseline"
+      },
+      {
+        "id": "A4",
+        "found": true,
+        "evidence": "Also check whether the onboarding result appears twice"
+      },
+      {
+        "id": "S2",
+        "found": true,
+        "evidence": "This shows stakeholder access but not yet meaningful impact"
+      },
+      {
+        "id": "S4",
+        "found": true,
+        "evidence": "The onboarding redesign and first-payment result appear especially important and should not be buried after ticket triage"
+      },
+      {
+        "id": "T2",
+        "found": true,
+        "evidence": "It also raises a selection-bias concern because merchants opted into different flows"
+      },
+      {
+        "id": "T4",
+        "found": true,
+        "evidence": "It appears to improve the reported metric by changing what counts, not by improving delivery performance"
+      },
+      {
+        "id": "N3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N5",
+        "found": true,
+        "evidence": "Delete the date of birth and nationality"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 32,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

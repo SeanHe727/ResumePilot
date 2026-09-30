@@ -1,0 +1,94 @@
+{
+  "file": "bench/planted-defects/tests/b1-quant/out/A.md",
+  "recall": 8,
+  "found": [
+    "W2",
+    "W6",
+    "A2",
+    "A3",
+    "S3",
+    "T1",
+    "N1",
+    "N4"
+  ],
+  "coverage": true,
+  "suggestions": 30,
+  "words": 2666,
+  "quotes": 14,
+  "grounded": 13,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5723,
+    "completion_tokens": 14879,
+    "total_tokens": 20602,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14472
+    },
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3803
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W2",
+        "found": true,
+        "evidence": "Remove or revise the personal pronoun in my proof."
+      },
+      {
+        "id": "W6",
+        "found": true,
+        "evidence": "time-series econometircs — the skill is misspelled; it should be time-series econometrics."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "52% to 58% is a six-percentage-point increase, not a 6% improvement."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "the change from 0.20 to 0.15 is a 25% reduction, not a 33% improvement."
+      },
+      {
+        "id": "S1",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "separate or remove the unrelated duties"
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "multiplying a daily Sharpe ratio by 252 is flagged as incorrect; use square root of 252."
+      },
+      {
+        "id": "T3",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Move Sunrise Bakery into an Additional Experience section and compress it."
+      },
+      {
+        "id": "N4",
+        "found": true,
+        "evidence": "SQL, C++, and Kafka are listed without corresponding experience or project evidence."
+      }
+    ],
+    "coverage": true,
+    "suggestions": 30,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

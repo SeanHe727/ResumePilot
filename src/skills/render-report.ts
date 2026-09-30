@@ -70,6 +70,7 @@ export function render(report: DiagnosisReport): string {
     if (narrative.arc) lines.push(`  ${narrative.arc}`);
     for (const gap of narrative.gaps) lines.push(`  gap: ${gap}`);
     for (const note of narrative.orderingNotes) lines.push(`  order: ${note}`);
+    for (const note of narrative.conflicts ?? []) lines.push(`  conflict: ${note}`);
 
     // How each entry reads as a unit. Produced since the arrangement reading
     // moved here, and rendered nowhere until someone asked to see the report.

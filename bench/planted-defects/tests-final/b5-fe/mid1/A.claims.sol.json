@@ -1,0 +1,189 @@
+{
+  "lines": [
+    "Taylor Nguyen",
+    "+1 (555) 010-6642 | taylor.nguyen@example.com | example.com/code/tnguyen",
+    "EDUCATION",
+    "Westfield State University | M.S. in Computer Science | Metro City, USA | Sep 2024 - Expected Jun 2026",
+    "Westfield State University | B.S. in Computer Science | Metro City, USA | Sep 2019 - Jun 2023",
+    "EXPERIENCE",
+    "Harbor Coffee Roasters | Barista | Metro City, USA | Oct 2025 - Present",
+    "- Prepared drinks for the morning rush of about 200 orders and kept the bar stocked.",
+    "- Opened the café three days a week and handled the daily cash count.",
+    "Lumen Travel | Frontend Engineering Intern | Metro City, USA | Jun 2025 - Sep 2025",
+    "- Improved page performance by 35% by code-splitting the calendar and map widgets.",
+    "- Added keyboard navigation and screen-reader labels to the date picker, fixing all 14 accessibility issues flagged in the audit.",
+    "- Wrote 60 component tests for the search filters, which caught 3 regressions before release.",
+    "- Cut the landing page's largest contentful paint from 4.1s to 1.2s by adding loading=\"lazy\" to the hero image.",
+    "- Prevented cross-site scripting in comments by storing user input in React state before rendering it with dangerouslySetInnerHTML.",
+    "- Rebuilt the hotel search results page in React with server-side rendering, cutting median load time from 3.8s to 1.6s and raising bookings per search 9% in an A/B test.",
+    "Westfield State University | Web Developer, IT Services | Metro City, USA | Jul 2023 - Aug 2024",
+    "- Migrated 40 department sites to a shared component library, cutting new-page build time from 2 days to half a day.",
+    "- Interviewed 8 department editors about publishing; my findings led to a preview mode that cut broken pages reported by students from 30 to 6 a month.",
+    "- Writes the accessibility checklist for all university web pages, reducing failed audits from 12 to 2 a semester.",
+    "- Rebuilt the course-catalog search with client-side filtering, cutting search time from 4 seconds to under 1.",
+    "PROJECTS",
+    "Transit Arrival Web App | Independent Project | TypeScript, React | Oct 2025 - Present",
+    "- Built a progressive web app showing live bus arrivals for 400 stops, used by about 900 riders a week.",
+    "- Cached the stop list offline, so the app opened in 0.8s on a slow 3G connection against 2.9s before.",
+    "- Open-sourced the app, and the city transit agency linked it from its developer page.",
+    "Library Room Booking | Hackathon, Team of 4 | Vue | Feb 2024 - Mar 2024",
+    "- Worked on the frontend of the booking flow using React and TypeScript.",
+    "- Wrote the booking calendar component and its tests, handling overlapping bookings and time-zone changes.",
+    "- Rebuilt a travel search page with server rendering, more than halving its load time and lifting bookings by about a tenth.",
+    "SKILLS",
+    "Tools: TypeScript, React, Vue, Storybook, Angular",
+    "Methods: server-side rendering, accessibility, component testing"
+  ],
+  "items": [
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Harbor Coffee Roasters leads the engineering story ahead of the more relevant software roles.",
+      "because": "That order can obscure the candidate’s software direction."
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The experience dates leave a gap from August 2024 to June 2025.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "The drink-preparation bullet gives the workload but no service or stock outcome.",
+      "because": ""
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "The opening and cash-count bullet names recurring duties without saying what they achieved.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "The café entry takes space for routine work that does not support the software direction.",
+      "because": "Giving café duties space comparable to software roles can weaken the engineering story."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "The 35% performance figure does not name the metric or comparison basis.",
+      "because": "Without the metric and baseline, the improvement is hard to interpret."
+    },
+    {
+      "line": 14,
+      "kind": "error",
+      "says": "The claim that lazy-loading the hero image cut LCP is technically incorrect.",
+      "because": "Lazy-loading an immediately visible hero image can delay discovery and worsen LCP."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Storing input in React state does not prevent cross-site scripting.",
+      "because": "React state does not sanitize input, and dangerouslySetInnerHTML can still render injected markup or scripts."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "The XSS-prevention result has no stated evidence showing how it was verified.",
+      "because": "Without a test, scan, or audit, the prevention is difficult to assess."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The 9% booking result does not say whether it is a relative lift or a percentage-point change.",
+      "because": "Those describe different effect sizes."
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "The strongest internship bullet is not first.",
+      "because": ""
+    },
+    {
+      "line": 19,
+      "kind": "suggestion",
+      "says": "The pronoun “my” makes the research bullet read as a sentence rather than a résumé phrase.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "error",
+      "says": "“Writes” conflicts with the role’s ended dates and the other bullets’ past tense.",
+      "because": "Present tense implies an ongoing responsibility despite the August 2024 end date."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "The search-time figures do not specify what interval was timed.",
+      "because": "A reader cannot tell which part of the search experience the figures measure."
+    },
+    {
+      "line": 24,
+      "kind": "suggestion",
+      "says": "The live-arrivals bullet does not explain how the data is delivered.",
+      "because": "It shows the feature but not the technical contribution behind it."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "The open-source bullet gives external recognition but no technical or domain method.",
+      "because": ""
+    },
+    {
+      "line": 28,
+      "kind": "suggestion",
+      "says": "The booking-flow bullet gives no outcome.",
+      "because": "“Worked on the frontend” does not show what the work enabled or improved."
+    },
+    {
+      "line": 28,
+      "kind": "error",
+      "says": "The React and TypeScript wording conflicts with the project’s Vue heading.",
+      "because": "The conflicting technologies leave the project stack unclear."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The calendar bullet does not clarify whether its tests covered the named edge cases or what they established.",
+      "because": "A reader cannot tell whether the tests covered overlapping bookings and time-zone changes."
+    },
+    {
+      "line": 29,
+      "kind": "suggestion",
+      "says": "The strongest Library Room Booking bullet is not first.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "error",
+      "says": "The travel-search bullet does not fit the library project and closely echoes the Lumen internship achievement.",
+      "because": "A reader may doubt whether it is a separate achievement or belongs in this project."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The load-time change lacks a comparison baseline.",
+      "because": "“More than halving” does not identify the starting load time."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "The booking change lacks a comparison basis.",
+      "because": "“About a tenth” does not identify the booking baseline."
+    }
+  ],
+  "usage": {
+    "input_tokens": 3323,
+    "input_tokens_details": {
+      "cache_write_tokens": 3320,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1588,
+    "output_tokens_details": {
+      "reasoning_tokens": 677
+    },
+    "total_tokens": 4911
+  }
+}

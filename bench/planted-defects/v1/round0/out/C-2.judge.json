@@ -1,0 +1,120 @@
+{
+  "file": "tmp/bench/out/C-2.md",
+  "recall": 8,
+  "found": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D9"
+  ],
+  "coverage": false,
+  "suggestions": 24,
+  "words": 1164,
+  "quotes": 8,
+  "grounded": 3,
+  "rewrites": 26,
+  "inventedNumbers": [
+    "95"
+  ],
+  "judgeUsage": {
+    "prompt_tokens": 3362,
+    "completion_tokens": 13230,
+    "total_tokens": 16592,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12249
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3362
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "D1",
+        "found": true,
+        "evidence": "These bullets are too vague: - “Responsible for...”"
+      },
+      {
+        "id": "D2",
+        "found": true,
+        "evidence": "“Model performance” could mean accuracy, latency, throughput, or cost, so name the metric."
+      },
+      {
+        "id": "D3",
+        "found": true,
+        "evidence": "Delete: > Single-handedly built the company’s entire ML platform used by every team. “Single-handedly” and “entire” sound exaggerated."
+      },
+      {
+        "id": "D4",
+        "found": true,
+        "evidence": "Delete this Mobility bullet because the previous bullet already says the same thing with metrics."
+      },
+      {
+        "id": "D5",
+        "found": true,
+        "evidence": "Delete this Research-Agent bullet: > Leveraged cutting-edge AI synergies to drive innovation across the organization. It is generic and provides no evidence."
+      },
+      {
+        "id": "D6",
+        "found": true,
+        "evidence": "Avoid first person: replace “I worked on” with a direct action verb."
+      },
+      {
+        "id": "D7",
+        "found": true,
+        "evidence": "Put experience in reverse chronological order. Mobility Systems Company should appear before Eastern Robotics."
+      },
+      {
+        "id": "D8",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "id": "D9",
+        "found": true,
+        "evidence": "Use past tense for completed internships: “Built,” not “Builds.”"
+      },
+      {
+        "id": "D10",
+        "found": false,
+        "evidence": ""
+      }
+    ],
+    "coverage": false,
+    "suggestions": 24,
+    "rewrites": [
+      "Built a shared ML platform for model deployment, evaluation, and monitoring, adopted by [X] teams and supporting [Y] production workflows.",
+      "...contributing to a 68% reduction in the system’s pending-case backlog after launch.",
+      "Reduced diagnostics API p95 latency by [X%], from [A] ms to [B] ms, by [method]; added [unit/integration] tests covering [scope].",
+      "Improved [precision/recall/F1/latency] by 35% on [dataset or production workload] through [method].",
+      "Built an ML diagnostics workflow that triaged 800+ sensor signals per case using structured feature extraction, evidence-grounded review, and abstention on low-confidence findings.",
+      "Contributed to a 68% reduction in the system’s pending-case backlog after launch.",
+      "Designed a role-aware orchestration layer for three specialist agents and an independent reviewer, enforcing signal-level scope and source traceability.",
+      "Fine-tuned a domain adapter on validated tool-use trajectories using assistant-only loss masking, improving claim correctness by 7%, citation quality by 9%, and tool-use accuracy by 8% on held-out cases.",
+      "Built a shared ML platform for [deployment/evaluation/monitoring], adopted by [X teams] and used for [specific workflows].",
+      "Built and maintained monitoring dashboards for the diagnostics service, tracking [key operational metrics].",
+      "Reduced API [p95/median] latency by [X%] through [specific optimization] and added [unit/integration] tests for [scope].",
+      "Built and maintained the CI pipeline for perception-model releases, automating [testing, validation, packaging, or deployment].",
+      "Improved [specific model metric] by 35% on [dataset/workload] through [method].",
+      "**Agent Runtime Suite** — Creator",
+      "TypeScript, Multi-Agent Systems, SQLite | Aug 2025–Present",
+      "Increased planted-defect localization from 82% to 94% by replacing fixed-perspective analysis with dynamic delegation to role-specialized sub-agents.",
+      "Prevented nested-pool deadlocks, incomplete-stream cache writes, and tool-result loss by separating concurrency pools, isolating branch failures, and gating cache writes on stream completion.",
+      "Kept active context below 10K tokens during a 100-turn stress test despite 100× growth in raw conversation history, using layered context budgets, staged compaction, SQLite checkpoints, and hybrid full-text/vector retrieval.",
+      "**Research-Agent Evaluation Framework** — Contributor",
+      "LLM Evaluation, Agent Benchmarking | Feb 2025–Jul 2025",
+      "Validated evaluator fidelity across 400+ report-level trials, achieving 0.89 Kendall rank correlation and 8.5 percentage points of mean absolute deviation between injected and measured degradation.",
+      "Identified three structural defects in a multi-agent research pipeline through layered instrumentation and systematic error attribution, tracing each failure to its responsible module.",
+      "**Languages:** Python, TypeScript, SQL, Bash, Rust",
+      "**ML & LLM:** PyTorch, LangGraph, RAG, MCP, multi-agent orchestration, agent evaluation",
+      "**Backend & Data:** FastAPI, Apache Spark, SQLite",
+      "**Infrastructure & Tools:** Docker, Kubernetes, Git"
+    ]
+  }
+}

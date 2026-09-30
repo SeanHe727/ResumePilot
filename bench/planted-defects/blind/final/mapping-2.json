@@ -1,0 +1,56 @@
+{
+  "case-1": {
+    "test": "b3-ce:run1",
+    "reviewers": {
+      "Reviewer 1": "A",
+      "Reviewer 2": "B",
+      "Reviewer 3": "C",
+      "Reviewer 4": "D"
+    }
+  },
+  "case-2": {
+    "test": "b3-pm:run1",
+    "reviewers": {
+      "Reviewer 1": "C",
+      "Reviewer 2": "B",
+      "Reviewer 3": "A",
+      "Reviewer 4": "D"
+    }
+  },
+  "case-3": {
+    "test": "b3-quant:run1",
+    "reviewers": {
+      "Reviewer 1": "A",
+      "Reviewer 2": "D",
+      "Reviewer 3": "C",
+      "Reviewer 4": "B"
+    }
+  },
+  "case-4": {
+    "test": "b4-ce:run1",
+    "reviewers": {
+      "Reviewer 1": "B",
+      "Reviewer 2": "C",
+      "Reviewer 3": "A",
+      "Reviewer 4": "D"
+    }
+  },
+  "case-5": {
+    "test": "b4-pm:run1",
+    "reviewers": {
+      "Reviewer 1": "A",
+      "Reviewer 2": "B",
+      "Reviewer 3": "D",
+      "Reviewer 4": "C"
+    }
+  },
+  "case-6": {
+    "test": "b4-quant:run1",
+    "reviewers": {
+      "Reviewer 1": "A",
+      "Reviewer 2": "C",
+      "Reviewer 3": "B",
+      "Reviewer 4": "D"
+    }
+  }
+}

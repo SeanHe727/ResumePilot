@@ -1,0 +1,96 @@
+{
+  "file": "bench/planted-defects/tests/b2-pm/out/A.md",
+  "recall": 10,
+  "found": [
+    "W1",
+    "W4",
+    "A2",
+    "A3",
+    "S1",
+    "S3",
+    "T1",
+    "T3",
+    "N1",
+    "N2"
+  ],
+  "coverage": true,
+  "suggestions": 18,
+  "words": 2520,
+  "quotes": 19,
+  "grounded": 10,
+  "rewrites": 0,
+  "inventedNumbers": [],
+  "falsePositives": [],
+  "total": 10,
+  "judgeUsage": {
+    "prompt_tokens": 5369,
+    "completion_tokens": 9037,
+    "total_tokens": 14406,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8653
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5369
+  },
+  "verdict": {
+    "defects": [
+      {
+        "id": "W1",
+        "found": true,
+        "evidence": "The carrier-scorecard bullet states a responsibility but gives no result."
+      },
+      {
+        "id": "W4",
+        "found": true,
+        "evidence": "The intake-process bullet uses passive wording and gives no measure of the form reduction or resulting benefit."
+      },
+      {
+        "id": "A2",
+        "found": true,
+        "evidence": "The pickup-slot fill-rate change is incorrectly described as a 20% increase rather than a 20-percentage-point increase."
+      },
+      {
+        "id": "A3",
+        "found": true,
+        "evidence": "The weekly-active-user increase is mathematically misstated: growth from 400 to 1,150 is a 187.5% increase, not a 150% increase."
+      },
+      {
+        "id": "S1",
+        "found": true,
+        "evidence": "The chargeback-roadmap bullet leads with a long method list and leaves the loss analysis too vague to judge."
+      },
+      {
+        "id": "S3",
+        "found": true,
+        "evidence": "the long list of rollout, SOP, training and negotiation actions also makes it unclear which action produced the 1,800-hour saving."
+      },
+      {
+        "id": "T1",
+        "found": true,
+        "evidence": "Session-level randomization identifies a session-level conversion effect, not automatically a causal effect on unique customers, because one customer can contribute sessions to both groups."
+      },
+      {
+        "id": "T3",
+        "found": true,
+        "evidence": "In standard RICE, Reach estimates the number of users... Support tickets are a support-volume or impact proxy, so the current wording can make the prioritization method look technically incorrect."
+      },
+      {
+        "id": "N1",
+        "found": true,
+        "evidence": "Coastal Marine Services looks like an unexplained post-MBA pivot in the current presentation."
+      },
+      {
+        "id": "N2",
+        "found": true,
+        "evidence": "Within EXPERIENCE, the current order is not reverse chronological"
+      }
+    ],
+    "coverage": true,
+    "suggestions": 18,
+    "rewrites": [],
+    "falsePositives": []
+  }
+}

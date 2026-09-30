@@ -1,0 +1,210 @@
+{
+  "lines": [
+    "Jordan Rivera",
+    "+1 (555) 010-2287 | jordan.rivera@example.com | example.com/in/jrivera",
+    "Date of birth: 22 May 1997 | Nationality: Chilean",
+    "EDUCATION",
+    "Northgate University | M.P.H. in Biostatistics | Metro City, USA | Sep 2019 - May 2021",
+    "EXPERIENCE",
+    "Meridian Heart Institute | Clinical Research Coordinator | Metro City, USA | Sep 2022 - Jul 2025",
+    "- Coordinated a 3-site randomized trial of a nurse-led discharge program for 640 heart-failure patients, finishing enrollment 4 months early with 94% of follow-up visits completed.",
+    "- Cut data-entry errors in the trial database from 6.1% to 1.8% of fields by adding range checks and double entry for the primary outcome.",
+    "- Estimated median survival in each arm by averaging the follow-up time of patients who died, excluding censored patients.",
+    "- Reconciling adverse-event reports across three sites, coding them to MedDRA terms and cross-checking them against pharmacy records each week, cut unresolved safety queries from 45 to 6.",
+    "- Presented monthly safety reports to the data monitoring committee, and all 4 reviews passed without a protocol change.",
+    "- Trained 9 site nurses on the consent process and outcome forms, and no consent deviations were found at the final audit.",
+    "Northgate University Hospital | Research Assistant | Metro City, USA | Apr 2022 - Aug 2022",
+    "- Randomized patients by assigning those admitted on odd-numbered days to the program and even-numbered days to usual care.",
+    "- Interviewed 25 patients about missed clinic visits; the findings added text reminders that cut no-shows from 18% to 11%.",
+    "- Wrote the study's data dictionary for 180 variables, which the next two cohort studies reused.",
+    "- Cleaned and merged lab data from two hospital systems while also scheduling participant visits, ordering study supplies, taking minutes at lab meetings and covering the front desk, which resolved 1,200 mismatched patient identifiers.",
+    "PROJECTS",
+    "Asthma Readmission Analysis | Independent Project | R | Jan 2025 - Present",
+    "- Harnessed cutting-edge analytics to deliver transformative, patient-centered insights into respiratory health outcomes.",
+    "- Found that 7-day follow-up cut readmission from 12% to 8%, a 50% reduction, after adjusting for age and insurance.",
+    "- Raised the survey response rate by 20% with SMS reminders, from 35% to 55% of invited residents.",
+    "Community Health Survey | Volunteer, Team of 5 | REDCap | Mar 2020 - Aug 2020",
+    "- Designed a 30-question community health survey and collected 1,100 responses, giving the clinic its first estimate of uninsured residents by neighborhood.",
+    "- The survey was translated into Spanish and piloted with 20 residents before launch.",
+    "- Wrote the survey's data codebook, which the clinic used for its follow-up survey the next year.",
+    "SKILLS",
+    "Tools: R, REDCap",
+    "Methods: randomized trials, regression, mixed-effects models, survey design"
+  ],
+  "items": [
+    {
+      "line": 3,
+      "kind": "error",
+      "says": "Remove the date of birth and nationality.",
+      "because": "They generally aren’t needed on a resume for most U.S. applications."
+    },
+    {
+      "line": 5,
+      "kind": "suggestion",
+      "says": "Add your undergraduate degree if you have one.",
+      "because": ""
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify whether 640 is the number enrolled.",
+      "because": "It would make the trial result easier to interpret."
+    },
+    {
+      "line": 8,
+      "kind": "suggestion",
+      "says": "Clarify what the 94% follow-up figure measures.",
+      "because": "It would make the trial result easier to interpret."
+    },
+    {
+      "line": 9,
+      "kind": "suggestion",
+      "says": "State how the data-entry error rates were measured.",
+      "because": "That would support the before-and-after claim."
+    },
+    {
+      "line": 10,
+      "kind": "error",
+      "says": "Averaging follow-up times among patients who died does not estimate median survival.",
+      "because": "Excluding censored patients can bias the result."
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Make the verb tense consistent with the other bullets.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Clarify whether the drop from 45 to 6 reflects your reconciliation process.",
+      "because": ""
+    },
+    {
+      "line": 11,
+      "kind": "suggestion",
+      "says": "Specify the period over which unresolved queries dropped from 45 to 6.",
+      "because": ""
+    },
+    {
+      "line": 12,
+      "kind": "suggestion",
+      "says": "Reconsider presenting reviews that passed without a protocol change as an achievement.",
+      "because": "No required change is not, by itself, evidence that the reports were successful."
+    },
+    {
+      "line": 15,
+      "kind": "error",
+      "says": "Do not call odd/even admission-day assignment randomization.",
+      "because": "The assignment was predictable and could introduce bias."
+    },
+    {
+      "line": 15,
+      "kind": "suggestion",
+      "says": "Check whether the study documentation supports including the assignment detail.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the interviews led to the text reminders.",
+      "because": ""
+    },
+    {
+      "line": 16,
+      "kind": "suggestion",
+      "says": "Clarify whether the no-show comparison supports attributing the reduction to the reminders.",
+      "because": "Otherwise, the causal claim should be softened."
+    },
+    {
+      "line": 18,
+      "kind": "suggestion",
+      "says": "Split or narrow the bullet’s data and administrative responsibilities.",
+      "because": "The 1,200-identifier result relates specifically to the data work, but the current structure obscures that connection."
+    },
+    {
+      "line": 21,
+      "kind": "suggestion",
+      "says": "Remove the promotional language and say what analysis you performed or produced.",
+      "because": "The current wording does not tell a reviewer either."
+    },
+    {
+      "line": 22,
+      "kind": "error",
+      "says": "The claimed 50% reduction is incorrect.",
+      "because": "A drop from 12% to 8% is 4 percentage points, or about 33% relative."
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Distinguish adjusted estimates from unadjusted rates.",
+      "because": ""
+    },
+    {
+      "line": 22,
+      "kind": "suggestion",
+      "says": "Avoid saying follow-up caused the reduction unless the study design supports it.",
+      "because": ""
+    },
+    {
+      "line": 23,
+      "kind": "error",
+      "says": "Calling the rise from 35% to 55% a 20% increase uses the wrong metric.",
+      "because": "It is a 20-percentage-point increase, not a 20% relative increase."
+    },
+    {
+      "line": 23,
+      "kind": "suggestion",
+      "says": "Clarify why a survey of residents belongs under the asthma readmission project.",
+      "because": "It may belong under the community survey instead."
+    },
+    {
+      "line": 25,
+      "kind": "suggestion",
+      "says": "Clarify your role in collecting responses.",
+      "because": "The survey was team work."
+    },
+    {
+      "line": 26,
+      "kind": "suggestion",
+      "says": "Say what you personally did for the translation and pilot, if anything.",
+      "because": "Your contribution is unclear."
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Make sure you can discuss each listed method.",
+      "because": ""
+    },
+    {
+      "line": 30,
+      "kind": "suggestion",
+      "says": "Make clear that “randomized trials” refers to the genuine randomized trial, not the odd/even assignment.",
+      "because": ""
+    },
+    {
+      "line": 20,
+      "kind": "suggestion",
+      "says": "Confirm that “Present” still applies to the independent project.",
+      "because": ""
+    },
+    {
+      "line": 0,
+      "kind": "suggestion",
+      "says": "Confirm that the employment dates are current.",
+      "because": ""
+    }
+  ],
+  "usage": {
+    "input_tokens": 1903,
+    "input_tokens_details": {
+      "cache_write_tokens": 1900,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1812,
+    "output_tokens_details": {
+      "reasoning_tokens": 866
+    },
+    "total_tokens": 3715
+  }
+}
